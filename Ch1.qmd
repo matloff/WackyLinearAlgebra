@@ -1,0 +1,75 @@
+
+
+```{r}
+#| include: false
+library(dsld)
+library(qeML)
+```
+
+{{< pagebreak >}}
+
+# Matrix Multiplication
+
+## A Random Walk Model
+
+Let's consider a *random walk* on {1,2,3,4,5} in the number line. Time
+is numbered 1,2,3,... Our current position is termed our *state*. The
+notation X~k~ = i means that at time k we are in state/position i.
+
+Our rule will be that at any time k, we flip a coin. If we are currently
+at position i, we move to either i+1 or i-1, depending on whether the
+coin landed heads or tails. The exceptions are k = 1 and k = 5, in which
+case we move to position 2 or 4, respectively.
+
+We can summarize the probabilities with a *matrix*, a two-dimensional
+array:
+
+$$
+P_1 =
+\left (
+\begin{array}{rrrrr}
+0 & 1 & 0 & 0 & 0\\
+0.5 & 0 & 0.5 & 0 & 0\\
+0 & 0.5 & 0 & 0.5 & 0\\
+0 & 0 & 0.5 & 0.5 & 0\\
+0 & 0 & 0 & 1 & 0 \\
+\end{array}
+\right )
+$$
+
+For instance, look at Row 2. There are 0.5 values in Columns 1 and 3,
+meaning there is a 0.5 chance of a move 2 $\rightarrow$ 1,
+and a 0.5 chance of a move 2 $\rightarrow$ 3.
+
+We use a subscript 1 here in $P_1$, meaning "one step." We go from,
+say, state 2 to state 1 in one step with probability 0.5. $P_1$ is
+called the *one-step transition matrix* for this process.
+
+What about the two-step transition matrix $P_2$? From state 3, we could
+go to state 1 in two steps, by two tails flips of the coin.  The
+probability of that is $0.5^2 = 0.25$. So the row 3, column 1 element in
+$P_2$ is 0.25. On the other hand, if from state 3 we flip tails then
+heads, or heads then tails, we are back to state 3. So, the row 3,
+column 3 element in  $P_2$ is 0.25 + 0.25 = 0.5.
+
+The reader should verify the correctness here:
+
+
+$$
+P_2 =
+\left (
+\begin{array}{rrrrr}
+0.5 & 0 & 0.5 & 0 & 0\\
+0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0.5 & 0 & 0.5 \\
+\end{array}
+\right )
+$$
+
+Well, finding two-step transition probabilities would be tedious in
+general, but it turns out that is a wonderful shortcut: Matrix
+multiplication.
+
+## Matrix Multiplication

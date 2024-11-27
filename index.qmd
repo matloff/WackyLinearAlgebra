@@ -1,0 +1,27 @@
+
+# Overview {.unnumbered}
+
+[.This work is licensed under 
+GNU General Public License v3.0.]{.column-margin}
+
+Unconventional linear algebra textbook, doing everything "backwards." 
+
+The presentation of each concept begins with a problem to be solved,
+leading up to a linear algebra solution. Basically, the math sneaks up
+on the reader, who suddenly realizes they've just learned a new general
+concept!
+
+## Prerequisite background
+
+Calculus and some exposure to R. 
+
+For a quick, painless introduction to R, see my
+[fasteR](https://github.com/matloff/fasteR) tutorial, say the first 8
+lessons.
+
+```{r}
+#| include: false
+library(dsld)
+library(qeML)
+```
+

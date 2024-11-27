@@ -1,0 +1,21 @@
+
+
+```{r}
+#| include: false
+library(dsld)
+library(qeML)
+```
+
+{{< pagebreak >}}
+
+# Matrix Multiplication
+
+
+
+$$
+\exp{-t^2}
+$$
+
+\begin{equation}
+abc
+\end{equation}
