@@ -3,8 +3,8 @@ project:
 
 book:
 
-   title: "Wacky Linear Algebra"
-   subtitle: "A most unconventional approach"
+   title: "Linear Algebra *in* Data Science"
+   subtitle: "An unconventional approach"
    author: 
      - Norman Matloff
    date: "11/27/2024"

@@ -19,7 +19,7 @@ notation X~k~ = i means that at time k we are in state/position i.
 Our rule will be that at any time k, we flip a coin. If we are currently
 at position i, we move to either i+1 or i-1, depending on whether the
 coin landed heads or tails. The exceptions are k = 1 and k = 5, in which
-case we move to position 2 or 4, respectively.
+case we stay put if tails or move to the adjacent position if heads.
 
 We can summarize the probabilities with a *matrix*, a two-dimensional
 array:
@@ -28,11 +28,11 @@ $$
 P_1 =
 \left (
 \begin{array}{rrrrr}
-0 & 1 & 0 & 0 & 0\\
+0.5 & 0.5 & 0 & 0 & 0\\
 0.5 & 0 & 0.5 & 0 & 0\\
 0 & 0.5 & 0 & 0.5 & 0\\
-0 & 0 & 0.5 & 0.5 & 0\\
-0 & 0 & 0 & 1 & 0 \\
+0 & 0 & 0.5 & 0 & 0.5\\
+0 & 0 & 0 & 0.5 & 0.5 \\
 \end{array}
 \right )
 $$
@@ -40,10 +40,13 @@ $$
 For instance, look at Row 2. There are 0.5 values in Columns 1 and 3,
 meaning there is a 0.5 chance of a move 2 $\rightarrow$ 1,
 and a 0.5 chance of a move 2 $\rightarrow$ 3.
+[Note that each row in a transition matrix must sum to 1. After, from
+state i we must go *somewhere*.]{.column-margin}
 
 We use a subscript 1 here in $P_1$, meaning "one step." We go from,
 say, state 2 to state 1 in one step with probability 0.5. $P_1$ is
-called the *one-step transition matrix* for this process.
+called the *one-step transition matrix* (or simply the
+*transition matrix*) for this process.
 
 What about the two-step transition matrix $P_2$? From state 3, we could
 go to state 1 in two steps, by two tails flips of the coin.  The
@@ -59,17 +62,221 @@ $$
 P_2 =
 \left (
 \begin{array}{rrrrr}
-0.5 & 0 & 0.5 & 0 & 0\\
-0 & 0 & 0 & 0 & 0\\
-0 & 0 & 0 & 0 & 0\\
-0 & 0 & 0 & 0 & 0\\
-0 & 0 & 0.5 & 0 & 0.5 \\
+0.5 & 0.25 & 0.25 & 0 & 0\\
+0.25 & 0.5 & 0 & 0.25 & 0\\
+0.25 & 0 & 0.5 & 0 & 0.25\\
+0 & 0.25 & 0 & 0.5 & 0.25\\
+0 & 0 & 0.25 & 0.25 & 0.5 \\
 \end{array}
 \right )
 $$
 
 Well, finding two-step transition probabilities would be tedious in
 general, but it turns out that is a wonderful shortcut: Matrix
-multiplication.
+multiplication. We will cover this in the next section, but first a
+couple of preliminaries.
+
+The above random walk is a *Markov chain*. The Markov Property says that
+the system "has no memory." If say we land at position 2, we will go to
+1 or 3 with probability 1/2 *no matter what the previous history of the
+system was*; it doesn't matter *how* we got to state 3. That in turn
+comes from the independence of the successive coin flips.
+
+**Notation:** Individual elements of a matrix are usually written with
+double subscripts. For instance, a<sub>25</sub> will mean the row 2,
+column 5 element of the matrix A.
 
 ## Matrix Multiplication
+
+This is the most fundamental operation in linear algebra. It is defined
+as follows:
+
+
+<blockquote>
+
+Given matrix A of k rows and m columns and
+matrix B of m rows and r columns, the product C = AB is
+an kxm matrix, whose row i, column j element is
+
+$$
+a_{i1} b_{i1} +
+a_{i2} b_{i1} + ... +
+a_{m1} b_{m1} 
+$$
+
+This is the "dot product" of row i of A and column j of B:  Find the
+products of the paired elements in the two vectors, then sum.
+
+</blockquote>
+
+[Be sure to remember that the number of rows of B must match the number
+of columns of A.]{.column-margin}
+
+For example, set 
+
+$$
+A = \left (
+\begin{array}{rr}
+5 & 2 & 6 \\
+1 & 1 & 8 \\
+\end{array}
+\right )
+$$
+
+and
+
+$$
+B = \left (
+\begin{array}{rrr}
+5 & -1 \\
+1 & 0 \\
+0 & 8 \\
+\end{array}
+\right )
+$$
+
+Let's find the row 2, column 2 element of C = AB.  Again, that means
+taking the dot product of row 2 of A and column 2 of B, which we've
+highlighted below.
+
+$$
+A = \left (
+\begin{array}{rr}
+5 & 2 & 6 \\
+\textcolor{red}{1} & \textcolor{red}{1} & \textcolor{red}{1} \\
+\end{array}
+\right )
+$$
+
+and
+
+$$
+B = \left (
+\begin{array}{rrr}
+5 & \textcolor{red}{-1} \\
+1 & \textcolor{red}{0} \\
+0 & \textcolor{red}{8} \\
+\end{array}
+\right )
+$$
+
+The value in question is then
+
+1 (-1) + 1 (0) + 1 (8) = 7
+
+Let's check it, with R:
+
+[.The **rbind** and **cbind** functions ("row bind" and "column bind")
+are very handy tools for creating matrices.]{.column-margin}
+
+```{r}
+a <- rbind(c(5,2,6),c(1,1,1))
+b <- cbind(c(5,1,0),c(-1,0,8))
+a %*% b
+```
+The reader should make sure to check the other elements by hand.
+
+## Application to Markov Chain Transition Matrices
+
+Now let's return to the question of how to easily compute $P_2$,
+the two-step transition matrix. It turns out that:
+
+<blockquote>
+
+Let P denote the transition matrix of a (finite-state) Markov chain. The
+k-step transition matrix is $P^k$.
+
+</blockquote>
+
+At first, this may seem amazingly fortuitous, but it makes sense in
+light of the "and/or" nature of the probability computations involved.
+Recall our computation for the row 1, column 2 element of $P_2$ above.
+From state 1, we could either stay at 1 for one flip, then move to 2 on
+the second flip, or we could go to 2 then return to 1. Each of these has
+probability 0.5, so the total probability is
+
+$$
+(0.5)(0.5) + (0.5)(0.5)
+$$
+
+But this is exactly the form of our "dot product" computation
+in the definition of matrix multiplication,
+
+$$
+a_{i1} b_{i1} +
+a_{i2} b_{i1} + ... +
+a_{m1} b_{m1} 
+$$
+
+Statisticians and computer scientists like to look at the *asymptotic*
+behavior of systems. Let's see where we might be after say, 6 steps:
+
+```{r}
+matpow <- function(m,k) {
+   nr <- nrow(m)
+   tmp <- diag(nr)  # identity matrix
+   for (i in 1:k) tmp <- tmp %*% m
+   tmp
+}
+
+p1 <- rbind(c(0.5,0.5,0,0,0), c(0.5,0,0.5,0,0), c(0,0.5,0,0.5,0), 
+   c(0,0,0.5,0,0.5), c(0,0,0,0.5,0.5))
+matpow(p1,6)
+```
+
+So for instance if we start at position 2, there is about an 11% chance
+that we will be at position 3 at time 6. What about time 25?
+
+```{r}
+matpow(p1,25)
+```
+
+So, no matter which state we start in, at time 25 we are about 20%
+likely to be at any of the states. In fact, as time n goes to infinity,
+this probability vector becomes exactly (0.20,0.20,0.20,0.20,0.20).
+This latter vector is called the *stationary distribution* of the
+process.
+[The reason behind the word *stationary* is as follows: If 
+we let $X_0$, the state at time 0, be random with this set of 
+probabilities, then $X_1$, the state at time 1, will have this distribution as 
+well.]{.column-margin}
+
+❄️  **Your Turn:** The stationary probabilities here turned out to be
+uniform, with value 0.20 for all five states. In fact, that is usually
+not the case.  Make a small change to $P_1$ -- remember to keep the row
+sums to 1 -- and compute a high power to check whether the stationary
+distribution seems nonuniform.
+
+## Network Graph Models
+
+There has always been lots of analyses of "Who is connected to who,"
+but activity soared after the advent of Facebook and the film, *A Social
+Network.*  See for instance *Statistical Analysis of Network Data with R*
+by Eric Kolaczy and Gábor Csárdi. As the authors say, 
+
+<blockquote>
+
+The oft-repeated statement that “we live in a connected world” perhaps
+best captures, in its simplicity...From on-line social networks like
+Facebook to the World Wide Web and the Internet itself, we are
+surrounded by examples of ways in which we interact with each other.
+Similarly, we are connected as well at the level of various human
+institutions (e.g., governments), processes (e.g., economies), and
+infrastructures (e.g., the global airline network). And, of course,
+humans are surely not unique in being members of various complex,
+inter-connected systems.  Looking at the natural world around us, we see
+a wealth of examples of such systems, from entire eco-systems, to
+biological food webs, to collections of inter-acting genes or
+communicating neurons.
+
+</blockquote>
+
+And of course, at the center of it all is a matrix!
+
+## Matrix Algebra
+
+### Basic operations
+
+### Partitioned matrices
+
+# Google PageRank
