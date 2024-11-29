@@ -280,3 +280,10 @@ And of course, at the center of it all is a matrix!
 ### Partitioned matrices
 
 # Google PageRank
+
+The *PageRank* algorithm used by Google to determine the "value" of a
+Web page uses Markov chain methods. Links of high probability are deemed
+more important, though there are further details. such as in [this
+overview](https://math.libretexts.org/Bookshelves/Linear_Algebra/Understanding_Linear_Algebra_(Austin)/04%3A_Eigenvalues_and_eigenvectors/4.05%3A_Markov_chains_and_Google's_PageRank_algorithm).
+
+
