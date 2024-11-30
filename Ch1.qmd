@@ -176,6 +176,13 @@ a %*% b
 ```
 The reader should make sure to check the other elements by hand.
 
+## Vectors
+
+A matrix that has only one row or only one column is called a *vector*.
+Depending on which of those two shapes it has, we may refer to it as a
+*row vector* or *column vector*. If we merely write "vector," we mean a
+column vector.
+
 ## Application to Markov Chain Transition Matrices
 
 Now let's return to the question of how to easily compute $P_2$,
@@ -275,9 +282,114 @@ And of course, at the center of it all is a matrix!
 
 ## Matrix Algebra
 
-### Basic operations
+### Other Basic operations
 
-### Partitioned matrices
+Matrix multiplication may seem odd at first, but other operations are
+straightforward.
+
+**Addition:** We just add corresponding elements. For instance,
+
+$$
+A = \left (
+\begin{array}{rr}
+5 & 2 & 6 \\
+1 & 2.6 & -1.2 \\
+\end{array}
+\right )
+$$
+
+$$
+B = \left (
+\begin{array}{rr}
+0 & 20 & 6 \\
+3 & 5.8 & 1 \\
+\end{array}
+\right )
+$$
+
+$$
+A+B = \left (
+\begin{array}{rr}
+5 & 22 & 12 \\
+4 & 8.4 & -0.2 \\
+\end{array}
+\right )
+$$
+
+We do have to make sure the addends match in terms of numbers of rows
+and columns, 2 and 3 in the example here.
+
+**Scalar multiplication:** Again, this is simply elementwise. E.g. with
+A as above,
+
+$$
+1.5 A = \left (
+\begin{array}{rr}
+7.5 & 3 & 9 \\
+1.5 & 3.9 & -1.8 \\
+\end{array}
+\right )
+$$
+
+**Distributive property:**
+
+For matrices A, B and C of suitable conformability (A and B match in
+numbers of rows and columns, and their common number of columns matches
+the number of rows in C), we have
+
+(A+B) C = AC + BC
+
+### Partitioned matrices: an invaluable visualization tool
+
+Look at the matrix-vector product Mv.  Let's denote row i of M by
+M<sub>i.</sub>.  Then our building of the matrix-vector product
+can be displayed--and most important, visualized--symbolicly.
+For an r-row matrix M and a conformable vector v, we think of Mv as
+
+$$
+\left (
+\begin{array}{r}
+M_{1.} v \\
+M_{2.}  v\\
+... \\
+M_{r.}  v\\
+\end{array}
+\right )
+$$
+
+where M<sub>i.</sub>v is interpreted as the dot product of
+M<sub>i.</sub> with v.
+
+The expression
+$$
+\left (
+\begin{array}{r}
+M_{1.} \\
+M_{2.} \\
+... \\
+M_{r.} \\
+\end{array}
+\right )
+$$
+
+is a column of r things, so if you squint, it "looks" like a column of r
+numbers.  It wil turn out later that this way to visualize things is
+useful.
+
+
+Similarly, for the matrix-matrix product MQ, our above formulation can
+be written symbolicly as follows, with Q<sub>.j</sub> symbolizing column
+j of Q, j = 1,...,c, we think of MQ as
+
+$$
+\left (
+M Q_{.1},...,M Q_{.c}
+\right )
+$$
+
+Mastering this way of visualizing matrix projects will go a long way to
+helping you master linear algebra.
+
 
 # Google PageRank
 
