@@ -110,7 +110,8 @@ products of the paired elements in the two vectors, then sum.
 </blockquote>
 
 [Be sure to remember that the number of rows of B must match the number
-of columns of A.]{.column-margin}
+of columns of A. In this case, we say thst the matrices are
+*conformable*.]{.column-margin}
 
 For example, set 
 
@@ -339,43 +340,153 @@ the number of rows in C), we have
 
 (A+B) C = AC + BC
 
+### Matrix transpose
+
+This is a very simple but very important operation: We merely exchange
+rows and columns of the given matrix. For instance, with A as above, its
+transpose (signified with "'", is
+
+$$
+A' = \left (
+\begin{array}{rr}
+5 & 1 \\
+2 & 2.6 \\
+6 & -1.2 \\
+\end{array}
+\right )
+$$
+
+It can be shown that if A and B are conformable, then
+
+(AB)' = B'A'
+
+We will often write a row vector in the form (a,b,c,...). So
+(5,1,88) means the 1x3 matrix with those elements. If we wish this to
+be a column vector, we use transpose, so that for instance (5,1,88)'
+means a 3x1 matrix.
+
 ### Partitioned matrices: an invaluable visualization tool
 
-Look at the matrix-vector product Mv.  Let's denote row i of M by
-M<sub>i.</sub>.  Then our building of the matrix-vector product
-can be displayed--and most important, visualized--symbolicly.
-For an r-row matrix M and a conformable vector v, we think of Mv as
+Consider a matrix-vector product Mv. Of course, that means that v is a
+column vector whose length is equal to the number of columns of M. If M
+is of size rxs, then v is sx1.
+
+Let's denote column j of M by C<sub>j</sub>.  Then it turns out that 
 
 $$
-\left (
-\begin{array}{r}
-M_{1.} v \\
-M_{2.}  v\\
-... \\
-M_{r.}  v\\
+Mv = 
+v_1 C_{1} +
+v_2 C_{2} + ... +
+v_s C_{s}  
+$$
+
+For instance, take 
+
+$$
+A = \left (
+\begin{array}{rr}
+5 & 2 & 6 \\
+1 & 2.6 & -1.2 \\
 \end{array}
 \right )
 $$
 
-where M<sub>i.</sub>v is interpreted as the dot product of
-M<sub>i.</sub> with v.
+and 
 
-The expression
 $$
-\left (
-\begin{array}{r}
-M_{1.} \\
-M_{2.} \\
-... \\
-M_{r.} \\
+v = \left (
+\begin{array}{rrr}
+10 \\
+2 \\
+1 \\
 \end{array}
 \right )
 $$
 
-is a column of r things, so if you squint, it "looks" like a column of r
-numbers.  It wil turn out later that this way to visualize things is
-useful.
+The reader should check that
 
+$$
+10 \left (
+\begin{array}{rr}
+5 \\
+1 \\
+\end{array}
+\right )
++
+2 \left (
+\begin{array}{rr}
+2 \\
+2.6 \\
+\end{array}
+\right )
++
+2 \left (
+\begin{array}{rr}
+6 \\
+-1.2 \\
+\end{array}
+\right )
+= Av
+$$
+
+where the latter is
+
+$$
+\left (
+\begin{array}{rr}
+60 \\
+14  \\
+\end{array}
+\right )
+$$
+
+Note that the above expression,
+
+$$
+10 \left (
+\begin{array}{rr}
+5 \\
+1 \\
+\end{array}
+\right )
++
+2 \left (
+\begin{array}{rr}
+2 \\
+2.6 \\
+\end{array}
+\right )
++
+2 \left (
+\begin{array}{rr}
+6 \\
+-1.2 \\
+\end{array}
+\right ),
+$$
+
+is a sum of scalar products of vectors, which is called a *linear
+combination* of those vectors. In other words, we have that:
+
+<blockquote>
+
+The product of a matrix and a column vector is equal to a linear
+combination of the columns of the matrix.
+
+</blockquote>
+
+Similarly,
+
+<blockquote>
+
+The product of a row vector and a matrix is equal to a linear
+combination of the rows of the matrix.
+
+</blockquote>
+
+❄️  **Your Turn:** Using the same matrix A and the same vector v as
+above, verify that v'A is indeed a linear combination of the rows of A
+as described.
 
 Similarly, for the matrix-matrix product MQ, our above formulation can
 be written symbolicly as follows, with Q<sub>.j</sub> symbolizing column
