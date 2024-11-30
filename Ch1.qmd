@@ -244,10 +244,10 @@ likely to be at any of the states. In fact, as time n goes to infinity,
 this probability vector becomes exactly (0.20,0.20,0.20,0.20,0.20).
 This latter vector is called the *stationary distribution* of the
 process.
-[The reason behind the word *stationary* is as follows: If 
-we let $X_0$, the state at time 0, be random with this set of 
-probabilities, then $X_1$, the state at time 1, will have this distribution as 
-well.]{.column-margin}
+
+The reason behind the word *stationary* is as follows: If we let $X_0$,
+the state at time 0, be random with this set of probabilities, then
+$X_1$, the state at time 1, will have this distribution as well. H
 
 ❄️  **Your Turn:** The stationary probabilities here turned out to be
 uniform, with value 0.20 for all five states. In fact, that is usually
