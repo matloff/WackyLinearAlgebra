@@ -77,7 +77,7 @@ multiplication. We will cover this in the next section, but first a
 couple of preliminaries.
 
 The above random walk is a *Markov chain*. The Markov Property says that
-the system "has no memory." If say we land at position 2, we will go to
+the system "has no jemory." If say we land at position 2, we will go to
 1 or 3 with probability 1/2 *no matter what the previous history of the
 system was*; it doesn't matter *how* we got to state 3. That in turn
 comes from the independence of the successive coin flips.
@@ -184,7 +184,7 @@ Depending on which of those two shapes it has, we may refer to it as a
 *row vector* or *column vector*. If we merely write "vector," we mean a
 column vector.
 
-## Application to Markov Chain Transition Matrices
+## Application to Markov Chain Transition Matrices {#sec-introMCs}
 
 Now let's return to the question of how to easily compute $P_2$,
 the two-step transition matrix. It turns out that:
@@ -242,18 +242,20 @@ matpow(p1,25)
 So, no matter which state we start in, at time 25 we are about 20%
 likely to be at any of the states. In fact, as time n goes to infinity,
 this probability vector becomes exactly (0.20,0.20,0.20,0.20,0.20).
-This latter vector is called the *stationary distribution* of the
-process.
 
-The reason behind the word *stationary* is as follows: If we let $X_0$,
-the state at time 0, be random with this set of probabilities, then
-$X_1$, the state at time 1, will have this distribution as well. H
-
-❄️  **Your Turn:** The stationary probabilities here turned out to be
+❄️  **Your Turn:** The long-run probabilities here turned out to be
 uniform, with value 0.20 for all five states. In fact, that is usually
 not the case.  Make a small change to $P_1$ -- remember to keep the row
-sums to 1 -- and compute a high power to check whether the stationary
+sums to 1 -- and compute a high power to check whether the long-run
 distribution seems nonuniform.
+
+❄️  **Your Turn:** And not every Markov chain, even ones with finitely
+many states, have long-run distributions. Some chains have *periodic*
+states. It may be, for instance, that after leaving state $i$, once can
+return only after an even number of hops. Modify our example chain here
+so that states 1 and 5 (and all the others) have that property. Then
+compute $P^n$ for various large values of $n$ and observe oscillatory
+behavior, rather than long-run convergence.
 
 ## Network Graph Models
 
@@ -279,7 +281,26 @@ communicating neurons.
 
 </blockquote>
 
-And of course, at the center of it all is a matrix!
+And of course, at the center of it all is a matrix! Here is why:
+
+Let's consider the famous Karate Club dataset:
+
+```{r}
+# remotes::install_github("schochastics/networkdata") 
+library(networkdata)
+data(karate)
+library(igraph)
+plot(karate)
+
+
+
+```
+
+
+
+Specifically, the
+*adjacency matrix* is the graph whose row i, column j element is 
+DIRECTED, UNDIRECTED.
 
 ## Matrix Algebra
 
@@ -509,8 +530,11 @@ where $a_{ij}$ is the row i, column j element of the chain's transition
 matrix $P$.
 
 For example, consider $g_5$. How could we be at state 5 at time 1? We
-could started in state 1, probability $f_1$, to moved to state 5,
-probability $a_{15}$, and so on.
+could started in state 1, probability $f_1$, then moved to state 5,
+probability $a_{15}$, for a total probability of $f_1 a_{15}$. 
+Or, we could started in state 2, probability $f_2$, then moved to state 5,
+probability $a_{25}$, for a total probability of $f_2 a_{25}$.
+And so on.
 
 So,
 
@@ -540,43 +564,65 @@ f_1 a_{1k} + f_2 a_{2k} + ... + f_k a_{kk} \\
 \right )
 $$
 
-Treating $f$ as a row vector, that last expression is
+Treating $f$ as a column vector, that last expression is
 
 $$
-fP
+Pf
 $$
 
 so we have the nice compact relation for the distribution of $X_1$ in
-terms of the distribution of $X_0$.
+terms of the distribution of $X_0$.[By the way, it won't be used here, but
+just for practice, note that the right-hand side, Pf, here is
+a linear combination of the columns of P, from our above material on
+partitioning.]{.column-margin}
 
 $$
-g = fP
-$$[By the way, it won't be used here, but
-just for practice, note that the right-hand side, fP, here is
-a linear combination of the rows of P, from our above material on
-partitioning.]{.column-margin}
+g = Pf
+$$
+
 
 And setting h to the distribution of $X_2$, the same reasoning gives us
 
 $$
-h = gP 
+h = Pg 
 $$
 
-so that
+Then since $g = Pf$, we have
+[Note that we used the Markov property, 
+"memorylessness." Once we reach time 1, "time starts over," regradless
+of the previous history, i.e. regardless of where we were at time 0.]{.column-margin}
 
 $$
-h = g P^2
+h = P^2 f
 $$
 
-and so on.[Note that we used the Markov property, "memoryless."]{.column-margin}
-
-In other words, setting $d_j$ to the distribution of $X_n$, 
+and so on. Iterating, we obtain
 
 $$
-d_j = d_0 P^j
+d_j = P^j d_0
 $$
 
+So we have a formula for the distribution of $X_j$.
 
+Similarly, setting $d_j$, as a column vector,
+to the distribution of $X_j$, 
+
+$$
+d_j = P d_{j-1}
+$$
+
+Now suppose our chain as a long-run distribution, as in {@sec-introMCs}.
+Let's call that distribution $\nu$. By lettting $j \rightarrow \infty$
+above, we have
+
+$$
+\nu = P \nu
+$$
+
+Since P is known, this provides us with a way to compute $\nu$. Yes,
+find a high power of P would do this too, but that would involve a lot
+of computation, and even then it would not yield the exact answer. We
+will return to this in a later chapter.
 
 # Google PageRank
 
