@@ -488,18 +488,94 @@ combination of the rows of the matrix.
 above, verify that v'A is indeed a linear combination of the rows of A
 as described.
 
-Similarly, for the matrix-matrix product MQ, our above formulation can
-be written symbolicly as follows, with Q<sub>.j</sub> symbolizing column
-j of Q, j = 1,...,c, we think of MQ as
+# A Further Look at Markov Chains
+
+Suppose $X_0$, our state at time 0, is random. Let $f$ denote its
+distribution, i.e. its list of probabilities:
+$f_i = P(X_0 = i)$, i = 1,...,k, where k is the number
+of states in the chain. What about $X_1$, the state at time 1?
+Let's find an expression for $g$, the distribution of $X_1$.[This
+section will be longer than previous ones, but will bring together many
+of the concepts. The reader's patience here will be an investment paying
+great dividends in the sequel.]{.column-margin}
 
 $$
+g_j = P(X_1 = j)
+= \sum_{i=1}^k P(X_0 = i) P(X_1 = j | X_0 = i)
+= \sum_{i=1}^k f_i a_{ij}
+$$
+
+where $a_{ij}$ is the row i, column j element of the chain's transition
+matrix $P$.
+
+For example, consider $g_5$. How could we be at state 5 at time 1? We
+could started in state 1, probability $f_1$, to moved to state 5,
+probability $a_{15}$, and so on.
+
+So,
+
+$$
+g_j = \sum_{i=1}^k f_i a_{ij}
+$$
+
+Putting this is more explicit matrix terms,
+
+$$
+g = \left (
+\begin{array}{rrrr}
+g_1 \\
+g_2 \\
+... \\
+g_k \\
+\end{array}
+\right )
+=
 \left (
-M Q_{.1},...,M Q_{.c}
+\begin{array}{rr}
+f_1 a_{11} + f_2 a_{21} + ... + f_k a_{k1} \\
+f_1 a_{12} + f_2 a_{22} + ... + f_k a_{k2} \\
+... \\
+f_1 a_{1k} + f_2 a_{2k} + ... + f_k a_{kk} \\
+\end{array}
 \right )
 $$
 
-Mastering this way of visualizing matrix projects will go a long way to
-helping you master linear algebra.
+Treating $f$ as a row vector, that last expression is
+
+$$
+fP
+$$
+
+so we have the nice compact relation for the distribution of $X_1$ in
+terms of the distribution of $X_0$.
+
+$$
+g = fP
+$$[By the way, it won't be used here, but
+just for practice, note that the right-hand side, fP, here is
+a linear combination of the rows of P, from our above material on
+partitioning.]{.column-margin}
+
+And setting h to the distribution of $X_2$, the same reasoning gives us
+
+$$
+h = gP 
+$$
+
+so that
+
+$$
+h = g P^2
+$$
+
+and so on.[Note that we used the Markov property, "memoryless."]{.column-margin}
+
+In other words, setting $d_j$ to the distribution of $X_n$, 
+
+$$
+d_j = d_0 P^j
+$$
+
 
 
 # Google PageRank
