@@ -257,7 +257,7 @@ so that states 1 and 5 (and all the others) have that property. Then
 compute $P^n$ for various large values of $n$ and observe oscillatory
 behavior, rather than long-run convergence.
 
-❄️❄️  **Your Turn:** Consider the following model of a discrete-time,
+❄️  **Your Turn:** Consider the following model of a discrete-time,
 single-server queue:
 
 * Model parameters are p (probability of job completion), q 
@@ -353,14 +353,25 @@ Accordingly, row 13, column 4 does have a 1 entry.
 As is the case with Markov transition matrices, powers of an adjacency
 matrix can yield valuable information. In the Markov case,
 multiplication gives us sums of paired products, computing
-probabilities. In the network graph case, products are of the form 0x0,
-0x1, 1x0 or 1x1. If there is 1 in an entry of the square of the
-adjacency matrix, say in row 15, column 19, that means there is a
-two-hop path from node 15 to node 19. In this way, using powers of the
-matrix, one can determine connectivity of the graph -- node i is
-connected to node j if there is a path, of whatever number of hops,
-between them -- count the number of paths and so on. The details are
-beyond the scope of this book.
+probabilities. What about the network graph case? 
+
+Here products are of the form 0x0, 0x1, 1x0 or 1x1.  If there is a
+nonzero entry m in row i, column j of the square of the adjacency
+matrix, that means there were m 1x1 products in that sum, which would
+correspond to m paths. Let's look into this.
+
+```{r}
+adjK2 <- adjK %*% adjK
+```
+
+We see that **adjK2[11,1]** is 2. Inspection of **adjK** shows that its
+row 11, columns 6 and 7 are 1s, and that rows 6 and 7, column 1 are 1s
+as well. So there are indeed two two-hop paths from node 11 to node 1,
+specifically $11 \rightarrow 6 \rightarrow 1$ and $
+$11 \rightarrow 7 \rightarrow 1$. 
+
+Making this kind of analysis fully correct requires paying attention to
+things such as cycles.  The details are beyond the scope of this book.
 
 ## Matrix Algebra
 
@@ -682,5 +693,5 @@ $$
 Since P is known, this provides us with a way to compute $\nu$. Yes,
 finding a high power of P would do this too, but that would involve a lot
 of computation, and even then it would not yield the exact answer. We
-will return to this in a later chapter. 
+will return to this in the next chapter. 
 

@@ -7,20 +7,22 @@ Welcome to my magnum opus! :-) I've written a number of books, but
 consider this one to be the most important.  [This work is licensed
 under Creative Commons Zero v1.0 Universal]{.column-margin}
 
-## Subtlety in the Title
+### Subtlety in the Title
 
 Let's start with the title of this book, "Linear Algebra *in* 
 Data Science." It would be more typical of "math support for field X"
 books to use "for" rather than "in," but the use of the latter aims to
 emphasize the fact that:
 
-::: {.callout-note}
+<blockquote>
+
 Linear algebra is absolutely fundamental to the Data Science field. For
 us data scientists, it is "our" branch of math. Mastering this branch,
 which is definitely within the reach of all, pays major dividends.
-:::
 
-## Philosophy
+</blockquote>
+
+### Philosophy
 
 This is an unconventional linear algebra textbook, doing everything
 "backwards." The presentation of each concept begins with a problem to
@@ -28,7 +30,7 @@ be solved, almost always from Data Science, leading up to a linear
 algebra solution.  Basically, the math sneaks up on the reader, who
 suddenly realizes they've just learned a new general concept!
 
-## Prerequisite background
+### Prerequisite background
 
 Basic data science:
 
