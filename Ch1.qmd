@@ -257,6 +257,45 @@ so that states 1 and 5 (and all the others) have that property. Then
 compute $P^n$ for various large values of $n$ and observe oscillatory
 behavior, rather than long-run convergence.
 
+❄️❄️  **Your Turn:** Consider the following model of a discrete-time,
+single-server queue:
+
+* Model parameters are p (probability of job completion), q 
+  (probability of new job arriving) and m (size of the buffer).
+
+* Jobs arrive, are served (possibly after queuing) and leave.
+
+* Only one job can be in service at a time.
+
+* At each time epoch:
+
+    * The job currently in service, if any, will complete with
+      probability p.
+
+    * Slightly after a possible job completion, a job in the queue,
+      if any, will start service.
+
+    a Slightly after that, anew job will arrive with probability q.
+      If the queue is empty, this job starts service. If not, and if the
+      queue is not full, it will join the queue.  Otherwise, the job is
+      discarded.
+
+* The system is memoryless.
+
+* The current state is the number of jobs in the system, taking on the
+values 0,1,2,..,m+1; that last state means m jobs in the queue and 1 in
+service.
+
+For instance, say p = 0.4, q = 0.2, m = 5, Suppose the current state is
+3, so there is a job in service and two jobs in the queue. Our next
+state will be 2 with probability (0.4) (0.8); it will be 3 with
+probability (0.4) (0.2), and so on.
+
+Analyze this system for the case given above.` Find the approximate
+long-run distribution, and also the proportion of jobs that get
+discarded.
+
+
 ## Network Graph Models
 
 There has always been lots of analyses of "Who is connected to who,"
@@ -641,7 +680,7 @@ $$
 $$
 
 Since P is known, this provides us with a way to compute $\nu$. Yes,
-find a high power of P would do this too, but that would involve a lot
+finding a high power of P would do this too, but that would involve a lot
 of computation, and even then it would not yield the exact answer. We
 will return to this in a later chapter. 
 
