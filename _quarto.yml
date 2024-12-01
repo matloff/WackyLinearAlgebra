@@ -25,5 +25,8 @@ format:
      fig_caption: no
      fig_numbers: no
     
+execute:
+   warning: false
+   message: false
 
 

@@ -249,7 +249,7 @@ not the case.  Make a small change to $P_1$ -- remember to keep the row
 sums to 1 -- and compute a high power to check whether the long-run
 distribution seems nonuniform.
 
-❄️  **Your Turn:** And not every Markov chain, even ones with finitely
+❄️  **Your Turn:** Not every Markov chain, even ones with finitely
 many states, have long-run distributions. Some chains have *periodic*
 states. It may be, for instance, that after leaving state $i$, once can
 return only after an even number of hops. Modify our example chain here
@@ -285,22 +285,43 @@ And of course, at the center of it all is a matrix! Here is why:
 
 Let's consider the famous Karate Club dataset:
 
+[]{.column-margin} 
+
 ```{r}
 # remotes::install_github("schochastics/networkdata") 
 library(networkdata)
 data(karate)
 library(igraph)
 plot(karate)
-
-
-
 ```
 
+There is a link between node 13 and node 4, meaning that club members 13
+and 4 are friends.[This graph is *undirected*, as friendship is mutual.
+Many graphs are *directed*d, but we will assume undirected
+here.]{.column-margin}
 
+Specifically, the *adjacency matrix* has row i, column j element as 1 or
+0, according to whether a link exists between nodes i and j.
 
-Specifically, the
-*adjacency matrix* is the graph whose row i, column j element is 
-DIRECTED, UNDIRECTED.
+```{r}
+adjK <- as_adjacency_matrix(karate)
+adjK
+adjK[13,4]
+```
+
+Accordingly, row 13, column 4 does have a 1 entry.
+
+As is the case with Markov transition matrices, powers of an adjacency
+matrix can yield valuable information. In the Markov case,
+multiplication gives us sums of paired products, computing
+probabilities. In the network graph case, products are of the form 0x0,
+0x1, 1x0 or 1x1. If there is 1 in an entry of the square of the
+adjacency matrix, say in row 15, column 19, that means there is a
+two-hop path from node 15 to node 19. In this way, using powers of the
+matrix, one can determine connectivity of the graph -- node i is
+connected to node j if there is a path, of whatever number of hops,
+between them -- count the number of paths and so on. The details are
+beyond the scope of this book.
 
 ## Matrix Algebra
 
@@ -622,13 +643,5 @@ $$
 Since P is known, this provides us with a way to compute $\nu$. Yes,
 find a high power of P would do this too, but that would involve a lot
 of computation, and even then it would not yield the exact answer. We
-will return to this in a later chapter.
-
-# Google PageRank
-
-The *PageRank* algorithm used by Google to determine the "value" of a
-Web page uses Markov chain methods. Links of high probability are deemed
-more important, though there are further details. such as in [this
-overview](https://math.libretexts.org/Bookshelves/Linear_Algebra/Understanding_Linear_Algebra_(Austin)/04%3A_Eigenvalues_and_eigenvectors/4.05%3A_Markov_chains_and_Google's_PageRank_algorithm).
-
+will return to this in a later chapter. 
 
