@@ -8,14 +8,71 @@ library(qeML)
 
 {{< pagebreak >}}
 
-# Matrix Multiplication
+# Matrix Inverse
 
-
+At the end of the last chapter, we found that for a Markov chain with
+transition matrix P and stationary distribution $\nu$,
 
 $$
-\exp{-t^2}
+\nu = P \nu
 $$
 
-\begin{equation}
-abc
-\end{equation}
+This suggests a method for computing $\nu$, by solving the above
+equation.
+
+Rewrite it using the identity matrix:
+
+$$
+(I - P) \nu = 0
+$$
+
+For the random walk chain in Chapter 1, we had
+
+$$
+P =
+\left (
+\begin{array}{rrrrr}
+0.5 & 0.5 & 0 & 0 & 0\\
+0.5 & 0 & 0.5 & 0 & 0\\
+0 & 0.5 & 0 & 0.5 & 0\\
+0 & 0 & 0.5 & 0 & 0.5\\
+0 & 0 & 0 & 0.5 & 0.5 \\
+\end{array}
+\right )
+$$
+
+With $\nu = (\nu_1,\nu_2,\nu_3,\nu_4,\nu_5)'$, the equation to be solved
+is
+
+$$
+\left (
+\begin{array}{rrrrr}
+0.5 & -0.5 & 0 & 0 & 0 \\
+-0.5 & 0 & -0.5 & 0 & 0 \\
+0 & -0.5 & 0 & -0.5 & 0 \\
+0 & 0 & -0.5 & 0 & -0.5 \\
+0 & 0 & 0 & -0.5 & 0.5 \\
+\end{array}
+\right )
+\left (
+\begin{array}{rrrrr}
+\nu_1 \\
+\nu_2 \\
+\nu_3 \\
+\nu_4 \\
+\nu_5 \\
+\end{array}
+\right ) 
+\left (
+\begin{array}{rrrrr}
+0 \\
+0 \\
+0 \\
+0 \\
+0 \\
+\end{array}
+\right ) 
+$$
+
+
+
