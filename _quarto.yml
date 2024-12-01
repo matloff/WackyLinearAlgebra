@@ -8,17 +8,15 @@ book:
    author: 
      - Norman Matloff
    date: "11/27/2024"
+
+   cover-image: WageIncByGender.png
    
    chapters:
      - index.qmd
      - Ch1.qmd
+     - Ch2.qmd
    
 format:
-  pdf:
-     toc: true
-     number-sections: true
-     fig_caption: no
-     fig_numbers: no
   html:
      toc: true
      number-sections: true
