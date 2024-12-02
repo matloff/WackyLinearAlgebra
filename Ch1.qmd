@@ -374,6 +374,21 @@ as well. So there are indeed two two-hop paths from node 11 to node 1,
 specifically $11 \rightarrow 6 \rightarrow 1$ and $
 $11 \rightarrow 7 \rightarrow 1$. 
 
+Actually, what is typically of interest is *connectivity* rather than
+number of paths. For any given pair of nodes, is there a multihop path
+between them?  Or does the graph break down to several "islands" of
+connected nodes?
+
+Again consider the karate club data.
+
+```{r}
+u <- matpow(adjK,33)
+sum(u == 0)
+```
+
+So, in this graph, no pair of nodes has 0 paths between them. The graph
+is connected.
+
 Making this kind of analysis fully correct requires paying attention to
 things such as cycles.  The details are beyond the scope of this book.
 
@@ -689,7 +704,7 @@ d_j' = d_{j-1}' P
 $$
 
 For convenience, let's take transposes:[Recall that $(AB)' =
-B'A'$.]{.column-margin}
+B'A'$.
 
 $$
 d_j = P' d_{j-1}

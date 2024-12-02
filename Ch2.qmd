@@ -169,3 +169,21 @@ nu
 ```
 
 This confirms our earlier speculation based on powers of $P'$.
+
+# Computation of the Matrix Inverse
+
+Finding the inverse of a large matrix -- in data science applications,
+the number of rows and columns $n$ can easily be hundreds or more -- can
+be computationally challenging. The run time is proportional to $n^3$,
+and roundoff error can be an issue. Sophisticated algorithms have been
+developed, such as QR and Choleski decompositions. So in R, we should
+use, say, **qr.solve** rather than **solve** if we are working with
+sizable matrices.
+
+The classic "pencil and paper" method for matrix inversion is
+instructive, and will be presented here.
+
+## Pencil-and-paper computation
+
+
+can be challenging.
