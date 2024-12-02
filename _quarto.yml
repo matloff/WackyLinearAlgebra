@@ -9,7 +9,7 @@ book:
      - Norman Matloff
    date: "11/27/2024"
 
-   cover-image: WageIncByGender.png
+   cover-image: Projections.png
    
    chapters:
      - index.qmd
