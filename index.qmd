@@ -30,6 +30,16 @@ be solved, almost always from Data Science, leading up to a linear
 algebra solution.  Basically, the math sneaks up on the reader, who
 suddenly realizes they've just learned a new general concept!
 
+### Who is this book for?
+
+Of course the book should work well as a course textbook. The
+"applications first" approach should motivate student, and the use of
+Quarto enables easy conversion to Powerpoint by instructors.
+
+I hope the book's emphasize on the Why? and How?  especially appeals to
+do-it-yourselfers, those who engagement in self-study is motivated by
+intellectual curiosity rather than a course grade.
+
 ### Prerequisite background
 
 Basic data science:
