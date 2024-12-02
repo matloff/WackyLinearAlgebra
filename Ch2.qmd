@@ -14,19 +14,22 @@ At the end of the last chapter, we found that for a Markov chain with
 transition matrix P and stationary distribution $\nu$,
 
 $$
-\nu = P \nu
+\nu = P' \nu
 $$
 
 This suggests a method for computing $\nu$, by solving the above
-equation.
+equation.[]{.column-margin}
 
-Rewrite it using the identity matrix:
+Rewrite it using the identity matrix:[Recall that for any square matrix
+C and identity matrix I of the same size, $IC = CI =
+C$.]{.column-margin}
 
 $$
-(I - P) \nu = 0
+(I - P') \nu = 0
 $$
 
-For the random walk chain in Chapter 1, we had
+For the random walk chain in Chapter 1, we had[In that particular model,
+P' = P, but for most chains this is not the case.]{.column-margin}
 
 $$
 P =
@@ -41,16 +44,16 @@ P =
 \right )
 $$
 
-With $\nu = (\nu_1,\nu_2,\nu_3,\nu_4,\nu_5)'$, the equation to be solved
-is
+With $\nu = (\nu_1,\nu_2,\nu_3,\nu_4,\nu_5)'$, the equation to be
+solved, $(I-P') \nu = \nu$, is
 
 $$
 \left (
 \begin{array}{rrrrr}
 0.5 & -0.5 & 0 & 0 & 0 \\
--0.5 & 0 & -0.5 & 0 & 0 \\
-0 & -0.5 & 0 & -0.5 & 0 \\
-0 & 0 & -0.5 & 0 & -0.5 \\
+-0.5 & 1 & -0.5 & 0 & 0 \\
+0 & -0.5 & 1 & -0.5 & 0 \\
+0 & 0 & -0.5 & 1 & -0.5 \\
 0 & 0 & 0 & -0.5 & 0.5 \\
 \end{array}
 \right )
@@ -62,7 +65,7 @@ $$
 \nu_4 \\
 \nu_5 \\
 \end{array}
-\right ) 
+\right ) = 
 \left (
 \begin{array}{rrrrr}
 0 \\
@@ -74,5 +77,95 @@ $$
 \right ) 
 $$
 
+If we perform the matrix multiplication, we have an ordinary system of
+linear equations:
 
+$$
+\begin{array}{rrrrr}
+0.5 \nu_1 - 0.5 \nu_2 = 0 \\
+-0.5 \nu_1 + \nu_2 - 0.5 \nu_3 = 0 \\
+-0.5 \nu_2 + \nu_3 - 0.5 \nu_4 = 0 \\
+-0.5 \nu_3 + \nu_4 - 0.5 \nu_5 = 0 \\
+-0.5 \nu_4 + 0.5 \nu_5 = 0 \\
+\end{array}
+$$
 
+This is high school math, and we could solve the equations that way. But
+this is literaally what linear algebra was invented for, solving systems
+of equations! We will use matrix inverse.
+
+But first, we have a problem to solve: The only solution to the above
+system is with all $\nu_i = 0$. We need an equation involving a nonzero
+quantity.
+
+But we do have such an equation. The $\nu$ is a stationary distribution
+for a Markov chain, and thus must sum to 1.0. Let's replace the last row
+by that relation:
+
+$$
+\left (
+\begin{array}{rrrrr}
+0.5 & -0.5 & 0 & 0 & 0 \\
+-0.5 & 1 & -0.5 & 0 & 0 \\
+0 & -0.5 & 1 & -0.5 & 0 \\
+0 & 0 & -0.5 & 1 & -0.5 \\
+1 & 1 & 1 & 1 & 1 \\
+\end{array}
+\right )
+\left (
+\begin{array}{rrrrr}
+\nu_1 \\
+\nu_2 \\
+\nu_3 \\
+\nu_4 \\
+\nu_5 \\
+\end{array}
+\right ) =
+\left (
+\begin{array}{rrrrr}
+0 \\
+0 \\
+0 \\
+0 \\
+1 \\
+\end{array}
+\right )
+$$
+
+More compactly, 
+
+$$
+B \nu = d
+$$
+
+Many square matrices $A$ have a multiplicative inverse, denoted by
+$A^{-1}$, with the property that
+
+$$
+A^{-1} A = A A^{-1} = I
+$$
+
+If our matrix $B$ is invertible, we can premultiply both sides of our
+equation above, yielding
+
+$$
+B^{-1} d = B^{-1} B \nu = \nu
+$$
+
+So, we have obtained our solution for the stationary distribution. We
+can evaluate it numerically via the R **solve** function, which finds
+matrix inverse:
+
+```{r}
+B <-
+rbind(c(0.5,-0.5,0,0,0), c(-0.5,1,-0.5,0,0), c(0,-0.5,1,-0.5,0),
+   c(0,0,-0.5,1,-0.5), c(1,1,1,1,1))
+B
+Binv <- solve(B)
+# check the inverse
+Binv %*% B  # yes, get I (of course with some roundoff error)
+nu <- Binv %*% c(0,0,0,0,1)
+nu
+```
+
+This confirms our earlier speculation based on powers of $P'$.

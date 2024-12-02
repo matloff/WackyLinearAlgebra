@@ -232,19 +232,20 @@ matpow <- function(m,k) {
 
 p1 <- rbind(c(0.5,0.5,0,0,0), c(0.5,0,0.5,0,0), c(0,0.5,0,0.5,0), 
    c(0,0,0.5,0,0.5), c(0,0,0,0.5,0.5))
-matpow(p1,6)
+matpow(t(p1),6) # R uses t() for transpose
 ```
 
 So for instance if we start at position 2, there is about an 11% chance
 that we will be at position 3 at time 6. What about time 25?
 
 ```{r}
-matpow(p1,25)
+matpow(t(p1),25)
 ```
 
 So, no matter which state we start in, at time 25 we are about 20%
 likely to be at any of the states. In fact, as time n goes to infinity,
-this probability vector becomes exactly (0.20,0.20,0.20,0.20,0.20).
+this probability vector becomes exactly (0.20,0.20,0.20,0.20,0.20), as
+we will see in the next chapter..
 
 ❄️  **Your Turn:** The long-run probabilities here turned out to be
 uniform, with value 0.20 for all five states. In fact, that is usually
@@ -339,7 +340,7 @@ plot(karate)
 
 There is a link between node 13 and node 4, meaning that club members 13
 and 4 are friends.[This graph is *undirected*, as friendship is mutual.
-Many graphs are *directed*d, but we will assume undirected
+Many graphs are *directed*, but we will assume undirected
 here.]{.column-margin}
 
 Specifically, the *adjacency matrix* has row i, column j element as 1 or
@@ -439,7 +440,7 @@ the number of rows in C), we have
 
 This is a very simple but very important operation: We merely exchange
 rows and columns of the given matrix. For instance, with A as above, its
-transpose (signified with "'", is
+transpose (signified with "'"), is
 
 $$
 A' = \left (
@@ -455,6 +456,8 @@ It can be shown that if A and B are conformable, then
 
 (AB)' = B'A'
 
+For some matrices C, we have C' = C. C is then termed \textit{symmetric}.
+
 We will often write a row vector in the form (a,b,c,...). So
 (5,1,88) means the 1x3 matrix with those elements. If we wish this to
 be a column vector, we use transpose, so that for instance (5,1,88)'
@@ -466,7 +469,8 @@ Consider a matrix-vector product Mv. Of course, that means that v is a
 column vector whose length is equal to the number of columns of M. If M
 is of size rxs, then v is sx1.
 
-Let's denote column j of M by C<sub>j</sub>.  Then it turns out that 
+Let's denote column j of M by C<sub>j</sub>.  Then we will see later in
+this chapter that 
 
 $$
 Mv = 
