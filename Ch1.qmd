@@ -181,8 +181,8 @@ The reader should make sure to check the other elements by hand.
 
 A matrix that has only one row or only one column is called a *vector*.
 Depending on which of those two shapes it has, we may refer to it as a
-*row vector* or *column vector*. If we merely write "vector," we mean a
-column vector.
+*row vector* or *column vector*. Usually we will simply say "vector," in
+which case it will be meant as a column vector.
 
 ## Application to Markov Chain Transition Matrices {#sec-introMCs}
 
@@ -604,9 +604,9 @@ where $a_{ij}$ is the row i, column j element of the chain's transition
 matrix $P$.
 
 For example, consider $g_5$. How could we be at state 5 at time 1? We
-could started in state 1, probability $f_1$, then moved to state 5,
+could start in state 1, probability $f_1$, then move to state 5,
 probability $a_{15}$, for a total probability of $f_1 a_{15}$. 
-Or, we could started in state 2, probability $f_2$, then moved to state 5,
+Or, we could start in state 2, probability $f_2$, then move to state 5,
 probability $a_{25}$, for a total probability of $f_2 a_{25}$.
 And so on.
 
@@ -638,10 +638,10 @@ f_1 a_{1k} + f_2 a_{2k} + ... + f_k a_{kk} \\
 \right )
 $$
 
-Treating $f$ as a column vector, that last expression is
+That last expression is
 
 $$
-Pf
+f'P
 $$
 
 so we have the nice compact relation for the distribution of $X_1$ in
@@ -651,38 +651,44 @@ a linear combination of the columns of P, from our above material on
 partitioning.]{.column-margin}
 
 $$
-g = Pf
+g' = f'P
 $$
 
 
 And setting h to the distribution of $X_2$, the same reasoning gives us
 
 $$
-h = Pg 
+h' = g'P 
 $$
 
-Then since $g = Pf$, we have
+Then since $g' = f'P$, we have
 [Note that we used the Markov property, 
 "memorylessness." Once we reach time 1, "time starts over," regradless
 of the previous history, i.e. regardless of where we were at time 0.]{.column-margin}
 
 $$
-h = P^2 f
+h' = f'P^2 
 $$
 
 and so on. Iterating, we obtain
 
 $$
-d_j = P^j d_0
+d_j' = d_0' P^j 
 $$
 
-So we have a formula for the distribution of $X_j$.
+where $d_i$ is the distribution of $X_i$.
 
-Similarly, setting $d_j$, as a column vector,
-to the distribution of $X_j$, 
+Similarly, 
 
 $$
-d_j = P d_{j-1}
+d_j' = d_{j-1}' P
+$$
+
+For convenience, let's take transposes:[Recall that $(AB)' =
+B'A'$.]{.column-margin}
+
+$$
+d_j = P' d_{j-1}
 $$
 
 Now suppose our chain as a long-run distribution, as in {@sec-introMCs}.
@@ -690,7 +696,7 @@ Let's call that distribution $\nu$. By lettting $j \rightarrow \infty$
 above, we have
 
 $$
-\nu = P \nu
+\nu = P' \nu
 $$
 
 Since P is known, this provides us with a way to compute $\nu$. Yes,
