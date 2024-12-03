@@ -1,0 +1,17 @@
+
+```{r}
+#| include: false
+library(dsld)
+library(qeML)
+```
+
+{{< pagebreak >}}
+
+# Linear Statistical Models
+
+This chapter could have been titled, say, "Optimization, Part I," since
+many applications of linear algebra involve minimization or maximization
+of some kind, and this chapter will involve calculus derivatives.  But
+the statistical applications of linear algebra are equally important.
+
+#

@@ -10,6 +10,11 @@ library(qeML)
 
 # Matrix Inverse
 
+This is a fundamental operation in linear algebra (though ironically,
+related quantities are often used instead).
+
+## Example
+
 At the end of the last chapter, we found that for a Markov chain with
 transition matrix P and stationary distribution $\nu$,
 
@@ -170,7 +175,7 @@ nu
 
 This confirms our earlier speculation based on powers of $P'$.
 
-# Matrix Algebra 
+## Matrix Algebra 
 
 If the inverses of $A$ and $B$ exist, and $A$ and $B$ are conformable,
 then $(AB)^{-1}$ exists and is equal to $B^{-1} A^{-1}$.
@@ -179,7 +184,7 @@ Also, $(A')^{-1}$ exists and is equal to $(A^{-1})'$.
 
 ❄️  **Your Turn:** Prove these assertions.
 
-# Computation of the Matrix Inverse
+## Computation of the Matrix Inverse
 
 Finding the inverse of a large matrix -- in data science applications,
 the number of rows and columns $n$ can easily be hundreds or more -- can
@@ -192,7 +197,7 @@ sizable matrices.
 The classic "pencil and paper" method for matrix inversion is
 instructive, and will be presented here.
 
-## Pencil-and-paper computation
+### Pencil-and-paper computation
 
 The basic idea follows the pattern the reader learned for solving
 systems of linear equations, but with the added twist of involving some
@@ -213,7 +218,7 @@ $$
 We aim to transform this to the 2x2 identity matrix, via a sequence of
 row operations.
 
-## Use of elementary matrices
+### Use of elementary matrices
 
 Let's multiply row 1 by 1/4, to put 1 in the first element:
 
