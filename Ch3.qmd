@@ -147,23 +147,119 @@ and $b_1$, the derivatives are termed *partial*, and the $\partial$
 symbol is used instead of 'd'.
 
 $$
-0 = 
-\frac{\partial}{\partial b_0}\sum_{i=1}^{100} [O_{i} - (b_0 + b_1 V_{i}) ]^2
-=
--2 \sum_{i=1}^{100} [O_{i} - (b_0 + b_1 V_{i}) ] 
-$$
+\begin{align}
+0 &= 
+\frac{\partial}{\partial b_0}\sum_{i=1}^{100} [C_{i} - (b_0 + b_1 V_{i })
+]^2 \\
+&=
+-2 \sum_{i=1}^{100} [C_{i} - (b_0 + b_1 V_{i}) ] 
+\end{align}
+$${#eq-b0}
 
 and
 
 $$
-0 = 
-\frac{\partial}{\partial b_1}\sum_{i=1}^{100} [O_{i} - (b_0 + b_1 V_{i}) ]^2
-=
--2 \sum_{i=1}^{100} [O_{i} - (b_0 + b_1 V_{i}) V_i] 
-$$
+\begin{align}
+0 &= 
+\frac{\partial}{\partial b_1}\sum_{i=1}^{100} [C_{i} - (b_0 + b_1 V_{i})
+]^2 \\
+&=
+-2 \sum_{i=1}^{100} [C_{i} - (b_0 + b_1 V_{i}) V_i] 
+\end{align}
+$${#eq-b1}
 
 We could then solve for the $b_i$, but let's go straight to the general
 case.
 
 ## Least-squares estimation, general number of predictors
+
+As we have seen, systems of linear equations are natural applications of
+linear algebra.  Equations @eq-b0 and @eq-b1 can be written in matrix
+terms as
+
+$$
+ \left (
+ \begin{array}{rr}
+ \sum_{i=1}^n C_i \\
+ \sum_{i=1}^n C_i V_i \\
+ \end{array}
+ \right ) =
+ \left (
+ \begin{array}{rr}
+ 100 & \sum_{i=1}^n V_i \\
+ \sum_{i=1}^n V_i & b_1 \sum_{i=1}^n V_i^2 \\
+ \end{array}
+ \right ) 
+ \left (
+ \begin{array}{rr}
+ b_0 \\
+ b_1 \\
+ \end{array}
+ \right )
+$$
+
+Actually, that matrix equation can be derived more easily by using
+matrices to begin with:
+
+Define $S$ and $T$:
+
+$$
+S = 
+ \left (
+ \begin{array}{rr}
+ C_1 \\
+ C_2 \\
+ ... \\
+ C_{100} \\
+ \end{array}
+ \right )
+$$
+
+and
+
+$$
+T = 
+ \left (
+ \begin{array}{rr}
+ V_1 \\
+ V_2 \\
+ ... \\
+ V_{100} \\
+ \end{array}
+ \right )
+$$
+
+Then our linear assumption, $E(C | V) = b_0 + b1 V$, applied to $S$ and
+$T$, is
+
+$$
+E(S | T) =
+A b
+$$
+
+where
+
+$$
+A =  
+ \left (
+ \begin{array}{rrrr}
+ 1 & V_1 \\
+ 1 & V_2 \\
+ ... & ... \\
+ 1 & V_{100} \\
+ \end{array}
+ \right )
+$$
+
+and $b = (b_0,b_1)'.$
+
+Our predicted error vector is very simply expressed:
+
+$$
+S - Ab
+$$
+
+
+
+
 
