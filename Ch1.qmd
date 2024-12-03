@@ -471,7 +471,7 @@ It can be shown that if A and B are conformable, then
 
 (AB)' = B'A'
 
-For some matrices C, we have C' = C. C is then termed \textit{symmetric}.
+For some matrices C, we have C' = C. C is then termed *symmetric*.
 
 We will often write a row vector in the form (a,b,c,...). So
 (5,1,88) means the 1x3 matrix with those elements. If we wish this to

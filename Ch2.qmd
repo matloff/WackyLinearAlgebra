@@ -170,6 +170,15 @@ nu
 
 This confirms our earlier speculation based on powers of $P'$.
 
+# Matrix Algebra 
+
+If the inverses of $A$ and $B$ exist, and $A$ and $B$ are conformable,
+then $(AB)^{-1}$ exists and is equal to $B^{-1} A^{-1}$.
+
+Also, $(A')^{-1}$ exists and is equal to $(A^{-1})'$.
+
+❄️  **Your Turn:** Prove these assertions.
+
 # Computation of the Matrix Inverse
 
 Finding the inverse of a large matrix -- in data science applications,
@@ -185,5 +194,201 @@ instructive, and will be presented here.
 
 ## Pencil-and-paper computation
 
+The basic idea follows the pattern the reader learned for solving
+systems of linear equations, but with the added twist of involving some
+matrix multiplication.
 
-can be challenging.
+Let's take as our example 
+
+$$
+ A = 
+ \left (
+ \begin{array}{rr}
+ 4 & 7 \\
+ -8 & 15  \\
+ \end{array}
+ \right )
+ $$
+
+We aim to transform this to the 2x2 identity matrix, via a sequence of
+row operations.
+
+## Use of elementary matrices
+
+Let's multiply row 1 by 1/4, to put 1 in the first element:
+
+$$
+ \left (
+ \begin{array}{rr}
+ 1 & \frac{7}{4} \\
+ -8 & 15  \\
+ \end{array}
+ \right )
+ $$
+
+In matrix terms, that operation is equivalent to premultiplying $A$ by 
+
+$$
+E_1=
+\left (
+\begin{array}{rr}
+\frac{1}{4} & 0  \\
+0 & 1  \\
+\end{array}
+\right )
+$$
+
+We then add 8 times row 1 to row 2, yielding
+
+$$
+ \left (
+ \begin{array}{rr}
+ 1 & \frac{7}{4} \\
+ 0 & 29  \\
+ \end{array}
+ \right )
+ $$
+
+The premultiplier for this operation is
+
+$$
+E_2=
+\left (
+\begin{array}{rr}
+1 & 0  \\
+8 & 1  \\
+\end{array}
+\right )
+$$
+
+Multiply row 2 by 1/29:
+
+$$
+ \left (
+ \begin{array}{rr}
+ 1 & \frac{7}{4} \\
+ 0 & 1  \\
+ \end{array}
+ \right )
+ $$
+
+corresponding to 
+
+$$
+E_3=
+\left (
+\begin{array}{rr}
+1 & 0  \\
+8 & 1/29  \\
+\end{array}
+\right )
+$$
+
+And finally, add -7/4 row 2 to row 1.
+
+$$
+ \left (
+ \begin{array}{rr}
+ 1 & 0 \\
+ 0 & 1  \\
+ \end{array}
+ \right )
+ $$
+
+The premultiplier is
+
+$$
+E_4 =
+ \left (
+ \begin{array}{rr}
+ 1 & \frac{7}{4} \\
+ 0 & 1  \\
+ \end{array}
+ \right )
+ $$
+
+Now, how does that give use $A^{-1}$? The method your were taught
+probably set up the partioned matrix $(A,I)$. The row operations that
+transformed $A$ to $I$ also transformed $I$ to $A^{-1}$. Here's why:
+
+As noted, the row operations are such that 
+
+$$
+E_4 E_3 E_2 E_1 A 
+$$
+
+give us the final transformed result, i.e. $I$: 
+
+$$
+E_4 E_3 E_2 E_1 A = I
+$$
+
+Then[Recall that the inverse of a product (if it exists is the reverse
+product of the inverses.]{.column-margin}
+
+$$
+A = (E_4 E_3 E_2 E_1)^{-1} I = E_4^{-1} E_3^{-1} E_2^{-1} E_1^{-1}
+$$
+
+So this accomplishes our goal of computing $A^{-1}$, provided we have
+the inverses of the elementary matrices $E_i$, But those are easy, as
+each simply "undoes" its partner. $E_1$, for instance, multiplies the
+row 1, column 1 element by 1/4, which is "undone" by multiplying that
+element by 4,
+
+$$
+E_1^{-1} =
+ \left (
+ \begin{array}{rr}
+ 4 & 0 \\
+ 0 & 1  \\
+ \end{array}
+ \right )
+$$
+ 
+Also, to undo the operation of adding 8 times row 1 to row 2, we
+add -8 times row 1 to row 2:
+
+$$
+E_2^{-1} =
+ \left (
+ \begin{array}{rr}
+ 1 & 0 \\
+ -8 & 1 \\
+ \end{array}
+ \right )
+$$
+ 
+❄️  **Your Turn:** Find the inverses of $E_3$
+and $E_4$ using similar reasoning, and thus find $A^{-1}$.
+
+## Nonexistent inverse
+
+Suppose our matrix $A$ had been slightly different:
+
+$$
+ A =
+ \left (
+ \begin{array}{rr}
+ 4 & 7 \\
+ -8 & -14  \\
+ \end{array}
+ \right )
+ $$
+
+This would have led to
+
+$$
+ \left (
+ \begin{array}{rr}
+ 1 & \frac{7}{4} \\
+ 0 & 0  \\
+ \end{array}
+ \right )
+ $$
+
+This cannot lead to $i$, indicating that $A^{-1}$ does not exist. And
+it's no coincidence that row 2 of $A$ is double row 1. This has many
+implications, as will be seen in our chapter on vector spaces.
+
+
