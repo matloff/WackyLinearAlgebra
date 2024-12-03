@@ -1,0 +1,11 @@
+
+```{r}
+#| include: false
+library(dsld)
+library(qeML)
+```
+
+{{< pagebreak >}}
+
+# Vector Spaces Part II 
+
