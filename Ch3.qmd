@@ -14,4 +14,129 @@ many applications of linear algebra involve minimization or maximization
 of some kind, and this chapter will involve calculus derivatives.  But
 the statistical applications of linear algebra are equally important.
 
-#
+## Linear Regression through the Origin
+
+Let's consider the Winds dataset from 
+[Compiled Lectures for Regression Modelling](https://r-resources.massey.ac.nz/161251/lectures/index.html)
+by Jonathan Godfrey, Section 34.1.1.
+
+```{r}
+winds <- read.csv('TenMinuteWinds.csv',header=TRUE)
+head(winds)
+plot(winds[,3:4])
+```
+
+We would like to fit a straight line through that data point cloud. We
+might have two motivations for doing this:
+
+* The line might serve as nice summary of the data.
+
+* More formally, let $C$ and $O$ denote the current speed and the old
+speed 10 minutes earlier. Then the model 
+
+$$E(C | O) = \beta O$$ 
+
+may be useful. Here the slope $\beta$ is an unknown value to be
+estimated from the data.  [Readers with some background in linear
+regression models should note that this assumption of a linear trend
+through the origin is the only assumption we are making here. Nothing on
+normal distributions etc.]{.column-margin}
+
+::: {.callout-important}
+## Model validity
+The great statistician George Box once said, "All models are wrong but
+some are useful." All data scientists should keep this at the forefronts
+of their minds.
+:::
+
+### Least squares approach
+
+We wish to estimate $\beta$ from our data, which we regard as a sample
+from the data generating process.[This too is something all data
+scientists should keep at the forefronts of their minds.]{.column-margin}
+Let $b$ denote our estimate. How should we obtain it?
+
+Denote our data by $(O_i,C_i), i = 1,...,144$. Pretend for a moment that
+we don't know, say, $C_{28}$. Using our estimated $\beta$, our predicted
+value would be $b O_{28}$.  Our squared prediction error would then be
+$(C_{28} - b O_{28})^2$.[Why not look at the absolute value instead of
+the square? The latter makes the math flow well, as will be seen
+shortly]{.column-margin}
+
+Well, we actually do know $C_{28}$ (and the others in our data), so we
+can answer the question:
+
+<blockquote>
+
+In our search for a good value of $b$, we can ask how well we would
+predict our known data, using that candidate value of $b$ in our data.
+Our total squared prediction error would be
+
+$$
+\sum_{i=1}^{144} [O_{i} - b C_{i} )^2
+$$
+
+A natural choice for $b$ would be the value that minimizes this
+quantity.
+
+</blockquote>
+
+### Calculation
+
+So our choice for $b$ will be the minimizer of
+
+$$
+\sum_{i=1}^{144} (O_{i} - b C_{i})^2
+$$
+
+This is a straightforward calculus problem. Setting
+
+$$
+0 = \frac{d}{db} \sum_{i=1}^{144} (O_{i} - C_{i}b )^2 =
+2 \sum_{i=1}^{144} (O_{i} - b  C_{i}) C_i
+$$
+
+and solving $b$, we find that
+
+$$
+b = \frac{\sum_{i=1}^n O_i C_i}{\sum_{i=1}^nC_i^2}
+$$
+
+### R code
+
+```{r}
+lm(Speed ~ TenMinEarlier -1,data=winds)
+```
+
+This says, "Fit the model $E(C | O) = \beta O$$ to the data, with the
+line constrained to pass through the origin." The constraint is
+specified by the -1 term. 
+
+## Full linear regression model
+
+Say  we do not want to constrain the model to pass the line through the
+origin. Our model is then
+
+$$E(C | O) = \beta_0 + \beta_1 O$$
+
+where we now have two unknown parameters to be estimated.
+
+### Least-squares estimation, single predictor
+
+Our sum of squared prediction errors is now
+
+$$
+\sum_{i=1}^{144} [O_{i} - (b_0 + b_1 C_{i}) ]^2
+$$
+
+This means setting two derivatives to 0 and solving. Since the
+derivatives involve two different quantities to be optimized, $b_0$ 
+and $b_1$, the derivatives are termed *partial*, and the $\partial$
+symbol is used instead of 'd'.
+
+xxx
+
+yyy
+
+## Least-squares estimation, general number of predictors
+
