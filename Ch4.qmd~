@@ -1,0 +1,66 @@
+
+```{r}
+#| include: false
+library(dsld)
+library(qeML)
+```
+
+{{< pagebreak >}}
+
+# Matrix Rank, and Vector Spaces Part I 
+
+In our computations in the latter part of the last chapter, we added a
+proviso that $(A'A)^{-1}$. In this chapter, we'll present a
+counterexample, which will naturally lead into covering matrix rank and
+the basics of vector spaces.
+
+## Example: census data
+
+This dataset is also from **qeML**. It is data for Silicon Valley
+engineers in the 2000 Census.
+
+```{r}
+data(svcensus) 
+head(svcensus) 
+svc <- svcensus[,c(1,4:6)] 
+head(svc) 
+lm(wageinc ~ .,data=svc) 
+```
+
+So, we estimate that, other factors being equal, men about paid close to
+\$11,000 more than women. This is a complex issue, but for our purposes
+here, how did **gender** become **gendermale**, no explicit mention of
+women?
+
+Let's try to force the issue:
+
+```{r}
+svc$man <- as.numeric(svc$gender == 'male')
+svc$woman <- as.numeric(svc$gender == 'female')
+svc$gender <- NULL
+head(svc)
+lm(wageinc ~ .,data=svc)
+```
+
+Well, we couldn't force the issue after all. Why not? We hinted above
+that $A' A$ may not be invertible. Let's check its row-reduced form.
+
+```{r}
+A <- cbind(1,svc[,-2])
+A <- as.matrix(A)
+ApA <- t(A) %*% A
+ApA
+library(pracma)
+rref(ApA) 
+```
+
+Aha! The row reduction process ended prematurely. This matrix has no
+inverse. We say that the matrix has *rank* 4, when it needs to be 5;
+$A'A$ is not of *full rank*.
+
+Recall that in the nonfull rank example we presented in the last
+chapter, one row was double another. Here the sum of the last two
+columns of $A$ was equal to the first column. We say the columns are
+*linearly dependent*.
+
+

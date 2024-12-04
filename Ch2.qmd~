@@ -1,0 +1,394 @@
+
+
+```{r}
+#| include: false
+library(dsld)
+library(qeML)
+```
+
+{{< pagebreak >}}
+
+# Matrix Inverse
+
+At the end of the last chapter, we found that for a Markov chain with
+transition matrix P and stationary distribution $\nu$,
+
+$$
+\nu = P' \nu
+$$
+
+This suggests a method for computing $\nu$, by solving the above
+equation.[]{.column-margin}
+
+Rewrite it using the identity matrix:[Recall that for any square matrix
+C and identity matrix I of the same size, $IC = CI =
+C$.]{.column-margin}
+
+$$
+(I - P') \nu = 0
+$$
+
+For the random walk chain in Chapter 1, we had[In that particular model,
+P' = P, but for most chains this is not the case.]{.column-margin}
+
+$$
+P =
+\left (
+\begin{array}{rrrrr}
+0.5 & 0.5 & 0 & 0 & 0\\
+0.5 & 0 & 0.5 & 0 & 0\\
+0 & 0.5 & 0 & 0.5 & 0\\
+0 & 0 & 0.5 & 0 & 0.5\\
+0 & 0 & 0 & 0.5 & 0.5 \\
+\end{array}
+\right )
+$$
+
+With $\nu = (\nu_1,\nu_2,\nu_3,\nu_4,\nu_5)'$, the equation to be
+solved, $(I-P') \nu = \nu$, is
+
+$$
+\left (
+\begin{array}{rrrrr}
+0.5 & -0.5 & 0 & 0 & 0 \\
+-0.5 & 1 & -0.5 & 0 & 0 \\
+0 & -0.5 & 1 & -0.5 & 0 \\
+0 & 0 & -0.5 & 1 & -0.5 \\
+0 & 0 & 0 & -0.5 & 0.5 \\
+\end{array}
+\right )
+\left (
+\begin{array}{rrrrr}
+\nu_1 \\
+\nu_2 \\
+\nu_3 \\
+\nu_4 \\
+\nu_5 \\
+\end{array}
+\right ) = 
+\left (
+\begin{array}{rrrrr}
+0 \\
+0 \\
+0 \\
+0 \\
+0 \\
+\end{array}
+\right ) 
+$$
+
+If we perform the matrix multiplication, we have an ordinary system of
+linear equations:
+
+$$
+\begin{array}{rrrrr}
+0.5 \nu_1 - 0.5 \nu_2 = 0 \\
+-0.5 \nu_1 + \nu_2 - 0.5 \nu_3 = 0 \\
+-0.5 \nu_2 + \nu_3 - 0.5 \nu_4 = 0 \\
+-0.5 \nu_3 + \nu_4 - 0.5 \nu_5 = 0 \\
+-0.5 \nu_4 + 0.5 \nu_5 = 0 \\
+\end{array}
+$$
+
+This is high school math, and we could solve the equations that way. But
+this is literaally what linear algebra was invented for, solving systems
+of equations! We will use matrix inverse.
+
+But first, we have a problem to solve: The only solution to the above
+system is with all $\nu_i = 0$. We need an equation involving a nonzero
+quantity.
+
+But we do have such an equation. The $\nu$ is a stationary distribution
+for a Markov chain, and thus must sum to 1.0. Let's replace the last row
+by that relation:
+
+$$
+\left (
+\begin{array}{rrrrr}
+0.5 & -0.5 & 0 & 0 & 0 \\
+-0.5 & 1 & -0.5 & 0 & 0 \\
+0 & -0.5 & 1 & -0.5 & 0 \\
+0 & 0 & -0.5 & 1 & -0.5 \\
+1 & 1 & 1 & 1 & 1 \\
+\end{array}
+\right )
+\left (
+\begin{array}{rrrrr}
+\nu_1 \\
+\nu_2 \\
+\nu_3 \\
+\nu_4 \\
+\nu_5 \\
+\end{array}
+\right ) =
+\left (
+\begin{array}{rrrrr}
+0 \\
+0 \\
+0 \\
+0 \\
+1 \\
+\end{array}
+\right )
+$$
+
+More compactly, 
+
+$$
+B \nu = d
+$$
+
+Many square matrices $A$ have a multiplicative inverse, denoted by
+$A^{-1}$, with the property that
+
+$$
+A^{-1} A = A A^{-1} = I
+$$
+
+If our matrix $B$ is invertible, we can premultiply both sides of our
+equation above, yielding
+
+$$
+B^{-1} d = B^{-1} B \nu = \nu
+$$
+
+So, we have obtained our solution for the stationary distribution. We
+can evaluate it numerically via the R **solve** function, which finds
+matrix inverse:
+
+```{r}
+B <-
+rbind(c(0.5,-0.5,0,0,0), c(-0.5,1,-0.5,0,0), c(0,-0.5,1,-0.5,0),
+   c(0,0,-0.5,1,-0.5), c(1,1,1,1,1))
+B
+Binv <- solve(B)
+# check the inverse
+Binv %*% B  # yes, get I (of course with some roundoff error)
+nu <- Binv %*% c(0,0,0,0,1)
+nu
+```
+
+This confirms our earlier speculation based on powers of $P'$.
+
+## Matrix Algebra 
+
+If the inverses of $A$ and $B$ exist, and $A$ and $B$ are conformable,
+then $(AB)^{-1}$ exists and is equal to $B^{-1} A^{-1}$.
+
+Also, $(A')^{-1}$ exists and is equal to $(A^{-1})'$.
+
+❄️  **Your Turn:** Prove these assertions.
+
+## Computation of the Matrix Inverse
+
+Finding the inverse of a large matrix -- in data science applications,
+the number of rows and columns $n$ can easily be hundreds or more -- can
+be computationally challenging. The run time is proportional to $n^3$,
+and roundoff error can be an issue. Sophisticated algorithms have been
+developed, such as QR and Choleski decompositions. So in R, we should
+use, say, **qr.solve** rather than **solve** if we are working with
+sizable matrices.
+
+The classic "pencil and paper" method for matrix inversion is
+instructive, and will be presented here.
+
+### Pencil-and-paper computation
+
+The basic idea follows the pattern the reader learned for solving
+systems of linear equations, but with the added twist of involving some
+matrix multiplication.
+
+Let's take as our example 
+
+$$
+ A = 
+ \left (
+ \begin{array}{rr}
+ 4 & 7 \\
+ -8 & 15  \\
+ \end{array}
+ \right )
+ $$
+
+We aim to transform this to the 2x2 identity matrix, via a sequence of
+row operations.
+
+### Use of elementary matrices
+
+Let's multiply row 1 by 1/4, to put 1 in the first element:
+
+$$
+ \left (
+ \begin{array}{rr}
+ 1 & \frac{7}{4} \\
+ -8 & 15  \\
+ \end{array}
+ \right )
+ $$
+
+In matrix terms, that operation is equivalent to premultiplying $A$ by 
+
+$$
+E_1=
+\left (
+\begin{array}{rr}
+\frac{1}{4} & 0  \\
+0 & 1  \\
+\end{array}
+\right )
+$$
+
+We then add 8 times row 1 to row 2, yielding
+
+$$
+ \left (
+ \begin{array}{rr}
+ 1 & \frac{7}{4} \\
+ 0 & 29  \\
+ \end{array}
+ \right )
+ $$
+
+The premultiplier for this operation is
+
+$$
+E_2=
+\left (
+\begin{array}{rr}
+1 & 0  \\
+8 & 1  \\
+\end{array}
+\right )
+$$
+
+Multiply row 2 by 1/29:
+
+$$
+ \left (
+ \begin{array}{rr}
+ 1 & \frac{7}{4} \\
+ 0 & 1  \\
+ \end{array}
+ \right )
+ $$
+
+corresponding to 
+
+$$
+E_3=
+\left (
+\begin{array}{rr}
+1 & 0  \\
+8 & 1/29  \\
+\end{array}
+\right )
+$$
+
+And finally, add -7/4 row 2 to row 1.
+
+$$
+ \left (
+ \begin{array}{rr}
+ 1 & 0 \\
+ 0 & 1  \\
+ \end{array}
+ \right )
+ $$
+
+The premultiplier is
+
+$$
+E_4 =
+ \left (
+ \begin{array}{rr}
+ 1 & \frac{7}{4} \\
+ 0 & 1  \\
+ \end{array}
+ \right )
+ $$
+
+Now, how does that give use $A^{-1}$? The method your were taught
+probably set up the partioned matrix $(A,I)$. The row operations that
+transformed $A$ to $I$ also transformed $I$ to $A^{-1}$. Here's why:
+
+As noted, the row operations are such that 
+
+$$
+E_4 E_3 E_2 E_1 A 
+$$
+
+give us the final transformed result, i.e. $I$: 
+
+$$
+E_4 E_3 E_2 E_1 A = I
+$$
+
+Then[Recall that the inverse of a product (if it exists is the reverse
+product of the inverses.]{.column-margin}
+
+$$
+A = (E_4 E_3 E_2 E_1)^{-1} I = E_4^{-1} E_3^{-1} E_2^{-1} E_1^{-1}
+$$
+
+So this accomplishes our goal of computing $A^{-1}$, provided we have
+the inverses of the elementary matrices $E_i$, But those are easy, as
+each simply "undoes" its partner. $E_1$, for instance, multiplies the
+row 1, column 1 element by 1/4, which is "undone" by multiplying that
+element by 4,
+
+$$
+E_1^{-1} =
+ \left (
+ \begin{array}{rr}
+ 4 & 0 \\
+ 0 & 1  \\
+ \end{array}
+ \right )
+$$
+ 
+Also, to undo the operation of adding 8 times row 1 to row 2, we
+add -8 times row 1 to row 2:
+
+$$
+E_2^{-1} =
+ \left (
+ \begin{array}{rr}
+ 1 & 0 \\
+ -8 & 1 \\
+ \end{array}
+ \right )
+$$
+ 
+❄️  **Your Turn:** Find the inverses of $E_3$
+and $E_4$ using similar reasoning, and thus find $A^{-1}$.
+
+## Nonexistent inverse
+
+Suppose our matrix $A$ had been slightly different:
+
+$$
+ A =
+ \left (
+ \begin{array}{rr}
+ 4 & 7 \\
+ -8 & -14  \\
+ \end{array}
+ \right )
+ $$
+
+This would have led to
+
+$$
+ \left (
+ \begin{array}{rr}
+ 1 & \frac{7}{4} \\
+ 0 & 0  \\
+ \end{array}
+ \right )
+ $$
+
+This cannot lead to $i$, indicating that $A^{-1}$ does not exist. And
+it's no coincidence that row 2 of $A$ is double row 1. This has many
+implications, as will be seen in our chapter on vector spaces.
+
+

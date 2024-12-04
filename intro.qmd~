@@ -1,0 +1,33 @@
+
+
+```{r}
+#| include: false
+library(dsld)
+library(qeML)
+```
+
+{{< pagebreak >}}
+
+# Introduction and Motivating Examples
+
+To set the stage, consider the following:
+
+## UC Berkeley discrimination claims {#sec-ucb}
+
+UC Berkeley was accused of discriminating against female applicants
+for graduate school, and indeed the overall acceptance rate for women
+was lower than that for men.  This seemed odd, given Berkeley's liberal
+reputation.
+
+However, upon breaking the data down [This data is included in R, as the
+built-in dataset **UCBAdmissions**.]{.column-margin} according to the
+program students were applying to, it was found that in every
+department, the female acceptance rate *within that department* was
+either higher than the male rate or of similar level.  The problem:
+women were applying to more selective programs, causing their overall
+rate to below that of men.
+
+$$
+\exp{-t^2}
+$$
+

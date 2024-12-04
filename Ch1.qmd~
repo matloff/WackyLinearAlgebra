@@ -1,0 +1,725 @@
+
+
+```{r}
+#| include: false
+library(dsld)
+library(qeML)
+```
+
+{{< pagebreak >}}
+
+# Matrix Multiplication
+
+## A Random Walk Model
+
+Let's consider a *random walk* on {1,2,3,4,5} in the number line. Time
+is numbered 1,2,3,... Our current position is termed our *state*. The
+notation X~k~ = i means that at time k we are in state/position i.
+
+Our rule will be that at any time k, we flip a coin. If we are currently
+at position i, we move to either i+1 or i-1, depending on whether the
+coin landed heads or tails. The exceptions are k = 1 and k = 5, in which
+case we stay put if tails or move to the adjacent position if heads.
+
+We can summarize the probabilities with a *matrix*, a two-dimensional
+array:
+
+$$
+P_1 =
+\left (
+\begin{array}{rrrrr}
+0.5 & 0.5 & 0 & 0 & 0\\
+0.5 & 0 & 0.5 & 0 & 0\\
+0 & 0.5 & 0 & 0.5 & 0\\
+0 & 0 & 0.5 & 0 & 0.5\\
+0 & 0 & 0 & 0.5 & 0.5 \\
+\end{array}
+\right )
+$$
+
+For instance, look at Row 2. There are 0.5 values in Columns 1 and 3,
+meaning there is a 0.5 chance of a move 2 $\rightarrow$ 1,
+and a 0.5 chance of a move 2 $\rightarrow$ 3.
+[Note that each row in a transition matrix must sum to 1. After, from
+state i we must go *somewhere*.]{.column-margin}
+
+We use a subscript 1 here in $P_1$, meaning "one step." We go from,
+say, state 2 to state 1 in one step with probability 0.5. $P_1$ is
+called the *one-step transition matrix* (or simply the
+*transition matrix*) for this process.
+
+What about the two-step transition matrix $P_2$? From state 3, we could
+go to state 1 in two steps, by two tails flips of the coin.  The
+probability of that is $0.5^2 = 0.25$. So the row 3, column 1 element in
+$P_2$ is 0.25. On the other hand, if from state 3 we flip tails then
+heads, or heads then tails, we are back to state 3. So, the row 3,
+column 3 element in  $P_2$ is 0.25 + 0.25 = 0.5.
+
+The reader should verify the correctness here:
+
+
+$$
+P_2 =
+\left (
+\begin{array}{rrrrr}
+0.5 & 0.25 & 0.25 & 0 & 0\\
+0.25 & 0.5 & 0 & 0.25 & 0\\
+0.25 & 0 & 0.5 & 0 & 0.25\\
+0 & 0.25 & 0 & 0.5 & 0.25\\
+0 & 0 & 0.25 & 0.25 & 0.5 \\
+\end{array}
+\right )
+$$
+
+Well, finding two-step transition probabilities would be tedious in
+general, but it turns out that is a wonderful shortcut: Matrix
+multiplication. We will cover this in the next section, but first a
+couple of preliminaries.
+
+The above random walk is a *Markov chain*. The Markov Property says that
+the system "has no jemory." If say we land at position 2, we will go to
+1 or 3 with probability 1/2 *no matter what the previous history of the
+system was*; it doesn't matter *how* we got to state 3. That in turn
+comes from the independence of the successive coin flips.
+
+**Notation:** Individual elements of a matrix are usually written with
+double subscripts. For instance, a<sub>25</sub> will mean the row 2,
+column 5 element of the matrix A.
+
+## Matrix Multiplication
+
+This is the most fundamental operation in linear algebra. It is defined
+as follows:
+
+
+<blockquote>
+
+Given matrix A of k rows and m columns and
+matrix B of m rows and r columns, the product C = AB is
+an kxm matrix, whose row i, column j element is
+
+$$
+a_{i1} b_{i1} +
+a_{i2} b_{i1} + ... +
+a_{m1} b_{m1} 
+$$
+
+This is the "dot product" of row i of A and column j of B:  Find the
+products of the paired elements in the two vectors, then sum.
+
+</blockquote>
+
+[Be sure to remember that the number of rows of B must match the number
+of columns of A. In this case, we say thst the matrices are
+*conformable*.]{.column-margin}
+
+For example, set 
+
+$$
+A = \left (
+\begin{array}{rr}
+5 & 2 & 6 \\
+1 & 1 & 8 \\
+\end{array}
+\right )
+$$
+
+and
+
+$$
+B = \left (
+\begin{array}{rrr}
+5 & -1 \\
+1 & 0 \\
+0 & 8 \\
+\end{array}
+\right )
+$$
+
+Let's find the row 2, column 2 element of C = AB.  Again, that means
+taking the dot product of row 2 of A and column 2 of B, which we've
+highlighted below.
+
+$$
+A = \left (
+\begin{array}{rr}
+5 & 2 & 6 \\
+\textcolor{red}{1} & \textcolor{red}{1} & \textcolor{red}{1} \\
+\end{array}
+\right )
+$$
+
+and
+
+$$
+B = \left (
+\begin{array}{rrr}
+5 & \textcolor{red}{-1} \\
+1 & \textcolor{red}{0} \\
+0 & \textcolor{red}{8} \\
+\end{array}
+\right )
+$$
+
+The value in question is then
+
+1 (-1) + 1 (0) + 1 (8) = 7
+
+Let's check it, with R:
+
+[.The **rbind** and **cbind** functions ("row bind" and "column bind")
+are very handy tools for creating matrices.]{.column-margin}
+
+```{r}
+a <- rbind(c(5,2,6),c(1,1,1))
+b <- cbind(c(5,1,0),c(-1,0,8))
+a %*% b
+```
+The reader should make sure to check the other elements by hand.
+
+## Vectors
+
+A matrix that has only one row or only one column is called a *vector*.
+Depending on which of those two shapes it has, we may refer to it as a
+*row vector* or *column vector*. Usually we will simply say "vector," in
+which case it will be meant as a column vector.
+
+## Application to Markov Chain Transition Matrices {#sec-introMCs}
+
+Now let's return to the question of how to easily compute $P_2$,
+the two-step transition matrix. It turns out that:
+
+<blockquote>
+
+Let P denote the transition matrix of a (finite-state) Markov chain. The
+k-step transition matrix is $P^k$.
+
+</blockquote>
+
+At first, this may seem amazingly fortuitous, but it makes sense in
+light of the "and/or" nature of the probability computations involved.
+Recall our computation for the row 1, column 2 element of $P_2$ above.
+From state 1, we could either stay at 1 for one flip, then move to 2 on
+the second flip, or we could go to 2 then return to 1. Each of these has
+probability 0.5, so the total probability is
+
+$$
+(0.5)(0.5) + (0.5)(0.5)
+$$
+
+But this is exactly the form of our "dot product" computation
+in the definition of matrix multiplication,
+
+$$
+a_{i1} b_{i1} +
+a_{i2} b_{i1} + ... +
+a_{m1} b_{m1} 
+$$
+
+Statisticians and computer scientists like to look at the *asymptotic*
+behavior of systems. Let's see where we might be after say, 6
+steps:[The *identity matrix* I of size n is the nxn matrix with 1s on
+the diagonal and 0s elsewhere.  IB = B and AI = A for any conformable A
+and B.]{.column-margin}
+
+```{r}
+matpow <- function(m,k) {
+   nr <- nrow(m)
+   tmp <- diag(nr)  # identity matrix
+   for (i in 1:k) tmp <- tmp %*% m
+   tmp
+}
+
+p1 <- rbind(c(0.5,0.5,0,0,0), c(0.5,0,0.5,0,0), c(0,0.5,0,0.5,0), 
+   c(0,0,0.5,0,0.5), c(0,0,0,0.5,0.5))
+matpow(t(p1),6) # R uses t() for transpose
+```
+
+So for instance if we start at position 2, there is about an 11% chance
+that we will be at position 3 at time 6. What about time 25?
+
+```{r}
+matpow(t(p1),25)
+```
+
+So, no matter which state we start in, at time 25 we are about 20%
+likely to be at any of the states. In fact, as time n goes to infinity,
+this probability vector becomes exactly (0.20,0.20,0.20,0.20,0.20), as
+we will see in the next chapter..
+
+❄️  **Your Turn:** The long-run probabilities here turned out to be
+uniform, with value 0.20 for all five states. In fact, that is usually
+not the case.  Make a small change to $P_1$ -- remember to keep the row
+sums to 1 -- and compute a high power to check whether the long-run
+distribution seems nonuniform.
+
+❄️  **Your Turn:** Not every Markov chain, even ones with finitely
+many states, have long-run distributions. Some chains have *periodic*
+states. It may be, for instance, that after leaving state $i$, once can
+return only after an even number of hops. Modify our example chain here
+so that states 1 and 5 (and all the others) have that property. Then
+compute $P^n$ for various large values of $n$ and observe oscillatory
+behavior, rather than long-run convergence.
+
+❄️  **Your Turn:** Consider the following model of a discrete-time,
+single-server queue:
+
+* Model parameters are p (probability of job completion), q 
+  (probability of new job arriving) and m (size of the buffer).
+
+* Jobs arrive, are served (possibly after queuing) and leave.
+
+* Only one job can be in service at a time.
+
+* At each time epoch:
+
+    * The job currently in service, if any, will complete with
+      probability p.
+
+    * Slightly after a possible job completion, a job in the queue,
+      if any, will start service.
+
+    a Slightly after that, anew job will arrive with probability q.
+      If the queue is empty, this job starts service. If not, and if the
+      queue is not full, it will join the queue.  Otherwise, the job is
+      discarded.
+
+* The system is memoryless.
+
+* The current state is the number of jobs in the system, taking on the
+values 0,1,2,..,m+1; that last state means m jobs in the queue and 1 in
+service.
+
+For instance, say p = 0.4, q = 0.2, m = 5, Suppose the current state is
+3, so there is a job in service and two jobs in the queue. Our next
+state will be 2 with probability (0.4) (0.8); it will be 3 with
+probability (0.4) (0.2), and so on.
+
+Analyze this system for the case given above.` Find the approximate
+long-run distribution, and also the proportion of jobs that get
+discarded.
+
+
+## Network Graph Models
+
+There has always been lots of analyses of "Who is connected to who,"
+but activity soared after the advent of Facebook and the film, *A Social
+Network.*  See for instance *Statistical Analysis of Network Data with R*
+by Eric Kolaczy and Gábor Csárdi. As the authors say, 
+
+<blockquote>
+
+The oft-repeated statement that “we live in a connected world” perhaps
+best captures, in its simplicity...From on-line social networks like
+Facebook to the World Wide Web and the Internet itself, we are
+surrounded by examples of ways in which we interact with each other.
+Similarly, we are connected as well at the level of various human
+institutions (e.g., governments), processes (e.g., economies), and
+infrastructures (e.g., the global airline network). And, of course,
+humans are surely not unique in being members of various complex,
+inter-connected systems.  Looking at the natural world around us, we see
+a wealth of examples of such systems, from entire eco-systems, to
+biological food webs, to collections of inter-acting genes or
+communicating neurons.
+
+</blockquote>
+
+And of course, at the center of it all is a matrix! Here is why:
+
+Let's consider the famous Karate Club dataset:
+
+[]{.column-margin} 
+
+```{r}
+# remotes::install_github("schochastics/networkdata") 
+library(networkdata)
+data(karate)
+library(igraph)
+plot(karate)
+```
+
+There is a link between node 13 and node 4, meaning that club members 13
+and 4 are friends.[This graph is *undirected*, as friendship is mutual.
+Many graphs are *directed*, but we will assume undirected
+here.]{.column-margin}
+
+Specifically, the *adjacency matrix* has row i, column j element as 1 or
+0, according to whether a link exists between nodes i and j.
+
+```{r}
+adjK <- as_adjacency_matrix(karate)
+adjK
+adjK[13,4]
+```
+
+Accordingly, row 13, column 4 does have a 1 entry.
+
+As is the case with Markov transition matrices, powers of an adjacency
+matrix can yield valuable information. In the Markov case,
+multiplication gives us sums of paired products, computing
+probabilities. What about the network graph case? 
+
+Here products are of the form 0x0, 0x1, 1x0 or 1x1.  If there is a
+nonzero entry m in row i, column j of the square of the adjacency
+matrix, that means there were m 1x1 products in that sum, which would
+correspond to m paths. Let's look into this.
+
+```{r}
+adjK2 <- adjK %*% adjK
+```
+
+We see that **adjK2[11,1]** is 2. Inspection of **adjK** shows that its
+row 11, columns 6 and 7 are 1s, and that rows 6 and 7, column 1 are 1s
+as well. So there are indeed two two-hop paths from node 11 to node 1,
+specifically $11 \rightarrow 6 \rightarrow 1$ and $
+$11 \rightarrow 7 \rightarrow 1$. 
+
+Actually, what is typically of interest is *connectivity* rather than
+number of paths. For any given pair of nodes, is there a multihop path
+between them?  Or does the graph break down to several "islands" of
+connected nodes?
+
+Again consider the karate club data.
+
+```{r}
+u <- matpow(adjK,33)
+sum(u == 0)
+```
+
+So, in this graph, no pair of nodes has 0 paths between them. The graph
+is connected.
+
+Making this kind of analysis fully correct requires paying attention to
+things such as cycles.  The details are beyond the scope of this book.
+
+## Matrix Algebra
+
+### Other Basic operations
+
+Matrix multiplication may seem odd at first, but other operations are
+straightforward.
+
+**Addition:** We just add corresponding elements. For instance,
+
+$$
+A = \left (
+\begin{array}{rr}
+5 & 2 & 6 \\
+1 & 2.6 & -1.2 \\
+\end{array}
+\right )
+$$
+
+$$
+B = \left (
+\begin{array}{rr}
+0 & 20 & 6 \\
+3 & 5.8 & 1 \\
+\end{array}
+\right )
+$$
+
+$$
+A+B = \left (
+\begin{array}{rr}
+5 & 22 & 12 \\
+4 & 8.4 & -0.2 \\
+\end{array}
+\right )
+$$
+
+We do have to make sure the addends match in terms of numbers of rows
+and columns, 2 and 3 in the example here.
+
+**Scalar multiplication:** Again, this is simply elementwise. E.g. with
+A as above,
+
+$$
+1.5 A = \left (
+\begin{array}{rr}
+7.5 & 3 & 9 \\
+1.5 & 3.9 & -1.8 \\
+\end{array}
+\right )
+$$
+
+**Distributive property:**
+
+For matrices A, B and C of suitable conformability (A and B match in
+numbers of rows and columns, and their common number of columns matches
+the number of rows in C), we have
+
+(A+B) C = AC + BC
+
+### Matrix transpose
+
+This is a very simple but very important operation: We merely exchange
+rows and columns of the given matrix. For instance, with A as above, its
+transpose (signified with "'"), is
+
+$$
+A' = \left (
+\begin{array}{rr}
+5 & 1 \\
+2 & 2.6 \\
+6 & -1.2 \\
+\end{array}
+\right )
+$$
+
+It can be shown that if A and B are conformable, then
+
+(AB)' = B'A'
+
+For some matrices C, we have C' = C. C is then termed \textit{symmetric}.
+
+We will often write a row vector in the form (a,b,c,...). So
+(5,1,88) means the 1x3 matrix with those elements. If we wish this to
+be a column vector, we use transpose, so that for instance (5,1,88)'
+means a 3x1 matrix.
+
+### Partitioned matrices: an invaluable visualization tool
+
+Consider a matrix-vector product Mv. Of course, that means that v is a
+column vector whose length is equal to the number of columns of M. If M
+is of size rxs, then v is sx1.
+
+Let's denote column j of M by C<sub>j</sub>.  Then we will see later in
+this chapter that 
+
+$$
+Mv = 
+v_1 C_{1} +
+v_2 C_{2} + ... +
+v_s C_{s}  
+$$
+
+For instance, take 
+
+$$
+A = \left (
+\begin{array}{rr}
+5 & 2 & 6 \\
+1 & 2.6 & -1.2 \\
+\end{array}
+\right )
+$$
+
+and 
+
+$$
+v = \left (
+\begin{array}{rrr}
+10 \\
+2 \\
+1 \\
+\end{array}
+\right )
+$$
+
+The reader should check that
+
+$$
+10 \left (
+\begin{array}{rr}
+5 \\
+1 \\
+\end{array}
+\right )
++
+2 \left (
+\begin{array}{rr}
+2 \\
+2.6 \\
+\end{array}
+\right )
++
+2 \left (
+\begin{array}{rr}
+6 \\
+-1.2 \\
+\end{array}
+\right )
+= Av
+$$
+
+where the latter is
+
+$$
+\left (
+\begin{array}{rr}
+60 \\
+14  \\
+\end{array}
+\right )
+$$
+
+Note that the above expression,
+
+$$
+10 \left (
+\begin{array}{rr}
+5 \\
+1 \\
+\end{array}
+\right )
++
+2 \left (
+\begin{array}{rr}
+2 \\
+2.6 \\
+\end{array}
+\right )
++
+2 \left (
+\begin{array}{rr}
+6 \\
+-1.2 \\
+\end{array}
+\right ),
+$$
+
+is a sum of scalar products of vectors, which is called a *linear
+combination* of those vectors. In other words, we have that:
+
+<blockquote>
+
+The product of a matrix and a column vector is equal to a linear
+combination of the columns of the matrix.
+
+</blockquote>
+
+Similarly,
+
+<blockquote>
+
+The product of a row vector and a matrix is equal to a linear
+combination of the rows of the matrix.
+
+</blockquote>
+
+❄️  **Your Turn:** Using the same matrix A and the same vector v as
+above, verify that v'A is indeed a linear combination of the rows of A
+as described.
+
+# A Further Look at Markov Chains
+
+Suppose $X_0$, our state at time 0, is random. Let $f$ denote its
+distribution, i.e. its list of probabilities:
+$f_i = P(X_0 = i)$, i = 1,...,k, where k is the number
+of states in the chain. What about $X_1$, the state at time 1?
+Let's find an expression for $g$, the distribution of $X_1$.[This
+section will be longer than previous ones, but will bring together many
+of the concepts. The reader's patience here will be an investment paying
+great dividends in the sequel.]{.column-margin}
+
+$$
+g_j = P(X_1 = j)
+= \sum_{i=1}^k P(X_0 = i) P(X_1 = j | X_0 = i)
+= \sum_{i=1}^k f_i a_{ij}
+$$
+
+where $a_{ij}$ is the row i, column j element of the chain's transition
+matrix $P$.
+
+For example, consider $g_5$. How could we be at state 5 at time 1? We
+could start in state 1, probability $f_1$, then move to state 5,
+probability $a_{15}$, for a total probability of $f_1 a_{15}$. 
+Or, we could start in state 2, probability $f_2$, then move to state 5,
+probability $a_{25}$, for a total probability of $f_2 a_{25}$.
+And so on.
+
+So,
+
+$$
+g_j = \sum_{i=1}^k f_i a_{ij}
+$$
+
+Putting this is more explicit matrix terms,
+
+$$
+g = \left (
+\begin{array}{rrrr}
+g_1 \\
+g_2 \\
+... \\
+g_k \\
+\end{array}
+\right )
+=
+\left (
+\begin{array}{rr}
+f_1 a_{11} + f_2 a_{21} + ... + f_k a_{k1} \\
+f_1 a_{12} + f_2 a_{22} + ... + f_k a_{k2} \\
+... \\
+f_1 a_{1k} + f_2 a_{2k} + ... + f_k a_{kk} \\
+\end{array}
+\right )
+$$
+
+That last expression is
+
+$$
+f'P
+$$
+
+so we have the nice compact relation for the distribution of $X_1$ in
+terms of the distribution of $X_0$.[By the way, it won't be used here, but
+just for practice, note that the right-hand side, Pf, here is
+a linear combination of the columns of P, from our above material on
+partitioning.]{.column-margin}
+
+$$
+g' = f'P
+$$
+
+
+And setting h to the distribution of $X_2$, the same reasoning gives us
+
+$$
+h' = g'P 
+$$
+
+Then since $g' = f'P$, we have
+[Note that we used the Markov property, 
+"memorylessness." Once we reach time 1, "time starts over," regradless
+of the previous history, i.e. regardless of where we were at time 0.]{.column-margin}
+
+$$
+h' = f'P^2 
+$$
+
+and so on. Iterating, we obtain
+
+$$
+d_j' = d_0' P^j 
+$$
+
+where $d_i$ is the distribution of $X_i$.
+
+Similarly, 
+
+$$
+d_j' = d_{j-1}' P
+$$
+
+For convenience, let's take transposes:[Recall that $(AB)' =
+B'A'$.
+
+$$
+d_j = P' d_{j-1}
+$$
+
+Now suppose our chain as a long-run distribution, as in {@sec-introMCs}.
+Let's call that distribution $\nu$. By lettting $j \rightarrow \infty$
+above, we have
+
+$$
+\nu = P' \nu
+$$
+
+Since P is known, this provides us with a way to compute $\nu$. Yes,
+finding a high power of P would do this too, but that would involve a lot
+of computation, and even then it would not yield the exact answer. We
+will return to this in the next chapter. 
+
