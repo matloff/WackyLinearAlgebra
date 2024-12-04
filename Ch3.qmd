@@ -276,6 +276,21 @@ $$
 Now how we will minimize that matrix expression with respect to the
 vector $b$. That is the subject of the next section.
 
+❄️  **Your Turn:** State what the matrix $A$ would have been under the
+earlier model in which the regression line is assmed to go through the
+origin. And what about $(S - Ab)'(S - Ab)$ and so on? Does the math
+still produce the correct answer? Note: $b$ is now a vector of length 1,
+a 1x1 matrix.
+
+❄️  **Your Turn:** Derivative of a Show that 
+
+$$
+\frac{d}{du} u'Qu = 2Qu
+$$
+
+for a constant symmetric matrix $Q$ and a vector $u$. ($u'Qu$ is called
+a *quadratic form*.)*
+
 ### Matrix derivatives.
 
 The (column) vector of partial derivatives of a scalar quantity is
@@ -313,6 +328,9 @@ It can be shown that for a column vector $a$,
 $$
 \frac{d}{da} a'a = 2a
 $$
+
+❄️  **Your Turn:*a Show this. Write $a = (a_1,...,a_k)'$ and find the
+gradient "by hand." Compare to $2a$.
 
 Equation @eq-rss is indeed of the form $a'a$, but the problem here is
 that $a$ in turn is a function of $b$, This calls for the Chain Rule,
