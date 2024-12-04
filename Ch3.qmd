@@ -173,6 +173,8 @@ case.
 
 ## Least-squares estimation, general number of predictors
 
+### Nile example
+
 As we have seen, systems of linear equations are natural applications of
 linear algebra.  Equations @eq-b0 and @eq-b1 can be written in matrix
 terms as
@@ -259,7 +261,152 @@ $$
 S - Ab
 $$
 
+And since for any column vector $u$, the sum of its squared elements is
 
+$$
+u'u
+$$
 
+our sum of squared prediction errors is
 
+$$
+(S - Ab)'(S - Ab)
+$$
 
+Now how we will minimize that matrix expression with respect to the
+vector $b$. That is the subject of the next section.
+
+### Matrix derivatives.
+
+The (column) vector of partial derivatives of a scalar quantity is
+called the *gradient* of that quantity. For instance, with 
+
+$$
+u = 2x + 3y^2 + xy
+$$
+
+we have that its gradient is
+
+$$
+ \frac{du}{dx dy} =
+ \left (
+ \begin{array}{rr}
+ 2 + y \\
+ 6y + x \\
+ \end{array}
+ \right )
+$$
+
+With care, we can compute gradients entirely at the matrix level, using
+easily derivable properties, without ever resorting to returning to the
+scalar expressions. Let's apply them to the case at hand in the last
+section, 
+
+$$
+(S - Ab)'(S - Ab)
+$${#eq-rss}
+
+### Differentiation purely in matrix terms
+
+It can be shown that for a column vector $a$,
+
+$$
+\frac{d}{da} a'a = 2a
+$$
+
+Equation @eq-rss is indeed of the form $a'a$, but the problem here is
+that $a$ in turn is a function of $b$, This calls for the Chain Rule,
+which does exist at the matrix level:
+
+For example if $u = Mv + w$, with $M$ and $w$ constants (i.e. not
+functions of $v$, then
+
+$$
+\frac{d}{dv} u'u = 2M'u
+$$
+
+With $M = -A$ and $w = S$, we have 
+
+$$
+\frac{d}{db} [(S - Ab)'(S - Ab) = -2 A'(S - Ab)
+$$
+
+So, set
+
+$$
+0 = A'(S - Ab) = A'S - A'A b
+$$
+
+yield our minimizing $b$:
+
+$$
+b = (A'A)^{-1} A'S
+$$
+
+providing the inverse exists (more on this in the next chapter).
+
+Let's check this with the Nile example:
+
+```{r}
+A <- cbind(1,n1)
+S <- n2
+Ap <- t(A)
+solve(Ap %*% A) %*% Ap %*% S
+# check via /R
+lm(n2 ~ n1)
+```
+
+### The general case
+
+Say our data consists of $n$ points, each of which is of length $p$.
+Write the $j^{th}$ element of the $i^{th}$ data point as $X_{ij}$.
+Then set
+
+$$
+A =
+\left (
+\begin{array}{rrrr}
+1 & X_{11} & ... & X_{p1} \\
+1 & X_{21} & ... & X_{p2} \\
+... & ... & ... & ... \\
+1 & X_{n1} & ... & X_{np} \\
+\end{array}
+\right )
+$$
+
+Coninue to set $S$ to thw length-$n$ column vector of our response
+variable, and write 
+
+$$
+b = (b_0,b_1,...,b_p)'
+$$
+
+Then, using the same reasoning as before, we have the minimizing
+value of $b$:
+
+$$
+b = (A'A)^{-1} A'S
+$$
+
+again providing that the inverse exists.
+
+As an examples, let's take the **mlb1**
+from my [qeML ('Quick and Easy Machine
+Learning](https://github.com/matloff/qeML) package.
+[Kindly provided by the UCLA Dept. of Statistics]{.column-margin}
+The data is on major league baseball players. We will predict weight
+from height and age.
+
+```{r}
+library(qeML)
+data(mlb1)
+head(mlb1)
+ourData <- as.matrix(mlb1[,-1]) # must have matrix to enable %*%
+head(ourData)
+A <- cbind(1,ourData[,c(1,3)])
+Ap <- t(A)
+S <- as.vector(mlb1[,3])
+solve(Ap %*% A) %*% Ap %*% S
+# check via R
+lm(Weight ~ .,data=mlb1[,-1])
+```
