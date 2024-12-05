@@ -25,7 +25,12 @@ format:
      number-sections: true
      fig_caption: no
      fig_numbers: no
-    
+  pdf:
+     toc: true  
+     number-sections: true      
+     fig_caption: no
+     fig_numbers: no
+   
 execute:
    warning: false
    message: false

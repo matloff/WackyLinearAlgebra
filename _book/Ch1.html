@@ -153,6 +153,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Matrix Inverse</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Linear Statistical Models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Matrix Rank, and Vector Spaces Part I</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Vector Spaces Part II</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -273,7 +291,7 @@ B = \left (
 A = \left (
 \begin{array}{rr}
 5 &amp; 2 &amp; 6 \\
-\textcolor{red}{1} &amp; \textcolor{red}{1} &amp; \textcolor{red}{1} \\
+\color{red}{1} &amp; \color{red}{1} &amp; \color{red}{1} \\
 \end{array}
 \right )
 \]</span></p>
@@ -281,9 +299,9 @@ A = \left (
 <p><span class="math display">\[
 B = \left (
 \begin{array}{rrr}
-5 &amp; \textcolor{red}{-1} \\
-1 &amp; \textcolor{red}{0} \\
-0 &amp; \textcolor{red}{8} \\
+5 &amp; \color{red}{-1} \\
+1 &amp; \color{red}{0} \\
+0 &amp; \color{red}{8} \\
 \end{array}
 \right )
 \]</span></p>
@@ -525,6 +543,7 @@ A' = \left (
 </section>
 <section id="partitioned-matrices-an-invaluable-visualization-tool" class="level3" data-number="1.6.3">
 <h3 data-number="1.6.3" class="anchored" data-anchor-id="partitioned-matrices-an-invaluable-visualization-tool"><span class="header-section-number">1.6.3</span> Partitioned matrices: an invaluable visualization tool</h3>
+<p>Here, “visualization” is not a reference to graphics but rather to highlighting certain submatrices.</p>
 <p>Consider a matrix-vector product Mv. Of course, that means that v is a column vector whose length is equal to the number of columns of M. If M is of size rxs, then v is sx1.</p>
 <p>Let’s denote column j of M by C<sub>j</sub>. Then we will see later in this chapter that</p>
 <p><span class="math display">\[
@@ -568,7 +587,7 @@ v = \left (
 \end{array}
 \right )
 +
-2 \left (
+1 \left (
 \begin{array}{rr}
 6 \\
 -1.2 \\
@@ -601,7 +620,7 @@ v = \left (
 \end{array}
 \right )
 +
-2 \left (
+1 \left (
 \begin{array}{rr}
 6 \\
 -1.2 \\
@@ -617,6 +636,91 @@ v = \left (
 <p>The product of a row vector and a matrix is equal to a linear combination of the rows of the matrix.</p>
 </blockquote>
 <p>❄️ <strong>Your Turn:</strong> Using the same matrix A and the same vector v as above, verify that v’A is indeed a linear combination of the rows of A as described.</p>
+<p>To further illustrate partitioned matrices, write the above matrix <span class="math inline">\(A\)</span> as</p>
+<p><span class="math display">\[
+A =
+\left (
+\begin{array}{r}
+A_{11} &amp; A_{21} \\
+\end{array}
+\right )
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+A_{11} =
+\left (
+\begin{array}{rr}
+5 &amp; 2 \\
+1 &amp; 2.6 \\
+\end{array}
+\right )
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+A_{12} =
+\left (
+\begin{array}{rr}
+6 \\
+-1.2 \\
+\end{array}
+\right )
+\]</span></p>
+<p>Symbolically, <span class="math inline">\(A\)</span> now looks like a 1x2 matrix. Similarly, writing</p>
+<p><span class="math display">\[
+v =
+\left (
+\begin{array}{rrr}
+v_{11} \\
+v_{21} \\
+\end{array}
+\right )
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+v_{11} =
+\left (
+\begin{array}{rr}
+10 \\
+2 \\
+\end{array}
+\right )
+\]</span></p>
+<p>and <span class="math inline">\(v_{21} = 1\)</span> (a 1x1 matrix), <span class="math inline">\(v\)</span> looks to be 2x1.</p>
+<p>So, again pretending, treat the product <span class="math inline">\(Av\)</span> as the multiplication of a 1x2 “matrix” and 2x1 “vector”, yielding a 1x1 result,</p>
+<p><span class="math display">\[
+A_{11} v_{11} + A_{12} v_{21}
+\]</span></p>
+<p>But all that pretending actually does give the correct answer!</p>
+<p><span class="math display">\[
+A_{11} v_{11} + A_{12} v_{21} =
+\left (
+\begin{array}{rr}
+5 &amp; 2 \\
+1 &amp; 2.6 \\
+\end{array}
+\right )
+\left (
+\begin{array}{rr}
+10 \\
+2 \\
+\end{array}
+\right )
++
+\left (
+\begin{array}{rr}
+6 \\
+-1.2 \\
+\end{array}
+\right )
+1
+=
+\left (
+\begin{array}{rr}
+60 \\
+14 \\
+\end{array}
+\right )
+\]</span></p>
 </section>
 </section>
 <section id="a-further-look-at-markov-chains" class="level1 page-columns page-full" data-number="2">

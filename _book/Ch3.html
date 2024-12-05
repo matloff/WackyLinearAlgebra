@@ -198,6 +198,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#differentiation-purely-in-matrix-terms" id="toc-differentiation-purely-in-matrix-terms" class="nav-link" data-scroll-target="#differentiation-purely-in-matrix-terms"><span class="header-section-number">3.3.3</span> Differentiation purely in matrix terms</a></li>
   <li><a href="#the-general-case" id="toc-the-general-case" class="nav-link" data-scroll-target="#the-general-case"><span class="header-section-number">3.3.4</span> The general case</a></li>
   </ul></li>
+  <li><a href="#determinants" id="toc-determinants" class="nav-link" data-scroll-target="#determinants"><span class="header-section-number">3.4</span> Determinants</a>
+  <ul class="collapse">
+  <li><a href="#definition" id="toc-definition" class="nav-link" data-scroll-target="#definition"><span class="header-section-number">3.4.1</span> Definition</a></li>
+  <li><a href="#properties" id="toc-properties" class="nav-link" data-scroll-target="#properties"><span class="header-section-number">3.4.2</span> Properties</a></li>
+  </ul></li>
+  <li><a href="#update-formulas" id="toc-update-formulas" class="nav-link" data-scroll-target="#update-formulas"><span class="header-section-number">3.5</span> Update formulas</a></li>
   </ul>
 </nav>
     </div>
@@ -430,6 +436,12 @@ u'u
 (S - Ab)'(S - Ab)
 \]</span></p>
 <p>Now how we will minimize that matrix expression with respect to the vector <span class="math inline">\(b\)</span>. That is the subject of the next section.</p>
+<p>❄️ <strong>Your Turn:</strong> State what the matrix <span class="math inline">\(A\)</span> would have been under the earlier model in which the regression line is assmed to go through the origin. And what about <span class="math inline">\((S - Ab)'(S - Ab)\)</span> and so on? Does the math still produce the correct answer? Note: <span class="math inline">\(b\)</span> is now a vector of length 1, a 1x1 matrix.</p>
+<p>❄️ <strong>Your Turn:</strong> Derivative of a Show that</p>
+<p><span class="math display">\[
+\frac{d}{du} u'Qu = 2Qu
+\]</span></p>
+<p>for a constant symmetric matrix <span class="math inline">\(Q\)</span> and a vector <span class="math inline">\(u\)</span>. (<span class="math inline">\(u'Qu\)</span> is called a <em>quadratic form</em>.)*</p>
 </section>
 <section id="matrix-derivatives." class="level3" data-number="3.3.2">
 <h3 data-number="3.3.2" class="anchored" data-anchor-id="matrix-derivatives."><span class="header-section-number">3.3.2</span> Matrix derivatives.</h3>
@@ -458,6 +470,7 @@ u = 2x + 3y^2 + xy
 <p><span class="math display">\[
 \frac{d}{da} a'a = 2a
 \]</span></p>
+<p>❄️ <strong>Your Turn:</strong> Show this. Write <span class="math inline">\(a = (a_1,...,a_k)'\)</span> and find the gradient “by hand.” Compare to <span class="math inline">\(2a\)</span>.</p>
 <p>Equation <a href="#eq-rss">Equation&nbsp;<span>3.3</span></a> is indeed of the form <span class="math inline">\(a'a\)</span>, but the problem here is that <span class="math inline">\(a\)</span> in turn is a function of <span class="math inline">\(b\)</span>, This calls for the Chain Rule, which does exist at the matrix level:</p>
 <p>For example if <span class="math inline">\(u = Mv + w\)</span>, with <span class="math inline">\(M\)</span> and <span class="math inline">\(w\)</span> constants (i.e.&nbsp;not functions of <span class="math inline">\(v\)</span>, then</p>
 <p><span class="math display">\[
@@ -570,9 +583,72 @@ Coefficients:
   -187.6382       4.9236       0.9115  </code></pre>
 </div>
 </div>
-
-
 </section>
+</section>
+<section id="determinants" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="determinants"><span class="header-section-number">3.4</span> Determinants</h2>
+<p>This is a topic that is quite straightforward and traditional, even old-fashioned. Yet the theme of a book by Sheldon Axler,, <em>Linear Algebra Done Right</em> is that determoinants are overemphasized. He relegates the topic to the very end of the book. Yet determinants do appear often in applied linear algebra settings. Moreover, they will be convenient to use in explaing very concepts in this book.</p>
+<p>But why place the topic in this particular chapter? The answer lies in the fact that earlier in this chapter we had the proviso “If <span class="math inline">\((A'A)^{-1}\)</span> exists.” The following property of determinants is then relevant:</p>
+<blockquote class="blockquote">
+<p>A square matrix <span class="math inline">\(G\)</span> is invertible if and only if <span class="math inline">\(det(G) \neq 0\)</span>.</p>
+</blockquote>
+<p>There are better ways to ascertain invertibility than this, but it is conceptually helpful. Determinants play a similar role in the topic of eigenveectors in Chapter 5.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">det</span>(Ap <span class="sc">%*%</span> A) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 103306202970</code></pre>
+</div>
+</div>
+<p>Nonzero! So <span class="math inline">\((A'A)^{-1}\)</span> does exist, confirming that our R code that needed that property.</p>
+<section id="definition" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="definition"><span class="header-section-number">3.4.1</span> Definition</h3>
+<p>The standard definition is one of the ugliest, and least useful, in all of mathematics. Instead we will define the term using one of the methods for calculating determinants.</p>
+<blockquote class="blockquote">
+<p>Consider an <span class="math inline">\(r \textrm{x} r\)</span> matrix <span class="math inline">\(G\)</span>. For <span class="math inline">\(r = 2\)</span>, write <span class="math inline">\(G\)</span> as</p>
+<p><span class="math display">\[
+G =
+\left (
+\begin{array}{rr}
+a &amp; b \\
+c &amp; d  \\
+\end{array}
+\right )
+\]</span></p>
+<p>and define <span class="math inline">\(\det(G)\)</span> to be <span class="math inline">\(ad -bc\)</span>. For <span class="math inline">\(r &gt; 2\)</span>, define submatrices as follows.</p>
+<p><span class="math inline">\(G_i\)</span> is the <span class="math inline">\((r-1) \textrm{x} (r-1)\)</span> submatrix obtained by removing row 1 and column <span class="math inline">\(j\)</span> from <span class="math inline">\(G\)</span>. Then <span class="math inline">\(\det(G)\)</span> is defined recursively as</p>
+<p><span class="math display">\[
+\sum_{i=1}^r (-1)^{i+1} \det(G_i)
+\]</span></p>
+</blockquote>
+<p>For instance, consider</p>
+<p><span class="math display">\[
+M =
+\left (
+\begin{array}{rrr}
+5 &amp; 1 &amp; 0 \\
+3 &amp; -1 &amp; 7 \\
+  0 &amp; 1 &amp; 1 \\
+  \end{array}
+\right )
+\]</span></p>
+<p>The <span class="math inline">\(\det(M) = 5(-8) - 3 + 0 = -43\)</span>.</p>
+<p>❄️ <strong>Your Turn:</strong> If you are familiar with recursive calls, write a function <span class="math inline">\(\verb+dt(a)+\)</span> to compute the determinant of a square matrix using this scheme.</p>
+</section>
+<section id="properties" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="properties"><span class="header-section-number">3.4.2</span> Properties</h3>
+<p>We state these without proof:</p>
+<ul>
+<li><p><span class="math inline">\(G^{-1}\)</span> exists if and only if <span class="math inline">\(\det(G) \neq 0\)</span></p></li>
+<li><p><span class="math inline">\(\det(GH) = \det(G) \det(H)\)</span></p></li>
+</ul>
+</section>
+</section>
+<section id="update-formulas" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="update-formulas"><span class="header-section-number">3.5</span> Update formulas</h2>
+<p>One important theme in developing prediction models (linear regression, neural networks etc.) is that, in testing a model we fit to only a subset of our data, then predict the remaining – “fresh” – holdout data using the model. Or, we might do this many times, say with many holdout sets of size 1, fitting the model on the remaining n-1 data points each time..</p>
+<p>This could become computationally challenging, as we would need to refit the model each time. It would be nice if we could have an “update” formula that would quickly recalculate the model found on the full dataset. In rhw case of linear models, such a formula exists, in the Sherman-Morrison-Woodbury relation.</p>
+
+
 </section>
 
 </main> <!-- /main -->

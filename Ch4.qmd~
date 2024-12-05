@@ -10,14 +10,14 @@ library(qeML)
 # Matrix Rank, and Vector Spaces Part I 
 
 In our computations in the latter part of the last chapter, we added a
-proviso that $(A'A)^{-1}$. In this chapter, we'll present a
-counterexample, which will naturally lead into covering matrix rank and
+proviso that $(A'A)^{-1}$ exists. In this chapter, we'll present a
+counterexample, which will naturally lead into our covering matrix rank and
 the basics of vector spaces.
 
 ## Example: census data
 
 This dataset is also from **qeML**. It is data for Silicon Valley
-engineers in the 2000 Census.
+engineers in the 2000 Census. Let's focus on just a few columns.
 
 ```{r}
 data(svcensus) 
@@ -56,11 +56,33 @@ rref(ApA)
 
 Aha! The row reduction process ended prematurely. This matrix has no
 inverse. We say that the matrix has *rank* 4, when it needs to be 5;
-$A'A$ is not of *full rank*.
+we also say that $A'A$ is not of *full rank*.
 
 Recall that in the nonfull rank example we presented in the last
 chapter, one row was double another. Here the sum of the last two
 columns of $A$ was equal to the first column. We say the columns are
-*linearly dependent*.
+*linearly dependent*. This is the culprit in non-full rank matrices.
+
+In fact, not only was $A'A$ not of full rank, but so was $A$:
+
+```{r}
+qr(ApA)$rank
+qr(A)$rank
+```
+
+This is rather startling. $A$ has over 20,000 rows --- yet only 4
+linearly independent ones?[There are many subsets of 4 rows that are
+linearly independent. But no sets of 5 or more are linearly independent.
+]{.column-margin} But it follows from this fact:
+
+<blockquote>
+
+For any $rxs$ matix $G$, the rank of $B$ is less than or equal to 
+$\min(r,s)$.
+
+</blockquote>
+
+Details to follow.
+
 
 

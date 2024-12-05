@@ -144,7 +144,7 @@ $$
 A = \left (
 \begin{array}{rr}
 5 & 2 & 6 \\
-\textcolor{red}{1} & \textcolor{red}{1} & \textcolor{red}{1} \\
+\color{red}{1} & \color{red}{1} & \color{red}{1} \\
 \end{array}
 \right )
 $$
@@ -154,9 +154,9 @@ and
 $$
 B = \left (
 \begin{array}{rrr}
-5 & \textcolor{red}{-1} \\
-1 & \textcolor{red}{0} \\
-0 & \textcolor{red}{8} \\
+5 & \color{red}{-1} \\
+1 & \color{red}{0} \\
+0 & \color{red}{8} \\
 \end{array}
 \right )
 $$

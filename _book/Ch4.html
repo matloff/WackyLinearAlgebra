@@ -101,7 +101,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -186,7 +186,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -206,10 +206,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 <div style="page-break-after: always;"></div>
-<p>In our computations in the latter part of the last chapter, we added a proviso that <span class="math inline">\((A'A)^{-1}\)</span>. In this chapter, we’ll present a counterexample, which will naturally lead into covering matrix rank and the basics of vector spaces.</p>
-<section id="example-census-data" class="level2" data-number="4.1">
+<p>In our computations in the latter part of the last chapter, we added a proviso that <span class="math inline">\((A'A)^{-1}\)</span> exists. In this chapter, we’ll present a counterexample, which will naturally lead into our covering matrix rank and the basics of vector spaces.</p>
+<section id="example-census-data" class="level2 page-columns page-full" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="example-census-data"><span class="header-section-number">4.1</span> Example: census data</h2>
-<p>This dataset is also from <strong>qeML</strong>. It is data for Silicon Valley engineers in the 2000 Census.</p>
+<p>This dataset is also from <strong>qeML</strong>. It is data for Silicon Valley engineers in the 2000 Census. Let’s focus on just a few columns.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(svcensus) </span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(svcensus) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -296,8 +296,23 @@ man     0   0       0   1    -1
 woman   0   0       0   0     0</code></pre>
 </div>
 </div>
-<p>Aha! The row reduction process ended prematurely. This matrix has no inverse. We say that the matrix has <em>rank</em> 4, when it needs to be 5; <span class="math inline">\(A'A\)</span> is not of <em>full rank</em>.</p>
-<p>Recall that in the nonfull rank example we presented in the last chapter, one row was double another. Here the sum of the last two columns of <span class="math inline">\(A\)</span> was equal to the first column. We say the columns are <em>linearly dependent</em>.</p>
+<p>Aha! The row reduction process ended prematurely. This matrix has no inverse. We say that the matrix has <em>rank</em> 4, when it needs to be 5; we also say that <span class="math inline">\(A'A\)</span> is not of <em>full rank</em>.</p>
+<p>Recall that in the nonfull rank example we presented in the last chapter, one row was double another. Here the sum of the last two columns of <span class="math inline">\(A\)</span> was equal to the first column. We say the columns are <em>linearly dependent</em>. This is the culprit in non-full rank matrices.</p>
+<p>In fact, not only was <span class="math inline">\(A'A\)</span> not of full rank, but so was <span class="math inline">\(A\)</span>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qr</span>(ApA)<span class="sc">$</span>rank</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qr</span>(A)<span class="sc">$</span>rank</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+</div>
+<div class="page-columns page-full"><p>This is rather startling. <span class="math inline">\(A\)</span> has over 20,000 rows — yet only 4 linearly independent ones? But it follows from this fact:</p><div class="no-row-height column-margin column-container"><span class="">There are many subsets of 4 rows that are linearly independent. But no sets of 5 or more are linearly independent.</span></div></div>
+<blockquote class="blockquote">
+<p>For any rxs matix <span class="math inline">\(G\)</span>, the rank of <span class="math inline">\(B\)</span> is less than or equal to <span class="math inline">\(\min(r,s)\)</span>.</p>
+</blockquote>
 <p>Details to follow.</p>
 
 
