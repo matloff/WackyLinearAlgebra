@@ -7,7 +7,7 @@ library(qeML)
 
 {{< pagebreak >}}
 
-# Matrix Rank, and Vector Spaces Part I 
+# Matrix Rank, and Vector Spaces 
 
 In our computations in the latter part of the last chapter, we added a
 proviso that $(A'A)^{-1}$ exists. In this chapter, we'll present a
