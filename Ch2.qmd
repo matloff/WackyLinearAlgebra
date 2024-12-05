@@ -392,8 +392,8 @@ $$
  \right )
  $$
 
-This cannot lead to $i$, indicating that $A^{-1}$ does not exist. And
-it's no coincidence that row 2 of $A$ is double row 1. This has many
-implications, as will be seen in our chapter on vector spaces.
-
+This cannot lead to $i$, indicating that $A^{-1}$ does not exist, and
+the matrix is said to be *singular*. And it's no coincidence that row 2
+of $A$ is double row 1. This has many implications, as will be seen in
+our chapter on vector spaces.
 
