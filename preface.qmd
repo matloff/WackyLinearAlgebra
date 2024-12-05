@@ -34,7 +34,7 @@ Of course the book should work well as a course textbook. The
 "applications first" approach should motivate student, and the use of
 Quarto enables easy conversion to Powerpoint by instructors.
 
-I hope the book's emphasize on the Why? and How?  especially appeals to
+I hope the book's emphasis on the Why? and How?  especially appeals to
 do-it-yourselfers, those who engagement in self-study is motivated by
 intellectual curiosity rather than a course grade.
 
