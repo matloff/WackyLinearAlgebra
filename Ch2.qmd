@@ -397,3 +397,17 @@ the matrix is said to be *singular*. And it's no coincidence that row 2
 of $A$ is double row 1. This has many implications, as will be seen in
 our chapter on vector spaces.
 
+## The multivariate normal distribution family
+
+The familiar "bell-shaped curve" refers to the *normal* (or *Gaussian*)
+family, whose densities have the form
+
+$$
+\frac{1}{\sigma \sqrt{2 \pi}}
+e^{-0.5 (\frac{t-\mu}{\sigma})^2}
+$$
+
+The values of $\mu$ and $\sigma$ are the mean and standard deviation.
+
+One might use this distribution family to model, say, human height. But
+what about jointly modeling height and weight?

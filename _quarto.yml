@@ -13,6 +13,7 @@ book:
    
    chapters:
      - index.qmd
+     - preface.qmd
      - Ch1.qmd
      - Ch2.qmd
      - Ch3.qmd
