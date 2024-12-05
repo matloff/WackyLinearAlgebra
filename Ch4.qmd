@@ -82,7 +82,21 @@ $\min(r,s)$.
 
 </blockquote>
 
-Details to follow.
+Details to follow in the next chapter..
 
+## Update formulas
+
+One important theme in developing prediction models (linear regression,
+neural networks etc.) is that, in testing a model we fit to only a
+subset of our data, then predict the remaining -- "fresh" -- holdout
+data using the model. Or, we might do this many times, say with many
+holdout sets of size 1, fitting the model on the remaining n-1 data
+points each time..
+
+This could become computationally challenging, as we would need to refit
+the model each time. It would be nice if we could have an "update"
+formula that would quickly recalculate the model found on the full
+dataset. In rhw case of linear models, such a formula exists, in the
+Sherman-Morrison-Woodbury relation.
 
 
