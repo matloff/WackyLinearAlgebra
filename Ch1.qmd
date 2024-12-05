@@ -480,6 +480,9 @@ means a 3x1 matrix.
 
 ### Partitioned matrices: an invaluable visualization tool
 
+Here, "visualization" is not a reference to graphics but rather to
+highlighting certain submatrices.
+
 Consider a matrix-vector product Mv. Of course, that means that v is a
 column vector whose length is equal to the number of columns of M. If M
 is of size rxs, then v is sx1.
@@ -534,7 +537,7 @@ $$
 \end{array}
 \right )
 +
-2 \left (
+1 \left (
 \begin{array}{rr}
 6 \\
 -1.2 \\
@@ -571,7 +574,7 @@ $$
 \end{array}
 \right )
 +
-2 \left (
+1 \left (
 \begin{array}{rr}
 6 \\
 -1.2 \\
@@ -601,6 +604,109 @@ combination of the rows of the matrix.
 ❄️  **Your Turn:** Using the same matrix A and the same vector v as
 above, verify that v'A is indeed a linear combination of the rows of A
 as described.
+
+To further illustrate partitioned matrices, write the above matrix $A$
+as 
+
+$$
+A = 
+\left (
+\begin{array}{r}
+A_{11} & A_{21} \\
+\end{array}
+\right )
+$$
+
+where 
+
+$$
+A_{11} = 
+ \left (
+ \begin{array}{rr}
+ 5 & 2 \\
+ 1 & 2.6 \\
+ \end{array}
+ \right )
+$$
+
+and  
+
+
+$$
+A_{12} = 
+ \left (
+ \begin{array}{rr}
+ 6 \\
+ -1.2 \\
+ \end{array}
+ \right )
+$$
+
+Symbolically, $A$ now looks like a 1x2 matrix. Similarly, writing
+
+$$
+v = 
+ \left (
+ \begin{array}{rrr}
+ v_{11} \\
+ v_{21} \\
+ \end{array}
+ \right )
+$$
+
+where 
+
+$$
+ v_{11} = 
+ \left (
+ \begin{array}{rr}
+ 10 \\
+ 2 \\
+ \end{array}
+ \right )
+ $$
+
+and $v_{21} = 1$ (a 1x1 matrix), $v$ looks to be 2x1.
+
+So, again pretending, treat the product $Av$ as the multiplication of a
+1x2 "matrix" and 2x1 "vector", yielding a 1x1 result,
+
+$$
+A_{11} v_{11} + A_{12} v_{21}
+$$
+
+But all that pretending actually does give the correct answer!
+
+$$
+A_{11} v_{11} + A_{12} v_{21} =
+ \left (
+ \begin{array}{rr}
+ 5 & 2 \\
+ 1 & 2.6 \\
+ \end{array}
+ \right ) 
+ \left (
+ \begin{array}{rr}
+ 10 \\
+ 2 \\
+ \end{array}
+ \right )
++
+ \left (
+ \begin{array}{rr}
+ 6 \\
+ -1.2 \\
+ \end{array}
+ \right )
+1 
+=
+ \left (
+ \begin{array}{rr}
+ 60 \\
+ 14 \\
+ \end{array}
+ \right )
+$$
 
 # A Further Look at Markov Chains
 
