@@ -7,5 +7,5 @@ library(qeML)
 
 {{< pagebreak >}}
 
-# Inner Product Spaces 
+# Eigenanalysis 
 

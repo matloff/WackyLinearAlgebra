@@ -7,5 +7,5 @@ library(qeML)
 
 {{< pagebreak >}}
 
-# Inner Product Spaces 
+# Linear Algebra in Machine Learning
 
