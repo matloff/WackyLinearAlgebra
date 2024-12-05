@@ -329,7 +329,7 @@ $$
 \frac{d}{da} a'a = 2a
 $$
 
-❄️  **Your Turn:*a Show this. Write $a = (a_1,...,a_k)'$ and find the
+❄️  **Your Turn:** Show this. Write $a = (a_1,...,a_k)'$ and find the
 gradient "by hand." Compare to $2a$.
 
 Equation @eq-rss is indeed of the form $a'a$, but the problem here is
@@ -468,10 +468,10 @@ for calculating determinants.
 
 <blockquote>
 
-Consider an $rxr$ matrix $G =$.  For $r = 2$, write $G$ as
+Consider an $r \textrm{x} r$ matrix $G$.  For $r = 2$, write $G$ as
 
 $$
- a = 
+ G = 
  \left (
  \begin{array}{rr}
  a & b \\
@@ -480,23 +480,42 @@ $$
  \right )
  $$
 
-and define $det(G)$ to be $ad -bc$. For $r > 2$, define
+and define $\det(G)$ to be $ad -bc$. For $r > 2$, 
+define submatrices as follows. 
+
+$G_i$ is the $(r-1) \textrm{x} (r-1)$ submatrix obtained by removing row
+1 and column $j$ from $G$. Then $\det(G)$ is defined recursively as
 
 $$
-det(G) 
+\sum_{i=1}^r (-1)^{i+1} \det(G_i)
 $$
-
-
-define submatrices as follows. $G_i$ is the
-$(r-1) x (r-1) $submatrix obtained by removing row 1 and column $j$ from
-$G$. Then $det(G)$ is defined recursively as
-
-$$
-\sum_{i=1}^r (-1)^{i} det(G_i)
-$$
-
 
 </blockquote>
 
+For instance, consider 
 
+$$
+ M = 
+ \left (
+ \begin{array}{rrr}
+ 5 & 1 & 0 \\
+ 3 & -1 & 7 \\
+  0 & 1 & 1 \\
+  \end{array}
+ \right )
+$$
+
+The $\det(M) = 5(-8) - 3 + 0 = -43$.
+
+❄️  **Your Turn:** If you are familiar with recursive calls, write a
+function $\verb+dt(a)+$ to compute the determinant of a square matrix
+\lstinline{a} using this scheme.
+
+### Properties
+
+We state these without proof:
+
+* $G^{-1}$ exists if and only if $\det(G) \neq 0$
+
+* $\det(GH) = \det(G) \det(H)$
 
