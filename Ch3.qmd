@@ -181,7 +181,7 @@ terms as
 
 $$
  \left (
- \begin{array}{rr}
+ \begin{array}{r}
  \sum_{i=1}^n C_i \\
  \sum_{i=1}^n C_i V_i \\
  \end{array}
@@ -193,7 +193,7 @@ $$
  \end{array}
  \right ) 
  \left (
- \begin{array}{rr}
+ \begin{array}{r}
  b_0 \\
  b_1 \\
  \end{array}
@@ -208,7 +208,7 @@ Define $S$ and $T$:
 $$
 S = 
  \left (
- \begin{array}{rr}
+ \begin{array}{r}
  C_1 \\
  C_2 \\
  ... \\
@@ -222,7 +222,7 @@ and
 $$
 T = 
  \left (
- \begin{array}{rr}
+ \begin{array}{r}
  V_1 \\
  V_2 \\
  ... \\
@@ -244,7 +244,7 @@ where
 $$
 A =  
  \left (
- \begin{array}{rrrr}
+ \begin{array}{rr}
  1 & V_1 \\
  1 & V_2 \\
  ... & ... \\
@@ -305,7 +305,7 @@ we have that its gradient is
 $$
  \frac{du}{dx dy} =
  \left (
- \begin{array}{rr}
+ \begin{array}{r}
  2 + y \\
  6y + x \\
  \end{array}

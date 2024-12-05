@@ -63,7 +63,7 @@ $$
 \end{array}
 \right )
 \left (
-\begin{array}{rrrrr}
+\begin{array}{r}
 \nu_1 \\
 \nu_2 \\
 \nu_3 \\
@@ -72,7 +72,7 @@ $$
 \end{array}
 \right ) = 
 \left (
-\begin{array}{rrrrr}
+\begin{array}{r}
 0 \\
 0 \\
 0 \\
@@ -86,7 +86,7 @@ If we perform the matrix multiplication, we have an ordinary system of
 linear equations:
 
 $$
-\begin{array}{rrrrr}
+\begin{array}{r}
 0.5 \nu_1 - 0.5 \nu_2 = 0 \\
 -0.5 \nu_1 + \nu_2 - 0.5 \nu_3 = 0 \\
 -0.5 \nu_2 + \nu_3 - 0.5 \nu_4 = 0 \\
@@ -118,7 +118,7 @@ $$
 \end{array}
 \right )
 \left (
-\begin{array}{rrrrr}
+\begin{array}{r}
 \nu_1 \\
 \nu_2 \\
 \nu_3 \\
@@ -127,7 +127,7 @@ $$
 \end{array}
 \right ) =
 \left (
-\begin{array}{rrrrr}
+\begin{array}{r}
 0 \\
 0 \\
 0 \\

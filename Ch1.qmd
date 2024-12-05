@@ -117,7 +117,7 @@ For example, set
 
 $$
 A = \left (
-\begin{array}{rr}
+\begin{array}{rrr}
 5 & 2 & 6 \\
 1 & 1 & 8 \\
 \end{array}
@@ -128,7 +128,7 @@ and
 
 $$
 B = \left (
-\begin{array}{rrr}
+\begin{array}{rr}
 5 & -1 \\
 1 & 0 \\
 0 & 8 \\
@@ -142,7 +142,7 @@ highlighted below.
 
 $$
 A = \left (
-\begin{array}{rr}
+\begin{array}{rrr}
 5 & 2 & 6 \\
 \color{red}{1} & \color{red}{1} & \color{red}{1} \\
 \end{array}
@@ -153,7 +153,7 @@ and
 
 $$
 B = \left (
-\begin{array}{rrr}
+\begin{array}{rr}
 5 & \color{red}{-1} \\
 1 & \color{red}{0} \\
 0 & \color{red}{8} \\
@@ -403,7 +403,7 @@ straightforward.
 
 $$
 A = \left (
-\begin{array}{rr}
+\begin{array}{rrr}
 5 & 2 & 6 \\
 1 & 2.6 & -1.2 \\
 \end{array}
@@ -412,7 +412,7 @@ $$
 
 $$
 B = \left (
-\begin{array}{rr}
+\begin{array}{rrr}
 0 & 20 & 6 \\
 3 & 5.8 & 1 \\
 \end{array}
@@ -421,7 +421,7 @@ $$
 
 $$
 A+B = \left (
-\begin{array}{rr}
+\begin{array}{rrr}
 5 & 22 & 12 \\
 4 & 8.4 & -0.2 \\
 \end{array}
@@ -436,7 +436,7 @@ A as above,
 
 $$
 1.5 A = \left (
-\begin{array}{rr}
+\begin{array}{rrr}
 7.5 & 3 & 9 \\
 1.5 & 3.9 & -1.8 \\
 \end{array}
@@ -501,7 +501,7 @@ For instance, take
 
 $$
 A = \left (
-\begin{array}{rr}
+\begin{array}{rrr}
 5 & 2 & 6 \\
 1 & 2.6 & -1.2 \\
 \end{array}
@@ -512,7 +512,7 @@ and
 
 $$
 v = \left (
-\begin{array}{rrr}
+\begin{array}{r}
 10 \\
 2 \\
 1 \\
@@ -524,21 +524,21 @@ The reader should check that
 
 $$
 10 \left (
-\begin{array}{rr}
+\begin{array}{r}
 5 \\
 1 \\
 \end{array}
 \right )
 +
 2 \left (
-\begin{array}{rr}
+\begin{array}{r}
 2 \\
 2.6 \\
 \end{array}
 \right )
 +
 1 \left (
-\begin{array}{rr}
+\begin{array}{r}
 6 \\
 -1.2 \\
 \end{array}
@@ -550,7 +550,7 @@ where the latter is
 
 $$
 \left (
-\begin{array}{rr}
+\begin{array}{r}
 60 \\
 14  \\
 \end{array}
@@ -561,21 +561,21 @@ Note that the above expression,
 
 $$
 10 \left (
-\begin{array}{rr}
+\begin{array}{r}
 5 \\
 1 \\
 \end{array}
 \right )
 +
 2 \left (
-\begin{array}{rr}
+\begin{array}{r}
 2 \\
 2.6 \\
 \end{array}
 \right )
 +
 1 \left (
-\begin{array}{rr}
+\begin{array}{r}
 6 \\
 -1.2 \\
 \end{array}
@@ -635,7 +635,7 @@ and
 $$
 A_{12} = 
  \left (
- \begin{array}{rr}
+ \begin{array}{r}
  6 \\
  -1.2 \\
  \end{array}
@@ -647,7 +647,7 @@ Symbolically, $A$ now looks like a 1x2 matrix. Similarly, writing
 $$
 v = 
  \left (
- \begin{array}{rrr}
+ \begin{array}{r}
  v_{11} \\
  v_{21} \\
  \end{array}
@@ -659,7 +659,7 @@ where
 $$
  v_{11} = 
  \left (
- \begin{array}{rr}
+ \begin{array}{r}
  10 \\
  2 \\
  \end{array}
@@ -686,14 +686,14 @@ A_{11} v_{11} + A_{12} v_{21} =
  \end{array}
  \right ) 
  \left (
- \begin{array}{rr}
+ \begin{array}{r}
  10 \\
  2 \\
  \end{array}
  \right )
 +
  \left (
- \begin{array}{rr}
+ \begin{array}{r}
  6 \\
  -1.2 \\
  \end{array}
@@ -701,7 +701,7 @@ A_{11} v_{11} + A_{12} v_{21} =
 1 
 =
  \left (
- \begin{array}{rr}
+ \begin{array}{r}
  60 \\
  14 \\
  \end{array}
@@ -745,7 +745,7 @@ Putting this is more explicit matrix terms,
 
 $$
 g = \left (
-\begin{array}{rrrr}
+\begin{array}{r}
 g_1 \\
 g_2 \\
 ... \\
@@ -754,7 +754,7 @@ g_k \\
 \right )
 =
 \left (
-\begin{array}{rr}
+\begin{array}{r}
 f_1 a_{11} + f_2 a_{21} + ... + f_k a_{k1} \\
 f_1 a_{12} + f_2 a_{22} + ... + f_k a_{k2} \\
 ... \\
