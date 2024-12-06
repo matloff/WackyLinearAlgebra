@@ -611,7 +611,7 @@ as
 $$
 A = 
 \left (
-\begin{array}{r}
+\begin{array}{rr}
 A_{11} & A_{21} \\
 \end{array}
 \right )
