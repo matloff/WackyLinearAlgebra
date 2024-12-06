@@ -425,7 +425,7 @@ $$
 
 Note the intuition:
 
-* Instead of $1/\sigma^2i$, i.e. instead of dividing by variance,
+* Instead of $1/\sigma^2$, i.e. instead of dividing by variance,
 we "divide by $\Sigma$," intuitively viewing matrix inverse as a
 "reciprocal" of a matrix.
 
