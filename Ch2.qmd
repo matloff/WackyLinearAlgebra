@@ -407,4 +407,37 @@ e^{-0.5 (\frac{t-\mu}{\sigma})^2}
 $$
 
 The values of $\mu$ and $\sigma$ are the mean and standard deviation.
+But what if we have a random vector, say of length $k$? Is there a
+generalized normal family? The answer is yes.  Here is an example for
+$k = 2$:
+
+![3D bell density](Bell.png)
+
+Well, then, what is the form of the $k$-dimensional density function?
+Just as the univariate normal family is parameterized by mean and
+variance, the multivariate one is parameterized via mean vector $\mu$
+and covariance matrix $\Sigma$. The form is 
+
+$$
+(2\pi)^{-k/2} \det(\Sigma)^{-k/2}
+e^{-0.5 (t-\mu)'(\Sigma)^{-1}(t-\mu)}
+$$
+
+Note the intuition:
+
+* Instead of $1/\sigma^2i$, i.e. instead of dividing by variance,
+we "divide by $\Sigma$," intuitively viewing matrix inverse as a
+"reciprocal" of a matrix.
+
+* In other words, covariance matrices operate roughly like
+generalized variances.
+
+* Instead of squaring the scalar $t - \mu$, we "square" it in the vector
+case by peforming a $w'w$ operation, albeit with $^{-k/2}$ in the
+middle. 
+
+Clearly, we should not stretch these analogies very far, but they do
+help our intuition here.
+
+
 
