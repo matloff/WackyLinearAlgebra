@@ -829,3 +829,108 @@ finding a high power of P would do this too, but that would involve a lot
 of computation, and even then it would not yield the exact answer. We
 will return to this in the next chapter. 
 
+## Random Vectors
+
+You are probably familiar with the concept of a random variable, but of
+even greater importance is random *vecctors*.
+
+Say we are jointly modeling height, weight, age, systolic blood pressure
+and cholesterol, and are especially interested in relations between
+these quantities.  We then have the random vector
+
+$$
+ X 
+=
+ \left (
+ \begin{array}{r}
+ X_1 \\
+ X_2 \\
+ X_3 \\
+ X_4 \\
+ X_5 \\
+  \end{array}
+ \right )
+=
+ \left (
+ \begin{array}{r}
+ \textrm{height} \\
+ \textrm{weight} \\
+ \textrm{age} \\
+ \textrm{bp} \\
+ \textrm{chol} \\
+  \end{array}
+ \right )
+ $$
+
+### Covariance matrices
+
+The relations between the various components of $X$ are often
+characterized by the *covariance matrix* of $X$, defined as follows
+for a $k$-component random vector. The covariance matrix, denoted by
+$Cov(X)$, is a $k \textrm{x} k$ matrix, and 
+for $1 \leq i,j \leq k$,[The definition is soewhat overloaded.
+"Cov" refers both to the covariance between two random variables, say
+height and weight, and to the covariance of a random vector, which is a
+matrix. But it will always be clear from context which one is being
+discussed.  ]{.column-margin} 
+
+$$
+Cov(X_i,X_j) = E[(X_i - EX_i) (X_j - EX_j)]
+$$
+
+Don't let the mathematical abstractness here fool you; it's a very
+common-sense notion. Think of height and weight in our 5-component
+example above.  Here $X$ is the vector of measurements of a randomly
+chosen member of some population. Look what happens when we repeat that
+draw many times:
+
+In many cases, the person will be taller than average, and due to
+correlation between height and weight, for such people it will often be the 
+case that they will be heavier than average. In such cases,
+
+$$
+(X_i - EX_i) (X_j - EX_j) > 0
+$$
+
+But similarly, our random draws will often be people who are shorter
+than average and lighter than average. But in those cases we will agein
+have
+
+$$
+(X_i - EX_i) (X_j - EX_j) > 0
+$$
+
+There will be some cases in which that product is negative, but more
+than not, it will be positive. So the average -- i.e. E() -- will be
+positive.
+
+So covariance is like correlation, and in fact we'll see later that
+correlation, a number between -1 and 1, is in fact a scaled covariance.
+
+As an example, here is data on major league baseball players:
+
+```{r}
+library(qeML) 
+data(mlb1) 
+head(mlb1) 
+hwa <- mlb1[,-1] 
+cov(hwa) 
+cor(hwa)
+```
+Again, we'll be discussing more of this later, but what about that
+negative correlation between height and age? It's near 0, and this could
+be a sampling artifact, but another possibility is that in this sport,
+shorter players do not survive as well.
+
+### Linear algebra properties of covariance matrices
+
+Say we have a random vector $X$, of length $k$, and a nonrandom matrix
+$A$ of sise $m \textrm{x} k$. Theh $A X$ is a new random vector $Y$ of $m$
+components. It turns out that 
+
+$$
+Cov(Y) = A Cov(X) A'
+$$
+
+The proof is straightforward but tedious, and it will be omittted.
+

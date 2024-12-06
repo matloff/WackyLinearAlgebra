@@ -1,5 +1,4 @@
 
-
 ```{r}
 #| include: false
 library(dsld)
@@ -409,5 +408,3 @@ $$
 
 The values of $\mu$ and $\sigma$ are the mean and standard deviation.
 
-One might use this distribution family to model, say, human height. But
-what about jointly modeling height and weight?
