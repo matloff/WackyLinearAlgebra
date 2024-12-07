@@ -922,10 +922,10 @@ negative correlation between height and age? It's near 0, and this could
 be a sampling artifact, but another possibility is that in this sport,
 shorter players do not survive as well.
 
-### Linear algebra properties of covariance matrices{sec-covprops}
+### Linear algebra properties of covariance matrices{#sec-covprops}
 
 Say we have a random vector $X$, of length $k$, and a nonrandom matrix
-$A$ of sise $m \textrm{x} k$. Theh $A X$ is a new random vector $Y$ of $m$
+$A$ of sise $m \textrm{x} k$. Then $A X$ is a new random vector $Y$ of $m$
 components. It turns out that 
 
 $$
@@ -936,14 +936,20 @@ The proof is straightforward but tedious, and it will be omittted.
 
 Note too:
 
-\begin{itemize}
-
-\item $Cov(X)$ is a symmetric matrix. This follows from the symmmetry of
+* $Cov(X)$ is a symmetric matrix. This follows from the symmmetry of
 the definition.
 
-\item The diagonal elements of $Cov(X)$ are the variances of the random
+* The diagonal elements of $Cov(X)$ are the variances of the random
 variables $X_i$. This follows from the definition of the variance of a
 random variable.
 
-\end{itemize} 
+* $Cov(X)$ is *nonnegative definite*, meaning that for any length-$k$
+column vector $a$
+
+$$
+a' Cov(X) a \geq 0
+$$
+
+❄️  **Your Turn:** Give a "one-liner" proof of the nonnegative definiteness
+assertion.
 
