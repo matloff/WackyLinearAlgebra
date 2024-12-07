@@ -433,7 +433,56 @@ lm(Weight ~ .,data=mlb1[,-1])
 ## Update formulas
 
 One important theme in developing prediction models (linear regression,
-neural networks etc.) is that, in testing a model we fit to only a
+neural networks etc.) is the avoidance of *overfitting*, meaning that we
+fit an overly elaborate model to our data. We simply are estimating too
+many things for the amount of data we have, "spreading our data too
+thin."
+
+A common example is using too many predictor variables, so that we are
+estimating a large number of $\beta_i$ 
+
+Or we may draw a histogram with too many bins:
+
+```{r}
+library(qeML)
+data(forest500)  # data on forest ground cover
+hist(forest500$V1,breaks=10)
+hist(forest500$V1,breaks=100)
+```
+
+In a histogram, we are estimating the height of the bins. With 10 bins
+we obtained a smooth graph, but with 100 bins it became choppy. So
+again, we are estimating too many things, given the capacity of the
+data. 
+
+With larger datasets, we can use more predictor variables, more
+histogram bins, and so on. The question then arises is, for instance,
+*How many* predictors can we afford to use with our given data?
+
+The typical solution is to fit several models of different complexity,
+then choose the one that predicts the best. But we must do this
+evaluation on "fresh" data; we should not predict on the same data on
+which we fitted our model.
+
+We thus rely on partitioning our data, into a *training set* to which we
+fit our model, and a *test set*, on which we predict using the fitted
+model. We may wish to do this several times.
+
+A special case is the Leaving One Our method, in which the holdout set
+size is 1. It might go like this, for a dataset d:
+
+```
+sumErrs = 0
+for i = 1,...,n
+   fit lm to d[-i,]
+   use result to predict d[i,]
+   add prediction error to sumErrs
+return sumErrs
+```
+
+
+
+that, in testing a model we fit to only a
 subset of our data, then predict the remaining -- "fresh" -- holdout
 data using the model. Or, we might do this many times, say with many
 holdout sets of size 1, fitting the model on the remaining n-1 data
