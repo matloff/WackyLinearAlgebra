@@ -276,14 +276,14 @@ origin. And what about $(S - Ab)'(S - Ab)$ and so on? Does the math
 still produce the correct answer? Note: $b$ is now a vector of length 1,
 a 1x1 matrix.
 
-❄️  **Your Turn:** Derivative of a Show that 
+❄️  **Your Turn:** Show that 
 
 $$
 \frac{d}{du} u'Qu = 2Qu
 $$
 
 for a constant symmetric matrix $Q$ and a vector $u$. ($u'Qu$ is called
-a *quadratic form*.)*
+a *quadratic form*.)
 
 ### Matrix derivatives.
 
@@ -364,9 +364,16 @@ A <- cbind(1,n1)
 S <- n2
 Ap <- t(A)
 solve(Ap %*% A) %*% Ap %*% S
-# check via /R
+# check via R
 lm(n2 ~ n1)
 ```
+
+```{r}
+det(Ap %*% A) 
+```
+
+Nonzero! So $(A'A)^{-1}$ does exist, confirming that our R code
+that needed that property.
 
 ### The general case
 
@@ -422,94 +429,4 @@ solve(Ap %*% A) %*% Ap %*% S
 # check via R
 lm(Weight ~ .,data=mlb1[,-1])
 ```
-
-## Determinants
-
-This is a topic that is quite straightforward and traditional, even
-old-fashioned. Yet the theme of a book by Sheldon Axler,, *Linear
-Algebra Done Right* is that determoinants are overemphasized. He
-relegates the topic to the very end of the book. Yet determinants do
-appear often in applied linear algebra settings. Moreover, they will be
-convenient to use in explaing very concepts in this book.
-
-But why place the topic in this particular chapter? The answer lies in
-the fact that earlier in this chapter we had the proviso "If
-$(A'A)^{-1}$ exists." The following property of determinants is then
-relevant:
-
-<blockquote>
-
-A square matrix $G$ is invertible if and only if $det(G) \neq 0$.
-
-</blockquote>
-
-There are better ways to ascertain invertibility than this, but it is
-conceptually helpful. Determinants play a similar role in the topic of
-eigenveectors in Chapter 5.
-
-```{r}
-det(Ap %*% A) 
-```
-
-Nonzero! So $(A'A)^{-1}$ does exist, confirming that our R code
-that needed that property.
-
-### Definition
-
-The standard definition is one of the ugliest, and least useful, in all
-of mathematics. Instead we will define the term using one of the methods
-for calculating determinants.
-
-<blockquote>
-
-Consider an $r \textrm{x} r$ matrix $G$.  For $r = 2$, write $G$ as
-
-$$
- G = 
- \left (
- \begin{array}{rr}
- a & b \\
- c & d  \\
- \end{array}
- \right )
- $$
-
-and define $\det(G)$ to be $ad -bc$. For $r > 2$, 
-define submatrices as follows. 
-
-$G_i$ is the $(r-1) \textrm{x} (r-1)$ submatrix obtained by removing row
-1 and column $j$ from $G$. Then $\det(G)$ is defined recursively as
-
-$$
-\sum_{i=1}^r (-1)^{i+1} \det(G_i)
-$$
-
-</blockquote>
-
-For instance, consider 
-
-$$
- M = 
- \left (
- \begin{array}{rrr}
- 5 & 1 & 0 \\
- 3 & -1 & 7 \\
-  0 & 1 & 1 \\
-  \end{array}
- \right )
-$$
-
-The $\det(M) = 5(-8) - 3 + 0 = -43$.
-
-❄️  **Your Turn:** If you are familiar with recursive calls, write a
-function $\verb+dt(a)+$ to compute the determinant of a square matrix
-A using this scheme.
-
-### Properties
-
-We state these without proof:
-
-* $G^{-1}$ exists if and only if $\det(G) \neq 0$
-
-* $\det(GH) = \det(G) \det(H)$
 
