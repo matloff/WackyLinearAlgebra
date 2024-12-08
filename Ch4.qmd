@@ -77,9 +77,12 @@ linearly independent. But no sets of 5 or more are linearly independent.
 
 <blockquote>
 
-For any rxs matix $G$, the rank of $G$ is less than or equal to 
+For any $r \textrm{x} s$ matrix $G$, the rank of $G$ is less than or equal to 
 $\min(r,s)$.
 
 </blockquote>
+
+## Vector spaces
+
 
 

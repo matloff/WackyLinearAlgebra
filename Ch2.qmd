@@ -181,7 +181,8 @@ then $(AB)^{-1}$ exists and is equal to $B^{-1} A^{-1}$.
 
 Also, $(A')^{-1}$ exists and is equal to $(A^{-1})'$.
 
-❄️  **Your Turn:** Prove these assertions.
+❄️  **Your Turn:** Prove these assertions.  Note that for the identity
+matrix $I$, $I' = I$.
 
 ## Computation of the Matrix Inverse
 
@@ -521,6 +522,5 @@ middle.
 
 Clearly, we should not stretch these analogies very far, but they do
 help our intuition here.
-
 
 

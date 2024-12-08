@@ -271,19 +271,10 @@ Now how we will minimize that matrix expression with respect to the
 vector $b$. That is the subject of the next section.
 
 ❄️  **Your Turn:** State what the matrix $A$ would have been under the
-earlier model in which the regression line is assmed to go through the
+earlier model in which the regression line is assumed to go through the
 origin. And what about $(S - Ab)'(S - Ab)$ and so on? Does the math
 still produce the correct answer? Note: $b$ is now a vector of length 1,
 a 1x1 matrix.
-
-❄️  **Your Turn:** Show that 
-
-$$
-\frac{d}{du} u'Qu = 2Qu
-$$
-
-for a constant symmetric matrix $Q$ and a vector $u$. ($u'Qu$ is called
-a *quadratic form*.)
 
 ### Matrix derivatives.
 
@@ -375,6 +366,15 @@ det(Ap %*% A)
 Nonzero! So $(A'A)^{-1}$ does exist, confirming that our R code
 that needed that property.
 
+❄️  **Your Turn:** Show that 
+
+$$
+\frac{d}{du} u'Qu = 2Qu
+$$
+
+for a constant symmetric matrix $Q$ and a vector $u$. ($u'Qu$ is called
+a *quadratic form*.)
+
 ### The general case
 
 Say our data consists of $n$ points, each of which is of length $p$.
@@ -393,8 +393,15 @@ A =
 \right )
 $$ {#eq-designmat}
 
-Coninue to set $S$ to thw length-$n$ column vector of our response
-variable, and write 
+Continue to set $S$ to the length-$n$ column vector of our response
+variable. Our model is
+
+$$
+E(S | A) = A \beta 
+$$
+
+for an unknown vector $\beta$ of length $p+1$. Our estimated of that
+vector based on our data will be denoted
 
 $$
 b = (b_0,b_1,...,b_p)'
@@ -405,9 +412,11 @@ value of $b$:
 
 $$
 b = (A'A)^{-1} A'S
-$$
+$${#eq-betahat}
 
 again providing that the inverse exists.
+
+### Example: **mlb1** data
 
 As an examples, let's take the **mlb1**
 from my [qeML ('Quick and Easy Machine
@@ -429,6 +438,41 @@ solve(Ap %*% A) %*% Ap %*% S
 # check via R
 lm(Weight ~ .,data=mlb1[,-1])
 ```
+
+### Homogeneous variance case
+
+In addition 
+
+$$
+E(S | A) = A \beta 
+$$
+
+it is often assumed that 
+
+$$
+Cov(S | A) = \sigma^2 I
+$$
+
+where $\sigma$ is an unknown constant to be estimated from the data.
+
+It is usually not a realistic assumption. Say for instance we are
+predicting human weight from height. There should be more variation in
+weight among taller people than above shorter people. But it's a
+simplifying assumption without really good alternatives, so it is
+commonly used.
+
+And in that setting, our formulas from Section {@sec-covar} come in
+handy, as follows.
+
+Recall that $b$ is our estimate of the unknown population
+parameter $\beta$, based on our random sample data. But that means that
+$b$ is a random vector, and thus has a covariance matrix. Using
+(\ref{@eq-betahat}) and setting the "hat matrix" $H = (A'A)^{-1} A'$$, we have
+
+$$
+Cov(b) = H Cov(S|A) H' = H \sigma^2 I H' = \sigma^2 H H' =
+\sigma^2 (A'A)^{-1}
+$$
 
 ## Update formulas
 

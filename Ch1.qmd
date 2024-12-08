@@ -922,7 +922,7 @@ negative correlation between height and age? It's near 0, and this could
 be a sampling artifact, but another possibility is that in this sport,
 shorter players do not survive as well.
 
-### Linear algebra properties of covariance matrices{#sec-covprops}
+### Linear algebra properties of covariance matrices{#sec-covar} 
 
 Say we have a random vector $X$, of length $k$, and a nonrandom matrix
 $A$ of sise $m \textrm{x} k$. Then $A X$ is a new random vector $Y$ of $m$
@@ -943,13 +943,24 @@ the definition.
 variables $X_i$. This follows from the definition of the variance of a
 random variable.
 
-* $Cov(X)$ is *nonnegative definite*, meaning that for any length-$k$
+* If $X$ is a vector of length 1, i.e. a number, then
+
+$$
+Cov(X) = Var(X)
+$$
+
+* For any length-$k$ column vector $a$,
+
+$$
+Var(a'X) = a' ~ Cov(X) ~ a
+$$
+
+
+* Thus $Cov(X)$ is *nonnegative definite*, meaning that for any length-$k$
 column vector $a$
 
 $$
 a' Cov(X) a \geq 0
 $$
 
-❄️  **Your Turn:** Give a "one-liner" proof of the nonnegative definiteness
-assertion.
 
