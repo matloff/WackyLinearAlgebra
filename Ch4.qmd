@@ -60,8 +60,8 @@ we also say that $A'A$ is not of *full rank*.
 
 Recall that in the nonfull rank example we presented in the last
 chapter, one row was double another. Here the sum of the last two
-columns of $A$ was equal to the first column. We say the columns are
-*linearly dependent*. This is the culprit in non-full rank matrices.
+columns of $A$ was equal to the first column. We say the rows or columns
+are *linearly dependent*. This is the culprit in non-full rank matrices.
 
 In fact, not only was $A'A$ not of full rank, but so was $A$:
 
@@ -77,10 +77,9 @@ linearly independent. But no sets of 5 or more are linearly independent.
 
 <blockquote>
 
-For any rxs matix $G$, the rank of $B$ is less than or equal to 
+For any rxs matix $G$, the rank of $G$ is less than or equal to 
 $\min(r,s)$.
 
 </blockquote>
 
-Details to follow in the next chapter..
 
