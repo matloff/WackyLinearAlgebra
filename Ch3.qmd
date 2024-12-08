@@ -391,7 +391,7 @@ A =
 1 & X_{n1} & ... & X_{np} \\
 \end{array}
 \right )
-$$
+$$ {#eq-designmat}
 
 Coninue to set $S$ to thw length-$n$ column vector of our response
 variable, and write 
@@ -453,7 +453,9 @@ hist(forest500$V1,breaks=100)
 In a histogram, we are estimating the height of the bins. With 10 bins
 we obtained a smooth graph, but with 100 bins it became choppy. So
 again, we are estimating too many things, given the capacity of the
-data. 
+data.[A histogram is an estimate of the probability density function of
+the observed random variable. Having more, thus narrower, bins reduces
+bias but increases variance.]{.column-margin} 
 
 With larger datasets, we can use more predictor variables, more
 histogram bins, and so on. The question then arises is, for instance,
@@ -473,25 +475,67 @@ size is 1. It might go like this, for a dataset d:
 
 ```
 sumErrs = 0
-for i = 1,...,n
+for i = 1,...,n  # dataset has n datapoints
    fit lm to d[-i,]
    use result to predict d[i,]
    add prediction error to sumErrs
 return sumErrs
 ```
 
+This can become computationally challenging, as we would need to refit
+the model each time. Each call to **lm** involves a matrix inversion
+(equivalent), and we must do this $n$ times.
 
-
-that, in testing a model we fit to only a
-subset of our data, then predict the remaining -- "fresh" -- holdout
-data using the model. Or, we might do this many times, say with many
-holdout sets of size 1, fitting the model on the remaining n-1 data
-points each time..
-
-This could become computationally challenging, as we would need to refit
-the model each time. It would be nice if we could have an "update"
+It would be nice if we could have an "update"
 formula that would quickly recalculate the model found on the full
-dataset. In rhw case of linear models, such a formula exists, in the
-Sherman-Morrison-Woodbury relation.
+dataset. Then e would need to perform matrix inversion just once.
+In the case of linear models, such a formula exists, in the
+Sherman-Morrison-Woodbury relation:
 
+<blockquote>
+
+Given an invertible matrix $B$ and row vectors $u$ and $v$ having
+lengths equal to the number of columns of $B$. form the matrix 
+
+$$
+C = B + uv'
+$$  
+
+Then $C^{-1}$ exists and is equal to[Note that the quantity 
+$uv'$ is a square matrix the size of $B$, so the sum and product make
+sense.]{.column-margin}
+
+$$
+B^{-1} - \frac{1}{1+v'B^{-1}u} B^{-1} uv' B^{-1}
+$$
+
+</blockquote>
+
+Now, how can we apply this to the Leave One Out method? In the matrix
+$A$ in Equation @eq-designmat, we wish to remove row $i$; call the
+result $A_{-i}$. Our new version of $A'A$ is then
+
+$$
+A_{-i}' A_{-i}
+$$
+
+So our main task is to obtain
+
+$$
+(A_{-i}' A_{-i})^{-1}
+$$
+
+by updating $(A'A)^{-1}$, which we already have from
+our computation in the full dataset.
+
+We can do this by setting $u$ to -1 times row $i$ of $A$, and setting
+$v$ to that row as well. Then (the reader should check this with a small
+example),
+
+$$
+A_{-i}' A_{-i} = A'A + uv'
+$$
+
+just what we need by Sherman-Morrison-Woodbury. Accordingly, 
+set $B = A'A$ in that formula, and we are all set.
 
