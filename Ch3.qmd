@@ -116,7 +116,7 @@ lm(n2 ~ n1-1)
 
 
 
-This says, "Fit the model $E(C | V) = \beta V$$ to the data, with the
+This says, "Fit the model $E(C | V) = \beta V$ to the data, with the
 line constrained to pass through the origin." The constraint is
 specified by the -1 term. 
 
@@ -124,7 +124,7 @@ We see that the estimate regression line is
 
 $$E(C | V) = 0.98 V$$
 
-## Full linear regression model
+## Linear regression model with intercept term
 
 Say  we do not want to constrain the model to pass the line through the
 origin. Our model is then
@@ -225,12 +225,12 @@ T =
  \right )
 $$
 
-Then our linear assumption, $E(C | V) = b_0 + b1 V$, applied to $S$ and
-$T$, is
+Then our linear assumption, $E(C | V) = \beta _0 + \beta_1 V$, applied to
+$S$ and $T$, is
 
 $$
 E(S | T) =
-A b
+A \beta
 $$
 
 where
@@ -247,9 +247,10 @@ A =
  \right )
 $$
 
-and $b = (b_0,b_1)'.$
+and $\beta = (\beta_0,\beta_1)'.$
 
-Our predicted error vector is very simply expressed:
+Our predicted error vector, using our estimate $b$ of $\beta$,
+is very simply expressed:
 
 $$
 S - Ab
@@ -441,7 +442,7 @@ lm(Weight ~ .,data=mlb1[,-1])
 
 ### Homogeneous variance case
 
-In addition 
+In addition to
 
 $$
 E(S | A) = A \beta 
