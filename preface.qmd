@@ -28,6 +28,27 @@ be solved, almost always from Data Science, leading up to a linear
 algebra solution.  Basically, the math sneaks up on the reader, who
 suddenly realizes they've just learned a new general concept!
 
+An excellent [review of book on Principal Components
+Analysis](https://loreley.one/2024-09-pca/). The reviewer writes
+
+<blockquote>
+
+I bought the acclaimed *Linear Algebra Done Right*...A
+classic. Used by students all over the world. I slogged through the
+early chapters. It was rather dull, one definition after another. It is
+not difficult to follow the logic, and to see how one theorem follows
+from another. But the entire enterprise was draining and unfulfilling.
+It felt random. “Follow these steps and you get the result you are
+looking for. I can prove that it works because of the following …”. But
+why does it work? What possessed you to follow this path as opposed to
+any other? How might I have come up with this myself? The book provided
+no answers and I was left feeling deeply unsatisfied.
+
+</blockquote>
+
+The fundamental philosophy of my book here is to avoid such reader
+frustration.
+
 ### Who is this book for?
 
 Of course the book should work well as a course textbook. The
