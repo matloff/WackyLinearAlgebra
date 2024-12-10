@@ -609,17 +609,17 @@ Thus
 
 $$
 A'A = 
-A_{-i}' A_{-i} + a_n' a_n
+A_{-i}' A_{-i} + a_n a_n'
 $$
 
 yielding
 
 $$
-A_{-i}' A_{-i} = A'A - a_n' a_n
+A_{-i}' A_{-i} = A'A - a_n a_n'
 $$
 
 
-just what we need for Sherman-Morrison-Woodbury, so that with $B = A'A$,
+just what we need for Sherman-Morrison-Woodbury: With $B = A'A$,
 we have
 
 $$
