@@ -394,7 +394,7 @@ things such as cycles.  The details are beyond the scope of this book.
 
 ## Matrix Algebra
 
-### Other Basic operations
+### Other basic Operations
 
 Matrix multiplication may seem odd at first, but other operations are
 straightforward.
@@ -707,6 +707,35 @@ A_{11} v_{11} + A_{12} v_{21} =
  \end{array}
  \right )
 $$
+
+We can extend that reasoning further. Say $A$ and $B$ are matrices of
+sizes $m \textrm{x} n$ and $n \textrm{x} k$, and consider the product
+$AB$. Partition $B$ by its columns,
+
+$$
+B = (B^{(1)},B^{(2)},..., B^{(k)})
+$$ 
+
+Now pretending that $A$ is a $1 \textrm{x} 1$ "matrix" and $B$ is 
+a$1 \textrm{x} k$ "matrix", we 
+
+$$
+AB = (AB^{(1)},AB^{(2)},..., AB^{(k)})
+$$
+
+In other words,
+
+<blockquote>
+
+In the product $AB$, column $j$ is a linear combination of the columns
+of $A$, and the coefficients in that linear combination are the elmeents
+of column $j$ of $B$.
+
+A similar result holds for the row of the product.
+
+</blockquote>
+
+❄️  **Your Turn:** Write out the details of that "similar result."
 
 # A Further Look at Markov Chains
 

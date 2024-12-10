@@ -14,7 +14,7 @@ proviso that $(A'A)^{-1}$ exists. In this chapter, we'll present a
 counterexample, which will naturally lead into our covering matrix rank and
 the basics of vector spaces.
 
-## Example: census data
+## Example: Census Data
 
 This dataset is also from **qeML**. It is data for Silicon Valley
 engineers in the 2000 Census. Let's focus on just a few columns.
@@ -63,14 +63,21 @@ chapter, one row was double another. Here the sum of the last two
 columns of $A$ was equal to the first column. We say the rows or columns
 are *linearly dependent*. This is the culprit in non-full rank matrices.
 
-In fact, not only was $A'A$ not of full rank, but so was $A$:
+```{r}
+head(A)
+```
+
+Behold! The sum of columns 4 and 5 is equal to column 1!
+
+It is thus not surprising that not only was $A'A$ not of full rank, but
+so was $A$:
 
 ```{r}
 qr(ApA)$rank
 qr(A)$rank
 ```
 
-This is rather startling. $A$ has over 20,000 rows --- yet only 4
+Yet this is rather startling. $A$ has over 20,000 rows --- yet only 4
 linearly independent ones?[There are many subsets of 4 rows that are
 linearly independent. But no sets of 5 or more are linearly independent.
 ]{.column-margin} But it follows from this fact:
@@ -82,7 +89,7 @@ $\min(r,s)$.
 
 </blockquote>
 
-## Vector spaces
+## Vector Spaces
 
 
 

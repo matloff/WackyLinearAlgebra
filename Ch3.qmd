@@ -46,7 +46,7 @@ through the origin is the only assumption we are making here. Nothing on
 normal distributions etc.]{.column-margin}
 
 ::: {.callout-important}
-## Model validity
+## Model Validity
 The great statistician George Box once said, "All models are wrong but
 some are useful." All data scientists should keep this at the forefronts
 of their minds.
@@ -124,7 +124,7 @@ We see that the estimate regression line is
 
 $$E(C | V) = 0.98 V$$
 
-## Linear regression model with intercept term
+## Linear Regression Model with Intercept Term
 
 Say  we do not want to constrain the model to pass the line through the
 origin. Our model is then
@@ -165,7 +165,7 @@ and
 We could then solve for the $b_i$, but let's go straight to the general
 case.
 
-## Least-squares estimation, general number of predictors
+## Least-Squares Estimation, General Number of Predictors
 
 ### Nile example
 
@@ -277,7 +277,7 @@ origin. And what about $(S - Ab)'(S - Ab)$ and so on? Does the math
 still produce the correct answer? Note: $b$ is now a vector of length 1,
 a 1x1 matrix.
 
-### Matrix derivatives.
+### Matrix derivatives
 
 The (column) vector of partial derivatives of a scalar quantity is
 called the *gradient* of that quantity. For instance, with 
@@ -475,7 +475,7 @@ Cov(b) = H Cov(S|A) H' = H \sigma^2 I H' = \sigma^2 H H' =
 \sigma^2 (A'A)^{-1}
 $$
 
-## Update formulas
+## Update Formulas
 
 One important theme in developing prediction models (linear regression,
 neural networks etc.) is the avoidance of *overfitting*, meaning that we
@@ -597,18 +597,4 @@ $$
 in that formula.
 
 
-Moreover, note that $B$ is a symmetric matrix, and so is
-
-$$
-B^{-1} uv' B^{-1}
-$$
-
-❄️  **Your Turn:** Prove this assertion.
-
-
-
-Accordingly, 
-
-
-so that 
 
