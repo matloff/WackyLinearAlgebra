@@ -580,12 +580,44 @@ $$
 u = -a_i, v = a_i
 $$
 
-to that row as well. Then (the reader should check this with a small
-example),
+To show why these choices for $u$ and $v$ work, consider the case in
+which we delete the last row of $A$. (The analysis would be similar for
+other cases.) Write the latter as a partitioned matrix,
 
 $$
-A_{-i}' A_{-i} = A'A + uv'
+ \left (
+ \begin{array}{r}
+ A_{(-n)} & \\
+ a_n & \\
+ \end{array}
+ \right )
 $$
+
+We pretend it is a $2 \textrm{x} 1$ "matrix," and $A'$ is then "$1
+\textrm{x} 2$":
+
+$$
+A' = 
+ \left (
+ \begin{array}{rr}
+ A_{(-n)}' & a_n' \\
+ \end{array}
+ \right )
+$$ 
+
+Thus
+
+$$
+A'A = 
+A_{-i}' A_{-i} + a_n' a_n
+$$
+
+yielding
+
+$$
+A_{-i}' A_{-i} = A'A - a_n' a_n
+$$
+
 
 just what we need for Sherman-Morrison-Woodbury. 
 Set 
