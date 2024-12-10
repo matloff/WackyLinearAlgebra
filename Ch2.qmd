@@ -202,7 +202,7 @@ sizable matrices.
 The classic "pencil and paper" method for matrix inversion is
 instructive, and will be presented here.
 
-### Pencil-and-paper computation
+### Pencil-and-paper computation{#sec-pencilpaper}
 
 The basic idea follows the pattern the reader learned for solving
 systems of linear equations, but with the added twist of involving some
@@ -372,7 +372,7 @@ $$
 ❄️  **Your Turn:** Find the inverses of $E_3$
 and $E_4$ using similar reasoning, and thus find $A^{-1}$.
 
-## Nonexistent Inverse
+## Nonexistent Inverse{#sec-noinverse}
 
 Suppose our matrix $A$ had been slightly different:
 
