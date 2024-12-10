@@ -484,7 +484,7 @@ many things for the amount of data we have, "spreading our data too
 thin."
 
 A common example is using too many predictor variables, so that we are
-estimating a large number of $\beta_i$ 
+estimating a large number of coefficients $\beta_i$.
 
 Or we may draw a histogram with too many bins:
 
@@ -495,7 +495,7 @@ hist(forest500$V1,breaks=10)
 hist(forest500$V1,breaks=100)
 ```
 
-In a histogram, we are estimating the height of the bins. With 10 bins
+In a histogram, we are estimating the heights of the bins. With 10 bins
 we obtained a smooth graph, but with 100 bins it became choppy. So
 again, we are estimating too many things, given the capacity of the
 data.[A histogram is an estimate of the probability density function of
@@ -504,7 +504,8 @@ bias but increases variance.]{.column-margin}
 
 With larger datasets, we can use more predictor variables, more
 histogram bins, and so on. The question then arises is, for instance,
-*How many* predictors can we afford to use with our given data?
+*How many* predictors, *how many* bins and so on,  can we afford to use
+with our given data?
 
 The typical solution is to fit several models of different complexity,
 then choose the one that predicts the best. But we must do this
@@ -515,7 +516,7 @@ We thus rely on partitioning our data, into a *training set* to which we
 fit our model, and a *test set*, on which we predict using the fitted
 model. We may wish to do this several times.
 
-A special case is the Leaving One Our method, in which the holdout set
+A special case is the Leaving One Out method, in which the holdout set
 size is 1. It might go like this, for a dataset d:
 
 ```
@@ -573,14 +574,41 @@ $$
 by updating $(A'A)^{-1}$, which we already have from
 our computation in the full dataset.
 
-We can do this by setting $u$ to -1 times row $i$ of $A$, and setting
-$v$ to that row as well. Then (the reader should check this with a small
+We can do this as follows. Denote row $i$ of $A$ by $a_i$, and set
+
+$$
+u = -a_i, v = a_i
+$$
+
+to that row as well. Then (the reader should check this with a small
 example),
 
 $$
 A_{-i}' A_{-i} = A'A + uv'
 $$
 
-just what we need by Sherman-Morrison-Woodbury. Accordingly, 
-set $B = A'A$ in that formula, and we are all set.
+just what we need for Sherman-Morrison-Woodbury. 
+Set 
+
+$$
+B = A'A
+$$ 
+
+in that formula.
+
+
+Moreover, note that $B$ is a symmetric matrix, and so is
+
+$$
+B^{-1} uv' B^{-1}
+$$
+
+❄️  **Your Turn:** Prove this assertion.
+
+
+
+Accordingly, 
+
+
+so that 
 
