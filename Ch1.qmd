@@ -177,6 +177,12 @@ a %*% b
 ```
 The reader should make sure to check the other elements by hand.
 
+## The Identity Matrix
+
+The *identity matrix* $I$ of size n is the nxn matrix with 1s on the
+diagonal and 0s elsewhere.  $IB = B$ and $AI = A$ for any conformable
+$A$ and $B$.
+
 ## Vectors
 
 A matrix that has only one row or only one column is called a *vector*.
@@ -218,9 +224,7 @@ $$
 
 Statisticians and computer scientists like to look at the *asymptotic*
 behavior of systems. Let's see where we might be after say, 6
-steps:[The *identity matrix* I of size n is the nxn matrix with 1s on
-the diagonal and 0s elsewhere.  IB = B and AI = A for any conformable A
-and B.]{.column-margin}
+steps:
 
 ```{r}
 matpow <- function(m,k) {
@@ -232,14 +236,14 @@ matpow <- function(m,k) {
 
 p1 <- rbind(c(0.5,0.5,0,0,0), c(0.5,0,0.5,0,0), c(0,0.5,0,0.5,0), 
    c(0,0,0.5,0,0.5), c(0,0,0,0.5,0.5))
-matpow(t(p1),6) # R uses t() for transpose
+matpow(p1,6) 
 ```
 
 So for instance if we start at position 2, there is about an 11% chance
 that we will be at position 3 at time 6. What about time 25?
 
 ```{r}
-matpow(t(p1),25)
+matpow(p1,25)
 ```
 
 So, no matter which state we start in, at time 25 we are about 20%
@@ -466,6 +470,8 @@ A' = \left (
 \end{array}
 \right )
 $$
+
+The R function for transpose is **t()**.
 
 It can be shown that if A and B are conformable, then
 
