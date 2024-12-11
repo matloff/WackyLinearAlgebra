@@ -7,7 +7,7 @@ library(qeML)
 
 {{< pagebreak >}}
 
-# Matrix Rank, and Vector Spaces 
+# Matrix Rank
 
 In our computations in the latter part of the last chapter, we added a
 proviso that $(A'A)^{-1}$ exists. In this chapter, we'll present a
@@ -99,12 +99,9 @@ properties:
 The reader should verify that the matrix at the end of 
 @sec-censusrref has these properties.
 
-## Census Data Example, Continued
+## Rank andLinear Dependent/Independent Vectors
 
-There is a lot here that is directly related to important general
-issues.
-
-### Linear dependent/independent vectors
+### Motivation
 
 Recall that in the nonfull rank example we presented in @sec-noinverse,
 one row was double another, 
@@ -121,12 +118,14 @@ the sum of the last two columns of $A$ was equal to the first column:
 
 column 1 - column 4 - column 5 = 0
 
+### Formal definitions
+
 We say are *linearly dependent* if some linear combination of them
 equals 0, as in both cases above. If no nontrival linear combination of
 the vectors is 0 (the linear combination whose coefficients are all 0 is
 trivally equal to 0), we say the vectors are *linearly independent*.
 
-So, here is the foermal definition:
+So, here is the formal definition:
 
 <blockquote>
 
@@ -137,6 +136,8 @@ rows.
 
 ### Relevance
 
+::: {.callout-important}
+## A Central Concept
 As we will see, linear dependence of the rows or columns is the culprit
 in non-full rank matrices. This is a major issue for linear models, in
 which an inverse is necessary. 
@@ -147,8 +148,9 @@ Moreover, in many cases a matrix will technically be invertible, but
 The reader can see, then, that understanding of matrix rank is key. That
 in turn will require understanding of vector spaces. The current chapter is
 devoted to these concepts, which are used heavily in the sequel.
+:::
 
-### Some other properties of rank
+## Some Properties of Rank
 
 In @sec-censusrref, we found the matrix $A'A$ to be noninvertible, as
 its RREF had a row of 0s. We mentioned a relation to rank, but didn't
