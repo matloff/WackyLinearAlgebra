@@ -489,6 +489,15 @@ means a 3x1 matrix.
 Here, "visualization" is not a reference to graphics but rather to
 highlighting certain submatrices.
 
+
+::: {.callout-important}
+## Crucial Tool
+The techniques introduced in this section will be used throughout the
+book. Readers should spend extra time here, devising some of their own
+examples.
+:::
+
+
 Consider a matrix-vector product Mv. Of course, that means that v is a
 column vector whose length is equal to the number of columns of M. If M
 is of size rxs, then v is sx1.
