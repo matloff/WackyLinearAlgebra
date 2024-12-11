@@ -66,7 +66,7 @@ we also say that $A'A$ is not of *full rank*. We will return to this
 point shortly, but first we formalize introduce the row operations
 process.
 
-## Reduced Row Echelon Form of a Matrix
+## Reduced Row Echelon Form (RREF) of a Matrix
 
 We formalize and extend @sec-pencilpaper:
 
@@ -126,7 +126,16 @@ equals 0, as in both cases above. If no nontrival linear combination of
 the vectors is 0 (the linear combination whose coefficients are all 0 is
 trivally equal to 0), we say the vectors are *linearly independent*.
 
-### Major relevance
+So, here is the foermal definition:
+
+<blockquote>
+
+The *rank* of a matrix $B$ is its maximal number of linearly independent 
+rows.
+
+</blockquote>
+
+### Relevance
 
 As we will see, linear dependence of the rows or columns is the culprit
 in non-full rank matrices. This is a major issue for linear models, in
@@ -139,17 +148,72 @@ The reader can see, then, that understanding of matrix rank is key. That
 in turn will require understanding of vector spaces. The current chapter is
 devoted to these concepts, which are used heavily in the sequel.
 
-### Bounds on ranks
+### Some other properties of rank
 
-It is surprising that not only was $A'A$ not of full rank, but
-so was $A$:
+In {@sec-censusrref}, we found the matrix $A'A$ to be noninvertible, as
+its RREF had a row of 0s. We mentioned a relation to rank, but didn't
+formalize it, which we will do now. Let's start with this one:
+
+<blockquote>
+
+If $C = EB$ for an invertible $E$, then $rank(C) = rank(B)$.
+
+*Proof:*
+
+Say $W$ is a set of $k$ linearly independent rows of $B$, where $k$ is
+the rank of $B$. Write
+
+$$
+u_1 r_1 + ... + u_k r_k \neq 0
+$$
+
+where the $r_i$ are the rows in $W$.
+
+By applying partitioning to both $B$ and $EB$,
+rows in $EB$ corresponding to $W$ are $EW$.
+
+Putting all this together, we see that 
+
+$$
+\textrm{rank}(C) = \textrm{rank}(EB) \geq k = \textrm{rank}(B)
+$$
+
+But we can reverse the roles. $B = GC$ where $B = E^{-1}C$. The same
+reasoning now tells us that 
+
+$$
+\textrm{rank}(B) \geq \textrm{rank}(C)
+$$
+
+So $\textrm{rank}(B) = \textrm{rank}(C)$.
+
+
+</blockquotek
+
+This leads to another property:
+
+<blockquote>
+
+The rank of a matrix $B$ is equal to the number of nonzero rows in its
+RREF.
+
+*Proof:*
+
+Recall that $B_{rref} = EB$, where $E$ is a product of elementary
+matrices and thus invertible. 
+
+
+</blockquote>
+
+In {@sec-censusrref}, we found the matrix $A'A$ to not be of full rank.
+It is surprising that so was $A$:
 
 ```{r}
 qr(ApA)$rank
 qr(A)$rank
 ```
 
-Yet this is rather startling. $A$ has over 20,000 rows --- yet only 4
+This is rather startling. $A$ has over 20,000 rows --- yet only 4
 linearly independent ones?[There are many subsets of 4 rows that are
 linearly independent. But no sets of 5 or more are linearly independent.
 ]{.column-margin} But it follows from this fact:
