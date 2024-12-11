@@ -53,7 +53,7 @@ ApA
 ```
 
 Is this matrix invertible? Let's apply the elementary row operations
-introduced in Section {@pencilpaper}:
+introduced in {@pencilpaper}:
 
 ```{r}
 library(pracma)
@@ -68,7 +68,7 @@ process.
 
 ## Reduced Row Echelon Form of a Matrix
 
-We formalize and extend Section {@sec-pencilpaper}:
+We formalize and extend @sec-pencilpaper:
 
 Elementary row operations:
 
@@ -101,18 +101,47 @@ The reader should verify that the matrix at the end of Section
 
 ## Census Data Example, Continued
 
-Recall that in the nonfull rank example we presented in Section
-{@sec-noinverse}, one row was double another. In the census example,
+There is a lot here that is directly related to important general
+issues.
+
+### Linear dependent/independent vectors
+
+Recall that in the nonfull rank example we presented in @sec-noinverse,
+one row was double another, 
+
+row 1 - 2 row 1 = 0
+
+In the census example,
 
 ```{r}
 head(A)
 ```
 
-the sum of the last two columns of $A$ was equal to the first column. We
-say the rows or columns are *linearly dependent*. This is the culprit in
-non-full rank matrices.
+the sum of the last two columns of $A$ was equal to the first column:
 
-It is thus not surprising that not only was $A'A$ not of full rank, but
+column 1 - column 4 - column 5 = 0
+
+We say are *linearly dependent* if some linear combination of them
+equals 0, as in both cases above. If no nontrival linear combination of
+the vectors is 0 (the linear combination whose coefficients are all 0 is
+trivally equal to 0), we say the vectors are *linearly independent*.
+
+### Major relevance
+
+As we will see, linear dependence of the rows or columns is the culprit
+in non-full rank matrices. This is a major issue for linear models, in
+which an inverse is necessary. 
+
+Moreover, in many cases a matrix will technically be invertible, but
+"approximately" nonfull rank. This can wreak havoc in linear models.
+
+The reader can see, then, that understanding of matrix rank is key. That
+in turn will require understanding of vector spaces. The current chapter is
+devoted to these concepts, which are used heavily in the sequel.
+
+### Bounds on ranks
+
+It is surprising that not only was $A'A$ not of full rank, but
 so was $A$:
 
 ```{r}
@@ -131,6 +160,8 @@ For any $r \textrm{x} s$ matrix $G$, the rank of $G$ is less than or equal to
 $\min(r,s)$.
 
 </blockquote>
+
+We will see shortly why this is true.
 
 ## Vector Spaces
 
