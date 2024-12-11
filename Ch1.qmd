@@ -895,7 +895,32 @@ $$
  \textrm{chol} \\
   \end{array}
  \right )
- $$
+$$
+
+### Sample vs. population
+
+We may observe $n$ realizations of $X$ in the form of sample data, say
+on $n = 100$ people. In the statistics world, we treat this data as a
+random sample from some population, say all Americans. Usually, we are
+just given the data rather then having actual random sampling, but this
+view recognizes that there are a lot more people out there than our
+data.
+
+We speak of estimating population quantities. For instance, we can
+estimate the population value $E(X1), i.e. mean of $X_1$ throughout the
+population, by the sammple analog,
+
+$$
+\frac{1}{n} \sum_{i=1}^n X_{1j}
+$$
+
+where $X_{ij}$ denotes the value of $X_i$ for the $j^{th}$ person in our
+sample.
+
+By contrast, this view is rarely taken in the machine learning
+community. The data is the data, and the fact that it is a small subset
+of a much larger group is irrelevant. They will often allude to the
+randomness of the data by mentioning the "data generating mechanism."
 
 ### Covariance matrices
 
