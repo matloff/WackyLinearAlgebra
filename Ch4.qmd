@@ -169,6 +169,16 @@ $$
 
 where the $r_i$ are the rows in $W$.
 
+Multiply the above equation by $E$:
+
+$$
+u_1 Er_1 + ... + u_k Er_k \neq 0
+$$
+
+So the vectors $Er_i$, which 
+
+are linearly independent. So, 
+
 By applying partitioning to both $B$ and $EB$,
 rows in $EB$ corresponding to $W$ are $EW$.
 

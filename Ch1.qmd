@@ -484,7 +484,7 @@ We will often write a row vector in the form (a,b,c,...). So
 be a column vector, we use transpose, so that for instance (5,1,88)'
 means a 3x1 matrix.
 
-### Partitioned matrices: an invaluable visualization tool
+# Partitioned Matrices: an Invaluable Visualization Tool{#sec-partition}
 
 Here, "visualization" is not a reference to graphics but rather to
 highlighting certain submatrices.
@@ -589,12 +589,15 @@ $$
 $$
 
 is a sum of scalar products of vectors, which is called a *linear
-combination* of those vectors. In other words, we have that:
+combination* of those vectors. 
+
+`In other words, we have that:
 
 <blockquote>
 
-The product of a matrix and a column vector is equal to a linear
-combination of the columns of the matrix.
+The product $Av$ of a matrix times a column vector is equal to a linear
+combination of the columns of the matrix, with coefficients equal to the
+column vector.
 
 </blockquote>
 
@@ -602,14 +605,11 @@ Similarly,
 
 <blockquote>
 
-The product of a row vector and a matrix is equal to a linear
-combination of the rows of the matrix.
+The product $wA$ of a row vector and a matrix is equal to a linear
+combination of the rows of the matrix, with the coefficients coming from
+the row vector.
 
 </blockquote>
-
-❄️  **Your Turn:** Using the same matrix A and the same vector v as
-above, verify that v'A is indeed a linear combination of the rows of A
-as described.
 
 To further illustrate partitioned matrices, write the above matrix $A$
 as 
@@ -648,7 +648,7 @@ A_{12} =
  \right )
 $$
 
-Symbolically, $A$ now looks like a 1x2 matrix. Similarly, writing
+Symbolically, $A$ now looks like a 1x2 "matrix." Similarly, writing
 
 $$
 v = 
@@ -723,7 +723,7 @@ B = (B^{(1)},B^{(2)},..., B^{(k)})
 $$ 
 
 Now pretending that $A$ is a $1 \textrm{x} 1$ "matrix" and $B$ is 
-a$1 \textrm{x} k$ "matrix", we 
+a$1 \textrm{x} k$ "matrix", we have
 
 $$
 AB = (AB^{(1)},AB^{(2)},..., AB^{(k)})
@@ -734,7 +734,7 @@ In other words,
 <blockquote>
 
 In the product $AB$, column $j$ is a linear combination of the columns
-of $A$, and the coefficients in that linear combination are the elmeents
+of $A$, and the coefficients in that linear combination are the elements
 of column $j$ of $B$.
 
 A similar result holds for the row of the product.
