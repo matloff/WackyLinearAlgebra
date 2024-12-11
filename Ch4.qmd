@@ -96,8 +96,8 @@ properties:
 
 * Each pivot is the only nonzero entry in its column.
 
-The reader should verify that the matrix at the end of Section
-{@censusrref} has these properties.
+The reader should verify that the matrix at the end of 
+@sec-censusrref has these properties.
 
 ## Census Data Example, Continued
 
@@ -150,7 +150,7 @@ devoted to these concepts, which are used heavily in the sequel.
 
 ### Some other properties of rank
 
-In {@sec-censusrref}, we found the matrix $A'A$ to be noninvertible, as
+In @sec-censusrref, we found the matrix $A'A$ to be noninvertible, as
 its RREF had a row of 0s. We mentioned a relation to rank, but didn't
 formalize it, which we will do now. Let's start with this one:
 
@@ -205,7 +205,7 @@ matrices and thus invertible.
 
 </blockquote>
 
-In {@sec-censusrref}, we found the matrix $A'A$ to not be of full rank.
+In @sec-censusrref, we found the matrix $A'A$ to not be of full rank.
 It is surprising that so was $A$:
 
 ```{r}
