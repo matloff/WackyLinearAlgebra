@@ -72,7 +72,7 @@ We formalize and extend @sec-pencilpaper:
 
 Elementary row operations:
 
-* Multiply a row by a constant.
+* Multiply a row by a nonzero constant.
 
 * Add a multiple of one row to another.
 
@@ -154,68 +154,43 @@ devoted to these concepts, which are used heavily in the sequel.
 
 In @sec-censusrref, we found the matrix $A'A$ to be noninvertible, as
 its RREF had a row of 0s. We mentioned a relation to rank, but didn't
-formalize it, which we will do now. Let's start with this one:
+formalize it, which we will do now. 
+
+### Yes, can tell rank from the RREF
 
 <blockquote>
 
-If $C = EB$ for an invertible $E$, then $rank(C) = rank(B)$.
+The rank of a matrix $B$ is equal to the rank of its RREF, $B_{rref}$.
 
 *Proof:*
 
-Say $W$ is a set of $k$ linearly independent rows of $B$, where $k$ is
-the rank of $B$. Write
+Say $B$ is $m \textrm{x} n$ and of rank $k$. Denote its rows by
+$r_1,...,r_m$}, and consider a linear combination
 
 $$
 u_1 r_1 + ... + u_k r_k \neq 0
 $$
 
-where the $r_i$ are the rows in $W$.
+Now, what happens to this equation as we step through the process of
+forming $B_{rre}$. Actually not much will change. If for instance we
+multiply row $i$ by $c$, the value of $u_i$ will be divided by $c$. 
+Swapping two rows will swap the corresponding $u_j$ and so on.
 
-Multiply the above equation by $E$:
+In other words, any nonzero linear combination of rows in $B$ will
+correspond to a nonzero linear combination of the rows of $B_{rref}$.
+That says that the rank of the latter is at least as large as that of
+$B$.
 
-$$
-u_1 Er_1 + ... + u_k Er_k \neq 0
-$$
+But we can reverse the direction of this analysis, and start with a
+given nonzero linear combination of the rows of $B_{rref}$. Working
+backward, we "undo" the row operations that produced $B_{rref}$, and
+conclude the rank of $B$ is at least as large as that of 
+$B_{eref}$.  
 
-So the vectors $Er_i$, which 
+Putting all this together, we see that the two matrices have the same
+rank.
 
-are linearly independent. So, 
-
-By applying partitioning to both $B$ and $EB$,
-rows in $EB$ corresponding to $W$ are $EW$.
-
-Putting all this together, we see that 
-
-$$
-\textrm{rank}(C) = \textrm{rank}(EB) \geq k = \textrm{rank}(B)
-$$
-
-But we can reverse the roles. $B = GC$ where $B = E^{-1}C$. The same
-reasoning now tells us that 
-
-$$
-\textrm{rank}(B) \geq \textrm{rank}(C)
-$$
-
-So $\textrm{rank}(B) = \textrm{rank}(C)$.
-
-
-</blockquotek
-
-This leads to another property:
-
-<blockquote>
-
-The rank of a matrix $B$ is equal to the number of nonzero rows in its
-RREF.
-
-*Proof:*
-
-Recall that $B_{rref} = EB$, where $E$ is a product of elementary
-matrices and thus invertible. 
-
-
-</blockquote>
+### Rank is bounded above by the "narrow" dimension of the matrix
 
 In @sec-censusrref, we found the matrix $A'A$ to not be of full rank.
 It is surprising that so was $A$:
