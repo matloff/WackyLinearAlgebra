@@ -396,9 +396,66 @@ is connected.
 Making this kind of analysis fully correct requires paying attention to
 things such as cycles.  The details are beyond the scope of this book.
 
+## Recommender Systems
+
+If you inquire about some item at an online store, the software will
+also present you with some related items that it thinks would be of
+interest to you.  How does the software make this guess?
+
+Clearly, the full answer is quite complex. But we can begin to see the
+process by looking at some real data.
+
+```{r}
+site <- 'http://files.grouplens.org/datasets/movielens/ml-100k/u.data'
+q <- read.table(site)
+names(q) <- c('user','movie','rating','userinfo')
+head(q)
+```
+
+We see for instance that user 22 gave movie 242 a rating of 1. If we
+want to know some characteristics of this user, his/her ID is 878887116,
+which we can find in the file **u.user** at the above URL. Other files
+tell us more about this movie, e.g. its genre, and so on.
+
+Let's explore the data a bit:
+
+How many users and movies are in this dataset?
+
+```{r}
+length(unique(q$user))
+length(unique(q$movie))
+```
+
+How many other users rated movie number 242?
+
+```{r}
+sum(q$movie == 242)
+```
+
+Did user 22 rate movie 234, for instance?
+
+```{r}
+which(q$user == 22 & q$movie == 234)
+```
+
+Now we can begin to see a solution to the recommender problem. Say we
+wish to guess whether user 22 would like movie 234. We could look for
+other users who have rated many of the same movies as user 22, then
+focus on the ones who rated movie 234.  We could average those ratings
+to obtain a predicted rating for movie 234 by user 22.[We could also
+incorporate the characteristics of user 22 and the others, which may
+improve our prediction accuracy, but we will not pursue that
+here.]{.column-margin}
+
+In order to assess interuser similarity of the nature described above,
+we might form a matrix $S$, as follows. There would be 943 rows, one
+for each user, and 1682 columns, one for each moview. The element in row
+$i$, column $j$ would be the rating user $i$ gave to movie $j$. Most of
+the matrix would be 0s.
+
 ## Matrix Algebra
 
-### Other basic Operations
+### Other basic operations
 
 Matrix multiplication may seem odd at first, but other operations are
 straightforward.
