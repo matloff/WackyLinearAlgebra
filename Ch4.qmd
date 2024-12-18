@@ -11,8 +11,8 @@ library(qeML)
 
 In our computations in the latter part of the last chapter, we added a
 proviso that $(A'A)^{-1}$ exists. In this chapter, we'll present a
-counterexample, which will naturally lead into our covering matrix rank and
-the basics of vector spaces.
+counterexample, which will naturally lead into our covering matrix rank,
+and in the next chapter,the basics of vector spaces.
 
 ## Example: Census Data{#sec-censusrref}
 
@@ -53,18 +53,18 @@ ApA
 ```
 
 Is this matrix invertible? Let's apply the elementary row operations
-introduced in {@pencilpaper}:
+introduced in {@sec-pencilpaper}:
 
 ```{r}
 library(pracma)
 rref(ApA) 
 ```
 
-Aha! The row operations process ended prematurely. This matrix has no
-inverse. We say that the matrix has *rank* 4, when it needs to be 5;
-we also say that $A'A$ is not of *full rank*. We will return to this
-point shortly, but first we formalize introduce the row operations
-process.
+Aha! Look at that row of 0s!  The row operations process ended
+prematurely. This matrix has no inverse. We say that the matrix has
+*rank* 4 -- 4 nonzero rows --  when it needs to be 5; we also say that
+the matrix is not of *full rank*. We will return to this point shortly,
+but first we formalize introduce the row operations process.
 
 ## Reduced Row Echelon Form (RREF) of a Matrix
 
@@ -80,13 +80,23 @@ Elementary row operations:
 
 Again, each operation can be implemented via pre-multiplying the given
 matrix by a corresponding elementary matrix. The latter is the result of
-applying the given operation to the identity matrix $I$.
+applying the given operation to the identity matrix $I$. For example,
+here is the matrix corresponding to swapping rows 2 and 3:
+
+$$
+\left ( \begin{array}{rrr} 
+1 & 0 & 0 \\
+0 & 0 & 1 \\
+0 & 1 & 0 \\
+\end{array} \right )
+$$
 
 By applying these operations to a matrix $A$, we can compute its
 *reduced row echelon form* $A_{rref}$, which is defined by the following
 properties:
 
-* Each row, if any, consisting of all 0s is at the bottom of the matrix.
+* Each row, if any, that consists of all 0s is at the bottom of the
+  matrix.
 
 * The first nonzero entry in a row, called the *pivot*, is a 1.
 
@@ -106,7 +116,7 @@ The reader should verify that the matrix at the end of
 Recall that in the nonfull rank example we presented in @sec-noinverse,
 one row was double another, 
 
-row 1 - 2 row 1 = 0
+row2 + 2 row1 = 0
 
 In the census example,
 
@@ -116,14 +126,25 @@ head(A)
 
 the sum of the last two columns of $A$ was equal to the first column:
 
-column 1 - column 4 - column 5 = 0
+column1 - column4 - column5 = 0
+
+Write this more fully as a formal linear combination of the columns of
+this matrix:
+
+1 column1 + 0 column2 + 0 column3 + (-1) column4 + (-1) column5 = 0
+
+The vector of coefficients is (1,0,0,-1,-1).
 
 ### Formal definitions
 
-We say are *linearly dependent* if some linear combination of them
-equals 0, as in both cases above. If no nontrival linear combination of
-the vectors is 0 (the linear combination whose coefficients are all 0 is
-trivally equal to 0), we say the vectors are *linearly independent*.
+We say a set of vectors is *linearly dependent* if some linear
+combination of them (excluding the trivial case in which all the
+coefficients are 0) equals 0, as in both cases above. 
+
+If no nontrival
+linear combination of the vectors is 0,
+we say the vectors are
+*linearly independent*.
 
 So, here is the formal definition:
 
@@ -161,20 +182,28 @@ formalize it, which we will do now.
 <blockquote>
 
 The rank of a matrix $B$ is equal to the rank of its RREF, $B_{rref}$.
+This we can determine the rank of $B$ by counting the nonzero rows of
+its RREF.
 
 *Proof:*
 
 Say $B$ is $m \textrm{x} n$ and of rank $k$. Denote its rows by
-$r_1,...,r_m$}, and consider a linear combination
+$r_1,...,r_m$, and consider a linear combination
 
 $$
 u_1 r_1 + ... + u_k r_k \neq 0
 $$
 
 Now, what happens to this equation as we step through the process of
-forming $B_{rre}$. Actually not much will change. If for instance we
-multiply row $i$ by $c$, the value of $u_i$ will be divided by $c$. 
-Swapping two rows will swap the corresponding $u_j$ and so on.
+forming $B_{rre}$? Each step will change one or two of the $r_i$. Will
+we be able to ensure that their new versions wlll still be linearly
+independent?
+
+The answer is yes. If for instance we multiply row $i$ by $c$, and we
+set the new value of $u_i$ to be the old one divided by $c$, the new
+linear combination will still have the same sum, and thus still have a
+nonzero sum.  Swapping two rows will swap the corresponding $u_j$ and so
+on.
 
 In other words, any nonzero linear combination of rows in $B$ will
 correspond to a nonzero linear combination of the rows of $B_{rref}$.
@@ -196,7 +225,7 @@ In @sec-censusrref, we found the matrix $A'A$ to not be of full rank.
 It is surprising that so was $A$:
 
 ```{r}
-qr(ApA)$rank
+qr(ApA)$rank  # qr is a built-in R function
 qr(A)$rank
 ```
 
