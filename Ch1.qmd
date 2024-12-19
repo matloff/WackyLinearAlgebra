@@ -660,7 +660,8 @@ $$
 $$
 
 is a sum of scalar products of vectors, which is called a *linear
-combination* of those vectors. 
+combination* of those vectors. The quantities 10, 2 and 1 are the
+*coefficients* in that linear combination.
 
 `In other words, we have that:
 
