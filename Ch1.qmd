@@ -453,6 +453,11 @@ for each user, and 1682 columns, one for each moview. The element in row
 $i$, column $j$ would be the rating user $i$ gave to movie $j$. Most of
 the matrix would be 0s.
 
+The point of constructing $S$ is that determining the similarity of
+users becomes a matter of measuring similarity of rows of $S$. This
+paves the way to exploiting the wealth of matrix-centric methodology we
+will develop in this book.
+
 ## Matrix Algebra
 
 ### Other basic operations
