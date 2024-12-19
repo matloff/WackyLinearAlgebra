@@ -232,7 +232,7 @@ Now, what happens to this equation as we step through the process of
 forming $B_{rref}$? Each step will change one or two of the rows $r_i$. Will
 their new versions wlll still be linearly independent?
 
-The answer is yes. If for instance we multiply row $i$ by $c$, and we
+The answer is yes. If for instance we multiply row $i$ by $c$, and we 
 set the new value of $u_i$ to be the old one divided by $c$, the new
 linear combination will still have the same sum, and thus still have a
 nonzero sum.  Swapping two rows will swap the corresponding $u_j$ and so
@@ -271,7 +271,23 @@ $\min(r,s)$.
 
 </blockquote>
 
-We will see shortly why this is true.
+But first, a more far-reaching theorem that will also imply the above:
+
+### Row rank and column rank
+
+We have defined the rank of a matrix to be the number of maximally
+linearly independent rows. We'll now call that the *row rank*, and
+define the *column rank* to be the number of maximally 
+linearly independent columns.
+
+<blockquote>
+
+*Theorem:* The row rank and column rank are equal.
+
+<blockquote>
+
+</blockquote>
+
 
 
 
