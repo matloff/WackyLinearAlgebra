@@ -458,6 +458,16 @@ users becomes a matter of measuring similarity of rows of $S$. This
 paves the way to exploiting the wealth of matrix-centric methodology we
 will develop in this book.
 
+❄️  **Your Turn:** Write a function with call form
+
+``` r
+makeSimilarityMatrix(m)
+```
+
+that takes as input a matrix or data frame of user-movie-rating data,
+and returns a matrix as described above, i.e. one row per user, one
+column per movie, and so on.
+
 ## Matrix Algebra
 
 ### Other basic operations
