@@ -68,9 +68,11 @@ but first we formalize introduce the row operations process.
 
 ## Reduced Row Echelon Form (RREF) of a Matrix
 
-We formalize and extend @sec-pencilpaper:
+We formalize and extend @sec-pencilpaper.
 
-Elementary row operations:
+### Elementary row operations
+
+These are:
 
 * Multiply a row by a nonzero constant.
 
@@ -91,6 +93,20 @@ $$
 \end{array} \right )
 $$
 
+For example:
+
+```{r}
+e <- rbind(c(1,0,0),c(0,0,1),c(0,1,0))
+e
+a <- matrix(runif(12),nrow=3)
+a
+e %*% a  # NOT e * a!
+```
+
+Yes, rows 2 and 3 were swapped.
+
+### The RREF
+
 By applying these operations to a matrix $A$, we can compute its
 *reduced row echelon form* $A_{rref}$, which is defined by the following
 properties:
@@ -108,6 +124,22 @@ properties:
 
 The reader should verify that the matrix at the end of 
 @sec-censusrref has these properties.
+
+### Review of @sec-pencilpaper{#sec-review}
+
+* Each row operation can be performed via premultiplication by an
+elementary matrix. Each such matrix is invertible, and its inverse is
+itself an elementary matrix.
+
+* Thus $B_{rref} = E_k... E_2 E_1 B$, for a sequence of  invertible elementary
+matrices.
+
+* And 
+
+    $B = (E_1)^{-1} (E_2)^{-1} ... (E_k)^{-1} B_{rref}$,
+
+    where each $(E_i)^{-1}$ is itself an elementary row operation.
+
 
 ## Rank andLinear Dependent/Independent Vectors
 
@@ -167,8 +199,10 @@ Moreover, in many cases a matrix will technically be invertible, but
 "approximately" nonfull rank. This can wreak havoc in linear models.
 
 The reader can see, then, that understanding of matrix rank is key. That
-in turn will require understanding of vector spaces. The current chapter is
-devoted to these concepts, which are used heavily in the sequel.
+will be our initial motivation for learning about vector spaces
+in the next chapter, which will in turn open the door to many central
+concepts and methods of linear algebra.
+
 :::
 
 ## Some Properties of Rank
@@ -177,12 +211,12 @@ In @sec-censusrref, we found the matrix $A'A$ to be noninvertible, as
 its RREF had a row of 0s. We mentioned a relation to rank, but didn't
 formalize it, which we will do now. 
 
-### Yes, can tell rank from the RREF
+### Yes, one can tell the rank of a matrix by looking at its RREF
 
 <blockquote>
 
 The rank of a matrix $B$ is equal to the rank of its RREF, $B_{rref}$.
-This we can determine the rank of $B$ by counting the nonzero rows of
+Thus we can determine the rank of $B$ by counting the nonzero rows of
 its RREF.
 
 *Proof:*
@@ -195,9 +229,8 @@ u_1 r_1 + ... + u_k r_k \neq 0
 $$
 
 Now, what happens to this equation as we step through the process of
-forming $B_{rre}$? Each step will change one or two of the $r_i$. Will
-we be able to ensure that their new versions wlll still be linearly
-independent?
+forming $B_{rref}$? Each step will change one or two of the rows $r_i$. Will
+their new versions wlll still be linearly independent?
 
 The answer is yes. If for instance we multiply row $i$ by $c$, and we
 set the new value of $u_i$ to be the old one divided by $c$, the new
@@ -207,17 +240,14 @@ on.
 
 In other words, any nonzero linear combination of rows in $B$ will
 correspond to a nonzero linear combination of the rows of $B_{rref}$.
-That says that the rank of the latter is at least as large as that of
-$B$.
-
-But we can reverse the direction of this analysis, and start with a
-given nonzero linear combination of the rows of $B_{rref}$. Working
-backward, we "undo" the row operations that produced $B_{rref}$, and
-conclude the rank of $B$ is at least as large as that of 
-$B_{eref}$.  
+Moreover, it's all reversible: @sec-review shows that by doing the
+inverse elementary operations in reverse, any set of linearly
+independent rows in $B_{rref}$ corresponds to some set of linearly
+independent rows in $B$.
 
 Putting all this together, we see that the two matrices have the same
-rank.
+number of maximally linearly independent rows, i.e. the two matrices
+have the same rank.
 
 ### Rank is bounded above by the "narrow" dimension of the matrix
 
@@ -242,8 +272,6 @@ $\min(r,s)$.
 </blockquote>
 
 We will see shortly why this is true.
-
-## Vector Spaces
 
 
 
