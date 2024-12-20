@@ -4,7 +4,7 @@ project:
 book:
 
    title: "Linear Algebra *in* Data Science"
-   subtitle: "An unconventional approach"
+   subtitle: "with R examples"
    author: 
      - Norman Matloff
    date: "11/27/2024"
