@@ -7,10 +7,20 @@ library(qeML)
 
 {{< pagebreak >}}
 
+
 # Matrix Inverse
+
+::: {.callout-note}
+
+## Goals of this chapter:
+
+Central to matrix operations is the matrix *inverse*, which is somewhat
+analogous to reciprocals in arithmetic.
 
 This is a fundamental operation in linear algebra (though ironically,
 related quantities are often used instead).
+
+:::
 
 ## Example
 

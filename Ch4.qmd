@@ -7,6 +7,16 @@ library(qeML)
 
 {{< pagebreak >}}
 
+::: {.callout-note}
+
+## Goals of this chapter:
+
+Many matrices are noninvertible. The subject of this chapter. matrix
+*rank* is closely tied to the invertibility issue, and is central to
+understanding matrix applications. 
+
+:::
+
 # Matrix Rank
 
 In our computations in the latter part of the last chapter, we added a
@@ -190,6 +200,7 @@ rows.
 ### Relevance
 
 ::: {.callout-important}
+
 ## A Central Concept
 As we will see, linear dependence of the rows or columns is the culprit
 in non-full rank matrices. This is a major issue for linear models, in

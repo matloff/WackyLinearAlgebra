@@ -10,6 +10,16 @@ library(qeML)
 
 # Matrix Multiplication
 
+::: {.callout-note}
+
+## Goals of this chapter:
+
+The two main structures in linear algebra are *matrices* and *vector
+speaces*. We begin the book with the former, introduced in this chapter,
+inroducing matrix multiplication and presenting several applications.
+
+:::
+
 ## A Random Walk Model
 
 Let's consider a *random walk* on {1,2,3,4,5} in the number line. Time
@@ -563,10 +573,13 @@ highlighting certain submatrices.
 
 
 ::: {.callout-important}
+
 ## Crucial Tool
+
 The techniques introduced in this section will be used throughout the
 book. Readers should spend extra time here, devising some of their own
 examples.
+
 :::
 
 
