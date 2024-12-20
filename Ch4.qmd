@@ -215,9 +215,9 @@ formalize it, which we will do now.
 
 <blockquote>
 
-The rank of a matrix $B$ is equal to the rank of its RREF, $B_{rref}$.
-Thus we can determine the rank of $B$ by counting the nonzero rows of
-its RREF.
+*Theorem:* The rank of a matrix $B$ is equal to the rank of its RREF,
+$B_{rref}$.  Thus we can determine the rank of $B$ by counting the
+nonzero rows of its RREF.
 
 *Proof:*
 
@@ -249,6 +249,22 @@ Putting all this together, we see that the two matrices have the same
 number of maximally linearly independent rows, i.e. the two matrices
 have the same rank.
 
+### Row rank and column rank
+
+We have defined the rank of a matrix to be the number of maximally
+linearly independent rows. We'll now call that the *row rank*, and
+define the *column rank* to be the number of maximally 
+linearly independent columns.
+
+<blockquote>
+
+*Theorem:* The column rank of a matrix $B$ is equal to that of its RREF.
+
+*Proof:* Simply follow the steps in the proof for the row rank case
+above. (Or apply that case to $B'$.)
+
+</blockquote>
+
 ### Rank is bounded above by the "narrow" dimension of the matrix
 
 In @sec-censusrref, we found the matrix $A'A$ to not be of full rank.
@@ -273,21 +289,43 @@ $\min(r,s)$.
 
 But first, a more far-reaching theorem that will also imply the above:
 
-### Row rank and column rank
-
-We have defined the rank of a matrix to be the number of maximally
-linearly independent rows. We'll now call that the *row rank*, and
-define the *column rank* to be the number of maximally 
-linearly independent columns.
-
 <blockquote>
 
-*Theorem:* The row rank and column rank are equal.
+*Theorem:* The row rank and column rank of a matrix $B$ are equal.
 
-<blockquote>
+*Proof:* First, it's clear from looking at the form of the RREF that
+both the row rank and the column rank of an RREF are equal to the number
+of rows with leading 1s. (Again, see the example at the end of
+@sec-censusrref to picture this.) In other words,
+
+$$
+rowrank(B_{rref}) = colrank(B_{rref})
+$$
+
+But we found earlier that
+
+$$
+rowrank(B) =  rowrank(B_{rref})
+$$
+
+and
+
+$$
+colrank(B) =  colrank(B_{rref})
+$$
+
+The result follows.
 
 </blockquote>
 
+And thus:
 
+<blockquote>
+
+*Corollary:* The (common value of) row and column ranks of an $m x n$
+mstrix $B$ must be less than or equal to the minimum of the number of
+rows and columns of $B$ .
+
+</blockquote>
 
 
