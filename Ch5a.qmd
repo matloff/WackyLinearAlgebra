@@ -9,3 +9,53 @@ library(qeML)
 
 # Vector Spaces 
 
+::: {.callout-note}
+
+## Goals of this chapter:
+
+As noted earlier, the two main structures in linear algebra are matrices
+and vector spaces. We now introduce the latter, a bit more abstract than
+matrices but even more powerful.
+
+:::
+
+## Review of matrix rank
+
+In the last chapter, we presented the concepts of matrix row and column
+rank, defined to be the maximal number of linearly independent
+combinations of the rows or columns of the matrix, respectively. We
+proved that
+
+<blockquote>
+
+For any matrix $B$, 
+
+$$
+\textrm{rowrank}(B)
+= \textrm{colrank}(B)
+= \textrm{rowrank}(B_{rref})
+= \textrm{colrank}(B_{rref})
+$$
+
+</blockquote>
+
+We can say something stronger: 
+
+<blockquote>
+
+Let $\cal V$ denote the set of all possible linear combinations of
+rows of $B$, and define $\cal V_{rref}$ similarly. Then
+
+$$
+\cal V = \cal V_{rref}
+$$
+
+The analogous result holds for columns.
+
+</blockquote>
+
+So, not only do the two matrices have the same maximal numbers of 
+linearly independent rows, they also generate *the same linear
+combinations*
+
+
