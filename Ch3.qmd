@@ -451,6 +451,11 @@ solve(Ap %*% A) %*% Ap %*% S
 lm(Weight ~ .,data=mlb1[,-1])
 ```
 
+So, if we have a player of known height and age, we would predict the
+weight to be
+
+-187.6382 + 4.9236 x height + 0.9115 x age
+
 ### Homogeneous variance case
 
 In addition to

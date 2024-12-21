@@ -19,7 +19,7 @@ matrices but even more powerful.
 
 :::
 
-## Review of matrix rank
+## Review of matrix rank properties
 
 In the last chapter, we presented the concepts of matrix row and column
 rank, defined to be the maximal number of linearly independent
@@ -43,8 +43,8 @@ We can say something stronger:
 
 <blockquote>
 
-Let $\cal V$ denote the set of all possible linear combinations of
-rows of $B$, and define $\cal V_{rref}$ similarly. Then
+*Theorem:* Let $\cal V$ denote the set of all possible linear
+combinations of rows of $B$, and define $\cal V_{rref}$ similarly. Then
 
 $$
 \cal V = \cal V_{rref}
@@ -52,10 +52,92 @@ $$
 
 The analogous result holds for columns.
 
+*Proof:* Actually, we already proved this in the proof regarding rank in
+@sec-yessamerank, in which we wrote, 
+``any nonzero linear combination of rows in $B_{rref}$ will correspond
+to a nonzero linear combination of the rows of $B$,'' and vice versa.
+This showed a one-to-one correspondence between the two sets of linear
+combinations.
+
 </blockquote>
 
 So, not only do the two matrices have the same maximal numbers of 
 linearly independent rows, they also generate *the same linear
-combinations*
+combinations* of those rows.
+
+The sets $\cal V$ and $\cal V_{rref}$ are called the *row spaces*
+of the two matrices, and yes, they are examples of vector spaces, as we
+will now see.
+
+## Vector space definition
+
+<blockquote>
+
+A set of objects $\cal W$ is called a \textit{vector space} if it satisfies the
+following conditions:
+
+* Some form of addition between vectors $u$ and $v$, denoted $u+v$, is defined
+  in $\cal W$, with u+v also being in $\cal W$. We describe that latter
+  property by saying $\cal W$ is *closed* under addition. `
+
+* Some form of scalar multiplication is defined, so that for any number
+  $c$ and and $u in $\cal W$, cw exists and is in $\cal W$. 
+  We describe that latter property by saying $\cal W$ is *closed* 
+  under scalar multiplication
+
+* This being a practical book with just a dash of theory, we'll skip the
+  remaining conditions, involving algebraic properties such as
+  commutativity of addition ($u+v = v+u$).
+
+</blockquote>
+
+## Examples
+
+### $\cal R^{n}$
+
+In the vast majority of examples in this book, our vector space will be
+$\cal R^{n}$.
+
+Here $\cal R$ represents the set of all real numbers, and $\cal R^{n}$ is
+simply the set of all vectors consisiting of $n$ real numbers. In an $m
+\textrm{x} k$ matrix the rows are members of so $\cal R^{m}$ and the
+columns are in $\cal R^{k}$.
+
+### The set of all continuous functions on the interval [0,1]
+
+No surprises here.  Vector addition and scalar multiplication are done
+as functions. If say $u$ is the squaring function and $v$$ is the sine
+function, then
+
+$$
+3u = 3x^{0.5}
+$$
+
+and 
+
+$$
+u+v = x^{0.5} + sin(x)
+$$
+
+### The set of all random variables defined on some probability space
+
+Consider the example in @sec-mlb on major league baseball players.  We
+choose a player at random.  Denote weight, height and age by $W$, $H$
+and $A$. 
+
+Vector addition and scalar multiplication are defined in a
+straightforward manner. For instance, the sum of $H$ and $A$
+is simply height + age. This may seem like a rather nonsensical sum, but
+it fits the technical definition, and moreover, we have already been
+doing things like this! This after all is what is happening in our
+prediction expression from that section,
+
+$$
+\textrm{predicted weight} =
+-187.6382 + 4.9236 H+ 0.9115 A
+$$
+
+In fact, in this vector space, the above is a linear combination of the
+random variables $1$, $H$ and $A$
 
 
