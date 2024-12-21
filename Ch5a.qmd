@@ -140,4 +140,13 @@ $$
 In fact, in this vector space, the above is a linear combination of the
 random variables $1$, $H$ and $A$
 
+## Subspaces
+
+Say $\cal W_{1}$ a subset of a vectpr space $\cal W$, such that $\cal
+W_{1}$ is closed under addition and scalar multiplication. $\cal W_{1}$
+is called a *subspace* of $\cal W$.
+
+For instance, say $\cal W$ is $R^3$, and take $\cal W_{1}$ to be all
+vectors of the form (a,b,0). Clearly, $\cal W_{1}$ is closed under
+addition and scalar multiplication.
 
