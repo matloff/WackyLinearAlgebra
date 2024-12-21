@@ -72,6 +72,20 @@ lessons.]{.column-margin}
 
 * Basics of random variables, expected value and variance.
 
+### The role of theory
+
+::: {.callout-important}
+
+## This book is "mathematical but not very theoretical."
+
+Theorems are mainly limited to results with practical importance, and
+proofs are sometimes rather informal. But the subject matter is indeed
+mathematical. The goal is to develop in the reader mathematical skill
+and intuition into this powerful tool, rather coding of linear algebra
+methods.
+
+:::
+
 ```{r}
 #| include: false
 library(dsld)
