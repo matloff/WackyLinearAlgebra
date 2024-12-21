@@ -15,7 +15,9 @@ library(qeML)
 
 As noted earlier, the two main structures in linear algebra are matrices
 and vector spaces. We now introduce the latter, a bit more abstract than
-matrices but even more powerful.
+matrices but even more powerful. We lay the crucial foundation in this
+chapter, then reap the benefits in the applications in the remaining
+chapters.
 
 :::
 
@@ -73,15 +75,16 @@ will now see.
 
 <blockquote>
 
-A set of objects $\cal W$ is called a \textit{vector space} if it satisfies the
+A set of objects $\cal W$ is called a *vector space* if it satisfies the
 following conditions:
 
-* Some form of addition between vectors $u$ and $v$, denoted $u+v$, is defined
-  in $\cal W$, with u+v also being in $\cal W$. We describe that latter
-  property by saying $\cal W$ is *closed* under addition. `
+* Some form of addition between vectors $u$ and $v$, denoted $u+v$, is
+  defined in $\cal W$, with the result that *u+v* is also in $\cal W$.
+  We describe that latter property by saying $\cal W$ is *closed* under
+  addition. `
 
 * Some form of scalar multiplication is defined, so that for any number
-  $c$ and and $u in $\cal W$, cw exists and is in $\cal W$. 
+  $c$ and and $u$ in $\cal W$, $cw$ exists and is in $\cal W$. 
   We describe that latter property by saying $\cal W$ is *closed* 
   under scalar multiplication
 
