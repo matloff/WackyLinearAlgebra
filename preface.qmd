@@ -28,21 +28,19 @@ be solved, almost always from Data Science, leading up to a linear
 algebra solution.  Basically, the math sneaks up on the reader, who
 suddenly realizes they've just learned a new general concept!
 
-An excellent [review of book on Principal Components
-Analysis](https://loreley.one/2024-09-pca/). The reviewer writes
+In an excellent [review of book on Principal Components
+Analysis](https://loreley.one/2024-09-pca/), the reviewer writes
 
 <blockquote>
 
-I bought the acclaimed *Linear Algebra Done Right*...A
-classic. Used by students all over the world. I slogged through the
-early chapters. It was rather dull, one definition after another. It is
-not difficult to follow the logic, and to see how one theorem follows
-from another. But the entire enterprise was draining and unfulfilling.
-It felt random. “Follow these steps and you get the result you are
-looking for. I can prove that it works because of the following …”. But
-why does it work? What possessed you to follow this path as opposed to
-any other? How might I have come up with this myself? The book provided
-no answers and I was left feeling deeply unsatisfied.
+I bought the acclaimed *Linear Algebra Done Right*...A classic...It was
+rather dull, one definition after another. It is not difficult to follow
+the logic, and to see how one theorem follows from another. But...it
+felt random.  “Follow these steps and you get the result you are looking
+for. I can prove that it works because of the following …”. But why does
+it work?  What possessed you to follow this path as opposed to any
+other? How might I have come up with this myself? The book provided no
+answers and I was left feeling deeply unsatisfied.
 
 </blockquote>
 
@@ -51,13 +49,13 @@ frustration.
 
 ### Who is this book for?
 
-Of course the book should work well as a course textbook. The
-"applications first" approach should motivate student, and the use of
+Of course the book should work well as a classroom textbook. The
+"applications first" approach should motivate students, and the use of
 Quarto enables easy conversion to Powerpoint by instructors.
 
-I hope the book's emphasis on the Why? and How?  especially appeals to
-do-it-yourselfers, those who engagement in self-study is motivated by
-intellectual curiosity rather than a course grade.
+But I also hope the book's emphasis on the Why? and How?  especially
+appeals to do-it-yourselfers, those whose engagement in self-study is
+motivated by intellectual curiosity rather than a course grade.
 
 ### Prerequisite background
 
@@ -81,7 +79,7 @@ lessons.]{.column-margin}
 Theorems are mainly limited to results with practical importance, and
 proofs are sometimes rather informal. But the subject matter is indeed
 mathematical. The goal is to develop in the reader mathematical skill
-and intuition into this powerful tool, rather coding of linear algebra
+and intuition into this powerful tool, rather than coding of linear algebra
 methods.
 
 :::
