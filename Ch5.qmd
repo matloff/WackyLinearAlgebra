@@ -7,7 +7,12 @@ library(qeML)
 
 {{< pagebreak >}}
 
+
 # Vector Spaces 
+
+$$
+x^2  
+$$
 
 ::: {.callout-note}
 
@@ -82,7 +87,10 @@ following conditions:
 * Some form of addition between vectors $u$ and $v$, denoted $u+v$, is
   defined in $\cal W$, with the result that *u+v* is also in $\cal W$.
   We describe that latter property by saying $\cal W$ is *closed* under
-  addition. `
+  addition. 
+
+* There is a unique element called ``0'' such that  $u +
+  0 = 0 + u = u$.
 
 * Some form of scalar multiplication is defined, so that for any number
   $c$ and and $u$ in $\cal W$, $cw$ exists and is in $\cal W$. 
@@ -123,7 +131,7 @@ $$
 u+v = x^{0.5} + \sin(x)
 $$
 
-### The set of all random variables defined on some probability space
+### The set $\cal RV(\Omega)$ of all random variables defined on some probability space $\Omega$
 
 Consider the example in {@sec-mlb} on major league baseball players.  We
 choose a player at random.  Denote weight, height and age by $W$, $H$
@@ -142,28 +150,40 @@ $$
 $$
 
 In fact, in this vector space, the above is a linear combination of the
-random variables $1$, $H$ and $A$
+random variables $1$, $H$ and $A$. Note that random variables such as
+$HW^{1.2}$ and so on are also members of this vector space, essentially
+any function of $W$, $H$ and $A$.
 
 ## Subspaces
 
 Say $\cal W_{1}$ a subset of a vector space $\cal W$, such that $\cal
 W_{1}$ is closed under addition and scalar multiplication. $\cal W_{1}$
-is called a *subspace* of $\cal W$.
+is called a *subspace* of $\cal W$.  Note that a subspace is also a
+vector space in its own right.
 
-For instance, say $\cal W$ is $R^3$, and take $\cal W_{1}$ to be all
-vectors of the form (a,b,0). Clearly, $\cal W_{1}$ is closed under
-addition and scalar multiplication.
+### Examples
+
+$R^3$: 
+
+For instance, take $\cal W_{1}$ to be all vectors of the form
+(a,b,0). Clearly, $\cal W_{1}$ is closed under addition and scalar
+multiplication.
 
 Another subspace of $R^3$ is the set of vectors (a,a,b), i.e. those
 vectors whose first two element are equal. What about vectors of the
 form (a,b,a+b)? Yes.
 
-In the C(0,1) example of continuous functions on [0,1], one subspace is
-the set of all polynomial functions. Again, the sum of two polynomials
-is a polynomial, and the same holds for scalar multiplication, so the
-set of polynomials is closed under those operations, and is a subspace.
+$C(0,1)$: 
 
-Note that a subspace is also a vector space in its own right.
+One subspace is the set of all polynomial functions. Again,
+the sum of two polynomials is a polynomial, and the same holds for
+scalar multiplication, so the set of polynomials is closed under those
+operations, and is a subspace.
+
+$\cal RV(\Omega)$: 
+
+The set of all random variables that
+are functions of $H$, say, is a subspace.
 
 ## Basis 
 
@@ -180,29 +200,37 @@ We say the vectors $u_1,...u_r$ in a vector space $\cal W$ form a *basis*
 for $\cal W$ if they are linearly independent and span $\cal W$.
 </blockquote>
 
+❄️  **Your Turn:** Prove that the coefficients in basis representations
+are unique. In other words, in a representation of the vector $x$ in
+terms of a basis $u_1,...,u_n$,
+
 ### Examples
 
 $\cal R^3$: 
 
-The vectors (1,0,0), (0,1,0) and (0,0,1) are easily seen to be 
-a basis here. They are
-linearly independent, and clearly span $\cal R^3$. For instance, to
-generate (3,1,-0.2), we use this linear combination:
+The vectors (1,0,0), (0,1,0) and (0,0,1) are easily seen to be a basis
+here.[Our convention has been that vectors are considered in matrix
+terms as column vectors by default. However, in nonmatrix contexts, it
+will be convenient to write $\cal R^n$ vectors as rows.]{.column-margin}
+They are linearly independent, and clearly span $\cal R^3$. For
+instance, to generate (3,1,-0.2), we use this linear combination:
 
 (3,1,-0.2) = 3 (1,0,0) + 1 (0,1,0) + (-0.2) (0,0,,1)
 
 But bases are not unique; for instance, the set (1,0,0, (0,1,0), (0,1,1) works
-equally well as a basis for this space, as dp (infitely) many others..
+equally well as a basis for this space, as are (infinitely) many others..
 
-A basis for The subspace of vectors of the form (a,a,b) is (1,1,0) and
+A basis for the subspace of vectors of the form (a,a,b) is (1,1,0) and
 (0,0,1). 
 
-C(0,1): Alas, there is no finite basis here. Even infinite ones have
+$C(0,1)$: 
+
+Alas, there is no finite basis here. Even infinite ones have
 issues in their mathematical formulation.
 
-❄️  **Your Turn:** Prove that the coefficients in basis representations
-are unique. In other words, in a representation of the vector $x$ in
-terms of a basis $u_1,...,u_n$,
+$\cal RV(\Omega)$:
+
+The situation here is the same as for C(0,1).
 
 $$
 x = a_1 + u_1 + ... + a_n u_n
@@ -297,11 +325,12 @@ You may recall from your high school geometry course the key concept of
 perpendicularity, represented by the ⊥ symbol. You may also recall that
 in 2-dimensional space,, given a point P and a line L, the line drawn
 from point P to the closest point P' within L is perpendicular to L.
-The same is true if L is a plane.
+The same is true if L is a plane. The point P' is called the
+*projection* of P onto L.
 
 This was shown in this book's cover, shown here:
 
-![xx](Projections.png)
+![Projections](Projections.png)
 
 The early developers of linear algebra wanted to extend such concepts to
 abstract vector spaces. This aids intuition, and has very powerful
@@ -326,7 +355,11 @@ and a numerical output, with the following properties:
 
 * $<u,v> = <v,u>$
 
-* The function is linear in both arguments.
+* The function is bilinear: 
+
+  $$
+  <u,av+bw> = a <u,v> + b <u,w>
+  $$
 
 * $<u,u> ~ \geq 0$, with equality if and only if $u = 0$.
 
@@ -334,11 +367,71 @@ and a numerical output, with the following properties:
 
 ### Examples
 
-* $\cal R^n$:
+$\cal R^n$:
 
-* *C(0,1)*:
+As noted, ordinary dot product is the most common inner product on this
+space.
 
-* *set of all random variables on a given probability space*:
+$<(a_1,...,a_n),(b_1,...,b_n> =
+a_1 b_1 + ... + a_n b_n$
+
+❄️  **Your Turn:** An $n ~ \textrm{x} ~ n$ symmetric matrix $M$ is called
+*positive definite* if 
+
+$$
+w'Mw > 0
+$$
+
+Show that $<u,v> = u'Mv$ is an inner product on $\cal R^n$.
+
+*C(0,1)*:
+
+One inner product on this space as
+
+$$
+<f,g> = \int_{0}^{1} f(t) g(t) ~ dt
+$$  
+
+For instance, with $f(t) = t^2$ and $g(t) = \sin(t)$, the inner product
+can be computed with R:
+
+```{r}
+f <- function(t) t^2
+g <- function(t) sin(t)
+fg <- function(t) f(t) * g(t)
+integrate(fg,0,1)
+```
+
+This clearly fits most requirements for inner products, but what about
+$<f,f> = 0$ only if $f = 0$?[Note that the 0 vector in this space is the
+function that is identically 0, not just 0 at some points]{.column-margin}
+A non-0 $f$ will have $f^2(t) > 0$ for at least one $t$, and by
+continuity, $f^2(t) > 0$ on an interval containing that $t$, thus making
+a nonzero contribution to the integral and thus to the inner product.
 
 
+$\cal RV(\Omega)$:
 
+From here on, we'll restrict to the vector space of all random variables
+on $\Omega$ having finite variance. We define
+
+$$
+<X,Y> = E(XY)
+$$
+
+The properties of expected value, e.g. linearity, show most of the
+requirements for an inner product hold.  But again, we need to show that
+
+$$
+<X,X> = E(X^2) > 0 
+$$
+
+for any $X$ such that $P(X = 0) < 1$. To see this,
+recall that for any random variable $X$ with finite variance, we have
+
+$$
+Var(X) = E[(X - E(X))^2] = E(X^2) - [E(X)]^2
+$$
+
+so that $E(X^2) > 0$ for any nonzero $X$, i.e. any $X$ that is not
+identically 0.
