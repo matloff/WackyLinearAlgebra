@@ -435,3 +435,36 @@ $$
 
 so that $E(X^2) > 0$ for any nonzero $X$, i.e. any $X$ that is not
 identically 0.
+
+### Norm of a vector
+
+This concept extends the notion of a the length of a vector, as we know
+it in $\cal R^2$ and $\cal R^3$.
+
+<blockquote>
+
+The *norm* of a vector $x$ is
+
+$$
+(<x,x>)^{0.5}
+$$
+
+</blockquote>
+
+## Projections
+
+As mentioned, the extension of classical geometry to abstract vector
+spaces has powerful applications. There is no better example of this
+than the idea of *projections*.
+
+### Definition
+
+<blockquote>
+
+Let $v$ be a vector in an inner product space $\cal V$, with a subspace $\cal
+W$.
+
+</blockquote>
+
+## Shrinkage Estimators
+
