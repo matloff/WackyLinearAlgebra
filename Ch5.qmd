@@ -332,3 +332,13 @@ and a numerical output, with the following properties:
 
 </blockquote>
 
+### Examples
+
+* $\cal R^n$:
+
+* *C(0,1)*:
+
+* *set of all random variables on a given probability space*:
+
+
+
