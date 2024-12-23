@@ -21,7 +21,7 @@ chapters.
 
 :::
 
-## Review of matrix rank properties
+## Review of Matrix Rank Properties
 
 In the last chapter, we presented the concepts of matrix row and column
 rank, defined to be the maximal number of linearly independent
@@ -45,8 +45,9 @@ We can say something stronger:
 
 <blockquote>
 
-*Theorem:* Let $\cal V$ denote the set of all possible linear
-combinations of rows of $B$, and define $\cal V_{rref}$ similarly. Then
+*Theorem:* Let $\cal V$ denote the *span* of the rows of $B$,i.e.\ the
+set of all possible linear combinations of rows of $B$. Define $\cal
+V_{rref}$ similarly. Then
 
 $$
 \cal V = \cal V_{rref}
@@ -71,7 +72,7 @@ The sets $\cal V$ and $\cal V_{rref}$ are called the *row spaces*
 of the two matrices, and yes, they are examples of vector spaces, as we
 will now see.
 
-## Vector space definition
+## Vector Space Definition
 
 <blockquote>
 
@@ -94,7 +95,7 @@ following conditions:
 
 </blockquote>
 
-## Examples
+### Examples
 
 ### $\cal R^{n}$
 
@@ -106,7 +107,7 @@ simply the set of all vectors consisiting of $n$ real numbers. In an $m
 \textrm{x} k$ matrix the rows are members of so $\cal R^{m}$ and the
 columns are in $\cal R^{k}$.
 
-### The set of all continuous functions on the interval [0,1]
+### The set C(0,1) of all continuous functions on the interval [0,1]
 
 No surprises here.  Vector addition and scalar multiplication are done
 as functions. If say $u$ is the squaring function and $v$$ is the sine
@@ -119,12 +120,12 @@ $$
 and 
 
 $$
-u+v = x^{0.5} + sin(x)
+u+v = x^{0.5} + \sin(x)
 $$
 
 ### The set of all random variables defined on some probability space
 
-Consider the example in @sec-mlb on major league baseball players.  We
+Consider the example in {@sec-mlb} on major league baseball players.  We
 choose a player at random.  Denote weight, height and age by $W$, $H$
 and $A$. 
 
@@ -145,11 +146,158 @@ random variables $1$, $H$ and $A$
 
 ## Subspaces
 
-Say $\cal W_{1}$ a subset of a vectpr space $\cal W$, such that $\cal
+Say $\cal W_{1}$ a subset of a vector space $\cal W$, such that $\cal
 W_{1}$ is closed under addition and scalar multiplication. $\cal W_{1}$
 is called a *subspace* of $\cal W$.
 
 For instance, say $\cal W$ is $R^3$, and take $\cal W_{1}$ to be all
 vectors of the form (a,b,0). Clearly, $\cal W_{1}$ is closed under
 addition and scalar multiplication.
+
+Another subspace of $R^3$ is the set of vectors (a,a,b), i.e. those
+vectors whose first two element are equal. What about vectors of the
+form (a,b,a+b)? Yes.
+
+In the C(0,1) example of continuous functions on [0,1], one subspace is
+the set of all polynomial functions. Again, the sum of two polynomials
+is a polynomial, and the same holds for scalar multiplication, so the
+set of polynomials is closed under those operations, and is a subspace.
+
+Note that a subspace is also a vector space in its own right.
+
+## Basis 
+
+Consider a set of vectors $u_1,...u_r$ in a vector space $\cal W$.
+Recall that the span of these vectors is defined to be the set of all
+linear combinations of them. In verb form, we say that $u_1,...u_r$
+*spans* $\cal W$ if we can generate the entire vector space from those
+vectors via linear combinations. It's even nicer if the vectors are
+linearly independent:
+
+<blockquote>
+
+We say the vectors $u_1,...u_r$ in a vector space $\cal W$ form a *basis*
+for $\cal W$ if they are linearly independent and span $\cal W$.
+</blockquote>
+
+### Examples
+
+$\cal R^3$: 
+
+The vectors (1,0,0), (0,1,0) and (0,0,1) are easily seen to be 
+a basis here. They are
+linearly independent, and clearly span $\cal R^3$. For instance, to
+generate (3,1,-0.2), we use this linear combination:
+
+(3,1,-0.2) = 3 (1,0,0) + 1 (0,1,0) + (-0.2) (0,0,,1)
+
+But bases are not unique; for instance, the set (1,0,0, (0,1,0), (0,1,1) works
+equally well as a basis for this space, as dp (infitely) many others..
+
+A basis for The subspace of vectors of the form (a,a,b) is (1,1,0) and
+(0,0,1). 
+
+C(0,1): Alas, there is no finite basis here. Even infinite ones have
+issues in their mathematical formulation.
+
+❄️  **Your Turn:** Prove that the coefficients in basis representations
+are unique. In other words, in a representation of the vector $x$ in
+terms of a basis $u_1,...,u_n$,
+
+$$
+x = a_1 + u_1 + ... + a_n u_n
+$$
+
+the coefficients $a_i$ are unique.
+
+## Dimension
+
+Geometrically, we often refer to what is called $\cal R^3$ here as
+``3-dimensional.'' We extend this to general vector spaces as follows:
+
+<blockquote>
+
+The \textit{dimension} of a vector space is the number of vectors in any
+of its bases.
+
+</blockquote>
+
+There is a bit of a landmine in that definition, as it presumes that all
+the bases do consist of the same number of vectors. This is true, but
+must be proven. Here we follow the 
+[elegant proof](https://www.google.com/books/edition/Algebra_and_Geometry/tVTd78vYzPkC?hl=en&gbpv=1&pg=PA106&printsec=frontcover) AF Beardon (*Algebra and Geometry*, 2005, Cambridge).
+
+<blockquote>
+
+*Theorem:* The number of vectors is the same in every basis.
+
+*Proof:* Consider two bases, $b_u = u_1,...,u_m$ and $b_v = v_1,...,v_n$
+By definition, each $u_i$ in $b_u$ can be represented by $b_v$ and vice
+versa:
+
+$$
+u_i = r_{i1} v_1 + ... + r_{in} v_n = \sum_{q=1}^n r_{iq} v_q
+$${#eq-ui}
+
+$$
+v_j = s_{j1} u_1 + ... + s_{jm} u_m \sum_{w=1}^m s_{jw} u_w
+$${#eq-vj}
+
+Substituting the second equation into the first, we have
+
+$$
+u_k = \sum_{q=1}^n r_{kq} \sum_{w=1}^m s_{qw} u_w =
+\sum_{q=1}^n \sum_{w=1}^m r_{kq}s_{qw} u_w
+$$
+
+Since the $u_w$ form a basis, then the above Your Turn problem on the
+uniqueness of coefficients in a basis representation says we can equate
+coefficients on both sides of the last equation. The coefficient of
+$u_k$ on the right side is 
+
+$$
+\sum_{q=1}^n r_{kq} s_{qk}
+$$
+
+whereas on the left side, it is 1. So, 
+
+$$
+1 = \sum_{q=1}^n r_{kq} s_{qk}
+$$
+
+Summing over $k$, we obtain
+
+$$
+n = \sum_{k=1}^m \sum_{q=1}^n r_{kq} s_{qk}
+$$
+
+But going through the same steps as above, but now substituting @eq-ui
+into @eq-vj, we would have
+
+$$
+m = \sum_{p=1}^m \sum_{q=1}^m 
+r_{pq} 
+s_{qp}
+$$
+
+The sums in the last two equations are the same!
+
+Therefore $m = n$, i.e. the two bases are of the same size.
+
+</blockquote>
+ 
+## Inner Product Spaces
+
+The usefulness of vector spaces is greatly enhanced with the addition of
+an *inner product* structure.
+
+### Geometric aspirations
+
+You may recall from your high school geometry course the key concept of
+perpendicularity, represented by the ⊥ symbol. You may also recall that
+the line drawn from a point P to the closest point P' within L is
+perpendicular to L.
+
+The early developers of linear algebra wanted to extend such concepts to
+abstract vector spaces.
 
