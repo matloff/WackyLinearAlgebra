@@ -295,9 +295,40 @@ an *inner product* structure.
 
 You may recall from your high school geometry course the key concept of
 perpendicularity, represented by the ⊥ symbol. You may also recall that
-the line drawn from a point P to the closest point P' within L is
-perpendicular to L.
+in 2-dimensional space,, given a point P and a line L, the line drawn
+from point P to the closest point P' within L is perpendicular to L.
+The same is true if L is a plane.
+
+This was shown in this book's cover, shown here:
+
+![xx](Projections.png)
 
 The early developers of linear algebra wanted to extend such concepts to
-abstract vector spaces.
+abstract vector spaces. This aids intuition, and has very powerful
+applications.
+
+### Definition
+
+You may have seen *dot products in a course on vector calculus or
+physics. For instance, the dot product of the vectors (3,1,1.5)' and
+(0,5,6)' is
+
+3x0 + 1x5 + 1.5x6 = 14
+
+This in fact is a standard inner product on $\cal R^3$, but the general
+definition is as follows.
+
+<blockquote>
+
+An *inner product* on a vector space $\cal V$, denoted by the ``angle
+brackets'' notation $<u,v>$ is a function with two vectors as arguments
+and a numerical output, with the following properties:
+
+* $<u,v> = <v,u>$
+
+* The function is linear in both arguments.
+
+* $<u,u> ~ \geq 0$, with equality if and only if $u = 0$.
+
+</blockquote>
 
