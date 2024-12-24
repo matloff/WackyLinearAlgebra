@@ -7,5 +7,166 @@ library(qeML)
 
 {{< pagebreak >}}
 
-# Inner Product Spaces 
+ 
+# Inner Product Spaces
+
+The usefulness of vector spaces is greatly enhanced with the addition of
+an *inner product* structure.
+
+## Geometric Aspirations
+
+You may recall from your high school geometry course the key concept of
+perpendicularity, represented by the ⊥ symbol. You may also recall that
+in 2-dimensional space,, given a point P and a line L, the line drawn
+from point P to the closest point P' within L is perpendicular to L.
+The same is true if L is a plane. The point P' is called the
+*projection* of P onto L.
+
+This was shown in this book's cover, shown here:
+
+![Projections](Projections.png)
+
+The early developers of linear algebra wanted to extend such concepts to
+abstract vector spaces. This aids intuition, and has very powerful
+applications.
+
+## Definition
+
+You may have seen *dot products in a course on vector calculus or
+physics. For instance, the dot product of the vectors (3,1,1.5)' and
+(0,5,6)' is
+
+3x0 + 1x5 + 1.5x6 = 14
+
+This in fact is a standard inner product on $\cal R^3$, but the general
+definition is as follows.
+
+<blockquote>
+
+An *inner product* on a vector space $\cal V$, denoted by the ``angle
+brackets'' notation $<u,v>$ is a function with two vectors as arguments
+and a numerical output, with the following properties:
+
+* $<u,v> = <v,u>$
+
+* The function is bilinear: 
+
+  $$
+  <u,av+bw> = a <u,v> + b <u,w>
+  $$
+
+* $<u,u> ~ \geq 0$, with equality if and only if $u = 0$.
+
+</blockquote>
+
+## Examples
+
+$\cal R^n$:
+
+As noted, ordinary dot product is the most common inner product on this
+space.
+
+$<(a_1,...,a_n),(b_1,...,b_n> =
+a_1 b_1 + ... + a_n b_n$
+
+❄️  **Your Turn:** An $n ~ \textrm{x} ~ n$ symmetric matrix $M$ is called
+*positive definite* if 
+
+$$
+w'Mw > 0
+$$
+
+Show that $<u,v> = u'Mv$ is an inner product on $\cal R^n$.
+
+*C(0,1)*:
+
+One inner product on this space as
+
+$$
+<f,g> = \int_{0}^{1} f(t) g(t) ~ dt
+$$  
+
+For instance, with $f(t) = t^2$ and $g(t) = \sin(t)$, the inner product
+can be computed with R:
+
+```{r}
+f <- function(t) t^2
+g <- function(t) sin(t)
+fg <- function(t) f(t) * g(t)
+integrate(fg,0,1)
+```
+
+This clearly fits most requirements for inner products, but what about
+$<f,f> = 0$ only if $f = 0$?[Note that the 0 vector in this space is the
+function that is identically 0, not just 0 at some points]{.column-margin}
+A non-0 $f$ will have $f^2(t) > 0$ for at least one $t$, and by
+continuity, $f^2(t) > 0$ on an interval containing that $t$, thus making
+a nonzero contribution to the integral and thus to the inner product.
+
+
+$\cal RV(\Omega)$:
+
+From here on, we'll restrict to the vector space of all random variables
+on $\Omega$ having finite variance. We define
+
+$$
+<X,Y> = E(XY)
+$$
+
+The properties of expected value, e.g. linearity, show most of the
+requirements for an inner product hold.  But again, we need to show that
+
+$$
+<X,X> = E(X^2) > 0 
+$$
+
+for any $X$ such that $P(X = 0) < 1$. To see this,
+recall that for any random variable $X$ with finite variance, we have
+
+$$
+Var(X) = E[(X - E(X))^2] = E(X^2) - [E(X)]^2
+$$
+
+so that $E(X^2) > 0$ for any nonzero $X$, i.e. any $X$ that is not
+identically 0.
+
+## Norm of a Vector
+
+This concept extends the notion of a the length of a vector, as we know
+it in $\cal R^2$ and $\cal R^3$.
+
+<blockquote>
+
+The *norm* of a vector $x$ is
+
+$$
+(<x,x>)^{0.5}
+$$
+
+</blockquote>
+
+## Projections
+
+As mentioned, the extension of classical geometry to abstract vector
+spaces has powerful applications. There is no better example of this
+than the idea of *projections*.
+
+### Definition
+
+<blockquote>
+
+Let $v$ be a vector in an inner product space $\cal V$, with a subspace $\cal
+W$.
+
+</blockquote>
+
+## Orthogonal Bases
+
+### The Gram-Schmidt method
+
+### Application: Best polynomial approximation to a function
+
+## Shrinkage Estimators
+
+## Application: Fairness in Algorithms
 

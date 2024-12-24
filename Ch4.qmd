@@ -7,6 +7,8 @@ library(qeML)
 
 {{< pagebreak >}}
 
+# Matrix Rank
+
 ::: {.callout-note}
 
 ## Goals of this chapter:
@@ -16,8 +18,6 @@ Many matrices are noninvertible. The subject of this chapter. matrix
 understanding matrix applications. 
 
 :::
-
-# Matrix Rank
 
 In our computations in the latter part of the last chapter, we added a
 proviso that $(A'A)^{-1}$ exists. In this chapter, we'll present a
@@ -222,7 +222,7 @@ In @sec-censusrref, we found the matrix $A'A$ to be noninvertible, as
 its RREF had a row of 0s. We mentioned a relation to rank, but didn't
 formalize it, which we will do now. 
 
-### Yes, one can tell the rank of a matrix by looking at its RREF
+### Yes, one can tell the rank of a matrix by looking at its RREF{#sec-yessamerank}
 
 <blockquote>
 
