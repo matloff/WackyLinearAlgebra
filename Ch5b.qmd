@@ -225,6 +225,13 @@ distances from A to C and C to B.
 (proof following
 https://math.stackexchange.com/questions/91181/proof-for-triangle-inequality-for-vectors)
 
+### Exercizes
+
+❄️  **Your Turn:** Consider the space $C(0,1)$. For function $f$ and $g$ 
+of your own choosing, verify that the Cauchy-Schwarz and Triangle
+Inequalities hold in that case.
+
+
 ## Projections
 
 (follow Hilbert Projection Theorem,
