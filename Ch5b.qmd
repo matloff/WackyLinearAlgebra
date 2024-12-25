@@ -136,7 +136,7 @@ identically 0.
 This concept extends the notion of a the length of a vector, as we know
 it in $\cal R^2$ and $\cal R^3$.
 
-### Definition
+*Definition:*
 
 <blockquote>
 
@@ -148,7 +148,70 @@ $$
 
 </blockquote>
 
-## Triangle Inequality
+## Important Inequalities
+
+These relations are highly useful, as we will see in the sequel.
+
+### The Cauchy-Schwarz Inequality
+
+<blockquote>
+
+Say $u$ and $v$ are vectors in an inner product space. Then
+
+$$
+|<u,v>| \leq ||u|| ~ ||v||
+$$
+
+</blockquote>
+
+### Application: Correlation
+
+*Correlation coefficients* are ubiquitous in data science. It is well
+known that their values fall into the interval [-1,1]. Let's prove that.
+
+Recall from @sec-cov the notion of the covariance between two random
+variables (from which the covariance matrix of a random vector is
+formed). We remarked that covariance is intuitively like correlation,but
+that latter is a scaled form. Formally,
+
+$$
+\rho(X,Y) =
+\frac{E[(X-EX)(Y-EY)}{\sqrt{Var(X)} \sqrt{Var(Y)}}
+$$
+
+By dividing the covariance by the product of the standard deviations, we
+obtain a unitless quantity, i.e. free of units such as centimeters and
+degrees.
+
+Now, $X$ and $Y$ are in $\cal RV(\Omega)$. To simplify the algebra,
+consider the case $EX = EY = 0$.
+
+Recalling our inner product for this space, we have
+
+$$
+<X,Y> = E(XY)
+$$
+
+and 
+
+$$
+||X||^2 = <X,X> = E(X^2) = Var(X)
+$$
+
+with the analogous relations for $Y$.
+
+Cauchy=Schwarz then says
+
+$$
+|E(XY)| \leq \sqrt{Var(X)} \sqrt{Var(Y)}
+$$
+
+which says the correlation is between -1 and 1 inclusive.
+
+*Proof:*  (follow
+https://www.perplexity.ai/search/in-using-the-gnu-screen-comman-47bUohl0TF63gZodzQ2dzQ?__cf_chl_tk=4PwrRobefvA_D4M64udWv.CY6CdcFyhvn9LO7Yk2Xlk-1734144596-1.0.1.1-zyojn6rqoKNR7.a6H_jnMFMYGreSr0ISSXwrgYuRBlI)
+
+### The Triangle Inequality
 
 In the world of ordinary physical geometry, we know the following
 
@@ -159,7 +222,13 @@ distances from A to C and C to B.
 
 </blockquote>
 
+(proof following
+https://math.stackexchange.com/questions/91181/proof-for-triangle-inequality-for-vectors)
+
 ## Projections
+
+(follow Hilbert Projection Theorem,
+https://en.wikipedia.org/wiki/Hilbert_projection_theorem
 
 As mentioned, the extension of classical geometry to abstract vector
 spaces has powerful applications. There is no better example of this
