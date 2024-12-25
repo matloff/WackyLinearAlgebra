@@ -11,7 +11,8 @@ library(qeML)
 # Inner Product Spaces
 
 The usefulness of vector spaces is greatly enhanced with the addition of
-an *inner product* structure.
+an *inner product* structure.[Inner product spaces are also known as *normed*
+spaces.]{.column-margin}
 
 ## Geometric Aspirations
 
@@ -135,13 +136,26 @@ identically 0.
 This concept extends the notion of a the length of a vector, as we know
 it in $\cal R^2$ and $\cal R^3$.
 
+### Definition
+
 <blockquote>
 
-The *norm* of a vector $x$ is
+The *norm* of a vector $x$, denoted $||x||$, is
 
 $$
 (<x,x>)^{0.5}
 $$
+
+</blockquote>
+
+## Triangle Inequality
+
+In the world of ordinary physical geometry, we know the following
+
+<blockquote>
+
+The distance from A to B is less than or equal to the sum of the
+distances from A to C and C to B.
 
 </blockquote>
 
@@ -151,12 +165,34 @@ As mentioned, the extension of classical geometry to abstract vector
 spaces has powerful applications. There is no better example of this
 than the idea of *projections*.
 
-### Definition
+### Definitions
 
 <blockquote>
 
-Let $v$ be a vector in an inner product space $\cal V$, with a subspace $\cal
-W$.
+Consider an inner product space $\cal V$, with subspace $\cal W$.
+
+* We say that vectors $x$ and $y$ in $\cal V$ are
+  *orthogonal* if $<x,y> = 0.$ 
+
+* Let $x$ be a vector in $\cal V$. Then the *orthogonal projection*
+  of $x$ onto $\cal W$, denoted $Px$, is a vector in $\cal W$
+  for which $<Px,x-Px> = 0$.
+
+</blockquote>
+
+Projections are generally unique, but there are mathematical niceties to
+consider, such as whether $W$ is topologically closed. Such issues are
+beyond the scope of this book, and we will assume uniqueness.
+
+### Minimum-distance property
+
+This will be key in the sequel, as many methods in data science involve
+minimizing some quantity.
+
+<blockquote>
+
+*Theorem*:The minimum value of the quantity $||x - y||$ over all $y$ in
+$\cal W$ is attained by setting $y = Px$, so that 
 
 </blockquote>
 

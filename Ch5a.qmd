@@ -229,18 +229,20 @@ A basis for the subspace of vectors of the form (a,a,b) is (1,1,0) and
 
 $C(0,1)$: 
 
-Alas, there is no finite basis here. Even infinite ones have
-issues in their mathematical formulation.
+Alas, there is no finite basis here. Even infinite ones have issues in
+their mathematical formulation.[For those with a background in
+mathematical analysis, here is how the problem is handled. One starts
+with a subspace that is *dense* in the full space, i.e.\ any vector in
+the full space can be approximated to any precision by some linear
+combination of vectors in the dense set. For instance, the famoua
+Stone-Weierstrauss Theorem says that the set of all polynomials is dense
+in $C(0,1)$. One then defines the dense set to be a ``basis.'' The use
+of trig functions as the dense set is much more common than use of
+polynomials, in the familiar *Fourier series*.]{.column-margin}
 
 $\cal RV(\Omega)$:
 
 The situation here is the same as for C(0,1).
-
-$$
-x = a_1 + u_1 + ... + a_n u_n
-$$
-
-the coefficients $a_i$ are unique.
 
 ## Dimension
 
