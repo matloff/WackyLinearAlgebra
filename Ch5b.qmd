@@ -162,7 +162,31 @@ $$
 |<u,v>| \leq ||u|| ~ ||v||
 $$
 
+*Proof:* See the Your Turn problem below.
+
 </blockquote>
+
+❄️  **Your Turn:** Derive the Cauchy-Schwarz Inequality, using the
+following algebraic outline:
+
+* The inequality
+
+  $$
+  0 \leq <(au+v),(au+v)>
+  $$
+
+  holds for any scalar $a$.
+
+* Expand the right-hand side (RHS), using the bilinear property of inner 
+  property.
+
+* Minimize the resulting RHS with respect to $a$.
+
+* Collect terms to yield
+
+   $$
+   <u,v>^2 \leq ||u||^2 ||v||^2
+   $$
 
 ### Application: Correlation
 
@@ -184,7 +208,11 @@ obtain a unitless quantity, i.e. free of units such as centimeters and
 degrees.
 
 Now, $X$ and $Y$ are in $\cal RV(\Omega)$. To simplify the algebra,
-consider the case $EX = EY = 0$.
+consider the case $EX = EY = 0$.[Actually, we should say, 
+``Make the transformation $X \rightarrow X - EX$,
+and note that it leaves both sides of the above correlation formula
+unchanged. We can thus assume $EX = EY = 0$.'' This is a common strategy,
+and should be kept in mind.]{.column-margin}
 
 Recalling our inner product for this space, we have
 
@@ -208,9 +236,6 @@ $$
 
 which says the correlation is between -1 and 1 inclusive.
 
-*Proof:*  (follow
-https://www.perplexity.ai/search/in-using-the-gnu-screen-comman-47bUohl0TF63gZodzQ2dzQ?__cf_chl_tk=4PwrRobefvA_D4M64udWv.CY6CdcFyhvn9LO7Yk2Xlk-1734144596-1.0.1.1-zyojn6rqoKNR7.a6H_jnMFMYGreSr0ISSXwrgYuRBlI)
-
 ### The Triangle Inequality
 
 In the world of ordinary physical geometry, we know the following
@@ -220,12 +245,29 @@ In the world of ordinary physical geometry, we know the following
 The distance from A to B is less than or equal to the sum of the
 distances from A to C and C to B.
 
+*Proof:* See the Your Turn problem below.
+
 </blockquote>
 
-(proof following
-https://math.stackexchange.com/questions/91181/proof-for-triangle-inequality-for-vectors)
+
 
 ### Exercizes
+
+❄️  **Your Turn:** Use the Cauchy-Schwarz Inequality to prove the
+Triangle Inequality, using the following algebraic outline.
+
+* Start with
+
+  $$
+  ||u+v||^2 = <(u+v,u+v>
+  ##
+
+* Expand the RHS algebraically.
+
+* Using Cauchy-Schwarz to make the equation an inequality.
+
+* Collect terms to yield the Triangle Inequality.
+
 
 ❄️  **Your Turn:** Consider the space $C(0,1)$. For function $f$ and $g$ 
 of your own choosing, verify that the Cauchy-Schwarz and Triangle
