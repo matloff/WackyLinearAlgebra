@@ -273,6 +273,11 @@ Triangle Inequality, using the following algebraic outline.
 of your own choosing, verify that the Cauchy-Schwarz and Triangle
 Inequalities hold in that case.
 
+❄️  **Your Turn:** Say we roll a die once, producing $X$ dotes. If $X = 6$,
+we get a bonus roll, yielding $B$ additional dotes; otherwise, $B = 0$.
+Let $Y = X+B$. Verify that $X$ and $B$ satisfy the Cauchy-Schwarz and
+Triangle Inequalities, and also find $\rho(X,B)$.
+
 
 ## Projections
 
