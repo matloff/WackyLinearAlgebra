@@ -319,4 +319,11 @@ The sums in the last two equations are the same!
 Therefore $m = n$, i.e. the two bases are of the same size.
 
 </blockquote>
+
+## Exercises
+
+❄️  **Your Turn:** Say $U$ and $V$ are subspaces of $W$. Show that
+$U \cap V$ is also a subspace, and that its dimension is at most the
+minimum of the dimensions of $U$ and $V$. Show by counterexample tha
+result does not hold for union.
  
