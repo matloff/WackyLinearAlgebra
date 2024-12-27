@@ -339,4 +339,21 @@ rows and columns of $B$ .
 
 </blockquote>
 
+## Further Exercises
+
+❄️  **Your Turn:** Consider an $m \textrm{x} n$ matrix $A$ with $m \geq n$.
+Then consider the partitioned matrix
+
+$$
+ B =
+ \left (
+ \begin{array}{r}
+ A \\
+ I \\
+ \end{array}
+ \right )
+$$
+
+where $I is the $n \textrm{x} n$ identity matrix. Prove that $B$ is of
+full rank.
 
