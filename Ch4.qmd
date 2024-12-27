@@ -357,3 +357,10 @@ $$
 where $I is the $n \textrm{x} n$ identity matrix. Prove that $B$ is of
 full rank.
 
+❄️  **Your Turn:** Consider the three basic elementary matrices discussed
+here: Swap rows $i$ and $j$; multiply row $i$ by a constant $b$; adding
+$c$ times row $i$ to row $j$, for a constant $c$. Find general formulas
+for the determinants of the three matrices.
+
+❄️  **Your Turn:** Prove that if the matrix $A$ has a 0 row, then
+$det(A) =  0$.
