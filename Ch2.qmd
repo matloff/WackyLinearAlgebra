@@ -529,10 +529,15 @@ $$
 
 The values of $\mu$ and $\sigma$ are the mean and standard deviation.
 But what if we have a random vector, say of length $k$? Is there a
-generalized normal family? The answer is yes.  Here is an example for
-$k = 2$:
+generalized normal family? 
+
+### Example: k = 2
+
+The answer is yes.  Here is an example for $k = 2$:
 
 ![3D bell density](Bell.png)
+
+### General form
 
 Well, then, what is the form of the $k$-dimensional density function?
 Just as the univariate normal family is parameterized by mean and
@@ -560,4 +565,19 @@ middle.
 Clearly, we should not stretch these analogies very far, but they do
 help our intuition here.
 
+### Implication for classical statistics
+
+It can be shown that if a random vector is MV normally distributed, then
+the conditional distribution of any one of its componentx $Y$, given the
+others $X_{others} = t$ (note that $t$ is a vector of $k > 2$) has the
+following properties:
+
+* It has a (univariate) normal distribution.
+
+* Its mean $E(Y | X_{others} = t$ linear in $t$.
+
+* Its variance $Var(Y | X_{others} = t$ does not involve $t$.
+
+These of course are the classical assumptions of linear regression
+models. They actually come from the MV normal model.
 
