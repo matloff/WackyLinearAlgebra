@@ -288,7 +288,7 @@ origin. And what about $(S - Ab)'(S - Ab)$ and so on? Does the math
 still produce the correct answer? Note: $b$ is now a vector of length 1,
 a 1x1 matrix.
 
-### Matrix derivatives
+### Matrix derivatives{#sec-matrixderivs}
 
 The (column) vector of partial derivatives of a scalar quantity is
 called the *gradient* of that quantity. For instance, with 

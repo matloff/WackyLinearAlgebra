@@ -18,7 +18,7 @@ spaces.]{.column-margin}
 
 You may recall from your high school geometry course the key concept of
 perpendicularity, represented by the ⊥ symbol. You may also recall that
-in 2-dimensional space,, given a point P and a line L, the line drawn
+in 2-dimensional space, given a point P and a line L, the line drawn
 from point P to the closest point P' within L is perpendicular to L.
 The same is true if L is a plane. The point P' is called the
 *projection* of P onto L.
@@ -27,13 +27,18 @@ This was shown in this book's cover, shown here:
 
 ![Projections](Projections.png)
 
+The point at the end of the green vector is projected onto the
+mustard-colored plane, producing the red vector. It in turn is projected
+onto the blue line. There are right angles in each case.
+
+
 The early developers of linear algebra wanted to extend such concepts to
 abstract vector spaces. This aids intuition, and has very powerful
 applications.
 
 ## Definition
 
-You may have seen *dot products in a course on vector calculus or
+You may have seen dot products in a course on vector calculus or
 physics. For instance, the dot product of the vectors (3,1,1.5)' and
 (0,5,6)' is
 
@@ -45,7 +50,7 @@ definition is as follows.
 <blockquote>
 
 An *inner product* on a vector space $\cal V$, denoted by the ``angle
-brackets'' notation $<u,v>$ is a function with two vectors as arguments
+brackets'' notation $<u,v>$, is a function with two vectors as arguments
 and a numerical output, with the following properties:
 
 * $<u,v> = <v,u>$
@@ -81,7 +86,7 @@ Show that $<u,v> = u'Mv$ is an inner product on $\cal R^n$.
 
 *C(0,1)*:
 
-One inner product on this space as
+One inner product on this space is
 
 $$
 <f,g> = \int_{0}^{1} f(t) g(t) ~ dt
@@ -121,15 +126,12 @@ $$
 <X,X> = E(X^2) > 0 
 $$
 
-for any $X$ such that $P(X = 0) < 1$. To see this,
-recall that for any random variable $X$ with finite variance, we have
+for any nonzero $X$, i.e. any $X$ such that $P(X = 0) < 1$. 
 
-$$
-Var(X) = E[(X - E(X))^2] = E(X^2) - [E(X)]^2
-$$
+❄️  **Your Turn:** Show that if $<X,X> = 0$, then $X$ must be the 0
+vector. Make use of the facts that $Var(X) = E(X^2) - [E(X)]^2$ and
+$Var(X) \geq 0$ with equality only of $X = c$ for some constant $c$.
 
-so that $E(X^2) > 0$ for any nonzero $X$, i.e. any $X$ that is not
-identically 0.
 
 ## Norm of a Vector
 
@@ -144,6 +146,12 @@ The *norm* of a vector $x$, denoted $||x||$, is
 
 $$
 (<x,x>)^{0.5}
+$$
+
+The *distance* from a vector $x$ to a vector $y$ is
+
+$$
+||y - x||
 $$
 
 </blockquote>
@@ -178,7 +186,7 @@ following algebraic outline:
   holds for any scalar $a$.
 
 * Expand the right-hand side (RHS), using the bilinear property of inner 
-  property.
+  products.
 
 * Minimize the resulting RHS with respect to $a$.
 
@@ -200,7 +208,7 @@ that latter is a scaled form. Formally,
 
 $$
 \rho(X,Y) =
-\frac{E[(X-EX)(Y-EY)}{\sqrt{Var(X)} \sqrt{Var(Y)}}
+\frac{E[(X-EX)(Y-EY)]}{\sqrt{Var(X)} \sqrt{Var(Y)}}
 $$
 
 By dividing the covariance by the product of the standard deviations, we
@@ -238,12 +246,18 @@ which says the correlation is between -1 and 1 inclusive.
 
 ### The Triangle Inequality
 
-In the world of ordinary physical geometry, we know the following
-
 <blockquote>
 
-The distance from A to B is less than or equal to the sum of the
-distances from A to C and C to B.
+In the world of ordinary physical geometry, we know the following
+
+*The distance from A to B is less than or equal to the sum of the
+distances from A to C and C to B.* 
+
+In a general inner product space,
+
+$$
+||x - z|| \leq ||x - y|| + ||y - z|| 
+$$
 
 *Proof:* See the Your Turn problem below.
 
@@ -251,7 +265,7 @@ distances from A to C and C to B.
 
 
 
-### Exercizes
+### Exercises{#sec-cauchyexercises}
 
 ❄️  **Your Turn:** Use the Cauchy-Schwarz Inequality to prove the
 Triangle Inequality, using the following algebraic outline.
@@ -260,7 +274,7 @@ Triangle Inequality, using the following algebraic outline.
 
   $$
   ||u+v||^2 = <(u+v,u+v>
-  ##
+  $$
 
 * Expand the RHS algebraically.
 
@@ -273,49 +287,67 @@ Triangle Inequality, using the following algebraic outline.
 of your own choosing, verify that the Cauchy-Schwarz and Triangle
 Inequalities hold in that case.
 
-❄️  **Your Turn:** Say we roll a die once, producing $X$ dotes. If $X = 6$,
-we get a bonus roll, yielding $B$ additional dotes; otherwise, $B = 0$.
+❄️  **Your Turn:** Say we roll a die once, producing $X$ dots. If $X = 6$,
+we get a bonus roll, yielding $B$ additional dots; otherwise, $B = 0$.
 Let $Y = X+B$. Verify that $X$ and $B$ satisfy the Cauchy-Schwarz and
 Triangle Inequalities, and also find $\rho(X,B)$.
 
 
 ## Projections
 
-(follow Hilbert Projection Theorem,
-https://en.wikipedia.org/wiki/Hilbert_projection_theorem
-
 As mentioned, the extension of classical geometry to abstract vector
 spaces has powerful applications. There is no better example of this
 than the idea of *projections*.
 
-### Definitions
+### Theorem
+
+We say that vectors $u$ and $v$ are *orthogonal* if $<u,v> = 0$. This is
+the general extension of the notion of perpendicularity in high school
+geometry.
 
 <blockquote>
 
-Consider an inner product space $\cal V$, with subspace $\cal W$.
+Consider an inner product space $\cal V$, with subspace $\cal W$.  Then
+for any vector $x$ in $\cal W$, there is a unique vector $z$ in $\cal
+V$, such that $z$ is the closest vector to $x$ in $\cal W$. 
 
-* We say that vectors $x$ and $y$ in $\cal V$ are
-  *orthogonal* if $<x,y> = 0.$ 
-
-* Let $x$ be a vector in $\cal V$. Then the *orthogonal projection*
-  of $x$ onto $\cal W$, denoted $Px$, is a vector in $\cal W$
-  for which $<Px,x-Px> = 0$.
+Furthermore, $x-z$ is orthogonal to any vector $r$ in $\cal W$.
 
 </blockquote>
 
-Projections are generally unique, but there are mathematical niceties to
-consider, such as whether $W$ is topologically closed. Such issues are
-beyond the scope of this book, and we will assume uniqueness.
+The full proof is beyond the scope of this book, as it requires
+background in real analysis. Indeed, even the statement of the theorem
+is not mathematically tight.[For readers who do have such background,
+this is the Hilbert Projection Theorem. "Closest" is defined in terms of
+infimum, and $\cal W$ needs to be a topologically closed
+set. See for example [the Wikipedia entry.l](https://en.wikipedia.org/wiki/Hilbert_projection_theorem)]{.column-margin}
 
-### Minimum-distance property
+For example, in the case of $R^n$, It will be seen shortly that for each
+$\cal W$ in the theorem, there is a matrix $P_{W}$ that implements the
+projection, i.e.
 
-This will be key in the sequel, as many methods in data science involve
-minimizing some quantity.
+$$
+z = P_W x
+$$
+
+The case of $\cal RV(\Omega)$ deserves its own section, coming up next.
+
+## Projections in$\cal RV(\Omega)$
+
+Here is what this very abstract vector space becomes useful in practical
+applications, such as will be presented in @sec-fairness. We will need
+to build a bit of infrastructure.
+
+### Conditional expectatior
+
+Recall the Your Turn problem in @sec-cauchyexercises:
 
 <blockquote>
 
-*Theorem*:The minimum value of the quantity $||x - y||$ over all $y$ in
-$\cal W$ is attained by setting $y = Px$, so that 
+we roll a die once, producing $X$ dots. If $X = 6$,
+we get a bonus roll, yielding $B$ additional dots; otherwise, $B = 0$.
+Let $Y = X+B$. Verify that $X$ and $B$ satisfy the Cauchy-Schwarz and
+Triangle Inequalities, and also find $\rho(X,B)$.
 
 </blockquote>
 
@@ -327,5 +359,5 @@ $\cal W$ is attained by setting $y = Px$, so that
 
 ## Shrinkage Estimators
 
-## Application: Fairness in Algorithms
+## Application: Fairness in Algorithms{#sec-fairness}
 
