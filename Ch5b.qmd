@@ -336,20 +336,157 @@ The case of $\cal RV(\Omega)$ deserves its own section, coming up next.
 
 Here is what this very abstract vector space becomes useful in practical
 applications, such as will be presented in @sec-fairness. We will need
-to build a bit of infrastructure.
+to build a bit of infrastructure.[The material in this section is rather
+lengthy. It is needed for the section on fairness in
+machine learning, @sec-fairness, which hopefully makes it worthwhile.
+But it may be safely skipped, not needed for the non-$\cal RV(\Omega)$ 
+parts of the book.]{.column-margin}
 
-### Conditional expectatior
+### Conditional expectation
 
 Recall the Your Turn problem in @sec-cauchyexercises:
 
 <blockquote>
 
-we roll a die once, producing $X$ dots. If $X = 6$,
+We roll a die once, producing $X$ dots. If $X = 6$,
 we get a bonus roll, yielding $B$ additional dots; otherwise, $B = 0$.
-Let $Y = X+B$. Verify that $X$ and $B$ satisfy the Cauchy-Schwarz and
-Triangle Inequalities, and also find $\rho(X,B)$.
+Let $Y = X+B$...
 
 </blockquote>
+
+*The basics:*
+
+Now, what is $E(Y | B = 2)$? If $B = 2$, then we got the bonus roll, so
+$X = 6$ and $Y = X + B = 8$:
+
+$$
+E(Y | B = 2) = 8
+$$
+
+More generally, 
+
+$$
+E(Y | B = i) = 6 + i, ~ i=1,...,6
+$$
+
+What about $E(Y | B = 0)$? A bit more involved, but still
+straightforward. If $B = 0$, then $X$ was 1, 2, 3, 4 or 5, with
+probability 1/5 each, mean of 3. So
+
+$$
+E(Y | B = 0) = 3
+$$
+
+In summary, 
+
+$$
+E(Y | B = i) =
+\begin{cases}
+3 & i = 0 \\
+6 + i & i = 1,2,3,4,5
+\end{cases}
+$$
+
+*Random variable form:*
+
+The quantity $E(Y | B = i$, a number, can be converted to a random
+variable, in the form of a function of $B$, which we will call $Q$, and 
+also denoted $E(Y | B)$,
+where
+
+$$
+Q = 
+\begin{cases}
+3 & B = 0 \\
+6 + B & B = 1,2,3,4,5
+\end{cases}
+$$
+
+$B$ is random, so $r(B)$ is also random, and here is its distribution:
+
+<blockquote>
+
+$$
+Q \textrm{ takes on the values } 3,7,8,9,10,11 \textrm{ with
+probabilities } 
+$$
+$$
+1/6, 1/36, 1/36, 1/36, 1/36, 1/36
+$$ 
+
+</blockquote>
+
+We need one more thing:
+
+*The Law of Iterated Expectation:*
+
+For random variable $U$ and $V$, set
+
+$$
+R = E[V |U]
+$$
+
+Then 
+
+$$
+E(R) = E(V)
+$$
+
+More concisely:
+
+$$
+E[E(V|U)] = E(V)
+$${#eq-iterexpect}
+
+Intuitive explanation: Say we wish to compute the mean height $E(H)$ of
+all students at a university. We might ask each department $D$ to
+measure their own students, and report to us the resulting mean $E(H|D)$. 
+We could then average all those departmental means to get the overall
+mean for the university:
+
+$$
+E[E(H|D)] = E(H)
+$$
+
+Note, though that that outer $E()$ (the first 'E') is a weighted
+average, since some departments are larger than others. The weights are
+the distribution of $D$.
+
+### Projections in $\cal RV(\Omega)$: how they work
+
+Consider random variables $X$ and $Y$. Let $W$ be the set of all
+functions of $X$ with finite variance, which is a subspace of the vector
+space $\cal RV(\Omega)$. The theorem talks of a closest vector $C$ in
+$W$ to $Y$. Let's see what form $C$ might take.
+
+Remember, the (squared) distance from $Y$ to $C$ is
+
+$$
+||Y - C||^2 = <Y-C,Y-C> = E[(Y-C)^2]
+$$
+
+That last term is 
+
+$$
+E[ E((Y-C)^2 | X) ]
+$$
+
+The minimum value of $E[(Q-d)^2]$ is attained by $d = E(Q)$. (See Your
+Turn problem below.)  So, the minimum of $E((Y-C)^2 | C)$, for all
+random variables $C$, is attained by the conditional mean,
+
+$$
+C = E(Y | X)
+$$
+
+In other words:
+
+<blockquote>
+
+The projection is the conditional mean.
+
+</blockquote>
+
 
 ## Orthogonal Bases
 
