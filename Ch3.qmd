@@ -15,7 +15,7 @@ library(qeML)
 ## Goals of this chapter:
 
 Here we bring together the concepts of previous chapters by presenting
-the *liinear model*, one of the most fundamental techniques in 
+the *linear model*, one of the most fundamental techniques in 
 statistics. It relies heavily on linear algebra, notably matrix inverse.
 
 :::
@@ -64,30 +64,34 @@ of their minds.
 :::
 
 ### Least squares approach
-[This too is something all data
-scientists should keep at the forefronts of their minds. We are always
-working with sample data, subject to intersample variations. The
-quantity $b$ is a random variable.]{.column-margin}
-Let $b$ denote our estimate. How should we obtain it?
+
 We wish to estimate $\beta$ from our data, which we regard as a sample
-from the data generating process.
-Denote our data by $(C_i,V_i), i = 1,...,100$. 
+from the data generating process.  Denote our data by $(C_i,V_i), i =
+1,...,100$.[This too is something all data scientists should keep at the
+forefronts of their minds. We are always working with sample data,
+subject to intersample variations. The quantity $\widehat{\beta}$ is a
+random variable.]{.column-margin} Let $\widehat{\beta}$ denote our
+estimate.[The "hat" notation '^' is statistical convention for "estimate
+of"; $\widehat{\beta}$ is our estimate of the unknown parameter
+$\beta$.]{.column-margin} How should we obtain it?
 
 Pretend for a moment that we don't know, say, $C_{28}$. Using our
-estimated $\beta$, our predicted value would be $b V_{28}$.  Our squared
-prediction error would then be $(C_{28} - b W_{28})^2$.
+estimated $\beta$, our predicted value would be $\widehat{\beta}
+V_{28}$.  Our squared prediction error would then be $(C_{28} - \widehat{\beta} 
+W_{28})^2$.
 
 Well, we actually do know $C_{28}$ (and the others in our data), so we
 can answer the question:
 
 <blockquote>
 
-In our search for a good value of $b$, we can ask how well we would
-predict our known data, using that candidate value of $b$ in our data.
-Our total squared prediction error would be
+In our search for a good value of $\widehat{\beta}$, we can ask how well
+we would predict our known data, using that candidate value of
+$\widehat{\beta}$ in our data.  Our total squared prediction error would
+be
 
 $$
-\sum_{i=1}^{100} [C_{i} - b V_{i} )^2
+\sum_{i=1}^{100} [C_{i} - \widehat{\beta} V_{i} )^2
 $$
 
 A natural choice for $b$ would be the value that minimizes this
@@ -105,6 +109,9 @@ As noted, our choice for $b$ will be the minimizer of
 $$
 \sum_{i=1}^{100} (C_{i} - b V_{i})^2
 $$
+
+over all possible values of $b$. We then set $\widehat{\beta}$ to that
+minimizing value of $b$.
 
 This is a straightforward calculus problem. Setting
 
@@ -260,7 +267,7 @@ $$
 
 and $\beta = (\beta_0,\beta_1)'.$
 
-Our predicted error vector, using our estimate $b$ of $\beta$,
+Our predicted error vector, using our candidate estimate $b$ of $\beta$,
 is very simply expressed:
 
 $$
@@ -280,13 +287,8 @@ $$
 $$
 
 Now how we will minimize that matrix expression with respect to the
-vector $b$. That is the subject of the next section.
+vector $b$? That is the subject of the next section.
 
-❄️  **Your Turn:** State what the matrix $A$ would have been under the
-earlier model in which the regression line is assumed to go through the
-origin. And what about $(S - Ab)'(S - Ab)$ and so on? Does the math
-still produce the correct answer? Note: $b$ is now a vector of length 1,
-a 1x1 matrix.
 
 ### Matrix derivatives{#sec-matrixderivs}
 
@@ -300,7 +302,6 @@ $$
 we have that its gradient is
 
 $$
- \frac{du}{dx dy} =
  \left (
  \begin{array}{r}
  2 + y \\
@@ -329,7 +330,7 @@ $$
 ❄️  **Your Turn:** Show this. Write $a = (a_1,...,a_k)'$ and find the
 gradient "by hand." Compare to $2a$.
 
-Equation @eq-rss is indeed of the form $a'a$, but the problem here is
+@eq-rss is indeed of the form $a'a$, but the problem here is
 that $a$ in turn is a function of $b$, This calls for the Chain Rule,
 which does exist at the matrix level:
 
@@ -338,9 +339,12 @@ functions of $v$, then
 
 $$
 \frac{d}{dv} u'u = 2M'u
-$$
+$$[We must keep in mind that we are working with vectors and
+matrices, so that $M'u$, say $r \textrm{x} s$ times $s \textrm{ x} 1$,
+is conformable matrix multiplication 
+while $uM'$ is mathematical nonsense.]{.column-margin}
 
-With $M = -A$ and $w = S$, we have 
+In our case at hand, we have $M = -A$ and $w = S$, so that
 
 $$
 \frac{d}{db} [(S - Ab)'(S - Ab) = -2 A'(S - Ab)
@@ -355,7 +359,7 @@ $$
 yield our minimizing $b$:
 
 $$
-b = (A'A)^{-1} A'S
+\widehat{\beta} = (A'A)^{-1} A'S
 $$
 
 providing the inverse exists (more on this in the next chapter).
