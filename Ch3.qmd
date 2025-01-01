@@ -284,7 +284,7 @@ our sum of squared prediction errors is
 
 $$
 (S - Ab)'(S - Ab)
-$$
+$${#eq-matrixss}
 
 Now how we will minimize that matrix expression with respect to the
 vector $b$? That is the subject of the next section.

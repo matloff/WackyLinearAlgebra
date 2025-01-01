@@ -3,7 +3,7 @@ project:
 
 book:
 
-   title: "Linear Algebra *in* Data Science"
+   title: "Linear Algebra Runs Data Science"
    subtitle: "with R examples"
    author: 
      - Norman Matloff

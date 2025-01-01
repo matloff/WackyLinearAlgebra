@@ -15,8 +15,9 @@ library(qeML)
 ## Goals of this chapter:
 
 The usefulness of vector spaces is greatly enhanced with the addition of
-an *inner product* structure.[Inner product spaces are also known as *normed*
-spaces.]{.column-margin}
+an *inner product* structures.[Inner product spaces are also known as *normed*
+spaces.]{.column-margin} We motivate and define such structures here,
+and present applications.
 
 :::
 
@@ -345,10 +346,9 @@ The case of $\cal RV(\Omega)$ deserves its own section, coming up next.
 Here is what this very abstract vector space becomes useful in practical
 applications, such as will be presented in @sec-fairness. We will need
 to build a bit of infrastructure.[The material in this section is rather
-lengthy. It is needed for the section on fairness in
-machine learning, @sec-fairness, which hopefully makes it worthwhile.
-But it may be safely skipped, not needed for the non-$\cal RV(\Omega)$ 
-parts of the book.]{.column-margin}
+involved, but it is needed for the section on racial, gender etc.
+fairness in machine learning, @sec-fairness, which hopefully makes it
+worthwhile.]{.column-margin}
 
 ### Conditional expectation
 
@@ -374,20 +374,6 @@ $$
 More generally, 
 
 $$
-E(Y | B = i) = 6 + i, ~ i=1,...,6
-$$
-
-What about $E(Y | B = 0)$? A bit more involved, but still
-straightforward. If $B = 0$, then $X$ was 1, 2, 3, 4 or 5, with
-probability 1/5 each, mean of 3. So
-
-$$
-E(Y | B = 0) = 3
-$$
-
-In summary, 
-
-$$
 E(Y | B = i) =
 \begin{cases}
 3 & i = 0 \\
@@ -395,12 +381,13 @@ E(Y | B = i) =
 \end{cases}
 $$
 
+❄️  **Your Turn:** Show the details in the above computation.
+
 *Random variable form:*
 
-The quantity $E(Y | B = i$, a number, can be converted to a random
+The quantity $E(Y | B = i)$, a number, can be converted to a random
 variable, in the form of a function of $B$, which we will call $Q$, and 
-also denoted $E(Y | B)$,
-where
+denoted $E(Y | B)$, where
 
 $$
 Q = 
@@ -460,12 +447,18 @@ Note, though that that outer $E()$ (the first 'E') is a weighted
 average, since some departments are larger than others. The weights are
 the distribution of $D$.
 
+❄️  **Your Turn:** In the die rolling example above, verify that
+
+$$
+E[E(Y|B)] = E(Y)
+$$
+
 ### Projections in $\cal RV(\Omega)$: how they work
 
 Consider random variables $X$ and $Y$. Let $W$ be the set of all
 functions of $X$ with finite variance, which is a subspace of the vector
-space $\cal RV(\Omega)$. The theorem talks of a closest vector $C$ in
-$W$ to $Y$. Let's see what form $C$ might take.
+space $\cal RV(\Omega)$. The above theorem talks of a closest vector $C$ in
+$W$ to $Y$. Let's see what form $C$ might take in this vector space.
 
 Remember, the (squared) distance from $Y$ to $C$ is
 
@@ -479,9 +472,12 @@ $$
 E[ E((Y-C)^2 | X) ]
 $$
 
-The minimum value of $E[(Q-d)^2]$ is attained by $d = E(Q)$. (See Your
-Turn problem below.)  So, the minimum of $E((Y-C)^2 | C)$, for all
-random variables $C$, is attained by the conditional mean,
+For any random variable $Q$ of finite variance, the minimum value of
+$E[(Q-d)^2]$ over all constants $d$ is attained by $d = E(Q)$. (See Your
+Turn problem below.) So, the minimum of $E((Y-C)^2 | C)$, for all random
+variables $C$, is attained by the conditional mean,[Note that since we
+are conditioning on the random variable $C$, it becomes a constant, like
+$d$ above.]{.column-margin}
 
 $$
 C = E(Y | X)
@@ -491,10 +487,20 @@ In other words:
 
 <blockquote>
 
-The projection is the conditional mean.
+Projections in $\cal RV(\Omega)$ are conditional means.
 
 </blockquote>
 
+## Projections in the Linear Model
+
+Armed with our new expertise on inner product spaces, we see that
+@eq-matrixss is
+
+$$
+<S-Ab,S-Ab>
+$$
+
+in the vector space $R^n$, where $n$ is the number of our data points.
 
 ## Orthogonal Bases
 
@@ -504,5 +510,5 @@ The projection is the conditional mean.
 
 ## Shrinkage Estimators
 
-## Application: Fairness in Algorithms{#sec-fairness}
+## Application: Racial, Gender Etc. Fairness in Algorithms{#sec-fairness}
 
