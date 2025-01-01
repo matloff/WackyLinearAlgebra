@@ -369,8 +369,8 @@ Let's check this with the Nile example:
 ```{r}
 A <- cbind(1,n1)
 S <- n2
-Ap <- t(A)
-solve(Ap %*% A) %*% Ap %*% S
+Ap <- t(A)  # R matrix transpose
+solve(Ap %*% A) %*% Ap %*% S  # R matrix inverse
 # check via R
 lm(n2 ~ n1)
 ```
@@ -379,8 +379,7 @@ lm(n2 ~ n1)
 det(Ap %*% A) 
 ```
 
-Nonzero! So $(A'A)^{-1}$ does exist, confirming that our R code
-that needed that property.
+Nonzero! So $(A'A)^{-1}$ does exist, as we saw.
 
 ❄️  **Your Turn:** Show that 
 
@@ -427,7 +426,7 @@ Then, using the same reasoning as before, we have the minimizing
 value of $b$:
 
 $$
-b = (A'A)^{-1} A'S
+\widehat{\beta} = (A'A)^{-1} A'S
 $${#eq-betahat}
 
 again providing that the inverse exists.
@@ -437,7 +436,7 @@ again providing that the inverse exists.
 As an examples, let's take the **mlb1**
 from my [qeML ('Quick and Easy Machine
 Learning](https://github.com/matloff/qeML) package.
-[Kindly provided by the UCLA Dept. of Statistics]{.column-margin}
+[Dataset kindly provided by the UCLA Dept. of Statistics]{.column-margin}
 The data is on major league baseball players. We will predict weight
 from height and age.
 
@@ -476,24 +475,27 @@ $$
 
 where $\sigma$ is an unknown constant to be estimated from the data.
 
-It is usually not a realistic assumption. Say for instance we are
-predicting human weight from height. There should be more variation in
-weight among taller people than above shorter people. But it's a
-simplifying assumption without really good alternatives, so it is
-commonly used.
+So $Var(S_i) = \sigma^2$ for all $i$.  It is usually not a realistic
+assumption. Say for instance we are predicting human weight from height.
+There should be more variation in weight among taller people than above
+shorter people. But it's a simplifying assumption without really good
+alternatives, so it is commonly used.
 
-And in that setting, our formulas from Section {@sec-covar} come in
+And in that setting, our formulas from {@sec-covar} come in
 handy, as follows.
 
-Recall that $b$ is our estimate of the unknown population
+Recall that $\widehat{\beta}$ is our estimate of the unknown population
 parameter $\beta$, based on our random sample data. But that means that
-$b$ is a random vector, and thus has a covariance matrix. Using
-(\ref{@eq-betahat}) and setting the "hat matrix" $H = (A'A)^{-1} A'$$, we have
+$\widehat{\beta}$ is a random vector, and thus has a covariance matrix. Using
+@eq-acova and setting the "hat matrix" $H = (A'A)^{-1} A'$$, we have
 
 $$
-Cov(b) = H Cov(S|A) H' = H \sigma^2 I H' = \sigma^2 H H' =
+Cov(\widehat{\beta}) = H Cov(S|A) H' = H \sigma^2 I H' = \sigma^2 H H' =
 \sigma^2 (A'A)^{-1}
 $$
+
+Classical statistical formulas use this relation to find standard errors
+for $\widehat{\beta}_i$ etc.
 
 ## Update Formulas
 

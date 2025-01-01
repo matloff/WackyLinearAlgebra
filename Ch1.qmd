@@ -1085,7 +1085,7 @@ components. It turns out that
 
 $$
 Cov(Y) = A Cov(X) A'
-$$
+$${#eq-acova}
 
 The proof is straightforward but tedious, and it will be omittted.
 
