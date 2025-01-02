@@ -342,6 +342,12 @@ $$
 z = P_W x
 $$
 
+Note that projection operators are *idempotent*, meaning that if you
+apply a projection twice, the effect is the same as applying it once. In
+the matrix equation above, this means $P_W^2 = P_W$. This makes sense;
+once you drop down to the subspace, there is no further dropping down to
+that same space.
+
 The case of $\cal RV(\Omega)$ deserves its own section, coming up next.
 
 ## Projections in$\cal RV(\Omega)$
@@ -551,7 +557,7 @@ $$
 \widehat{\beta} = (A'A)^{-1} A'S
 $$
 
-the projection itself is then 
+The projection itself is then 
 
 $$
 A \widehat{\beta} = A(A'A)^{-1} A'S = HS
@@ -560,16 +566,39 @@ $$
 where the matrix $H = A(A'A)^{-1} A'$, which projects $S$ onto the column
 space of $A$, is called the *hat matrix*. 
 
-Denoting the elements of $H$ by $h_{ij}$, we have
+As a projection, $H$ is idempotent, which one can easily verify by
+multiplication.  $H$ is also symmetric.
+
+❄️  **Your Turn:** Show this.
+
+Let $h_{ii}$ denote element $i$ of the diagonal of $H$, with $x_i$
+denoting row $i$ of A. One can show that
 
 $$
-\widehat{\beta}_i = h_{ii} S_i + \sum_{j \neq i}
+h_{ii} = x_{i} (A'A)^{-1} x_i'
 $$
 
+❄️  **Your Turn:** Show this.
 
+The quantity $h_{ii}$ is called the *leverage* for datapoint $i$.
+
+Ah, so we know $h_{ii} \geq 0$.  But also,using an extenson of
+@eq-traceab,[It can be shown that trace is invariant under *circular
+shifts*, e.g. $UVW$, $VWU$ and $WUV$ all have the same
+trace.]{.column-margin} we have
+
+$$
+tr(H) = 
+tr[\underbrace{A(A'A)^{-1}} A'] =
+tr[A'\underbrace{A(A'A)^{-1}}] = tr(I) = p
+$$
+
+for $A$ of size $n \textrm{x} p$.
+
+Thus the average value of $h_{ii}$ is $p/n$. Accordingly, we might
+suspect an outlier if $h_{ii}$ is considerably larger than $p/n$. 
 
 ## Orthogonal Bases
-
 ### The Gram-Schmidt method
 
 ### Application: Best polynomial approximation to a function

@@ -163,7 +163,7 @@ vector space in its own right.
 
 ### Examples
 
-$R^3$: 
+$R^3$ and $R^n$: 
 
 For instance, take $\cal W_{1}$ to be all vectors of the form
 (a,b,0). Clearly, $\cal W_{1}$ is closed under addition and scalar
@@ -172,6 +172,10 @@ multiplication.
 Another subspace of $R^3$ is the set of vectors (a,a,b), i.e. those
 vectors whose first two element are equal. What about vectors of the
 form (a,b,a+b)? Yes.
+
+We saw earlier that the *row space* of an $m \textrm{x} n$ matrix $A$,
+consisting of all linear combinations of the rows of $A$, is a subspace
+of $R^m$. Similarly, the *column space* is a subspace of $R^n$.
 
 $C(0,1)$: 
 
