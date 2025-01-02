@@ -360,7 +360,7 @@ yield our minimizing $b$:
 
 $$
 \widehat{\beta} = (A'A)^{-1} A'S
-$$
+$${#eq-linregformula}
 
 providing the inverse exists (more on this in the next chapter).
 
@@ -487,10 +487,10 @@ handy, as follows.
 Recall that $\widehat{\beta}$ is our estimate of the unknown population
 parameter $\beta$, based on our random sample data. But that means that
 $\widehat{\beta}$ is a random vector, and thus has a covariance matrix. Using
-@eq-acova and setting the "hat matrix" $H = (A'A)^{-1} A'$$, we have
+@eq-acova and setting $R = (A'A)^{-1} A'$$, we have
 
 $$
-Cov(\widehat{\beta}) = H Cov(S|A) H' = H \sigma^2 I H' = \sigma^2 H H' =
+Cov(\widehat{\beta}|A) = R Cov(S|A) R' = R \sigma^2 I R' = \sigma^2 R R' =
 \sigma^2 (A'A)^{-1}
 $$
 
