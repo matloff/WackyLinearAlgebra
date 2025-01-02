@@ -467,7 +467,11 @@ $$
 E(S | A) = A \beta 
 $$
 
-it is often assumed that 
+it is often assumed that[In some applications, $A$ is actually chosen by
+an experimenter, so that it is not random. But even in the random case,
+it is standard to condition on $A$. By @eq-iterexpect, a conditional
+confidence interval, say, at the 95% level also has the level
+unconditionally.]{.column-margin} 
 
 $$
 Cov(S | A) = \sigma^2 I
