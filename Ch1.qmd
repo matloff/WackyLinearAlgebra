@@ -566,6 +566,29 @@ We will often write a row vector in the form (a,b,c,...). So
 be a column vector, we use transpose, so that for instance (5,1,88)'
 means a 3x1 matrix.
 
+### Trace of a square matrix
+
+The *trace* of a square matrix $A$ is the sum of its diagonal elements,
+$tr(A) = \sum_{i=1}^n A_{ii}$. This measure has various properties, some
+obvious (trace of the sum is sum of the traces), and some less so, such
+as:
+
+<blockquote>
+
+Suppose $A$ and $B$ are square matrices of the same size. Then
+
+$$
+tr(AB) = tr(BA)
+$${#eq-traceab}
+
+*Proof:* See Your Turn problem.
+
+</blockquote>
+
+❄️  **Your Turn:** Prove @eq-traceab.  Hint: Write out the left-hand side
+as a double sum.  Reverse the order of summation, and work toward the
+right-hand side.
+
 # Partitioned Matrices: an Invaluable Visualization Tool{#sec-partition}
 
 Here, "visualization" is not a reference to graphics but rather to
