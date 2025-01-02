@@ -19,6 +19,9 @@ an *inner product* structures.[Inner product spaces are also known as *normed*
 spaces.]{.column-margin} We motivate and define such structures here,
 and present applications.
 
+Among other things, we will analyze a method for removing racial, gender
+etc. bias in machine learning algorithms.
+
 :::
 
 
@@ -491,7 +494,28 @@ Projections in $\cal RV(\Omega)$ are conditional means.
 
 </blockquote>
 
+Moreover:
+
+Since the difference between a vector and its projection onto a subspace
+is orthogonal to that subspace we have:
+
+<blockquote>
+
+The vector $Y - E(Y|X)$ is uncorrelated with $E(Y|X)$.  In other words,
+the prediction error (also called the *residual* has 0 correlation with
+the prediction itself.
+
+</blockquote>
+
+❄️  **Your Turn:** Prove this assertion.
+
 ## Projections in the Linear Model
+
+The case of the linear model will deepen our understanding, and will
+lead to a method for outlier detection that is commonly used in
+practice.
+
+### The least-squares solution is a projection
 
 Armed with our new expertise on inner product spaces, we see that
 @eq-matrixss is
@@ -501,6 +525,48 @@ $$
 $$
 
 in the vector space $R^n$, where $n$ is the number of our data points.
+Since we are minimizing that quantity with respect to $b$, the solution,
+$A \widehat{\beta}$, is the projection of $Y$ onto the subspace.
+
+But wait -- *what* subspace?  Well, it is the subspace consisting of all
+vectors of the form $Ab$:
+
+<blockquote>
+
+The linear model projects the vector $Y$ onto the column space of $A$.
+
+</blockquote>
+
+### Application: identifying outliers
+
+An *outlier* is a data point that is rather far from the others. It
+could be an error, or simply an anomalous case. Even in the latter
+situation, such a data point could distort our results, so in both
+cases, identifying outliers is important.
+
+Recall @eq-linregformula, the general solution to our linear regression
+model: 
+
+$$
+\widehat{\beta} = (A'A)^{-1} A'S
+$$
+
+the projection itself is then 
+
+$$
+A \widehat{\beta} = A(A'A)^{-1} A'S = HS
+$$
+
+where the matrix $H = A(A'A)^{-1} A'$, which projects $S$ onto the column
+space of $A$, is called the *hat matrix*. 
+
+Denoting the elements of $H$ by $h_{ij}$, we have
+
+$$
+\widehat{\beta}_i = h_{ii} S_i + \sum_{j \neq i}
+$$
+
+
 
 ## Orthogonal Bases
 
