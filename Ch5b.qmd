@@ -530,7 +530,9 @@ $$
 <S-Ab,S-Ab>
 $$
 
-in the vector space $R^n$, where $n$ is the number of our data points.
+in the vector space $R^n$, where $n$ is the number of our data
+points.[Of course, "data points" means rows in the data frame.  In the
+statistics realm, people often speak of "observations."]{.column-margin}
 Since we are minimizing that quantity with respect to $b$, the solution,
 $A \widehat{\beta}$, is the projection of $Y$ onto the subspace.
 
@@ -582,7 +584,7 @@ $$
 
 The quantity $h_{ii}$ is called the *leverage* for datapoint $i$.
 
-Ah, so we know $h_{ii} \geq 0$.  But also,using an extenson of
+Ah, so we know $h_{ii} \geq 0$.  But also,using an extension of
 @eq-traceab,[It can be shown that trace is invariant under *circular
 shifts*, e.g. $UVW$, $VWU$ and $WUV$ all have the same
 trace.]{.column-margin} we have
@@ -598,12 +600,27 @@ for $A$ of size $n \textrm{x} p$.
 Thus the average value of $h_{ii}$ is $p/n$. Accordingly, we might
 suspect an outlier if $h_{ii}$ is considerably larger than $p/n$. 
 
+For example, let's look at the census data we've seen earlier:
+
+```{r}
+library(qeML)
+data(mlb1)
+ourData <- as.matrix(mlb1[,-1]) # must have matrix to enable %*%
+A <- cbind(1,ourData[,c(1,3)])
+dim(A)
+S <- as.vector(mlb1[,3])
+H <- A %*% solve(t(A) %*% A) %*% t(A)
+hist(diag(H))
+```
+
+The ratio $p/n$ here is 3/1015, about 0.003. We might take a look at the 
+observations having $h_{ii}$ above 0.01, say.
+
 ## Orthogonal Bases
 ### The Gram-Schmidt method
 
-### Application: Best polynomial approximation to a function
-
-## Shrinkage Estimators
+### Application: 
+Best polynomial approximation to a function
 
 ## Application: Racial, Gender Etc. Fairness in Algorithms{#sec-fairness}
 

@@ -1,0 +1,22 @@
+
+```{r}
+#| include: false
+library(dsld)
+library(qeML)
+```
+
+{{< pagebreak >}}
+
+ 
+# Regularization
+
+::: {.callout-note}
+
+## Goals of this chapter:
+
+In the previous chapter, we introduced the norm of a vector. In many
+data science applications, solutions with smaller norms may be more
+accurate. This point is explored here.
+
+:::
+
