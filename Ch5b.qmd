@@ -617,6 +617,54 @@ The ratio $p/n$ here is 3/1015, about 0.003. We might take a look at the
 observations having $h_{ii}$ above 0.01, say.
 
 ## Orthogonal Bases
+
+It turns out that a basis for a vector space is especially useful if its
+members are orthogonal to each other.  We'll see why, and see how to
+generate such a basis from a nonorthogonal one.
+
+### Motivation
+
+Say we have a vector space $\cal V$, a subspace $\cal W$, and a vector
+$x$ in $\cal V$. We know $x$ has a projection in $\cal W$; call it $z$. But
+how do we find $z$?
+
+Let $u_1,...,u_k$ be a basis for $\cal W$.[So we are assuming $\cal W$
+(but not necessarily $\cal V$ is finite-dimensional. Using proper math,
+this could be extended.]{.column-margin} Then there exist $a_1,...,a_k$
+such that
+
+$$
+z = a_1 u_1 + ..., + a_k u_k
+$${#eq-aiui}
+
+So we can find $z$ by finding the $a_i$.
+
+### The virtues of orthogonality
+
+We do have a hint to work from: We know that $x-z$ is orthogonal to
+every vector in $\cal W$ -- including the $u_i$. So
+
+$$
+0 = <x-z,z> = <x-z,u_i> <x,u_i> - <z,u_i>
+$$
+
+Thus
+
+$$
+<x,u_i> = <z,u_i>
+$$
+
+Now, say the $u_i$ are orthogonal to each other, and let's also say they
+are length 1. Then $<z,u_i> = a_i$.
+
+so 
+
+$$
+<x,u_i> = a_i
+$$
+
+So, we're done! We want to determine the $a_i$, and now we 
+
 ### The Gram-Schmidt method
 
 ### Application: 
