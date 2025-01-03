@@ -645,7 +645,7 @@ We do have a hint to work from: We know that $x-z$ is orthogonal to
 every vector in $\cal W$ -- including the $u_i$. So
 
 $$
-0 = <x-z,z> = <x-z,u_i> <x,u_i> - <z,u_i>
+0 = <x-z,u_i> = <x,u_i> - <z,u_i>
 $$
 
 Thus
@@ -655,7 +655,7 @@ $$
 $$
 
 Now, say the $u_i$ are orthogonal to each other, and let's also say they
-are length 1. Then $<z,u_i> = a_i$.
+are length 1. Then $<z,u_i> = a_i$,
 
 so 
 
@@ -663,9 +663,30 @@ $$
 <x,u_i> = a_i
 $$
 
-So, we're done! We want to determine the $a_i$, and now we 
+So, we're done! We want to determine the $a_i$, and now we see that we
+can easily obtain it by calculating $<x,u_i>$.
 
-### The Gram-Schmidt method
+But how do we obtain an orthogonal basis, if we only have a
+nonorthogonal one? That's next...
+
+### The Gram-Schmidt Method
+
+As seen in the last section, it is desirable to have an orthogonal
+basis, and it's even more convenient if its vectors have length 1 (an
+*orthonormal* basis). Converting to length 1 is trivial -- just divide
+the vector by its length.  Here is the process for conversion:
+
+<blockquote>
+
+*The Gram-Schmidt Method*
+
+Say we have a basis $b_1,...,b_k$ for some vector space. Convert it to
+an orthonormal basis as follows.
+
+1. Set $u_1 = b_1/||b_1||.$
+
+
+</blockquote>
 
 ### Application: 
 Best polynomial approximation to a function
