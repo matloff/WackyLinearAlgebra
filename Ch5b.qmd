@@ -826,10 +826,5 @@ Note the following:
 * Bottom line: Instead of predicting $Y$ from $X$, use $U$ as the
   predictor vector.  This will enable truly $S$-free prediction.
 
-Recall that quantities like $E(X|S)$ are projections. That implies 
-that the residuals, e.g. $U$ above, are orthogonal to the projections,
-i.e. have correlation 0:
+Goal achieved.
 
-$$
-\rho(U,E(X|S) = 0
-$$
