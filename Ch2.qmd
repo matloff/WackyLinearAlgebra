@@ -517,7 +517,7 @@ $$
 Suppose the elements of $M$ are independent random variables with uniform
 distributions on (0,1). Argue that P(M is invertible) = 1.
 
-## The Multivariate Normal Distribution Family
+## The Multivariate Normal Distribution Family{#sec-mvn}
 
 The familiar "bell-shaped curve" refers to the *normal* (or *Gaussian*)
 family, whose densities have the form

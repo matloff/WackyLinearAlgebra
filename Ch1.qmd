@@ -566,7 +566,7 @@ We will often write a row vector in the form (a,b,c,...). So
 be a column vector, we use transpose, so that for instance (5,1,88)'
 means a 3x1 matrix.
 
-### Trace of a square matrix
+### Trace of a square matrix{#sec-trace}
 
 The *trace* of a square matrix $A$ is the sum of its diagonal elements,
 $tr(A) = \sum_{i=1}^n A_{ii}$. This measure has various properties, some
@@ -588,6 +588,15 @@ $${#eq-traceab}
 ❄️  **Your Turn:** Prove @eq-traceab.  Hint: Write out the left-hand side
 as a double sum.  Reverse the order of summation, and work toward the
 right-hand side.
+
+And furthermore:
+
+<blockquote>
+
+It can be shown that trace is invariant under *circular
+shifts*, e.g. $UVW$, $VWU$ and $WUV$ all have the same trace.
+
+</blockquote>
 
 # Partitioned Matrices: an Invaluable Visualization Tool{#sec-partition}
 
