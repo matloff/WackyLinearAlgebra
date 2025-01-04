@@ -768,4 +768,68 @@ Gaussian distribution, with $Y$ scalar and $X$ being a vector of length
 $p$.  For convenience, assume here that $S$ is scalar.  As in @sec-corr,
 all variables are assumed centered, i.e. mean 0.
 
-Let's rei
+Let's review the material in @sec-mvn: Say we have $W$ with a
+multivariate normal distribution, and wish to predict one of its
+components, $Y$, from a vector $X$ consisting of one or more of the
+other components, or linear combinations of them. Then
+
+* the distribution of $Y|X$ is univeriate normal
+
+* E(Y|X=t) is a linear function of $t$
+
+* Var(Y|X=t) is independent of $t$
+
+Let's add:
+
+* though having 0 correlation does not in general imply independence, it
+  does so in the multivariate normal case
+
+One first applies a linear model in regressing $X$ on $S$,
+
+$$
+E(X | S) = S \gamma 
+$$
+
+where $\gamma$ is a length-$p$ coefficient vector. Here we are
+predicting the predictors (of $Y$), seemingly odd, but a first step in
+ridding ourselves from the influence of $S$.
+
+Now consider the prediction errors (*residuals)*,
+
+$$
+U = X - S \gamma 
+$$
+
+$U$ can be viewed as the part of $X$ that is unrelated to $S$; think of
+$U$ as "having no $S$ content." Note that $U$ is a vector of length $p$.
+
+Note the following:
+
+* $E(X|S)$ is the projection of $X$ onto the subspace of all functions
+  of $S$.
+
+* $X - E(X|S)$ (original vector minus the projection) is orthogonal to $S$.
+
+* That is, 
+
+  $$
+  0 = <S,X - E(X|S)> = E[S (X - E(X|S))] = E(SU)
+  $$
+
+* Thus $S$ and $U$ are uncorrelated.
+
+* Due to the BA, that means $S$ and $U$ are independent.
+
+* In other words, our intution above that $U$ "has no $S$ content" 
+  was mathematically correct.
+
+* Bottom line: Instead of predicting $Y$ from $X$, use $U$ as the
+  predictor vector.  This will enable truly $S$-free prediction.
+
+Recall that quantities like $E(X|S)$ are projections. That implies 
+that the residuals, e.g. $U$ above, are orthogonal to the projections,
+i.e. have correlation 0:
+
+$$
+\rho(U,E(X|S) = 0
+$$
