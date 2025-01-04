@@ -767,3 +767,5 @@ The basic assumption (BA) amounts to $(Y,X,S)$ having a multivariate
 Gaussian distribution, with $Y$ scalar and $X$ being a vector of length
 $p$.  For convenience, assume here that $S$ is scalar.  As in @sec-corr,
 all variables are assumed centered, i.e. mean 0.
+
+Let's rei

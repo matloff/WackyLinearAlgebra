@@ -569,14 +569,14 @@ help our intuition here.
 
 It can be shown that if a random vector is MV normally distributed, then
 the conditional distribution of any one of its componentx $Y$, given the
-others $X_{others} = t$ (note that $t$ is a vector of $k > 2$) has the
+others $X_{others} = t$ (note that $t$ is a vector if $k > 2$) has the
 following properties:
 
 * It has a (univariate) normal distribution.
 
-* Its mean $E(Y | X_{others} = t$ linear in $t$.
+* Its mean $E(Y | X_{others}) = t$ linear in $t$.
 
-* Its variance $Var(Y | X_{others} = t$ does not involve $t$.
+* Its variance $Var(Y | X_{others}) = t$ does not involve $t$.
 
 These of course are the classical assumptions of linear regression
 models. They actually come from the MV normal model.
