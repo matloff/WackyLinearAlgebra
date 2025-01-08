@@ -350,6 +350,26 @@ that same space.
 
 The case of $\cal RV(\Omega)$ deserves its own section, coming up next.
 
+### The Pythagorean Theorem
+
+That this ancient theorem in geometry still holds in general inner
+product spaces is a tribute to the power of abstraction.
+
+<blockquote>
+
+The Pythagorean Theorem
+
+If vectors $X$ and $Y$ are orthogonal, then
+
+$$
+||X+Y||^2 = ||X||^2 + ||Y||^2
+$$
+
+</blockquote>
+
+❄️  **Your Turn:** Prove this by expanding the inner product and
+simplifying algebraically.
+
 ## Projections in$\cal RV(\Omega)$
 
 Here is what this very abstract vector space becomes useful in practical
@@ -514,6 +534,16 @@ the prediction itself.
 </blockquote>
 
 ❄️  **Your Turn:** Prove this assertion.
+
+❄️  **Your Turn:** For $X$ and $Y$ in $\cal RV(\Omega$, prove that
+
+$$
+Var(Y) = E[Var(Y|X)] + Var[E(Y|X)],
+$$
+
+first algebraically using @eq-iterexpect and the relation $Var(R) =
+E(R^2) - (E(R))^2$, and then using the Pythagorean Theorem for a much
+quicker proof.  As before, assume $X$ and $Y$ are centered.
 
 ## Projections in the Linear Model
 
@@ -731,15 +761,19 @@ gsc01(m)  # performs Gram-Schmidt and returns the result
 bestpoly(f,gsout)  # approx. f by output from gsc01
 
 ```
+
+Hint: Since the vectors here are functions, you'll need a data structure
+capable of storing functions. An R **list** will work well here.
+
 ## Application: Racial, Gender Etc. Fairness in Algorithms{#sec-fairness}
 
 COMPAS is a software tool designed to aid judges in determining
 sentences in criminal trials, by assessing the probability that the
 defendant would recividate. It is a commercial product by Northpointe.
 
-However, COMPAS came under intense scrutiny after ' [an
+COMPAS came under intense scrutiny after [an
 investigation](https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing)
-by *ProPublica*, which revealed evidence of racial bias against black
+by *ProPublica*, which asserted evidence of racial bias against black
 defendants compared to white defendants with similar profiles.
 Northpointe contested these findings, asserting that their software
 treated black and white defendants equally.  While this book does not
@@ -752,8 +786,7 @@ We consider prediction of a variable $Y$ from a feature vector $X$ and a
 vector of sensitive variables $S$. The target $Y$ may be either numeric
 (in a regression setting) or dichotomous (in a two-class classification
 setting where $Y$ = 1 or $Y$ = 0). The $m$-class case can be handled
-using $m$ dichotomous variables with regards to the material presented
-here. We will consider only the numeric case here.
+using $m$ dichotomous variables. We will consider only the numeric case here.
 
 Our goal is to reduce or eliminate the influence of the sensitive 
 variable $S$. One might ask, why not simply remove $S$ from our
