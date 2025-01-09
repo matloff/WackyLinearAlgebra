@@ -20,3 +20,125 @@ accurate. This point is explored here.
 
 :::
 
+## Ridge Regression
+
+In seminal paper, Hoerl and Kennard[*Technometrids*,
+Februaru1970]{.column-margin} discussed the problem of
+*multicollinearity* of predictor variables in a linear model.  
+
+### Crux of the problem
+
+Multicollinearity referred to settings in which the following concerns
+arise:
+
+* One column of the matrix $A$ in @eq-linregformula is nearly equal to
+  some linear combination of the others.
+
+* Thus $A$ is nearly not of full rank.
+
+* Thus $A'A$ is nearly not of full rank.
+
+* Thus $\widehat{\beta}$ is unstable, in the form of high variance.
+
+Needless to say, the word "nearly" is vague, and leaves open the
+question of "How near is 'near'?" and "What can we do about it?" Ridge
+regression is Hoerl'ss and Kennards's answer to the latter question, and
+it is based on a parameter that can be used to explore the former one.
+
+### The ridge solution
+
+Their solution is simple; Add some quantity to the diagonal of $A'A$.
+Specifically, @eq-linregformula now becomes
+
+$$
+\widehat{\beta} - (A'A + \lambda I)^{-1} A'S
+$${#eq-ridge}
+
+where $\lambda$ is a positive number chosen by the analyst.
+
+Here $A$ has dimensions $n \textrm{ x } p$, and $I$ is the $p \textrm{ x } p$
+identity matrix.
+
+### Matrix formulation
+
+Using partitioned matrices helps understand ridge. Replace  $A$ and $S$
+by
+
+$$
+A_{new} =
+ \left (
+ \begin{array}{r}
+ A \\
+ \lambda I \\
+ \end{array}
+ \right )
+$$
+
+and
+
+$$
+S_{new} =
+ \left (
+ \begin{array}{r}
+ S \\
+ 0 \\
+ \end{array}
+ \right )
+$$
+
+where 0 means $p$ 0s. In essence, we are adding artificial data here,
+consisting of $p$ new rows to $A$, and $p$ new elements to $S$.
+So @eq-ridge is just the result of applying @eq-linregformula to
+$A_{new}$ and $S_{new}$.
+
+Loosely speaking, we can think of the addition of $\lambda I$ to $A'A$
+makes the latter "larger", and thus its inverse smaller. In other words,
+we are "shrinking" $\widehat{\beta}$ towards 0. This effect is made even
+stronger by the fact that we added 0s data to $S$. This will be made
+more precise below.
+
+### Modern view
+
+There are many ways to deal with multicollinearity, which we must remind
+the reader only concerns *approximate* linear dependence pf the columns of
+$A$. These days, ridge is often used for situations in which there is
+*exact* linear dependence.
+
+We saw such a setting in @sec-censusrref. There we deliberately induced
+exact linear dependence by inclusion of both male and female dummy
+variables. Let's apply ridge:
+
+```{r}
+library(qeML) 
+data(svcensus) 
+svc <- svcensus[,c(1,4:6)]  
+svc$man <- as.numeric(svc$gender == 'male') 
+svc$woman <- as.numeric(svc$gender == 'female') 
+svc$gender <- NULL 
+a <- svc[,-2] 
+lambda <- 0.1 
+a <- as.matrix(a) 
+tmp1 <- solve(t(a) %*% a + lambda * diag(4)) 
+tmp1 %*% t(a) %*% as.matrix(svc$wageinc) 
+```
+
+The results essentially are the same as what we obtained by having only
+one dummy, thus no linear dependence: Men still enjoy about an \$11,000
+advantage. But ridge allowed us to avoid deleting one of our dummies.
+Such deletion is easy in this case, but for large $p$, say in the
+hundreds or even more, some analysts prefer the convenience of ridge.
+
+Of course, there is still the issue of how to choose the value of
+$\lambda$. This is beyond the scope of this book, which focuses on linar
+algebra.
+
+### Formalizing the notion of shrinkage
+
+JAMES-STEIN
+
+EQUIV TO RIDGE; MATRIX DERIVS; THEN LASSO
+
+
+
+
+
