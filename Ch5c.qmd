@@ -97,6 +97,8 @@ we are "shrinking" $\widehat{\beta}$ towards 0. This effect is made even
 stronger by the fact that we added 0s data to $S$. This will be made
 more precise below.
 
+❄️  **Your Turn:** Show that $A_{new}$ is of full rank, $p$.
+
 ### Modern view
 
 There are many ways to deal with multicollinearity, which we must remind
@@ -134,11 +136,79 @@ algebra.
 
 ### Formalizing the notion of shrinkage
 
-JAMES-STEIN
+In the early 1980s, the statistical world was shocked by research by
+James and Stein that found, in short that:
 
-EQUIV TO RIDGE; MATRIX DERIVS; THEN LASSO
+<blockquote>
 
+Say $W$ has $q$-dimensional normal distribution with mean vector $\mu$
+and independent components having variance $\sigma^2$, each. We have
+just $n = 1$ observation, $W$.  Then if $q \geq 3$, in terms of Mean
+Squared Estimation Error, the best estimator of $\mu$ is NOT 
+$W$. Instead, it's
 
+$$
+\left (
+1 - \frac{(q-2) \sigma^2}{||W||^2} 
+\right )
+W
+$$
+
+</blockquote>
+
+The quantity within the parentheses is typically smaller than 1, giving
+us the shrinkage property.[E.g. if $\mu = 0$, then $E(||W||^2) = q
+\sigma^2$]{.column-margin}
+
+In the case of linear regression, shrinkage works there too, with $q$
+being the number of columns in the $A$ matrix. 
+
+### Shrinkage through length penalization
+
+Say instead of minimizing @ex-matrixss, we minimize
+
+$$
+(S - Ab)'(S - Ab) + \lambda ||b||^2 =
+(S - Ab)'(S - Ab) + \lambda b'b
+$${#eq-matrixssridge}
+
+The large $b$ is the harder it is to minimize the overall quantity
+@eq-matrixssridge. We say that we *penalize* large values of $b$,
+an indirect way of pursuing shrinkage. Now take the derivative and set
+to 0:
+
+$$
+0 = A'(S-Ab) + \lambda b
+$$
+
+i.e.
+
+$$
+(A'A + \lambda I) b = A'S
+$$ 
+
+and thus
+
+$$
+\widehat{\beta} = (A'A+\lambda I)^{-1} A'S
+$$
+
+It's ridge! So here is formalization of our "almost singular" etc.
+language above to justify ridge as a shrinkage estimator..
+
+THEN LASSO
+
+## A Warning
+
+::: {.callout-important}
+
+## No Statistical Inference on Shrinkage Estimators
+
+Shrinkage produces a bias, of unknown size. Thus classical statistical
+inference (confidence intervals, hypothesis tests), e.g. those based on
+@eq-varcovar for linear models, is not possible.
+
+:::
 
 
 

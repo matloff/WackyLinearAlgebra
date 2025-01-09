@@ -496,7 +496,7 @@ $\widehat{\beta}$ is a random vector, and thus has a covariance matrix. Using
 $$
 Cov(\widehat{\beta}|A) = R Cov(S|A) R' = R \sigma^2 I R' = \sigma^2 R R' =
 \sigma^2 (A'A)^{-1}
-$$
+$${#eq-varcovar}
 
 Classical statistical formulas use this relation to find standard errors
 for $\widehat{\beta}_i$ etc.
