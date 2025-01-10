@@ -15,9 +15,8 @@ library(qeML)
 ## Goals of this chapter:
 
 The usefulness of vector spaces is greatly enhanced with the addition of
-an *inner product* structures.[Inner product spaces are also known as *normed*
-spaces.]{.column-margin} We motivate and define such structures here,
-and present applications.
+an *inner product* structures.  We motivate and define such structures
+here, and present applications.
 
 Among other things, we will analyze a method for removing racial, gender
 etc. bias in machine learning algorithms.

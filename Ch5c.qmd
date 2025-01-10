@@ -165,14 +165,13 @@ being the number of columns in the $A$ matrix.
 
 ### Shrinkage through length penalization
 
-Say instead of minimizing @ex-matrixss, we minimize
+Say instead of minimizing @eq-matrixss, we minimize
 
 $$
-(S - Ab)'(S - Ab) + \lambda ||b||^2 =
-(S - Ab)'(S - Ab) + \lambda b'b
+(S - Ab)'(S - Ab) + \lambda ||b||^2 
 $${#eq-matrixssridge}
 
-The large $b$ is the harder it is to minimize the overall quantity
+The larger $b$ is the harder it is to minimize the overall quantity
 @eq-matrixssridge. We say that we *penalize* large values of $b$,
 an indirect way of pursuing shrinkage. Now take the derivative and set
 to 0:
@@ -196,7 +195,28 @@ $$
 It's ridge! So here is formalization of our "almost singular" etc.
 language above to justify ridge as a shrinkage estimator..
 
-THEN LASSO
+## The LASSO
+
+The LASSO (Least Absolute Shrinkage and Selection Operator) was
+developed by Robert Tibshirani in 1996, following earlier work by Leo
+Breiman.  It takes $\widehat{\beta}$ to be the value of $b$ that
+minimizes
+
+$$
+(S - Ab)'(S - Ab) + \lambda ||b||_1
+$${#eq-matrixsslasso}
+
+where the "l1 norm" is 
+
+$$
+||b|| = \sum_{i=1}^p |b_i|
+$$
+
+This is a seemingly minor change, but with important implications.  What
+Breiman and Tibshirani were trying to do was to obtain a $\widehat{\beta}$
+with lots of 0s, thereby providing a method for predictor variable
+selection. This is important because so-called "parsimonious" prediction
+models are desirable.
 
 ## A Warning
 
