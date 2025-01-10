@@ -171,7 +171,7 @@ $$
 (S - Ab)'(S - Ab) + \lambda ||b||^2 
 $${#eq-matrixssridge}
 
-The larger $b$ is the harder it is to minimize the overall quantity
+The larger $b$ is, the harder it is to minimize the overall quantity
 @eq-matrixssridge. We say that we *penalize* large values of $b$,
 an indirect way of pursuing shrinkage. Now take the derivative and set
 to 0:
@@ -212,13 +212,63 @@ $$
 ||b|| = \sum_{i=1}^p |b_i|
 $$
 
+We will write our original norm as $||b||_2$.
+
 This is a seemingly minor change, but with important implications.  What
-Breiman and Tibshirani were trying to do was to obtain a $\widehat{\beta}$
-with lots of 0s, thereby providing a method for predictor variable
-selection. This is important because so-called "parsimonious" prediction
-models are desirable.
+Breiman and Tibshirani were trying to do was to obtain a *sparse*
+$\widehat{\beta}, i.e. a solution $ with lots of 0s, thereby providing a
+method for predictor variable selection. This is important because
+so-called "parsimonious" prediction models are desirable.
+
+To that end, first note that it can be shown that, under some technical
+conditions, that the ridge solution minimizes 
+
+$$
+(S - Ab)'(S - Ab) 
+$$
+
+subject to the constraint
+
+$$
+||b||_2 \leq \gamma
+$$
+
+while in the LASSO case the constraint is
+
+$$
+||b||_1 \leq \gamma
+$$
+
+As with $\lambda$ in the original formulation, $\gamma$ is a positive
+number chosen by the analyst.
+
+Comparison between the ridge and LASSO concepts is often done via this
+[famous
+picture](https://www.google.com/imgres?q=ridge%20vs%20lasso%20famous%20picture&imgurl=https%3A%2F%2Fmiro.medium.com%2Fv2%2Fresize%3Afit%3A1400%2F1*9bPyll00vcCKUQBSaps7YA.jpeg&imgrefurl=https%3A%2F%2Fmedium.com%2F%40kiprono_65591%2Fregularization-a-technique-used-to-prevent-over-fitting-886d5b361700&docid=Irc6S64NB1SwpM&tbnid=dREcVXNWMoEpkM&vet=12ahUKEwixrP7t3euKAxX0ITQIHUjqDl8QM3oECD0QAA..i&w=1400&h=749&hcb=2&ved=2ahUKEwixrP7t3euKAxX0ITQIHUjqDl8QM3oECD0QAA).
+Here is what is involved:
+
+Here $p = 2$, with $b = (b_0,b_1)'$. The horizontal and vertical axes
+represent $b_0$ and $b_1$.  The constraints $||b||_2 \leq \gamma$ and
+$||b||_1 \leq \gamma$ then take the form of a circle and a diamond,
+respectively.
+
+Meanwhile, the concentric ellipses depict the values of $(S - Ab)'(S - Ab)$.
+On the one hand, we want that quantity to be small, thus a smaller
+ellipse, but we need the ellipse to go through the circle or diamond.
+The solution is then the one in which the ellipse just barely touches
+the circle or diamond, respectively.
+
+The key point is that in the LASSO case, that "barely touching" point 
+will be one of the four corners of the diamond, points at which either
+$b_0 = 0$ or $b_1 = 0$ -- hence a sparse solution.  This will not happen
+with the circle; the touch point will almost certainly have both $b_0$
+and $b_1$ as nonzero.
 
 ## A Warning
+
+Many statistical quantities now have *regularized*, i.e. shrunken
+versions. It is also standard practice in neural networks. This may be
+quite helpful in prediction contexts. However, note the following:
 
 ::: {.callout-important}
 
