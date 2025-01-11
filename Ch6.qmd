@@ -15,3 +15,9 @@ returns an orthonormal basis for this subspace. Then write a function
 which takes that basis as input, and finds the projection onto the
 subspace of any f in $C(0,1)$.
 
+## Application: Dimension Reduction
+
+## Application: Detecting Multicollinearity
+
+## Application: Graph Clustering
+
