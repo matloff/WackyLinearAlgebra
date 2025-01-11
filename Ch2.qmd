@@ -436,10 +436,13 @@ There are better ways to ascertain invertibility than this, but it is
 conceptually helpful. Determinants play a similar role in the topic of
 eigenvectors in Chapter 5.
 
-### Definition
+### Definition{#sec-detdef}
 
-The standard definition is one of the ugliest, and least useful, in all
-of mathematics. Instead we will define the term using one of the methods
+The standard definition is one of the ugliest, in all
+of mathematics. It involves sums and differences of permuted products of
+distinct elements of the matrix.
+
+Instead we will define the term using one of the methods
 for calculating determinants.
 
 <blockquote>
