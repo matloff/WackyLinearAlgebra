@@ -142,23 +142,23 @@ James and Stein that found, in short that:
 <blockquote>
 
 Say $W$ has $q$-dimensional normal distribution with mean vector $\mu$
-and independent components having variance $\sigma^2$, each. We have
-just $n = 1$ observation, $W$.  Then if $q \geq 3$, in terms of Mean
-Squared Estimation Error, the best estimator of $\mu$ is NOT 
-$W$. Instead, it's
+and independent components having variance $\sigma^2$, each. We have a
+random sample of size $n$, i.e. $n$ independent observations on $W$.
+Then if $q \geq 3$, in terms of Mean Squared Estimation Error, the best
+estimator of $\mu$ is NOT the sample mean $\bar{W}$. Instead, it's
 
 $$
 \left (
-1 - \frac{(q-2) \sigma^2}{||W||^2} 
+1 - \frac{(q-2) \sigma^2/n}{||\bar{W}||^2} 
 \right )
-W
+\bar{W}
 $$
 
 </blockquote>
 
 The quantity within the parentheses is typically smaller than 1, giving
-us the shrinkage property.[E.g. if $\mu = 0$, then $E(||W||^2) = q
-\sigma^2$]{.column-margin}
+us the shrinkage property. Note, though, that with larger $n$, the
+amount of shrinkage is minor.
 
 In the case of linear regression, shrinkage works there too, with $q$
 being the number of columns in the $A$ matrix. 
