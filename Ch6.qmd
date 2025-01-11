@@ -37,7 +37,9 @@ $x$.
   
 </blockquote>
 
-## A Few Properties
+## A First Look
+
+Here are a few properties to start with:
 
 * The definition is equivalent to
 
@@ -59,7 +61,12 @@ $x$.
 
 * There are much better ways to calculate the eigenvalues than this, but
   a useful piece information arising from that analysis is that $M$ as
-  $m$ eigenvalues (not necessarily distinct).  ,
+  $m$ eigenvalues (not necessarily distinct).  
+
+## The Special Case of Symmetric Matrices
+
+Many matrices in data science are symmetric, such as covariance matrices
+and $A'A$ in @eq-linregformula.
 
 * Some eigenvalues may be complex numbers, i.e. of the form $a+bi$,
   but it can be shown that if $M$ is symmetric, its eigenvalues are
