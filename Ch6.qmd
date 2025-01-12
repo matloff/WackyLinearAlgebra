@@ -68,10 +68,34 @@ Here are a few properties to start with:
 Many matrices in data science are symmetric, such as covariance matrices
 and $A'A$ in @eq-linregformula.
 
-* Some eigenvalues may be complex numbers, i.e. of the form $a+bi$,
-  but it can be shown that if $M$ is symmetric, its eigenvalues are
-  guaranteed to be real. This is good news for data science, as many
-  matrices in that field are symmetric, such covariance matrices.
+### Eigenvalues are real
+
+Some eigenvalues may be complex numbers, i.e. of the form $a+bi$, but it
+can be shown that if $M$ is symmetric, its eigenvalues are guaranteed to
+be real. This is good news for data science, as many matrices in that
+field are symmetric, such covariance matrices.
+
+### Eigenvectors are orthogonal
+
+<blockquote>
+
+Eigenvectors corresponding to distinct eigenvalues of a symmetric matrix
+$M$ are othogonal.
+
+*Proof:* Let $u$ and $v$ be such eigenvectors, corresponding to
+eigenvalues $\mu$ and $\nu$.
+
+$$
+\mu' M \nu = (\mu' M \nu)' = \nu' M' \mu = \nu' M \mu
+$$
+
+(in that first equality, we used the fact that the transpose of a number
+is that number). Substitute for $M\nu$ and $M\mu$, then subtract.
+
+
+
+
+</blockquote>
 
 ## Application: Dimension Reduction
 
