@@ -63,6 +63,10 @@ Here are a few properties to start with:
   a useful piece information arising from that analysis is that $M$ as
   $m$ eigenvalues (not necessarily distinct).  
 
+❄️  **Your Turn:** Show that if $x$ is an eigenvector of $M$ with
+eigenvalue $\lambda \neq 0$, then for any nonzero number $c$, $cx$ will
+also be an eigenvector with eigenvalue $\lambda$.
+
 ## The Special Case of Symmetric Matrices
 
 Many matrices in data science are symmetric, such as covariance matrices
@@ -91,6 +95,57 @@ $$
 
 (in that first equality, we used the fact that the transpose of a number
 is that number). Substitute for $M\nu$ and $M\mu$, then subtract.
+
+</blockquote>
+
+### Symmetric matrices are diagonalizable
+
+A square matrix $R$ is said to be *diagonalizable* if there exists an
+invertible matrix $P$ such that $P^{-1}RP$ is equal to some diagonali
+matrix $D$.
+
+<blockquote>
+
+*Theorem:* Symmetric matrices $M$ are diagonalizable. In fact, the matrix $P$
+is equal to the matrix whose columns are the eigenvectors of $M$, chosen
+to have length 1. The associated diagonal matrix has as its diagonal
+elements the eigenvalues of $M$. The matrix $P$ has the property that
+$P^{-1} = P'$.
+
+*Proof:* Use partitioned matrices. (The reader may wish to review
+@sec-partition before continuing.) 
+
+Let $D = diag(d_1,...,d_m)$.
+
+First write
+
+$$
+MP = M(P_1 | ... | P_m) = (MP_1 | ... | MP_n) =
+(d_1 P_1 | ... | (d_m P_m) = PD
+$$
+
+Recall that the eigenvectors of $M$, i.e. the columns of $P$, are
+orthogonal. That means the rows of $P'$ are orthogonal. Again using
+partitioning, we see that 
+
+$$
+P'P = I
+$$
+
+so that $P^{-1} = P'$.
+
+Thus we inspect 
+
+$$
+P'MP = P'DP
+$$
+
+
+Next, note that
+
+$$
+
+$$
 
 
 

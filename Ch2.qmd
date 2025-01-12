@@ -438,12 +438,9 @@ eigenvectors in Chapter 5.
 
 ### Definition{#sec-detdef}
 
-The standard definition is one of the ugliest, in all
-of mathematics. It involves sums and differences of permuted products of
-distinct elements of the matrix.
-
-Instead we will define the term using one of the methods
-for calculating determinants.
+The standard definition is one of the ugliest, in all of mathematics.
+Instead we will define the term using one of the methods for calculating
+determinants.
 
 <blockquote>
 
@@ -490,7 +487,7 @@ The $\det(M) = 5(-8) - 3 + 0 = -43$.
 function $\verb+dt(a)+$ to compute the determinant of a square matrix
 $A$ using this scheme.
 
-*The classical definition:*
+*A glimpse at the classical definition:*
 
 Using the same approach as in the last computation, we would find that
 the determinant of a general $3 \textrm{ x } 3$ matrix
@@ -510,6 +507,16 @@ is
 $$
 aei + bfg + cdh - afh - bdi - ceg
 $$
+
+Each term here is involves a product of 3 of the elements of the matrix. 
+The formation of the terms in general, and the deterimination of 
++ and - signs, is done in complex but precise manner that we will not
+present here. But the reader should at least keep in mind that each term
+is a product of $n$ elements of the matrix, a fact that will be relevant
+in the sequel.
+
+It involves sums and differences of permuted products of
+distinct elements of the matrix.
 
 ### Properties
 
