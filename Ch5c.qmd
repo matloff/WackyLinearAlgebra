@@ -99,7 +99,7 @@ more precise below.
 
 ❄️  **Your Turn:** Show that $A_{new}$ is of full rank, $p$.
 
-### Modern view
+### Modern view{#sec-pgtn}
 
 There are many ways to deal with multicollinearity, which we must remind
 the reader only concerns *approximate* linear dependence pf the columns of

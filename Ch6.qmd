@@ -67,6 +67,10 @@ Here are a few properties to start with:
 eigenvalue $\lambda \neq 0$, then for any nonzero number $c$, $cx$ will
 also be an eigenvector with eigenvalue $\lambda$.
 
+❄️  **Your Turn:** Show that if a matrix $M$ has a 0 eigenvalue, $M$
+must be singular. Also prove the converse. (Hint: Consider the column
+rank.)
+
 ## The Special Case of Symmetric Matrices
 
 Many matrices in data science are symmetric, such as covariance matrices
@@ -101,8 +105,17 @@ is that number). Substitute for $M\nu$ and $M\mu$, then subtract.
 ### Symmetric matrices are diagonalizable
 
 A square matrix $R$ is said to be *diagonalizable* if there exists an
-invertible matrix $P$ such that $P^{-1}RP$ is equal to some diagonali
+invertible matrix $P$ such that $P^{-1}RP$ is equal to some diagonal
 matrix $D$.
+
+One application of this is the computation of powers of a matrix:
+
+$$
+R^k = P^{-1}RP ~ P^{-1}RP ~ ... ~ P^{-1}RP = P^{-1}D^kP
+$$
+
+$D^k$ is equal to the diagonal matrix with elements $d_k^k$, so the
+computation of $M^k$ is easy.
 
 <blockquote>
 
@@ -112,17 +125,11 @@ to have length 1. The associated diagonal matrix has as its diagonal
 elements the eigenvalues of $M$. The matrix $P$ has the property that
 $P^{-1} = P'$.
 
-*Proof:* Use partitioned matrices. (The reader may wish to review
-@sec-partition before continuing.) 
+*Proof:* Use partitioned matrices. 
 
-Let $D = diag(d_1,...,d_m)$.
-
-First write
-
-$$
-MP = M(P_1 | ... | P_m) = (MP_1 | ... | MP_n) =
-(d_1 P_1 | ... | (d_m P_m) = PD
-$$
+Let $D = diag(d_1,...,d_m)$, where the $d_i$ are the eigenvalues of $M$,
+corresponding to eigenvectors $P_i$. Set the latter to have length 1,
+by dividing by their lengths.  
 
 Recall that the eigenvectors of $M$, i.e. the columns of $P$, are
 orthogonal. That means the rows of $P'$ are orthogonal. Again using
@@ -134,25 +141,47 @@ $$
 
 so that $P^{-1} = P'$.
 
-Thus we inspect 
+Now write
 
 $$
-P'MP = P'DP
+MP = M(P_1 | ... | P_m) = (MP_1 | ... | MP_n) =
+(d_1 P_1 | ... | (d_m P_m) = PD
 $$
 
-
-Next, note that
-
-$$
-
-$$
-
-
-
+Finally, multiply on the left by $P'$, and we are done.
 
 </blockquote>
 
-## Application: Dimension Reduction
+*Example:*
+
+Let's illustrate all this with the data in @sec-pgtn. We will form the
+matrix $A'A$ in @sec-linregformula, which as mentioned, is symmetric.
+
+Recall that in that example, $A$ is not of full rank. Thus we should
+expect to see a 0 eigenvalue.
+
+```{r}
+library(qeML)
+data(svcensus)
+svc <- svcensus[,c(1,4:6)]
+svc$man <- as.numeric(svc$gender == 'male')
+svc$woman <- as.numeric(svc$gender == 'female')
+svc$gender <- NULL
+a <- as.matrix(svc[,-2])
+a <- cbind(1,a)  # add the column of 1s
+m <- t(a) %*% a
+eigs <- eigen(m)
+eigs
+m %*% eigs$vectors[,1]
+eigs$values[1] %*% eigs$vectors[,1]
+```
+
+Yes, that first column is indeed an eigenvector, with the claimed eigenvalue. 
+
+Note that the expected 0 eigenvalue shows up as 2.801489e-12, quite
+small but nonzero, due to roundoff error.
+
+## Application: Dimension Reduction (PCA)
 
 ## Application: Measuring Multicollinearity
 

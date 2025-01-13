@@ -598,7 +598,7 @@ shifts*, e.g. $UVW$, $VWU$ and $WUV$ all have the same trace.
 
 </blockquote>
 
-# Partitioned Matrices: an Invaluable Visualization Tool{#sec-partition}
+# Partitioned Matrices: an Invaluable Visualization Tool{#sec-partitioned}
 
 Here, "visualization" is not a reference to graphics but rather to
 highlighting certain submatrices.
