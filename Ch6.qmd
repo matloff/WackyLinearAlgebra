@@ -183,6 +183,34 @@ small but nonzero, due to roundoff error.
 
 ## Application: Dimension Reduction (PCA)
 
+To get things started, let's consider the African Soils dataset,
+available at various Internet locations, such as
+[Kaggle](https://www.kaggle.com/c/afsis-soil-properties). Unzip the file
+to obtain **train.zip**, and unzip that to get **training.csv**. Make
+sure the latter file is in the same directory/folder as the one from
+which you are running Quarto.
+
+Let's take a look around:
+
+``` r 
+afrs <- read.csv('training.csv')
+dim(afrs)
+# 1157 3600
+names(afrs)
+[1] "PIDN"     "m7497.96" "m7496.04" "m7494.11" "m7492.18" "m7490.25"
+[7] "m7488.32" "m7486.39" "m7484.46" "m7482.54" "m7480.61" "m7478.68"
+[3577] "m603.617" "m601.688" "m599.76"  "BSAN"     "BSAS"     "BSAV"
+[3583] "CTI"      "ELEV"     "EVI"      "LSTD"     "LSTN"     "REF1"
+[3589] "REF2"     "REF3"     "REF7"     "RELI"     "TMAP"     "TMFI"
+[3595] "Depth"    "Ca"       "P"        "pH"       "SOC"      "Sand"
+```
+
+Let's try predicting **pH**, the acidity. But that leaves 3599 possible
+predictors. There is an old rule of thumb that one should have $p <
+\sqrt{n}$ to avoid overfitting, which in our setting of $n = 1157$
+grossly violates.  We need to do *dimension reduction*. One way to
+accomplish this is to use *Principal Components Analysis* (PCA),
+
 ## Application: Measuring Multicollinearity
 
 ## Application: Another Solution to the $p > n$ Problem in Linear Models
