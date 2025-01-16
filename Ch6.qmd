@@ -1,5 +1,5 @@
 
-```{r}
+```{r}   
 #| include: false
 library(dsld)
 library(qeML)
@@ -47,7 +47,7 @@ Here are a few properties to start with:
   (M - \lambda I) x = 0
   $$
 
-  which in turn implies that $(M - \lambda I$ is noninvertible. That
+  which in turn implies that $M - \lambda I$ is noninvertible. That
   then implies that 
 
   $$
@@ -74,7 +74,7 @@ rank.)
 ## The Special Case of Symmetric Matrices
 
 Many matrices in data science are symmetric, such as covariance matrices
-and $A'A$ in @eq-linregformula.
+and $A'A$ in @eq-linregformula. 
 
 ### Eigenvalues are real
 
@@ -221,9 +221,51 @@ accomplish this is to use PCA.
 ### Overall Idea 
 
 The goal is to find a few important linear combinations of our original
-predictor variables. Let's see how this is done.
+predictor variables--important in the sense that they roughly summarize
+our data.  Let's see how this is done.
 
-Recall the matrix $A$ in {@eq-linregformula}.
+of $\widehat{\beta}$ with maximal variance
+
+Recall from @sec-varbhat that in the homogeneous-variance case, the
+covariance matrix of $\widehat{\beta}$ is equal to 
+
+$$
+\sigma^2
+(A'A)^{-1}
+$$
+
+In searching for good linear combinations, we want to aim for ones with
+high variance. We certainly don't want ones with low variance; after
+all, a random variable with 0 variance is a constant.  So we wish to
+find linear combinations 
+
+$$
+u'\widehat{\beta}
+$$
+
+which maximize 
+
+$$
+Var(u'\widehat{\beta}) = \sigma^2 u'(A'A)^{-1}u
+$$
+
+But that goal is ill-defined, since we could take larger and larger
+values of $u$, no maximum.  So, let's constrain it to vectors $u$
+of length 1:
+
+$$
+u'u = 1
+$$
+
+The method of *Lagrange multipliers* is used to solve maximum/minimum
+problems, by adding a new variable corresponding to the constraint. In
+our case, we minimize
+
+$$
+\sigma^2 u'(A'A)^{-1}u + \gamma (u'u - 1)
+$$
+
+with respect to $u$ and $\gamma$.
 
 ## Application: Measuring Multicollinearity
 
