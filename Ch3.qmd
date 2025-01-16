@@ -295,20 +295,20 @@ vector $b$? That is the subject of the next section.
 The (column) vector of partial derivatives of a scalar quantity is
 called the *gradient* of that quantity. For instance, with 
 
-\[
+$$
 u = 2x + 3y^2 + xy
-\]
+$$
 
 we have that its gradient is
 
-\[
+$$
  \left (
  \begin{array}{r}
  2 + y \\
  6y + x \\
  \end{array}
  \right )
-\]
+$$
 
 With care, we can compute gradients entirely at the matrix level, using
 easily derivable properties, without ever resorting to returning to the
@@ -316,8 +316,8 @@ scalar expressions. Let's apply them to the case at hand in the last
 section, 
 
 $$
-(S - Ab)'(S - Ab){#eq-rss}
-$$
+(S - Ab)'(S - Ab)
+$${#eq-rss}
 
 ### Differentiation purely in matrix terms
 
