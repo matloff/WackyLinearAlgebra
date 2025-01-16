@@ -183,12 +183,19 @@ small but nonzero, due to roundoff error.
 
 ## Application: Dimension Reduction (PCA)
 
+The term *dimension reduction* means thinning out ones set of predictor
+variables/features. This could be for the purpose of avoiding
+overfitting, or just to keep things simple. One classical method for
+achieving this is Principal Components Analysis (PCA).
+
+### Example: African Soils Data
+
 To get things started, let's consider the African Soils dataset,
 available at various Internet locations, such as
 [Kaggle](https://www.kaggle.com/c/afsis-soil-properties). Unzip the file
 to obtain **train.zip**, and unzip that to get **training.csv**. Make
-sure the latter file is in the same directory/folder as the one from
-which you are running Quarto.
+sure the latter file is in the same directory/folder as your Quarto
+files for this document.
 
 Let's take a look around:
 
@@ -206,10 +213,17 @@ names(afrs)
 ```
 
 Let's try predicting **pH**, the acidity. But that leaves 3599 possible
-predictors. There is an old rule of thumb that one should have $p <
-\sqrt{n}$ to avoid overfitting, which in our setting of $n = 1157$
-grossly violates.  We need to do *dimension reduction*. One way to
-accomplish this is to use *Principal Components Analysis* (PCA),
+predictors. There is an old rule of thumb that one should have 
+$$p < \sqrt{n}$$ to avoid overfitting, which in our setting of $$n = 1157$$
+grossly violates.  We need to do dimension reduction. One way to
+accomplish this is to use PCA. 
+
+### Overall Idea 
+
+The goal is to find a few important linear combinations of our original
+predictor variables. Let's see how this is done.
+
+Recall the matrix $A$ in {@eq-linregformula}.
 
 ## Application: Measuring Multicollinearity
 
