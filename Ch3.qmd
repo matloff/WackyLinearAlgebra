@@ -319,7 +319,7 @@ $$
 (S - Ab)'(S - Ab)
 $${#eq-rss}
 
-### Differentiation purely in matrix terms
+### Differentiation purely in matrix terms{#sec-linregformula}
 
 It can be shown that for a column vector $a$,
 

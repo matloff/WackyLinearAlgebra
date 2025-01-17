@@ -235,9 +235,11 @@ $$
 Var(Xu) = u' Cov(X) u
 $$
 
+where we have invoked @eq-acova.
+
 But that goal is ill-defined, since we could take larger and larger
-values of $u$, no maximum.  So, let's constrain it to vectors $u$
-of length 1:
+vectors $u$, thus larger and larger vectors $Xu$, no maximum.  So, let's
+constrain it to vectors $u$ of length 1:
 
 $$
 u'u = 1
@@ -248,15 +250,15 @@ problems that have constraints, by adding a new variable corresponding
 to the constraint. In our case, we maximize
 
 $$
-\sigma^2 u'(A'A)^{-1}u + \gamma (u'u - 1)
+u'Cov(X)u + \gamma (u'u - 1)
 $$
 
 with respect to $u$ and $\gamma$.
 
 Setting derivatives to 0, we have
-
 $$
-0 = \sigma^2 2 (A'A)^{-1} u + 2 \gamma u
+0 = 
+2 Cov(X) u + 2 \gamma u
 $$
 
 and
@@ -268,17 +270,12 @@ $$
 In other words,
 
 $$
-\sigma^2 (A'A)^{-1} u = -\gamma u
+Cov(X) u = -\gamma u
 $$
 
-Aha! The vector $u$ is an eigenvector of the matrix $\sigma^2
-(A'A)^{-1}$ with eigenvalue $-\gamma$. And a little simpler, $u$ is an
-eigenvector of $(A'A)^{-1}$ with eigenvalue $-\gamma/\sigma^2$.
-
-We need not know the values of $\gamma$ and $\sigma^2$ here, as we can
-find the eigenvalues and eigenvectors of $(A'A)^{-1}$ directly.  We've
-discovered that our quest for dimension reduction can be couched as an
-eigenanalysis problem!
+Aha! The vector $u$ is an eigenvector of the matrix $Cov(X)$ with
+eigenvalue $-\gamma$.  We've discovered that our quest for dimension
+reduction can be couched as an eigenanalysis problem!
 
 More commonly, we start with a covariance matrix rather than $A'A$, but
 with the same result: Our solution is eigenanalysis on the covariance
@@ -288,20 +285,37 @@ covariance matrix anyway.)
 ### Back to the Example
 
 So, we remove the ``Y'' variable, $pH$, number 3598 as seen above, as
-proceed. For convenience, we will also remove the nonnumeric columns,
+proceed. We will also remove the nonnumeric columns,
 **PIDN** and **Depth**.
 
 ```{r} 
 x <- afrs[,-c(1,3595,3598)]
-x[1,1]
 ```
 
-At this point, we could call **cov()}** and then **eigen** to perform
-the eigenanalysis, but R's **prcomp** function does all the work for us.
-Again, for convenience, let's just apply the concept to the $X$ data;
-out goal is simply dimension reduction, a rough, informal action,
-so it really doesn't matter.
+At this point, we could run
 
+``` r
+xcov <- cov(x)
+eigs <- eigen(xcov)
+```
+
+to perform the eigenanalysis, but R's **prcomp** function does all the
+work for us.  
+
+```{r}
+pcs <- prcomp(x)
+```
+
+Our goal is to retain linear combinations of the columns of $X$ that
+have large variances.  For whatever reason, the designers of **prcomp**
+report standard deviations instead of variances.
+
+```{r}
+pcs$sdev[1:50]
+```
+
+Ah, the eigenvalues fall off rapidly after the first few. So, let's say
+we decide to use the first 9 $u$ vectors.
 
 ## Application: Measuring Multicollinearity
 
