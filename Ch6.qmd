@@ -199,17 +199,11 @@ files for this document.
 
 Let's take a look around:
 
-``` r 
+```{r}
 afrs <- read.csv('training.csv')
 dim(afrs)
-# 1157 3600
-names(afrs)
-[1] "PIDN"     "m7497.96" "m7496.04" "m7494.11" "m7492.18" "m7490.25"
-[7] "m7488.32" "m7486.39" "m7484.46" "m7482.54" "m7480.61" "m7478.68"
-[3577] "m603.617" "m601.688" "m599.76"  "BSAN"     "BSAS"     "BSAV"
-[3583] "CTI"      "ELEV"     "EVI"      "LSTD"     "LSTN"     "REF1"
-[3589] "REF2"     "REF3"     "REF7"     "RELI"     "TMAP"     "TMFI"
-[3595] "Depth"    "Ca"       "P"        "pH"       "SOC"      "Sand"
+names(afrs)[1:25]
+names(afrs)[3576:3600]
 ```
 
 Let's try predicting **pH**, the acidity. But that leaves 3599 possible
@@ -224,29 +218,21 @@ The goal is to find a few important linear combinations of our original
 predictor variables--important in the sense that they roughly summarize
 our data.  Let's see how this is done.
 
-of $\widehat{\beta}$ with maximal variance
-
-Recall from @sec-varbhat that in the homogeneous-variance case, the
-covariance matrix of $\widehat{\beta}$ is equal to 
-
-$$
-\sigma^2
-(A'A)^{-1}
-$$
-
+Let **X** denote a set of variables of interest (not necessarily in a
+prediction context).
 In searching for good linear combinations, we want to aim for ones with
 high variance. We certainly don't want ones with low variance; after
 all, a random variable with 0 variance is a constant.  So we wish to
 find linear combinations 
 
 $$
-u'\widehat{\beta}
+Xu
 $$
 
 which maximize 
 
 $$
-Var(u'\widehat{\beta}) = \sigma^2 u'(A'A)^{-1}u
+Var(Xu) = u' Cov(X) u
 $$
 
 But that goal is ill-defined, since we could take larger and larger
@@ -258,14 +244,64 @@ u'u = 1
 $$
 
 The method of *Lagrange multipliers* is used to solve maximum/minimum
-problems, by adding a new variable corresponding to the constraint. In
-our case, we minimize
+problems that have constraints, by adding a new variable corresponding
+to the constraint. In our case, we maximize
 
 $$
 \sigma^2 u'(A'A)^{-1}u + \gamma (u'u - 1)
 $$
 
 with respect to $u$ and $\gamma$.
+
+Setting derivatives to 0, we have
+
+$$
+0 = \sigma^2 2 (A'A)^{-1} u + 2 \gamma u
+$$
+
+and
+
+$$
+0 = u'u - 1
+$$
+
+In other words,
+
+$$
+\sigma^2 (A'A)^{-1} u = -\gamma u
+$$
+
+Aha! The vector $u$ is an eigenvector of the matrix $\sigma^2
+(A'A)^{-1}$ with eigenvalue $-\gamma$. And a little simpler, $u$ is an
+eigenvector of $(A'A)^{-1}$ with eigenvalue $-\gamma/\sigma^2$.
+
+We need not know the values of $\gamma$ and $\sigma^2$ here, as we can
+find the eigenvalues and eigenvectors of $(A'A)^{-1}$ directly.  We've
+discovered that our quest for dimension reduction can be couched as an
+eigenanalysis problem!
+
+More commonly, we start with a covariance matrix rather than $A'A$, but
+with the same result: Our solution is eigenanalysis on the covariance
+matrix.  (If we center our predictors, and divide by $n$, we get the
+covariance matrix anyway.)
+
+### Back to the Example
+
+So, we remove the ``Y'' variable, $pH$, number 3598 as seen above, as
+proceed. For convenience, we will also remove the nonnumeric columns,
+**PIDN** and **Depth**.
+
+```{r} 
+x <- afrs[,-c(1,3595,3598)]
+x[1,1]
+```
+
+At this point, we could call **cov()}** and then **eigen** to perform
+the eigenanalysis, but R's **prcomp** function does all the work for us.
+Again, for convenience, let's just apply the concept to the $X$ data;
+out goal is simply dimension reduction, a rough, informal action,
+so it really doesn't matter.
+
 
 ## Application: Measuring Multicollinearity
 
