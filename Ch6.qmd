@@ -1,5 +1,5 @@
 
-```{r}   
+```{r} 
 #| include: false
 library(dsld)
 library(qeML)
@@ -195,7 +195,7 @@ available at various Internet locations, such as
 [Kaggle](https://www.kaggle.com/c/afsis-soil-properties). Unzip the file
 to obtain **train.zip**, and unzip that to get **training.csv**. Make
 sure the latter file is in the same directory/folder as your Quarto
-files for this document.
+files for this document, so that the code will run.
 
 Let's take a look around:
 
@@ -208,7 +208,8 @@ names(afrs)[3576:3600]
 
 Let's try predicting **pH**, the acidity. But that leaves 3599 possible
 predictors. There is an old rule of thumb that one should have 
-$$p < \sqrt{n}$$ to avoid overfitting, which in our setting of $$n = 1157$$
+$p < \sqrt{n}$, for $p$ predictors and $n$ data points,
+to avoid overfitting, which in our setting of $$n = 1157$$
 grossly violates.  We need to do dimension reduction. One way to
 accomplish this is to use PCA. 
 
@@ -283,7 +284,19 @@ Aha! The vector $u$ is an eigenvector of the matrix $Cov(X)$ with
 eigenvalue $-\gamma$.  We've discovered that our quest for dimension
 reduction can be couched as an eigenanalysis problem!
 
-The eigenvectors are then the *principal components*.
+The full set of eigenvectors is then known as the *principal
+components* (PCs). They have some further important properties:
+
+<blockquote>
+
+* The PCs are orthogonal to each other. This follows from our earlier
+  finding that eigenvectors of a symmetric matrix, in this case
+  $Cov(X)$, are orthogonal.
+
+* This in turn implies that the PCs are uncorrelated, and in the
+  multivariate normal case, statistically ndp.
+
+</blockquote>
 
 ### Back to the Example
 
@@ -325,7 +338,7 @@ lmout <- lm(afrs$pH ~ xnew)
 We chose to use the first 9 principal components in our example here,
 but just for illustration purposes.  There are no formal rules for how
 many to use.  Many "rules of thumb" are in use, but they are beyond the
-scope of this book.
+scope of this book.   
 
 ## Application: Measuring Multicollinearity
 
