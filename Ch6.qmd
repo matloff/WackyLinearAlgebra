@@ -298,6 +298,9 @@ components* (PCs). They have some further important properties:
 
 </blockquote>
 
+By the way, though we used the covariance matrix here, it is more common
+to simply do eigenanalysis on the original data matrix.
+
 ### Back to the Example
 
 So, we remove the ``Y'' variable, $pH$, number 3598 as seen above, as
@@ -340,7 +343,15 @@ but just for illustration purposes.  There are no formal rules for how
 many to use.  Many "rules of thumb" are in use, but they are beyond the
 scope of this book.   
 
-## Application: Measuring Multicollinearity
+## Application: Detecting Multicollinearity
+
+Say we have a dataset $A$, with columns consisting of different
+variables and rows representing different data points.  We say $A$
+has *multicollinearity* if its columns are approximately linearly
+dependent, i.e. some linear combination of that is approximately the 0
+vector.
+
+One can't beat PCA for detecting multip
 
 ## Application: Another Solution to the $p > n$ Problem in Linear Models
 
