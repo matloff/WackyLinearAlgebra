@@ -212,6 +212,12 @@ $$p < \sqrt{n}$$ to avoid overfitting, which in our setting of $$n = 1157$$
 grossly violates.  We need to do dimension reduction. One way to
 accomplish this is to use PCA. 
 
+(Note, though, that this presumes our goal is prediction, rather than
+effect estimation. In the latter case, our new variables will be
+principle components, and their regression coefficients may not be
+meaningful to us. If we are doing prediction, regression coefficients
+may not be of interest.)
+
 ### Overall Idea 
 
 The goal is to find a few important linear combinations of our original
@@ -271,16 +277,13 @@ In other words,
 
 $$
 Cov(X) u = -\gamma u
-$$
+$${#eq-aha}
 
 Aha! The vector $u$ is an eigenvector of the matrix $Cov(X)$ with
 eigenvalue $-\gamma$.  We've discovered that our quest for dimension
 reduction can be couched as an eigenanalysis problem!
 
-More commonly, we start with a covariance matrix rather than $A'A$, but
-with the same result: Our solution is eigenanalysis on the covariance
-matrix.  (If we center our predictors, and divide by $n$, we get the
-covariance matrix anyway.)
+The eigenvectors are then the *principal components*.
 
 ### Back to the Example
 
@@ -290,32 +293,39 @@ proceed. We will also remove the nonnumeric columns,
 
 ```{r} 
 x <- afrs[,-c(1,3595,3598)]
-```
-
-At this point, we could run
-
-``` r
+dim(x)
 xcov <- cov(x)
 eigs <- eigen(xcov)
-```
-
-to perform the eigenanalysis, but R's **prcomp** function does all the
-work for us.  
-
-```{r}
-pcs <- prcomp(x)
-```
-
-Our goal is to retain linear combinations of the columns of $X$ that
-have large variances.  For whatever reason, the designers of **prcomp**
-report standard deviations instead of variances.
-
-```{r}
-pcs$sdev[1:50]
+eigs$values[1:100]  # don't print out all 3597!
 ```
 
 Ah, the eigenvalues fall off rapidly after the first few. So, let's say
-we decide to use the first 9 $u$ vectors.
+we decide to use the first 9 $u$ vectors.  
+
+```{r}
+eigvecs <- eigs$vectors[,1:9]
+dim(eigvecs)
+```
+
+So, recalling the sequence of equations leading to @eq-aha, we are ready
+to replace our old variables by the new:
+
+```{r} 
+x <- as.matrix(x)
+dim(x)
+xnew <- x %*% eigvecs
+dim(xnew)  
+ph <- afrs[,3595]
+lmout <- lm(afrs$pH ~ xnew)
+# and so on
+```
+
+### How Many Principal Components Should We Use?
+
+We chose to use the first 9 principal components in our example here,
+but just for illustration purposes.  There are no formal rules for how
+many to use.  Many "rules of thumb" are in use, but they are beyond the
+scope of this book.
 
 ## Application: Measuring Multicollinearity
 
