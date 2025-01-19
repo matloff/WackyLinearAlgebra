@@ -21,40 +21,10 @@ chapter.
 
 ::: 
 
-```{r} 
-#| include: false
-library(dsld)
-library(qeML)
-```
 
-{{< pagebreak >}}
+### Example: African soils data
 
-# PCA and SVD
-
-::: {.callout-note}
-
-## Goals of this chapter:
-
-Here we delve into one of the most famous application areas of
-eigenanalysis.
-
-:::
-
-## Application: Dimension Reduction (PCA)
-
-The term *dimension reduction* means thinning out ones set of predictor
-variables/features. This could be for the purpose of avoiding
-overfitting, or just to keep things simple. One classical method for
-achieving this is Principal Components Analysis (PCA).  
-
-### Example: African Soils Data
-
-To get things started, let's consider the African Soils dataset,
-available at various Internet locations, such as
-[Kaggle](https://www.kaggle.com/c/afsis-soil-properties). Unzip the file
-to obtain **train.zip**, and unzip that to get **training.csv**. Make
-sure the latter file is in the same directory/folder as your Quarto
-files for this document, so that the code will run.
+To get things started, let's consider the African Soils dataset.
 
 Let's take a look around:
 
@@ -74,15 +44,18 @@ accomplish this is to use PCA.
 
 (Note, though, that this presumes our goal is prediction, rather than
 effect estimation. In the latter case, our new variables will be
-principle components, and their regression coefficients may not be
+principal components, and their regression coefficients may not be
 meaningful to us. If we are doing prediction, regression coefficients
 may not be of interest.)
 
-### Overall Idea 
+## Overall Idea 
 
 The goal is to find a few important linear combinations of our original
 predictor variables--important in the sense that they roughly summarize
-our data.  Let's see how this is done.
+our data.  These new variables are called the *principal components*
+(PCs) of the data.  Let's see how this is done.
+
+### The first PC
 
 Let **X** denote a set of variables of interest (not necessarily in a
 prediction context).
@@ -122,6 +95,7 @@ $$
 with respect to $u$ and $\gamma$.
 
 Setting derivatives to 0, we have
+
 $$
 0 = 
 2 Cov(X) u + 2 \gamma u
@@ -143,6 +117,70 @@ Aha! The vector $u$ is an eigenvector of the matrix $Cov(X)$ with
 eigenvalue $-\gamma$.  We've discovered that our quest for dimension
 reduction can be couched as an eigenanalysis problem!
 
+### The second, third etc. PCs
+
+There are as many principal components as there are columns in columns
+in $X$. So, how are the second, third and so on defined and computed?
+
+The key issue is that we want our PCs to be orthogonal, because as we
+have seen orthogonal random vectors are uncorrelated, and independent in
+the multivariate normal case. So if we summarize our data
+with say, the first few PCs, the fact that they are (at least loosely
+speaking) uncorrelated makes for a neater summary.
+
+So with $u$ and $v$ denoting the first and second PCs, we want $v$ 
+to maximize
+
+$$
+v'Cov(X)v + \gamma (v'v - 1)
+$$
+
+subject to 
+
+$$
+u'v = 0
+$$
+
+For the latter condition, let's add another Lagrange multiplier term:
+
+$$
+v'Cov(X)v + \omega (v'v - 1) + \eta u'v
+$$
+
+Setting derivatives (with respect to $v$) to 0, we have
+
+$$
+0 = 2 Cov(X) v + 2 \omega v + \eta u
+$${#eq-2ndeig}
+
+Multiplying on the left by $u'$, we have
+
+$$
+0 = 2 u'Cov(X) v + 2 \omega u'v + \eta u'u
+$${#eq-ucovv}
+
+But from before we have 
+
+$$
+u'Cov(X) = -\gamma u
+$$
+
+so that
+
+$$
+u'Cov(X) v = 0
+$$
+
+in @eq-ucovv. Moreover, $u'v = 0$ there as well, so that we have $\eta =
+0$, which reduces @eq-ucovv to a statement that $v$ too must be an
+eigenvector of $Cov(X)$.
+
+
+
+
+
+### Properties
+
 The full set of eigenvectors is then known as the *principal
 components* (PCs). They have some further important properties:
 
@@ -153,7 +191,7 @@ components* (PCs). They have some further important properties:
   $Cov(X)$, are orthogonal.
 
 * This in turn implies that the PCs are uncorrelated, and in the
-  multivariate normal case, statistically ndp.  
+  multivariate normal case, statistically independent.  
 
 </blockquote>
 
@@ -194,6 +232,8 @@ ph <- AfricanSoil[,3595]
 lmout <- lm(AfricanSoil$pH ~ xnew)
 # and so on
 ```
+
+### Application: Detecting multicollinearity
 
 ### How Many Principal Components Should We Use?
 

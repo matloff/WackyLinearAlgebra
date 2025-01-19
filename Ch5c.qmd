@@ -40,10 +40,24 @@ arise:
 
 * Thus $\widehat{\beta}$ is unstable, in the form of high variance.
 
-Needless to say, the word "nearly" is vague, and leaves open the
-question of "How near is 'near'?" and "What can we do about it?" Ridge
-regression is Hoerl's and Kennards's answer to the latter question, and
-it is based on a parameter that can be used to explore the former one.
+That latter point is often quantified by the *Variance Inflation
+Factor*. To motivate it, consider the usual "R-squared" value
+from linear regression analyis, which is the squared correlation between
+"Y" and predicted "Y". Let $R^2_j$ denote that measure in the case of
+predicting column $j$ of $A$ from the other columns. The quantity
+
+$$
+VIF_j = \frac{1}{1-R^2_j}
+$$
+
+then measures the negative impact due to multicollinearity on estimating 
+$\widehat{\beta}_j$.
+
+Needless to say, the word "nearly" above, e.g. in "nearly not of full
+rank," is vague, and leaves open the question of "How near is 'near'?"
+and "What can we do about it?" Ridge regression is Hoerl's and
+Kennards's answer to the latter question, and it is based on a parameter
+that can be used to explore the former one.
 
 ### The ridge solution
 
