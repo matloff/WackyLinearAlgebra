@@ -235,6 +235,10 @@ lmout <- lm(AfricanSoil$pH ~ xnew)
 
 ### Application: Detecting multicollinearity
 
+### Principal components regress
+
+"Here we follow Banerjee and Roy, p384"
+
 ### How Many Principal Components Should We Use?
 
 We chose to use the first 9 principal components in our example here,
