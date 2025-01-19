@@ -21,7 +21,9 @@ book:
      - Ch5a.qmd
      - Ch5b.qmd
      - Ch5c.qmd
-     - Ch6.qmd
+     - Ch6a.qmd
+     - Ch6b.qmd
+     - Ch6c.qmd
      - Ch7.qmd
    
 format:
@@ -35,7 +37,6 @@ format:
      number-sections: true      
      fig_caption: no
      fig_numbers: no
-   
 execute:
    warning: false
    message: false

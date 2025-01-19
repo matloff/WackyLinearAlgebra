@@ -42,7 +42,7 @@ arise:
 
 Needless to say, the word "nearly" is vague, and leaves open the
 question of "How near is 'near'?" and "What can we do about it?" Ridge
-regression is Hoerl'ss and Kennards's answer to the latter question, and
+regression is Hoerl's and Kennards's answer to the latter question, and
 it is based on a parameter that can be used to explore the former one.
 
 ### The ridge solution
@@ -194,6 +194,20 @@ $$
 
 It's ridge! So here is formalization of our "almost singular" etc.
 language above to justify ridge as a shrinkage estimator..
+
+### Shrinkage through length limitation
+
+Instead of penalizing $||b||$, we could simply constrain it, i.e. we
+could set our optimization problem to:
+
+<blockquote>
+
+minimize $(S-Ab)'(S-Ab)$, subject to the constraint $||b||^2 \leq \gamma$
+
+</blockquote>
+
+We say that this new formulation is the *dual* of the first one. One can
+show that they are typically equivalent.
 
 ## The LASSO
 

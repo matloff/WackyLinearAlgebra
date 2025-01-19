@@ -1,0 +1,23 @@
+
+```{r} 
+#| include: false
+library(dsld)
+library(qeML)
+```
+
+{{< pagebreak >}}
+
+# Matrix Pseudoinverses 
+
+::: {.callout-note}
+
+## Goals of this chapter:
+
+The concept of eigenvalues and eigenvectors is one of the most important
+of all appplications of linear algebra to data science. We introduce the
+ideas in this chapter, and present some applications.
+
+::: 
+
+## Application: Another Solution to the $p > n$ Problem in Linear Models
+
