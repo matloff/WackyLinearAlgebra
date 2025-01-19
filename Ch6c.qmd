@@ -7,15 +7,15 @@ library(qeML)
 
 {{< pagebreak >}}
 
-# Matrix Pseudoinverses 
+# Singular Value Decomposition
 
 ::: {.callout-note}
 
 ## Goals of this chapter:
 
-The concept of eigenvalues and eigenvectors is one of the most important
-of all appplications of linear algebra to data science. We introduce the
-ideas in this chapter, and present some applications.
+We've seen the notion of eigenanalysis for square matrices. Well, it
+turns out this can be extended usefully for nonsquare matrices, via
+*Singular Value Decomposition*, the topic of this chapter.
 
 ::: 
 

@@ -7,11 +7,17 @@ library(qeML)
 
 {{< pagebreak >}}
 
-# Principal Components and Singular Value Decomposition
+# Principal Components 
 
 ::: {.callout-note}
 
 ## Goals of this chapter:
+
+Today's large datasets being so common, we need a way to "cut things
+down to size," i.e. *dimension reduction*. It turns out that
+eigenanalysis can be quite useful for this purpose, by determining the
+*principal components* of our data. This is the focus of the current
+chapter.
 
 ::: 
 
