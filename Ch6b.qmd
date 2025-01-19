@@ -7,15 +7,30 @@ library(qeML)
 
 {{< pagebreak >}}
 
+# Principal Components and Singular Value Decomposition
+
+::: {.callout-note}
+
+## Goals of this chapter:
+
+::: 
+
+```{r} 
+#| include: false
+library(dsld)
+library(qeML)
+```
+
+{{< pagebreak >}}
+
 # PCA and SVD
 
 ::: {.callout-note}
 
 ## Goals of this chapter:
 
-One of the major notions in linear algebra involving factoring matrices
-into special forms. Eigenvalues and eigenvalues play a key role in some
-of the these factorizations, presented in this chapter.
+Here we delve into one of the most famous application areas of
+eigenanalysis.
 
 :::
 
@@ -24,7 +39,7 @@ of the these factorizations, presented in this chapter.
 The term *dimension reduction* means thinning out ones set of predictor
 variables/features. This could be for the purpose of avoiding
 overfitting, or just to keep things simple. One classical method for
-achieving this is Principal Components Analysis (PCA).
+achieving this is Principal Components Analysis (PCA).  
 
 ### Example: African Soils Data
 
@@ -38,10 +53,10 @@ files for this document, so that the code will run.
 Let's take a look around:
 
 ```{r}
-afrs <- read.csv('training.csv')
-dim(afrs)
-names(afrs)[1:25]
-names(afrs)[3576:3600]
+load('data/AfricanSoil.Rd')
+dim(AfricanSoil)
+names(AfricanSoil)[1:25]
+names(AfricanSoil)[3576:3600]
 ```
 
 Let's try predicting **pH**, the acidity. But that leaves 3599 possible
@@ -132,7 +147,7 @@ components* (PCs). They have some further important properties:
   $Cov(X)$, are orthogonal.
 
 * This in turn implies that the PCs are uncorrelated, and in the
-  multivariate normal case, statistically ndp.
+  multivariate normal case, statistically ndp.  
 
 </blockquote>
 
@@ -146,7 +161,7 @@ proceed. We will also remove the nonnumeric columns,
 **PIDN** and **Depth**.
 
 ```{r} 
-x <- afrs[,-c(1,3595,3598)]
+x <- AfricanSoil[,-c(1,3595,3598)]
 dim(x)
 xcov <- cov(x)
 eigs <- eigen(xcov)
@@ -169,8 +184,8 @@ x <- as.matrix(x)
 dim(x)
 xnew <- x %*% eigvecs
 dim(xnew)  
-ph <- afrs[,3595]
-lmout <- lm(afrs$pH ~ xnew)
+ph <- AfricanSoil[,3595]
+lmout <- lm(AfricanSoil$pH ~ xnew)
 # and so on
 ```
 

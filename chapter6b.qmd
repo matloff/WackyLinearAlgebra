@@ -7,35 +7,15 @@ library(qeML)
 
 {{< pagebreak >}}
 
-# Matrix Pseudoinverses 
-
-::: {.callout-note}
-
-## Goals of this chapter:
-
-The concept of eigenvalues and eigenvectors is one of the most important
-of all appplications of linear algebra to data science. We introduce the
-ideas in this chapter, and present some applications.
-
-::: 
-
-
-
-```{r} 
-#| include: false
-library(dsld)
-library(qeML)
-```
-
-{{< pagebreak >}}
-
 # PCA and SVD
 
 ::: {.callout-note}
 
 ## Goals of this chapter:
 
-xxxxxxxxxxxxxxxxxx
+One of the major notions in linear algebra involving factoring matrices
+into special forms. Eigenvalues and eigenvalues play a key role in some
+of the these factorizations, presented in this chapter.
 
 :::
 
@@ -166,11 +146,11 @@ proceed. We will also remove the nonnumeric columns,
 **PIDN** and **Depth**.
 
 ```{r} 
-x <- AfricanSoil[,-c(1,3595,3598)]
-dim(x)
-xcov <- cov(x)
-eigs <- eigen(xcov)
-eigs$values[1:100]  # don't print out all 3597!
+#### x <- AfricanSoil[,-c(1,3595,3598)]
+#### dim(x)
+#### xcov <- cov(x)
+#### eigs <- eigen(xcov)
+#### eigs$values[1:100]  # don't print out all 3597!
 ```
 
 Ah, the eigenvalues fall off rapidly after the first few. So, let's say
