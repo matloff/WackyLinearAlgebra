@@ -26,9 +26,9 @@ In seminal paper, Hoerl and Kennard[*Technometrids*,
 Februaru1970]{.column-margin} discussed the problem of
 *multicollinearity* of predictor variables in a linear model.  
 
-### Crux of the problem
+### Multicollinearity
 
-Multicollinearity referred to settings in which the following concerns
+The term *multicollinearity* refers to settings in which the following concerns
 arise:
 
 * One column of the matrix $A$ in @eq-linregformula is nearly equal to
@@ -39,6 +39,11 @@ arise:
 * Thus $A'A$ is nearly not of full rank.
 
 * Thus $\widehat{\beta}$ is unstable, in the form of high variance.
+
+(Technically, the above conditions refer to *approximate*
+multicollinearity, with the exact version consisting of the first three
+bullet points, minus the word "nearly." However, informally, the term
+*multicollinearity* is usually taken to mean the approximate condition.)
 
 That latter point is often quantified by the *Variance Inflation
 Factor*. To motivate it, consider the usual "R-squared" value
