@@ -55,7 +55,7 @@ predictor variables--important in the sense that they roughly summarize
 our data.  These new variables are called the *principal components*
 (PCs) of the data.  Let's see how this is done.
 
-### The first PC
+### The first PC{#sec-firstPC}
 
 Let **X** denote a set of variables of interest (not necessarily in a
 prediction context).
@@ -198,6 +198,36 @@ components* (PCs). They have some further important properties:
 By the way, though we used the covariance matrix here, it is more common
 to simply do eigenanalysis on the original data matrix.
 
+### Eigenanalysis relation between $A$ and $Cov(X)$ in linear regression
+
+Consider our usual linear regression setting, in which the matrix $A$
+contains our data for our predictor variables $X$.  If we center and
+scale our data, then '
+
+$$
+Cov(X) = A'A 
+$$
+
+Now say the PCA of X has a 0 eigenvalue. That implies that some linear
+combination $u'X$ has 0 variance. Then
+
+$$
+0 = Var(u'X) = u' Cov(X) u = u' A'A u = (Au)'Au
+$$
+
+Thus 
+
+$$
+Au = 0
+$$
+
+Since $Au$ is a linear combination of the columns of $A$, we see that
+the columns of $A$ are linearly dependent.
+
+The same argument works in reverse. If $Au = 0$, we fine that $Var(u'X)
+= 0$, and since the eigenvalues of $Cov(X)$ are variances of linear
+combinations of $X$, we see that one of those variances is 0.
+
 ### Back to the Example
 
 So, we remove the ``Y'' variable, $pH$, number 3598 as seen above, as
@@ -234,6 +264,41 @@ lmout <- lm(AfricanSoil$pH ~ xnew)
 ```
 
 ### PCA in detection of multicollinearity
+
+Recall the itemized list in @sec-nearly of various conditions 
+under which we have multicollinearity. We can add the following item to
+that list:  
+
+* $A$ has an eigenvalue that is nearly 0.
+
+The reasons are straightforward. If $Ax = 0$ for some nonzero $x, then
+the material in @sec-partitioned on partitioning says that the
+coefficients in $x$ form a linear combination of the columns of $A$ that
+results in the 0 vector, i.e. $A$ is not of full rank.
+
+
+In fact, PCA can warn us of specific linear combinations of $Cov(A'A)$
+that are nearly 0, as follows.
+
+* Say a PC corresponds to a small eigenvalue.
+
+* Then from @sec-firstPC that linear combination has small variance.
+
+* Random variables with small variance are nearly constant.
+
+* Thus with high probability, the linear combination is near to $c$
+for some number $c$.
+
+* If our design matrix $A$ includes a 1s column, then the above linear
+  combination, together with this 1s column, gives us a linear
+  combination that is usually close to the 0 vector, thus
+  multicollinear.
+
+In other words, PCA can point out to us specific linear combinations of
+our variables that may be problematic. If we are considering solving the
+problem by removing one or more predictor variables, this analysis could
+suggest which ones to remove.
+
 
 ### How Many Principal Components Should We Use?
 

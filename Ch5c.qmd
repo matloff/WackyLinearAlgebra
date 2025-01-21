@@ -26,7 +26,7 @@ In seminal paper, Hoerl and Kennard[*Technometrids*,
 Februaru1970]{.column-margin} discussed the problem of
 *multicollinearity* of predictor variables in a linear model.  
 
-### Multicollinearity
+### Multicollinearity{#sec-nearly}
 
 The term *multicollinearity* refers to settings in which the following concerns
 arise:
