@@ -63,14 +63,6 @@ Here are a few properties to start with:
   a useful piece information arising from that analysis is that $M$ as
   $m$ eigenvalues (not necessarily distinct).  
 
-❄️  **Your Turn:** Show that if $x$ is an eigenvector of $M$ with
-eigenvalue $\lambda \neq 0$, then for any nonzero number $c$, $cx$ will
-also be an eigenvector with eigenvalue $\lambda$.
-
-❄️  **Your Turn:** Show that if a matrix $M$ has a 0 eigenvalue, $M$
-must be singular. Also prove the converse. (Hint: Consider the column
-rank.)
-
 ## The Special Case of Symmetric Matrices
 
 Many matrices in data science are symmetric, such as covariance matrices
@@ -183,3 +175,15 @@ small but nonzero, due to roundoff error.
 
 ❄️  **Your Turn:** Show that the diagonalizing matrix $P$ above must
 have determinant $\pm 1$.
+
+❄️  **Your Turn:** Show that if $x$ is an eigenvector of $M$ with
+eigenvalue $\lambda \neq 0$, then for any nonzero number $c$, $cx$ will
+also be an eigenvector with eigenvalue $\lambda$.
+
+❄️  **Your Turn:** Show that if a matrix $M$ has a 0 eigenvalue, $M$
+must be singular. Also prove the converse. (Hint: Consider the column
+rank.)
+
+❄️  **Your Turn:** Consider a projection matrix $P_W$. Show that the only
+possible eigenvalues are 0 and 1. Hint: Recall that projection matrices
+are idempotent.

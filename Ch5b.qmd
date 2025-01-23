@@ -314,7 +314,7 @@ than the idea of *projections*.
 
 We say that vectors $u$ and $v$ are *orthogonal* if $<u,v> = 0$. This is
 the general extension of the notion of perpendicularity in high school
-geometry.
+geometry. Then we have the following:
 
 <blockquote>
 
