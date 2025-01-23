@@ -22,7 +22,7 @@ chapter.
 ::: 
 
 
-### Example: African soils data
+## Example: African Soils Data
 
 To get things started, let's consider the African Soils dataset.
 
@@ -123,8 +123,8 @@ There are as many principal components as there are columns in columns
 in $X$. So, how are the second, third and so on defined and computed?
 
 The key issue is that we want our PCs to be orthogonal, because as we
-have seen orthogonal random vectors are uncorrelated, and independent in
-the multivariate normal case. So if we summarize our data
+have seen orthogonal random vectors are statistically uncorrelated, and
+independent in the multivariate normal case. So if we summarize our data
 with say, the first few PCs, the fact that they are (at least loosely
 speaking) uncorrelated makes for a neater summary.
 
@@ -175,11 +175,7 @@ in @eq-ucovv. Moreover, $u'v = 0$ there as well, so that we have $\eta =
 0$, which reduces @eq-ucovv to a statement that $v$ too must be an
 eigenvector of $Cov(X)$.
 
-
-
-
-
-### Properties
+## Properties
 
 The full set of eigenvectors is then known as the *principal
 components* (PCs). They have some further important properties:
@@ -188,17 +184,26 @@ components* (PCs). They have some further important properties:
 
 * The PCs are orthogonal to each other. This follows from our earlier
   finding that eigenvectors of a symmetric matrix, in this case
-  $Cov(X)$, are orthogonal.
+  $Cov(X)$, are orthogonal. We say that a 
 
 * This in turn implies that the PCs are uncorrelated, and in the
   multivariate normal case, statistically independent.  
 
+* The eigenvalues are the variances of the PCs. The PCs are in order of
+  decreasing (or at least nonincreasing) variance. 
+
+  This first statement follows from pre-mutiplying @eq-aha by $u'$,
+  giving us $Var(u)$ on the left and $-\lambda u'u = -\lambda$ on the
+  right. The second statement follows from the fact that as we go from
+  the first PC to the second, third and so on, we are maximizing under
+  more and more constraints, hence smaller maxima.
+
 </blockquote>
 
-By the way, though we used the covariance matrix here, it is more common
+By the way, though we used the covariance matrix here, it is also common
 to simply do eigenanalysis on the original data matrix.
 
-### Eigenanalysis relation between $A$ and $Cov(X)$ in linear regression
+## Eigenanalysis Relation between $A$ and $Cov(X)$ in Linear Regression
 
 Consider our usual linear regression setting, in which the matrix $A$
 contains our data for our predictor variables $X$.  If we center and
@@ -228,7 +233,7 @@ The same argument works in reverse. If $Au = 0$, we fine that $Var(u'X)
 = 0$, and since the eigenvalues of $Cov(X)$ are variances of linear
 combinations of $X$, we see that one of those variances is 0.
 
-### Back to the Example
+## Back to the Example
 
 So, we remove the ``Y'' variable, $pH$, number 3598 as seen above, as
 proceed. We will also remove the nonnumeric columns,
@@ -263,7 +268,39 @@ lmout <- lm(AfricanSoil$pH ~ xnew)
 # and so on
 ```
 
-### PCA in detection of multicollinearity
+## A Pause for Reflection
+
+❄️  **Your Turn:** Modify the code for **qePCA** for the case of linear
+regression by addig a component **xCoeffs** to its return value. This
+will give the regression coefficients in terms of the original X
+predictors.
+
+❄️  **Your Turn:** Say the symmetric matrix $A$ has *block diagonal* form
+
+$$
+ A = 
+ \left (
+ \begin{array}{rr}
+ A_1 & 0 & 0 ... \\
+ 0 & A_2 & 0 ...  \\
+ ...
+ \end{array}
+ \right )
+$$
+
+where $A_i$ ($i=1,...,r)$ 
+
+* is symmetric 
+
+* is of size $k_i \textrm{ x } k_i$
+
+* has eigenvalues $\gamma_{1},...,\gamma_{k}$
+
+* has eigenvectors $\u{1,j},...,\u{k,j}$, where $j=1,...,k_i$
+
+State the form of the eigenvalues and eigenvectors of $A$.
+
+## PCA in Detection of Multicollinearity
 
 Recall the itemized list in @sec-nearly of various conditions 
 under which we have multicollinearity. We can add the following item to
@@ -300,9 +337,98 @@ problem by removing one or more predictor variables, this analysis could
 suggest which ones to remove.
 
 
-### How Many Principal Components Should We Use?
+## How Many Principal Components Should We Use?
 
 We chose to use the first 9 principal components in our example here,
 but just for illustration purposes.  There are no formal rules for how
-many to use.  Many "rules of thumb" are in use, but they are beyond the
-scope of this book.   
+many to use.  Many "rules of thumb" are in use.  
+
+If we are doing prediction, there is a very natural way to choose our
+number of PCs--just determine which number gives the most accurate
+prediction.
+
+### Example: New York City taxi trips
+
+This is a well-known dataset, a version of which is included in the
+**qeML** package. The object is to predict trip time, given pickup and
+dropoff locations, trip distance and day of the week.
+
+In the raw form of the data, there are just 5 columns, thus 4
+predictors.  But the pickup and dropoff locations are R factors, coding
+numerous locations. These must be decoded to dummy variables (values 1
+or 0, coding whether or not, say, a given trip began at pickup location
+121. If for instance one calls the R linear regression function **lm**,
+that function will do the conversion internally, but in our case we will
+perform the conversion ourselves, using **regtools::factorsToDummies**.
+(The **regtools** package is included by **qeML**.)
+
+```{r}
+library(qeML)
+data(nyctaxi)
+dim(nyctaxi)
+nyc <- factorsToDummies(nyctaxi,dfOut=T)
+dim(nyc)
+```
+
+Wow! That's quite a lot of predictors, and well in excess of the common
+rule of thumb that one should have no more than $\sqrt{n}$ predictors,
+100 in this case.
+
+So, we might try dimension reduction via PCA, then use the PCs as
+predictors. The function **qeML::qePCA** combines these two operations.
+Let's see how it works.
+
+```{r}
+args(qePCA)
+```
+
+Here **qeName** indicates which function is desired for prediction, e.g.
+**qeLin** for a linear model. (This function wraps **lm**.) But a key
+argument here is **pcaProp**. Recall that:
+
+* The PCs come in order of decreasing variance.
+
+* We are mainly interested in the first few PCs. The later ones have
+small variance, which makes them approximately constant and thus of no
+use to us.
+
+The name 'pcaProp' stands for "proportion of total variance." If we set
+this to, say, 0.25, we are saying "Give us whatever number of the first
+few PCs that have a total variance of at least 25% of the total." Let's
+give that a try:
+
+``` r 
+qePCA(nyc,'tripTime','qeLin',pcaProp=0.25)$testAcc
+[1] 311.9159
+```
+We asked to predict the column 'tripTime' in the dataset **nyc** using
+the **qeLin** function, based on as many of the PCs that will give us
+25% of the total variance.  As seen above, most of the **qeML**
+prediction functions split the data into a training set and a holdout
+set.  The model is fit to the training set, and then applied to
+prediction of the holdout set. The output value is the mean absolute
+prediction error (MAPE).
+
+However, since the holdout set is randomly generated, the MAPE value is
+random, so we should do multiple runs. Some experimentation showed that
+MAPE here is highly variable, so we decided to perform 500 runs, e.g.
+
+``` r  
+mean(sapply(1:500,function(i) qePCA(nyc,'tripTime','qeLin',pcaProp=0.1)$testAcc)) 
+[1] 359.663
+```
+
+| pcaProb | MAPE | 
+|---------|:-----|
+| 0.1      | 359.6630  | 
+| 0.2      | 359.3068  | 
+| 0.3      | 403.9878  | 
+| 0.4      | 397.3783  |
+| 0.5      | 430.8958  | 
+| 0.6      | 359.663   | 
+| 0.7      | 359.663   | 
+| 0.8      | 359.663   | 
+| 0.9      | 359.663   | 
+
+: Mean absolute predictive error 
+

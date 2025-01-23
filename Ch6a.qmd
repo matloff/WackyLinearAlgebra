@@ -181,3 +181,5 @@ Yes, that first column is indeed an eigenvector, with the claimed eigenvalue.
 Note that the expected 0 eigenvalue shows up as 2.801489e-12, quite
 small but nonzero, due to roundoff error.
 
+❄️  **Your Turn:** Show that the diagonalizing matrix $P$ above must
+have determinant $\pm 1$.
