@@ -426,9 +426,9 @@ mean(sapply(1:500,function(i) qePCA(nyc,'tripTime','qeLin',pcaProp=0.1)$testAcc)
 | 0.4      | 397.3783  |
 | 0.5      | 430.8958  | 
 | 0.6      | 423.7299  |
-| 0.7      | 359.663   | 
-| 0.8      | 359.663   | 
-| 0.9      | 359.663   | 
+| 0.7      | 517.7917  | 
+| 0.8      | 969.1304  |
+| 0.9      | 2275.091  | 
 
-: Mean absolute predictive error 
+: Mean Absolute Predictive Error 
 

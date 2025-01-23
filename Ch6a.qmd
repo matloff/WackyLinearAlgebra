@@ -54,6 +54,12 @@ Here are a few properties to start with:
   det(M - \lambda I) = 0
   $$
 
+* The left-hand side of this equation is a polynomial in $\lambda$. So
+  for an $n \textrm{ x } n$ matrix $M$, there are $n$ roots of the
+  equation and thus $n$ eigenvalues. Note that some roots may be
+  repeated; if $M$ is the zero matrix, it will have an eigenvalue $0$
+  with multiplicity $n$.
+
 * In principle, that means we can solve the above determinant equation
   to find the eigenvalues of the matrix. The comments in @sec-detdef
   regarding the "ugly" definition of determinants imply that the
@@ -187,3 +193,8 @@ rank.)
 ❄️  **Your Turn:** Consider a projection matrix $P_W$. Show that the only
 possible eigenvalues are 0 and 1. Hint: Recall that projection matrices
 are idempotent.
+
+❄️  **Your Turn:** Say $A$ is an invertible matrix with eigenvalue
+$\lambda$ and eigenvector $v$. Show that $v$ is also an eigenvector of
+$A^{-1}$, with eigenvalue $1/\lambda$.
+
