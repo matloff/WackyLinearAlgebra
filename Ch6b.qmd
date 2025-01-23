@@ -341,7 +341,7 @@ suggest which ones to remove.
 
 We chose to use the first 9 principal components in our example here,
 but just for illustration purposes.  There are no formal rules for how
-many to use.  Many "rules of thumb" are in use.  
+many to use.  Many "rules of thumb" exist. 
 
 If we are doing prediction, there is a very natural way to choose our
 number of PCs--just determine which number gives the most accurate
@@ -432,3 +432,6 @@ mean(sapply(1:500,function(i) qePCA(nyc,'tripTime','qeLin',pcaProp=0.1)$testAcc)
 
 : Mean Absolute Predictive Error 
 
+Among other things, this shows the dangers of overfitting, in this case
+using too many PCs in our linear regression model. It seems best here to
+use only the first 10 or 20% of the PCs.

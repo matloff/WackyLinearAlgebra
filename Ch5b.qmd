@@ -349,6 +349,9 @@ that same space.
 
 The case of $\cal RV(\Omega)$ deserves its own section, coming up next.
 
+❄️  **Your Turn:** Show that any set of orthogonal vectors is linearly
+independent.
+
 ### The Pythagorean Theorem
 
 That this ancient theorem in geometry still holds in general inner
