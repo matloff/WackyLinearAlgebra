@@ -78,7 +78,7 @@ where $\lambda$ is a positive number chosen by the analyst.
 Here $A$ has dimensions $n \textrm{ x } p$, and $I$ is the $p \textrm{ x } p$
 identity matrix.
 
-### Matrix formulation
+### Matrix formulation{#sec-matform}
 
 Using partitioned matrices helps understand ridge. Replace  $A$ and $S$
 by
@@ -115,8 +115,6 @@ makes the latter "larger", and thus its inverse smaller. In other words,
 we are "shrinking" $\widehat{\beta}$ towards 0. This effect is made even
 stronger by the fact that we added 0s data to $S$. This will be made
 more precise below.
-
-❄️  **Your Turn:** Show that $A_{new}$ is of full rank, $p$.
 
 ### Modern view{#sec-pgtn}
 
@@ -338,6 +336,10 @@ inference (confidence intervals, hypothesis tests), e.g. those based on
 @eq-varcovar for linear models, is not possible.
 
 :::
+
+## Your Turn
+
+❄️  **Your Turn:** Show that $A_{new}$ in @sec-matform is of full rank, $p$.
 
 
 

@@ -259,7 +259,9 @@ matpow(p1,25)
 So, no matter which state we start in, at time 25 we are about 20%
 likely to be at any of the states. In fact, as time n goes to infinity,
 this probability vector becomes exactly (0.20,0.20,0.20,0.20,0.20), as
-we will see in the next chapter..
+we will see in the next chapter.
+
+## Your Turn
 
 ❄️  **Your Turn:** The long-run probabilities here turned out to be
 uniform, with value 0.20 for all five states. In fact, that is usually

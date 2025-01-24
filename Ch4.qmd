@@ -334,12 +334,12 @@ And thus:
 <blockquote>
 
 *Corollary:* The (common value of) row and column ranks of an $m x n$
-mstrix $B$ must be less than or equal to the minimum of the number of
+matrix $B$ must be less than or equal to the minimum of the number of
 rows and columns of $B$ .
 
 </blockquote>
 
-## Further Exercises
+## Your Turn
 
 ❄️  **Your Turn:** Consider an $m \textrm{x} n$ matrix $A$ with $m \geq n$.
 Then consider the partitioned matrix

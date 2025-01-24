@@ -86,8 +86,8 @@ space.
 $<(a_1,...,a_n),(b_1,...,b_n> =
 a_1 b_1 + ... + a_n b_n$
 
-❄️  **Your Turn:** An $n ~ \textrm{x} ~ n$ symmetric matrix $M$ is called
-*positive definite* if 
+An $n ~ \textrm{x} ~ n$ symmetric matrix $M$ is called *positive
+definite* if 
 
 $$
 w'Mw > 0
@@ -95,7 +95,7 @@ $$
 
 for all nonzero vectors $w$. (And the term used is *nonnegative
 definite* if $>$ is replaced by $ \geq$.) Show that $<u,v> = u'Mv$ is an
-inner product on $\cal R^n$.
+inner product on $\cal R^n$.)
 
 *C(0,1)*:
 
@@ -141,11 +141,6 @@ $$
 
 for any nonzero $X$, i.e. any $X$ such that $P(X = 0) < 1$. 
 
-❄️  **Your Turn:** Show that if $<X,X> = 0$, then $X$ must be the 0
-vector. Make use of the facts that $Var(X) = E(X^2) - [E(X)]^2$ and
-$Var(X) \geq 0$ with equality only of $X = c$ for some constant $c$.
-
-
 ## Norm of a Vector
 
 This concept extends the notion of a the length of a vector, as we know
@@ -186,28 +181,6 @@ $$
 *Proof:* See the Your Turn problem below.
 
 </blockquote>
-
-❄️  **Your Turn:** Derive the Cauchy-Schwarz Inequality, using the
-following algebraic outline:
-
-* The inequality
-
-  $$
-  0 \leq <(au+v),(au+v)>
-  $$
-
-  holds for any scalar $a$.
-
-* Expand the right-hand side (RHS), using the bilinear property of inner 
-  products.
-
-* Minimize the resulting RHS with respect to $a$.
-
-* Collect terms to yield
-
-   $$
-   <u,v>^2 \leq ||u||^2 ||v||^2
-   $$
 
 ### Application: Correlation{#sec-corr}
 
@@ -275,8 +248,6 @@ $$
 *Proof:* See the Your Turn problem below.
 
 </blockquote>
-
-
 
 ### Exercises{#sec-cauchyexercises}
 
@@ -865,3 +836,31 @@ Note the following:
 
 Goal achieved.
 
+## Your Turn
+
+❄️  **Your Turn:** Consider the space $\cal RV(\Omega)$.  Show that if
+$<X,X> = 0$, then $X$ must be the 0 vector. Make use of the facts that
+$Var(X) = E(X^2) - [E(X)]^2$ and $Var(X) \geq 0$ with equality only of
+$X = c$ for some constant $c$.
+
+❄️  **Your Turn:** Derive the Cauchy-Schwarz Inequality, using the
+following algebraic outline:
+
+* The inequality
+
+  $$
+  0 \leq <(au+v),(au+v)>
+  $$
+
+  holds for any scalar $a$.
+
+* Expand the right-hand side (RHS), using the bilinear property of inner 
+  products.
+
+* Minimize the resulting RHS with respect to $a$.
+
+* Collect terms to yield
+
+   $$
+   <u,v>^2 \leq ||u||^2 ||v||^2
+   $$

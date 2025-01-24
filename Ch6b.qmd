@@ -268,38 +268,6 @@ lmout <- lm(AfricanSoil$pH ~ xnew)
 # and so on
 ```
 
-## A Pause for Reflection
-
-❄️  **Your Turn:** Modify the code for **qePCA** for the case of linear
-regression by addig a component **xCoeffs** to its return value. This
-will give the regression coefficients in terms of the original X
-predictors.
-
-❄️  **Your Turn:** Say the symmetric matrix $A$ has *block diagonal* form
-
-$$
- A = 
- \left (
- \begin{array}{rr}
- A_1 & 0 & 0 ... \\
- 0 & A_2 & 0 ...  \\
- ...
- \end{array}
- \right )
-$$
-
-where $A_i$ ($i=1,...,r)$ 
-
-* is symmetric 
-
-* is of size $k_i \textrm{ x } k_i$
-
-* has eigenvalues $\gamma_{1},...,\gamma_{k}$
-
-* has eigenvectors $u{1,j},...,u{k,j}$, where $j=1,...,k_i$
-
-State the form of the eigenvalues and eigenvectors of $A$.
-
 ## PCA in Detection of Multicollinearity
 
 Recall the itemized list in @sec-nearly of various conditions 
@@ -435,3 +403,35 @@ mean(sapply(1:500,function(i) qePCA(nyc,'tripTime','qeLin',pcaProp=0.1)$testAcc)
 Among other things, this shows the dangers of overfitting, in this case
 using too many PCs in our linear regression model. It seems best here to
 use only the first 10 or 20% of the PCs.
+
+## Your Turn
+
+❄️  **Your Turn:** Modify the code for **qePCA** for the case of linear
+regression by addig a component **xCoeffs** to its return value. This
+will give the regression coefficients in terms of the original X
+predictors.
+
+❄️  **Your Turn:** Say the symmetric matrix $A$ has *block diagonal* form
+
+$$
+ A = 
+ \left (
+ \begin{array}{rr}
+ A_1 & 0 & 0 ... \\
+ 0 & A_2 & 0 ...  \\
+ ...
+ \end{array}
+ \right )
+$$
+
+where $A_i$ ($i=1,...,r)$ 
+
+* is symmetric 
+
+* is of size $k_i \textrm{ x } k_i$
+
+* has eigenvalues $\gamma_{1},...,\gamma_{k}$
+
+* has eigenvectors $u{1,j},...,u{k,j}$, where $j=1,...,k_i$
+
+State the form of the eigenvalues and eigenvectors of $A$.

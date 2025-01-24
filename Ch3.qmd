@@ -325,10 +325,7 @@ It can be shown that for a column vector $a$,
 
 $$
 \frac{d}{da} a'a = 2a
-$$
-
-❄️  **Your Turn:** Show this. Write $a = (a_1,...,a_k)'$ and find the
-gradient "by hand." Compare to $2a$.
+$${#eq-dda}
 
 @eq-rss is indeed of the form $a'a$, but the problem here is
 that $a$ in turn is a function of $b$, This calls for the Chain Rule,
@@ -380,15 +377,6 @@ det(Ap %*% A)
 ```
 
 Nonzero! So $(A'A)^{-1}$ does exist, as we saw.
-
-❄️  **Your Turn:** Show that 
-
-$$
-\frac{d}{du} u'Qu = 2Qu
-$$
-
-for a constant symmetric matrix $Q$ and a vector $u$. ($u'Qu$ is called
-a *quadratic form*.)
 
 ### The general case
 
@@ -674,4 +662,17 @@ apai + w1 * w2
 apa2i
 ```
 
+## Your Turn
+
+❄️  **Your Turn:** Show @eq-dda. Write $a = (a_1,...,a_k)'$ and find the
+gradient "by hand." Compare to $2a$.
+
+❄️  **Your Turn:** Show that 
+
+$$
+\frac{d}{du} u'Qu = 2Qu
+$$
+
+for a constant symmetric matrix $Q$ and a vector $u$. ($u'Qu$ is called
+a *quadratic form*.)
 

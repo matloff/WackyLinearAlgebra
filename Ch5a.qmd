@@ -190,9 +190,6 @@ The set of all random variables that are functions of $H$, say, is a
 subspace. Another subspace is the set of all random variable with mean
 0.
 
-❄️  **Your Turn:** Citing the properties of expected value, E(), show
-that the latter set is indeed a subspace of $\cal RV(\Omega)$.
-
 ## Basis 
 
 Consider a set of vectors $u_1,...u_r$ in a vector space $\cal W$.
@@ -207,10 +204,6 @@ linearly independent:
 We say the vectors $u_1,...u_r$ in a vector space $\cal W$ form a *basis*
 for $\cal W$ if they are linearly independent and span $\cal W$.
 </blockquote>
-
-❄️  **Your Turn:** Prove that the coefficients in basis representations
-are unique. In other words, in a representation of the vector $x$ in
-terms of a basis $u_1,...,u_n$,
 
 ### Examples
 
@@ -288,7 +281,7 @@ u_k = \sum_{q=1}^n r_{kq} \sum_{w=1}^m s_{qw} u_w =
 \sum_{q=1}^n \sum_{w=1}^m r_{kq}s_{qw} u_w
 $$
 
-Since the $u_w$ form a basis, then the above Your Turn problem on the
+Since the $u_w$ form a basis, then the below Your Turn problem on the
 uniqueness of coefficients in a basis representation says we can equate
 coefficients on both sides of the last equation. The coefficient of
 $u_k$ on the right side is 
@@ -324,10 +317,17 @@ Therefore $m = n$, i.e. the two bases are of the same size.
 
 </blockquote>
 
-## Exercises
+## Your Turn
 
 ❄️  **Your Turn:** Say $U$ and $V$ are subspaces of $W$. Show that
 $U \cap V$ is also a subspace, and that its dimension is at most the
 minimum of the dimensions of $U$ and $V$. Show by counterexample tha
 result does not hold for union.
- 
+
+❄️  **Your Turn:** Citing the properties of expected value, E(), show
+that the set of all random variable with mean 0 latter set is indeed a
+subspace of $\cal RV(\Omega)$.
+
+❄️  **Your Turn:** Prove that the coefficients in basis representations
+are unique. In other words, in a representation of the vector $x$ in
+terms of a basis $u_1,...,u_n$,
