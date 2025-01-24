@@ -30,7 +30,7 @@ $x$ and a number $\lambda$ such that
 
 $$
 Mx = \lambda x
-$$
+$${#eq-simpledef}
 
 we say that $\lambda$ is an *eigenvalue* of $M$, with *eigenvector*
 $x$.
@@ -179,6 +179,36 @@ Yes, that first column is indeed an eigenvector, with the claimed eigenvalue.
 Note that the expected 0 eigenvalue shows up as 2.801489e-12, quite
 small but nonzero, due to roundoff error.
 
+## Computation: the Power Method
+
+One way to compute eigenvalues and eigenvectors is the *power method*, a
+simple iteration. We begin with an initial guess, $\x_0$ for an
+eigenvector. Substituting in @eq-simpledef, we have the next guess:
+
+$$
+x_1 = M x_0
+$$
+
+We keep iterating until convergence, generating $x_2$ from $x_1$ and so
+on. However, the $x_i$ may grow, so we normalize to length 1:
+
+$$
+x_i \leftarrow \frac{x_i}{||x_i||}
+$$
+
+## Application: Computation of Long-Run Distribution in Markov Chains
+
+We showed in @sec-markovsolve how matrix inverse can be used to compute
+the long-run distribution $\nu$ in a Markov chain. However, this is
+inefficient for very large transition matrices. For instance, in Google
+PageRank, there is a Markov state for every page on the Web!
+
+Instead, we exploit the fact that @eq-MarkovPi says that the transition
+matrix has an eigenvector $\nu$ with eigenvalue 1.  Due to the typical
+huge size of the matrix, the power method or a variant is often used.
+
+## Your Turn
+
 ❄️  **Your Turn:** Show that the diagonalizing matrix $P$ above must
 have determinant $\pm 1$.
 
@@ -197,4 +227,7 @@ are idempotent.
 ❄️  **Your Turn:** Say $A$ is an invertible matrix with eigenvalue
 $\lambda$ and eigenvector $v$. Show that $v$ is also an eigenvector of
 $A^{-1}$, with eigenvalue $1/\lambda$.
+
+❄️  **Your Turn:** Show that if $A$ is nonnegative-definite, its
+eigenvalues must be nonnegative.
 

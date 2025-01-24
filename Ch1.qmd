@@ -991,10 +991,23 @@ finding a high power of P would do this too, but that would involve a lot
 of computation, and even then it would not yield the exact answer. We
 will return to this in the next chapter. 
 
+## Application: Google PageRank{#sec-pagerank}
+
+When Google was first formed, its key internal component was a method to
+rank Web sites in terms of popularity.  They developed such a method,
+and named it PageRank, a pun combining the term *Web page* (i.e. Web
+site) and the name of one of the founders, Larry Page. It's based on a
+Markov model.
+
+The transition matrix is modeled as follows. Row $i$ has $o_i$ nonzero
+entries, each of which is equal to $1/o_i$.
+They define popularity as the resulting long-run distribution, i.e.
+$\nu$ in @sec-introMCs.
+
 ## Random Vectors
 
 You are probably familiar with the concept of a random variable, but of
-even greater importance is random *vecctors*.
+even greater importance is random *vectors*.
 
 Say we are jointly modeling height, weight, age, systolic blood pressure
 and cholesterol, and are especially interested in relations between

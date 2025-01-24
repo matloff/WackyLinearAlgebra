@@ -22,14 +22,14 @@ related quantities are often used instead).
 
 :::
 
-## Example
+## Example: Computing Long-Run Markov Distribution{#sec-markovsolve}
 
 At the end of the last chapter, we found that for a Markov chain with
 transition matrix P and stationary distribution $\nu$,
 
 $$
 \nu = P' \nu
-$$
+$${#eq-MarkovPi}
 
 This suggests a method for computing $\nu$, by solving the above
 equation.[]{.column-margin}

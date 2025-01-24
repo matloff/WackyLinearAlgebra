@@ -296,7 +296,7 @@ where $A_i$ ($i=1,...,r)$
 
 * has eigenvalues $\gamma_{1},...,\gamma_{k}$
 
-* has eigenvectors $\u{1,j},...,\u{k,j}$, where $j=1,...,k_i$
+* has eigenvectors $u{1,j},...,u{k,j}$, where $j=1,...,k_i$
 
 State the form of the eigenvalues and eigenvectors of $A$.
 

@@ -93,7 +93,9 @@ $$
 w'Mw > 0
 $$
 
-Show that $<u,v> = u'Mv$ is an inner product on $\cal R^n$.
+for all nonzero vectors $w$. (And the term used is *nonnegative
+definite* if $>$ is replaced by $ \geq$.) Show that $<u,v> = u'Mv$ is an
+inner product on $\cal R^n$.
 
 *C(0,1)*:
 
