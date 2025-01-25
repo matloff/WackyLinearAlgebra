@@ -15,7 +15,7 @@ library(qeML)
 
 We've seen the notion of eigenanalysis for square matrices. Well, it
 turns out this can be extended usefully for nonsquare matrices, via
-*Singular Value Decomposition*, the topic of this chapter.
+*Singular Value Decomposition* (SVD), the topic of this chapter.
 
 ::: 
 
@@ -27,5 +27,32 @@ library(dsld)
 library(qeML)
 ```
 
-xxx
+## Basic Idea
+
+We'll take this as our definition of SVD:
+
+<blockquote>
+
+Given a (very possibly nonsquare) matrix $A$, we wish to find orthogonal
+matrices $U$ and $V$, and a diagonal matrix $\Sigma$ whose nonzero
+elements are positive, such that
+
+$$
+A = U \Sigma V'
+$$
+
+</blockquote>
+
+## Solution
+
+1. Compute the eigenvalues and eigenvectors of $A'A$. 
+
+2. Since $A'A$ is symmetric and positive-semidefinite, its eigenvalues 
+   will be nonnegative and its length-1 eigenvectors will be orthogonal. 
+
+3. Set $\Sigma$ to $diag(\sqrt{\sigma_1},...,\sqrt{\sigma_r}$, the
+   nonincreasing list of postive eigenvalues. Set the columns of $V$ to
+   the corresponding eigenvectors.
+
+4.  Set $U$ as with $V$, but based on $AA'$ rather than $$A'A$.$
 
