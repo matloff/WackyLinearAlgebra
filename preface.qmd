@@ -8,7 +8,7 @@ under Creative Commons Zero v1.0 Universal]{.column-margin}
 
 ### Subtlety in the Title
 
-Let's start with the title of this book, "Linear Algebra *Runs* 
+Let's start with the title of this book, "Linear Algebra *Rules* 
 Data Science." It would be more typical of "math support for field X"
 books to use "for" rather than "in," but the use of the latter aims to
 emphasize the fact that:
