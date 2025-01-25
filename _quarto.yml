@@ -6,8 +6,11 @@ book:
    title: "Linear Algebra Rules Data Science"
    subtitle: "with R examples"
    author: 
-     - Norman Matloff
-   date: "11/27/2024"
+     - name: Norman Matloff
+       email: nsmatloff@ucdavis.edu
+       affiliations:
+         - name: University of California, Davis
+   date: today
 
    cover-image: Projections.png
    

@@ -190,6 +190,11 @@ The set of all random variables that are functions of $H$, say, is a
 subspace. Another subspace is the set of all random variable with mean
 0.
 
+### Span of a set of vectors
+
+The *span* of a set of vectors $G = {v_1,...,v_k}$ is the set of all
+linear combinations of those vectors. It's a subspace of the main space.
+
 ## Basis 
 
 Consider a set of vectors $u_1,...u_r$ in a vector space $\cal W$.

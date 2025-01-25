@@ -864,3 +864,19 @@ following algebraic outline:
    $$
    <u,v>^2 \leq ||u||^2 ||v||^2
    $$
+
+❄️  **Your Turn:** Consider a set of vectors $W = {v_1,...,v_k}$ in an
+inner product space $V$. Let $U$ be another vector in $V$. Show that
+there exist scalars $a_1,...,a_k$ and a vector $v$ such that
+
+$$
+u = a_1 v_1 + ... + a_k v_k +v 
+$$
+
+with
+
+$$
+<v,v_i> = 0 \textrm{ for all i}
+$$
+
+
