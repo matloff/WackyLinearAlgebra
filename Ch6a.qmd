@@ -139,6 +139,9 @@ $$
 
 so that $P^{-1} = P'$.
 
+By the way, any square matrix $Q$ such that $Q'Q = I$ is said to be
+*orthogonal*
+
 Now write
 
 $$
