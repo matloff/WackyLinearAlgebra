@@ -100,7 +100,7 @@ is that number). Substitute for $M\nu$ and $M\mu$, then subtract.
 
 </blockquote>
 
-### Symmetric matrices are diagonalizable
+### Symmetric matrices are diagonalizable{#sec-diagonalizable}
 
 A square matrix $R$ is said to be *diagonalizable* if there exists an
 invertible matrix $P$ such that $P^{-1}RP$ is equal to some diagonal

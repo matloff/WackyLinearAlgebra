@@ -1,5 +1,5 @@
 
-```{r}
+```{r} 
 #| include: false
 library(dsld)
 library(qeML)
@@ -7,5 +7,27 @@ library(qeML)
 
 {{< pagebreak >}}
 
-# Linear Algebra in Machine Learning
+# Matrix Pseudoinverses 
+
+::: {.callout-note}
+
+## Goals of this chapter:
+
+Inverse of a nonsquare matrix? How can that be possible, let alone
+useful? Methods for such an operation are presented here, with
+applications.  
+
+::: 
+
+
+
+```{r} 
+#| include: false
+library(dsld)
+library(qeML)
+```
+
+## The Basic Idea
+
+Given a general matrix $A$, we wish to find ortho
 

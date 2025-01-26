@@ -184,7 +184,8 @@ components* (PCs). They have some further important properties:
 
 * The PCs are orthogonal to each other. This follows from our earlier
   finding that eigenvectors of a symmetric matrix, in this case
-  $Cov(X)$, are orthogonal. We say that a 
+  $Cov(X)$, are orthogonal. We say that a symmetric is *orthogonal*
+  if its columns are orthogonal as vectors.
 
 * This in turn implies that the PCs are uncorrelated, and in the
   multivariate normal case, statistically independent.  
