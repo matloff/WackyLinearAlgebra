@@ -59,7 +59,15 @@ which are too complex to pursue here. Let's go straight to the answer:
 
 4.  Set $U$ as with $V$, but based on $AA'$ rather than $A'A$.
 
+Note that if the dimensions of $A$ are $m \textrm{ x } n$, then $U$,
+$\Sigma$ and $V$ will be of dimensions $m \textrm{ x } n$,  $n \textrm{
+x } n$  and $n \textrm{ x } n$, respectively. 
+
 ## The Data Scientist's Swiss Army Knife
 
 There are a great many pieces of information and sources of tools packed
 into this innocuous-looking factorization.  Let's take a look at some:
+
+### Rank of $A$
+
+This can be 
