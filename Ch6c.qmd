@@ -63,6 +63,27 @@ Note that if the dimensions of $A$ are $m \textrm{ x } n$, then $U$,
 $\Sigma$ and $V$ will be of dimensions $m \textrm{ x } n$,  $n \textrm{
 x } n$  and $n \textrm{ x } n$, respectively. 
 
+## Example: ToothGrowth Data
+
+This dataset is built into R.
+
+```{r}
+library(qeML)
+tg <- factorsToDummies(ToothGrowth,dfOut=FALSE) 
+z <- svd(tg)
+names(z)
+dim(tg)
+dim(z$u)
+dim(z$d)  # Sigma, as the diagonal vector, 4x4 actually
+dim(z$v)
+head(z$u)
+z$d
+z$v
+udv <- z$u %*% diag(z$d) %*% t(z$v)  # check
+head(udv)
+head(tg)
+```
+
 ## The Data Scientist's Swiss Army Knife
 
 There are a great many pieces of information and sources of tools packed
@@ -70,4 +91,8 @@ into this innocuous-looking factorization.  Let's take a look at some:
 
 ### Rank of $A$
 
-This can be 
+This can be seen by the size of $\Sigma$. In fact, if there are some
+really tiny elements there, one might also entertain the thought that
+the true is less than this size.
+
+Why does this work? 
