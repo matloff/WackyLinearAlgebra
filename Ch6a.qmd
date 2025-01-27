@@ -104,9 +104,10 @@ is that number). Substitute for $M\nu$ and $M\mu$, then subtract.
 
 A square matrix $R$ is said to be *diagonalizable* if there exists an
 invertible matrix $P$ such that $P^{-1}RP$ is equal to some diagonal
-matrix $D$.
+matrix $D$. We see that symmetric matrices fall into this category.
 
-One application of this is the computation of powers of a matrix:
+One application of this is the computation of powers of a diagonal
+matrix:
 
 $$
 R^k = P^{-1}RP ~ P^{-1}RP ~ ... ~ P^{-1}RP = P^{-1}D^kP
@@ -117,11 +118,12 @@ computation of $M^k$ is easy.
 
 <blockquote>
 
-*Theorem:* Symmetric matrices $M$ are diagonalizable. In fact, the matrix $P$
-is equal to the matrix whose columns are the eigenvectors of $M$, chosen
-to have length 1. The associated diagonal matrix has as its diagonal
-elements the eigenvalues of $M$. The matrix $P$ has the property that
-$P^{-1} = P'$.
+*Theorem:* Symmetric matrices $M$ are diagonalizable. In fact, the
+matrix $P$ is equal to the matrix whose columns are the eigenvectors of
+$M$, chosen to have length 1. The associated diagonal matrix has as its
+diagonal elements the eigenvalues of $M$. The matrix $P$ has the
+property that $P^{-1} = P'$.  Moreover, the rank of $M$ is equal to the
+number of nonzero eigenvalues of $M$.
 
 *Proof:* Use partitioned matrices. 
 
@@ -140,7 +142,7 @@ $$
 so that $P^{-1} = P'$.
 
 By the way, any square matrix $Q$ such that $Q'Q = I$ is said to be
-*orthogonal*
+*orthogonal*.
 
 Now write
 
@@ -149,7 +151,11 @@ MP = M(P_1 | ... | P_m) = (MP_1 | ... | MP_n) =
 (d_1 P_1 | ... | (d_m P_m) = PD
 $$
 
-Finally, multiply on the left by $P'$, and we are done.
+Multiply on the left by $P'$, and we are done.
+
+Regarding rank, @thm-ranknotchange tells us that pre- or postmultiplying
+by an invertible matrix does not change rank, and clearly the rank of a
+diagonal matrix is the number of nonzero elements.
 
 </blockquote>
 
