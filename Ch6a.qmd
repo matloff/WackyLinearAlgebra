@@ -118,12 +118,20 @@ computation of $M^k$ is easy.
 
 <blockquote>
 
-*Theorem:* Symmetric matrices $M$ are diagonalizable. In fact, the
-matrix $P$ is equal to the matrix whose columns are the eigenvectors of
-$M$, chosen to have length 1. The associated diagonal matrix has as its
-diagonal elements the eigenvalues of $M$. The matrix $P$ has the
-property that $P^{-1} = P'$.  Moreover, the rank of $M$ is equal to the
-number of nonzero eigenvalues of $M$.
+*Theorem:* Any symmetric matrix $M$ has the following properties
+
+* $M$ is diagonalizable. 
+
+* In fact, the matrix $P$ is equal to the matrix whose columns are the
+  eigenvectors of $M$, chosen to have length 1. 
+
+* The associated diagonal matrix has as its diagonal elements the
+  eigenvalues of $M$. 
+
+* The matrix $P$ has the property that $P^{-1} = P'$.  
+
+* Moreover, the rank of $M$ is equal to the number of nonzero
+  eigenvalues of $M$.
 
 *Proof:* Use partitioned matrices. 
 
