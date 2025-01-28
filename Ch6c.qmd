@@ -150,9 +150,13 @@ into this innocuous-looking factorization.  Let's take a look at some:
 
 ### Rank of $A$
 
-This can be seen by the size of $\Sigma$. In fact, if there are some
+This is the number of nonzero values in $\Sigma$. 
+
+
+
+In fact, if there are some
 really tiny elements there, one might also entertain the thought that
-the true is less than this size.
+the true rank is less than this size.
 
 Why does this work? 
 
