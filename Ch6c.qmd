@@ -29,9 +29,11 @@ library(qeML)
 
 ## Basic Idea
 
-We'll take this as our definition of SVD:
+Here is what we are aiming for.
 
-<blockquote>
+::: {.callout-note}
+
+## Our target relation:
 
 Given a (very possibly nonsquare) matrix $A$, we wish to find orthogonal
 matrices $U$ and $V$, and a diagonal matrix $\Sigma$ whose nonzero
@@ -41,12 +43,18 @@ $$
 A = U \Sigma V'
 $$
 
-</blockquote>
+Note that, by matrix partitioning, this also says that 
+
+$$
+A = \sum_{i=1}^n \sigma_i u_i v_i'
+$$ {#eq-aissumuivi}
+
+:::
 
 ## Solution
 
-There are various derivations, e.g. along the lines of @sec-firstPC,
-which are too complex to pursue here. Let's go straight to the answer:  
+There are various derivations, e.g. along the lines of @sec-firstPC (one
+maximizes the quantity $U A V'$), but let's go quickly to the answer:  
 
 1. Compute the eigenvalues and eigenvectors of $A'A$. 
 
@@ -55,13 +63,64 @@ which are too complex to pursue here. Let's go straight to the answer:
 
 3. Set $\Sigma$ to $diag(\sqrt{\sigma_1},...,\sqrt{\sigma_r})$, the
    nonincreasing list of positive eigenvalues. Set the columns of $V$ to
-   the corresponding eigenvectors (recall @sec-diagonalizable).
+   the corresponding eigenvectors (recall @sec-diagonalizable). (We will
+   assume that all the $u_i$ are positive; the proof needs a slight
+   modification for the general case.)
 
-4.  Set $U$ as with $V$, but based on $AA'$ rather than $A'A$.
+4. Set the columns of $U$ as
+
+$$
+u_i = \frac{1}{\sigma_i} v_i
+$$
 
 Note that if the dimensions of $A$ are $m \textrm{ x } n$, then $U$,
 $\Sigma$ and $V$ will be of dimensions $m \textrm{ x } n$,  $n \textrm{
 x } n$  and $n \textrm{ x } n$, respectively. 
+
+## Checking the Formula
+
+Are the two matrices orthogonal. and does $U \Sigma V'$ really work out
+to be $A$?
+
+* $U$ is orthogonal.
+
+Since $V$ arises eigenvectors of the symmetric matrix $A'A$, it is an
+orthogonal matrix. Then
+
+$$
+\sigma_i^2 u_i'u_i =  (A v_i)' A v_i = \sigma^2 v_i'v_i = \sigma_i^2
+$$
+
+since $V$ is orthogonal.  Thus the columns of $U$ are of length 1.
+
+Replacing the second $u_i$ and second $v_i$ above by
+$u_j$ and $v_j$, we find that the columns of $U$ are orthogonal.
+
+Thus the matrix $U$ is orthogonal.
+
+* The product works out as claimed.
+
+Using matrix partitioning, we have
+
+$$
+U \Sigma = (\sigma_1 u_1 | ... | \sigma_n u_n)
+$$
+
+So, again using partitioning,
+
+$$
+U \Sigma V' = (\sigma_1 u_1 | ... | \sigma_n u_n) 
+ \left (
+ \begin{array}{r}
+ v_1' \\
+ ... \\
+ v_n'  \\
+ \end{array}
+ \right )
+= \sum_{i=1}^n \sigma_i u_i v_i'  
+$$
+
+That last expression is equal to $A$, by @eq-aissumuivi.
 
 ## Example: ToothGrowth Data
 
@@ -96,3 +155,9 @@ really tiny elements there, one might also entertain the thought that
 the true is less than this size.
 
 Why does this work? 
+
+## Your Turn
+
+❄️  **Your Turn:** Show that in the SVD factorization, $U$ consists of
+the eigenvectors of $AA'$.
+
