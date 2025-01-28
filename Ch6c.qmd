@@ -84,43 +84,43 @@ to be $A$?
 
 * $U$ is orthogonal.
 
-Since $V$ arises eigenvectors of the symmetric matrix $A'A$, it is an
-orthogonal matrix. Then
+    Since $V$ arises eigenvectors of the symmetric matrix $A'A$, it is an
+    orthogonal matrix. Then
+    
+    $$
+    \sigma_i^2 u_i'u_i =  (A v_i)' A v_i = \sigma^2 v_i'v_i = \sigma_i^2
+    $$
+    
+    since $V$ is orthogonal.  Thus the columns of $U$ are of length 1.
+    
+    Replacing the second $u_i$ and second $v_i$ above by
+    $u_j$ and $v_j$, we find that the columns of $U$ are orthogonal.
+    
+    Thus the matrix $U$ is orthogonal.
 
-$$
-\sigma_i^2 u_i'u_i =  (A v_i)' A v_i = \sigma^2 v_i'v_i = \sigma_i^2
-$$
+* The product evaluates ot $A$, as claimed.
 
-since $V$ is orthogonal.  Thus the columns of $U$ are of length 1.
-
-Replacing the second $u_i$ and second $v_i$ above by
-$u_j$ and $v_j$, we find that the columns of $U$ are orthogonal.
-
-Thus the matrix $U$ is orthogonal.
-
-* The product works out as claimed.
-
-Using matrix partitioning, we have
-
-$$
-U \Sigma = (\sigma_1 u_1 | ... | \sigma_n u_n)
-$$
-
-So, again using partitioning,
-
-$$
-U \Sigma V' = (\sigma_1 u_1 | ... | \sigma_n u_n) 
- \left (
- \begin{array}{r}
- v_1' \\
- ... \\
- v_n'  \\
- \end{array}
- \right )
-= \sum_{i=1}^n \sigma_i u_i v_i'  
-$$
-
-That last expression is equal to $A$, by @eq-aissumuivi.
+    Using matrix partitioning, we have
+    
+    $$
+    U \Sigma = (\sigma_1 u_1 | ... | \sigma_n u_n)
+    $$
+    
+    So, again using partitioning,
+    
+    $$
+    U \Sigma V' = (\sigma_1 u_1 | ... | \sigma_n u_n) 
+     \left (
+     \begin{array}{r}
+     v_1' \\
+     ... \\
+     v_n'  \\
+     \end{array}
+     \right )
+    = \sum_{i=1}^n \sigma_i u_i v_i'  
+    $$
+    
+    That last expression is equal to $A$, by @eq-aissumuivi.
 
 ## Example: ToothGrowth Data
 
@@ -150,15 +150,12 @@ into this innocuous-looking factorization.  Let's take a look at some:
 
 ### Rank of $A$
 
-This is the number of nonzero values in $\Sigma$. 
+This is the number of nonzero values in $\Sigma$. This follows from
+@thm-ranknotchange.
 
-
-
-In fact, if there are some
-really tiny elements there, one might also entertain the thought that
-the true rank is less than this size.
-
-Why does this work? 
+It should be noted, though, that if there are some really tiny elements
+there, one might also entertain the thought that the true rank is less
+than this size, as these tiny values may be due to roundoff error from 0.
 
 ## Your Turn
 
