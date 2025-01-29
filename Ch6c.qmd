@@ -151,11 +151,107 @@ into this innocuous-looking factorization.  Let's take a look at some:
 ### Rank of $A$
 
 This is the number of nonzero values in $\Sigma$. This follows from
-@thm-ranknotchange.
+@thm-ranknotchange, since $U$ and $V$, as orthogonal matrices, are invertible.
 
 It should be noted, though, that if there are some really tiny elements
 there, one might also entertain the thought that the true rank is less
 than this size, as these tiny values may be due to roundoff error from 0.
+
+### SVD as matrix pseudoinverse
+
+Recall the example in @sec-censusrref. We could not have dummy-variable
+columns for both male and female, as their sum would be a column of all
+1s, in addition to a column the X data matrix already had. The three columns
+would then have a nonzero linear combination that evaluates to the 0
+vector.  Then in @eq-linregformula, $A$ (i.e. X) would not be of full
+rank, and $(A'A)^{-1}$ would not exist.
+
+And yet the equation from which that comes,
+
+$$
+A'A b = A'S
+$${#eq-overdetermined}
+
+is still valid. We could, as in that example, remove one of the gender
+columns, thus solving the problem of less than full rank, but the use of
+*pseudoinverses* (also known as *generalized inverses*) solves the
+problem directly. If $A$ has hundreds or thousands of columns, say, the
+use of pseudoinverses may be more convenient.
+
+We omit the formal definition of pseudoinverses and their properties. We
+will note the use of the latter as the need arises. For now, we state
+without proof that:
+
+* One of the most famous forms of pseudoinverse, Moore-Penrose, is 
+  based on SVD.  Given the SVD of a matrix $M$, 
+
+  $$
+  M = U_M \Sigma_M V_{M}'
+  $$
+
+  its Moore-Penrose inverse, denoted by $M^{-1}$ is 
+
+  $$
+  M^{-} = V_M \Sigma_M^{-} U_{M}'
+  $$
+
+  where $\Sigma_M^{-}$ is the diagonal matrix obtained form $\Sigma_M$
+  by replacing each nonzero element by its reciprocal.
+
+* The Moore-Penrose solution of $Mz = w$ for vectors $z$ and $w$, is
+  $M^{-} w$.
+
+By the way, the R function **MASS::ginv** performs the necessary
+computation for us; we need not call **svd()**.
+
+### SVD in linear models
+
+Now apply this to our linear model problem @eq-overdetermined. The
+claim is that 
+
+$$
+b = A^{-} S = V \Sigma^{-} U' S
+$$ 
+
+solves the equation. [As in @sec-matalg, where we found that the inverse of
+a product is the reverse product of the inverses, the same holds for
+pseudoinverses.]{.column-margin} Let's check (warning: this will be
+messy):
+
+$$
+\begin{align}
+A'A b &= (U \Sigma V')' (U \Sigma V') (U \Sigma V')^{-} S \\
+&= (V \Sigma U') (U \Sigma V') (V \Sigma^{-} U') S \\
+&= V \Sigma^2 V'V \Sigma^{-} U' S \\
+&= V \Sigma^{-} U' S
+\end{align}
+$$
+
+But that is exactly the expression we found for $A^{-1}S$ above.
+
+$\blacksquare$
+
+### SVD as the minimum-norm solution
+
+In an overdetermined linear system such as @eq-overdetermined, there are
+many solutions. However, an advantage of Moore-Penrose is that it gives
+us the *minimum norm* solution. We'll discuss the significance of this
+shortly, but let's prove it first.
+
+::: {#thm-shortest}
+
+## The Moore-Penrose solution is the shortest 
+
+:::
+
+::: {.proof}
+
+
+:::
+
+
+
+### SVD as the best low-rank approximation
 
 ## Your Turn
 

@@ -184,7 +184,7 @@ nu
 
 This confirms our earlier speculation based on powers of $P'$.
 
-## Matrix Algebra{sec-matalg}
+## Matrix Algebra{#sec-matalg}
 
 Several properties to note:
 
