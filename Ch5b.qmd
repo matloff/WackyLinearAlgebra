@@ -695,7 +695,7 @@ so that $P$ thereby implements the projection.
 But how do we obtain an orthogonal basis, if we only 
 have a nonorthogonal one? That's next...
 
-### The Gram-Schmidt Method
+### The Gram-Schmidt Method{#sec-gramschmidt}
 
 As seen in the last section, it is desirable to have an orthogonal
 basis, and it's even more convenient if its vectors have length 1 (an

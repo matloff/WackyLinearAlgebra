@@ -81,7 +81,7 @@ can be shown that if $M$ is symmetric, its eigenvalues are guaranteed to
 be real. This is good news for data science, as many matrices in that
 field are symmetric, such covariance matrices.
 
-### Eigenvectors are orthogonal
+### Eigenvectors are orthogonal{#sec-eigortho}
 
 <blockquote>
 

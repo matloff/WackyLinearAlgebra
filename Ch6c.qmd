@@ -35,9 +35,9 @@ Here is what we are aiming for.
 
 ## Our target relation:
 
-Given a (very possibly nonsquare) matrix $A$, we wish to find orthogonal
-matrices $U$ and $V$, and a diagonal matrix $\Sigma$ whose nonzero
-elements are positive, such that
+Given an $m \times n$ matrix $A$, we wish to find orthogonal matrices
+$U$ and $V$, and a matrix $\Sigma = diag(\sigma_1,...,\sigma_n)$ whose
+nonzero elements are positive, such that
 
 $$
 A = U \Sigma V'
@@ -51,54 +51,59 @@ $$ {#eq-aissumuivi}
 
 :::
 
+Note the dimensions: 
+
+* $U$ is $m \times n$
+
+* $V$ is $n \times n$
+
+* $\Sigma$ is $n \times n$
+
+Let $r$ denote the rank of $A$. Recall that $r \leq \min(m,n)$.
+
 ## Solution
 
 There are various derivations, e.g. along the lines of @sec-firstPC (one
 maximizes the quantity $U A V'$), but let's go quickly to the answer:  
 
-1. Compute the eigenvalues and eigenvectors of $A'A$. 
+1. Compute the eigenvalues $\sigma_1,...,\sigma_n$
+and eigenvectors $q_1,...,q_n$ of $A'A$. 
 
 2. Since $A'A$ is symmetric and positive-semidefinite, its eigenvalues 
    will be nonnegative and its length-1 eigenvectors will be orthogonal. 
 
-3. Set $\Sigma$ to $diag(\sqrt{\sigma_1},...,\sqrt{\sigma_r})$, the
-   nonincreasing list of positive eigenvalues. Set the columns of $V$ to
-   the corresponding eigenvectors (recall @sec-diagonalizable). (We will
-   assume that all the $u_i$ are positive; the proof needs a slight
-   modification for the general case.)
+3. Set $\Sigma$ to $diag(\sqrt{\sigma_1},...,\sqrt{\sigma_n})$, the
+   nonincreasing list of eigenvalues. Set the columns of $V$ to
+   the corresponding eigenvectors (recall @sec-diagonalizable). 
 
-4. Set the columns of $U$ as
+4. Set 
 
 $$
-u_i = \frac{1}{\sigma_i} v_i
+u_i = \frac{1}{\sigma_i} Av_i, ~ i=1,...,r
 $$
 
-Note that if the dimensions of $A$ are $m \textrm{ x } n$, then $U$,
-$\Sigma$ and $V$ will be of dimensions $m \textrm{ x } n$,  $n \textrm{
-x } n$  and $n \textrm{ x } n$, respectively. 
+Using the Gram-Schmidt Method (@sec-gramschmidt), we can compute (if $r
+< m$ necessitates it) vectors $u_{r+1},...u_m$ so that $u_1,...,u_m$ is
+an orthonormal basis for $\mathcal{R}^m$.  Set $U$, decribed in
+partitioning terms: to 
+
+$$
+U = (u_1|...|u_m)
+$$
 
 ## Checking the Formula
 
-Are the two matrices orthogonal. and does $U \Sigma V'$ really work out
+Are $U$ and $V$ really orthogonal, and does $U \Sigma V'$ really work out
 to be $A$?
 
 * $U$ is orthogonal.
 
-    Since $V$ arises eigenvectors of the symmetric matrix $A'A$, it is an
-    orthogonal matrix. Then
-    
-    $$
-    \sigma_i^2 u_i'u_i =  (A v_i)' A v_i = \sigma^2 v_i'v_i = \sigma_i^2
-    $$
-    
-    since $V$ is orthogonal.  Thus the columns of $U$ are of length 1.
-    
-    Replacing the second $u_i$ and second $v_i$ above by
-    $u_j$ and $v_j$, we find that the columns of $U$ are orthogonal.
-    
-    Thus the matrix $U$ is orthogonal.
+  This follows immediately from the fact that the columns of $U$ are an
+  orthonormal basis from $\mathcal{R}^m$.
 
-* The product evaluates ot $A$, as claimed.
+* $V$ is orthogonal, by @sec-eigortho.
+
+* The product evaluates to $A$, as claimed.
 
     Using matrix partitioning, we have
     
@@ -121,6 +126,12 @@ to be $A$?
     $$
     
     That last expression is equal to $A$, by @eq-aissumuivi.
+
+## Uniqueness
+
+The SVD can be shown to be unique, if there are no repeated eigenvalues.
+If the latter exist, one can permute the corresponding columns of $U$
+and $V$, but otherwise uniqueness holds.
 
 ## The Data Scientist's Swiss Army Knife
 
@@ -237,40 +248,55 @@ $$
 
 ### The Fundamental Theorem of Linear Algebra
 
-One can define four fundamental subspaces for any matrix $A$:
+One can define four fundamental subspaces for any matrix $A$. We will
+need the notation $W^{\perp}$, for the *orthogonal complement* of a
+subspace $W$. It consists of all vectors outside $W$ is the parent
+vector space.
 
-* $colspace(A)$: $\{Ax\}$ (all linear combinations of columns of $A$)
+* $\textrm{row space}(A), \mathcal{R}(A)$: $\{x'A\}~~$ (all linear
+  combinations of rows of $A$)
 
-* $rowspace(A)$: $\{x'A\}$ (all linear combinations of rows of $A$)
+* $\textrm{column space}(A), \mathcal{C}(A)$: $\{Ax\}~~$ (all linear
+  combinations of columns of $A$)
 
-* $nullspace(A)$: $\{x: Ax = 0\}$
+* $\textrm{null space}(A), \mathcal{N}(A)$: $\{x: Ax = 0\}$
 
-* $leftnullspace(A)$: $\{x: x'A = 0\}$ (all linear combinations of rows of $A$)
+* $\textrm{left null space}(A) = \mathcal{N}(A')$: $\{x: x'A = 0\}$ 
 
 These subspaces have various properties, which are easily verified via
-SVD. @eq-aissumuivi will come in very handy. We first find bases for
-these subspaces.
+SVD. @eq-aissumuivi will come in very handy. 
 
-* Write
+* Consider the column space first. Write
 
-$$
-Ax = \sum_{i=1}^n \sigma_i u_i v_i' x 
-$$
-
-Note that $v_i'x$ is a scalar, so we have
-
-$$
-Ax = \sum_{i=1}^n [\sigma_i (v_i' x)] u_i  
-$$
-
+    $$
+    Ax = \sum_{i=1}^n \sigma_i u_i v_i' x 
+    $$
+    
+    Note that $v_i'x$ is a scalar, so we have
+    
+    $$ 
+    Ax = \sum_{i=1}^n [\sigma_i (v_i' x)] u_i  
+    $$
+    
 Since $\sigma_i = 0$ for $i > r$, we now have a characterization of one
 of the four subspaces:
 
 <blockquote>
 
-The column space of $A$ has dimension $r$, with basis $u_1,...[_r]()$.
+The column space of $A$ has dimension $r$, with basis $u_1,...u_r$.
 
 </blockquote>
+
+* Now for the row space, just piggyback on the result for the column
+  space. 
+
+  $\mathcal{R}(A) = \mathcal{C}(A')$
+
+  Since $A = U \Sigma V'$ we have that the SVD for $A'$ is 
+  $V \Sigma U'$. (Recall the uniqueness of SVD.). So $A'$
+  has its column space of dimension $r$ and basis $v_1,...v_r$.
+  This is then the row space of $A$.W
+  
 
 ### SVD as the minimum-norm solution
 
