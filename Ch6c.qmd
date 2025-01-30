@@ -122,27 +122,6 @@ to be $A$?
     
     That last expression is equal to $A$, by @eq-aissumuivi.
 
-## Example: ToothGrowth Data
-
-This dataset is built into R.
-
-```{r}
-library(qeML)
-tg <- factorsToDummies(ToothGrowth,dfOut=FALSE) 
-z <- svd(tg)
-names(z)
-dim(tg)
-dim(z$u)
-dim(z$d)  # Sigma, as the diagonal vector, 4x4 actually
-dim(z$v)
-head(z$u)
-z$d
-z$v
-udv <- z$u %*% diag(z$d) %*% t(z$v)  # check
-head(udv)
-head(tg)
-```
-
 ## The Data Scientist's Swiss Army Knife
 
 There are a great many pieces of information and sources of tools packed
@@ -231,6 +210,68 @@ But that is exactly the expression we found for $A^{-1}S$ above.
 
 $\blacksquare$
 
+## Example: Census Data 
+
+```{r}
+library(qeML)
+data(svcensus)
+# have only 1 categorical/dichotomous variable, for simple example
+head(svcensus)
+svc <- svcensus[,-c(2,3)]
+svc <- factorsToDummies(svc)
+head(svc)
+x <- cbind(1,svc[,-2])
+head(x)
+xminus <- MASS::ginv(x)
+bhat <- xminus %*% svc[,2]
+bhat
+lm(wageinc ~ .,svcensus[,-c(2,3)])$coef
+```
+
+The two approaches are consistent with each other (though internally
+they are solving slightly different problems). Note that
+
+$$
+-13361.634-(-2660.821) = -10700.81
+$$
+
+### The Fundamental Theorem of Linear Algebra
+
+One can define four fundamental subspaces for any matrix $A$:
+
+* $colspace(A)$: $\{Ax\}$ (all linear combinations of columns of $A$)
+
+* $rowspace(A)$: $\{x'A\}$ (all linear combinations of rows of $A$)
+
+* $nullspace(A)$: $\{x: Ax = 0\}$
+
+* $leftnullspace(A)$: $\{x: x'A = 0\}$ (all linear combinations of rows of $A$)
+
+These subspaces have various properties, which are easily verified via
+SVD. @eq-aissumuivi will come in very handy. We first find bases for
+these subspaces.
+
+* Write
+
+$$
+Ax = \sum_{i=1}^n \sigma_i u_i v_i' x 
+$$
+
+Note that $v_i'x$ is a scalar, so we have
+
+$$
+Ax = \sum_{i=1}^n [\sigma_i (v_i' x)] u_i  
+$$
+
+Since $\sigma_i = 0$ for $i > r$, we now have a characterization of one
+of the four subspaces:
+
+<blockquote>
+
+The column space of $A$ has dimension $r$, with basis $u_1,...[_r]()$.
+
+</blockquote>
+
 ### SVD as the minimum-norm solution
 
 In an overdetermined linear system such as @eq-overdetermined, there are
@@ -240,16 +281,43 @@ shortly, but let's prove it first.
 
 ::: {#thm-shortest}
 
-## The Moore-Penrose solution is the shortest 
+## The Moore-Penrose Solution Is Min-Norm
+
+\newline 
+Of all solutions $b$ to
+
+$$
+A'A b = A'S
+$${#eq-linsyst}
+
+the Moore-Penrose solution
+
+$$
+b = V \Sigma^{-} U' S
+$$
+
+minimizes $||b||$.
 
 :::
 
 ::: {.proof}
 
+Partition $U$ into $(U_1 | U_2)$, its first $r$ columns and the last
+$n-r$ columns. Do the same for $V$, so that
+
+$$
+V' =
+ \left (
+ \begin{array}{r}
+ V_1' \\
+ V_2' \\
+ \end{array}
+ \right )
+$$
+
+Multiply @eq-linsyst on the left by $U'$
 
 :::
-
-
 
 ### SVD as the best low-rank approximation
 

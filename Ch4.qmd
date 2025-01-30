@@ -231,10 +231,13 @@ formalize it, which we will do now.
 
 ### Yes, one can tell the rank of a matrix by looking at its RREF{#sec-yessamerank}
 
+This is an important property:
+
 ::: {#thm-ranknotchange}
 
 ## Rank Is Preserved in Pre-/Post-multiplication by Invertible Matrices
 
+\newline
 Let $A$ be any matrix, and let $V$ and $W$ be square, invertible
 matrices with sizes compatible with the products below. Then the ranks
 of $VA$ and $AW$ are equal to that of $A$.
