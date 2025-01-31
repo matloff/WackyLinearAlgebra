@@ -41,13 +41,16 @@ nonzero elements are positive, such that
 
 $$
 A = U \Sigma V'
-$$
+$${#eq-svd}
 
-Note that, by matrix partitioning, this also says that 
+By convention the ordering of columns is set so that the $\sigma_i$
+occur in nonincreasing order.
+
+Note that, by matrix partitioning, @eq-svd also says that 
 
 $$
 A = \sum_{i=1}^n \sigma_i u_i v_i'
-$$ {#eq-aissumuivi}
+$${#eq-aissumuivi}
 
 :::
 
@@ -59,7 +62,8 @@ Note the dimensions:
 
 * $\Sigma$ is $n \times n$
 
-Let $r$ denote the rank of $A$. Recall that $r \leq \min(m,n)$.
+Let $r$ denote the rank of $A$. Recall that $r \leq \min(m,n)$. It will
+turn out that $\sigma_i = 0$ for $i=r+1,...,n$.
 
 ## Solution
 
@@ -249,9 +253,7 @@ $$
 ### The Fundamental Theorem of Linear Algebra
 
 One can define four fundamental subspaces for any matrix $A$. We will
-need the notation $W^{\perp}$, for the *orthogonal complement* of a
-subspace $W$. It consists of all vectors outside $W$ is the parent
-vector space.
+need the following:
 
 * $\textrm{row space}(A), \mathcal{R}(A)$: $\{x'A\}~~$ (all linear
   combinations of rows of $A$)
@@ -266,7 +268,7 @@ vector space.
 These subspaces have various properties, which are easily verified via
 SVD. @eq-aissumuivi will come in very handy. 
 
-* Consider the column space first. Write
+* Consider the column space first. From @eq-aissumuiv write
 
   $$
   Ax = \sum_{i=1}^n \sigma_i u_i v_i' x 
@@ -281,10 +283,25 @@ SVD. @eq-aissumuivi will come in very handy.
   \end{align}
   $${#eq-Ax1}
 
-  zzz So for any $x$ in $\mathcal{R}^n$, $Ax$ will be in the span of
-  $u_1,...u_r$. But what about the converse? zz
+  Now keep in mind, ultimately our focus here is on $x$, not $Ax$.
+  Thus the question at hand is,
 
-  Now ask, is *any* linear combination of $v_1,...v_r$, say $c_1
+  <blockquote>
+
+  Which values of $x$ will make $Ax \neq 0$?
+
+  </blockquote>
+
+  This boils down to asking,
+
+  <blockquote>
+
+  For which values of $x$ will we have $v_i'x \neq 0$ for at least one
+  $i$ in $1,...,r$?
+
+  </blockquote>
+
+  ask, is *any* linear combination of $v_1,...v_r$, say $c_1
   v_1+...+c_r v_r$ equal to $Ax$ for some $x$?  The answer is
   yes. Set
 

@@ -1,4 +1,3 @@
-
 ```{r}
 #| include: false
 library(dsld)
@@ -170,17 +169,24 @@ These relations are highly useful, as we will see in the sequel.
 
 ### The Cauchy-Schwarz Inequality
 
-<blockquote>
+::: {#thm-cs}
 
+## Cauchy-Schwarz Inequality
+
+\newline
 Say $u$ and $v$ are vectors in an inner product space. Then
 
 $$
 |<u,v>| \leq ||u|| ~ ||v||
 $$
 
-*Proof:* See the Your Turn problem below.
+:::
 
-</blockquote>
+::: {.proof}
+
+See the Your Turn problem below.
+
+:::
 
 ### Application: Correlation{#sec-corr}
 
@@ -239,43 +245,21 @@ In the world of ordinary physical geometry, we know the following
 *The distance from A to B is less than or equal to the sum of the
 distances from A to C and C to B.* 
 
+::: {#thm-triangle}
+
+## Triangle Inequality
+
 In a general inner product space,
 
 $$
 ||x - z|| \leq ||x - y|| + ||y - z|| 
 $$
 
-*Proof:* See the Your Turn problem below.
+:::
 
-</blockquote>
+::: {.proof}
 
-### Exercises{#sec-cauchyexercises}
-
-❄️  **Your Turn:** Use the Cauchy-Schwarz Inequality to prove the
-Triangle Inequality, using the following algebraic outline.
-
-* Start with
-
-  $$
-  ||u+v||^2 = <(u+v,u+v>
-  $$
-
-* Expand the RHS algebraically.
-
-* Using Cauchy-Schwarz to make the equation an inequality.
-
-* Collect terms to yield the Triangle Inequality.
-
-
-❄️  **Your Turn:** Consider the space $C(0,1)$. For function $f$ and $g$ 
-of your own choosing, verify that the Cauchy-Schwarz and Triangle
-Inequalities hold in that case.
-
-❄️  **Your Turn:** Say we roll a die once, producing $X$ dots. If $X = 6$,
-we get a bonus roll, yielding $B$ additional dots; otherwise, $B = 0$.
-Let $Y = X+B$. Verify that $X$ and $B$ satisfy the Cauchy-Schwarz and
-Triangle Inequalities, and also find $\rho(X,B)$.
-
+See the Your Turn problem below.
 
 ## Projections
 
@@ -289,7 +273,9 @@ We say that vectors $u$ and $v$ are *orthogonal* if $<u,v> = 0$. This is
 the general extension of the notion of perpendicularity in high school
 geometry. Then we have the following:
 
-<blockquote>
+::: {#thm-projection}
+
+## Projection Theorem
 
 Consider an inner product space $\cal V$, with subspace $\cal W$.  Then
 for any vector $x$ in $\cal W$, there is a unique vector $z$ in $\cal
@@ -297,7 +283,7 @@ V$, such that $z$ is the closest vector to $x$ in $\cal W$.
 
 Furthermore, $x-z$ is orthogonal to any vector $r$ in $\cal W$.
 
-</blockquote>
+:::
 
 The full proof is beyond the scope of this book, as it requires
 background in real analysis. Indeed, even the statement of the theorem
@@ -322,9 +308,6 @@ that same space.
 
 The case of $\cal RV(\Omega)$ deserves its own section, coming up next.
 
-❄️  **Your Turn:** Show that any set of orthogonal vectors is linearly
-independent.
-
 ### The Pythagorean Theorem
 
 That this ancient theorem in geometry still holds in general inner
@@ -338,12 +321,9 @@ If vectors $X$ and $Y$ are orthogonal, then
 
 $$
 ||X+Y||^2 = ||X||^2 + ||Y||^2
-$$
+$${#eq-pythag}
 
 </blockquote>
-
-❄️  **Your Turn:** Prove this by expanding the inner product and
-simplifying algebraically.
 
 ## Projections in$\cal RV(\Omega)$
 
@@ -356,17 +336,16 @@ worthwhile.]{.column-margin}
 
 ### Conditional expectation
 
-Recall the Your Turn problem in @sec-cauchyexercises:
+One of the Your Turn problems at the end of this chapter covers this
+setting: 
 
 <blockquote>
-
-We roll a die once, producing $X$ dots. If $X = 6$,
+Say we roll a die once, producing $X$ dots. If $X = 6$,
 we get a bonus roll, yielding $B$ additional dots; otherwise, $B = 0$.
-Let $Y = X+B$...
-
+Let $Y = X+B$.
 </blockquote>
 
-*The basics:*
+*The basic form:*
 
 Now, what is $E(Y | B = 2)$? If $B = 2$, then we got the bonus roll, so
 $X = 6$ and $Y = X + B = 8$:
@@ -385,9 +364,7 @@ E(Y | B = i) =
 \end{cases}
 $$
 
-❄️  **Your Turn:** Show the details in the above computation.
-
-*Random variable form:*
+*The random variable form:*
 
 The quantity $E(Y | B = i)$, a number, can be converted to a random
 variable, in the form of a function of $B$, which we will call $Q$, and 
@@ -450,12 +427,6 @@ $$
 Note, though that that outer $E()$ (the first 'E') is a weighted
 average, since some departments are larger than others. The weights are
 the distribution of $D$.
-
-❄️  **Your Turn:** In the die rolling example above, verify that
-
-$$
-E[E(Y|B)] = E(Y)
-$$
 
 ### Projections in $\cal RV(\Omega)$: how they work
 
@@ -570,13 +541,19 @@ $$
 A \widehat{\beta} = A(A'A)^{-1} A'S = HS
 $$
 
-where the matrix $H = A(A'A)^{-1} A'$, which projects $S$ onto the column
-space of $A$, is called the *hat matrix*. 
+where the matrix 
+
+$$
+H = A(A'A)^{-1} A'
+$$ 
+
+which projects $S$ onto the column space of $A$, is called the *hat
+matrix*. 
 
 As a projection, $H$ is idempotent, which one can easily verify by
 multiplication.  $H$ is also symmetric.
 
-❄️  **Your Turn:** Show this.
+❄️  **Your Turn:** Show that 
 
 Let $h_{ii}$ denote element $i$ of the diagonal of $H$, with $x_i$
 denoting row $i$ of A. One can show that
@@ -624,6 +601,10 @@ observations having $h_{ii}$ above 0.01, say.
 It turns out that a basis for a vector space is especially useful if its
 members are orthogonal to each other.  We'll see why, and see how to
 generate such a basis from a nonorthogonal one.
+
+An orthogonal basis in which every vector has length 1 is called
+*orthonormal*. Recall that $x \neq 0$ then $x/||x||$ has length 1,
+so that any orthogonal basis can easily be converted to orthonormal.
 
 ### Motivation
 
@@ -683,6 +664,8 @@ And, as a projection, we have that $x-p$ is orthogonal to all the $u_i$.
 
 </blockquote>
 
+#@ Your#
+
 ❄️  **Your Turn:** Say $\cal V$ is $R^n$. Form the matrix $A$ whose
 columns are the $u_i$, and let $P = AA'$. Show that
 
@@ -725,20 +708,6 @@ an orthonormal basis as follows.
    normalize.
 
 </blockquote>
-
-❄️  **Your Turn:** Say in $C(0,1)$ we want to approximate functions by 
-polynomials. Specifically, for any $f$ in $C(0,1)$, we want to find the
-closest polynomial of degree $m$. Write functions to do this, with the
-following call forms:
-
-``` r
-gsc01(m)  # performs Gram-Schmidt and returns the result
-bestpoly(f,gsout)  # approx. f by output from gsc01
-
-```
-
-Hint: Since the vectors here are functions, you'll need a data structure
-capable of storing functions. An R **list** will work well here.
 
 ## Application: Racial, Gender Etc. Fairness in Algorithms{#sec-fairness}
 
@@ -878,5 +847,64 @@ with
 $$
 <v,v_i> = 0 \textrm{ for all i}
 $$
+
+❄️  **Your Turn:** Say in $C(0,1)$ we want to approximate functions by 
+polynomials. Specifically, for any $f$ in $C(0,1)$, we want to find the
+closest polynomial of degree $m$. Write functions to do this, with the
+following call forms:
+
+``` r
+gsc01(m)  # performs Gram-Schmidt and returns the result
+bestpoly(f,gsout)  # approx. f by output from gsc01
+
+```
+
+Hint: Since the vectors here are functions, you'll need a data structure
+capable of storing functions. An R **list** will work well here.
+
+❄️  **Your Turn:** Show that the hat matrix is symmetric.
+
+❄️  **Your Turn:** Use the Cauchy-Schwarz Inequality to prove the
+Triangle Inequality, using the following algebraic outline.
+
+* Start with
+
+  $$
+  ||u+v||^2 = <(u+v,u+v>
+  $$
+
+* Expand the RHS algebraically.
+
+* Using Cauchy-Schwarz to make the equation an inequality.
+
+* Collect terms to yield the Triangle Inequality.
+
+
+❄️  **Your Turn:** Consider the space $C(0,1)$. For function $f$ and $g$ 
+of your own choosing, verify that the Cauchy-Schwarz and Triangle
+Inequalities hold in that case.
+
+❄️  **Your Turn:** In the die rolling example, verify that
+
+$$
+E[E(Y|B)] = E(Y)
+$$
+
+❄️  **Your Turn:** Say we roll a die once, producing $X$ dots. If $X = 6$,
+we get a bonus roll, yielding $B$ additional dots; otherwise, $B = 0$.
+Let $Y = X+B$...
+
+❄️  **Your Turn:** Say we roll a die once, producing $X$ dots. If $X = 6$,
+we get a bonus roll, yielding $B$ additional dots; otherwise, $B = 0$.
+Let $Y = X+B$. Verify that $X$ and $B$ satisfy the Cauchy-Schwarz and
+Triangle Inequalities, and also find $\rho(X,B)$.
+
+❄️  **Your Turn:** Show that any set of orthogonal vectors is linearly
+independent.
+
+❄️  **Your Turn:** Prove @eq-pythag by expanding the inner product and
+simplifying algebraically.
+
+❄️  **Your Turn:** Prove @eq-triangle. 
 
 
