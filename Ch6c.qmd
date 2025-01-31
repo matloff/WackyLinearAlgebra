@@ -268,24 +268,66 @@ SVD. @eq-aissumuivi will come in very handy.
 
 * Consider the column space first. Write
 
-    $$
-    Ax = \sum_{i=1}^n \sigma_i u_i v_i' x 
-    $$
-    
-    Note that $v_i'x$ is a scalar, so we have
-    
-    $$ 
-    Ax = \sum_{i=1}^n [\sigma_i (v_i' x)] u_i  
-    $$
-    
-Since $\sigma_i = 0$ for $i > r$, we now have a characterization of one
-of the four subspaces:
+  $$
+  Ax = \sum_{i=1}^n \sigma_i u_i v_i' x 
+  $${#eq-Ax}
+   
+  Note that $v_i'x$ is a scalar, so we have
 
-<blockquote>
+  $$ 
+  \begin{align}
+  Ax &= \sum_{i=1}^n [\sigma_i (v_i' x)] u_i \\
+  &= \sum_{i=1}^r [\sigma_i (v_i' x)] u_i 
+  \end{align}
+  $${#eq-Ax1}
 
-The column space of $A$ has dimension $r$, with basis $u_1,...u_r$.
+  zzz So for any $x$ in $\mathcal{R}^n$, $Ax$ will be in the span of
+  $u_1,...u_r$. But what about the converse? zz
 
-</blockquote>
+  Now ask, is *any* linear combination of $v_1,...v_r$, say $c_1
+  v_1+...+c_r v_r$ equal to $Ax$ for some $x$?  The answer is
+  yes. Set
+
+  $$
+  x = \sum_{j=1}^r \frac{c_j}{\sigma_j} v_j
+  $$
+
+  Since the $v_k$ are an orthonormal set, we have $v_i' v_j = 0$ for all
+  cases of $i \neq j$.  Thus 
+
+  $$
+  v_i' x = \frac{c_i}{\sigma_i},
+  $$
+
+  as desired. So, the column space of $A$ contains
+
+  $$
+  D_1 = \textrm{span}(v_1,...,v_r) 
+  $$
+
+  Now define the rest of $\mathcal{R}^n$, 
+
+  $$
+  D_2 = \textrm{span}(v_{r+1},...,v_n) = D_1^{\perp}
+  $$
+
+  If $x$ is in $D_2$, then in @eq-Ax, we will have $v_i'x = 0$
+  for $i \leq r$, and so $Ax = 0$. So $x \textrm{ in } D_2$ implies that
+  $x$ is *not* in the column space of $A$.
+
+  In other words, $the column space of $A$ is exactly $D_1$.
+
+  But the above argument also has the biproduct of showing that 
+  the null space of $A$ is exactly $D_2$.
+
+  We now have characterizations of two of the four subspaces:
+
+  <blockquote>
+  
+  The column space of $A$ has dimension $r$, with basis $v_1,...v_r$.
+  The null space has dimension $n-r$, with basis $v_{r+1},...,v_n$.
+  
+  </blockquote>
 
 * Now for the row space, just piggyback on the result for the column
   space. 
@@ -294,10 +336,9 @@ The column space of $A$ has dimension $r$, with basis $u_1,...u_r$.
 
   Since $A = U \Sigma V'$ we have that the SVD for $A'$ is 
   $V \Sigma U'$. (Recall the uniqueness of SVD.). So $A'$
-  has its column space of dimension $r$ and basis $v_1,...v_r$.
-  This is then the row space of $A$.W
-  
-
+  has its column space of dimension $r$ and basis $u_1,...u_r$.
+  This is then the row space of $A$.
+ 
 ### SVD as the minimum-norm solution
 
 In an overdetermined linear system such as @eq-overdetermined, there are
