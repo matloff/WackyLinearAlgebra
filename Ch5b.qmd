@@ -173,7 +173,6 @@ These relations are highly useful, as we will see in the sequel.
 
 ## Cauchy-Schwarz Inequality
 
-\newline
 Say $u$ and $v$ are vectors in an inner product space. Then
 
 $$

@@ -358,7 +358,6 @@ shortly, but let's prove it first.
 
 ## The Moore-Penrose Solution Is Min-Norm
 
-\newline 
 Of all solutions $b$ to
 
 $$
