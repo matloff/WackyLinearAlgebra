@@ -479,18 +479,6 @@ the prediction itself.
 
 </blockquote>
 
-❄️  **Your Turn:** Prove this assertion.
-
-❄️  **Your Turn:** For $X$ and $Y$ in $\cal RV(\Omega$, prove that
-
-$$
-Var(Y) = E[Var(Y|X)] + Var[E(Y|X)],
-$$
-
-first algebraically using @eq-iterexpect and the relation $Var(R) =
-E(R^2) - (E(R))^2$, and then using the Pythagorean Theorem for a much
-quicker proof.  As before, assume $X$ and $Y$ are centered.
-
 ## Projections in the Linear Model
 
 The case of the linear model will deepen our understanding, and will
@@ -553,16 +541,12 @@ matrix*.
 As a projection, $H$ is idempotent, which one can easily verify by
 multiplication.  $H$ is also symmetric.
 
-❄️  **Your Turn:** Show that 
-
 Let $h_{ii}$ denote element $i$ of the diagonal of $H$, with $x_i$
 denoting row $i$ of A. One can show that
 
 $$
 h_{ii} = x_{i} (A'A)^{-1} x_i'
-$$
-
-❄️  **Your Turn:** Show this.
+$${#eq-hii}
 
 The quantity $h_{ii}$ is called the *leverage* for datapoint $i$.
 
@@ -664,16 +648,6 @@ And, as a projection, we have that $x-p$ is orthogonal to all the $u_i$.
 
 </blockquote>
 
-#@ Your#
-
-❄️  **Your Turn:** Say $\cal V$ is $R^n$. Form the matrix $A$ whose
-columns are the $u_i$, and let $P = AA'$. Show that
-
-$$
-Px = <x,u_1> u_1+...+<x,u_k> u_k
-$$
-
-so that $P$ thereby implements the projection.
 
 But how do we obtain an orthogonal basis, if we only 
 have a nonorthogonal one? That's next...
@@ -907,4 +881,26 @@ simplifying algebraically.
 
 ❄️  **Your Turn:** Prove @eq-triangle. 
 
+❄️  **Your Turn:** Prove that the vector $Y - E(Y|X)$ is uncorrelated
+with $E(Y|X)$
 
+❄️  **Your Turn:** For $X$ and $Y$ in $\cal RV(\Omega$, prove that
+
+$$
+Var(Y) = E[Var(Y|X)] + Var[E(Y|X)],
+$$
+
+first algebraically using @eq-iterexpect and the relation $Var(R) =
+E(R^2) - (E(R))^2$, and then using the Pythagorean Theorem for a much
+quicker proof.  As before, assume $X$ and $Y$ are centered.
+
+❄️  **your turn:** show that @eq-hii holds. holds. holds.
+
+❄️  **Your Turn:** Say $\cal V$ is $R^n$. Form the matrix $A$ whose
+columns are the $u_i$, and let $P = AA'$. Show that
+
+$$
+Px = <x,u_1> u_1+...+<x,u_k> u_k
+$$
+
+so that $P$ thereby implements the projection.
