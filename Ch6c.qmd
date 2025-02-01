@@ -137,6 +137,103 @@ The SVD can be shown to be unique, if there are no repeated eigenvalues.
 If the latter exist, one can permute the corresponding columns of $U$
 and $V$, but otherwise uniqueness holds.
 
+## The Fundamental Theorem of Linear Algebra
+
+One can define four fundamental subspaces for any matrix $A$. We will
+need the following:
+
+* $\textrm{row space}(A), \mathcal{R}(A)$: $\{x'A\}~~$ (all linear
+  combinations of rows of $A$)
+
+* $\textrm{column space}(A), \mathcal{C}(A)$: $\{Ax\}~~$ (all linear
+  combinations of columns of $A$)
+
+* $\textrm{null space}(A), \mathcal{N}(A)$: $\{x: Ax = 0\}$
+
+* $\textrm{left null space}(A) = \mathcal{N}(A')$: $\{x: x'A = 0\}$ 
+
+These subspaces have various properties, which may be verified via
+SVD. @eq-aissumuivi will come in very handy. 
+
+Consider the column space first. From @eq-aissumuivi write
+
+$$
+Ax = \sum_{i=1}^n \sigma_i u_i v_i' x 
+$${#eq-Ax}
+ 
+Note that $v_i'x$ is a scalar, so we have
+
+$$ 
+\begin{align}
+Ax &= \sum_{i=1}^n [\sigma_i (v_i' x)] u_i \\
+&= \sum_{i=1}^r [\sigma_i (v_i' x)] u_i 
+\end{align}
+$${#eq-Ax1}
+
+So 
+
+$$
+\mathcal{C}(A) \subset \textrm{ span}(u_1,...,u_r)
+$${#eq-colsubset} 
+
+Now, is the left side equal to all of the right side? Say a member of
+the right side is $c_1 u_1+...+c_r u_r$. Then, using the fact that 
+$\{v_1....,v_r\}$ is an orthonormal set, take $x$ to be
+
+$$
+x = \sum_{j=1}^r \frac{c_j}{\sigma_j} v_j
+$$
+
+Then for each $i$, we have
+
+$$
+\sigma_i v_i'x =c_i
+$$
+
+and 
+
+$$
+Ax = \sum_{i=1}^r c_i u_i
+$$
+
+as desired, so @eq-colsubset is actually an equality.
+
+We have thus characterized one of the four fundamental subspaces:
+
+<blockquote>
+
+The column space of $A$ has dimension $r$, with basis
+$u_1,...[_r]()$.
+</blockquote>
+
+Now look at the null space.  $Ax = 0$ means:
+
+* The vector $x$ is orthogonal to each row of $A$.
+
+*
+
+  But the above argument also has the biproduct of showing that 
+  the null space of $A$ is exactly $D_2$.
+
+  We now have characterizations of two of the four subspaces:
+
+  <blockquote>
+  
+  The column space of $A$ has dimension $r$, with basis $v_1,...v_r$.
+  The null space has dimension $n-r$, with basis $v_{r+1},...,v_n$.
+  
+  </blockquote>
+
+* Now for the row space, just piggyback on the result for the column
+  space. 
+
+  $\mathcal{R}(A) = \mathcal{C}(A')$
+
+  Since $A = U \Sigma V'$ we have that the SVD for $A'$ is 
+  $V \Sigma U'$. (Recall the uniqueness of SVD.). So $A'$
+  has its column space of dimension $r$ and basis $u_1,...u_r$.
+  This is then the row space of $A$.
+
 ## The Data Scientist's Swiss Army Knife
 
 There are a great many pieces of information and sources of tools packed
@@ -249,112 +346,6 @@ they are solving slightly different problems). Note that
 $$
 -13361.634-(-2660.821) = -10700.81
 $$
-
-### The Fundamental Theorem of Linear Algebra
-
-One can define four fundamental subspaces for any matrix $A$. We will
-need the following:
-
-* $\textrm{row space}(A), \mathcal{R}(A)$: $\{x'A\}~~$ (all linear
-  combinations of rows of $A$)
-
-* $\textrm{column space}(A), \mathcal{C}(A)$: $\{Ax\}~~$ (all linear
-  combinations of columns of $A$)
-
-* $\textrm{null space}(A), \mathcal{N}(A)$: $\{x: Ax = 0\}$
-
-* $\textrm{left null space}(A) = \mathcal{N}(A')$: $\{x: x'A = 0\}$ 
-
-These subspaces have various properties, which are easily verified via
-SVD. @eq-aissumuivi will come in very handy. 
-
-* Consider the column space first. From @eq-aissumuiv write
-
-  $$
-  Ax = \sum_{i=1}^n \sigma_i u_i v_i' x 
-  $${#eq-Ax}
-   
-  Note that $v_i'x$ is a scalar, so we have
-
-  $$ 
-  \begin{align}
-  Ax &= \sum_{i=1}^n [\sigma_i (v_i' x)] u_i \\
-  &= \sum_{i=1}^r [\sigma_i (v_i' x)] u_i 
-  \end{align}
-  $${#eq-Ax1}
-
-  Now keep in mind, ultimately our focus here is on $x$, not $Ax$.
-  Thus the question at hand is,
-
-  <blockquote>
-
-  Which values of $x$ will make $Ax \neq 0$?
-
-  </blockquote>
-
-  This boils down to asking,
-
-  <blockquote>
-
-  For which values of $x$ will we have $v_i'x \neq 0$ for at least one
-  $i$ in $1,...,r$?
-
-  </blockquote>
-
-  ask, is *any* linear combination of $v_1,...v_r$, say $c_1
-  v_1+...+c_r v_r$ equal to $Ax$ for some $x$?  The answer is
-  yes. Set
-
-  $$
-  x = \sum_{j=1}^r \frac{c_j}{\sigma_j} v_j
-  $$
-
-  Since the $v_k$ are an orthonormal set, we have $v_i' v_j = 0$ for all
-  cases of $i \neq j$.  Thus 
-
-  $$
-  v_i' x = \frac{c_i}{\sigma_i},
-  $$
-
-  as desired. So, the column space of $A$ contains
-
-  $$
-  D_1 = \textrm{span}(v_1,...,v_r) 
-  $$
-
-  Now define the rest of $\mathcal{R}^n$, 
-
-  $$
-  D_2 = \textrm{span}(v_{r+1},...,v_n) = D_1^{\perp}
-  $$
-
-  If $x$ is in $D_2$, then in @eq-Ax, we will have $v_i'x = 0$
-  for $i \leq r$, and so $Ax = 0$. So $x \textrm{ in } D_2$ implies that
-  $x$ is *not* in the column space of $A$.
-
-  In other words, $the column space of $A$ is exactly $D_1$.
-
-  But the above argument also has the biproduct of showing that 
-  the null space of $A$ is exactly $D_2$.
-
-  We now have characterizations of two of the four subspaces:
-
-  <blockquote>
-  
-  The column space of $A$ has dimension $r$, with basis $v_1,...v_r$.
-  The null space has dimension $n-r$, with basis $v_{r+1},...,v_n$.
-  
-  </blockquote>
-
-* Now for the row space, just piggyback on the result for the column
-  space. 
-
-  $\mathcal{R}(A) = \mathcal{C}(A')$
-
-  Since $A = U \Sigma V'$ we have that the SVD for $A'$ is 
-  $V \Sigma U'$. (Recall the uniqueness of SVD.). So $A'$
-  has its column space of dimension $r$ and basis $u_1,...u_r$.
-  This is then the row space of $A$.
  
 ### SVD as the minimum-norm solution
 
