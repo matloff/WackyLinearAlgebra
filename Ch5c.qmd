@@ -247,7 +247,7 @@ We will write our original norm as $||b||_2$.
 
 This is a seemingly minor change, but with important implications.  What
 Breiman and Tibshirani were trying to do was to obtain a *sparse*
-$\widehat{\beta}, i.e. a solution $ with lots of 0s, thereby providing a
+$\widehat{\beta}$ , i.e. a solution with lots of 0s, thereby providing a
 method for predictor variable selection. This is important because
 so-called "parsimonious" prediction models are desirable.
 

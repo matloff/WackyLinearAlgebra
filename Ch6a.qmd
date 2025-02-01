@@ -199,7 +199,7 @@ small but nonzero, due to roundoff error.
 ## Computation: the Power Method
 
 One way to compute eigenvalues and eigenvectors is the *power method*, a
-simple iteration. We begin with an initial guess, $\x_0$ for an
+simple iteration. We begin with an initial guess, $x_0$ for an
 eigenvector. Substituting in @eq-simpledef, we have the next guess:
 
 $$

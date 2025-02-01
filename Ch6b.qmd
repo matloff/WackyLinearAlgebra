@@ -417,7 +417,7 @@ predictors.
 $$
  A = 
  \left (
- \begin{array}{rr}
+ \begin{array}{rrr}
  A_1 & 0 & 0 ... \\
  0 & A_2 & 0 ...  \\
  ...
