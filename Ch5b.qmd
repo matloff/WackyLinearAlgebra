@@ -261,7 +261,7 @@ $$
 
 See the Your Turn problem below.
 
-## Projections
+## Projections{#sec-projections}
 
 As mentioned, the extension of classical geometry to abstract vector
 spaces has powerful applications. There is no better example of this
@@ -682,6 +682,29 @@ an orthonormal basis as follows.
    normalize.
 
 </blockquote>
+
+## Orthogonal Complements and Direct Sums
+
+Consider a subspace $W$ of an inner product space $V$. The set of
+vectors having inner product 0 with vectors in $W$ is denoted
+$W^{\perp}$, known as the *orthogonal complement* of $W$.  It too is a
+subpace, and jointly $W$ and $W^{\perp}$ span all of $V$.
+
+From @sec-projections, we know that for any $x$ in $V$, one can uniquely
+write
+
+$$
+x = x_1 + x_2
+$$
+
+where $x_1$ and $x_2$ are in $W$ and $W^{\perp}$, respectively.
+
+Say $u_1,...,u_r$ and $v_1,...,v_s$ are bases for $W$ and $W^{\perp}$.
+Then together they form a basis for all of $V$. Typically they are
+chosen to be orthonormal.
+
+Finally, we say that $V$ is the *direct sum* of $W$ and $W^{\perp}$,
+denoted $V = W \oplus W^{\perp}$.
 
 ## Application: Racial, Gender Etc. Fairness in Algorithms{#sec-fairness}
 
