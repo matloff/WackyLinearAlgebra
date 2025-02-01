@@ -164,10 +164,10 @@ $${#eq-Ax}
 Note that $v_i'x$ is a scalar, so we have
 
 $$ 
-\begin{align}
+\begin{aligned}
 Ax &= \sum_{i=1}^n [\sigma_i (v_i' x)] u_i \\
 &= \sum_{i=1}^r [\sigma_i (v_i' x)] u_i 
-\end{align}
+\end{aligned}
 $${#eq-Ax1}
 
 So 
@@ -310,12 +310,12 @@ pseudoinverses.]{.column-margin} Let's check (warning: this will be
 messy):
 
 $$
-\begin{align}
+\begin{aligned}
 A'A b &= (U \Sigma V')' (U \Sigma V') (U \Sigma V')^{-} S \\
 &= (V \Sigma U') (U \Sigma V') (V \Sigma^{-} U') S \\
 &= V \Sigma^2 V'V \Sigma^{-} U' S \\
 &= V \Sigma^{-} U' S
-\end{align}
+\end{aligned}
 $$
 
 But that is exactly the expression we found for $A^{-1}S$ above.
