@@ -601,8 +601,8 @@ other cases.) Write the latter as a partitioned matrix,
 $$
  \left (
  \begin{array}{r}
- A_{(-n)} & \\
- a_n & \\
+ A_{(-n)} \\
+ a_n \\
  \end{array}
  \right )
 $$
