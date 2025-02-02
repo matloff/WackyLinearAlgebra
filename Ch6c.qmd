@@ -358,26 +358,34 @@ shortly, but let's prove it first.
 
 ## The Moore-Penrose Solution Is Min-Norm
 
-Of all solutions $b$ to
+Consider a matrix $B$ and vector $q$
+Of all solutions $x$ to
 
 $$
-A'A b = A'S
+Bx = q
 $${#eq-linsyst}
 
-the Moore-Penrose solution
-
-$$
-b = V \Sigma^{-} U' S
-$$
-
-minimizes $||b||$.
+the Moore-Penrose solution minimizes $||x||$.
 
 :::
 
 ::: {.proof}
 
-Partition $U$ into $(U_1 | U_2)$, its first $r$ columns and the last
-$n-r$ columns. Do the same for $V$, so that
+Again, write 
+
+$$
+B = U \Sigma V'
+$$
+
+Note that $UU'$ is idempotent,
+
+$$
+(UU') (UU') = U (U'U) U' = UIU' = UU'
+$$
+
+and this is a projection. Since it maps $$
+
+
 
 $$
 V' =
