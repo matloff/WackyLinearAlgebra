@@ -257,7 +257,7 @@ has rank $r$.
 The argument for the case of $AW$ is identical, this time involving rows
 of $A$.
 
-$\blacksquare$
+$\square$
 
 :::
 

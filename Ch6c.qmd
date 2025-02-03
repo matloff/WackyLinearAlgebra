@@ -320,7 +320,7 @@ $$
 
 But that is exactly the expression we found for $A^{-1}S$ above.
 
-$\blacksquare$
+$\square$
 
 ## Example: Census Data 
 
@@ -358,8 +358,7 @@ shortly, but let's prove it first.
 
 ## The Moore-Penrose Solution Is Min-Norm
 
-Consider a matrix $B$ and vector $q$
-Of all solutions $x$ to
+Consider a matrix $B$ and vector $q$.  Of all solutions $x$ to
 
 $$
 Bx = q
@@ -371,33 +370,158 @@ the Moore-Penrose solution minimizes $||x||$.
 
 ::: {.proof}
 
-Again, write 
+Again, write[Adapted from
+*https://courses.cs.duke.edu/fall13/compsc*]{.column-margin}  
 
 $$
-B = U \Sigma V'
+B = U \Sigma V',
 $$
 
-Note that $UU'$ is idempotent,
+and consider the residual sum of squares 
 
 $$
-(UU') (UU') = U (U'U) U' = UIU' = UU'
+||Bx - q||^2 = ||U (\Sigma V' x - U'q)||^2
+$${#eq-RSS}
+
+since $UU'=I$.
+
+A Your Turn problem below says that for an orthogonal matrix $M$ and a
+vector $w$, $||Mw|| = ||w||$. Thus we can remove the factor $U$
+in @eq-RSS, yielding
+
+$$
+||Bx - q||^2 = ||\Sigma V' x - U'q||^2
+$${#eq-RSS1}
+
+Rename $$V'x$$ to $y$:
+
+$$
+||Bx - q||^2 = ||\Sigma y - U'q||^2
+$${#eq-RSS2}
+
+Now bring in the fact that $\sigma_i = 0$ for $i > r$, by writing
+everything in partitioned fashion.  Break $U$ into $r$ and $n-r$
+rows,
+
+$$
+U = 
+\left (
+\begin{array}{r}
+U_1 \\
+U_2 \\
+\end{array}
+\right )
 $$
 
-and this is a projection. Since it maps $$
-
-
+and partition other objects similarly:
 
 $$
-V' =
+V = (V_1 | V_2),
+$$
+
+$$
+\Sigma =
+ \left (
+ \begin{array}{rr}
+ \Sigma_1 & 0 \\
+ 0 & 0  \\
+ \end{array}
+ \right ),
+$$
+
+and 
+
+$$
+y =
  \left (
  \begin{array}{r}
- V_1' \\
- V_2' \\
+ y_1 \\
+ y_2 \\
  \end{array}
  \right )
 $$
 
-Multiply @eq-linsyst on the left by $U'$
+Substituting into @eq-RSS2, we have
+
+$$
+||Bx - q||^2 
+= ||
+\left (
+\begin{array}{r}
+\Sigma_1 y_1 \\
+0 \\
+\end{array}
+\right ) -
+\left (
+\begin{array}{r}
+U_1q \\
+U_2q \\
+\end{array}
+\right )
+||^2
+$${#eq-RSS3}
+
+This means that $y_2$ can be anything at all, without changing the
+residual sum of squares, confirming that there are infinitely many
+equally-effective solutions!
+
+But if we want $x$ to be of minimum length, we need $y$ to be of minimum
+length (the shortest $y$ gives us the shortest $x = Vy$, again by the
+Your Turn problem).  And,
+
+$$
+||y||^2 = ||y_2||^2 + ||y_2||^2
+$$
+
+Thus we take $y_2 = 0$.  
+
+Now, reviewing @eq-RSS3, note that the equation
+
+$$
+\Sigma_1 y_1 = U_1 q
+$$
+
+has the solution
+
+$$
+y_1 = \Sigma_1^{-1} U_1 q
+$$
+
+
+$$
+
+$$
+
+$$
+y_1 = \Sigma_1^{-1} U_1 q
+$$
+
+An interesting sidelight of this is that it means that
+
+$$
+||Bx - q||^2 
+= ||
+\left (
+\begin{array}{r}
+0  \\
+U_2q \\
+\end{array}
+\right )
+||^2,
+$${#eq-RSS3}
+
+i.e. the residual sum of squares depends only on $U_2$, not $U_1$. But
+returning to our quest for the minimum-norm solution, 
+we map back to $x = Vy$, and have
+
+$$
+x_1 = V_1 \Sigma_1^{-1} U_1'q
+$$
+
+which is the SVD solution! Thus the SVD solution does have minimum norm.
+
+$\square$
+
 
 :::
 
@@ -416,3 +540,9 @@ with return value consisting of an R list containing four matrices,
 representing the four fundamental subspaces of the input argument.
 Each matrix will consist of columns equal to a basis for the given
 subspace.
+
+❄️  **Your Turn:**
+
+Show that for an orthogonal matrix $M$ and a vector $w$, $||Mw|| =
+||w||$.
+
