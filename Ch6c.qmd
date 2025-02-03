@@ -370,8 +370,7 @@ the Moore-Penrose solution minimizes $||x||$.
 
 ::: {.proof}
 
-Again, write[Adapted from
-*https://courses.cs.duke.edu/fall13/compsc*]{.column-margin}  
+Again, write[Adapted from a derivation by Carlo Tomasi]{.column-margin}  
 
 $$
 B = U \Sigma V',
@@ -522,8 +521,9 @@ which is the SVD solution! Thus the SVD solution does have minimum norm.
 
 $\square$
 
-
 :::
+
+### Application: Explaining the Mystery of ``Double Descent"
 
 ### SVD as the best low-rank approximation
 
