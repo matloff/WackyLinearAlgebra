@@ -38,8 +38,8 @@ names(AfricanSoil)[3576:3600]
 Let's try predicting **pH**, the acidity. But that leaves 3599 possible
 predictors. There is an old rule of thumb that one should have 
 $p < \sqrt{n}$, for $p$ predictors and $n$ data points,
-to avoid overfitting, which in our setting of $$n = 1157$$
-grossly violates.  We need to do dimension reduction. One way to
+to avoid overfitting, a rule which in our setting of $n = 1157$
+is grossly violated.  We need to do dimension reduction. One way to
 accomplish this is to use PCA. 
 
 (Note, though, that this presumes our goal is prediction, rather than
@@ -238,7 +238,8 @@ combinations of $X$, we see that one of those variances is 0.
 
 So, we remove the ``Y'' variable, $pH$, number 3598 as seen above, as
 proceed. We will also remove the nonnumeric columns,
-**PIDN** and **Depth**.
+**PIDN** and **Depth**. We could use R's **prcomp** function here, but
+to better illustrate the concepts, we do things from scratch.
 
 ```{r} 
 x <- AfricanSoil[,-c(1,3595,3598)]
@@ -268,6 +269,16 @@ ph <- AfricanSoil[,3595]
 lmout <- lm(AfricanSoil$pH ~ xnew)
 # and so on
 ```
+
+### Use of cross-validation
+
+We decided to use 9 principal components here, but why not 8 or 10 or
+whatever?  A common way to choose among models is *cross-validation*: We
+set aside a subset of the data for use in testing predictive accuracy.
+The remaining data is the *training set*. For each of our competing
+models, we fit the model on the training set, then use the result to
+predict the test set. We then use whichever model does best in the test
+set.
 
 ## PCA in Detection of Multicollinearity
 

@@ -183,9 +183,9 @@ and
 We could then solve for the $b_i$, but let's go straight to the general
 case.
 
-## Least-Squares Estimation, General Number of Predictors{#sec genlin)
+## Least-Squares Estimation, General Number of Predictors{#sec-genlin)
 
-### Nile example
+### Nile example  
 
 As we have seen, systems of linear equations are natural applications of
 linear algebra.  The equations setting the derivatives to 0 can be

@@ -525,6 +525,64 @@ $\square$
 
 ### Application: Explaining the Mystery of ``Double Descent"
 
+Around 2018-2019, one of the statistics field's most deeply-held notions
+was thrown off its pedestal, largely by some researchers in machine
+learning. And many of the explanations given have been related to SVD.
+
+To illustrate the issue, let's look at *polynomial regression*. As an
+example, let's look once again at our **svcensus** dataset.
+
+```{r}
+head(svcensus)
+```
+
+To keep things simple, let's predict wage income from just age.
+
+```{r}
+lm(wageinc ~ age,svcensus)$coef
+```
+
+That model has mean income as a linear function of age. But we might try
+a quadratic function, for two reasons:
+
+* Linearity is an idealization. In practice, most functions are
+  nonlinear, and though a linear approximation may be adequate, we might
+  do better with a more complex model, such as quadratic, cubic and so
+  on.
+
+* Age discrimination is rampant in Silicon Valley, with the effect that
+  at the older end of the demographic, mean income may actually decline.
+  A linear model cannot reflect that but a quadratic model can. 
+
+So, how would we do this?
+
+```{r}
+svc1 <- svcensus[c('age','wageinc')]
+head(svc1)
+svc1$age2 <- svc1$age^2
+head(svc1)
+```
+
+So now we have the model
+
+mean income = $\beta_0$ + $beta_1$ age + $beta_1$ age$^2$
+
+Note carefully that *we still have a linear model*, meaning that it is
+linear the $\beta_i$. If say we multiply all the $\beta_i$ by 2, the
+value of the above expression will be doubled. Or, viewed another way,
+our calculation of the $\beta_i$ will still use the same calculations as
+in @eq-betahat.
+
+So, let's run the model:
+
+```{r}
+lm(wageinc ~ .,svc1)$coef
+```
+
+As a side comment, note that If our above hunch about the effects of age
+discrimination is corrected, the coefficient of the squared term should
+be negative, which turns out to be the case.
+
 ### SVD as the best low-rank approximation
 
 ## Your Turn
