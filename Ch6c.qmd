@@ -347,12 +347,28 @@ $$
 -13361.634-(-2660.821) = -10700.81
 $$
  
-### SVD as the minimum-norm solution
+## SVD as the Minimum-Norm Solution
 
 In an overdetermined linear system such as @eq-overdetermined, there are
 many solutions. However, an advantage of Moore-Penrose is that it gives
 us the *minimum norm* solution. We'll discuss the significance of this
 shortly, but let's prove it first.
+
+We will need this:
+
+::: {#thm-samenorm}
+
+## Multiplication by an Orthogonal Matrix Preserves Norm
+
+For an orthogonal matrix $M$ and a vector $w$, $||Mw|| = ||w||$. 
+
+:::
+
+::: {.proof}
+
+See the Your Turn problem below.
+
+:::
 
 ::: {#thm-shortest}
 
@@ -384,9 +400,7 @@ $${#eq-RSS}
 
 since $UU'=I$.
 
-A Your Turn problem below says that for an orthogonal matrix $M$ and a
-vector $w$, $||Mw|| = ||w||$. Thus we can remove the factor $U$
-in @eq-RSS, yielding
+Thus we can remove the factor $U$ in @eq-RSS, yielding
 
 $$
 ||Bx - q||^2 = ||\Sigma V' x - U'q||^2
@@ -486,15 +500,6 @@ $$
 y_1 = \Sigma_1^{-1} U_1 q
 $$
 
-
-$$
-
-$$
-
-$$
-y_1 = \Sigma_1^{-1} U_1 q
-$$
-
 An interesting sidelight of this is that it means that
 
 $$
@@ -523,6 +528,8 @@ $\square$
 
 :::
 
+## Application: SVD as the Best Low-Rank Approximation
+
 ## Application: Explaining the Mystery of ``Double Descent"
 
 Around 2018-2019, one of the statistics field's most deeply-held notions
@@ -531,7 +538,7 @@ learning. (This is arguably when the idea first became widespread, but
 for earlier instances, see Marco Loog *et al*, *A brief prehistory of
 double descent*, 2020,
 *https://www.pnas.org/doi/10.1073/pnas.2001875117*.) And many of the
-explanations given have been related to SVD.
+explanations given have been related to SVD. 
 
 ### Motivating example: polynomial regression
 
@@ -664,8 +671,6 @@ U.
 </blockquote>
 
 This is a rare sea change in classic quantitative analysis.
-
-### SVD as the best low-rank approximation
 
 ## Your Turn
 

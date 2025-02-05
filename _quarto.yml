@@ -27,7 +27,8 @@ book:
      - Ch6a.qmd
      - Ch6b.qmd
      - Ch6c.qmd
-     - Ch7.qmd
+     - Ch7a.qmd
+     - Ch8a.qmd
    
 format:
   html:
