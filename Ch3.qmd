@@ -183,7 +183,7 @@ and
 We could then solve for the $b_i$, but let's go straight to the general
 case.
 
-## Least-Squares Estimation, General Number of Predictors{#sec-genlin)
+## Least-Squares Estimation, General Number of Predictors
 
 ### Nile example  
 

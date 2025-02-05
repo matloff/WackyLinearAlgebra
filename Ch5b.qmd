@@ -926,3 +926,6 @@ Px = <x,u_1> u_1+...+<x,u_k> u_k
 $$
 
 so that $P$ thereby implements the projection.
+
+❄️  **Your Turn:** Consider the quadratic form $x'Px$. Show that if $P$ 
+is a projection matrix, the form equals $||Px||^2$.

@@ -327,7 +327,7 @@ If we are doing prediction, there is a very natural way to choose our
 number of PCs--just determine which number gives the most accurate
 prediction.
 
-### Example: New York City taxi trips
+### Example: New York City taxi trips{#sec-nyc}
 
 This is a well-known dataset, a version of which is included in the
 **qeML** package. The object is to predict trip time, given pickup and

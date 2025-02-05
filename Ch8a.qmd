@@ -31,3 +31,7 @@ library(qeML)
 
 ## Low Rank Approximation of Weight Matrices
 
+## Role of Matrix Condition Number
+
+*https://math.stackexchange.com/questions/4362666/relationship-between-condition-number-of-a-matrix-and-eigenvalues*
+

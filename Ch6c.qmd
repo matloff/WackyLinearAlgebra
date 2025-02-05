@@ -523,11 +523,17 @@ $\square$
 
 :::
 
-### Application: Explaining the Mystery of ``Double Descent"
+## Application: Explaining the Mystery of ``Double Descent"
 
 Around 2018-2019, one of the statistics field's most deeply-held notions
 was thrown off its pedestal, largely by some researchers in machine
-learning. And many of the explanations given have been related to SVD.
+learning. (This is arguably when the idea first became widespread, but
+for earlier instances, see Marco Loog *et al*, *A brief prehistory of
+double descent*, 2020,
+*https://www.pnas.org/doi/10.1073/pnas.2001875117*.) And many of the
+explanations given have been related to SVD.
+
+### Motivating example: polynomial regression
 
 To illustrate the issue, let's look at *polynomial regression*. As an
 example, let's look once again at our **svcensus** dataset.
@@ -582,6 +588,82 @@ lm(wageinc ~ .,svc1)$coef
 As a side comment, note that If our above hunch about the effects of age
 discrimination is corrected, the coefficient of the squared term should
 be negative, which turns out to be the case.
+
+### Polynomial regression in the context of overfitting
+
+Recall that a well-known rule of thumb is that the number $p$ of
+predictors should be less than $\sqrt{n}$, where $n$ is the number of
+data points. Let's abandon this and see what happens.
+
+In our quadratic fit above, we had $p = 2$ predictors. Since the Census
+data has more than 20,000 rows, this is not a problem in terms of the
+rule of thumb at all. But what if $n = 3$?
+
+Think first of a linear model for mean income as a function of age. Now
+we have $p = 1$. Suppose $n = 2$, i.e.\ we have just two data points.
+The result would be a straight line going through the two points
+exactly. The sum of squared prediction errors, @eq-matrixss, also known
+as the *residual sum of squares* (RSS), would equal 0.
+
+But...a linear model with $n = 3$ would be ovefit. With $n = 2$, we
+already got a 0 RSS, so an extra data point would seem to be useless.
+Moreover, it can be shown that the inverse in @eq-linregformula would
+not exist. We could still use SVD to get a solution in this case, but
+that was viewed as useless.
+
+In the quadratic setting with $n = 3$, we are fitting a
+quadratic curve through 3 data points, and it will be an exact fit,
+going through each point exactly. But $n = 4$ would overfit.
+
+For a polynomial model of degree $d$, $n = d+1$ gives a perfect fit, and
+$n > d+1$ would overfit.
+
+### The classic  and modern views
+
+Let $\kappa$ denote the complexity of a model. In the case of a linear
+model, $\kappa$ would be the number of predictor columns in our dataset,
+and there are ways of defining it for other methods.
+
+We might try several values of $\kappa$, as we did in the table
+in @eq-nyc, and then choose the one with smallest MAPE or other accuracy
+measure.
+
+Before 2018-2019, the view was:
+
+<blockquote>
+
+In plotting MAPE against $\kappa$, the curve will generally be roughly
+U-shaped, up to the point at which $\kappa$ gives us a 0 value of RSS in
+the training set. That value of $\kappa$, called the *interpolation*
+point, will give us "perfect" prediction in the training set, but very
+poor prediction in the test set, which is what counts.
+
+We choose the value of $\kappa$ at which the curve is
+lowest. There is no point in trying values of $\kappa$ past the
+interpolation point.
+
+</blockquote>
+
+This was taken for granted throughout the statistics and machine learning
+fields. But around 2018-2019, machine learning engineers were routinely
+analyzing dataset of extraordinarily large sizes, using unprecedently
+large values of $\kappa$. And they discovered that, bizarrely, as
+$\kappa$ moved past the interpolation point, the curve often went
+*down*--the second "descent"--often tracing its own second U-shape.
+And most significantly, the low point of the second U was sometimes
+below that of the first U! Overfitting--grossly so--may pay off!
+
+So the modern view is:
+
+<blockquote>
+
+The first U-shaped curve is as in the classic view. But the curve should
+be plotted past $\kappa$, and the overall minimum may be in that second
+U.
+
+</blockquote>
+
+This is a rare sea change in classic quantitative analysis.
 
 ### SVD as the best low-rank approximation
 
