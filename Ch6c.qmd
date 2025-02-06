@@ -528,6 +528,51 @@ $\square$
 
 :::
 
+to add:
+
+possible reasons:
+
+  at interp, min norm suddenly gives more than 1 choice; min norm is
+  like min Var; maybe show unbiased by arguing A'A b = A'S for all A,
+  thus A'E(estreg) = A'beta'Y for all A etc.
+
+  condition number is max at interpolation
+
+  (size of?) second U depends on min nonzero eigenvalue
+
+my empirical example
+
+ovrf <- function(nreps,n,maxP)
+ {
+    load('YearData.save')
+    # yr <- yr[,1:2]
+    nas <- rep(NA,nreps*(maxP-1))
+    outdf <- data.frame(p=nas,mape=nas)
+    rownum <- 0
+    for (i in 1:nreps) {
+       idxs <- sample(1:nrow(yr),n)
+       trn <- yr[idxs,]
+       tst <- yr[-idxs,]
+       for (p in 2:maxP) {
+          rownum <- rownum + 1
+          # out<-qePolyLin(trn[,1:(p+1)],
+          #    'V1',2,holdout=NULL)
+          out <- qeLin(trn[,1:(p+1)],'V1',2,holdout=NULL)
+          preds <- predict(out,tst[,2:(p+1)])
+          mape <- mean(abs(preds - tst[,1]))
+          outdf[rownum,1] <- p
+          outdf[rownum,2] <- mape
+          print(outdf[rownum,])
+       }
+    }
+    outdf  #run through tapply() for the graph
+ }
+
+ MAKE IT GENERAL, PUT IN code/
+
+ > set.seed(999)
+ > o1 <- ovrf(1,30,30)  USE THIS
+
 ## Application: SVD as the Best Low-Rank Approximation
 
 ## Application: Explaining the Mystery of ``Double Descent"
