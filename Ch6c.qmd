@@ -569,10 +569,12 @@ ovrf <- function(nreps,n,maxP)
     outdf  #run through tapply() for the graph
  }
 
+<!--
  MAKE IT GENERAL, PUT IN code/
 
  > set.seed(999)
  > o1 <- ovrf(1,30,30)  USE THIS
+<-->
 
 ## Application: SVD as the Best Low-Rank Approximation
 
@@ -658,7 +660,7 @@ The result would be a straight line going through the two points
 exactly. The sum of squared prediction errors, @eq-matrixss, also known
 as the *residual sum of squares* (RSS), would equal 0.
 
-But...a linear model with $n = 3$ would be ovefit. With $n = 2$, we
+But...a linear model with $n = 3$ would be overfit. With $n = 2$, we
 already got a 0 RSS, so an extra data point would seem to be useless.
 Moreover, it can be shown that the inverse in @eq-linregformula would
 not exist. We could still use SVD to get a solution in this case, but
