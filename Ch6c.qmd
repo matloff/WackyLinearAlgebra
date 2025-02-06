@@ -534,7 +534,8 @@ possible reasons:
 
   at interp, min norm suddenly gives more than 1 choice; min norm is
   like min Var; maybe show unbiased by arguing A'A b = A'S for all A,
-  thus A'E(estreg) = A'beta'Y for all A etc.
+  thus A'E(estreg) = A'beta'Y for all A etc.; this of course holds only
+  for estimable x'beta, meaning x is in row space of A (or equiv, A'A)
 
   condition number is max at interpolation
 
