@@ -85,6 +85,20 @@ methods.
 
 :::
 
+## R Libraries Used
+
+* **dsld**
+
+* **igraph**
+
+* **lars**
+
+* **networkdata**
+
+* **pracma**
+
+* **qeML**
+
 ```{r}
 #| include: false
 library(dsld)

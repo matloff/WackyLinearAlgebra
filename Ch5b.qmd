@@ -901,7 +901,7 @@ independent.
 ❄️  **Your Turn:** Prove @eq-pythag by expanding the inner product and
 simplifying algebraically.
 
-❄️  **Your Turn:** Prove @eq-triangle. 
+❄️  **Your Turn:** Prove @thm-triangle. 
 
 ❄️  **Your Turn:** Prove that the vector $Y - E(Y|X)$ is uncorrelated
 with $E(Y|X)$
