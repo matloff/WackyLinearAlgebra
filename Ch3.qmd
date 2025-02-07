@@ -421,7 +421,7 @@ again providing that the inverse exists.
 
 ### Example: **mlb1** data{#sec-mlb}
 
-As an examples, let's take the **mlb1**
+As an example, let's take the **mlb1**
 from my [qeML ('Quick and Easy Machine
 Learning](https://github.com/matloff/qeML) package.
 [Dataset kindly provided by the UCLA Dept. of Statistics]{.column-margin}

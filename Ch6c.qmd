@@ -584,96 +584,195 @@ Around 2018-2019, one of the statistics field's most deeply-held notions
 was thrown off its pedestal, largely by some researchers in machine
 learning. (This is arguably when the idea first became widespread, but
 for earlier instances, see Marco Loog *et al*, *A brief prehistory of
-double descent*, 2020,
-*https://www.pnas.org/doi/10.1073/pnas.2001875117*.) And many of the
-explanations given have been related to SVD. 
+double descent*, PNAS, 2020.) And many of the explanations given have
+been related to SVD. 
 
-### Motivating example: polynomial regression
+### Motivating example
 
-To illustrate the issue, let's look at *polynomial regression*. As an
-example, let's look once again at our **svcensus** dataset.
+Let's consider the Million Song Dataset, varous versions of which are on
+the Web. Ours is the one with 515345 rows and 91 columns. The first
+column is the year of release, followed by 90 columns of various audio
+measurements. The goal is to predict the year from the audio variables.
 
-```{r}
-head(svcensus)
-```
-
-To keep things simple, let's predict wage income from just age.
-
-```{r}
-lm(wageinc ~ age,svcensus)$coef
-```
-
-That model has mean income as a linear function of age. But we might try
-a quadratic function, for two reasons:
-
-* Linearity is an idealization. In practice, most functions are
-  nonlinear, and though a linear approximation may be adequate, we might
-  do better with a more complex model, such as quadratic, cubic and so
-  on.
-
-* Age discrimination is rampant in Silicon Valley, with the effect that
-  at the older end of the demographic, mean income may actually decline.
-  A linear model cannot reflect that but a quadratic model can. 
-
-So, how would we do this?
-
-```{r}
-svc1 <- svcensus[c('age','wageinc')]
-head(svc1)
-svc1$age2 <- svc1$age^2
-head(svc1)
-```
-
-So now we have the model
-
-mean income = $\beta_0$ + $beta_1$ age + $beta_1$ age$^2$
-
-Note carefully that *we still have a linear model*, meaning that it is
-linear the $\beta_i$. If say we multiply all the $\beta_i$ by 2, the
-value of the above expression will be doubled. Or, viewed another way,
-our calculation of the $\beta_i$ will still use the same calculations as
-in @eq-betahat.
-
-So, let's run the model:
-
-```{r}
-lm(wageinc ~ .,svc1)$coef
-```
-
-As a side comment, note that If our above hunch about the effects of age
-discrimination is corrected, the coefficient of the squared term should
-be negative, which turns out to be the case.
-
-### Polynomial regression in the context of overfitting
+### Overfitting and BEYOND
 
 Recall that a well-known rule of thumb is that the number $p$ of
 predictors should be less than $\sqrt{n}$, where $n$ is the number of
-data points. Let's abandon this and see what happens.
+data points. We will abandon this and see what happens. 
 
-In our quadratic fit above, we had $p = 2$ predictors. Since the Census
-data has more than 20,000 rows, this is not a problem in terms of the
-rule of thumb at all. But what if $n = 3$?
+We will add predictors one at a time, to form models of increasing
+complexity. As usual, let $p$ denote the number of predictors in a given
+model. We will also use only a small number of rows, say $n = 30$.  We
+start with $p=1$, then $p=2$, eventually reaching $p = n-1$ (accounting
+for the 1s column in the $A$ matrix in @eq-betahat), and not stopping
+even there. We go to $p=n$, $p=n+1$ and so on.
 
-Think first of a linear model for mean income as a function of age. Now
-we have $p = 1$. Suppose $n = 2$, i.e.\ we have just two data points.
-The result would be a straight line going through the two points
-exactly. The sum of squared prediction errors, @eq-matrixss, also known
-as the *residual sum of squares* (RSS), would equal 0.
+When we reach $p=n+2$, the matrix $A$ will have more columns than rows,
+and $(A'A)^{-1}$ will not exist. (See Your Turn problem below.) We can
+still use SVD to solve for $b$, but intuitively some kind of major
+change may happen at that point.
 
-But...a linear model with $n = 3$ would be overfit. With $n = 2$, we
-already got a 0 RSS, so an extra data point would seem to be useless.
-Moreover, it can be shown that the inverse in @eq-linregformula would
-not exist. We could still use SVD to get a solution in this case, but
-that was viewed as useless.
+Here is the code and output
 
-In the quadratic setting with $n = 3$, we are fitting a
-quadratic curve through 3 data points, and it will be an exact fit,
-going through each point exactly. But $n = 4$ would overfit.
+``` r
+ovrf <- function(nreps,n,maxP)
+ {
+    load('YearData.save')
+    # yr <- yr[,1:2]
+    nas <- rep(NA,nreps*(maxP-1))
+    outdf <- data.frame(p=nas,mape=nas)
+    rownum <- 0
+    for (i in 1:nreps) {
+       idxs <- sample(1:nrow(yr),n)
+       trn <- yr[idxs,]
+       tst <- yr[-idxs,]
+       for (p in 2:maxP) {
+          rownum <- rownum + 1
+          # don't use lm or qeLin, since no SVD; instead, fit polynomial
+          # of degree 1, i.e. linear model
+          out <- qePolyLin(trn[,1:(p+1)],'V1',1,holdout=NULL)
+          preds <- predict(out,tst[,2:(p+1)])
+          mape <- mean(abs(preds - tst[,1]))
+          outdf[rownum,1] <- p
+          outdf[rownum,2] <- mape
+          print(outdf[rownum,])
+       }
+    }
+    outdf  #run through tapply() for the graph
+ }
+```
 
-For a polynomial model of degree $d$, $n = d+1$ gives a perfect fit, and
-$n > d+1$ would overfit.
+``` r
+> set.seed(111111); o1 <- ovrf(1,30,40)
+  p     mape
+1 2 7.865117
+  p     mape
+2 3 7.876853
+  p     mape
+3 4 7.984233
+  p     mape
+4 5 8.631492
+  p     mape
+5 6 8.608561
+  p     mape
+6 7 8.734537
+  p    mape
+7 8 8.74647
+  p     mape
+8 9 8.746996
+   p     mape
+9 10 9.042233
+    p     mape
+10 11 8.795864
+    p    mape
+11 12 8.88431
+    p     mape
+12 13 10.06747
+    p     mape
+13 14 10.17324
+    p     mape
+14 15 10.68381
+    p     mape
+15 16 10.41553
+    p     mape
+16 17 9.892437
+    p    mape
+17 18 9.71409
+    p     mape
+18 19 11.25314
+    p     mape
+19 20 11.88647
+    p     mape
+20 21 17.94607
+    p     mape
+21 22 18.63847
+    p     mape
+22 23 15.26327
+    p     mape
+23 24 19.50255
+    p     mape
+24 25 24.53056
+    p     mape
+25 26 23.60238
+    p     mape
+26 27 25.35561
+    p    mape
+27 28 36.1927
+    p     mape
+28 29 57.97567
+    p     mape
+29 30 754.9635
+P > N. With polynomial terms and interactions, P is 31.
+
+
+    p    mape
+30 31 741.573
+P > N. With polynomial terms and interactions, P is 32.
+
+
+    p  mape
+31 32 477.3
+P > N. With polynomial terms and interactions, P is 33.
+
+
+    p     mape
+32 33 525.8362
+P > N. With polynomial terms and interactions, P is 34.
+
+
+    p     mape
+33 34 465.0518
+P > N. With polynomial terms and interactions, P is 35.
+
+
+    p     mape
+34 35 761.3692
+P > N. With polynomial terms and interactions, P is 36.
+
+
+    p    mape
+35 36 689.829
+P > N. With polynomial terms and interactions, P is 37.
+
+
+    p     mape
+36 37 673.8049
+P > N. With polynomial terms and interactions, P is 38.
+
+
+    p     mape
+37 38 728.8918
+P > N. With polynomial terms and interactions, P is 39.
+
+
+    p     mape
+38 39 666.2301
+P > N. With polynomial terms and interactions, P is 40.
+
+
+    p     mape
+39 40 621.9375
+```
+MAPE here is mean absolute prediction error (calculated on the holdout
+set).
+
+Here $n = 30$, so $p = 30, 31,...$ uses SVD, and is overfitting. Indeed,
+much smaller values of $p$ seem to have overfit as well. But the point
+is that once we got to the point at which there is no unique solution,
+MAPE actually improved, a huge shock to the field. It was always assumed
+that there is no point going beyond the values of $p$ that gives us 0
+for the sum of squares.
+
+The graph of MAPE is typically a U-shape. In this case, we seem to have
+only the right half of a U, but still a U. What was shocking was that
+sometimes there is a *second* U-shape after we reach 0 sum of squares.
+Even more shocking, in some case the low point of the second U is lower
+than that of the first--it pays to radically ovefit.
 
 ### The classic  and modern views
+
+In other words, here is the sea change that occurred in the field around
+2018-2019.
 
 Let $\kappa$ denote the complexity of a model. In the case of a linear
 model, $\kappa$ would be the number of predictor columns in our dataset,
@@ -720,6 +819,83 @@ U.
 
 This is a rare sea change in classic quantitative analysis.
 
+### How can this bizarre effect occur?
+
+Let's look further. If at least some our predictors are numeric (with Million
+Song, they all are), then for $p = n-1$, the (square) matrix $A$ itself
+will very likely be invertible, and setting
+
+$$
+b = A^{-1} S
+$$
+
+will minimize @eq-matrixss--with the value of that expression being 0--a
+perfect fit to the data!
+
+Now again consider $p=n$. Let $A_{new}$ denote our new $A$ (it will be
+equal to the old one with a new column added on the right), and $b_{new}$
+denote a new version of $b$. We say "*a* new version" here, because
+there are now infinitely many versions; recall that the SVD version has
+minimum norm among them, a point we will return to shortly. Let's use
+$A_{old}$ and $b_{ol}$ to denote the quantities we got for $p=n-1$.
+
+We can write 
+
+$$
+A_{new} =
+(A_{old} | c_{n+1})
+$$
+
+and 
+
+$$
+b_{new} = (b_{old} | b_{n+1})'
+$$
+
+Thus
+
+$$
+A_{new}' A_{new} b_{new} =
+(A_{old}' A_{old} + c_{n+1} c_{n+1}')
+\left (
+\begin{array}{r}
+b_{old} \\
+b_{n+1} \\
+\end{array}
+\right )
+$$
+
+As noted, we now must use SVD. We will still get a perfect fit. To see
+this, set $b_{n+1} = 0$ above, which gives us the same fit we got for $n
+= p-1$.  In fact, there will be infinitely many values of $b$ that
+achieve that perfect fit.  But remember, the SVD solution has minimum
+norm among them all, a point we will return to shortly.
+
+In considering the effectiveness of an estimator in statistics, we often
+look at bias and variance.  Let's consider bias first.
+
+In our setting here, the quantities of interest are of the form
+$w'\beta$ the predicted value for an individual who has the characterics
+$w$. We don't know $\beta$, so we use $w'b$ instead.
+, estimated by $w'b$. In the non-full rank setting, not all
+such quantities are physically estimable, but the theory says that any
+$w$ in the row space of $A$ will be fine. Moreover, it says the least
+squares estimate of $w'\beta$ will have 0 bias.
+
+Now concerning variance, we have
+
+$$
+Var(w'b) = w' Cov(b) w 
+$$
+
+In general, shorter random vectors will have less variability, which
+though not the same as variance/covariance at least gives us the feeling
+that such an estimator has low variance. 
+
+Thus it is at least plausible that we might get a second U-shape, as the
+impact of the minimum-norm nature of SVD kicks in.
+
+
 ## Your Turn
 
 ❄️  **Your Turn:** Show that in the SVD factorization, $U$ consists of
@@ -734,8 +910,9 @@ representing the four fundamental subspaces of the input argument.
 Each matrix will consist of columns equal to a basis for the given
 subspace.
 
-❄️  **Your Turn:**
+❄️  **Your Turn:** Show that for an orthogonal matrix $M$ and a vector
+$w$, $||Mw|| = ||w||$.
 
-Show that for an orthogonal matrix $M$ and a vector $w$, $||Mw|| =
-||w||$.
+❄️  **Your Turn:** Using properties of matrix rank, show that if $p+1 > n$
+in @eq-betahat, the inverse will not exist.
 
