@@ -270,16 +270,6 @@ lmout <- lm(AfricanSoil$pH ~ xnew)
 # and so on
 ```
 
-### Use of cross-validation{#sec-crossval}
-
-We decided to use 9 principal components here, but why not 8 or 10 or
-whatever?  A common way to choose among models is *cross-validation*: We
-set aside a subset of the data for use in testing predictive accuracy.
-The remaining data is the *training set*. For each of our competing
-models, we fit the model on the training set, then use the result to
-predict the test set. We then use whichever model does best in the test
-set.
-
 ## PCA in Detection of Multicollinearity
 
 Recall the itemized list in @sec-nearly of various conditions 
@@ -324,8 +314,8 @@ but just for illustration purposes.  There are no formal rules for how
 many to use.  Many "rules of thumb" exist. 
 
 If we are doing prediction, there is a very natural way to choose our
-number of PCs--just determine which number gives the most accurate
-prediction.
+number of PCs--do cross-validation (@sec-lassoxval), and use whichever
+number gives the most accurate prediction.
 
 ### Example: New York City taxi trips{#sec-nyc}
 

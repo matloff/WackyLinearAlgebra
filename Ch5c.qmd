@@ -325,7 +325,7 @@ This will not happen with ridge. The diamond would now be a circle (not
 shown). The "barely touching point" will almost certainly will be at a
 place in which both $b_1$ and $b_2$ are nonzero. Hence no sparsity.
 
-### Use of LASSO for dimension reduction 
+### Use of LASSO for dimension reduction{#sec-lassoxval} 
 
 In prediction applications, one goal is to avoid *overfitting*, meaning
 using using such a complex model that it actually has poorer predictive
@@ -333,8 +333,38 @@ power than a simpler one. An example is using too many predictors.
 
 The LASSO, in producing a sparse estimated coefficient vector, reduces
 the number of predictors. This would seem to achieve our goal, but a
-problem is that we must still choose $\lambda$. A common approach is to
-use *cross validation* (@sec-crossval) for this purpose.
+problem is that we must still choose $\lambda$. 
+
+A common way to choose among models is *cross-validation*: We set aside
+a subset of the data for use in testing predictive accuracy.  The
+remaining data is the *training set*. For each of our competing models,
+we fit the model on the training set, then use the result to predict the
+test set. We then use whichever model does best in the test set.
+
+*Example: Census data*
+
+Let's look once again at our census dataset (@sec-censusrref). With $n =
+20090$ and $p=14$, we probably would not have to worry about overfitting
+even if we used the full dataset, it is convenient to use as an example
+here.
+
+CRAN's **glmnet** does automatic cross-validation, but let's use the
+**lars** package here for simplicity, just to see the effects of using
+different values of $\lambda$.
+
+```{r}
+library(lars)
+# lars pkg needs numeric inputs
+svcdumm <- factorsToDummies(svcensus)
+colnames(svcdumm)
+z <- lars(svcdumm[,-11],svcdumm[,11],'lasso')
+z$lambda
+z$beta
+```
+
+Again, we are not doing cross-validation here, but it appears to
+Occupation 141 is an expendable predictor, and we might consider
+dropping, say, the **educ.14** variable.
 
 ## A Warning
 
