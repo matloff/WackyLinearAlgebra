@@ -890,7 +890,9 @@ $$
 
 In general, shorter random vectors will have less variability, which
 though not the same as variance/covariance at least gives us the feeling
-that such an estimator has low variance. 
+that such an estimator has low variance. Recall that this is the
+rationale for shrinkage estimators -- accept a small amount of bias in
+return for a reduction in variance.
 
 Thus it is at least plausible that we might get a second U-shape, as the
 impact of the minimum-norm nature of SVD kicks in. On the other hand, as
