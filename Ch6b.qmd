@@ -270,7 +270,7 @@ lmout <- lm(AfricanSoil$pH ~ xnew)
 # and so on
 ```
 
-### Use of cross-validation
+### Use of cross-validation{#sec-crossval}
 
 We decided to use 9 principal components here, but why not 8 or 10 or
 whatever?  A common way to choose among models is *cross-validation*: We

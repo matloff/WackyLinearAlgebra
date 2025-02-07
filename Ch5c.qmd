@@ -251,6 +251,8 @@ $\widehat{\beta}$ , i.e. a solution with lots of 0s, thereby providing a
 method for predictor variable selection. This is important because
 so-called "parsimonious" prediction models are desirable.
 
+### Properties
+
 To that end, first note that it can be shown that, under some technical
 conditions, that the ridge solution minimizes 
 
@@ -273,8 +275,10 @@ $$
 As with $\lambda$ in the original formulation, $\gamma$ is a positive
 number chosen by the analyst.
 
+### Geometric view
+
 Comparison between the ridge and LASSO concepts is often done via this
-graph depicting the LASSO setting::
+graph depicting the LASSO setting:
 
 ![LASSO sparsity](LASSO_gray.png)
 
@@ -320,6 +324,17 @@ $b_1 = 0$ or $b_2 = 0$ -- *hence a sparse solution*.
 This will not happen with ridge. The diamond would now be a circle (not
 shown). The "barely touching point" will almost certainly will be at a
 place in which both $b_1$ and $b_2$ are nonzero. Hence no sparsity.
+
+### Use of LASSO for dimension reduction 
+
+In prediction applications, one goal is to avoid *overfitting*, meaning
+using using such a complex model that it actually has poorer predictive
+power than a simpler one. An example is using too many predictors.
+
+The LASSO, in producing a sparse estimated coefficient vector, reduces
+the number of predictors. This would seem to achieve our goal, but a
+problem is that we must still choose $\lambda$. A common approach is to
+use *cross validation* (@sec-crossval) for this purpose.
 
 ## A Warning
 
