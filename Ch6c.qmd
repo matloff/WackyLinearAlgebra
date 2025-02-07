@@ -893,7 +893,10 @@ though not the same as variance/covariance at least gives us the feeling
 that such an estimator has low variance. 
 
 Thus it is at least plausible that we might get a second U-shape, as the
-impact of the minimum-norm nature of SVD kicks in.
+impact of the minimum-norm nature of SVD kicks in. On the other hand, as
+$p$ grows further, $b$ has more and more components, and likely that
+minmum-norm $b$ will grow in length at some point, hence the typical
+later turn back upward of the second U.
 
 
 ## Your Turn
