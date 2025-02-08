@@ -29,6 +29,11 @@ be solved, almost always from Data Science, leading up to a linear
 algebra solution.  Basically, the math sneaks up on the reader, who
 suddenly realizes they've just learned a new general concept!
 
+Or, the reader suddenly sees a connection to a familiar topic. For
+instance, after introducing the Cauchy-Schwarz Inequality, the book
+shows that it implies our familiar notion that statistical correlation
+is bounded between -1 and 1.
+
 In an excellent [review of book on Principal Components
 Analysis](https://loreley.one/2024-09-pca/), the reviewer writes
 
