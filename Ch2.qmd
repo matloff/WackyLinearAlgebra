@@ -566,8 +566,11 @@ help our intuition here.
 
 ### Implication for classical statistics
 
-It can be shown that if a random vector is MV normally distributed, then
-the conditional distribution of any one of its componentx $Y$, given the
+
+::: {#thm-conditMVnormal}
+
+if a random vector is MV normally distributed, then
+the conditional distribution of any one of its components $Y$, given the
 others $X_{others} = t$ (note that $t$ is a vector if $k > 2$) has the
 following properties:
 
@@ -579,6 +582,83 @@ following properties:
 
 These of course are the classical assumptions of linear regression
 models. They actually come from the MV normal model.
+
+:::
+
+::: {.proof}
+This comes out of writing down the conditional density (overall density
+divided by marginal), and then doing some algebra.
+
+$\square$
+
+::: 
+
+::: {#thm-xnormalthenaxnormal}
+
+If $X$ is a multivariate-normal random vector, then so is $AX$ for any
+compatible nonrandom matrix $A$.
+
+::: 
+
+::: {.proof}
+Again, perform direct evaluation of the density.
+
+$\square$
+::: 
+
+## The Delta Method
+
+This is one of the most useful simple tools in statistics.  As an
+example, say we are estimating a population mean $\mu$ and are also
+interested in estimating $\log(\mu)$. 
+
+We will probably use $\bar{X}$ to estimate $\mu$, and thus use
+$\log{\bar{X}}$ to estimate $\log(\mu)$. But how do we obtain a standard
+error for the latter?[If we just need to form a confidence interval for
+$\log(\mu)$, we can form a CI for $\mu$ and then take the log of both
+endpoints.]{.column-margin}
+
+The Central Limit Theorem tells as that $\bar{X}$ is asymptotically
+normally distributed. But what about $\log{\bar{X}}$?
+
+From calculus, we know that a smooth function $f$ can be written as a
+Taylor series,
+
+$$
+f(x) = f(x_0) + f'(x_0) (x-x_0) + f''(x_0) (x-x_0)^2 /2 + ...
+$$
+
+where here "'" denotes derivative.
+
+In our case here, setting $W = \log{\bar{X}}$, we have
+
+$$
+W = \log{\mu} + \log'({\mu}) (\bar{X}-\mu) + \log''({\mu}) (\bar{X}-\mu)^2 /2 + ...
+$$
+
+and $\log'(t) = 1/t$ and so on.
+
+The key point is that as n grows, $\bar{X}-\mu$ goes to 0, and
+$(\bar{X}-\mu)^2$ goes to 0 even faster. Using theorems from probability
+theory, one can show that, in the sense of distribution, 
+
+$$
+W \approx log(\mu) + log'(\mu) (\bar{X}-\mu)
+$$
+
+In other words, $W$ has an approximate normal distribution that
+has mean $log(\mu)$ and variance
+
+$$
+\frac{1}{\mu^2} \sigma^2/n
+$$
+
+where $\sigma^2$ is the population variance. We estimate the latter by
+the usual $S^2$ quantity, and thus have our standard error.
+
+
+
+
 
 ## Your Turn
 
