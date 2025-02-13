@@ -238,7 +238,7 @@ This is an important property:
 ## Rank Is Preserved in Pre-/Post-multiplication by Invertible Matrices
 
 Let $A$ be any matrix, and let $V$ and $W$ be square, invertible
-matrices with sizes compatible with the products below. Then the ranks
+matrices with sizes conformable with the products below. Then the ranks
 of $VA$ and $AW$ are equal to that of $A$.
 :::
 

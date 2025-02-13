@@ -187,6 +187,14 @@ a %*% b
 ```
 The reader should make sure to check the other elements by hand.
 
+::: {#tip-conformable .callout-tip}  
+
+Always keep in mind that in the matrix product $AB$, the number of rows
+of $B$ must equal the number of columns of $A$. The two matrices are
+then said to be \textit{conformable}.
+
+::: 
+
 ## The Identity Matrix
 
 The *identity matrix* $I$ of size n is the nxn matrix with 1s on the
@@ -604,7 +612,6 @@ shifts*, e.g. $UVW$, $VWU$ and $WUV$ all have the same trace.
 
 Here, "visualization" is not a reference to graphics but rather to
 highlighting certain submatrices.
-
 
 ::: {#tip-partitioned .callout-tip}  
 
@@ -1075,7 +1082,18 @@ Cov(U,V) = E[(U - EU)(V - EV)]
 $$
 
 Loosely speaking, this measures the degree to which the two random
-variables vary together. Say for instance $V$ is usually large -- meaning
+variables vary together. Consider for instance human height $H$ and $W$.
+Taller people tend to also be heavier. Say we sample many people from a
+population. Most of those who are taller than average, i.e. $H > EH$
+will also be heavier than average, $W > EW$, making $(H - EH)(W - EW) >
+0$.  Similarly, shorter people tend to be lighter, but then we still
+have $(H - EH)(W - EW) > 0$. So, usually $(H - EH)(W - EW) > 0$, and
+though there will be a number of exceptions, they will be rare enough so
+that $E[(U - EU)(V - EV)] > 0$.[Of course, the *magnitude* of $(H - EH)(W - EW)$
+plays a role too.]{.column-margin}
+
+
+$V$ is usually large -- meaning
 above its mean $EV$ -- when $U$ is large (i.e.\ above \textit{its}
 mean), and they are usually both small together. Then $U - EU$ and $V - EV$
 are usually of the same sign, thus have a positive product. Then
@@ -1089,10 +1107,16 @@ Note a couple of properties of covariance:
 
 * $Cov(U,U) = Var(U)$.
 
+* For statistically independent random vectors $Q$ and $W$ of the same length,
+
+$$
+Cov(Q+W) = Cov(Q) + Cov(W) 
+$${#eq-indepcov}
+
 The relations between the various components of $X$ are often
 characterized by the *covariance matrix* of $X$, defined as follows
 for a $k$-component random vector. The covariance matrix, denoted by
-$Cov(X)$, is a $k \textrm{x} k$ matrix, and 
+$Cov(X)$, is a $k \textrm{ x } k$ matrix, and 
 for $1 \leq i,j \leq k$,[The definition is soewhat overloaded.
 "Cov" refers both to the covariance between two random variables, say
 height and weight, and to the covariance of a random vector, which is a
