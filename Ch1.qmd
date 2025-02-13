@@ -269,60 +269,6 @@ likely to be at any of the states. In fact, as time n goes to infinity,
 this probability vector becomes exactly (0.20,0.20,0.20,0.20,0.20), as
 we will see in the next chapter.
 
-## Your Turn
-
-❄️  **Your Turn:** The long-run probabilities here turned out to be
-uniform, with value 0.20 for all five states. In fact, that is usually
-not the case.  Make a small change to $P_1$ -- remember to keep the row
-sums to 1 -- and compute a high power to check whether the long-run
-distribution seems nonuniform.
-
-❄️  **Your Turn:** Not every Markov chain, even ones with finitely
-many states, have long-run distributions. Some chains have *periodic*
-states. It may be, for instance, that after leaving state $i$, once can
-return only after an even number of hops. Modify our example chain here
-so that states 1 and 5 (and all the others) have that property. Then
-compute $P^n$ for various large values of $n$ and observe oscillatory
-behavior, rather than long-run convergence.
-
-❄️  **Your Turn:** Consider the following model of a discrete-time,
-single-server queue:
-
-* Model parameters are p (probability of job completion), q 
-  (probability of new job arriving) and m (size of the buffer).
-
-* Jobs arrive, are served (possibly after queuing) and leave.
-
-* Only one job can be in service at a time.
-
-* At each time epoch:
-
-    * The job currently in service, if any, will complete with
-      probability p.
-
-    * Slightly after a possible job completion, a job in the queue,
-      if any, will start service.
-
-    a Slightly after that, anew job will arrive with probability q.
-      If the queue is empty, this job starts service. If not, and if the
-      queue is not full, it will join the queue.  Otherwise, the job is
-      discarded.
-
-* The system is memoryless.
-
-* The current state is the number of jobs in the system, taking on the
-values 0,1,2,..,m+1; that last state means m jobs in the queue and 1 in
-service.
-
-For instance, say p = 0.4, q = 0.2, m = 5, Suppose the current state is
-3, so there is a job in service and two jobs in the queue. Our next
-state will be 2 with probability (0.4) (0.8); it will be 3 with
-probability (0.4) (0.2), and so on.
-
-Analyze this system for the case given above.` Find the approximate
-long-run distribution, and also the proportion of jobs that get
-discarded.
-
 
 ## Network Graph Models
 
@@ -1101,17 +1047,13 @@ $Cov(U,V) > 0$. If on the other hand, one is usually small when the
 other is large and vice versa, $Cov(U,V) < 0$. This will later lead to
 the concept of correlation, but that intuition will serve us now.
 
-Note a couple of properties of covariance:
+Note some properties of covariance. 
 
-* Cov is bilinear, i.e. $Cov(aU,bV) = ab Cov(U,V)$.
+* $Cov$ is bilinear, i.e. $Cov(aU,bV) = ab Cov(U,V)$.
 
 * $Cov(U,U) = Var(U)$.
 
-* For statistically independent random vectors $Q$ and $W$ of the same length,
-
-$$
-Cov(Q+W) = Cov(Q) + Cov(W) 
-$${#eq-indepcov}
+* $Var(U+V) = Var(U) + Var(V) + 2 Cov(U,V)$ .
 
 The relations between the various components of $X$ are often
 characterized by the *covariance matrix* of $X$, defined as follows
@@ -1171,6 +1113,16 @@ negative correlation between height and age? It's near 0, and this could
 be a sampling artifact, but another possibility is that in this sport,
 shorter players do not survive as well.
 
+Properties of the matrix version:
+
+* For statistically independent random vectors $Q$ and $W$ of the same length,
+
+$$
+Cov(Q+W) = Cov(Q) + Cov(W) 
+$${#eq-indepcov}
+
+* For any nonrandom scalar $c$, and $Q$ a random vector, we have $Cov(cQ) = c^2 Cov(Q)$.
+
 ### Linear algebra properties of covariance matrices{#sec-covar} 
 
 Say we have a random vector $X$, of length $k$, and a nonrandom matrix
@@ -1211,4 +1163,58 @@ column vector $a$
 $$
 a' Cov(X) a \geq 0
 $$
+
+## Your Turn
+
+❄️  **Your Turn:** The long-run probabilities here turned out to be
+uniform, with value 0.20 for all five states. In fact, that is usually
+not the case.  Make a small change to $P_1$ -- remember to keep the row
+sums to 1 -- and compute a high power to check whether the long-run
+distribution seems nonuniform.
+
+❄️  **Your Turn:** Not every Markov chain, even ones with finitely
+many states, have long-run distributions. Some chains have *periodic*
+states. It may be, for instance, that after leaving state $i$, once can
+return only after an even number of hops. Modify our example chain here
+so that states 1 and 5 (and all the others) have that property. Then
+compute $P^n$ for various large values of $n$ and observe oscillatory
+behavior, rather than long-run convergence.
+
+❄️  **Your Turn:** Consider the following model of a discrete-time,
+single-server queue:
+
+* Model parameters are p (probability of job completion), q 
+  (probability of new job arriving) and m (size of the buffer).
+
+* Jobs arrive, are served (possibly after queuing) and leave.
+
+* Only one job can be in service at a time.
+
+* At each time epoch:
+
+    * The job currently in service, if any, will complete with
+      probability p.
+
+    * Slightly after a possible job completion, a job in the queue,
+      if any, will start service.
+
+    a Slightly after that, anew job will arrive with probability q.
+      If the queue is empty, this job starts service. If not, and if the
+      queue is not full, it will join the queue.  Otherwise, the job is
+      discarded.
+
+* The system is memoryless.
+
+* The current state is the number of jobs in the system, taking on the
+values 0,1,2,..,m+1; that last state means m jobs in the queue and 1 in
+service.
+
+For instance, say p = 0.4, q = 0.2, m = 5, Suppose the current state is
+3, so there is a job in service and two jobs in the queue. Our next
+state will be 2 with probability (0.4) (0.8); it will be 3 with
+probability (0.4) (0.2), and so on.
+
+Analyze this system for the case given above.` Find the approximate
+long-run distribution, and also the proportion of jobs that get
+discarded.
 

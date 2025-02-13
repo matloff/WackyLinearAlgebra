@@ -629,14 +629,13 @@ $$
 Then the distribution of the random vector
 
 $$
-W_n = \sqrt{n} \Sigma^{-1} (\bar{X} - \mu)
+W_n = \sqrt{n} (\bar{X} - \mu)
 $$
 
-(Be sure to take a moment to verify the compatibility of the matrix
-multiplication here. Say the $X_i$ each have length $q$. Then
-$\Sigma$ is $q \textrm{ x } q$, as is its inverse, while
-$\bar{X}$ and $\mu$ are also of length $q$, i.e.\ $q \textrm{ x } 1$
-as matrices.)
+goes to multivariate normal with the 0 vector as mean and[The usual form
+would involve the "square root" of a matrix, but we will not discuss
+that concept until our chapter on inner product spaces.]{.column-margin}
+covariance matrix $\Sigma$.
 
 :::
 `
@@ -695,7 +694,7 @@ I_{ik}  \\
 \right )
 $$
 
-Here $I_ij$ is 1 or 0, depending on whether trial $i$ resulted in
+Here $I_{ij}$ is 1 or 0, depending on whether trial $i$ resulted in
 category $j$. (A 1 "indicates" that caregory $j$ occurred.)
 
 The key is that
@@ -707,6 +706,22 @@ $$
 For instance, in the die-rolling example, the first component on the
 right-hand side is the number of rolls in which we got 1 dot, and that
 is by definition the same as $N_1$, the first component of $X$.
+
+From our discussion above, we know that
+
+$$
+EX = 
+\left (
+\begin{array}{r}
+np_1 \\
+... \\
+np_k \\
+\end{array}
+\right )
+$$
+
+What about $Cov(X)$?
+
 
 ## The Delta Method
 
