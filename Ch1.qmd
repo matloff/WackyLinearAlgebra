@@ -191,7 +191,7 @@ The reader should make sure to check the other elements by hand.
 
 Always keep in mind that in the matrix product $AB$, the number of rows
 of $B$ must equal the number of columns of $A$. The two matrices are
-then said to be \textit{conformable}.
+then said to be *conformable*.
 
 ::: 
 
@@ -1040,7 +1040,7 @@ plays a role too.]{.column-margin}
 
 
 $V$ is usually large -- meaning
-above its mean $EV$ -- when $U$ is large (i.e.\ above \textit{its}
+above its mean $EV$ -- when $U$ is large (i.e.\ above *its*
 mean), and they are usually both small together. Then $U - EU$ and $V - EV$
 are usually of the same sign, thus have a positive product. Then
 $Cov(U,V) > 0$. If on the other hand, one is usually small when the

@@ -253,7 +253,7 @@ Geometrically, we often refer to what is called $\cal R^3$ here as
 
 <blockquote>
 
-The \textit{dimension} of a vector space is the number of vectors in any
+The *dimension* of a vector space is the number of vectors in any
 of its bases.
 
 </blockquote>
