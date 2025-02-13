@@ -650,7 +650,7 @@ $\square$
 
 ## Multinomial Random Vectors Have Approximate Multivariate Normal Distributions
 
-Recall that a \textit{multinomial} random vector is the mathematial
+Recall that a *multinomial* random vector is the mathematial
 analog of an R factor variable -- a categorical variable with $k$
 levels/categories. Just as a binomial random variable represents the
 number of "successes" in $n$ "trials," a multinomial random vector
@@ -681,7 +681,7 @@ So for instance if we roll a fair die 10 times, then $N_i$ is the
 number of trials in which the roll's outcome was $i$ dots
 and $p_i = 1/6$ , $i=1,2,3,4,5,6$.
 
-Let's find $Cov(X)$. Define the \textit{indicator} vector 
+Let's find $Cov(X)$. Define the *indicator* vector 
 
 $$
 I_i = 
@@ -707,6 +707,12 @@ For instance, in the die-rolling example, the first component on the
 right-hand side is the number of rolls in which we got 1 dot, and that
 is by definition the same as $N_1$, the first component of $X$.
 
+So there we have it -- $X$ is a sum of independent, identically
+distributed random vectors, so by the Multivariate Central Limit
+Theorem, $X$ has an approximate multivariate normal distribution.
+Now, what are the mean vector and covariance matrix in that
+distribution?
+
 From our discussion above, we know that
 
 $$
@@ -725,24 +731,42 @@ What about $Cov(X)$?
 
 ## The Delta Method
 
-This is one of the most useful simple tools in statistics.  As an
-example, say we are estimating a population mean $\mu$ and are also
-interested in estimating $\log(\mu)$. 
+This is one of the most useful simple tools in statistics.  
+
+To set the stage, let's review the statistical concepts of 
+*confidence interval* and *standard error*. Say we have
+an estimator $\widehat{\theta}$ of some population parameter $\theta$,
+e.g.\ $\bar{X}$ for a population mean $\mu$.
+
+* Roughly speaking, the term *standard error* of is our estimate of
+  $\sqrt{\widehat{\theta}}$.  More precisely, suppose that
+  $\widehat{\theta}$ is asymptotically normal.  The standard error is an
+  estimate of the standard deviation of that normal distribution.
+
+  This can be used to form a confidence interval (see below), but 
+  also stands on its own as an indication of the accuracy of 
+  $\widehat{\theta}$.
+
+* A, say 95%, confidence interval for $\mu$ is then
+
+$$
+\widehat{\theta} \pm 1.96 \textrm{ s.e.}(\widehat{\theta})
+$$
+
+  The 95% figure means that of all possible samples of the given size
+  from the population, 95% of the resulting confidence intervals will
+  contain $\theta$.
+
+Now, for the delta method, as a first example, say we are estimating a
+population mean $\mu$ and are also interested in estimating $\log(\mu)$. 
 
 We will probably use the sample mean $\bar{X}$ to estimate $\mu$, and
-thus use $\log{\bar{X}}$ to estimate $\log(\mu)$. 
+thus use $W = \log{\bar{X}}$ to estimate $\log(\mu)$. 
 [If we just need to form a confidence
 interval for $\log(\mu)$, we can form a CI for $\mu$ and then take the
-log of both endpoints.]{.column-margin}
-But how do we obtain a standard error for the latter?
-
-(Recall that roughly speaking, the term \textit{standard error} of
-an estimator $\widehat{\theta}$ of some population parameter $\theta$
-is our estimate of $\sqrt{\widehat{\theta}}$. This can be used to form a
-confidence interval, but also stands on its own as an indication of the
-accuracy of $\widehat{\theta}$[Technically, $\widehat{\theta}$ needs to
-be asymptotically normal, in which case the standard error is an
-estimate of the standard deviation of that distribution.]{.column-margin})
+log of both endpoints. But again, standard errors are of interest in
+their own right.]{.column-margin}
+But how do we obtain a standard error for $W$?
 
 The Central Limit Theorem tells as that $\bar{X}$ is asymptotically
 normally distributed. But what about $\log{\bar{X}}$?
@@ -756,8 +780,8 @@ $$
 
 where here "'" denotes derivative.
 
-In our case here, setting $W = \log{\bar{X}}$
-and $f(t) = \log{t}$, we have
+In our case here, setting $f(t) = \log{t}$, $x_0 = \mu$ and $x =
+\bar{X}$, we have
 
 $$
 W = \log{\mu} + \log'({\mu}) (\bar{X}-\mu) + \log''({\mu}) (\bar{X}-\mu)^2 /2 + ...
@@ -787,8 +811,66 @@ $$
 \textrm{s.e.}(W) = \frac{S}{\bar{X} \sqrt{n}}
 $$
 
-Now, what if the function $f$ has two arguments instead of one?
+Now, what if the function $f$ has two arguments instead of one? The
+above linear approximation is now
 
+$$
+f(v,w) \approx f(v_0,w_0) + f_1(v_0,w_0) (v-v_0) + f_2(v_0,w_0)(w-w_0)
+$${#eq-twoTaylor}
+
+where $f_1$ and $f_2$ are partial derivatives,[A *partial derivative* of
+a function of more than one variable is the derivative with respect to
+one of those variables. E.g. $\partial/\partial v ~ vw^2 =
+w^2$ and $\partial/\partial w ~ vw^2 =
+2vw$.]{.column-margin}
+
+$$
+f_1(v,w) = \frac{\partial}{\partial v} f(v,w)
+$$
+
+$$
+f_2(v,w) = \frac{\partial}{\partial w} f(v,w)
+$$
+
+So if we are estimating, for instance, a population quantity
+$(\alpha,\beta)'$ by $(Q,R)'$, its standard error is
+
+$$
+\sqrt{
+f_1^2 (Q,R) Var(Q) +
+f_2^2 (Q,R) Var(R) +
+2 f_1(Q,R) f_2(Q,R) Cov(Q,R)
+}
+$$
+
+where again quantities like $Var(Q)$ are understood to be in the context
+of the asymptotic normal distribution.
+
+As usual, use of matrix notation can help clean up messy expressions
+like this. The *gradient* of $f$, say in the two-argument case as above,
+is the vector
+
+$$
+\nabla f =
+\left (
+\begin{array}{r}
+f_1 (v,w) \\
+f_2 (v,w) \\
+\end{array}
+\right )
+$$
+
+so that @eq-twoTaylor can be written as
+
+$$
+f(v,w) = f(v_0,w_0) + (\nabla f)' 
+ \left (
+ \begin{array}{r}
+ v-v_0 \\
+ w-w_0 \\
+ \end{array}
+ \right )
+$$
 
 ## Your Turn
 
@@ -823,4 +905,16 @@ $$
 
 Suppose the elements of $M$ are independent random variables with uniform
 distributions on (0,1). Argue that P(M is invertible) = 1.
+
+❄️  **Your Turn:** Show that in the scalar context,
+
+$$
+Cov(X,Y) = E(XY) - EX ~ EY
+$$
+
+❄️  **Your Turn:** Show that in the vector context,
+
+$$
+Cov(X) = E(X X') - (EX) (EX)'
+$$
 
