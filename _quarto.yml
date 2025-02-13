@@ -19,6 +19,7 @@ book:
      - preface.qmd
      - Ch1.qmd
      - Ch2.qmd
+     - Ch2a.qmd
      - Ch3.qmd
      - Ch4.qmd
      - Ch5a.qmd
