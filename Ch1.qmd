@@ -1018,7 +1018,7 @@ community. The data is the data, and the fact that it is a small subset
 of a much larger group is irrelevant. They will often allude to the
 randomness of the data by mentioning the "data generating mechanism."
 
-### Covariance matrices{#sec-cov}
+## Covariance Matrices{#sec-cov}
 
 Recall the notion in statistics of *covariance*:  Given a pair of random
 variables $U$ and $V$, their covariance is defined by
@@ -1047,7 +1047,7 @@ $Cov(U,V) > 0$. If on the other hand, one is usually small when the
 other is large and vice versa, $Cov(U,V) < 0$. This will later lead to
 the concept of correlation, but that intuition will serve us now.
 
-Note some properties of covariance. 
+Note some properties of scalar covariance. 
 
 * $Cov$ is bilinear, i.e. $Cov(aU,bV) = ab Cov(U,V)$.
 
@@ -1095,19 +1095,15 @@ $${#eq-indepcov}
 
 * For any nonrandom scalar $c$, and $Q$ a random vector, we have $Cov(cQ) = c^2 Cov(Q)$.
 
-### Linear algebra properties of covariance matrices{#sec-covar} 
+* Say we have a random vector $X$, of length $k$, and a nonrandom matrix
+  $A$ of sise $m \textrm{x} k$. Then $A X$ is a new random vector $Y$ of $m$
+  components. It turns out that 
 
-Say we have a random vector $X$, of length $k$, and a nonrandom matrix
-$A$ of sise $m \textrm{x} k$. Then $A X$ is a new random vector $Y$ of $m$
-components. It turns out that 
+  $$
+  Cov(Y) = A Cov(X) A'
+  $${#eq-acova}
 
-$$
-Cov(Y) = A Cov(X) A'
-$${#eq-acova}
-
-The proof is straightforward but tedious, and it will be omittted.
-
-Note too:
+  The proof is straightforward but tedious, and it will be omittted.
 
 * $Cov(X)$ is a symmetric matrix. This follows from the symmmetry of
 the definition.
