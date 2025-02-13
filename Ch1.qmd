@@ -1056,47 +1056,19 @@ Note some properties of covariance.
 * $Var(U+V) = Var(U) + Var(V) + 2 Cov(U,V)$ .
 
 The relations between the various components of $X$ are often
-characterized by the *covariance matrix* of $X$, defined as follows
-for a $k$-component random vector. The covariance matrix, denoted by
-$Cov(X)$, is a $k \textrm{ x } k$ matrix, and 
-for $1 \leq i,j \leq k$,[The definition is soewhat overloaded.
-"Cov" refers both to the covariance between two random variables, say
-height and weight, and to the covariance of a random vector, which is a
-matrix. But it will always be clear from context which one is being
-discussed.  ]{.column-margin} 
+characterized by the *covariance matrix* of $X$, whose entries consist
+of scalar covariances between pairs of components of a random vector.
+[The definition is soewhat overloaded.  "Cov" refers both to the
+covariance between two random variables, say height and weight, and to
+the covariance of a random vector, which is a matrix. But it will always
+be clear from context which one is being discussed.  ]{.column-margin}
+It is defined as follows for a $k$-component random vector. The
+covariance matrix, denoted by $Cov(X)$, is a $k \textrm{ x } k$ matrix,
+and for $1 \leq i,j \leq k$,
 
 $$
 Cov(X_i,X_j) = E[(X_i - EX_i) (X_j - EX_j)]
 $$
-
-Don't let the mathematical abstractness here fool you; it's a very
-common-sense notion. Think of height and weight in our 5-component
-example above.  Here $X$ is the vector of measurements of a randomly
-chosen member of some population. Look what happens when we repeat that
-draw many times:
-
-In many cases, the person will be taller than average, and due to
-correlation between height and weight, for such people it will often be the 
-case that they will be heavier than average. In such cases,
-
-$$
-(X_i - EX_i) (X_j - EX_j) > 0
-$$
-
-But similarly, our random draws will often be people who are shorter
-than average and lighter than average. But in those cases we will agein
-have
-
-$$
-(X_i - EX_i) (X_j - EX_j) > 0
-$$
-
-There will be some cases in which that product is negative, but more
-than not, it will be positive. So the average -- i.e. E() -- will be
-positive.
-
-So covariance is like correlation, and in fact we'll see later that
-correlation, a number between -1 and 1, is in fact a scaled covariance.
 
 As an example, here is data on major league baseball players:
 
@@ -1113,7 +1085,7 @@ negative correlation between height and age? It's near 0, and this could
 be a sampling artifact, but another possibility is that in this sport,
 shorter players do not survive as well.
 
-Properties of the matrix version:
+Properties of the matrix version of covariance:
 
 * For statistically independent random vectors $Q$ and $W$ of the same length,
 
