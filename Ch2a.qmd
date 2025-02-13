@@ -20,6 +20,8 @@ and show its role in the multivariate analog of the normal distribution
 family. We close the chapter with an application to the *delta method*,
 one of the most useful simple tools in statistics.
 
+:::
+
 ## Covariance Matrices{#sec-cov}
 
 Recall the notion in statistics of *covariance*:  Given a pair of random
@@ -50,13 +52,13 @@ the concept of correlation, but that intuition will serve us now.
 
 Note some properties of scalar covariance. 
 
-* $Cov$ is bilinear, i.e. $Cov(aU,bV) = ab Cov(U,V)$.
+* $Cov$ is bilinear, i.e. $Cov(aU,bV) = ab Cov(U,V)$
 
-* $Cov(U,U) = Var(U)$.
+* $Cov(U,U) = Var(U)$
 
-* $Var(U+V) = Var(U) + Var(V) + 2 Cov(U,V)$ .
+* $Var(U+V) = Var(U) + Var(V) + 2 Cov(U,V)$ 
 
-* Cov(U,V) = E(UV) - (EU) (EV){#eq-covuv} 
+* $Cov(U,V) = E(UV) - (EU) (EV)${#eq-covuv} 
 
 The relations between the various components of $X$ are often
 characterized by the *covariance matrix* of $X$, whose entries consist
@@ -89,6 +91,15 @@ be a sampling artifact, but another possibility is that in this sport,
 shorter players do not survive as well.
 
 Properties of the matrix version of covariance:
+
+* Matrix form of definition: 
+
+$$ Cov(X) = E[(X - X) (X - EX)'] 
+$${#eq-matrixdef}
+ 
+  (Note the dimensions: $X$ is a column vector, say $k \textrm{ x } 1$,
+  so $(X - X) (X - EX)'$ is $q \textrm{ x } q$.  The expected value is
+  then of that size as well.)
 
 * For statistically independent random vectors $Q$ and $W$ of the same length,
 
@@ -125,7 +136,7 @@ $$
 
 $$
 Var(a'X) = a' ~ Cov(X) ~ a
-$$
+$${#eq-quadform}
 
 * Thus $Cov(X)$ is *nonnegative definite*, meaning that for any length-$k$
 column vector $a$
@@ -187,9 +198,9 @@ help our intuition here.
 
 ::: {#thm-conditMVnormal}
 
-if a random vector is MV normally distributed, then
-the conditional distribution of any one of its components $Y$, given the
-others $X_{others} = t$ (note that $t$ is a vector if $k > 2$) has the
+If a random vector is MV normally distributed, then the conditional
+distribution of any one of its components $Y$, given the others
+$X_{others} = t$ (note that $t$ is a vector if $k > 2$) has the
 following properties:
 
 * It has a (univariate) normal distribution.
@@ -358,7 +369,7 @@ distributed (the trials all have the same probabilistic behavior).
 Now to evaluate that covariance matrix, consider two specific elements
 $I_{1j}$ and $I_{im}$ of $I_1$. Recall, that element is equal to 1 or 0,
 depending on whether the first trial results in Categories j and m,
-respectively. Then what is $Cov(I_{1j},I_{1m})$? From @eq-covuv, we have
+respectively. Then what is $Cov(I_{1j},I_{1m})$? From @eq-covuv, we have 
 
 $$
 Cov(I_{1j},I_{1m}) = E(I_{1j} I_{1m}) - (EI_{1j}) (EI_{1m})
@@ -385,15 +396,19 @@ $$
 
 This is one of the most useful simple tools in statistics.  
 
+### Review: confidence intervals, standard errors
+
 To set the stage, let's review the statistical concepts of 
 *confidence interval* and *standard error*. Say we have
 an estimator $\widehat{\theta}$ of some population parameter $\theta$,
 e.g.\ $\bar{X}$ for a population mean $\mu$.
 
-* Roughly speaking, the term *standard error* of is our estimate of
-  $\sqrt{\widehat{\theta}}$.  More precisely, suppose that
+* Loosely speaking, the term *standard error* of is our estimate of
+  $\sqrt{Var(\widehat{\theta}})$.  More precisely, suppose that
   $\widehat{\theta}$ is asymptotically normal.  The standard error is an
-  estimate of the standard deviation of that normal distribution.
+  estimate of the standard deviation of that normal distribution. For
+  this reason, It is customary to write $AVar(\widehat{\theta})$ 
+  rather than $Var(\widehat{\theta})$.
 
   This can be used to form a confidence interval (see below), but 
   also stands on its own as an indication of the accuracy of 
@@ -409,6 +424,8 @@ $$
   from the population, 95% of the resulting confidence intervals will
   contain $\theta$.
 
+### Delta method: motivating example
+
 Now, for the delta method, as a first example, say we are estimating a
 population mean $\mu$ and are also interested in estimating $\log(\mu)$. 
 
@@ -419,6 +436,8 @@ interval for $\log(\mu)$, we can form a CI for $\mu$ and then take the
 log of both endpoints. But again, standard errors are of interest in
 their own right.]{.column-margin}
 But how do we obtain a standard error for $W$?
+
+### Use of the Central Limit Theorem
 
 The Central Limit Theorem tells as that $\bar{X}$ is asymptotically
 normally distributed. But what about $\log{\bar{X}}$?
@@ -463,12 +482,14 @@ $$
 \textrm{s.e.}(W) = \frac{S}{\bar{X} \sqrt{n}}
 $$
 
+## Use of the Multivariate Central Limit Theorem
+
 Now, what if the function $f$ has two arguments instead of one? The
 above linear approximation is now
 
 $$
 f(v,w) \approx f(v_0,w_0) + f_1(v_0,w_0) (v-v_0) + f_2(v_0,w_0)(w-w_0)
-$${#eq-twoTaylor}
+$${#eq-twotaylor}
 
 where $f_1$ and $f_2$ are partial derivatives,[A *partial derivative* of
 a function of more than one variable is the derivative with respect to
@@ -489,14 +510,11 @@ $(\alpha,\beta)'$ by $(Q,R)'$, its standard error is
 
 $$
 \sqrt{
-f_1^2 (Q,R) Var(Q) +
-f_2^2 (Q,R) Var(R) +
-2 f_1(Q,R) f_2(Q,R) Cov(Q,R)
+f_1^2 (Q,R) AVar(Q) +
+f_2^2 (Q,R) AVar(R) +
+2 f_1(Q,R) f_2(Q,R) ACov(Q,R)
 }
 $$
-
-where again quantities like $Var(Q)$ are understood to be in the context
-of the asymptotic normal distribution.
 
 As usual, use of matrix notation can help clean up messy expressions
 like this. The *gradient* of $f$, say in the two-argument case as above,
@@ -506,13 +524,13 @@ $$
 \nabla f =
 \left (
 \begin{array}{r}
-f_1 (v,w) \\
-f_2 (v,w) \\
+f_1 (v_0,w_0) \\
+f_2 (v_0,w_0) \\
 \end{array}
 \right )
 $$
 
-so that @eq-twoTaylor can be written as
+so that @eq-twotaylor can be written as
 
 $$
 f(v,w) = f(v_0,w_0) + (\nabla f)' 
@@ -523,6 +541,81 @@ f(v,w) = f(v_0,w_0) + (\nabla f)'
  \end{array}
  \right )
 $$
+
+Then from @eq-quadform, 
+
+$$
+AVar[f(v,w)] = (\nabla f)' AV(v,w) (\nabla f)
+$${#eq-deltaquad}
+
+*Example: Ratio of Two Means*
+
+Say our sample data consists of mother-daughter pairs,
+
+$$
+\left (
+\begin{array}{r}
+M \\
+D \\
+\end{array}
+\right )
+$$
+
+representing the heights of mother and daughter. Denote the population mean
+vector by
+
+$$
+\nu =
+\left (
+\begin{array}{r}
+\mu_M \\
+\mu_D \\
+\end{array}
+\right )
+$$
+
+We might be interested in the ratio $\omega = \mu_D / \mu_M$.  Our
+estimator will be $\widehat{\omega} = \bar{D} / \bar{M}$, the ratio of
+the sample means.
+
+Then in @eq-deltaquad, with $f(q,r) = q/r$
+
+$$
+\nabla{f} =
+ \left (
+ \begin{array}{r}
+ 1/r \\
+ -q/r^2  \\
+ \end{array}
+ \right )
+$$
+
+which in our application here we would approximate by
+
+$$
+\nabla{f} =
+ \left (
+ \begin{array}{r}
+ 1/\bar{M} \\
+ -\bar{D}/\bar{M}^2  \\
+ \end{array}
+ \right )
+$$
+
+As to $AVar(v,w)$ in @eq-deltaquad, we would use the multivariate analog
+of the usual $S^2$ in the univeriate case, taking advantage of
+@eq-matrixdef:
+
+$$
+\widehat{\Sigma} = 
+\frac{1}{n-1}
+\sum_{i=1}^n (X_i - \bar{X}) (X_i - \bar{X})'
+$$
+
+So now we have the estmated mean and variance, and can obtain a standard
+error for $\widehat{\omega}$, from which we can form a confidence
+interval.
+
 
 ## Your Turn
 
