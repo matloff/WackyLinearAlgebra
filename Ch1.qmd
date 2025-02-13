@@ -1067,6 +1067,28 @@ randomness of the data by mentioning the "data generating mechanism."
 
 ### Covariance matrices{#sec-cov}
 
+Recall the notion in statistics of *covariance*:  Given a pair of random
+variables $U$ and $V$, their covariance is defined by
+
+$$
+Cov(U,V) = E[(U - EU)(V - EV)]
+$$
+
+Loosely speaking, this measures the degree to which the two random
+variables vary together. Say for instance $V$ is usually large -- meaning
+above its mean $EV$ -- when $U$ is large (i.e.\ above \textit{its}
+mean), and they are usually both small together. Then $U - EU$ and $V - EV$
+are usually of the same sign, thus have a positive product. Then
+$Cov(U,V) > 0$. If on the other hand, one is usually small when the
+other is large and vice versa, $Cov(U,V) < 0$. This will later lead to
+the concept of correlation, but that intuition will serve us now.
+
+Note a couple of properties of covariance:
+
+* Cov is bilinear, i.e. $Cov(aU,bV) = ab Cov(U,V)$.
+
+* $Cov(U,U) = Var(U)$.
+
 The relations between the various components of $X$ are often
 characterized by the *covariance matrix* of $X$, defined as follows
 for a $k$-component random vector. The covariance matrix, denoted by
