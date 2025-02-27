@@ -24,8 +24,10 @@ one of the most useful simple tools in statistics.
 
 ## Covariance Matrices{#sec-cov}
 
-Recall the notion in statistics of *covariance*:  Given a pair of random
-variables $U$ and $V$, their covariance is defined by
+### Scalar covariance
+
+Recall first the notion in statistics of *covariance*:  Given a pair of
+random variables $U$ and $V$, their covariance is defined by
 
 $$
 Cov(U,V) = E[(U - EU)(V - EV)]
@@ -34,45 +36,62 @@ $$
 Loosely speaking, this measures the degree to which the two random
 variables vary together. Consider for instance human height $H$ and $W$.
 Taller people tend to also be heavier. Say we sample many people from a
-population. Most of those who are taller than average, i.e. $H > EH$
+population. Most of those who are taller than average, i.e. $H > EH$,
 will also be heavier than average, $W > EW$, making $(H - EH)(W - EW) >
-0$.  Similarly, shorter people tend to be lighter, but then we still
-have $(H - EH)(W - EW) > 0$. So, usually $(H - EH)(W - EW) > 0$, and
-though there will be a number of exceptions, they will be rare enough so
-that $E[(U - EU)(V - EV)] > 0$.[Of course, the *magnitude* of $(H -
-EH)(W - EW)$ plays a role too.]{.column-margin}
+0$.  Similarly, shorter people tend to be lighter, i.e. we often have $H
+< EH$ and $W < EW$, but then we still have $(H - EH)(W - EW) > 0$. So,
+one way or the other, usually $(H - EH)(W - EW) > 0$, and though there
+will be a number of exceptions, they will be rare enough so that 
 
-$V$ is usually large -- meaning
-above its mean $EV$ -- when $U$ is large (i.e.\ above *its*
-mean), and they are usually both small together. Then $U - EU$ and $V - EV$
-are usually of the same sign, thus have a positive product. Then
-$Cov(U,V) > 0$. If on the other hand, one is usually small when the
-other is large and vice versa, $Cov(U,V) < 0$. This will later lead to
-the concept of correlation, but that intuition will serve us now.
+$E[(H - EH)(W - EW)] > 0$.[Of course, the *magnitude* of $(H - EH)(W - EW)$
+plays a role too.]{.column-margin} 
+
+In other words, $Cov(H,W) > 0$.  Similarly if $U$ is often large when
+$V$ is small, and vice versa, we will likely have $Cov(H,W) < 0$.
+
+If this sounds like correlation to you, then your hunch is correct.
+Covariance will indeed later lead to the concept of correlation, but
+that intuition will serve us now.
 
 Note some properties of scalar covariance. 
 
-* $Cov$ is bilinear, i.e. $Cov(aU,bV) = ab Cov(U,V)$
+* $Cov(U,V) = Cov(V,U)$
+
+* $Cov$ is bilinear: 
+
+$$
+Cov(aU,bV) = ab Cov(U,V)
+$$
 
 * $Cov(U,U) = Var(U)$
 
-* $Var(U+V) = Var(U) + Var(V) + 2 Cov(U,V)$ 
+* Cross-product term:
 
-* $Cov(U,V) = E(UV) - (EU) (EV)${#eq-covuv} 
+$$
+Var(U+V) = Var(U) + Var(V) + 2 Cov(U,V)
+$$
+
+* "Short cut" formula: 
+
+$$
+Cov(U,V) = E(UV) - (EU) (EV)
+$${#eq-covuv} 
+
+### Covariance matrices
 
 The relations between the various components of $X$ are often
 characterized by the *covariance matrix* of $X$, whose entries consist
 of scalar covariances between pairs of components of a random vector.
-[The definition is somewhat overloaded.  "Cov" refers both to the
+[The notation is somewhat overloaded.  "Cov" refers both to the
 covariance between two random variables, say height and weight, and to
-the covariance of a random vector, which is a matrix. But it will always
+the covariance matrix of a random vector. But it will always
 be clear from context which one is being discussed.  ]{.column-margin}
 It is defined as follows for a $k$-component random vector. The
 covariance matrix, denoted by $Cov(X)$, is a $k \textrm{ x } k$ matrix,
 and for $1 \leq i,j \leq k$,
 
 $$
-Cov(X_i,X_j) = E[(X_i - EX_i) (X_j - EX_j)]
+Cov(X)_{ij} = Cov(X_i,X_j)
 $$
 
 As an example, here is data on major league baseball players:
@@ -94,11 +113,11 @@ Properties of the matrix version of covariance:
 
 * Matrix form of definition: 
 
-$$ Cov(X) = E[(X - X) (X - EX)'] 
-$${#eq-matrixdef}
+  $$ Cov(X) = E[(X - X) (X - EX)'] 
+  $${#eq-matrixdef}
  
   (Note the dimensions: $X$ is a column vector, say $k \textrm{ x } 1$,
-  so $(X - X) (X - EX)'$ is $q \textrm{ x } q$.  The expected value is
+  so $(X - X) (X - EX)'$ is $k \textrm{ x } k$.  The expected value is
   then of that size as well.)
 
 * For statistically independent random vectors $Q$ and $W$ of the same length,
@@ -110,21 +129,20 @@ $${#eq-indepcov}
 * For any nonrandom scalar $c$, and $Q$ a random vector, we have $Cov(cQ) = c^2 Cov(Q)$.
 
 * Say we have a random vector $X$, of length $k$, and a nonrandom matrix
-  $A$ of sise $m \textrm{x} k$. Then $A X$ is a new random vector $Y$ of $m$
+  $A$ of size $m \textrm{ x } k$. Then $A X$ is a new random vector $Y$ of $m$
   components. It turns out that 
 
   $$
   Cov(Y) = A Cov(X) A'
   $${#eq-acova}
 
-  The proof is straightforward but tedious, and it will be omittted.
+  The proof is straightforward but tedious, and will be omittted.
 
 * $Cov(X)$ is a symmetric matrix. This follows from the symmmetry of
-the definition.
+  the definition.
 
 * The diagonal elements of $Cov(X)$ are the variances of the random
-variables $X_i$. This follows from the definition of the variance of a
-random variable.
+  variables $X_i$. This follows from $Cov(U,U) = Var(U)$ for scalar $U$.
 
 * If $X$ is a vector of length 1, i.e. a number, then
 
