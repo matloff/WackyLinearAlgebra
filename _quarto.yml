@@ -3,8 +3,8 @@ project:
 
 book:
 
-   title: "Linear Algebra Rules Data Science"
-   subtitle: "with R examples"
+   title: "Powered by Linear Algebra"
+   subtitle: "The central role of matrices and vector spaces in Data Science"
    author: 
      - name: Norman Matloff
        email: nsmatloff@ucdavis.edu
