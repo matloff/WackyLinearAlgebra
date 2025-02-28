@@ -6,7 +6,7 @@ Welcome to my magnum opus! :-) I've written a number of books, but
 consider this one to be the most important.  [This work is licensed
 under Creative Commons Zero v1.0 Universal]{.column-margin}
 
-### Subtlety in the Title
+## Subtlety in the Title
 
 Let's start with the title of this book, "Powered by Linear Algebra: The
 central role of matrices and vector spaces in Data Science." A title
@@ -18,37 +18,30 @@ fact that:
 > us data scientists, it is "our" branch of math. Mastering this branch,
 > which is definitely within the reach of all, pays major dividends.
 
-### Philosophy
+## Philosophy
 
-This is an unconventional linear algebra textbook, doing everything
-"backwards." The presentation of each concept begins with a problem to
-be solved, almost always from Data Science, leading up to a linear
+*I learned very early the difference between knowing the name of
+something and knowing something* -- physicist Richard Feynman 
+
+*...it felt random.  "Follow these steps and you get the
+result you are looking for." But why does it work?  What possessed you
+to follow this path as opposed to any other? How might I have come up
+with this myself?* -- [comment](https://loreley.one/2024-09-pca) by
+a reader of a famous linear algebra book
+
+A fundamental philosophy of my book here is to avoid such reader
+frustration. It's easy to define, say the dimension of a vector
+subspace, but that's definitely not enough. What is the underlying
+intuition? Why is the concept important, especially in Data Science?
+
+The presentation of each concept in this book begins with a problem to
+be solved, almost always from Data Science, then leading up to a linear
 algebra solution.  Basically, the math sneaks up on the reader, who
-suddenly realizes they've just learned a new general concept!
+suddenly realizes they've just learned a new general concept! And the
+reader knows where the concept fits into the Big Picture, and can
+distill the abstraction into an intuitive summary.
 
-Or, the reader suddenly sees a connection to a familiar topic. For
-instance, after introducing the Cauchy-Schwarz Inequality, the book
-shows that it implies our familiar notion that statistical correlation
-is bounded between -1 and 1.
-
-In an excellent [review of book on Principal Components
-Analysis](https://loreley.one/2024-09-pca/), the reviewer writes
-
-
-> I bought the acclaimed *Linear Algebra Done Right*...A classic...It was
-> rather dull, one definition after another. It is not difficult to follow
-> the logic, and to see how one theorem follows from another. But...it
-> felt random.  “Follow these steps and you get the result you are looking
-> for. I can prove that it works because of the following …”. But why does
-> it work?  What possessed you to follow this path as opposed to any
-> other? How might I have come up with this myself? The book provided no
-> answers and I was left feeling deeply unsatisfied.
-
-
-The fundamental philosophy of my book here is to avoid such reader
-frustration.
-
-### Who is this book for?
+## Who Is This Book For?
 
 Of course the book should work well as a classroom textbook. The
 "applications first" approach should motivate students, and the use of
@@ -58,7 +51,7 @@ But I also hope the book's emphasis on the Why? and How?  especially
 appeals to do-it-yourselfers, those whose engagement in self-study is
 motivated by intellectual curiosity rather than a course grade.
 
-### Prerequisite background
+## Prerequisite Background
 
 Basic data science:
 
@@ -71,7 +64,7 @@ lessons.]{.column-margin}
 
 * Basics of random variables, expected value and variance.
 
-### The role of theory
+## The Role of Theory
 
 ::: {.callout-important}
 
@@ -85,10 +78,9 @@ methods.
 
 Thus the many R examples are meant to make the mathematical
 concepts concrete. This is definitely not an "how to do linear algebra
-in R" book. The famous physicist Richard Feynman once said, "I learned
-very early the difference between knowing the name of something and
-knowing something," i.e. knowing the name without understanding is
-useless. In the software context, the statement should be, "Knowing how
+in R" book. 
+
+In the software context, the statement should be, "Knowing how
 to use code libraries for something is useless if one doesn't understand
 the nature of that thing."
 
