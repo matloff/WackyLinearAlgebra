@@ -8,18 +8,15 @@ under Creative Commons Zero v1.0 Universal]{.column-margin}
 
 ### Subtlety in the Title
 
-Let's start with the title of this book, "Linear Algebra *Rules* 
-Data Science." It would be more typical of "math support for field X"
-books to use "for" rather than "in," but the use of the latter aims to
-emphasize the fact that:
+Let's start with the title of this book, "Powered by Linear Algebra: The
+central role of matrices and vector spaces in Data Science." A title
+more typical of "math support for field X" books might be "Linear
+Algebra for Data Science," but the goal in the title is to emphasize the
+fact that:
 
-<blockquote>
-
-Linear algebra is absolutely fundamental to the Data Science field. For
-us data scientists, it is "our" branch of math. Mastering this branch,
-which is definitely within the reach of all, pays major dividends.
-
-</blockquote>
+> Linear algebra is absolutely fundamental to the Data Science field. For
+> us data scientists, it is "our" branch of math. Mastering this branch,
+> which is definitely within the reach of all, pays major dividends.
 
 ### Philosophy
 
@@ -37,18 +34,16 @@ is bounded between -1 and 1.
 In an excellent [review of book on Principal Components
 Analysis](https://loreley.one/2024-09-pca/), the reviewer writes
 
-<blockquote>
 
-I bought the acclaimed *Linear Algebra Done Right*...A classic...It was
-rather dull, one definition after another. It is not difficult to follow
-the logic, and to see how one theorem follows from another. But...it
-felt random.  “Follow these steps and you get the result you are looking
-for. I can prove that it works because of the following …”. But why does
-it work?  What possessed you to follow this path as opposed to any
-other? How might I have come up with this myself? The book provided no
-answers and I was left feeling deeply unsatisfied.
+> I bought the acclaimed *Linear Algebra Done Right*...A classic...It was
+> rather dull, one definition after another. It is not difficult to follow
+> the logic, and to see how one theorem follows from another. But...it
+> felt random.  “Follow these steps and you get the result you are looking
+> for. I can prove that it works because of the following …”. But why does
+> it work?  What possessed you to follow this path as opposed to any
+> other? How might I have come up with this myself? The book provided no
+> answers and I was left feeling deeply unsatisfied.
 
-</blockquote>
 
 The fundamental philosophy of my book here is to avoid such reader
 frustration.
