@@ -485,6 +485,9 @@ $$
 \right )
 $$
 
+(Note: The term *scalar* simply means a number, rather than a matrix or
+vector. It will be used quite frequently in this book.)
+
 **Distributive property:**
 
 For matrices A, B and C of suitable conformability (A and B match in
