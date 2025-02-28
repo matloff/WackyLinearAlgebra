@@ -522,7 +522,7 @@ $$
 \textrm{s.e.}(W) = \frac{S}{\bar{X} \sqrt{n}}
 $$
 
-## Use of the Multivariate Central Limit Theorem
+### Use of the Multivariate Central Limit Theorem 
 
 Now, what if the function $f$ has two arguments instead of one? The
 above linear approximation is now
@@ -573,7 +573,7 @@ $$
 so that @eq-twotaylor can be written as
 
 $$
-f(v,w) = f(v_0,w_0) + (\nabla f)' 
+f(v,w) \approx f(v_0,w_0) + (\nabla f)' 
  \left (
  \begin{array}{r}
  v-v_0 \\
