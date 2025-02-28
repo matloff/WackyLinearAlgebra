@@ -22,7 +22,7 @@ one of the most useful simple tools in statistics.
 
 :::
 
-## Covariance Matrices{#sec-cov}
+## Covariance{#sec-cov}
 
 ### Scalar covariance
 
@@ -55,7 +55,11 @@ that intuition will serve us now.
 
 Note some properties of scalar covariance. 
 
-* $Cov(U,V) = Cov(V,U)$
+* Symmetry: 
+
+$$
+Cov(U,V) = Cov(V,U)
+$$
 
 * $Cov$ is bilinear: 
 
@@ -63,7 +67,11 @@ $$
 Cov(aU,bV) = ab Cov(U,V)
 $$
 
-* $Cov(U,U) = Var(U)$
+* Variance as a special case:
+
+$$
+Cov(U,U) = Var(U)
+$$
 
 * Cross-product term:
 
@@ -86,9 +94,9 @@ of scalar covariances between pairs of components of a random vector.
 covariance between two random variables, say height and weight, and to
 the covariance matrix of a random vector. But it will always
 be clear from context which one is being discussed.  ]{.column-margin}
-It is defined as follows for a $k$-component random vector. The
+It is defined as follows for a $k$-component random vector $X$ . The
 covariance matrix, denoted by $Cov(X)$, is a $k \textrm{ x } k$ matrix,
-and for $1 \leq i,j \leq k$,
+and for $1 \leq i,j \leq k$, its row $i$, column $j$ element is
 
 $$
 Cov(X)_{ij} = Cov(X_i,X_j)
@@ -126,7 +134,11 @@ $$
 Cov(Q+W) = Cov(Q) + Cov(W) 
 $${#eq-indepcov}
 
-* For any nonrandom scalar $c$, and $Q$ a random vector, we have $Cov(cQ) = c^2 Cov(Q)$.
+* For any nonrandom scalar $c$, and $Q$ a random vector, we have 
+
+$$
+Cov(cQ) = c^2 Cov(Q)
+$$
 
 * Say we have a random vector $X$, of length $k$, and a nonrandom matrix
   $A$ of size $m \textrm{ x } k$. Then $A X$ is a new random vector $Y$ of $m$
@@ -138,7 +150,7 @@ $${#eq-indepcov}
 
   The proof is straightforward but tedious, and will be omittted.
 
-* $Cov(X)$ is a symmetric matrix. This follows from the symmmetry of
+* $Cov(X)$ is a symmetric matrix. This follows from the symmetry of
   the definition.
 
 * The diagonal elements of $Cov(X)$ are the variances of the random
@@ -219,13 +231,13 @@ help our intuition here.
 If a random vector is MV normally distributed, then the conditional
 distribution of any one of its components $Y$, given the others
 $X_{others} = t$ (note that $t$ is a vector if $k > 2$) has the
-following properties:
+following properties:  
 
 * It has a (univariate) normal distribution.
 
-* Its mean $E(Y | X_{others}) = t$ linear in $t$.
+* Its mean $E(Y | X_{others}) = t$ is linear in $t$.
 
-* Its variance $Var(Y | X_{others}) = t$ does not involve $t$.
+* Its variance $Var(Y | X_{others} = t)$ does not involve $t$.
 
 These of course are the classical assumptions of linear regression
 models. They actually come from the MV normal model.
@@ -254,13 +266,23 @@ Again, perform direct evaluation of the density.
 $\square$
 ::: 
 
-::: {#thm-mvuvnormal}
+::: {#thm-cw}
+
+## Cramer-Wold Theorem {#thm-mvuvnormal}
 
 A random vector $X$ has a multivariate normal distribution if and only
 if $w'X$ has a univariate normal distribution for all conformable
 nonrandom vectors $w$.
 
 :::
+
+::: {.proof}
+
+"Only if" follows from above. "If" part too complex to present here.
+
+% NM
+$\square$
+::: 
 
 ::: {#thm-mvclt}
 
@@ -385,7 +407,7 @@ that last equality reflecting that the $I_i$ are identically
 distributed (the trials all have the same probabilistic behavior).
 
 Now to evaluate that covariance matrix, consider two specific elements
-$I_{1j}$ and $I_{im}$ of $I_1$. Recall, that element is equal to 1 or 0,
+$I_{1j}$ and $I_{im}$ of $I_1$. Recall, those elements are equal to 1 or 0,
 depending on whether the first trial results in Categories j and m,
 respectively. Then what is $Cov(I_{1j},I_{1m})$? From @eq-covuv, we have 
 

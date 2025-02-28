@@ -83,6 +83,15 @@ mathematical. The goal is to develop in the reader mathematical skill
 and intuition into this powerful tool, rather than coding of linear algebra
 methods.
 
+Thus the many R examples are meant to make the mathematical
+concepts concrete. This is definitely not an "how to do linear algebra
+in R" book. The famous physicist Richard Feynman once said, "I learned
+very early the difference between knowing the name of something and
+knowing something," i.e. knowing the name without understanding is
+useless. In the software context, the statement should be, "Knowing how
+to use code libraries for something is useless if one doesn't understand
+the nature of that thing."
+
 :::
 
 ## R Libraries Used

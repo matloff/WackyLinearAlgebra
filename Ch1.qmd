@@ -106,7 +106,7 @@ as follows:
 
 Given matrix A of k rows and m columns and
 matrix B of m rows and r columns, the product C = AB is
-an kxm matrix, whose row i, column j element is
+a $k \textrm{ x } m$ matrix, whose row i, column j element is
 
 $$
 a_{i1} b_{i1} +
