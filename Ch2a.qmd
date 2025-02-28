@@ -444,7 +444,7 @@ an estimator $\widehat{\theta}$ of some population parameter $\theta$,
 e.g.\ $\bar{X}$ for a population mean $\mu$.
 
 * Loosely speaking, the term *standard error* of is our estimate of
-  $\sqrt{Var(\widehat{\theta}})$.  More precisely, suppose that
+  $\sqrt{Var(\widehat{\theta})}$.  More precisely, suppose that
   $\widehat{\theta}$ is asymptotically normal.  The standard error is an
   estimate of the standard deviation of that normal distribution. For
   this reason, It is customary to write $AVar(\widehat{\theta})$ 
@@ -489,7 +489,7 @@ $$
 f(x) = f(x_0) + f'(x_0) (x-x_0) + f''(x_0) (x-x_0)^2 /2 + ...
 $$
 
-where here "'" denotes derivative.
+where here "'" denotes derivative rather than matrix transpose.
 
 In our case here, setting $f(t) = \log{t}$, $x_0 = \mu$ and $x =
 \bar{X}$, we have
