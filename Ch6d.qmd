@@ -16,3 +16,115 @@ library(qeML)
 ::: 
 
 
+
+```{r} 
+#| include: false
+library(dsld)
+library(qeML)
+```
+
+
+### SVD as matrix pseudoinverse
+
+Recall the example in @sec-censusrref. We could not have dummy-variable
+columns for both male and female, as their sum would be a column of all
+1s, in addition to a column the X data matrix already had. The three columns
+would then have a nonzero linear combination that evaluates to the 0
+vector.  Then in @eq-linregformula, $A$ (i.e. X) would not be of full
+rank, and $(A'A)^{-1}$ would not exist.
+
+And yet the equation from which that comes,
+
+$$
+A'A b = A'S
+$${#eq-overdetermined}
+
+is still valid. We could, as in that example, remove one of the gender
+columns, thus solving the problem of less than full rank, but the use of
+*pseudoinverses* (also known as *generalized inverses*) solves the
+problem directly. If $A$ has hundreds or thousands of columns, say, the
+use of pseudoinverses may be more convenient.
+
+We omit the formal definition of pseudoinverses and their properties. We
+will note the use of the latter as the need arises. For now, we state
+without proof that:
+
+* One of the most famous forms of pseudoinverse, Moore-Penrose, is 
+  based on SVD.  Given the SVD of a matrix $M$, 
+
+  $$
+  M = U_M \Sigma_M V_{M}'
+  $$
+
+  its Moore-Penrose inverse, denoted by $M^{-1}$ is 
+
+  $$
+  M^{-} = V_M \Sigma_M^{-} U_{M}'
+  $$
+
+  where $\Sigma_M^{-}$ is the diagonal matrix obtained form $\Sigma_M$
+  by replacing each nonzero element by its reciprocal.
+
+* The Moore-Penrose solution of $Mz = w$ for vectors $z$ and $w$, is
+  $M^{-} w$.
+
+By the way, the R function **MASS::ginv** performs the necessary
+computation for us; we need not call **svd()**.
+
+### SVD in linear models
+
+Now apply this to our linear model problem @eq-overdetermined. The
+claim is that 
+
+$$
+b = A^{-} S = V \Sigma^{-} U' S
+$$ 
+
+solves the equation. [As in @sec-matalg, where we found that the inverse of
+a product is the reverse product of the inverses, the same holds for
+pseudoinverses.]{.column-margin} Let's check (warning: this will be
+messy):
+
+$$
+\begin{aligned}
+A'A b &= (U \Sigma V')' (U \Sigma V') (U \Sigma V')^{-} S \\
+&= (V \Sigma U') (U \Sigma V') (V \Sigma^{-} U') S \\
+&= V \Sigma^2 V'V \Sigma^{-} U' S \\
+&= V \Sigma^{-} U' S
+\end{aligned}
+$$
+
+But that is exactly the expression we found for $A^{-1}S$ above.
+
+$\square$
+
+## Example: Census Data 
+
+```{r}
+library(qeML)
+data(svcensus)
+# have only 1 categorical/dichotomous variable, for simple example
+head(svcensus)
+svc <- svcensus[,-c(2,3)]
+svc <- factorsToDummies(svc)
+head(svc)
+x <- cbind(1,svc[,-2])
+head(x)
+xminus <- MASS::ginv(x)
+bhat <- xminus %*% svc[,2]
+bhat
+lm(wageinc ~ .,svcensus[,-c(2,3)])$coef
+```
+
+The two approaches are consistent with each other (though internally
+they are solving slightly different problems). Note that
+
+$$
+-13361.634-(-2660.821) = -10700.81
+$$
+
+
+## Your Turn
+
+
+
