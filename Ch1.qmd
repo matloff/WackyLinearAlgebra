@@ -87,7 +87,7 @@ multiplication. We will cover this in the next section, but first a
 couple of preliminaries.
 
 The above random walk is a *Markov chain*. The Markov Property says that
-the system "has no jemory." If say we land at position 2, we will go to
+the system "has no memory." If say we land at position 2, we will go to
 1 or 3 with probability 1/2 *no matter what the previous history of the
 system was*; it doesn't matter *how* we got to state 3. That in turn
 comes from the independence of the successive coin flips.
