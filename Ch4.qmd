@@ -168,7 +168,9 @@ for a sequence of  invertible elementary matrices.
     where each $(E_i)^{-1}$ is itself an elementary row operation.
 
 
-## Rank andLinear Dependent/Independent Vectors
+## Rank in Relation to Sets of Linear Dependent/Independent Vectors
+
+Here we use rank as our entre'e to key concepts about sets of vectors.
 
 ### Motivation
 
