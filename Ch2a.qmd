@@ -515,8 +515,8 @@ $$
 \frac{1}{\mu^2} \sigma^2/n
 $$
 
-where $\sigma^2$ is the population variance. We estimate the latter by
-the usual $S^2$ quantity, and thus have our standard error,
+where $\sigma^2$ is the population variance $Var(X)$ . We estimate the
+latter by the usual $S^2$ quantity, and thus have our standard error,
 
 $$
 \textrm{s.e.}(W) = \frac{S}{\bar{X} \sqrt{n}}
@@ -546,7 +546,7 @@ f_2(v,w) = \frac{\partial}{\partial w} f(v,w)
 $$
 
 So if we are estimating, for instance, a population quantity
-$(\alpha,\beta)'$ by $(Q,R)'$, its standard error is
+$(\alpha,\beta)'$ by $(Q,R)'$, standard error of the latter is
 
 $$
 \sqrt{
@@ -585,10 +585,10 @@ $$
 Then from @eq-quadform, 
 
 $$
-AVar[f(v,w)] = (\nabla f)' AV(v,w) (\nabla f)
+AVar[f(Q,R)] = (\nabla f)' AV(Q,R) (\nabla f)
 $${#eq-deltaquad}
 
-*Example: Ratio of Two Means*
+### Example: ratio of two means
 
 Say our sample data consists of mother-daughter pairs,
 
@@ -618,7 +618,8 @@ We might be interested in the ratio $\omega = \mu_D / \mu_M$.  Our
 estimator will be $\widehat{\omega} = \bar{D} / \bar{M}$, the ratio of
 the sample means.
 
-Then in @eq-deltaquad, with $f(q,r) = q/r$
+So take $Q = \bar{D}$ and $R =  \bar{M}$.` Then in @eq-deltaquad, with
+$f(q,r) = q/r$
 
 $$
 \nabla{f} =
@@ -653,8 +654,44 @@ $$
 $$
 
 So now we have the estmated mean and variance, and can obtain a standard
-error for $\widehat{\omega}$, from which we can form a confidence
+error for $\widehat{\omega}$: 
+
+$$
+\sqrt{
+\nabla f' \widehat{\Sigma} \nabla f
+}
+$$
+
+
+from which we can form a confidence
 interval.
+
+### Regarding those pesky derivatives
+
+Though finding expressions for the derivatives in the above example was
+not onerous, the function $f$ can be rather complex, with the
+expressions for its derivatives even more complicated. Typically such
+tedious and error-prone operations can be avoided, by having the
+software calculate approximate derivatives.
+
+Recall the definition of derivative:
+
+$$
+f'(x) = \lim_{w \rightarrow 0}
+\frac{f(x+w) - f(x)}{w}
+$$
+
+So an aproximate value of $f'(x)$ is obtained by choosing some small
+value of $w$ and evaluating 
+
+$$
+\frac{f(x+w) - f(x)}{w}
+$$
+
+Though of course there is an issue with one's choice of $w$, the point
+is that one can code the software to find approximate derivatives
+automatically using this device. *This is very common in Data Science
+libraries.*
 
 
 ## Your Turn
@@ -670,4 +707,5 @@ $$
 $$
 Cov(X) = E(X X') - (EX) (EX)'
 $$
+
 
