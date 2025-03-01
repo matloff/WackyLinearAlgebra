@@ -18,7 +18,7 @@ Central to matrix operations is the matrix *inverse*, which is somewhat
 analogous to reciprocals in arithmetic.
 
 This is a fundamental operation in linear algebra (though ironically,
-related quantities are often used instead).
+related quantities are often used instead of using the inverse directly).
 
 :::
 
@@ -105,14 +105,14 @@ $$
 $$
 
 This is high school math, and we could solve the equations that way. But
-this is literaally what linear algebra was invented for, solving systems
+this is literally what linear algebra was invented for, solving systems
 of equations! We will use matrix inverse.
 
 But first, we have a problem to solve: The only solution to the above
 system is with all $\nu_i = 0$. We need an equation involving a nonzero
 quantity.
 
-But we do have such an equation. The $\nu$ is a stationary distribution
+But we do have such an equation. The vector $\nu$ is a stationary distribution
 for a Markov chain, and thus must sum to 1.0. Let's replace the last row
 by that relation:
 
@@ -166,8 +166,8 @@ $$
 B^{-1} d = B^{-1} B \nu = \nu
 $$
 
-So, we have obtained our solution for the stationary distribution. We
-can evaluate it numerically via the R **solve** function, which finds
+So, we have obtained our solution for the stationary distribution $\nu$.
+We can evaluate it numerically via the R **solve** function, which finds
 matrix inverse:
 
 ```{r}
@@ -189,12 +189,23 @@ This confirms our earlier speculation based on powers of $P'$.
 Several properties to note:
 
 * If the inverses of $A$ and $B$ exist, and $A$ and $B$ are conformable,
-then $(AB)^{-1}$ exists and is equal to $B^{-1} A^{-1}$.
+  then $(AB)^{-1}$ exists and is equal to $B^{-1} A^{-1}$.
+
+  *Proof:* Consider the product $(AB) (B^{-1} A^{-1})$. The $B factors 
+  give us $I$, leaving $A A^{-1}$, which too is $I$. 
 
 * $(A')^{-1}$ exists and is equal to $(A^{-1})'$.
 
+  *Proof:* Follows immediately from $A A^{-1} = I$.
+
 * If $A$ is invertible and symmetric, then $(A^{-1})'$ is also
-symmetric.$
+  symmetric.
+
+  *Proof:* For convenience, let $B$ denote $A^{-1}$. Then
+
+  $$
+  AB = I
+  $$
 
 ## Computation of the Matrix Inverse
 
