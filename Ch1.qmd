@@ -20,6 +20,11 @@ inroducing matrix multiplication and presenting several applications.
 
 :::
 
+In this chapter, we will take as our main application *Markov chains*,
+a statistical model having wide applications in medicine, economics and
+so on. It is very simple to explain, thus making it a good choice for
+introducing matrices.
+
 ## A Random Walk Model
 
 Let's consider a *random walk* on {1,2,3,4,5} in the number line. Time

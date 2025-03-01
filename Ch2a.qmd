@@ -175,6 +175,25 @@ $$
 a' Cov(X) a \geq 0
 $$
 
+### Cross-covariance
+
+The matrix $Cov(X)$ represents the covariance of a vector $X$
+*with itself*. But we can also speak of the covariance of one vector $X$
+with another vector $Y$, termed the *cross-covariance* between them.
+Its definition is a natural extension of covariance matrices:
+
+$$
+Cov(X,Y) = E[(X - EX) (Y- EY)]
+$$
+
+Say $X$ and $Y$ are of lengths $m$ and $n$. Then $Cov(X,Y)$ will be of
+size $m \textrm{ x } n$, with
+
+$$
+Cov(X,Y)_{ij} = Cov(X_i,Y_j)
+$$
+
+where the latter covariance is scalar.
 
 ## The Multivariate Normal Distribution Family{#sec-mvn}
 
