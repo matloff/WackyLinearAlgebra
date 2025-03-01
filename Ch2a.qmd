@@ -727,4 +727,19 @@ $$
 Cov(X) = E(X X') - (EX) (EX)'
 $$
 
+❄️  **Your Turn:** Suppose
+
+$$
+W = X \beta + \alpha S
+$$
+
+for a random vector $X$, a scalar random variable $S$, a nonrandom
+vector $\beta$ and a nonrandom scalar $\alpha$. Show that
+
+$$
+Cov(W,S) = \beta' Cov(X,S) + \alpha Var(S)
+$$
+
+
+
 
