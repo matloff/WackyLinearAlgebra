@@ -22,7 +22,7 @@ understanding matrix applications.
 In our computations in the latter part of the last chapter, we added a
 proviso that $(A'A)^{-1}$ exists. In this chapter, we'll present a
 counterexample, which will naturally lead into our covering matrix rank,
-and in the next chapter,the basics of vector spaces.
+and in the next chapter, the basics of vector spaces.
 
 ## Example: Census Data{#sec-censusrref}
 

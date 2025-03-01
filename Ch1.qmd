@@ -93,8 +93,10 @@ system was*; it doesn't matter *how* we got to state 3. That in turn
 comes from the independence of the successive coin flips.
 
 **Notation:** Individual elements of a matrix are usually written with
-double subscripts. For instance, a<sub>25</sub> will mean the row 2,
-column 5 element of the matrix A.
+double subscripts. For instance, a~25~ will mean the row 2,
+column 5 element of the matrix $A$. If say $A$ has more than 9 rows, 
+its row 11, column 5 element is denoted by a~11,5~, using the comma to
+avoid ambiguity.
 
 ## Matrix Multiplication
 
@@ -102,26 +104,18 @@ This is the most fundamental operation in linear algebra. It is defined
 as follows:
 
 
-<blockquote>
-
-Given matrix A of k rows and m columns and
-matrix B of m rows and r columns, the product C = AB is
-a $k \textrm{ x } m$ matrix, whose row i, column j element is
-
-$$
-a_{i1} b_{i1} +
-a_{i2} b_{i1} + ... +
-a_{m1} b_{m1} 
-$$
-
-This is the "dot product" of row i of A and column j of B:  Find the
-products of the paired elements in the two vectors, then sum.
-
-</blockquote>
-
-[Be sure to remember that the number of rows of B must match the number
-of columns of A. In this case, we say thst the matrices are
-*conformable*.]{.column-margin}
+> Given matrix A of k rows and m columns and
+> matrix B of m rows and r columns, the product C = AB is
+> a $k \textrm{ x } m$ matrix, whose row i, column j element is
+> 
+> $$
+> a_{i1} b_{i1} +
+> a_{i2} b_{i1} + ... +
+> a_{m1} b_{m1} 
+> $$
+> 
+> This is the "dot product" of row i of A and column j of B:  Find the
+> products of the paired elements in the two vectors, then sum.
 
 For example, set 
 
@@ -213,12 +207,8 @@ which case it will be meant as a column vector.
 Now let's return to the question of how to easily compute $P_2$,
 the two-step transition matrix. It turns out that:
 
-<blockquote>
-
-Let P denote the transition matrix of a (finite-state) Markov chain. The
-k-step transition matrix is $P^k$.
-
-</blockquote>
+> Let P denote the transition matrix of a (finite-state) Markov chain. The
+> k-step transition matrix is $P^k$.
 
 At first, this may seem amazingly fortuitous, but it makes sense in
 light of the "and/or" nature of the probability computations involved.
@@ -239,6 +229,9 @@ a_{i1} b_{i1} +
 a_{i2} b_{i1} + ... +
 a_{m1} b_{m1} 
 $$
+
+Then $P$~3~ stores the 3-step probabilities and so on.
+
 
 Statisticians and computer scientists like to look at the *asymptotic*
 behavior of systems. Let's see where we might be after say, 6
@@ -272,27 +265,23 @@ we will see in the next chapter.
 
 ## Network Graph Models
 
-There has always been lots of analyses of "Who is connected to who,"
+There has always been lots of analysis of "Who is connected to who,"
 but activity soared after the advent of Facebook and the film, *A Social
 Network.*  See for instance *Statistical Analysis of Network Data with R*
 by Eric Kolaczy and Gábor Csárdi. As the authors say, 
 
-<blockquote>
-
-The oft-repeated statement that “we live in a connected world” perhaps
-best captures, in its simplicity...From on-line social networks like
-Facebook to the World Wide Web and the Internet itself, we are
-surrounded by examples of ways in which we interact with each other.
-Similarly, we are connected as well at the level of various human
-institutions (e.g., governments), processes (e.g., economies), and
-infrastructures (e.g., the global airline network). And, of course,
-humans are surely not unique in being members of various complex,
-inter-connected systems.  Looking at the natural world around us, we see
-a wealth of examples of such systems, from entire eco-systems, to
-biological food webs, to collections of inter-acting genes or
-communicating neurons.
-
-</blockquote>
+> The oft-repeated statement that “we live in a connected world” perhaps
+> best captures, in its simplicity...From on-line social networks like
+> Facebook to the World Wide Web and the Internet itself, we are
+> surrounded by examples of ways in which we interact with each other.
+> Similarly, we are connected as well at the level of various human
+> institutions (e.g., governments), processes (e.g., economies), and
+> infrastructures (e.g., the global airline network). And, of course,
+> humans are surely not unique in being members of various complex,
+> inter-connected systems.  Looking at the natural world around us, we see
+> a wealth of examples of such systems, from entire eco-systems, to
+> biological food webs, to collections of inter-acting genes or
+> communicating neurons.
 
 And of course, at the center of it all is a matrix! Here is why:
 
@@ -342,7 +331,8 @@ We see that **adjK2[11,1]** is 2. Inspection of **adjK** shows that its
 row 11, columns 6 and 7 are 1s, and that rows 6 and 7, column 1 are 1s
 as well. So there are indeed two two-hop paths from node 11 to node 1,
 specifically $11 \rightarrow 6 \rightarrow 1$ and $
-$11 \rightarrow 7 \rightarrow 1$. 
+$11 \rightarrow 7 \rightarrow 1$. Thus the 2 we see in **adjK2[11,1]**
+was correct.
 
 Actually, what is typically of interest is *connectivity* rather than
 number of paths. For any given pair of nodes, is there a multihop path
@@ -496,7 +486,7 @@ the number of rows in C), we have
 
 (A+B) C = AC + BC
 
-### Matrix transpose
+### Matrix transpose{#sec-transpose}
 
 This is a very simple but very important operation: We merely exchange
 rows and columns of the given matrix. For instance, with A as above, its
