@@ -128,12 +128,24 @@ properties:
 
 * Each pivot will be to the right of the pivots in the rows above it.
 
-* All entries below a pivot are 0.
-
 * Each pivot is the only nonzero entry in its column.
 
 The reader should verify that the matrix at the end of 
-@sec-censusrref has these properties.
+@sec-censusrref has these properties. 
+
+> Partioned-Matrix View
+>
+> Say $A$ is of size $m \textrm{ x } n$. Then $A_{rref}$ has the form
+> 
+> $$
+> \left (
+> \begin{array}{rr}
+> I_{r} & U \\
+> 0 & 0  \\
+> \end{array}
+> \right )
+> $$
+> where $r$ is the rank of $A$ and $U$ has dimension $r \textrm{ x } (n-r)$
 
 ### Review of @sec-pencilpaper{#sec-review}
 
