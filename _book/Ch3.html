@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.3.433">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Linear Algebra in Data Science - 3&nbsp; Linear Statistical Models</title>
+<title>Powered by Linear Algebra - 5&nbsp; Linear Statistical Models</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./Ch4.html" rel="next">
-<link href="./Ch2.html" rel="prev">
+<link href="./Ch2a.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -110,7 +110,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Ch3.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Linear Statistical Models</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Ch3.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Linear Statistical Models</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -125,7 +125,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Linear Algebra <em>in</em> Data Science</a> 
+      <a href="./">Powered by Linear Algebra</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -138,37 +138,97 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./preface.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Matrix Multiplication</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Matrix Multiplication</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Matrix Inverse</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Matrix Inverse</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch2a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Covariance Matrices, Multivariate Normal Distribution, Delta Method</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch3.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Linear Statistical Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Linear Statistical Models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Matrix Rank, and Vector Spaces Part I</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Matrix Rank</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Ch5.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Vector Spaces Part II</span></span></a>
+  <a href="./Ch5a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Vector Spaces</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch5b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Inner Product Spaces</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch5c.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Shrinkage Estimators</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch6a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Eigenanalysis: Properties</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch6b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Principal Components</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch6c.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Singular Value Decomposition</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch6d.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Pseudoinverse and Double Descent</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch7a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Recommender Systems</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch8a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Neural Networks</span></span></a>
   </div>
 </li>
     </ul>
@@ -181,29 +241,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#linear-regression-through-the-origin" id="toc-linear-regression-through-the-origin" class="nav-link active" data-scroll-target="#linear-regression-through-the-origin"><span class="header-section-number">3.1</span> Linear Regression through the Origin</a>
+  <li><a href="#linear-regression-through-the-origin" id="toc-linear-regression-through-the-origin" class="nav-link active" data-scroll-target="#linear-regression-through-the-origin"><span class="header-section-number">5.1</span> Linear Regression through the Origin</a>
   <ul class="collapse">
-  <li><a href="#least-squares-approach" id="toc-least-squares-approach" class="nav-link" data-scroll-target="#least-squares-approach"><span class="header-section-number">3.1.1</span> Least squares approach</a></li>
-  <li><a href="#calculation" id="toc-calculation" class="nav-link" data-scroll-target="#calculation"><span class="header-section-number">3.1.2</span> Calculation</a></li>
-  <li><a href="#r-code" id="toc-r-code" class="nav-link" data-scroll-target="#r-code"><span class="header-section-number">3.1.3</span> R code</a></li>
+  <li><a href="#least-squares-approach" id="toc-least-squares-approach" class="nav-link" data-scroll-target="#least-squares-approach"><span class="header-section-number">5.1.1</span> Least squares approach</a></li>
+  <li><a href="#calculation" id="toc-calculation" class="nav-link" data-scroll-target="#calculation"><span class="header-section-number">5.1.2</span> Calculation</a></li>
+  <li><a href="#r-code" id="toc-r-code" class="nav-link" data-scroll-target="#r-code"><span class="header-section-number">5.1.3</span> R code</a></li>
   </ul></li>
-  <li><a href="#full-linear-regression-model" id="toc-full-linear-regression-model" class="nav-link" data-scroll-target="#full-linear-regression-model"><span class="header-section-number">3.2</span> Full linear regression model</a>
+  <li><a href="#linear-regression-model-with-intercept-term" id="toc-linear-regression-model-with-intercept-term" class="nav-link" data-scroll-target="#linear-regression-model-with-intercept-term"><span class="header-section-number">5.2</span> Linear Regression Model with Intercept Term</a>
   <ul class="collapse">
-  <li><a href="#least-squares-estimation-single-predictor" id="toc-least-squares-estimation-single-predictor" class="nav-link" data-scroll-target="#least-squares-estimation-single-predictor"><span class="header-section-number">3.2.1</span> Least-squares estimation, single predictor</a></li>
+  <li><a href="#least-squares-estimation-single-predictor" id="toc-least-squares-estimation-single-predictor" class="nav-link" data-scroll-target="#least-squares-estimation-single-predictor"><span class="header-section-number">5.2.1</span> Least-squares estimation, single predictor</a></li>
   </ul></li>
-  <li><a href="#least-squares-estimation-general-number-of-predictors" id="toc-least-squares-estimation-general-number-of-predictors" class="nav-link" data-scroll-target="#least-squares-estimation-general-number-of-predictors"><span class="header-section-number">3.3</span> Least-squares estimation, general number of predictors</a>
+  <li><a href="#least-squares-estimation-general-number-of-predictors" id="toc-least-squares-estimation-general-number-of-predictors" class="nav-link" data-scroll-target="#least-squares-estimation-general-number-of-predictors"><span class="header-section-number">5.3</span> Least-Squares Estimation, General Number of Predictors</a>
   <ul class="collapse">
-  <li><a href="#nile-example" id="toc-nile-example" class="nav-link" data-scroll-target="#nile-example"><span class="header-section-number">3.3.1</span> Nile example</a></li>
-  <li><a href="#matrix-derivatives." id="toc-matrix-derivatives." class="nav-link" data-scroll-target="#matrix-derivatives."><span class="header-section-number">3.3.2</span> Matrix derivatives.</a></li>
-  <li><a href="#differentiation-purely-in-matrix-terms" id="toc-differentiation-purely-in-matrix-terms" class="nav-link" data-scroll-target="#differentiation-purely-in-matrix-terms"><span class="header-section-number">3.3.3</span> Differentiation purely in matrix terms</a></li>
-  <li><a href="#the-general-case" id="toc-the-general-case" class="nav-link" data-scroll-target="#the-general-case"><span class="header-section-number">3.3.4</span> The general case</a></li>
+  <li><a href="#nile-example" id="toc-nile-example" class="nav-link" data-scroll-target="#nile-example"><span class="header-section-number">5.3.1</span> Nile example</a></li>
+  <li><a href="#sec-matrixderivs" id="toc-sec-matrixderivs" class="nav-link" data-scroll-target="#sec-matrixderivs"><span class="header-section-number">5.3.2</span> Matrix derivatives</a></li>
+  <li><a href="#sec-linregformula" id="toc-sec-linregformula" class="nav-link" data-scroll-target="#sec-linregformula"><span class="header-section-number">5.3.3</span> Differentiation purely in matrix terms</a></li>
+  <li><a href="#the-general-case" id="toc-the-general-case" class="nav-link" data-scroll-target="#the-general-case"><span class="header-section-number">5.3.4</span> The general case</a></li>
+  <li><a href="#sec-mlb" id="toc-sec-mlb" class="nav-link" data-scroll-target="#sec-mlb"><span class="header-section-number">5.3.5</span> Example: <strong>mlb1</strong> data</a></li>
+  <li><a href="#sec-varbhat" id="toc-sec-varbhat" class="nav-link" data-scroll-target="#sec-varbhat"><span class="header-section-number">5.3.6</span> Homogeneous variance case</a></li>
   </ul></li>
-  <li><a href="#determinants" id="toc-determinants" class="nav-link" data-scroll-target="#determinants"><span class="header-section-number">3.4</span> Determinants</a>
-  <ul class="collapse">
-  <li><a href="#definition" id="toc-definition" class="nav-link" data-scroll-target="#definition"><span class="header-section-number">3.4.1</span> Definition</a></li>
-  <li><a href="#properties" id="toc-properties" class="nav-link" data-scroll-target="#properties"><span class="header-section-number">3.4.2</span> Properties</a></li>
-  </ul></li>
-  <li><a href="#update-formulas" id="toc-update-formulas" class="nav-link" data-scroll-target="#update-formulas"><span class="header-section-number">3.5</span> Update formulas</a></li>
+  <li><a href="#update-formulas" id="toc-update-formulas" class="nav-link" data-scroll-target="#update-formulas"><span class="header-section-number">5.4</span> Update Formulas</a></li>
+  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">5.5</span> Your Turn</a></li>
   </ul>
 </nav>
     </div>
@@ -212,7 +270,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Linear Statistical Models</span></h1>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Linear Statistical Models</span></h1>
 </div>
 
 
@@ -228,9 +286,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 <div style="page-break-after: always;"></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Goals of this chapter:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Here we bring together the concepts of previous chapters by presenting the <em>linear model</em>, one of the most fundamental techniques in statistics. It relies heavily on linear algebra, notably matrix inverse.</p>
+</div>
+</div>
 <p>This chapter could have been titled, say, “Optimization, Part I,” since many applications of linear algebra involve minimization or maximization of some kind, and this chapter will involve calculus derivatives. But the statistical applications of linear algebra are equally important.</p>
-<section id="linear-regression-through-the-origin" class="level2 page-columns page-full" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="linear-regression-through-the-origin"><span class="header-section-number">3.1</span> Linear Regression through the Origin</h2>
+<section id="linear-regression-through-the-origin" class="level2 page-columns page-full" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="linear-regression-through-the-origin"><span class="header-section-number">5.1</span> Linear Regression through the Origin</h2>
 <p>Let’s consider the <strong>Nile</strong> dataset built-in to R. It is a time series, one measurement per year.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(Nile)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -266,32 +337,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Model validity
+Model Validity
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>The great statistician George Box once said, “All models are wrong but some are useful.” All data scientists should keep this at the forefronts of their minds.</p>
 </div>
 </div>
-<section id="least-squares-approach" class="level3 page-columns page-full" data-number="3.1.1">
-<h3 data-number="3.1.1" class="anchored" data-anchor-id="least-squares-approach"><span class="header-section-number">3.1.1</span> Least squares approach</h3>
-<div class="page-columns page-full"><p> Let <span class="math inline">\(b\)</span> denote our estimate. How should we obtain it? We wish to estimate <span class="math inline">\(\beta\)</span> from our data, which we regard as a sample from the data generating process. Denote our data by <span class="math inline">\((C_i,V_i), i = 1,...,100\)</span>.</p><div class="no-row-height column-margin column-container"><span class="">This too is something all data scientists should keep at the forefronts of their minds. We are always working with sample data, subject to intersample variations. The quantity <span class="math inline">\(b\)</span> is a random variable.</span></div></div>
-<p>Pretend for a moment that we don’t know, say, <span class="math inline">\(C_{28}\)</span>. Using our estimated <span class="math inline">\(\beta\)</span>, our predicted value would be <span class="math inline">\(b V_{28}\)</span>. Our squared prediction error would then be <span class="math inline">\((C_{28} - b W_{28})^2\)</span>.</p>
+<section id="least-squares-approach" class="level3 page-columns page-full" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="least-squares-approach"><span class="header-section-number">5.1.1</span> Least squares approach</h3>
+<div class="page-columns page-full"><p>We wish to estimate <span class="math inline">\(\beta\)</span> from our data, which we regard as a sample from the data generating process. Denote our data by <span class="math inline">\((C_i,V_i), i = 1,...,100\)</span>. Let <span class="math inline">\(\widehat{\beta}\)</span> denote our estimate. How should we obtain it?</p><div class="no-row-height column-margin column-container"><span class="">This too is something all data scientists should keep at the forefronts of their minds. We are always working with sample data, subject to intersample variations. The quantity <span class="math inline">\(\widehat{\beta}\)</span> is a random variable.</span><span class="">The “hat” notation ‘^’ is statistical convention for “estimate of”; <span class="math inline">\(\widehat{\beta}\)</span> is our estimate of the unknown parameter <span class="math inline">\(\beta\)</span>.</span></div></div>
+<p>Pretend for a moment that we don’t know, say, <span class="math inline">\(C_{28}\)</span>. Using our estimated <span class="math inline">\(\beta\)</span>, our predicted value would be <span class="math inline">\(\widehat{\beta} V_{28}\)</span>. Our squared prediction error would then be <span class="math inline">\((C_{28} - \widehat{\beta} W_{28})^2\)</span>.</p>
 <p>Well, we actually do know <span class="math inline">\(C_{28}\)</span> (and the others in our data), so we can answer the question:</p>
 <blockquote class="blockquote page-columns page-full">
-<p>In our search for a good value of <span class="math inline">\(b\)</span>, we can ask how well we would predict our known data, using that candidate value of <span class="math inline">\(b\)</span> in our data. Our total squared prediction error would be</p>
+<p>In our search for a good value of <span class="math inline">\(\widehat{\beta}\)</span>, we can ask how well we would predict our known data, using that candidate value of <span class="math inline">\(\widehat{\beta}\)</span> in our data. Our total squared prediction error would be</p>
 <p><span class="math display">\[
-\sum_{i=1}^{100} [C_{i} - b V_{i} )^2
+\sum_{i=1}^{100} [C_{i} - \widehat{\beta} V_{i} )^2
 \]</span></p>
 <div class="page-columns page-full"><p>A natural choice for <span class="math inline">\(b\)</span> would be the value that minimizes this quantity. </p><div class="no-row-height column-margin column-container"><span class="">Why not look at the absolute value instead of the square? The latter makes the math flow well, as will be seen shortly.</span></div></div>
 </blockquote>
 </section>
-<section id="calculation" class="level3" data-number="3.1.2">
-<h3 data-number="3.1.2" class="anchored" data-anchor-id="calculation"><span class="header-section-number">3.1.2</span> Calculation</h3>
+<section id="calculation" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2" class="anchored" data-anchor-id="calculation"><span class="header-section-number">5.1.2</span> Calculation</h3>
 <p>As noted, our choice for <span class="math inline">\(b\)</span> will be the minimizer of</p>
 <p><span class="math display">\[
 \sum_{i=1}^{100} (C_{i} - b V_{i})^2
 \]</span></p>
+<p>over all possible values of <span class="math inline">\(b\)</span>. We then set <span class="math inline">\(\widehat{\beta}\)</span> to that minimizing value of <span class="math inline">\(b\)</span>.</p>
 <p>This is a straightforward calculus problem. Setting</p>
 <p><span class="math display">\[
 0 = \frac{d}{db} \sum_{i=1}^{100} (C_{i} - b V_{i} )^2 =
@@ -302,8 +374,8 @@ Model validity
 b = \frac{\sum_{i=1}^n C_i V_i}{\sum_{i=1}^nV_i^2}
 \]</span></p>
 </section>
-<section id="r-code" class="level3" data-number="3.1.3">
-<h3 data-number="3.1.3" class="anchored" data-anchor-id="r-code"><span class="header-section-number">3.1.3</span> R code</h3>
+<section id="r-code" class="level3" data-number="5.1.3">
+<h3 data-number="5.1.3" class="anchored" data-anchor-id="r-code"><span class="header-section-number">5.1.3</span> R code</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(n2 <span class="sc">~</span> n1<span class="dv">-1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -316,53 +388,47 @@ Coefficients:
 0.98  </code></pre>
 </div>
 </div>
-<p>This says, “Fit the model <span class="math inline">\(E(C | V) = \beta V\)</span>$ to the data, with the line constrained to pass through the origin.” The constraint is specified by the -1 term.</p>
+<p>This says, “Fit the model <span class="math inline">\(E(C | V) = \beta V\)</span> to the data, with the line constrained to pass through the origin.” The constraint is specified by the -1 term.</p>
 <p>We see that the estimate regression line is</p>
 <p><span class="math display">\[E(C | V) = 0.98 V\]</span></p>
 </section>
 </section>
-<section id="full-linear-regression-model" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="full-linear-regression-model"><span class="header-section-number">3.2</span> Full linear regression model</h2>
+<section id="linear-regression-model-with-intercept-term" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="linear-regression-model-with-intercept-term"><span class="header-section-number">5.2</span> Linear Regression Model with Intercept Term</h2>
 <p>Say we do not want to constrain the model to pass the line through the origin. Our model is then</p>
 <p><span class="math display">\[E(C | V) = \beta_0 + \beta_1 V\]</span></p>
 <p>where we now have two unknown parameters to be estimated.</p>
-<section id="least-squares-estimation-single-predictor" class="level3" data-number="3.2.1">
-<h3 data-number="3.2.1" class="anchored" data-anchor-id="least-squares-estimation-single-predictor"><span class="header-section-number">3.2.1</span> Least-squares estimation, single predictor</h3>
+<section id="least-squares-estimation-single-predictor" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="least-squares-estimation-single-predictor"><span class="header-section-number">5.2.1</span> Least-squares estimation, single predictor</h3>
 <p>Our sum of squared prediction errors is now</p>
 <p><span class="math display">\[
 \sum_{i=1}^{100} [O_{i} - (b_0 + b_1 V_{i}) ]^2
 \]</span></p>
 <p>This means setting two derivatives to 0 and solving. Since the derivatives involve two different quantities to be optimized, <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span>, the derivatives are termed <em>partial</em>, and the <span class="math inline">\(\partial\)</span> symbol is used instead of ‘d’.</p>
-<p><span id="eq-b0"><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 0 &amp;=
-\frac{\partial}{\partial b_0}\sum_{i=1}^{100} [C_{i} - (b_0 + b_1 V_{i })
-]^2 \\
+\frac{\partial}{\partial b_0}\sum_{i=1}^{100} [C_{i} - (b_0 + b_1 V_{i })]^2 \\
 &amp;=
 -2 \sum_{i=1}^{100} [C_{i} - (b_0 + b_1 V_{i}) ]
-\end{align}
-\tag{3.1}\]</span></span></p>
+\end{align}\]</span></p>
 <p>and</p>
-<p><span id="eq-b1"><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 0 &amp;=
-\frac{\partial}{\partial b_1}\sum_{i=1}^{100} [C_{i} - (b_0 + b_1 V_{i})
-]^2 \\
+\frac{\partial}{\partial b_1}\sum_{i=1}^{100} [C_{i} - (b_0 + b_1 V_{i})]^2 \\
 &amp;=
--2 \sum_{i=1}^{100} [C_{i} - (b_0 + b_1 V_{i}) V_i]
-\end{align}
-\tag{3.2}\]</span></span></p>
+-2 \sum_{i=1}^{100} [C_{i} - (b_0 + b_1 V_{i})] V_i
+\end{align}\]</span></p>
 <p>We could then solve for the <span class="math inline">\(b_i\)</span>, but let’s go straight to the general case.</p>
 </section>
 </section>
-<section id="least-squares-estimation-general-number-of-predictors" class="level2 page-columns page-full" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="least-squares-estimation-general-number-of-predictors"><span class="header-section-number">3.3</span> Least-squares estimation, general number of predictors</h2>
-<section id="nile-example" class="level3" data-number="3.3.1">
-<h3 data-number="3.3.1" class="anchored" data-anchor-id="nile-example"><span class="header-section-number">3.3.1</span> Nile example</h3>
-<p>As we have seen, systems of linear equations are natural applications of linear algebra. Equations <a href="#eq-b0">Equation&nbsp;<span>3.1</span></a> and <a href="#eq-b1">Equation&nbsp;<span>3.2</span></a> can be written in matrix terms as</p>
+<section id="least-squares-estimation-general-number-of-predictors" class="level2 page-columns page-full" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="least-squares-estimation-general-number-of-predictors"><span class="header-section-number">5.3</span> Least-Squares Estimation, General Number of Predictors</h2>
+<section id="nile-example" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="nile-example"><span class="header-section-number">5.3.1</span> Nile example</h3>
+<p>As we have seen, systems of linear equations are natural applications of linear algebra. The equations setting the derivatives to 0 can be written in matrix terms as</p>
 <p><span class="math display">\[
 \left (
-\begin{array}{rr}
+\begin{array}{r}
 \sum_{i=1}^n C_i \\
 \sum_{i=1}^n C_i V_i \\
 \end{array}
@@ -374,7 +440,7 @@ Coefficients:
 \end{array}
 \right )
 \left (
-\begin{array}{rr}
+\begin{array}{r}
 b_0 \\
 b_1 \\
 \end{array}
@@ -385,7 +451,7 @@ b_1 \\
 <p><span class="math display">\[
 S =
 \left (
-\begin{array}{rr}
+\begin{array}{r}
 C_1 \\
 C_2 \\
 ... \\
@@ -397,7 +463,7 @@ C_{100} \\
 <p><span class="math display">\[
 T =
 \left (
-\begin{array}{rr}
+\begin{array}{r}
 V_1 \\
 V_2 \\
 ... \\
@@ -405,16 +471,16 @@ V_{100} \\
 \end{array}
 \right )
 \]</span></p>
-<p>Then our linear assumption, <span class="math inline">\(E(C | V) = b_0 + b1 V\)</span>, applied to <span class="math inline">\(S\)</span> and <span class="math inline">\(T\)</span>, is</p>
+<p>Then our linear assumption, <span class="math inline">\(E(C | V) = \beta _0 + \beta_1 V\)</span>, applied to <span class="math inline">\(S\)</span> and <span class="math inline">\(T\)</span>, is</p>
 <p><span class="math display">\[
 E(S | T) =
-A b
+A \beta
 \]</span></p>
 <p>where</p>
 <p><span class="math display">\[
 A =  
 \left (
-\begin{array}{rrrr}
+\begin{array}{rr}
 1 &amp; V_1 \\
 1 &amp; V_2 \\
 ... &amp; ... \\
@@ -422,8 +488,8 @@ A =
 \end{array}
 \right )
 \]</span></p>
-<p>and <span class="math inline">\(b = (b_0,b_1)'.\)</span></p>
-<p>Our predicted error vector is very simply expressed:</p>
+<p>and <span class="math inline">\(\beta = (\beta_0,\beta_1)'.\)</span></p>
+<p>Our predicted error vector, using our candidate estimate <span class="math inline">\(b\)</span> of <span class="math inline">\(\beta\)</span>, is very simply expressed:</p>
 <p><span class="math display">\[
 S - Ab
 \]</span></p>
@@ -432,28 +498,21 @@ S - Ab
 u'u
 \]</span></p>
 <p>our sum of squared prediction errors is</p>
-<p><span class="math display">\[
+<p><span id="eq-matrixss"><span class="math display">\[
 (S - Ab)'(S - Ab)
-\]</span></p>
-<p>Now how we will minimize that matrix expression with respect to the vector <span class="math inline">\(b\)</span>. That is the subject of the next section.</p>
-<p>❄️ <strong>Your Turn:</strong> State what the matrix <span class="math inline">\(A\)</span> would have been under the earlier model in which the regression line is assmed to go through the origin. And what about <span class="math inline">\((S - Ab)'(S - Ab)\)</span> and so on? Does the math still produce the correct answer? Note: <span class="math inline">\(b\)</span> is now a vector of length 1, a 1x1 matrix.</p>
-<p>❄️ <strong>Your Turn:</strong> Derivative of a Show that</p>
-<p><span class="math display">\[
-\frac{d}{du} u'Qu = 2Qu
-\]</span></p>
-<p>for a constant symmetric matrix <span class="math inline">\(Q\)</span> and a vector <span class="math inline">\(u\)</span>. (<span class="math inline">\(u'Qu\)</span> is called a <em>quadratic form</em>.)*</p>
+\tag{5.1}\]</span></span></p>
+<p>Now how we will minimize that matrix expression with respect to the vector <span class="math inline">\(b\)</span>? That is the subject of the next section.</p>
 </section>
-<section id="matrix-derivatives." class="level3" data-number="3.3.2">
-<h3 data-number="3.3.2" class="anchored" data-anchor-id="matrix-derivatives."><span class="header-section-number">3.3.2</span> Matrix derivatives.</h3>
+<section id="sec-matrixderivs" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="sec-matrixderivs"><span class="header-section-number">5.3.2</span> Matrix derivatives</h3>
 <p>The (column) vector of partial derivatives of a scalar quantity is called the <em>gradient</em> of that quantity. For instance, with</p>
 <p><span class="math display">\[
 u = 2x + 3y^2 + xy
 \]</span></p>
 <p>we have that its gradient is</p>
 <p><span class="math display">\[
-\frac{du}{dx dy} =
 \left (
-\begin{array}{rr}
+\begin{array}{r}
 2 + y \\
 6y + x \\
 \end{array}
@@ -462,21 +521,20 @@ u = 2x + 3y^2 + xy
 <p>With care, we can compute gradients entirely at the matrix level, using easily derivable properties, without ever resorting to returning to the scalar expressions. Let’s apply them to the case at hand in the last section,</p>
 <p><span id="eq-rss"><span class="math display">\[
 (S - Ab)'(S - Ab)
-\tag{3.3}\]</span></span></p>
+\tag{5.2}\]</span></span></p>
 </section>
-<section id="differentiation-purely-in-matrix-terms" class="level3" data-number="3.3.3">
-<h3 data-number="3.3.3" class="anchored" data-anchor-id="differentiation-purely-in-matrix-terms"><span class="header-section-number">3.3.3</span> Differentiation purely in matrix terms</h3>
+<section id="sec-linregformula" class="level3 page-columns page-full" data-number="5.3.3">
+<h3 data-number="5.3.3" class="anchored" data-anchor-id="sec-linregformula"><span class="header-section-number">5.3.3</span> Differentiation purely in matrix terms</h3>
 <p>It can be shown that for a column vector <span class="math inline">\(a\)</span>,</p>
-<p><span class="math display">\[
+<p><span id="eq-dda"><span class="math display">\[
 \frac{d}{da} a'a = 2a
-\]</span></p>
-<p>❄️ <strong>Your Turn:</strong> Show this. Write <span class="math inline">\(a = (a_1,...,a_k)'\)</span> and find the gradient “by hand.” Compare to <span class="math inline">\(2a\)</span>.</p>
-<p>Equation <a href="#eq-rss">Equation&nbsp;<span>3.3</span></a> is indeed of the form <span class="math inline">\(a'a\)</span>, but the problem here is that <span class="math inline">\(a\)</span> in turn is a function of <span class="math inline">\(b\)</span>, This calls for the Chain Rule, which does exist at the matrix level:</p>
+\tag{5.3}\]</span></span></p>
+<p><a href="#eq-rss">Equation&nbsp;<span>5.2</span></a> is indeed of the form <span class="math inline">\(a'a\)</span>, but the problem here is that <span class="math inline">\(a\)</span> in turn is a function of <span class="math inline">\(b\)</span>, This calls for the Chain Rule, which does exist at the matrix level:</p>
 <p>For example if <span class="math inline">\(u = Mv + w\)</span>, with <span class="math inline">\(M\)</span> and <span class="math inline">\(w\)</span> constants (i.e.&nbsp;not functions of <span class="math inline">\(v\)</span>, then</p>
-<p><span class="math display">\[
+<div class="page-columns page-full"><p><span class="math display">\[
 \frac{d}{dv} u'u = 2M'u
-\]</span></p>
-<p>With <span class="math inline">\(M = -A\)</span> and <span class="math inline">\(w = S\)</span>, we have</p>
+\]</span></p><div class="no-row-height column-margin column-container"><span class="">We must keep in mind that we are working with vectors and matrices, so that <span class="math inline">\(M'u\)</span>, say <span class="math inline">\(r \textrm{x} s\)</span> times <span class="math inline">\(s \textrm{ x} 1\)</span>, is conformable matrix multiplication while <span class="math inline">\(uM'\)</span> is mathematical nonsense.</span></div></div>
+<p>In our case at hand, we have <span class="math inline">\(M = -A\)</span> and <span class="math inline">\(w = S\)</span>, so that</p>
 <p><span class="math display">\[
 \frac{d}{db} [(S - Ab)'(S - Ab) = -2 A'(S - Ab)
 \]</span></p>
@@ -485,22 +543,22 @@ u = 2x + 3y^2 + xy
 0 = A'(S - Ab) = A'S - A'A b
 \]</span></p>
 <p>yield our minimizing <span class="math inline">\(b\)</span>:</p>
-<p><span class="math display">\[
-b = (A'A)^{-1} A'S
-\]</span></p>
+<p><span id="eq-linregformula"><span class="math display">\[
+\widehat{\beta} = (A'A)^{-1} A'S
+\tag{5.4}\]</span></span></p>
 <p>providing the inverse exists (more on this in the next chapter).</p>
 <p>Let’s check this with the Nile example:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>,n1)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>S <span class="ot">&lt;-</span> n2</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>Ap <span class="ot">&lt;-</span> <span class="fu">t</span>(A)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">solve</span>(Ap <span class="sc">%*%</span> A) <span class="sc">%*%</span> Ap <span class="sc">%*%</span> S</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>Ap <span class="ot">&lt;-</span> <span class="fu">t</span>(A)  <span class="co"># R matrix transpose</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">solve</span>(Ap <span class="sc">%*%</span> A) <span class="sc">%*%</span> Ap <span class="sc">%*%</span> S  <span class="co"># R matrix inverse</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          [,1]
    452.7667508
 n1   0.5043159</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check via /R</span></span>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check via R</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(n2 <span class="sc">~</span> n1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -512,11 +570,18 @@ Coefficients:
    452.7668       0.5043  </code></pre>
 </div>
 </div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">det</span>(Ap <span class="sc">%*%</span> A) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 277463876</code></pre>
+</div>
+</div>
+<p>Nonzero! So <span class="math inline">\((A'A)^{-1}\)</span> does exist, as we saw.</p>
 </section>
-<section id="the-general-case" class="level3 page-columns page-full" data-number="3.3.4">
-<h3 data-number="3.3.4" class="anchored" data-anchor-id="the-general-case"><span class="header-section-number">3.3.4</span> The general case</h3>
+<section id="the-general-case" class="level3" data-number="5.3.4">
+<h3 data-number="5.3.4" class="anchored" data-anchor-id="the-general-case"><span class="header-section-number">5.3.4</span> The general case</h3>
 <p>Say our data consists of <span class="math inline">\(n\)</span> points, each of which is of length <span class="math inline">\(p\)</span>. Write the <span class="math inline">\(j^{th}\)</span> element of the <span class="math inline">\(i^{th}\)</span> data point as <span class="math inline">\(X_{ij}\)</span>. Then set</p>
-<p><span class="math display">\[
+<p><span id="eq-designmat"><span class="math display">\[
 A =
 \left (
 \begin{array}{rrrr}
@@ -526,21 +591,28 @@ A =
 1 &amp; X_{n1} &amp; ... &amp; X_{np} \\
 \end{array}
 \right )
+\tag{5.5}\]</span></span></p>
+<p>Continue to set <span class="math inline">\(S\)</span> to the length-<span class="math inline">\(n\)</span> column vector of our response variable. Our model is</p>
+<p><span class="math display">\[
+E(S | A) = A \beta
 \]</span></p>
-<p>Coninue to set <span class="math inline">\(S\)</span> to thw length-<span class="math inline">\(n\)</span> column vector of our response variable, and write</p>
+<p>for an unknown vector <span class="math inline">\(\beta\)</span> of length <span class="math inline">\(p+1\)</span>. Our estimated of that vector based on our data will be denoted</p>
 <p><span class="math display">\[
 b = (b_0,b_1,...,b_p)'
 \]</span></p>
 <p>Then, using the same reasoning as before, we have the minimizing value of <span class="math inline">\(b\)</span>:</p>
-<p><span class="math display">\[
-b = (A'A)^{-1} A'S
-\]</span></p>
+<p><span id="eq-betahat"><span class="math display">\[
+\widehat{\beta} = (A'A)^{-1} A'S
+\tag{5.6}\]</span></span></p>
 <p>again providing that the inverse exists.</p>
-<div class="page-columns page-full"><p>As an examples, let’s take the <strong>mlb1</strong> from my <a href="https://github.com/matloff/qeML">qeML (’Quick and Easy Machine Learning</a> package.  The data is on major league baseball players. We will predict weight from height and age.</p><div class="no-row-height column-margin column-container"><span class="">Kindly provided by the UCLA Dept. of Statistics</span></div></div>
+</section>
+<section id="sec-mlb" class="level3 page-columns page-full" data-number="5.3.5">
+<h3 data-number="5.3.5" class="anchored" data-anchor-id="sec-mlb"><span class="header-section-number">5.3.5</span> Example: <strong>mlb1</strong> data</h3>
+<div class="page-columns page-full"><p>As an example, let’s take the <strong>mlb1</strong> from my <a href="https://github.com/matloff/qeML">qeML (’Quick and Easy Machine Learning</a> package.  The data is on major league baseball players. We will predict weight from height and age.</p><div class="no-row-height column-margin column-container"><span class="">Dataset kindly provided by the UCLA Dept. of Statistics</span></div></div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qeML)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mlb1)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mlb1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qeML)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mlb1)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mlb1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        Position Height Weight   Age
 1        Catcher     74    180 22.99
@@ -550,8 +622,8 @@ b = (A'A)^{-1} A'S
 5  First_Baseman     73    188 35.71
 6 Second_Baseman     69    176 29.39</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>ourData <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(mlb1[,<span class="sc">-</span><span class="dv">1</span>]) <span class="co"># must have matrix to enable %*%</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ourData)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>ourData <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(mlb1[,<span class="sc">-</span><span class="dv">1</span>]) <span class="co"># must have matrix to enable %*%</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ourData)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Height Weight   Age
 1     74    180 22.99
@@ -561,18 +633,18 @@ b = (A'A)^{-1} A'S
 5     73    188 35.71
 6     69    176 29.39</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>,ourData[,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)])</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>Ap <span class="ot">&lt;-</span> <span class="fu">t</span>(A)</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>S <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(mlb1[,<span class="dv">3</span>])</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">solve</span>(Ap <span class="sc">%*%</span> A) <span class="sc">%*%</span> Ap <span class="sc">%*%</span> S</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>,ourData[,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)])</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>Ap <span class="ot">&lt;-</span> <span class="fu">t</span>(A)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>S <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(mlb1[,<span class="dv">3</span>])</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">solve</span>(Ap <span class="sc">%*%</span> A) <span class="sc">%*%</span> Ap <span class="sc">%*%</span> S</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>               [,1]
        -187.6381754
 Height    4.9235994
 Age       0.9115326</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check via R</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(Weight <span class="sc">~</span> .,<span class="at">data=</span>mlb1[,<span class="sc">-</span><span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check via R</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(Weight <span class="sc">~</span> .,<span class="at">data=</span>mlb1[,<span class="sc">-</span><span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -583,70 +655,155 @@ Coefficients:
   -187.6382       4.9236       0.9115  </code></pre>
 </div>
 </div>
+<p>So, if we have a player of known height and age, we would predict the weight to be</p>
+<p>-187.6382 + 4.9236 x height + 0.9115 x age</p>
 </section>
-</section>
-<section id="determinants" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="determinants"><span class="header-section-number">3.4</span> Determinants</h2>
-<p>This is a topic that is quite straightforward and traditional, even old-fashioned. Yet the theme of a book by Sheldon Axler,, <em>Linear Algebra Done Right</em> is that determoinants are overemphasized. He relegates the topic to the very end of the book. Yet determinants do appear often in applied linear algebra settings. Moreover, they will be convenient to use in explaing very concepts in this book.</p>
-<p>But why place the topic in this particular chapter? The answer lies in the fact that earlier in this chapter we had the proviso “If <span class="math inline">\((A'A)^{-1}\)</span> exists.” The following property of determinants is then relevant:</p>
-<blockquote class="blockquote">
-<p>A square matrix <span class="math inline">\(G\)</span> is invertible if and only if <span class="math inline">\(det(G) \neq 0\)</span>.</p>
-</blockquote>
-<p>There are better ways to ascertain invertibility than this, but it is conceptually helpful. Determinants play a similar role in the topic of eigenveectors in Chapter 5.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">det</span>(Ap <span class="sc">%*%</span> A) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 103306202970</code></pre>
-</div>
-</div>
-<p>Nonzero! So <span class="math inline">\((A'A)^{-1}\)</span> does exist, confirming that our R code that needed that property.</p>
-<section id="definition" class="level3" data-number="3.4.1">
-<h3 data-number="3.4.1" class="anchored" data-anchor-id="definition"><span class="header-section-number">3.4.1</span> Definition</h3>
-<p>The standard definition is one of the ugliest, and least useful, in all of mathematics. Instead we will define the term using one of the methods for calculating determinants.</p>
-<blockquote class="blockquote">
-<p>Consider an <span class="math inline">\(r \textrm{x} r\)</span> matrix <span class="math inline">\(G\)</span>. For <span class="math inline">\(r = 2\)</span>, write <span class="math inline">\(G\)</span> as</p>
+<section id="sec-varbhat" class="level3 page-columns page-full" data-number="5.3.6">
+<h3 data-number="5.3.6" class="anchored" data-anchor-id="sec-varbhat"><span class="header-section-number">5.3.6</span> Homogeneous variance case</h3>
+<p>In addition to</p>
 <p><span class="math display">\[
-G =
+E(S | A) = A \beta
+\]</span></p>
+<div class="page-columns page-full"><p>it is often assumed that</p><div class="no-row-height column-margin column-container"><span class="">In some applications, <span class="math inline">\(A\)</span> is actually chosen by an experimenter, so that it is not random. But even in the random case, it is standard to condition on <span class="math inline">\(A\)</span>. By <a href="Ch5b.html#eq-iterexpect">Equation&nbsp;<span>8.2</span></a>, a conditional confidence interval, say, at the 95% level also has the level unconditionally.</span></div></div>
+<p><span class="math display">\[
+Cov(S | A) = \sigma^2 I
+\]</span></p>
+<p>where <span class="math inline">\(\sigma\)</span> is an unknown constant to be estimated from the data.</p>
+<p>So <span class="math inline">\(Var(S_i) = \sigma^2\)</span> for all <span class="math inline">\(i\)</span>. It is usually not a realistic assumption. Say for instance we are predicting human weight from height. There should be more variation in weight among taller people than above shorter people. But it’s a simplifying assumption without really good alternatives, so it is commonly used.</p>
+<p>And in that setting, our formulas from {<span class="quarto-unresolved-ref">?sec-covar</span>} come in handy, as follows.</p>
+<p>Recall that <span class="math inline">\(\widehat{\beta}\)</span> is our estimate of the unknown population parameter <span class="math inline">\(\beta\)</span>, based on our random sample data. But that means that <span class="math inline">\(\widehat{\beta}\)</span> is a random vector, and thus has a covariance matrix. Using <a href="Ch2a.html#eq-acova">Equation&nbsp;<span>4.4</span></a> and setting <span class="math inline">\(R = (A'A)^{-1} A'\)</span>$, we have</p>
+<p><span id="eq-varcovar"><span class="math display">\[
+Cov(\widehat{\beta}|A) = R Cov(S|A) R' = R \sigma^2 I R' = \sigma^2 R R' =
+\sigma^2 (A'A)^{-1}
+\tag{5.7}\]</span></span></p>
+<p>Classical statistical formulas use this relation to find standard errors for <span class="math inline">\(\widehat{\beta}_i\)</span> etc.</p>
+</section>
+</section>
+<section id="update-formulas" class="level2 page-columns page-full" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="update-formulas"><span class="header-section-number">5.4</span> Update Formulas</h2>
+<p>One important theme in developing prediction models (linear regression, neural networks etc.) is the avoidance of <em>overfitting</em>, meaning that we fit an overly elaborate model to our data. We simply are estimating too many things for the amount of data we have, “spreading our data too thin.”</p>
+<p>A common example is using too many predictor variables, so that we are estimating a large number of coefficients <span class="math inline">\(\beta_i\)</span>.</p>
+<p>Or we may draw a histogram with too many bins:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qeML)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(forest500)  <span class="co"># data on forest ground cover</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(forest500<span class="sc">$</span>V1,<span class="at">breaks=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Ch3_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(forest500<span class="sc">$</span>V1,<span class="at">breaks=</span><span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Ch3_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="page-columns page-full"><p>In a histogram, we are estimating the heights of the bins. With 10 bins we obtained a smooth graph, but with 100 bins it became choppy. So again, we are estimating too many things, given the capacity of the data.</p><div class="no-row-height column-margin column-container"><span class="">A histogram is an estimate of the probability density function of the observed random variable. Having more, thus narrower, bins reduces bias but increases variance.</span></div></div>
+<p>With larger datasets, we can use more predictor variables, more histogram bins, and so on. The question then arises is, for instance, <em>How many</em> predictors, <em>how many</em> bins and so on, can we afford to use with our given data?</p>
+<p>The typical solution is to fit several models of different complexity, then choose the one that predicts the best. But we must do this evaluation on “fresh” data; we should not predict on the same data on which we fitted our model.</p>
+<p>We thus rely on partitioning our data, into a <em>training set</em> to which we fit our model, and a <em>test set</em>, on which we predict using the fitted model. We may wish to do this several times.</p>
+<p>A special case is the Leaving One Out method, in which the holdout set size is 1. It might go like this, for a dataset d:</p>
+<pre><code>sumErrs = 0
+for i = 1,...,n  # dataset has n datapoints
+   fit lm to d[-i,]
+   use result to predict d[i,]
+   add prediction error to sumErrs
+return sumErrs</code></pre>
+<p>This can become computationally challenging, as we would need to refit the model each time. Each call to <strong>lm</strong> involves a matrix inversion (equivalent), and we must do this <span class="math inline">\(n\)</span> times.</p>
+<p>It would be nice if we could have an “update” formula that would quickly recalculate the model found on the full dataset. Then e would need to perform matrix inversion just once. In the case of linear models, such a formula exists, in the Sherman-Morrison-Woodbury relation:</p>
+<blockquote class="blockquote page-columns page-full">
+<p>Given an invertible matrix <span class="math inline">\(B\)</span> and row vectors <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> having lengths equal to the number of columns of <span class="math inline">\(B\)</span>. form the matrix</p>
+<p><span class="math display">\[
+C = B + uv'
+\]</span></p>
+<div class="page-columns page-full"><p>Then <span class="math inline">\(C^{-1}\)</span> exists and is equal to</p><div class="no-row-height column-margin column-container"><span class="">Note that the quantity <span class="math inline">\(uv'\)</span> is a square matrix the size of <span class="math inline">\(B\)</span>, so the sum and product make sense.</span></div></div>
+<p><span class="math display">\[
+B^{-1} - \frac{1}{1+v'B^{-1}u} B^{-1} (uv') B^{-1}
+\]</span></p>
+</blockquote>
+<p>Now, how can we apply this to the Leave One Out method? In the matrix <span class="math inline">\(A\)</span> in Equation <a href="#eq-designmat">Equation&nbsp;<span>5.5</span></a>, we wish to remove row <span class="math inline">\(i\)</span>; call the result <span class="math inline">\(A_{-i}\)</span>. Our new version of <span class="math inline">\(A'A\)</span> is then</p>
+<p><span class="math display">\[
+A_{-i}' A_{-i}
+\]</span></p>
+<p>So our main task is to obtain</p>
+<p><span class="math display">\[
+(A_{-i}' A_{-i})^{-1}
+\]</span></p>
+<p>by updating <span class="math inline">\((A'A)^{-1}\)</span>, which we already have from our computation in the full dataset.</p>
+<p>We can do this as follows. Denote row <span class="math inline">\(i\)</span> of <span class="math inline">\(A\)</span> by <span class="math inline">\(a_i\)</span>, and set</p>
+<p><span class="math display">\[
+u = -a_i, v = a_i
+\]</span></p>
+<p>To show why these choices for <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> work, consider the case in which we delete the last row of <span class="math inline">\(A\)</span>. (The analysis would be similar for other cases.) Write the latter as a partitioned matrix,</p>
+<p><span class="math display">\[
 \left (
-\begin{array}{rr}
-a &amp; b \\
-c &amp; d  \\
+\begin{array}{r}
+A_{(-n)} \\
+a_n \\
 \end{array}
 \right )
 \]</span></p>
-<p>and define <span class="math inline">\(\det(G)\)</span> to be <span class="math inline">\(ad -bc\)</span>. For <span class="math inline">\(r &gt; 2\)</span>, define submatrices as follows.</p>
-<p><span class="math inline">\(G_i\)</span> is the <span class="math inline">\((r-1) \textrm{x} (r-1)\)</span> submatrix obtained by removing row 1 and column <span class="math inline">\(j\)</span> from <span class="math inline">\(G\)</span>. Then <span class="math inline">\(\det(G)\)</span> is defined recursively as</p>
+<p>We pretend it is a <span class="math inline">\(2 \textrm{x} 1\)</span> “matrix,” and <span class="math inline">\(A'\)</span> is then “<span class="math inline">\(1 \textrm{x} 2\)</span>”:</p>
 <p><span class="math display">\[
-\sum_{i=1}^r (-1)^{i+1} \det(G_i)
-\]</span></p>
-</blockquote>
-<p>For instance, consider</p>
-<p><span class="math display">\[
-M =
+A' =
 \left (
-\begin{array}{rrr}
-5 &amp; 1 &amp; 0 \\
-3 &amp; -1 &amp; 7 \\
-  0 &amp; 1 &amp; 1 \\
-  \end{array}
+\begin{array}{rr}
+A_{(-n)}' &amp; a_n' \\
+\end{array}
 \right )
 \]</span></p>
-<p>The <span class="math inline">\(\det(M) = 5(-8) - 3 + 0 = -43\)</span>.</p>
-<p>❄️ <strong>Your Turn:</strong> If you are familiar with recursive calls, write a function <span class="math inline">\(\verb+dt(a)+\)</span> to compute the determinant of a square matrix using this scheme.</p>
+<p>Thus</p>
+<p><span class="math display">\[
+A'A =
+A_{-i}' A_{-i} + a_n a_n'
+\]</span></p>
+<p>yielding</p>
+<p><span class="math display">\[
+A_{-i}' A_{-i} = A'A - a_n a_n'
+\]</span></p>
+<p>just what we need for Sherman-Morrison-Woodbury: With <span class="math inline">\(B = A'A\)</span>, we have</p>
+<p><span class="math display">\[
+[A_{-i}' A_{-i}]^{-1} =
+B^{-1} + \frac{1}{1-a_i'B^{-1}a_i}
+B^{-1} (a_i a_i') B^{-1}
+\]</span></p>
+<p>Let’s check it:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">2</span>),<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">5</span>),<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>),<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">9</span>,<span class="sc">-</span><span class="dv">3</span>)) </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>apa <span class="ot">&lt;-</span> <span class="fu">t</span>(a) <span class="sc">%*%</span> a</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>apai <span class="ot">&lt;-</span> <span class="fu">solve</span>(apa)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>a2 <span class="ot">&lt;-</span> a[<span class="sc">-</span><span class="dv">2</span>,]</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>apa2 <span class="ot">&lt;-</span> <span class="fu">t</span>(a2) <span class="sc">%*%</span> a2</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>apa2i <span class="ot">&lt;-</span> <span class="fu">solve</span>(apa2)</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co"># prepare for S-M-W</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>adel <span class="ot">&lt;-</span> <span class="fu">matrix</span>(a[<span class="dv">2</span>,],<span class="at">ncol=</span><span class="dv">1</span>)</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>w1 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fu">t</span>(adel) <span class="sc">%*%</span> apai <span class="sc">%*%</span> adel)</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>w1 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(w1)</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>uvt <span class="ot">&lt;-</span> adel <span class="sc">%*%</span> <span class="fu">t</span>(adel)</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>w2 <span class="ot">&lt;-</span> apai <span class="sc">%*%</span> uvt <span class="sc">%*%</span> apai</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a><span class="co"># S-M-W says this will be apa2i</span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>apai <span class="sc">+</span> w1 <span class="sc">*</span> w2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           [,1]       [,2]      [,3]
+[1,]  3.4140625 -0.7109375 -1.015625
+[2,] -0.7109375  0.1640625  0.234375
+[3,] -1.0156250  0.2343750  0.406250</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>apa2i</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           [,1]       [,2]      [,3]
+[1,]  3.4140625 -0.7109375 -1.015625
+[2,] -0.7109375  0.1640625  0.234375
+[3,] -1.0156250  0.2343750  0.406250</code></pre>
+</div>
+</div>
 </section>
-<section id="properties" class="level3" data-number="3.4.2">
-<h3 data-number="3.4.2" class="anchored" data-anchor-id="properties"><span class="header-section-number">3.4.2</span> Properties</h3>
-<p>We state these without proof:</p>
-<ul>
-<li><p><span class="math inline">\(G^{-1}\)</span> exists if and only if <span class="math inline">\(\det(G) \neq 0\)</span></p></li>
-<li><p><span class="math inline">\(\det(GH) = \det(G) \det(H)\)</span></p></li>
-</ul>
-</section>
-</section>
-<section id="update-formulas" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="update-formulas"><span class="header-section-number">3.5</span> Update formulas</h2>
-<p>One important theme in developing prediction models (linear regression, neural networks etc.) is that, in testing a model we fit to only a subset of our data, then predict the remaining – “fresh” – holdout data using the model. Or, we might do this many times, say with many holdout sets of size 1, fitting the model on the remaining n-1 data points each time..</p>
-<p>This could become computationally challenging, as we would need to refit the model each time. It would be nice if we could have an “update” formula that would quickly recalculate the model found on the full dataset. In rhw case of linear models, such a formula exists, in the Sherman-Morrison-Woodbury relation.</p>
+<section id="your-turn" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">5.5</span> Your Turn</h2>
+<p>❄️ <strong>Your Turn:</strong> Show <a href="#eq-dda">Equation&nbsp;<span>5.3</span></a>. Write <span class="math inline">\(a = (a_1,...,a_k)'\)</span> and find the gradient “by hand.” Compare to <span class="math inline">\(2a\)</span>.</p>
+<p>❄️ <strong>Your Turn:</strong> Show that</p>
+<p><span class="math display">\[
+\frac{d}{du} u'Qu = 2Qu
+\]</span></p>
+<p>for a constant symmetric matrix <span class="math inline">\(Q\)</span> and a vector <span class="math inline">\(u\)</span>. (<span class="math inline">\(u'Qu\)</span> is called a <em>quadratic form</em>.)</p>
 
 
 </section>
@@ -887,13 +1044,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./Ch2.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Matrix Inverse</span></span>
+      <a href="./Ch2a.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Covariance Matrices, Multivariate Normal Distribution, Delta Method</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./Ch4.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Matrix Rank, and Vector Spaces Part I</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Matrix Rank</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

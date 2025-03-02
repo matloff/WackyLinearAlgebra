@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Powered by Linear Algebra - 8&nbsp; Inner Product Spaces</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Ch5c.html" rel="next">
+<link href="./Ch5a.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating slimcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Ch5b.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Inner Product Spaces</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Powered by Linear Algebra</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./preface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Matrix Multiplication</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Matrix Inverse</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch2a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Covariance Matrices, Multivariate Normal Distribution, Delta Method</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Linear Statistical Models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Matrix Rank</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch5a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Vector Spaces</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch5b.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Inner Product Spaces</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch5c.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Shrinkage Estimators</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch6a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Eigenanalysis: Properties</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch6b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Principal Components</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch6c.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Singular Value Decomposition</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch6d.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Pseudoinverse and Double Descent</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch7a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Recommender Systems</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch8a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Neural Networks</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#geometric-aspirations" id="toc-geometric-aspirations" class="nav-link active" data-scroll-target="#geometric-aspirations"><span class="header-section-number">8.1</span> Geometric Aspirations</a></li>
+  <li><a href="#definition" id="toc-definition" class="nav-link" data-scroll-target="#definition"><span class="header-section-number">8.2</span> Definition</a></li>
+  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples"><span class="header-section-number">8.3</span> Examples</a></li>
+  <li><a href="#norm-of-a-vector" id="toc-norm-of-a-vector" class="nav-link" data-scroll-target="#norm-of-a-vector"><span class="header-section-number">8.4</span> Norm of a Vector</a></li>
+  <li><a href="#important-inequalities" id="toc-important-inequalities" class="nav-link" data-scroll-target="#important-inequalities"><span class="header-section-number">8.5</span> Important Inequalities</a>
+  <ul class="collapse">
+  <li><a href="#the-cauchy-schwarz-inequality" id="toc-the-cauchy-schwarz-inequality" class="nav-link" data-scroll-target="#the-cauchy-schwarz-inequality"><span class="header-section-number">8.5.1</span> The Cauchy-Schwarz Inequality</a></li>
+  <li><a href="#sec-corr" id="toc-sec-corr" class="nav-link" data-scroll-target="#sec-corr"><span class="header-section-number">8.5.2</span> Application: Correlation</a></li>
+  <li><a href="#the-triangle-inequality" id="toc-the-triangle-inequality" class="nav-link" data-scroll-target="#the-triangle-inequality"><span class="header-section-number">8.5.3</span> The Triangle Inequality</a></li>
+  </ul></li>
+  <li><a href="#sec-projections" id="toc-sec-projections" class="nav-link" data-scroll-target="#sec-projections"><span class="header-section-number">8.6</span> Projections</a>
+  <ul class="collapse">
+  <li><a href="#theorem" id="toc-theorem" class="nav-link" data-scroll-target="#theorem"><span class="header-section-number">8.6.1</span> Theorem</a></li>
+  <li><a href="#the-pythagorean-theorem" id="toc-the-pythagorean-theorem" class="nav-link" data-scroll-target="#the-pythagorean-theorem"><span class="header-section-number">8.6.2</span> The Pythagorean Theorem</a></li>
+  </ul></li>
+  <li><a href="#projections-incal-rvomega" id="toc-projections-incal-rvomega" class="nav-link" data-scroll-target="#projections-incal-rvomega"><span class="header-section-number">8.7</span> Projections in<span class="math inline">\(\cal RV(\Omega)\)</span></a>
+  <ul class="collapse">
+  <li><a href="#conditional-expectation" id="toc-conditional-expectation" class="nav-link" data-scroll-target="#conditional-expectation"><span class="header-section-number">8.7.1</span> Conditional expectation</a></li>
+  <li><a href="#projections-in-cal-rvomega-how-they-work" id="toc-projections-in-cal-rvomega-how-they-work" class="nav-link" data-scroll-target="#projections-in-cal-rvomega-how-they-work"><span class="header-section-number">8.7.2</span> Projections in <span class="math inline">\(\cal RV(\Omega)\)</span>: how they work</a></li>
+  </ul></li>
+  <li><a href="#projections-in-the-linear-model" id="toc-projections-in-the-linear-model" class="nav-link" data-scroll-target="#projections-in-the-linear-model"><span class="header-section-number">8.8</span> Projections in the Linear Model</a>
+  <ul class="collapse">
+  <li><a href="#the-least-squares-solution-is-a-projection" id="toc-the-least-squares-solution-is-a-projection" class="nav-link" data-scroll-target="#the-least-squares-solution-is-a-projection"><span class="header-section-number">8.8.1</span> The least-squares solution is a projection</a></li>
+  <li><a href="#application-identifying-outliers" id="toc-application-identifying-outliers" class="nav-link" data-scroll-target="#application-identifying-outliers"><span class="header-section-number">8.8.2</span> Application: identifying outliers</a></li>
+  </ul></li>
+  <li><a href="#orthogonal-bases" id="toc-orthogonal-bases" class="nav-link" data-scroll-target="#orthogonal-bases"><span class="header-section-number">8.9</span> Orthogonal Bases</a>
+  <ul class="collapse">
+  <li><a href="#motivation" id="toc-motivation" class="nav-link" data-scroll-target="#motivation"><span class="header-section-number">8.9.1</span> Motivation</a></li>
+  <li><a href="#the-virtues-of-orthogonality" id="toc-the-virtues-of-orthogonality" class="nav-link" data-scroll-target="#the-virtues-of-orthogonality"><span class="header-section-number">8.9.2</span> The virtues of orthogonality</a></li>
+  <li><a href="#sec-gramschmidt" id="toc-sec-gramschmidt" class="nav-link" data-scroll-target="#sec-gramschmidt"><span class="header-section-number">8.9.3</span> The Gram-Schmidt Method</a></li>
+  </ul></li>
+  <li><a href="#orthogonal-complements-and-direct-sums" id="toc-orthogonal-complements-and-direct-sums" class="nav-link" data-scroll-target="#orthogonal-complements-and-direct-sums"><span class="header-section-number">8.10</span> Orthogonal Complements and Direct Sums</a></li>
+  <li><a href="#sec-fairness" id="toc-sec-fairness" class="nav-link" data-scroll-target="#sec-fairness"><span class="header-section-number">8.11</span> Application: Racial, Gender Etc. Fairness in Algorithms</a>
+  <ul class="collapse">
+  <li><a href="#setting" id="toc-setting" class="nav-link" data-scroll-target="#setting"><span class="header-section-number">8.11.1</span> Setting</a></li>
+  <li><a href="#the-method-of-scutari-et-al" id="toc-the-method-of-scutari-et-al" class="nav-link" data-scroll-target="#the-method-of-scutari-et-al"><span class="header-section-number">8.11.2</span> The method of Scutari <em>et al</em></a></li>
+  </ul></li>
+  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">8.12</span> Your Turn</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Inner Product Spaces</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<div style="page-break-after: always;"></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Goals of this chapter:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The usefulness of vector spaces is greatly enhanced with the addition of an <em>inner product</em> structures. We motivate and define such structures here, and present applications.</p>
+<p>Among other things, we will analyze a method for removing racial, gender etc. bias in machine learning algorithms.</p>
+</div>
+</div>
+<section id="geometric-aspirations" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="geometric-aspirations"><span class="header-section-number">8.1</span> Geometric Aspirations</h2>
+<p>You may recall from your high school geometry course the key concept of perpendicularity, represented by the ⊥ symbol. You may also recall that in 2-dimensional space, given a point P and a line L, the line drawn from point P to the closest point P’ within L is perpendicular to L. The same is true if L is a plane. The point P’ is called the <em>projection</em> of P onto L.</p>
+<p>This was shown in this book’s cover, shown here:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Projections.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Projections</figcaption>
+</figure>
+</div>
+<p>The point at the end of the green vector is projected onto the mustard-colored plane, producing the red vector. It in turn is projected onto the blue line. There are right angles in each case.</p>
+<p>The early developers of linear algebra wanted to extend such concepts to abstract vector spaces. This aids intuition, and has very powerful applications.</p>
+</section>
+<section id="definition" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="definition"><span class="header-section-number">8.2</span> Definition</h2>
+<p>You may have seen dot products in a course on vector calculus or physics. For instance, the dot product of the vectors (3,1,1.5)’ and (0,5,6)’ is</p>
+<p>3x0 + 1x5 + 1.5x6 = 14</p>
+<p>This in fact is a standard inner product on <span class="math inline">\(\cal R^3\)</span>, but the general definition is as follows.</p>
+<blockquote class="blockquote">
+<p>An <em>inner product</em> on a vector space <span class="math inline">\(\cal V\)</span>, denoted by the ``angle brackets’’ notation <span class="math inline">\(&lt;u,v&gt;\)</span>, is a function with two vectors as arguments and a numerical output, with the following properties:</p>
+<ul>
+<li><p><span class="math inline">\(&lt;u,v&gt; = &lt;v,u&gt;\)</span></p></li>
+<li><p>The function is bilinear:</p>
+<p><span class="math display">\[
+&lt;u,av+bw&gt; = a &lt;u,v&gt; + b &lt;u,w&gt;
+\]</span></p></li>
+<li><p><span class="math inline">\(&lt;u,u&gt; ~ \geq 0\)</span>, with equality if and only if <span class="math inline">\(u = 0\)</span>.</p></li>
+</ul>
+</blockquote>
+</section>
+<section id="examples" class="level2 page-columns page-full" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="examples"><span class="header-section-number">8.3</span> Examples</h2>
+<p><span class="math inline">\(\cal R^n\)</span>:</p>
+<p>As noted, ordinary dot product is the most common inner product on this space.</p>
+<p><span class="math inline">\(&lt;(a_1,...,a_n),(b_1,...,b_n&gt; = a_1 b_1 + ... + a_n b_n\)</span></p>
+<p>An <span class="math inline">\(n ~ \textrm{x} ~ n\)</span> symmetric matrix <span class="math inline">\(M\)</span> is called <em>positive definite</em> if</p>
+<p><span class="math display">\[
+w'Mw &gt; 0
+\]</span></p>
+<p>for all nonzero vectors <span class="math inline">\(w\)</span>. (And the term used is <em>nonnegative definite</em> if <span class="math inline">\(&gt;\)</span> is replaced by $ $.) Show that <span class="math inline">\(&lt;u,v&gt; = u'Mv\)</span> is an inner product on <span class="math inline">\(\cal R^n\)</span>.)</p>
+<p><em>C(0,1)</em>:</p>
+<p>One inner product on this space is</p>
+<p><span class="math display">\[
+&lt;f,g&gt; = \int_{0}^{1} f(t) g(t) ~ dt
+\]</span></p>
+<p>For instance, with <span class="math inline">\(f(t) = t^2\)</span> and <span class="math inline">\(g(t) = \sin(t)\)</span>, the inner product can be computed with R:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(t) t<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="cf">function</span>(t) <span class="fu">sin</span>(t)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>fg <span class="ot">&lt;-</span> <span class="cf">function</span>(t) <span class="fu">f</span>(t) <span class="sc">*</span> <span class="fu">g</span>(t)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">integrate</span>(fg,<span class="dv">0</span>,<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.2232443 with absolute error &lt; 2.5e-15</code></pre>
+</div>
+</div>
+<div class="page-columns page-full"><p>This clearly fits most requirements for inner products, but what about <span class="math inline">\(&lt;f,f&gt; = 0\)</span> only if <span class="math inline">\(f = 0\)</span>? A non-0 <span class="math inline">\(f\)</span> will have <span class="math inline">\(f^2(t) &gt; 0\)</span> for at least one <span class="math inline">\(t\)</span>, and by continuity, <span class="math inline">\(f^2(t) &gt; 0\)</span> on an interval containing that <span class="math inline">\(t\)</span>, thus making a nonzero contribution to the integral and thus to the inner product.</p><div class="no-row-height column-margin column-container"><span class="">Note that the 0 vector in this space is the function that is identically 0, not just 0 at some points</span></div></div>
+<p><span class="math inline">\(\cal RV(\Omega)\)</span>:</p>
+<p>From here on, we’ll restrict to the vector space of all random variables on <span class="math inline">\(\Omega\)</span> having finite variance. We define</p>
+<p><span class="math display">\[
+&lt;X,Y&gt; = E(XY)
+\]</span></p>
+<p>The properties of expected value, e.g.&nbsp;linearity, show most of the requirements for an inner product hold. But again, we need to show that</p>
+<p><span class="math display">\[
+&lt;X,X&gt; = E(X^2) &gt; 0
+\]</span></p>
+<p>for any nonzero <span class="math inline">\(X\)</span>, i.e.&nbsp;any <span class="math inline">\(X\)</span> such that <span class="math inline">\(P(X = 0) &lt; 1\)</span>.</p>
+</section>
+<section id="norm-of-a-vector" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="norm-of-a-vector"><span class="header-section-number">8.4</span> Norm of a Vector</h2>
+<p>This concept extends the notion of a the length of a vector, as we know it in <span class="math inline">\(\cal R^2\)</span> and <span class="math inline">\(\cal R^3\)</span>.</p>
+<p><em>Definition:</em></p>
+<blockquote class="blockquote">
+<p>The <em>norm</em> of a vector <span class="math inline">\(x\)</span>, denoted <span class="math inline">\(||x||\)</span>, is</p>
+<p><span class="math display">\[
+(&lt;x,x&gt;)^{0.5}
+\]</span></p>
+<p>The <em>distance</em> from a vector <span class="math inline">\(x\)</span> to a vector <span class="math inline">\(y\)</span> is</p>
+<p><span class="math display">\[
+||y - x||
+\]</span></p>
+</blockquote>
+</section>
+<section id="important-inequalities" class="level2 page-columns page-full" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="important-inequalities"><span class="header-section-number">8.5</span> Important Inequalities</h2>
+<p>These relations are highly useful, as we will see in the sequel.</p>
+<section id="the-cauchy-schwarz-inequality" class="level3" data-number="8.5.1">
+<h3 data-number="8.5.1" class="anchored" data-anchor-id="the-cauchy-schwarz-inequality"><span class="header-section-number">8.5.1</span> The Cauchy-Schwarz Inequality</h3>
+<div id="thm-cs" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 8.1 (Cauchy-Schwarz Inequality) </strong></span>Say <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> are vectors in an inner product space. Then</p>
+<p><span class="math display">\[
+|&lt;u,v&gt;| \leq ||u|| ~ ||v||
+\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>See the Your Turn problem below.</p>
+</div>
+</section>
+<section id="sec-corr" class="level3 page-columns page-full" data-number="8.5.2">
+<h3 data-number="8.5.2" class="anchored" data-anchor-id="sec-corr"><span class="header-section-number">8.5.2</span> Application: Correlation</h3>
+<p><em>Correlation coefficients</em> are ubiquitous in data science. It is well known that their values fall into the interval [-1,1]. Let’s prove that.</p>
+<p>Recall from <a href="Ch2a.html#sec-cov"><span>Section&nbsp;4.1</span></a> the notion of the covariance between two random variables (from which the covariance matrix of a random vector is formed). We remarked that covariance is intuitively like correlation,but that latter is a scaled form. Formally,</p>
+<p><span class="math display">\[
+\rho(X,Y) =
+\frac{E[(X-EX)(Y-EY)]}{\sqrt{Var(X)} \sqrt{Var(Y)}}
+\]</span></p>
+<p>By dividing the covariance by the product of the standard deviations, we obtain a unitless quantity, i.e.&nbsp;free of units such as centimeters and degrees.</p>
+<div class="page-columns page-full"><p>Now, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are in <span class="math inline">\(\cal RV(\Omega)\)</span>. To simplify the algebra, consider the case <span class="math inline">\(EX = EY = 0\)</span>.</p><div class="no-row-height column-margin column-container"><span class="">Actually, we should say, ``Make the transformation <span class="math inline">\(X \rightarrow X - EX\)</span>, and note that it leaves both sides of the above correlation formula unchanged. We can thus assume <span class="math inline">\(EX = EY = 0\)</span>.’’ This is a common strategy, and should be kept in mind.</span></div></div>
+<p>Recalling our inner product for this space, we have</p>
+<p><span class="math display">\[
+&lt;X,Y&gt; = E(XY)
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+||X||^2 = &lt;X,X&gt; = E(X^2) = Var(X)
+\]</span></p>
+<p>with the analogous relations for <span class="math inline">\(Y\)</span>.</p>
+<p>Cauchy=Schwarz then says</p>
+<p><span class="math display">\[
+|E(XY)| \leq \sqrt{Var(X)} \sqrt{Var(Y)}
+\]</span></p>
+<p>which says the correlation is between -1 and 1 inclusive.</p>
+</section>
+<section id="the-triangle-inequality" class="level3" data-number="8.5.3">
+<h3 data-number="8.5.3" class="anchored" data-anchor-id="the-triangle-inequality"><span class="header-section-number">8.5.3</span> The Triangle Inequality</h3>
+<blockquote class="blockquote">
+<p>In the world of ordinary physical geometry, we know the following</p>
+<p><em>The distance from A to B is less than or equal to the sum of the distances from A to C and C to B.</em></p>
+<div id="thm-triangle" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 8.2 (Triangle Inequality) </strong></span>In a general inner product space,</p>
+<p><span class="math display">\[
+||x - z|| \leq ||x - y|| + ||y - z||
+\]</span></p>
+</div>
+<p>::: {.proof}</p>
+<p>See the Your Turn problem below.</p>
+</blockquote></section>
+</section>
+<section id="sec-projections" class="level2 page-columns page-full" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="sec-projections"><span class="header-section-number">8.6</span> Projections</h2>
+<p>As mentioned, the extension of classical geometry to abstract vector spaces has powerful applications. There is no better example of this than the idea of <em>projections</em>.</p>
+<section id="theorem" class="level3 page-columns page-full" data-number="8.6.1">
+<h3 data-number="8.6.1" class="anchored" data-anchor-id="theorem"><span class="header-section-number">8.6.1</span> Theorem</h3>
+<p>We say that vectors <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> are <em>orthogonal</em> if <span class="math inline">\(&lt;u,v&gt; = 0\)</span>. This is the general extension of the notion of perpendicularity in high school geometry. Then we have the following:</p>
+<div id="thm-projection" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 8.3 (Projection Theorem) </strong></span>Consider an inner product space <span class="math inline">\(\cal V\)</span>, with subspace <span class="math inline">\(\cal W\)</span>. Then for any vector <span class="math inline">\(x\)</span> in <span class="math inline">\(\cal W\)</span>, there is a unique vector <span class="math inline">\(z\)</span> in <span class="math inline">\(\cal V\)</span>, such that <span class="math inline">\(z\)</span> is the closest vector to <span class="math inline">\(x\)</span> in <span class="math inline">\(\cal W\)</span>.</p>
+<p>Furthermore, <span class="math inline">\(x-z\)</span> is orthogonal to any vector <span class="math inline">\(r\)</span> in <span class="math inline">\(\cal W\)</span>.</p>
+</div>
+<div class="page-columns page-full"><p>The full proof is beyond the scope of this book, as it requires background in real analysis. Indeed, even the statement of the theorem is not mathematically tight.</p><div class="no-row-height column-margin column-container"><span class="">For readers who do have such background, this is the Hilbert Projection Theorem. “Closest” is defined in terms of infimum, and <span class="math inline">\(\cal W\)</span> needs to be a topologically closed set. See for example <a href="https://en.wikipedia.org/wiki/Hilbert_projection_theorem">the Wikipedia entry.l</a></span></div></div>
+<p>For example, in the case of <span class="math inline">\(R^n\)</span>, It will be seen shortly that for each <span class="math inline">\(\cal W\)</span> in the theorem, there is a matrix <span class="math inline">\(P_{W}\)</span> that implements the projection, i.e.</p>
+<p><span class="math display">\[
+z = P_W x
+\]</span></p>
+<p>Note that projection operators are <em>idempotent</em>, meaning that if you apply a projection twice, the effect is the same as applying it once. In the matrix equation above, this means <span class="math inline">\(P_W^2 = P_W\)</span>. This makes sense; once you drop down to the subspace, there is no further dropping down to that same space.</p>
+<p>The case of <span class="math inline">\(\cal RV(\Omega)\)</span> deserves its own section, coming up next.</p>
+</section>
+<section id="the-pythagorean-theorem" class="level3" data-number="8.6.2">
+<h3 data-number="8.6.2" class="anchored" data-anchor-id="the-pythagorean-theorem"><span class="header-section-number">8.6.2</span> The Pythagorean Theorem</h3>
+<p>That this ancient theorem in geometry still holds in general inner product spaces is a tribute to the power of abstraction.</p>
+<blockquote class="blockquote">
+<p>The Pythagorean Theorem</p>
+<p>If vectors <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are orthogonal, then</p>
+<p><span id="eq-pythag"><span class="math display">\[
+||X+Y||^2 = ||X||^2 + ||Y||^2
+\tag{8.1}\]</span></span></p>
+</blockquote>
+</section>
+</section>
+<section id="projections-incal-rvomega" class="level2 page-columns page-full" data-number="8.7">
+<h2 data-number="8.7" class="anchored" data-anchor-id="projections-incal-rvomega"><span class="header-section-number">8.7</span> Projections in<span class="math inline">\(\cal RV(\Omega)\)</span></h2>
+<div class="page-columns page-full"><p>Here is what this very abstract vector space becomes useful in practical applications, such as will be presented in <a href="#sec-fairness"><span>Section&nbsp;8.11</span></a>. We will need to build a bit of infrastructure.</p><div class="no-row-height column-margin column-container"><span class="">The material in this section is rather involved, but it is needed for the section on racial, gender etc. fairness in machine learning, <a href="#sec-fairness"><span>Section&nbsp;8.11</span></a>, which hopefully makes it worthwhile.</span></div></div>
+<section id="conditional-expectation" class="level3" data-number="8.7.1">
+<h3 data-number="8.7.1" class="anchored" data-anchor-id="conditional-expectation"><span class="header-section-number">8.7.1</span> Conditional expectation</h3>
+<p>One of the Your Turn problems at the end of this chapter covers this setting:</p>
+<blockquote class="blockquote">
+Say we roll a die once, producing <span class="math inline">\(X\)</span> dots. If <span class="math inline">\(X = 6\)</span>, we get a bonus roll, yielding <span class="math inline">\(B\)</span> additional dots; otherwise, <span class="math inline">\(B = 0\)</span>. Let <span class="math inline">\(Y = X+B\)</span>.
+</blockquote>
+<p><em>The basic form:</em></p>
+<p>Now, what is <span class="math inline">\(E(Y | B = 2)\)</span>? If <span class="math inline">\(B = 2\)</span>, then we got the bonus roll, so <span class="math inline">\(X = 6\)</span> and <span class="math inline">\(Y = X + B = 8\)</span>:</p>
+<p><span class="math display">\[
+E(Y | B = 2) = 8
+\]</span></p>
+<p>More generally,</p>
+<p><span class="math display">\[
+E(Y | B = i) =
+\begin{cases}
+3 &amp; i = 0 \\
+6 + i &amp; i = 1,2,3,4,5
+\end{cases}
+\]</span></p>
+<p><em>The random variable form:</em></p>
+<p>The quantity <span class="math inline">\(E(Y | B = i)\)</span>, a number, can be converted to a random variable, in the form of a function of <span class="math inline">\(B\)</span>, which we will call <span class="math inline">\(Q\)</span>, and denoted <span class="math inline">\(E(Y | B)\)</span>, where</p>
+<p><span class="math display">\[
+Q =
+\begin{cases}
+3 &amp; B = 0 \\
+6 + B &amp; B = 1,2,3,4,5
+\end{cases}
+\]</span></p>
+<p><span class="math inline">\(B\)</span> is random, so <span class="math inline">\(r(B)\)</span> is also random, and here is its distribution:</p>
+<blockquote class="blockquote">
+<p><span class="math display">\[
+Q \textrm{ takes on the values } 3,7,8,9,10,11 \textrm{ with
+probabilities }
+\]</span> <span class="math display">\[
+1/6, 1/36, 1/36, 1/36, 1/36, 1/36
+\]</span></p>
+</blockquote>
+<p>We need one more thing:</p>
+<p><em>The Law of Iterated Expectation:</em></p>
+<p>For random variable <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span>, set</p>
+<p><span class="math display">\[
+R = E[V |U]
+\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[
+E(R) = E(V)
+\]</span></p>
+<p>More concisely:</p>
+<p><span id="eq-iterexpect"><span class="math display">\[
+E[E(V|U)] = E(V)
+\tag{8.2}\]</span></span></p>
+<p>Intuitive explanation: Say we wish to compute the mean height <span class="math inline">\(E(H)\)</span> of all students at a university. We might ask each department <span class="math inline">\(D\)</span> to measure their own students, and report to us the resulting mean <span class="math inline">\(E(H|D)\)</span>. We could then average all those departmental means to get the overall mean for the university:</p>
+<p><span class="math display">\[
+E[E(H|D)] = E(H)
+\]</span></p>
+<p>Note, though that that outer <span class="math inline">\(E()\)</span> (the first ‘E’) is a weighted average, since some departments are larger than others. The weights are the distribution of <span class="math inline">\(D\)</span>.</p>
+</section>
+<section id="projections-in-cal-rvomega-how-they-work" class="level3 page-columns page-full" data-number="8.7.2">
+<h3 data-number="8.7.2" class="anchored" data-anchor-id="projections-in-cal-rvomega-how-they-work"><span class="header-section-number">8.7.2</span> Projections in <span class="math inline">\(\cal RV(\Omega)\)</span>: how they work</h3>
+<p>Consider random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. Let <span class="math inline">\(W\)</span> be the set of all functions of <span class="math inline">\(X\)</span> with finite variance, which is a subspace of the vector space <span class="math inline">\(\cal RV(\Omega)\)</span>. The above theorem talks of a closest vector <span class="math inline">\(C\)</span> in <span class="math inline">\(W\)</span> to <span class="math inline">\(Y\)</span>. Let’s see what form <span class="math inline">\(C\)</span> might take in this vector space.</p>
+<p>Remember, the (squared) distance from <span class="math inline">\(Y\)</span> to <span class="math inline">\(C\)</span> is</p>
+<p><span class="math display">\[
+||Y - C||^2 = &lt;Y-C,Y-C&gt; = E[(Y-C)^2]
+\]</span></p>
+<p>That last term is</p>
+<p><span class="math display">\[
+E[ E((Y-C)^2 | X) ]
+\]</span></p>
+<div class="page-columns page-full"><p>For any random variable <span class="math inline">\(Q\)</span> of finite variance, the minimum value of <span class="math inline">\(E[(Q-d)^2]\)</span> over all constants <span class="math inline">\(d\)</span> is attained by <span class="math inline">\(d = E(Q)\)</span>. (See Your Turn problem below.) So, the minimum of <span class="math inline">\(E((Y-C)^2 | C)\)</span>, for all random variables <span class="math inline">\(C\)</span>, is attained by the conditional mean,</p><div class="no-row-height column-margin column-container"><span class="">Note that since we are conditioning on the random variable <span class="math inline">\(C\)</span>, it becomes a constant, like <span class="math inline">\(d\)</span> above.</span></div></div>
+<p><span class="math display">\[
+C = E(Y | X)
+\]</span></p>
+<p>In other words:</p>
+<blockquote class="blockquote">
+<p>Projections in <span class="math inline">\(\cal RV(\Omega)\)</span> are conditional means.</p>
+</blockquote>
+<p>Moreover:</p>
+<p>Since the difference between a vector and its projection onto a subspace is orthogonal to that subspace we have:</p>
+<blockquote class="blockquote">
+<p>The vector <span class="math inline">\(Y - E(Y|X)\)</span> is uncorrelated with <span class="math inline">\(E(Y|X)\)</span>. In other words, the prediction error (also called the <em>residual</em> has 0 correlation with the prediction itself.</p>
+</blockquote>
+</section>
+</section>
+<section id="projections-in-the-linear-model" class="level2 page-columns page-full" data-number="8.8">
+<h2 data-number="8.8" class="anchored" data-anchor-id="projections-in-the-linear-model"><span class="header-section-number">8.8</span> Projections in the Linear Model</h2>
+<p>The case of the linear model will deepen our understanding, and will lead to a method for outlier detection that is commonly used in practice.</p>
+<section id="the-least-squares-solution-is-a-projection" class="level3 page-columns page-full" data-number="8.8.1">
+<h3 data-number="8.8.1" class="anchored" data-anchor-id="the-least-squares-solution-is-a-projection"><span class="header-section-number">8.8.1</span> The least-squares solution is a projection</h3>
+<p>Armed with our new expertise on inner product spaces, we see that <a href="Ch3.html#eq-matrixss">Equation&nbsp;<span>5.1</span></a> is</p>
+<p><span class="math display">\[
+&lt;S-Ab,S-Ab&gt;
+\]</span></p>
+<div class="page-columns page-full"><p>in the vector space <span class="math inline">\(R^n\)</span>, where <span class="math inline">\(n\)</span> is the number of our data points. Since we are minimizing that quantity with respect to <span class="math inline">\(b\)</span>, the solution, <span class="math inline">\(A \widehat{\beta}\)</span>, is the projection of <span class="math inline">\(Y\)</span> onto the subspace.</p><div class="no-row-height column-margin column-container"><span class="">Of course, “data points” means rows in the data frame. In the statistics realm, people often speak of “observations.”</span></div></div>
+<p>But wait – <em>what</em> subspace? Well, it is the subspace consisting of all vectors of the form <span class="math inline">\(Ab\)</span>:</p>
+<blockquote class="blockquote">
+<p>The linear model projects the vector <span class="math inline">\(Y\)</span> onto the column space of <span class="math inline">\(A\)</span>.</p>
+</blockquote>
+</section>
+<section id="application-identifying-outliers" class="level3" data-number="8.8.2">
+<h3 data-number="8.8.2" class="anchored" data-anchor-id="application-identifying-outliers"><span class="header-section-number">8.8.2</span> Application: identifying outliers</h3>
+<p>An <em>outlier</em> is a data point that is rather far from the others. It could be an error, or simply an anomalous case. Even in the latter situation, such a data point could distort our results, so in both cases, identifying outliers is important.</p>
+<p>Recall <a href="Ch3.html#eq-linregformula">Equation&nbsp;<span>5.4</span></a>, the general solution to our linear regression model:</p>
+<p><span class="math display">\[
+\widehat{\beta} = (A'A)^{-1} A'S
+\]</span></p>
+<p>The projection itself is then</p>
+<p><span class="math display">\[
+A \widehat{\beta} = A(A'A)^{-1} A'S = HS
+\]</span></p>
+<p>where the matrix</p>
+<p><span class="math display">\[
+H = A(A'A)^{-1} A'
+\]</span></p>
+<p>which projects <span class="math inline">\(S\)</span> onto the column space of <span class="math inline">\(A\)</span>, is called the <em>hat matrix</em>.</p>
+<p>As a projection, <span class="math inline">\(H\)</span> is idempotent, which one can easily verify by multiplication. <span class="math inline">\(H\)</span> is also symmetric.</p>
+<p>Let <span class="math inline">\(h_{ii}\)</span> denote element <span class="math inline">\(i\)</span> of the diagonal of <span class="math inline">\(H\)</span>, with <span class="math inline">\(x_i\)</span> denoting row <span class="math inline">\(i\)</span> of A. One can show that</p>
+<p><span id="eq-hii"><span class="math display">\[
+h_{ii} = x_{i} (A'A)^{-1} x_i'
+\tag{8.3}\]</span></span></p>
+<p>The quantity <span class="math inline">\(h_{ii}\)</span> is called the <em>leverage</em> for datapoint <span class="math inline">\(i\)</span>.</p>
+<p>Ah, so we know <span class="math inline">\(h_{ii} \geq 0\)</span>. But also, using the material on circular shifts in <a href="Ch1.html#sec-trace"><span>Section&nbsp;2.8.3</span></a>, we have</p>
+<p><span class="math display">\[
+tr(H) =
+tr[\underbrace{A(A'A)^{-1}} A'] =
+tr[A'\underbrace{A(A'A)^{-1}}] = tr(I) = p
+\]</span></p>
+<p>for <span class="math inline">\(A\)</span> of size <span class="math inline">\(n \textrm{x} p\)</span>.</p>
+<p>Thus the average value of <span class="math inline">\(h_{ii}\)</span> is <span class="math inline">\(p/n\)</span>. Accordingly, we might suspect an outlier if <span class="math inline">\(h_{ii}\)</span> is considerably larger than <span class="math inline">\(p/n\)</span>.</p>
+<p>For example, let’s look at the census data we’ve seen earlier:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qeML)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mlb1)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>ourData <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(mlb1[,<span class="sc">-</span><span class="dv">1</span>]) <span class="co"># must have matrix to enable %*%</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>,ourData[,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)])</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1015    3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>S <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(mlb1[,<span class="dv">3</span>])</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>H <span class="ot">&lt;-</span> A <span class="sc">%*%</span> <span class="fu">solve</span>(<span class="fu">t</span>(A) <span class="sc">%*%</span> A) <span class="sc">%*%</span> <span class="fu">t</span>(A)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">diag</span>(H))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Ch5b_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The ratio <span class="math inline">\(p/n\)</span> here is 3/1015, about 0.003. We might take a look at the observations having <span class="math inline">\(h_{ii}\)</span> above 0.01, say.</p>
+</section>
+</section>
+<section id="orthogonal-bases" class="level2 page-columns page-full" data-number="8.9">
+<h2 data-number="8.9" class="anchored" data-anchor-id="orthogonal-bases"><span class="header-section-number">8.9</span> Orthogonal Bases</h2>
+<p>It turns out that a basis for a vector space is especially useful if its members are orthogonal to each other. We’ll see why, and see how to generate such a basis from a nonorthogonal one.</p>
+<p>An orthogonal basis in which every vector has length 1 is called <em>orthonormal</em>. Recall that <span class="math inline">\(x \neq 0\)</span> then <span class="math inline">\(x/||x||\)</span> has length 1, so that any orthogonal basis can easily be converted to orthonormal.</p>
+<section id="motivation" class="level3 page-columns page-full" data-number="8.9.1">
+<h3 data-number="8.9.1" class="anchored" data-anchor-id="motivation"><span class="header-section-number">8.9.1</span> Motivation</h3>
+<p>Say we have a vector space <span class="math inline">\(\cal V\)</span>, a subspace <span class="math inline">\(\cal W\)</span>, and a vector <span class="math inline">\(x\)</span> in <span class="math inline">\(\cal V\)</span>. We know <span class="math inline">\(x\)</span> has a projection in <span class="math inline">\(\cal W\)</span>; call it <span class="math inline">\(z\)</span>. But how do we find <span class="math inline">\(z\)</span>?</p>
+<div class="page-columns page-full"><p>Let <span class="math inline">\(u_1,...,u_k\)</span> be a basis for <span class="math inline">\(\cal W\)</span>. Then there exist <span class="math inline">\(a_1,...,a_k\)</span> such that</p><div class="no-row-height column-margin column-container"><span class="">So we are assuming <span class="math inline">\(\cal W\)</span> (but not necessarily <span class="math inline">\(\cal V\)</span> is finite-dimensional. Using proper math, this could be extended.</span></div></div>
+<p><span id="eq-aiui"><span class="math display">\[
+z = a_1 u_1 + ..., + a_k u_k
+\tag{8.4}\]</span></span></p>
+<p>So we can find <span class="math inline">\(z\)</span> by finding the <span class="math inline">\(a_i\)</span>.</p>
+</section>
+<section id="the-virtues-of-orthogonality" class="level3" data-number="8.9.2">
+<h3 data-number="8.9.2" class="anchored" data-anchor-id="the-virtues-of-orthogonality"><span class="header-section-number">8.9.2</span> The virtues of orthogonality</h3>
+<p>We do have a hint to work from: We know that <span class="math inline">\(x-z\)</span> is orthogonal to every vector in <span class="math inline">\(\cal W\)</span> – including the <span class="math inline">\(u_i\)</span>. So</p>
+<p><span class="math display">\[
+0 = &lt;x-z,u_i&gt; = &lt;x,u_i&gt; - &lt;z,u_i&gt;
+\]</span></p>
+<p>Thus</p>
+<p><span class="math display">\[
+&lt;x,u_i&gt; = &lt;z,u_i&gt;
+\]</span></p>
+<p>Now, say the <span class="math inline">\(u_i\)</span> are orthogonal to each other, and let’s also say they are length 1. Then <span class="math inline">\(&lt;z,u_i&gt; = a_i\)</span>,</p>
+<p>so</p>
+<p><span class="math display">\[
+&lt;x,u_i&gt; = a_i
+\]</span></p>
+<p>So, we’re done! We want to determine the <span class="math inline">\(a_i\)</span>, and now we see that we can easily obtain it by calculating <span class="math inline">\(&lt;x,u_i&gt;\)</span>. So, we have:</p>
+<blockquote class="blockquote">
+<p>Given: a vector space <span class="math inline">\(\cal V\)</span>; a subspace <span class="math inline">\(\cal W\)</span> with orthonormal basis <span class="math inline">\(u_1,...,u_k\)</span>; and a vector <span class="math inline">\(x\)</span> in <span class="math inline">\(\cal V\)</span>. Then the projection of <span class="math inline">\(x\)</span> onto <span class="math inline">\(\cal V\)</span> is equal to</p>
+<p><span id="eq-orthoproj"><span class="math display">\[
+p = &lt;x,u_1&gt; u_1+...+&lt;x,u_k&gt; u_k.
+\tag{8.5}\]</span></span></p>
+<p>And, as a projection, we have that <span class="math inline">\(x-p\)</span> is orthogonal to all the <span class="math inline">\(u_i\)</span>.</p>
+</blockquote>
+<p>But how do we obtain an orthogonal basis, if we only have a nonorthogonal one? That’s next…</p>
+</section>
+<section id="sec-gramschmidt" class="level3" data-number="8.9.3">
+<h3 data-number="8.9.3" class="anchored" data-anchor-id="sec-gramschmidt"><span class="header-section-number">8.9.3</span> The Gram-Schmidt Method</h3>
+<p>As seen in the last section, it is desirable to have an orthogonal basis, and it’s even more convenient if its vectors have length 1 (an <em>orthonormal</em> basis). Converting to length 1 is trivial – just divide the vector by its length.</p>
+<p>But if we start with a basis <span class="math inline">\(b_i\)</span> and generate, say, orthogonal, length 1 vectors <span class="math inline">\(u_1,...,u_m\)</span>, how do we get <span class="math inline">\(u_{m+1}\)</span> from <span class="math inline">\(b_{m+1}\)</span>? the answer lies in <a href="#eq-orthoproj">Equation&nbsp;<span>8.5</span></a>: Take the projection <span class="math inline">\(q\)</span> of <span class="math inline">\(b_{m+1}\)</span> onto the subspace generated by <span class="math inline">\(u_1,...,u_m\)</span>; <span class="math inline">\(b_{m+1}-q\)</span> will be orthogonal to <span class="math inline">\(u_1,...,u_m\)</span>, so we can take <span class="math inline">\(u_{m+1}\)</span> to be <span class="math inline">\(b_{m+1}-q\)</span>! We then normalize it.</p>
+<p>So, here is the process for conversion:</p>
+<blockquote class="blockquote">
+<p><em>The Gram-Schmidt Method</em></p>
+<p>Say we have a basis <span class="math inline">\(b_1,...,b_k\)</span> for some vector space. Convert it to an orthonormal basis as follows.</p>
+<ol type="1">
+<li><p>Set <span class="math inline">\(u_1 = b_1/||b_1||\)</span>.</p></li>
+<li><p>For each <span class="math inline">\(i = 2,...,k\)</span>, find the projection <span class="math inline">\(q\)</span> of <span class="math inline">\(b_{i}\)</span> onto the subspace generated by <span class="math inline">\(u_1,...,u_{i-1}\)</span>. Set <span class="math inline">\(u_i\)</span> to <span class="math inline">\(b_i-q\)</span>, and normalize.</p></li>
+</ol>
+</blockquote>
+</section>
+</section>
+<section id="orthogonal-complements-and-direct-sums" class="level2" data-number="8.10">
+<h2 data-number="8.10" class="anchored" data-anchor-id="orthogonal-complements-and-direct-sums"><span class="header-section-number">8.10</span> Orthogonal Complements and Direct Sums</h2>
+<p>Consider a subspace <span class="math inline">\(W\)</span> of an inner product space <span class="math inline">\(V\)</span>. The set of vectors having inner product 0 with vectors in <span class="math inline">\(W\)</span> is denoted <span class="math inline">\(W^{\perp}\)</span>, known as the <em>orthogonal complement</em> of <span class="math inline">\(W\)</span>. It too is a subpace, and jointly <span class="math inline">\(W\)</span> and <span class="math inline">\(W^{\perp}\)</span> span all of <span class="math inline">\(V\)</span>.</p>
+<p>From <a href="#sec-projections"><span>Section&nbsp;8.6</span></a>, we know that for any <span class="math inline">\(x\)</span> in <span class="math inline">\(V\)</span>, one can uniquely write</p>
+<p><span class="math display">\[
+x = x_1 + x_2
+\]</span></p>
+<p>where <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> are in <span class="math inline">\(W\)</span> and <span class="math inline">\(W^{\perp}\)</span>, respectively.</p>
+<p>Say <span class="math inline">\(u_1,...,u_r\)</span> and <span class="math inline">\(v_1,...,v_s\)</span> are bases for <span class="math inline">\(W\)</span> and <span class="math inline">\(W^{\perp}\)</span>. Then together they form a basis for all of <span class="math inline">\(V\)</span>. Typically they are chosen to be orthonormal.</p>
+<p>Finally, we say that <span class="math inline">\(V\)</span> is the <em>direct sum</em> of <span class="math inline">\(W\)</span> and <span class="math inline">\(W^{\perp}\)</span>, denoted <span class="math inline">\(V = W \oplus W^{\perp}\)</span>.</p>
+</section>
+<section id="sec-fairness" class="level2" data-number="8.11">
+<h2 data-number="8.11" class="anchored" data-anchor-id="sec-fairness"><span class="header-section-number">8.11</span> Application: Racial, Gender Etc. Fairness in Algorithms</h2>
+<p>COMPAS is a software tool designed to aid judges in determining sentences in criminal trials, by assessing the probability that the defendant would recividate. It is a commercial product by Northpointe.</p>
+<p>COMPAS came under intense scrutiny after <a href="https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing">an investigation</a> by <em>ProPublica</em>, which asserted evidence of racial bias against black defendants compared to white defendants with similar profiles. Northpointe contested these findings, asserting that their software treated black and white defendants equally. While this book does not take a position on the specific dispute, this case highlights the critical importance of addressing fairness in machine learning.</p>
+<section id="setting" class="level3" data-number="8.11.1">
+<h3 data-number="8.11.1" class="anchored" data-anchor-id="setting"><span class="header-section-number">8.11.1</span> Setting</h3>
+<p>We consider prediction of a variable <span class="math inline">\(Y\)</span> from a feature vector <span class="math inline">\(X\)</span> and a vector of sensitive variables <span class="math inline">\(S\)</span>. The target <span class="math inline">\(Y\)</span> may be either numeric (in a regression setting) or dichotomous (in a two-class classification setting where <span class="math inline">\(Y\)</span> = 1 or <span class="math inline">\(Y\)</span> = 0). The <span class="math inline">\(m\)</span>-class case can be handled using <span class="math inline">\(m\)</span> dichotomous variables. We will consider only the numeric case here.</p>
+<p>Our goal is to reduce or eliminate the influence of the sensitive variable <span class="math inline">\(S\)</span>. One might ask, why not simply remove <span class="math inline">\(S\)</span> from our model-fitting process? The problem is that <span class="math inline">\(X\)</span> may include variables that are related to <span class="math inline">\(S\)</span>. In the COMPAS example, race has some correlation with another variable, number of prior convictions.</p>
+</section>
+<section id="the-method-of-scutari-et-al" class="level3" data-number="8.11.2">
+<h3 data-number="8.11.2" class="anchored" data-anchor-id="the-method-of-scutari-et-al"><span class="header-section-number">8.11.2</span> The method of Scutari <em>et al</em></h3>
+<p>The basic assumption (BA) amounts to <span class="math inline">\((Y,X,S)\)</span> having a multivariate Gaussian distribution, with <span class="math inline">\(Y\)</span> scalar and <span class="math inline">\(X\)</span> being a vector of length <span class="math inline">\(p\)</span>. For convenience, assume here that <span class="math inline">\(S\)</span> is scalar. As in <a href="#sec-corr"><span>Section&nbsp;8.5.2</span></a>, all variables are assumed centered, i.e.&nbsp;mean 0.</p>
+<p>Let’s review the material in <a href="Ch2a.html#sec-mvn"><span>Section&nbsp;4.2</span></a>: Say we have <span class="math inline">\(W\)</span> with a multivariate normal distribution, and wish to predict one of its components, <span class="math inline">\(Y\)</span>, from a vector <span class="math inline">\(X\)</span> consisting of one or more of the other components, or linear combinations of them. Then</p>
+<ul>
+<li><p>the distribution of <span class="math inline">\(Y|X\)</span> is univeriate normal</p></li>
+<li><p>E(Y|X=t) is a linear function of <span class="math inline">\(t\)</span></p></li>
+<li><p>Var(Y|X=t) is independent of <span class="math inline">\(t\)</span></p></li>
+</ul>
+<p>Let’s add:</p>
+<ul>
+<li>though having 0 correlation does not in general imply independence, it does so in the multivariate normal case</li>
+</ul>
+<p>One first applies a linear model in regressing <span class="math inline">\(X\)</span> on <span class="math inline">\(S\)</span>,</p>
+<p><span class="math display">\[
+E(X | S) = S \gamma
+\]</span></p>
+<p>where <span class="math inline">\(\gamma\)</span> is a length-<span class="math inline">\(p\)</span> coefficient vector. Here we are predicting the predictors (of <span class="math inline">\(Y\)</span>), seemingly odd, but a first step in ridding ourselves from the influence of <span class="math inline">\(S\)</span>.</p>
+<p>Now consider the prediction errors (<em>residuals)</em>,</p>
+<p><span class="math display">\[
+U = X - S \gamma
+\]</span></p>
+<p><span class="math inline">\(U\)</span> can be viewed as the part of <span class="math inline">\(X\)</span> that is unrelated to <span class="math inline">\(S\)</span>; think of <span class="math inline">\(U\)</span> as “having no <span class="math inline">\(S\)</span> content.” Note that <span class="math inline">\(U\)</span> is a vector of length <span class="math inline">\(p\)</span>.</p>
+<p>Note the following:</p>
+<ul>
+<li><p><span class="math inline">\(E(X|S)\)</span> is the projection of <span class="math inline">\(X\)</span> onto the subspace of all functions of <span class="math inline">\(S\)</span>.</p></li>
+<li><p><span class="math inline">\(X - E(X|S)\)</span> (original vector minus the projection) is orthogonal to <span class="math inline">\(S\)</span>.</p></li>
+<li><p>That is,</p>
+<p><span class="math display">\[
+0 = &lt;S,X - E(X|S)&gt; = E[S (X - E(X|S))] = E(SU)
+\]</span></p></li>
+<li><p>Thus <span class="math inline">\(S\)</span> and <span class="math inline">\(U\)</span> are uncorrelated.</p></li>
+<li><p>Due to the BA, that means <span class="math inline">\(S\)</span> and <span class="math inline">\(U\)</span> are independent.</p></li>
+<li><p>In other words, our intution above that <span class="math inline">\(U\)</span> “has no <span class="math inline">\(S\)</span> content” was mathematically correct.</p></li>
+<li><p>Bottom line: Instead of predicting <span class="math inline">\(Y\)</span> from <span class="math inline">\(X\)</span>, use <span class="math inline">\(U\)</span> as the predictor vector. This will enable truly <span class="math inline">\(S\)</span>-free prediction.</p></li>
+</ul>
+<p>Goal achieved.</p>
+</section>
+</section>
+<section id="your-turn" class="level2" data-number="8.12">
+<h2 data-number="8.12" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">8.12</span> Your Turn</h2>
+<p>❄️ <strong>Your Turn:</strong> Consider the space <span class="math inline">\(\cal RV(\Omega)\)</span>. Show that if <span class="math inline">\(&lt;X,X&gt; = 0\)</span>, then <span class="math inline">\(X\)</span> must be the 0 vector. Make use of the facts that <span class="math inline">\(Var(X) = E(X^2) - [E(X)]^2\)</span> and <span class="math inline">\(Var(X) \geq 0\)</span> with equality only of <span class="math inline">\(X = c\)</span> for some constant <span class="math inline">\(c\)</span>.</p>
+<p>❄️ <strong>Your Turn:</strong> Derive the Cauchy-Schwarz Inequality, using the following algebraic outline:</p>
+<ul>
+<li><p>The inequality</p>
+<p><span class="math display">\[
+0 \leq &lt;(au+v),(au+v)&gt;
+\]</span></p>
+<p>holds for any scalar <span class="math inline">\(a\)</span>.</p></li>
+<li><p>Expand the right-hand side (RHS), using the bilinear property of inner products.</p></li>
+<li><p>Minimize the resulting RHS with respect to <span class="math inline">\(a\)</span>.</p></li>
+<li><p>Collect terms to yield</p>
+<p><span class="math display">\[
+&lt;u,v&gt;^2 \leq ||u||^2 ||v||^2
+\]</span></p></li>
+</ul>
+<p>❄️ <strong>Your Turn:</strong> Consider a set of vectors <span class="math inline">\(W = {v_1,...,v_k}\)</span> in an inner product space <span class="math inline">\(V\)</span>. Let <span class="math inline">\(U\)</span> be another vector in <span class="math inline">\(V\)</span>. Show that there exist scalars <span class="math inline">\(a_1,...,a_k\)</span> and a vector <span class="math inline">\(v\)</span> such that</p>
+<p><span class="math display">\[
+u = a_1 v_1 + ... + a_k v_k +v
+\]</span></p>
+<p>with</p>
+<p><span class="math display">\[
+&lt;v,v_i&gt; = 0 \textrm{ for all i}
+\]</span></p>
+<p>❄️ <strong>Your Turn:</strong> Say in <span class="math inline">\(C(0,1)\)</span> we want to approximate functions by polynomials. Specifically, for any <span class="math inline">\(f\)</span> in <span class="math inline">\(C(0,1)\)</span>, we want to find the closest polynomial of degree <span class="math inline">\(m\)</span>. Write functions to do this, with the following call forms:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gsc01</span>(m)  <span class="co"># performs Gram-Schmidt and returns the result</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bestpoly</span>(f,gsout)  <span class="co"># approx. f by output from gsc01</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Hint: Since the vectors here are functions, you’ll need a data structure capable of storing functions. An R <strong>list</strong> will work well here.</p>
+<p>❄️ <strong>Your Turn:</strong> Show that the hat matrix is symmetric.</p>
+<p>❄️ <strong>Your Turn:</strong> Use the Cauchy-Schwarz Inequality to prove the Triangle Inequality, using the following algebraic outline.</p>
+<ul>
+<li><p>Start with</p>
+<p><span class="math display">\[
+||u+v||^2 = &lt;(u+v,u+v&gt;
+\]</span></p></li>
+<li><p>Expand the RHS algebraically.</p></li>
+<li><p>Using Cauchy-Schwarz to make the equation an inequality.</p></li>
+<li><p>Collect terms to yield the Triangle Inequality.</p></li>
+</ul>
+<p>❄️ <strong>Your Turn:</strong> Consider the space <span class="math inline">\(C(0,1)\)</span>. For function <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> of your own choosing, verify that the Cauchy-Schwarz and Triangle Inequalities hold in that case.</p>
+<p>❄️ <strong>Your Turn:</strong> In the die rolling example, verify that</p>
+<p><span class="math display">\[
+E[E(Y|B)] = E(Y)
+\]</span></p>
+<p>❄️ <strong>Your Turn:</strong> Say we roll a die once, producing <span class="math inline">\(X\)</span> dots. If <span class="math inline">\(X = 6\)</span>, we get a bonus roll, yielding <span class="math inline">\(B\)</span> additional dots; otherwise, <span class="math inline">\(B = 0\)</span>. Let <span class="math inline">\(Y = X+B\)</span>…</p>
+<p>❄️ <strong>Your Turn:</strong> Say we roll a die once, producing <span class="math inline">\(X\)</span> dots. If <span class="math inline">\(X = 6\)</span>, we get a bonus roll, yielding <span class="math inline">\(B\)</span> additional dots; otherwise, <span class="math inline">\(B = 0\)</span>. Let <span class="math inline">\(Y = X+B\)</span>. Verify that <span class="math inline">\(X\)</span> and <span class="math inline">\(B\)</span> satisfy the Cauchy-Schwarz and Triangle Inequalities, and also find <span class="math inline">\(\rho(X,B)\)</span>.</p>
+<p>❄️ <strong>Your Turn:</strong> Show that any set of orthogonal vectors is linearly independent.</p>
+<p>❄️ <strong>Your Turn:</strong> Prove <a href="#eq-pythag">Equation&nbsp;<span>8.1</span></a> by expanding the inner product and simplifying algebraically.</p>
+<p>❄️ <strong>Your Turn:</strong> Prove <a href="#thm-triangle">Theorem&nbsp;<span>8.2</span></a>.</p>
+<p>❄️ <strong>Your Turn:</strong> Prove that the vector <span class="math inline">\(Y - E(Y|X)\)</span> is uncorrelated with <span class="math inline">\(E(Y|X)\)</span></p>
+<p>❄️ <strong>Your Turn:</strong> For <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> in <span class="math inline">\(\cal RV(\Omega\)</span>, prove that</p>
+<p><span class="math display">\[
+Var(Y) = E[Var(Y|X)] + Var[E(Y|X)],
+\]</span></p>
+<p>first algebraically using <a href="#eq-iterexpect">Equation&nbsp;<span>8.2</span></a> and the relation <span class="math inline">\(Var(R) = E(R^2) - (E(R))^2\)</span>, and then using the Pythagorean Theorem for a much quicker proof. As before, assume <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are centered.</p>
+<p>❄️ <strong>your turn:</strong> show that <a href="#eq-hii">Equation&nbsp;<span>8.3</span></a> holds. holds. holds.</p>
+<p>❄️ <strong>Your Turn:</strong> Say <span class="math inline">\(\cal V\)</span> is <span class="math inline">\(R^n\)</span>. Form the matrix <span class="math inline">\(A\)</span> whose columns are the <span class="math inline">\(u_i\)</span>, and let <span class="math inline">\(P = AA'\)</span>. Show that</p>
+<p><span class="math display">\[
+Px = &lt;x,u_1&gt; u_1+...+&lt;x,u_k&gt; u_k
+\]</span></p>
+<p>so that <span class="math inline">\(P\)</span> thereby implements the projection.</p>
+<p>❄️ <strong>Your Turn:</strong> Consider the quadratic form <span class="math inline">\(x'Px\)</span>. Show that if <span class="math inline">\(P\)</span> is a projection matrix, the form equals <span class="math inline">\(||Px||^2\)</span>.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./Ch5a.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Vector Spaces</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./Ch5c.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Shrinkage Estimators</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

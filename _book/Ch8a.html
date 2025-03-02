@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Norman Matloff">
-<meta name="dcterms.date" content="2025-03-01">
 
-<title>Powered by Linear Algebra</title>
+<title>Powered by Linear Algebra - 15&nbsp; Neural Networks</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./preface.html" rel="next">
+<link href="./Ch7a.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -75,7 +73,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Ch8a.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Neural Networks</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -102,7 +100,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></span></a>
   </div>
 </li>
@@ -192,7 +190,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Ch8a.html" class="sidebar-item-text sidebar-link">
+  <a href="./Ch8a.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Neural Networks</span></span></a>
   </div>
 </li>
@@ -202,41 +200,31 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#tensors" id="toc-tensors" class="nav-link active" data-scroll-target="#tensors"><span class="header-section-number">15.1</span> Tensors</a></li>
+  <li><a href="#sgd" id="toc-sgd" class="nav-link" data-scroll-target="#sgd"><span class="header-section-number">15.2</span> SGD</a></li>
+  <li><a href="#sgd-and-double-descent" id="toc-sgd-and-double-descent" class="nav-link" data-scroll-target="#sgd-and-double-descent"><span class="header-section-number">15.3</span> SGD and Double Descent</a></li>
+  <li><a href="#low-rank-approximation-of-weight-matrices" id="toc-low-rank-approximation-of-weight-matrices" class="nav-link" data-scroll-target="#low-rank-approximation-of-weight-matrices"><span class="header-section-number">15.4</span> Low Rank Approximation of Weight Matrices</a></li>
+  <li><a href="#role-of-matrix-condition-number" id="toc-role-of-matrix-condition-number" class="nav-link" data-scroll-target="#role-of-matrix-condition-number"><span class="header-section-number">15.5</span> Role of Matrix Condition Number</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Powered by Linear Algebra</h1>
-<p class="subtitle lead">The central role of matrices and vector spaces in Data Science</p>
+<h1 class="title"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Neural Networks</span></h1>
 </div>
 
 
-<div class="quarto-title-meta-author">
-  <div class="quarto-title-meta-heading">Author</div>
-  <div class="quarto-title-meta-heading">Affiliation</div>
-  
-    <div class="quarto-title-meta-contents">
-    <p class="author">Norman Matloff </p>
-  </div>
-    <div class="quarto-title-meta-contents">
-        <p class="affiliation">
-            University of California, Davis
-          </p>
-      </div>
-    </div>
 
 <div class="quarto-title-meta">
 
-      
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">March 1, 2025</p>
-    </div>
-  </div>
+    
   
     
   </div>
@@ -244,9 +232,38 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p><img src="Projections.png" title="Powered by Linear Algebra" class="quarto-cover-image img-fluid"></p>
+<div style="page-break-after: always;"></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Goals of this chapter:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+<section id="tensors" class="level2" data-number="15.1">
+<h2 data-number="15.1" class="anchored" data-anchor-id="tensors"><span class="header-section-number">15.1</span> Tensors</h2>
+</section>
+<section id="sgd" class="level2" data-number="15.2">
+<h2 data-number="15.2" class="anchored" data-anchor-id="sgd"><span class="header-section-number">15.2</span> SGD</h2>
+</section>
+<section id="sgd-and-double-descent" class="level2" data-number="15.3">
+<h2 data-number="15.3" class="anchored" data-anchor-id="sgd-and-double-descent"><span class="header-section-number">15.3</span> SGD and Double Descent</h2>
+</section>
+<section id="low-rank-approximation-of-weight-matrices" class="level2" data-number="15.4">
+<h2 data-number="15.4" class="anchored" data-anchor-id="low-rank-approximation-of-weight-matrices"><span class="header-section-number">15.4</span> Low Rank Approximation of Weight Matrices</h2>
+</section>
+<section id="role-of-matrix-condition-number" class="level2" data-number="15.5">
+<h2 data-number="15.5" class="anchored" data-anchor-id="role-of-matrix-condition-number"><span class="header-section-number">15.5</span> Role of Matrix Condition Number</h2>
+<p><em>https://math.stackexchange.com/questions/4362666/relationship-between-condition-number-of-a-matrix-and-eigenvalues</em></p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -484,11 +501,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./Ch7a.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Recommender Systems</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./preface.html" class="pagination-link">
-        <span class="nav-page-text">Preface</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
