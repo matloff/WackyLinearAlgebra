@@ -72,9 +72,9 @@ rref(ApA)
 
 Aha! Look at that row of 0s!  The row operations process ended
 prematurely. This matrix will be seen to have no inverse.  We say that
-the matrix has *rank* 4 -- 4 nonzero rows --  when it needs to be 5.  We
-still have not formally defined rank, just building intuition, but
-toward that end, let us first formalize the row operations process.
+the matrix has *rank* 4 -- meaning 4 nonzero rows --  when it needs to
+be 5.  We still have not formally defined rank, just building intuition,
+but toward that end, let us first formalize the row operations process.
 
 ## Reduced Row Echelon Form (RREF) of a Matrix
 
@@ -148,12 +148,11 @@ partitioned-matrix form:
 > \end{array}
 > \right )
 > $${#eq-rref}
-> where $I_s$ is an identity matrix of size $s$
+> where $I_s$ is an identity matrix of some size $s$
 > and $U$ has dimension $s \textrm{ x } (n-s)$.
 
-Clearly, the rank of $$
-
-It will turn out the $s$ is the rank of $A$.
+Clearly, the rank of $A_{rref}$ is $s$.  It will turn out the $s$ is the
+rank of $A$ as well.
 
 ### Review of @sec-pencilpaper{#sec-review}
 
