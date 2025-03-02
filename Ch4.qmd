@@ -143,15 +143,17 @@ partitioned-matrix form:
 > $$
 > \left (
 > \begin{array}{rr}
-> I_{r} & U \\
+> I_{s} & U \\
 > 0 & 0  \\
 > \end{array}
 > \right )
 > $${#eq-rref}
-> where $I_r$ is the identity matrix of size $r$
-> and $U$ has dimension $r \textrm{ x } (n-r)$.
+> where $I_s$ is an identity matrix of size $s$
+> and $U$ has dimension $s \textrm{ x } (n-s)$.
 
-It will turn out the $r$ is the rank of $A$.
+Clearly, the rank of $$
+
+It will turn out the $s$ is the rank of $A$.
 
 ### Review of @sec-pencilpaper{#sec-review}
 
@@ -265,12 +267,14 @@ formalize it, which we will do now.
 Let $A$ be any matrix, and let $V$ and $W$ be square, invertible
 matrices with sizes conformable with the products below. Then the column
 rank of $VA$ is equal to that of $A$, and the row rank of
-AW$ are equal to that of $A$.
+$AW$ is equal to that of $A$.
+
 :::
 
 ::: {.proof}
-Say $A$ has rank $r$. Then there exist $r$ (and no more than $r$)
-linearly independent rows of $A$. For convenience of notation, say 
+
+Say $A$ has column rank $r$. Then there exist $r$ (and no more than $r$)
+linearly independent columns of $A$. For convenience of notation, say 
 these are the first $r$ columns, and call them $c_1,...,c_r$. Then 
 the first $r$ columns of $VA$ are $Vc_1,...,Vc_r$, by matrix partitioning. 
 
@@ -278,7 +282,7 @@ Note that for a vector $x$, $Vx = 0$ if and only if $x = 0$. (Just
 multiply $Vx = 0$ on the left by $V^{-1}$.) So a linear combination
 $\lambda_1 c_1+...+\lambda_r c_r$ is 0 if and only if the corresponding
 linear combination $\lambda_1 Vc_1+...+\lambda_r Vc_r$ is 0. Thus 
-the vectors $Vc_i$ are linearly independent, $VA$ has rank $r$.
+the vectors $Vc_i$ are linearly independent, $VA$ has column rank $r$.
 
 The argument for the case of $AW$ is identical, this time involving rows
 of $A$.
@@ -287,33 +291,34 @@ $\square$
 
 :::
 
-This then gives us:
 
-<blockquote>
+::: {#thm-twocolranks}
 
-*Corollary:* The rank of a matrix $B$ is equal to the rank of its RREF,
-$B_{rref}$.  Thus we can determine the rank of $B$ by counting the
-nonzero rows of its RREF.
+The column rank of a matrix $B$ is equal to the column rank
+of its RREF, $B_{rref}$, which in turn is $s$ in @eq-rref.
 
-*Proof:*
+:::
 
-The @thm-ranknotchange
-above theorem says that pre- or postmultiplying $B$ will not 
-change its rank. Then invoke @eq-eeeb.
+::: {.proof}
 
-</blockquote>
+The above @thm-ranknotchange says that pre-postmultiplying $B$ will not
+change its column rank. Then invoke @eq-eeeb.
 
+It is clear that any column in $U$ in @eq-rref can be written as a
+linear combination of the columns of $I_s$. Thus the column rank of $B$
+is $s$.
 
-### Row rank and column rank are equal
+:::
 
-<blockquote>
+::: {#thm-tworankseq} 
 
-*Theorem:* The column rank of a matrix $B$ is equal to that of its RREF.
+## The row rank and column rank of a matrix are equal.
 
-*Proof:* Simply follow the steps in the proof for the row rank case
-above. (Or apply that case to $B'$.)
+EACH ELEMENTARY ROW OP LEAVES ROW RANK UNCHANGED. SAY WE HAVE A NONZRO LIN COM
+LAMBDA_I ETC. SHOW HOW EACH OF THE 3 KINDS OF ROW  OPS JUST CHANGES THE
+LAMBDAS.
 
-</blockquote>
+:::
 
 ### Rank is bounded above by the "narrow" dimension of the matrix
 

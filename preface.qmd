@@ -9,14 +9,19 @@ under Creative Commons Zero v1.0 Universal]{.column-margin}
 ## Subtlety in the Title
 
 Let's start with the title of this book, "Powered by Linear Algebra: The
-central role of matrices and vector spaces in Data Science." A title
-more typical of "math support for field X" books might be "Linear
-Algebra for Data Science," but the goal in the title is to emphasize the
+central role of matrices and vector spaces in Data Science." It's
+important to understand why the title is NOT
+"Linear Algebra for Data Scientists." That latter would connote that
+people in Data Science will first learn linear algebra purely as a
+branch of math in this book, then apply that knowledge in subsequent
+Data Science courses. Instead, the goal in the title is to emphasize the
 fact that:
 
 > Linear algebra is absolutely fundamental to the Data Science field. For
 > us data scientists, it is "our" branch of math. Mastering this branch,
 > which is definitely within the reach of all, pays major dividends.
+> Almost every concept in this book is first motivated by a Data Science
+> application.
 
 ## Philosophy
 
