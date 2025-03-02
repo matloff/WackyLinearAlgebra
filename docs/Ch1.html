@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Powered by Linear Algebra - 2&nbsp; Matrix Multiplication</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Ch2.html" rel="next">
+<link href="./preface.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating slimcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Ch1.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Matrix Multiplication</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Powered by Linear Algebra</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./preface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch1.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Matrix Multiplication</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Matrix Inverse</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch2a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Covariance Matrices, Multivariate Normal Distribution, Delta Method</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Linear Statistical Models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Matrix Rank</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch5a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Vector Spaces</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch5b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Inner Product Spaces</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch5c.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Shrinkage Estimators</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch6a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Eigenanalysis: Properties</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch6b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Principal Components</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch6c.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Singular Value Decomposition</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch6d.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Pseudoinverse and Double Descent</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch7a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Recommender Systems</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Ch8a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Neural Networks</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#a-random-walk-model" id="toc-a-random-walk-model" class="nav-link active" data-scroll-target="#a-random-walk-model"><span class="header-section-number">2.1</span> A Random Walk Model</a></li>
+  <li><a href="#matrix-multiplication" id="toc-matrix-multiplication" class="nav-link" data-scroll-target="#matrix-multiplication"><span class="header-section-number">2.2</span> Matrix Multiplication</a></li>
+  <li><a href="#the-identity-matrix" id="toc-the-identity-matrix" class="nav-link" data-scroll-target="#the-identity-matrix"><span class="header-section-number">2.3</span> The Identity Matrix</a></li>
+  <li><a href="#vectors" id="toc-vectors" class="nav-link" data-scroll-target="#vectors"><span class="header-section-number">2.4</span> Vectors</a></li>
+  <li><a href="#sec-introMCs" id="toc-sec-introMCs" class="nav-link" data-scroll-target="#sec-introMCs"><span class="header-section-number">2.5</span> Application to Markov Chain Transition Matrices</a></li>
+  <li><a href="#network-graph-models" id="toc-network-graph-models" class="nav-link" data-scroll-target="#network-graph-models"><span class="header-section-number">2.6</span> Network Graph Models</a></li>
+  <li><a href="#recommender-systems" id="toc-recommender-systems" class="nav-link" data-scroll-target="#recommender-systems"><span class="header-section-number">2.7</span> Recommender Systems</a></li>
+  <li><a href="#matrix-algebra" id="toc-matrix-algebra" class="nav-link" data-scroll-target="#matrix-algebra"><span class="header-section-number">2.8</span> Matrix Algebra</a>
+  <ul class="collapse">
+  <li><a href="#other-basic-operations" id="toc-other-basic-operations" class="nav-link" data-scroll-target="#other-basic-operations"><span class="header-section-number">2.8.1</span> Other basic operations</a></li>
+  <li><a href="#sec-transpose" id="toc-sec-transpose" class="nav-link" data-scroll-target="#sec-transpose"><span class="header-section-number">2.8.2</span> Matrix transpose</a></li>
+  <li><a href="#sec-trace" id="toc-sec-trace" class="nav-link" data-scroll-target="#sec-trace"><span class="header-section-number">2.8.3</span> Trace of a square matrix</a></li>
+  </ul></li>
+  <li><a href="#partitioned-matrices-an-invaluable-visualization-tool" id="toc-partitioned-matrices-an-invaluable-visualization-tool" class="nav-link" data-scroll-target="#partitioned-matrices-an-invaluable-visualization-tool"><span class="header-section-number">3</span> Partitioned Matrices: an Invaluable Visualization Tool</a>
+  <ul class="collapse">
+  <li><a href="#how-it-works" id="toc-how-it-works" class="nav-link" data-scroll-target="#how-it-works"><span class="header-section-number">3.1</span> How It Works</a></li>
+  </ul></li>
+  <li><a href="#a-further-look-at-markov-chains" id="toc-a-further-look-at-markov-chains" class="nav-link" data-scroll-target="#a-further-look-at-markov-chains"><span class="header-section-number">4</span> A Further Look at Markov Chains</a>
+  <ul class="collapse">
+  <li><a href="#sec-pagerank" id="toc-sec-pagerank" class="nav-link" data-scroll-target="#sec-pagerank"><span class="header-section-number">4.1</span> Application: Google PageRank</a></li>
+  <li><a href="#random-vectors" id="toc-random-vectors" class="nav-link" data-scroll-target="#random-vectors"><span class="header-section-number">4.2</span> Random Vectors</a>
+  <ul class="collapse">
+  <li><a href="#sample-vs.-population" id="toc-sample-vs.-population" class="nav-link" data-scroll-target="#sample-vs.-population"><span class="header-section-number">4.2.1</span> Sample vs.&nbsp;population</a></li>
+  </ul></li>
+  <li><a href="#sec-cov" id="toc-sec-cov" class="nav-link" data-scroll-target="#sec-cov"><span class="header-section-number">4.3</span> Covariance Matrices</a></li>
+  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">4.4</span> Your Turn</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Matrix Multiplication</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<div style="page-break-after: always;"></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Goals of this chapter:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The two main structures in linear algebra are <em>matrices</em> and <em>vector speaces</em>. We begin the book with the former, introduced in this chapter, inroducing matrix multiplication and presenting several applications.</p>
+</div>
+</div>
+<p>In this chapter, we will take as our main application <em>Markov chains</em>, a statistical model having wide applications in medicine, economics and so on. It is very simple to explain, thus making it a good choice for introducing matrices.</p>
+<section id="a-random-walk-model" class="level2 page-columns page-full" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="a-random-walk-model"><span class="header-section-number">2.1</span> A Random Walk Model</h2>
+<p>Let’s consider a <em>random walk</em> on {1,2,3,4,5} in the number line. Time is numbered 1,2,3,… Our current position is termed our <em>state</em>. The notation X<sub>k</sub> = i means that at time k we are in state/position i.</p>
+<p>Our rule will be that at any time k, we flip a coin. If we are currently at position i, we move to either i+1 or i-1, depending on whether the coin landed heads or tails. The exceptions are k = 1 and k = 5, in which case we stay put if tails or move to the adjacent position if heads.</p>
+<p>We can summarize the probabilities with a <em>matrix</em>, a two-dimensional array:</p>
+<p><span class="math display">\[
+P_1 =
+\left (
+\begin{array}{rrrrr}
+0.5 &amp; 0.5 &amp; 0 &amp; 0 &amp; 0\\
+0.5 &amp; 0 &amp; 0.5 &amp; 0 &amp; 0\\
+0 &amp; 0.5 &amp; 0 &amp; 0.5 &amp; 0\\
+0 &amp; 0 &amp; 0.5 &amp; 0 &amp; 0.5\\
+0 &amp; 0 &amp; 0 &amp; 0.5 &amp; 0.5 \\
+\end{array}
+\right )
+\]</span></p>
+<div class="page-columns page-full"><p>For instance, look at Row 2. There are 0.5 values in Columns 1 and 3, meaning there is a 0.5 chance of a move 2 <span class="math inline">\(\rightarrow\)</span> 1, and a 0.5 chance of a move 2 <span class="math inline">\(\rightarrow\)</span> 3. </p><div class="no-row-height column-margin column-container"><span class="">Note that each row in a transition matrix must sum to 1. After, from state i we must go <em>somewhere</em>.</span></div></div>
+<p>We use a subscript 1 here in <span class="math inline">\(P_1\)</span>, meaning “one step.” We go from, say, state 2 to state 1 in one step with probability 0.5. <span class="math inline">\(P_1\)</span> is called the <em>one-step transition matrix</em> (or simply the <em>transition matrix</em>) for this process.</p>
+<p>What about the two-step transition matrix <span class="math inline">\(P_2\)</span>? From state 3, we could go to state 1 in two steps, by two tails flips of the coin. The probability of that is <span class="math inline">\(0.5^2 = 0.25\)</span>. So the row 3, column 1 element in <span class="math inline">\(P_2\)</span> is 0.25. On the other hand, if from state 3 we flip tails then heads, or heads then tails, we are back to state 3. So, the row 3, column 3 element in <span class="math inline">\(P_2\)</span> is 0.25 + 0.25 = 0.5.</p>
+<p>The reader should verify the correctness here:</p>
+<p><span class="math display">\[
+P_2 =
+\left (
+\begin{array}{rrrrr}
+0.5 &amp; 0.25 &amp; 0.25 &amp; 0 &amp; 0\\
+0.25 &amp; 0.5 &amp; 0 &amp; 0.25 &amp; 0\\
+0.25 &amp; 0 &amp; 0.5 &amp; 0 &amp; 0.25\\
+0 &amp; 0.25 &amp; 0 &amp; 0.5 &amp; 0.25\\
+0 &amp; 0 &amp; 0.25 &amp; 0.25 &amp; 0.5 \\
+\end{array}
+\right )
+\]</span></p>
+<p>Well, finding two-step transition probabilities would be tedious in general, but it turns out that is a wonderful shortcut: Matrix multiplication. We will cover this in the next section, but first a couple of preliminaries.</p>
+<p>The above random walk is a <em>Markov chain</em>. The Markov Property says that the system “has no memory.” If say we land at position 2, we will go to 1 or 3 with probability 1/2 <em>no matter what the previous history of the system was</em>; it doesn’t matter <em>how</em> we got to state 3. That in turn comes from the independence of the successive coin flips.</p>
+<p><strong>Notation:</strong> Individual elements of a matrix are usually written with double subscripts. For instance, a<sub>25</sub> will mean the row 2, column 5 element of the matrix <span class="math inline">\(A\)</span>. If say <span class="math inline">\(A\)</span> has more than 9 rows, its row 11, column 5 element is denoted by a<sub>11,5</sub>, using the comma to avoid ambiguity.</p>
+</section>
+<section id="matrix-multiplication" class="level2 page-columns page-full" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="matrix-multiplication"><span class="header-section-number">2.2</span> Matrix Multiplication</h2>
+<p>This is the most fundamental operation in linear algebra. It is defined as follows:</p>
+<blockquote class="blockquote">
+<p>Given matrix A of k rows and m columns and matrix B of m rows and r columns, the product C = AB is a <span class="math inline">\(k \textrm{ x } m\)</span> matrix, whose row i, column j element is</p>
+<p><span class="math display">\[
+a_{i1} b_{i1} +
+a_{i2} b_{i1} + ... +
+a_{m1} b_{m1}
+\]</span></p>
+<p>This is the “dot product” of row i of A and column j of B: Find the products of the paired elements in the two vectors, then sum.</p>
+</blockquote>
+<p>For example, set</p>
+<p><span class="math display">\[
+A = \left (
+\begin{array}{rrr}
+5 &amp; 2 &amp; 6 \\
+1 &amp; 1 &amp; 8 \\
+\end{array}
+\right )
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+B = \left (
+\begin{array}{rr}
+5 &amp; -1 \\
+1 &amp; 0 \\
+0 &amp; 8 \\
+\end{array}
+\right )
+\]</span></p>
+<p>Let’s find the row 2, column 2 element of C = AB. Again, that means taking the dot product of row 2 of A and column 2 of B, which we’ve highlighted below.</p>
+<p><span class="math display">\[
+A = \left (
+\begin{array}{rrr}
+5 &amp; 2 &amp; 6 \\
+\color{red}{1} &amp; \color{red}{1} &amp; \color{red}{1} \\
+\end{array}
+\right )
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+B = \left (
+\begin{array}{rr}
+5 &amp; \color{red}{-1} \\
+1 &amp; \color{red}{0} \\
+0 &amp; \color{red}{8} \\
+\end{array}
+\right )
+\]</span></p>
+<p>The value in question is then</p>
+<p>1 (-1) + 1 (0) + 1 (8) = 7</p>
+<p>Let’s check it, with R:</p>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">.The <strong>rbind</strong> and <strong>cbind</strong> functions (“row bind” and “column bind”) are very handy tools for creating matrices.</span></div></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">6</span>),<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">0</span>),<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">8</span>))</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>a <span class="sc">%*%</span> b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]   27   43
+[2,]    6    7</code></pre>
+</div>
+</div>
+<p>The reader should make sure to check the other elements by hand.</p>
+<div id="tip-conformable" class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Always keep in mind that in the matrix product <span class="math inline">\(AB\)</span>, the number of rows of <span class="math inline">\(B\)</span> must equal the number of columns of <span class="math inline">\(A\)</span>. The two matrices are then said to be <em>conformable</em>.</p>
+</div>
+</div>
+</section>
+<section id="the-identity-matrix" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="the-identity-matrix"><span class="header-section-number">2.3</span> The Identity Matrix</h2>
+<p>The <em>identity matrix</em> <span class="math inline">\(I\)</span> of size n is the nxn matrix with 1s on the diagonal and 0s elsewhere. <span class="math inline">\(IB = B\)</span> and <span class="math inline">\(AI = A\)</span> for any conformable <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>.</p>
+</section>
+<section id="vectors" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="vectors"><span class="header-section-number">2.4</span> Vectors</h2>
+<p>A matrix that has only one row or only one column is called a <em>vector</em>. Depending on which of those two shapes it has, we may refer to it as a <em>row vector</em> or <em>column vector</em>. Usually we will simply say “vector,” in which case it will be meant as a column vector.</p>
+</section>
+<section id="sec-introMCs" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="sec-introMCs"><span class="header-section-number">2.5</span> Application to Markov Chain Transition Matrices</h2>
+<p>Now let’s return to the question of how to easily compute <span class="math inline">\(P_2\)</span>, the two-step transition matrix. It turns out that:</p>
+<blockquote class="blockquote">
+<p>Let P denote the transition matrix of a (finite-state) Markov chain. The k-step transition matrix is <span class="math inline">\(P^k\)</span>.</p>
+</blockquote>
+<p>At first, this may seem amazingly fortuitous, but it makes sense in light of the “and/or” nature of the probability computations involved. Recall our computation for the row 1, column 2 element of <span class="math inline">\(P_2\)</span> above. From state 1, we could either stay at 1 for one flip, then move to 2 on the second flip, or we could go to 2 then return to 1. Each of these has probability 0.5, so the total probability is</p>
+<p><span class="math display">\[
+(0.5)(0.5) + (0.5)(0.5)
+\]</span></p>
+<p>But this is exactly the form of our “dot product” computation in the definition of matrix multiplication,</p>
+<p><span class="math display">\[
+a_{i1} b_{i1} +
+a_{i2} b_{i1} + ... +
+a_{m1} b_{m1}
+\]</span></p>
+<p>Then <span class="math inline">\(P\)</span><sub>3</sub> stores the 3-step probabilities and so on.</p>
+<p>Statisticians and computer scientists like to look at the <em>asymptotic</em> behavior of systems. Let’s see where we might be after say, 6 steps:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>matpow <span class="ot">&lt;-</span> <span class="cf">function</span>(m,k) {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>   nr <span class="ot">&lt;-</span> <span class="fu">nrow</span>(m)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>   tmp <span class="ot">&lt;-</span> <span class="fu">diag</span>(nr)  <span class="co"># identity matrix</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>   <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>k) tmp <span class="ot">&lt;-</span> tmp <span class="sc">%*%</span> m</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>   tmp</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="fu">c</span>(<span class="fl">0.5</span>,<span class="fl">0.5</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="fu">c</span>(<span class="fl">0.5</span>,<span class="dv">0</span>,<span class="fl">0.5</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.5</span>,<span class="dv">0</span>,<span class="fl">0.5</span>,<span class="dv">0</span>), </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>   <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.5</span>,<span class="dv">0</span>,<span class="fl">0.5</span>), <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.5</span>,<span class="fl">0.5</span>))</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">matpow</span>(p1,<span class="dv">6</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         [,1]     [,2]     [,3]     [,4]     [,5]
+[1,] 0.312500 0.234375 0.234375 0.109375 0.109375
+[2,] 0.234375 0.312500 0.109375 0.234375 0.109375
+[3,] 0.234375 0.109375 0.312500 0.109375 0.234375
+[4,] 0.109375 0.234375 0.109375 0.312500 0.234375
+[5,] 0.109375 0.109375 0.234375 0.234375 0.312500</code></pre>
+</div>
+</div>
+<p>So for instance if we start at position 2, there is about an 11% chance that we will be at position 3 at time 6. What about time 25?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">matpow</span>(p1,<span class="dv">25</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          [,1]      [,2]      [,3]      [,4]      [,5]
+[1,] 0.2016179 0.2016179 0.1993820 0.1993820 0.1980001
+[2,] 0.2016179 0.1993820 0.2016179 0.1980001 0.1993820
+[3,] 0.1993820 0.2016179 0.1980001 0.2016179 0.1993820
+[4,] 0.1993820 0.1980001 0.2016179 0.1993820 0.2016179
+[5,] 0.1980001 0.1993820 0.1993820 0.2016179 0.2016179</code></pre>
+</div>
+</div>
+<p>So, no matter which state we start in, at time 25 we are about 20% likely to be at any of the states. In fact, as time n goes to infinity, this probability vector becomes exactly (0.20,0.20,0.20,0.20,0.20), as we will see in the next chapter.</p>
+</section>
+<section id="network-graph-models" class="level2 page-columns page-full" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="network-graph-models"><span class="header-section-number">2.6</span> Network Graph Models</h2>
+<p>There has always been lots of analysis of “Who is connected to who,” but activity soared after the advent of Facebook and the film, <em>A Social Network.</em> See for instance <em>Statistical Analysis of Network Data with R</em> by Eric Kolaczy and Gábor Csárdi. As the authors say,</p>
+<blockquote class="blockquote">
+<p>The oft-repeated statement that “we live in a connected world” perhaps best captures, in its simplicity…From on-line social networks like Facebook to the World Wide Web and the Internet itself, we are surrounded by examples of ways in which we interact with each other. Similarly, we are connected as well at the level of various human institutions (e.g., governments), processes (e.g., economies), and infrastructures (e.g., the global airline network). And, of course, humans are surely not unique in being members of various complex, inter-connected systems. Looking at the natural world around us, we see a wealth of examples of such systems, from entire eco-systems, to biological food webs, to collections of inter-acting genes or communicating neurons.</p>
+</blockquote>
+<p>And of course, at the center of it all is a matrix! Here is why:</p>
+<p>Let’s consider the famous Karate Club dataset:</p>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class=""></span></div></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remotes::install_github("schochastics/networkdata") </span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(networkdata)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(karate)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(igraph)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(karate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Ch1_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="page-columns page-full"><p>There is a link between node 13 and node 4, meaning that club members 13 and 4 are friends.</p><div class="no-row-height column-margin column-container"><span class="">This graph is <em>undirected</em>, as friendship is mutual. Many graphs are <em>directed</em>, but we will assume undirected here.</span></div></div>
+<p>Specifically, the <em>adjacency matrix</em> has row i, column j element as 1 or 0, according to whether a link exists between nodes i and j.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>adjK <span class="ot">&lt;-</span> <span class="fu">as_adjacency_matrix</span>(karate)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>adjK</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>34 x 34 sparse Matrix of class "dgCMatrix"
+                                                                         
+ [1,] . 1 1 1 1 1 1 1 1 . 1 1 1 1 . . . 1 . 1 . 1 . . . . . . . . . 1 . .
+ [2,] 1 . 1 1 . . . 1 . . . . . 1 . . . 1 . 1 . 1 . . . . . . . . 1 . . .
+ [3,] 1 1 . 1 . . . 1 1 1 . . . 1 . . . . . . . . . . . . . 1 1 . . . 1 .
+ [4,] 1 1 1 . . . . 1 . . . . 1 1 . . . . . . . . . . . . . . . . . . . .
+ [5,] 1 . . . . . 1 . . . 1 . . . . . . . . . . . . . . . . . . . . . . .
+ [6,] 1 . . . . . 1 . . . 1 . . . . . 1 . . . . . . . . . . . . . . . . .
+ [7,] 1 . . . 1 1 . . . . . . . . . . 1 . . . . . . . . . . . . . . . . .
+ [8,] 1 1 1 1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+ [9,] 1 . 1 . . . . . . . . . . . . . . . . . . . . . . . . . . . 1 . 1 1
+[10,] . . 1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1
+[11,] 1 . . . 1 1 . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+[12,] 1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+[13,] 1 . . 1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+[14,] 1 1 1 1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1
+[15,] . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1 1
+[16,] . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1 1
+[17,] . . . . . 1 1 . . . . . . . . . . . . . . . . . . . . . . . . . . .
+[18,] 1 1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+[19,] . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1 1
+[20,] 1 1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1
+[21,] . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1 1
+[22,] 1 1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+[23,] . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1 1
+[24,] . . . . . . . . . . . . . . . . . . . . . . . . . 1 . 1 . 1 . . 1 1
+[25,] . . . . . . . . . . . . . . . . . . . . . . . . . 1 . 1 . . . 1 . .
+[26,] . . . . . . . . . . . . . . . . . . . . . . . 1 1 . . . . . . 1 . .
+[27,] . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1 . . . 1
+[28,] . . 1 . . . . . . . . . . . . . . . . . . . . 1 1 . . . . . . . . 1
+[29,] . . 1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1 . 1
+[30,] . . . . . . . . . . . . . . . . . . . . . . . 1 . . 1 . . . . . 1 1
+[31,] . 1 . . . . . . 1 . . . . . . . . . . . . . . . . . . . . . . . 1 1
+[32,] 1 . . . . . . . . . . . . . . . . . . . . . . . 1 1 . . 1 . . . 1 1
+[33,] . . 1 . . . . . 1 . . . . . 1 1 . . 1 . 1 . 1 1 . . . . . 1 1 1 . 1
+[34,] . . . . . . . . 1 1 . . . 1 1 1 . . 1 1 1 . 1 1 . . 1 1 1 1 1 1 1 .</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>adjK[<span class="dv">13</span>,<span class="dv">4</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+</div>
+<p>Accordingly, row 13, column 4 does have a 1 entry.</p>
+<p>As is the case with Markov transition matrices, powers of an adjacency matrix can yield valuable information. In the Markov case, multiplication gives us sums of paired products, computing probabilities. What about the network graph case?</p>
+<p>Here products are of the form 0x0, 0x1, 1x0 or 1x1. If there is a nonzero entry m in row i, column j of the square of the adjacency matrix, that means there were m 1x1 products in that sum, which would correspond to m paths. Let’s look into this.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>adjK2 <span class="ot">&lt;-</span> adjK <span class="sc">%*%</span> adjK</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We see that <strong>adjK2[11,1]</strong> is 2. Inspection of <strong>adjK</strong> shows that its row 11, columns 6 and 7 are 1s, and that rows 6 and 7, column 1 are 1s as well. So there are indeed two two-hop paths from node 11 to node 1, specifically <span class="math inline">\(11 \rightarrow 6 \rightarrow 1\)</span> and $ <span class="math inline">\(11 \rightarrow 7 \rightarrow 1\)</span>. Thus the 2 we see in <strong>adjK2[11,1]</strong> was correct.</p>
+<p>Actually, what is typically of interest is <em>connectivity</em> rather than number of paths. For any given pair of nodes, is there a multihop path between them? Or does the graph break down to several “islands” of connected nodes?</p>
+<p>Again consider the karate club data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">matpow</span>(adjK,<span class="dv">33</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(u <span class="sc">==</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+<p>So, in this graph, no pair of nodes has 0 paths between them. The graph is connected.</p>
+<p>Making this kind of analysis fully correct requires paying attention to things such as cycles. The details are beyond the scope of this book.</p>
+</section>
+<section id="recommender-systems" class="level2 page-columns page-full" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="recommender-systems"><span class="header-section-number">2.7</span> Recommender Systems</h2>
+<p>If you inquire about some item at an online store, the software will also present you with some related items that it thinks would be of interest to you. How does the software make this guess?</p>
+<p>Clearly, the full answer is quite complex. But we can begin to see the process by looking at some real data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>site <span class="ot">&lt;-</span> <span class="st">'http://files.grouplens.org/datasets/movielens/ml-100k/u.data'</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>q <span class="ot">&lt;-</span> <span class="fu">read.table</span>(site)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(q) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'user'</span>,<span class="st">'movie'</span>,<span class="st">'rating'</span>,<span class="st">'userinfo'</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(q)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  user movie rating  userinfo
+1  196   242      3 881250949
+2  186   302      3 891717742
+3   22   377      1 878887116
+4  244    51      2 880606923
+5  166   346      1 886397596
+6  298   474      4 884182806</code></pre>
+</div>
+</div>
+<p>We see for instance that user 22 gave movie 242 a rating of 1. If we want to know some characteristics of this user, his/her ID is 878887116, which we can find in the file <strong>u.user</strong> at the above URL. Other files tell us more about this movie, e.g.&nbsp;its genre, and so on.</p>
+<p>Let’s explore the data a bit:</p>
+<p>How many users and movies are in this dataset?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(q<span class="sc">$</span>user))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 943</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(q<span class="sc">$</span>movie))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1682</code></pre>
+</div>
+</div>
+<p>How many other users rated movie number 242?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(q<span class="sc">$</span>movie <span class="sc">==</span> <span class="dv">242</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 117</code></pre>
+</div>
+</div>
+<p>Did user 22 rate movie 234, for instance?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(q<span class="sc">$</span>user <span class="sc">==</span> <span class="dv">22</span> <span class="sc">&amp;</span> q<span class="sc">$</span>movie <span class="sc">==</span> <span class="dv">234</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>integer(0)</code></pre>
+</div>
+</div>
+<div class="page-columns page-full"><p>Now we can begin to see a solution to the recommender problem. Say we wish to guess whether user 22 would like movie 234. We could look for other users who have rated many of the same movies as user 22, then focus on the ones who rated movie 234. We could average those ratings to obtain a predicted rating for movie 234 by user 22.</p><div class="no-row-height column-margin column-container"><span class="">We could also incorporate the characteristics of user 22 and the others, which may improve our prediction accuracy, but we will not pursue that here.</span></div></div>
+<p>In order to assess interuser similarity of the nature described above, we might form a matrix <span class="math inline">\(S\)</span>, as follows. There would be 943 rows, one for each user, and 1682 columns, one for each moview. The element in row <span class="math inline">\(i\)</span>, column <span class="math inline">\(j\)</span> would be the rating user <span class="math inline">\(i\)</span> gave to movie <span class="math inline">\(j\)</span>. Most of the matrix would be 0s.</p>
+<p>The point of constructing <span class="math inline">\(S\)</span> is that determining the similarity of users becomes a matter of measuring similarity of rows of <span class="math inline">\(S\)</span>. This paves the way to exploiting the wealth of matrix-centric methodology we will develop in this book.</p>
+<p>❄️ <strong>Your Turn:</strong> Write a function with call form</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">makeSimilarityMatrix</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>that takes as input a matrix or data frame of user-movie-rating data, and returns a matrix as described above, i.e.&nbsp;one row per user, one column per movie, and so on.</p>
+</section>
+<section id="matrix-algebra" class="level2" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="matrix-algebra"><span class="header-section-number">2.8</span> Matrix Algebra</h2>
+<section id="other-basic-operations" class="level3" data-number="2.8.1">
+<h3 data-number="2.8.1" class="anchored" data-anchor-id="other-basic-operations"><span class="header-section-number">2.8.1</span> Other basic operations</h3>
+<p>Matrix multiplication may seem odd at first, but other operations are straightforward.</p>
+<p><strong>Addition:</strong> We just add corresponding elements. For instance,</p>
+<p><span class="math display">\[
+A = \left (
+\begin{array}{rrr}
+5 &amp; 2 &amp; 6 \\
+1 &amp; 2.6 &amp; -1.2 \\
+\end{array}
+\right )
+\]</span></p>
+<p><span class="math display">\[
+B = \left (
+\begin{array}{rrr}
+0 &amp; 20 &amp; 6 \\
+3 &amp; 5.8 &amp; 1 \\
+\end{array}
+\right )
+\]</span></p>
+<p><span class="math display">\[
+A+B = \left (
+\begin{array}{rrr}
+5 &amp; 22 &amp; 12 \\
+4 &amp; 8.4 &amp; -0.2 \\
+\end{array}
+\right )
+\]</span></p>
+<p>We do have to make sure the addends match in terms of numbers of rows and columns, 2 and 3 in the example here.</p>
+<p><strong>Scalar multiplication:</strong> Again, this is simply elementwise. E.g. with A as above,</p>
+<p><span class="math display">\[
+1.5 A = \left (
+\begin{array}{rrr}
+7.5 &amp; 3 &amp; 9 \\
+1.5 &amp; 3.9 &amp; -1.8 \\
+\end{array}
+\right )
+\]</span></p>
+<p>(Note: The term <em>scalar</em> simply means a number, rather than a matrix or vector. It will be used quite frequently in this book.)</p>
+<p><strong>Distributive property:</strong></p>
+<p>For matrices A, B and C of suitable conformability (A and B match in numbers of rows and columns, and their common number of columns matches the number of rows in C), we have</p>
+<p>(A+B) C = AC + BC</p>
+</section>
+<section id="sec-transpose" class="level3" data-number="2.8.2">
+<h3 data-number="2.8.2" class="anchored" data-anchor-id="sec-transpose"><span class="header-section-number">2.8.2</span> Matrix transpose</h3>
+<p>This is a very simple but very important operation: We merely exchange rows and columns of the given matrix. For instance, with A as above, its transpose (signified with “’”), is</p>
+<p><span class="math display">\[
+A' = \left (
+\begin{array}{rr}
+5 &amp; 1 \\
+2 &amp; 2.6 \\
+6 &amp; -1.2 \\
+\end{array}
+\right )
+\]</span></p>
+<p>The R function for transpose is <strong>t()</strong>.</p>
+<p>It can be shown that if A and B are conformable, then</p>
+<p>(AB)’ = B’A’</p>
+<p>For some matrices C, we have C’ = C. C is then termed <em>symmetric</em>.</p>
+<p>We will often write a row vector in the form (a,b,c,…). So (5,1,88) means the 1x3 matrix with those elements. If we wish this to be a column vector, we use transpose, so that for instance (5,1,88)’ means a 3x1 matrix.</p>
+</section>
+<section id="sec-trace" class="level3" data-number="2.8.3">
+<h3 data-number="2.8.3" class="anchored" data-anchor-id="sec-trace"><span class="header-section-number">2.8.3</span> Trace of a square matrix</h3>
+<p>The <em>trace</em> of a square matrix <span class="math inline">\(A\)</span> is the sum of its diagonal elements, <span class="math inline">\(tr(A) = \sum_{i=1}^n A_{ii}\)</span>. This measure has various properties, some obvious (trace of the sum is sum of the traces), and some less so, such as:</p>
+<blockquote class="blockquote">
+<p>Suppose <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are square matrices of the same size. Then</p>
+<p><span id="eq-traceab"><span class="math display">\[
+tr(AB) = tr(BA)
+\tag{2.1}\]</span></span></p>
+<p><em>Proof:</em> See Your Turn problem.</p>
+</blockquote>
+<p>❄️ <strong>Your Turn:</strong> Prove <a href="#eq-traceab">Equation&nbsp;<span>2.1</span></a>. Hint: Write out the left-hand side as a double sum. Reverse the order of summation, and work toward the right-hand side.</p>
+<p>And furthermore:</p>
+<blockquote class="blockquote">
+<p>It can be shown that trace is invariant under <em>circular shifts</em>, e.g.&nbsp;<span class="math inline">\(UVW\)</span>, <span class="math inline">\(VWU\)</span> and <span class="math inline">\(WUV\)</span> all have the same trace.</p>
+</blockquote>
+</section>
+</section>
+<section id="partitioned-matrices-an-invaluable-visualization-tool" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Partitioned Matrices: an Invaluable Visualization Tool</h1>
+<p>Here, “visualization” is not a reference to graphics but rather to highlighting certain submatrices.</p>
+<div id="tip-partitioned" class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Crucial Tool
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The techniques introduced in this section will be used throughout the book. Readers should spend extra time here, devising some of their own examples.</p>
+</div>
+</div>
+<section id="how-it-works" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="how-it-works"><span class="header-section-number">3.1</span> How It Works</h2>
+<p>Consider a matrix-vector product Mv. Of course, that means that v is a column vector whose length is equal to the number of columns of M. If M is of size rxs, then v is sx1.</p>
+<p>Let’s denote column j of M by C<sub>j</sub>. Then we will see later in this chapter that</p>
+<p><span class="math display">\[
+Mv =
+v_1 C_{1} +
+v_2 C_{2} + ... +
+v_s C_{s}  
+\]</span></p>
+<p>For instance, take</p>
+<p><span class="math display">\[
+A = \left (
+\begin{array}{rrr}
+5 &amp; 2 &amp; 6 \\
+1 &amp; 2.6 &amp; -1.2 \\
+\end{array}
+\right )
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+v = \left (
+\begin{array}{r}
+10 \\
+2 \\
+1 \\
+\end{array}
+\right )
+\]</span></p>
+<p>The reader should check that</p>
+<p><span class="math display">\[
+10 \left (
+\begin{array}{r}
+5 \\
+1 \\
+\end{array}
+\right )
++
+2 \left (
+\begin{array}{r}
+2 \\
+2.6 \\
+\end{array}
+\right )
++
+1 \left (
+\begin{array}{r}
+6 \\
+-1.2 \\
+\end{array}
+\right )
+= Av
+\]</span></p>
+<p>where the latter is</p>
+<p><span class="math display">\[
+\left (
+\begin{array}{r}
+60 \\
+14  \\
+\end{array}
+\right )
+\]</span></p>
+<p>Note that the above expression,</p>
+<p><span class="math display">\[
+10 \left (
+\begin{array}{r}
+5 \\
+1 \\
+\end{array}
+\right )
++
+2 \left (
+\begin{array}{r}
+2 \\
+2.6 \\
+\end{array}
+\right )
++
+1 \left (
+\begin{array}{r}
+6 \\
+-1.2 \\
+\end{array}
+\right ),
+\]</span></p>
+<p>is a sum of scalar products of vectors, which is called a <em>linear combination</em> of those vectors. The quantities 10, 2 and 1 are the <em>coefficients</em> in that linear combination.</p>
+<p>In other words, we have that:</p>
+<blockquote class="blockquote">
+<p>The product <span class="math inline">\(Av\)</span> of a matrix times a column vector is equal to a linear combination of the columns of the matrix, with coefficients equal to the column vector.</p>
+</blockquote>
+<p>Similarly,</p>
+<blockquote class="blockquote">
+<p>The product <span class="math inline">\(wA\)</span> of a row vector and a matrix is equal to a linear combination of the rows of the matrix, with the coefficients coming from the row vector.</p>
+</blockquote>
+<p>To further illustrate partitioned matrices, write the above matrix <span class="math inline">\(A\)</span> as</p>
+<p><span class="math display">\[
+A =
+\left (
+\begin{array}{rr}
+A_{11} &amp; A_{21} \\
+\end{array}
+\right )
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+A_{11} =
+\left (
+\begin{array}{rr}
+5 &amp; 2 \\
+1 &amp; 2.6 \\
+\end{array}
+\right )
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+A_{12} =
+\left (
+\begin{array}{r}
+6 \\
+-1.2 \\
+\end{array}
+\right )
+\]</span></p>
+<p>Symbolically, <span class="math inline">\(A\)</span> now looks like a 1x2 “matrix.” Similarly, writing</p>
+<p><span class="math display">\[
+v =
+\left (
+\begin{array}{r}
+v_{11} \\
+v_{21} \\
+\end{array}
+\right )
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+v_{11} =
+\left (
+\begin{array}{r}
+10 \\
+2 \\
+\end{array}
+\right )
+\]</span></p>
+<p>and <span class="math inline">\(v_{21} = 1\)</span> (a 1x1 matrix), <span class="math inline">\(v\)</span> looks to be 2x1.</p>
+<p>So, again pretending, treat the product <span class="math inline">\(Av\)</span> as the multiplication of a 1x2 “matrix” and 2x1 “vector”, yielding a 1x1 result,</p>
+<p><span class="math display">\[
+A_{11} v_{11} + A_{12} v_{21}
+\]</span></p>
+<p>But all that pretending actually does give the correct answer!</p>
+<p><span class="math display">\[
+A_{11} v_{11} + A_{12} v_{21} =
+\left (
+\begin{array}{rr}
+5 &amp; 2 \\
+1 &amp; 2.6 \\
+\end{array}
+\right )
+\left (
+\begin{array}{r}
+10 \\
+2 \\
+\end{array}
+\right )
++
+\left (
+\begin{array}{r}
+6 \\
+-1.2 \\
+\end{array}
+\right )
+1
+=
+\left (
+\begin{array}{r}
+60 \\
+14 \\
+\end{array}
+\right )
+\]</span></p>
+<p>We can extend that reasoning further. Say <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are matrices of sizes <span class="math inline">\(m \textrm{x} n\)</span> and <span class="math inline">\(n \textrm{x} k\)</span>, and consider the product <span class="math inline">\(AB\)</span>. Partition <span class="math inline">\(B\)</span> by its columns,</p>
+<p><span class="math display">\[
+B = (B^{(1)},B^{(2)},..., B^{(k)})
+\]</span></p>
+<p>Now pretending that <span class="math inline">\(A\)</span> is a <span class="math inline">\(1 \textrm{x} 1\)</span> “matrix” and <span class="math inline">\(B\)</span> is a<span class="math inline">\(1 \textrm{x} k\)</span> “matrix”, we have</p>
+<p><span class="math display">\[
+AB = (AB^{(1)},AB^{(2)},..., AB^{(k)})
+\]</span></p>
+<p>In other words,</p>
+<blockquote class="blockquote">
+<p>In the product <span class="math inline">\(AB\)</span>, column <span class="math inline">\(j\)</span> is a linear combination of the columns of <span class="math inline">\(A\)</span>, and the coefficients in that linear combination are the elements of column <span class="math inline">\(j\)</span> of <span class="math inline">\(B\)</span>.</p>
+<p>A similar result holds for the row of the product.</p>
+</blockquote>
+<p>❄️ <strong>Your Turn:</strong> Write out the details of that “similar result.”</p>
+</section>
+</section>
+<section id="a-further-look-at-markov-chains" class="level1 page-columns page-full" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> A Further Look at Markov Chains</h1>
+<div class="page-columns page-full"><p>Suppose <span class="math inline">\(X_0\)</span>, our state at time 0, is random. Let <span class="math inline">\(f\)</span> denote its distribution, i.e.&nbsp;its list of probabilities: <span class="math inline">\(f_i = P(X_0 = i)\)</span>, i = 1,…,k, where k is the number of states in the chain. What about <span class="math inline">\(X_1\)</span>, the state at time 1? Let’s find an expression for <span class="math inline">\(g\)</span>, the distribution of <span class="math inline">\(X_1\)</span>.</p><div class="no-row-height column-margin column-container"><span class="">This section will be longer than previous ones, but will bring together many of the concepts. The reader’s patience here will be an investment paying great dividends in the sequel.</span></div></div>
+<p><span class="math display">\[
+g_j = P(X_1 = j)
+= \sum_{i=1}^k P(X_0 = i) P(X_1 = j | X_0 = i)
+= \sum_{i=1}^k f_i a_{ij}
+\]</span></p>
+<p>where <span class="math inline">\(a_{ij}\)</span> is the row i, column j element of the chain’s transition matrix <span class="math inline">\(P\)</span>.</p>
+<p>For example, consider <span class="math inline">\(g_5\)</span>. How could we be at state 5 at time 1? We could start in state 1, probability <span class="math inline">\(f_1\)</span>, then move to state 5, probability <span class="math inline">\(a_{15}\)</span>, for a total probability of <span class="math inline">\(f_1 a_{15}\)</span>. Or, we could start in state 2, probability <span class="math inline">\(f_2\)</span>, then move to state 5, probability <span class="math inline">\(a_{25}\)</span>, for a total probability of <span class="math inline">\(f_2 a_{25}\)</span>. And so on.</p>
+<p>So,</p>
+<p><span class="math display">\[
+g_j = \sum_{i=1}^k f_i a_{ij}
+\]</span></p>
+<p>Putting this is more explicit matrix terms,</p>
+<p><span class="math display">\[
+g = \left (
+\begin{array}{r}
+g_1 \\
+g_2 \\
+... \\
+g_k \\
+\end{array}
+\right )
+=
+\left (
+\begin{array}{r}
+f_1 a_{11} + f_2 a_{21} + ... + f_k a_{k1} \\
+f_1 a_{12} + f_2 a_{22} + ... + f_k a_{k2} \\
+... \\
+f_1 a_{1k} + f_2 a_{2k} + ... + f_k a_{kk} \\
+\end{array}
+\right )
+\]</span></p>
+<p>That last expression is</p>
+<p><span class="math display">\[
+f'P
+\]</span></p>
+<div class="page-columns page-full"><p>so we have the nice compact relation for the distribution of <span class="math inline">\(X_1\)</span> in terms of the distribution of <span class="math inline">\(X_0\)</span>.</p><div class="no-row-height column-margin column-container"><span class="">By the way, it won’t be used here, but just for practice, note that the right-hand side, Pf, here is a linear combination of the columns of P, from our above material on partitioning.</span></div></div>
+<p><span class="math display">\[
+g' = f'P
+\]</span></p>
+<p>And setting h to the distribution of <span class="math inline">\(X_2\)</span>, the same reasoning gives us</p>
+<p><span class="math display">\[
+h' = g'P
+\]</span></p>
+<div class="page-columns page-full"><p>Then since <span class="math inline">\(g' = f'P\)</span>, we have </p><div class="no-row-height column-margin column-container"><span class="">Note that we used the Markov property, “memorylessness.” Once we reach time 1, “time starts over,” regradless of the previous history, i.e.&nbsp;regardless of where we were at time 0.</span></div></div>
+<p><span class="math display">\[
+h' = f'P^2
+\]</span></p>
+<p>and so on. Iterating, we obtain</p>
+<p><span class="math display">\[
+d_j' = d_0' P^j
+\]</span></p>
+<p>where <span class="math inline">\(d_i\)</span> is the distribution of <span class="math inline">\(X_i\)</span>.</p>
+<p>Similarly,</p>
+<p><span class="math display">\[
+d_j' = d_{j-1}' P
+\]</span></p>
+<p>For convenience, let’s take transposes:[Recall that <span class="math inline">\((AB)' = B'A'\)</span>.</p>
+<p><span class="math display">\[
+d_j = P' d_{j-1}
+\]</span></p>
+<p>Now suppose our chain as a long-run distribution, as in {<a href="#sec-introMCs"><span>Section&nbsp;2.5</span></a>}. Let’s call that distribution <span class="math inline">\(\nu\)</span>. By lettting <span class="math inline">\(j \rightarrow \infty\)</span> above, we have</p>
+<p><span class="math display">\[
+\nu = P' \nu
+\]</span></p>
+<p>Since P is known, this provides us with a way to compute <span class="math inline">\(\nu\)</span>. Yes, finding a high power of P would do this too, but that would involve a lot of computation, and even then it would not yield the exact answer. We will return to this in the next chapter.</p>
+<section id="sec-pagerank" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="sec-pagerank"><span class="header-section-number">4.1</span> Application: Google PageRank</h2>
+<p>When Google was first formed, its key internal component was a method to rank Web sites in terms of popularity. They developed such a method, and named it PageRank, a pun combining the term <em>Web page</em> (i.e.&nbsp;Web site) and the name of one of the founders, Larry Page. It’s based on a Markov model.</p>
+<p>The transition matrix is modeled as follows. Row <span class="math inline">\(i\)</span> has <span class="math inline">\(o_i\)</span> nonzero entries, each of which is equal to <span class="math inline">\(1/o_i\)</span>. They define popularity as the resulting long-run distribution, i.e. <span class="math inline">\(\nu\)</span> in <a href="#sec-introMCs"><span>Section&nbsp;2.5</span></a>.</p>
+</section>
+<section id="random-vectors" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="random-vectors"><span class="header-section-number">4.2</span> Random Vectors</h2>
+<p>You are probably familiar with the concept of a random variable, but of even greater importance is random <em>vectors</em>.</p>
+<p>Say we are jointly modeling height, weight, age, systolic blood pressure and cholesterol, and are especially interested in relations between these quantities. We then have the random vector</p>
+<p><span class="math display">\[
+X
+=
+\left (
+\begin{array}{r}
+X_1 \\
+X_2 \\
+X_3 \\
+X_4 \\
+X_5 \\
+  \end{array}
+\right )
+=
+\left (
+\begin{array}{r}
+\textrm{height} \\
+\textrm{weight} \\
+\textrm{age} \\
+\textrm{bp} \\
+\textrm{chol} \\
+  \end{array}
+\right )
+\]</span></p>
+<section id="sample-vs.-population" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="sample-vs.-population"><span class="header-section-number">4.2.1</span> Sample vs.&nbsp;population</h3>
+<p>We may observe <span class="math inline">\(n\)</span> realizations of <span class="math inline">\(X\)</span> in the form of sample data, say on <span class="math inline">\(n = 100\)</span> people. In the statistics world, we treat this data as a random sample from some population, say all Americans. Usually, we are just given the data rather then having actual random sampling, but this view recognizes that there are a lot more people out there than our data.</p>
+<p>We speak of estimating population quantities. For instance, we can estimate the population value $E(X1), i.e.&nbsp;mean of <span class="math inline">\(X_1\)</span> throughout the population, by the sammple analog,</p>
+<p><span class="math display">\[
+\frac{1}{n} \sum_{i=1}^n X_{1j}
+\]</span></p>
+<p>where <span class="math inline">\(X_{ij}\)</span> denotes the value of <span class="math inline">\(X_i\)</span> for the <span class="math inline">\(j^{th}\)</span> person in our sample.</p>
+<p>By contrast, this view is rarely taken in the machine learning community. The data is the data, and the fact that it is a small subset of a much larger group is irrelevant. They will often allude to the randomness of the data by mentioning the “data generating mechanism.”</p>
+</section>
+</section>
+<section id="sec-cov" class="level2 page-columns page-full" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="sec-cov"><span class="header-section-number">4.3</span> Covariance Matrices</h2>
+<p>Recall the notion in statistics of <em>covariance</em>: Given a pair of random variables <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span>, their covariance is defined by</p>
+<p><span class="math display">\[
+Cov(U,V) = E[(U - EU)(V - EV)]
+\]</span></p>
+<div class="page-columns page-full"><p>Loosely speaking, this measures the degree to which the two random variables vary together. Consider for instance human height <span class="math inline">\(H\)</span> and <span class="math inline">\(W\)</span>. Taller people tend to also be heavier. Say we sample many people from a population. Most of those who are taller than average, i.e.&nbsp;<span class="math inline">\(H &gt; EH\)</span> will also be heavier than average, <span class="math inline">\(W &gt; EW\)</span>, making <span class="math inline">\((H - EH)(W - EW) &gt; 0\)</span>. Similarly, shorter people tend to be lighter, but then we still have <span class="math inline">\((H - EH)(W - EW) &gt; 0\)</span>. So, usually <span class="math inline">\((H - EH)(W - EW) &gt; 0\)</span>, and though there will be a number of exceptions, they will be rare enough so that <span class="math inline">\(E[(U - EU)(V - EV)] &gt; 0\)</span>.</p><div class="no-row-height column-margin column-container"><span class="">Of course, the <em>magnitude</em> of <span class="math inline">\((H - EH)(W - EW)\)</span> plays a role too.</span></div></div>
+<p><span class="math inline">\(V\)</span> is usually large – meaning above its mean <span class="math inline">\(EV\)</span> – when <span class="math inline">\(U\)</span> is large (i.e.&nbsp;above <em>its</em> mean), and they are usually both small together. Then <span class="math inline">\(U - EU\)</span> and <span class="math inline">\(V - EV\)</span> are usually of the same sign, thus have a positive product. Then <span class="math inline">\(Cov(U,V) &gt; 0\)</span>. If on the other hand, one is usually small when the other is large and vice versa, <span class="math inline">\(Cov(U,V) &lt; 0\)</span>. This will later lead to the concept of correlation, but that intuition will serve us now.</p>
+<p>Note some properties of scalar covariance.</p>
+<ul>
+<li><p><span class="math inline">\(Cov\)</span> is bilinear, i.e.&nbsp;<span class="math inline">\(Cov(aU,bV) = ab Cov(U,V)\)</span>.</p></li>
+<li><p><span class="math inline">\(Cov(U,U) = Var(U)\)</span>.</p></li>
+<li><p><span class="math inline">\(Var(U+V) = Var(U) + Var(V) + 2 Cov(U,V)\)</span> .</p></li>
+</ul>
+<div class="page-columns page-full"><p>The relations between the various components of <span class="math inline">\(X\)</span> are often characterized by the <em>covariance matrix</em> of <span class="math inline">\(X\)</span>, whose entries consist of scalar covariances between pairs of components of a random vector.  It is defined as follows for a <span class="math inline">\(k\)</span>-component random vector. The covariance matrix, denoted by <span class="math inline">\(Cov(X)\)</span>, is a <span class="math inline">\(k \textrm{ x } k\)</span> matrix, and for <span class="math inline">\(1 \leq i,j \leq k\)</span>,</p><div class="no-row-height column-margin column-container"><span class="">The definition is soewhat overloaded. “Cov” refers both to the covariance between two random variables, say height and weight, and to the covariance of a random vector, which is a matrix. But it will always be clear from context which one is being discussed.</span></div></div>
+<p><span class="math display">\[
+Cov(X_i,X_j) = E[(X_i - EX_i) (X_j - EX_j)]
+\]</span></p>
+<p>As an example, here is data on major league baseball players:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qeML) </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mlb1) </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mlb1) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        Position Height Weight   Age
+1        Catcher     74    180 22.99
+2        Catcher     74    215 34.69
+3        Catcher     72    210 30.78
+4  First_Baseman     72    210 35.43
+5  First_Baseman     73    188 35.71
+6 Second_Baseman     69    176 29.39</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>hwa <span class="ot">&lt;-</span> mlb1[,<span class="sc">-</span><span class="dv">1</span>] </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cov</span>(hwa) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           Height    Weight        Age
+Height  5.3542814  25.61130 -0.8239233
+Weight 25.6113038 433.60211 12.9110576
+Age    -0.8239233  12.91106 18.6145019</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(hwa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            Height    Weight         Age
+Height  1.00000000 0.5315393 -0.08252974
+Weight  0.53153932 1.0000000  0.14371113
+Age    -0.08252974 0.1437111  1.00000000</code></pre>
+</div>
+</div>
+<p>Again, we’ll be discussing more of this later, but what about that negative correlation between height and age? It’s near 0, and this could be a sampling artifact, but another possibility is that in this sport, shorter players do not survive as well.</p>
+<p>Properties of the matrix version of covariance:</p>
+<ul>
+<li>For statistically independent random vectors <span class="math inline">\(Q\)</span> and <span class="math inline">\(W\)</span> of the same length,</li>
+</ul>
+<p><span id="eq-indepcov"><span class="math display">\[
+Cov(Q+W) = Cov(Q) + Cov(W)
+\tag{4.1}\]</span></span></p>
+<ul>
+<li><p>For any nonrandom scalar <span class="math inline">\(c\)</span>, and <span class="math inline">\(Q\)</span> a random vector, we have <span class="math inline">\(Cov(cQ) = c^2 Cov(Q)\)</span>.</p></li>
+<li><p>Say we have a random vector <span class="math inline">\(X\)</span>, of length <span class="math inline">\(k\)</span>, and a nonrandom matrix <span class="math inline">\(A\)</span> of sise <span class="math inline">\(m \textrm{x} k\)</span>. Then <span class="math inline">\(A X\)</span> is a new random vector <span class="math inline">\(Y\)</span> of <span class="math inline">\(m\)</span> components. It turns out that</p>
+<p><span id="eq-acova"><span class="math display">\[
+Cov(Y) = A Cov(X) A'
+\tag{4.2}\]</span></span></p>
+<p>The proof is straightforward but tedious, and it will be omittted.</p></li>
+<li><p><span class="math inline">\(Cov(X)\)</span> is a symmetric matrix. This follows from the symmmetry of the definition.</p></li>
+<li><p>The diagonal elements of <span class="math inline">\(Cov(X)\)</span> are the variances of the random variables <span class="math inline">\(X_i\)</span>. This follows from the definition of the variance of a random variable.</p></li>
+<li><p>If <span class="math inline">\(X\)</span> is a vector of length 1, i.e.&nbsp;a number, then</p></li>
+</ul>
+<p><span class="math display">\[
+Cov(X) = Var(X)
+\]</span></p>
+<ul>
+<li>For any length-<span class="math inline">\(k\)</span> column vector <span class="math inline">\(a\)</span>,</li>
+</ul>
+<p><span class="math display">\[
+Var(a'X) = a' ~ Cov(X) ~ a
+\]</span></p>
+<ul>
+<li>Thus <span class="math inline">\(Cov(X)\)</span> is <em>nonnegative definite</em>, meaning that for any length-<span class="math inline">\(k\)</span> column vector <span class="math inline">\(a\)</span></li>
+</ul>
+<p><span class="math display">\[
+a' Cov(X) a \geq 0
+\]</span></p>
+</section>
+<section id="your-turn" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">4.4</span> Your Turn</h2>
+<p>❄️ <strong>Your Turn:</strong> The long-run probabilities here turned out to be uniform, with value 0.20 for all five states. In fact, that is usually not the case. Make a small change to <span class="math inline">\(P_1\)</span> – remember to keep the row sums to 1 – and compute a high power to check whether the long-run distribution seems nonuniform.</p>
+<p>❄️ <strong>Your Turn:</strong> Not every Markov chain, even ones with finitely many states, have long-run distributions. Some chains have <em>periodic</em> states. It may be, for instance, that after leaving state <span class="math inline">\(i\)</span>, once can return only after an even number of hops. Modify our example chain here so that states 1 and 5 (and all the others) have that property. Then compute <span class="math inline">\(P^n\)</span> for various large values of <span class="math inline">\(n\)</span> and observe oscillatory behavior, rather than long-run convergence.</p>
+<p>❄️ <strong>Your Turn:</strong> Consider the following model of a discrete-time, single-server queue:</p>
+<ul>
+<li><p>Model parameters are p (probability of job completion), q (probability of new job arriving) and m (size of the buffer).</p></li>
+<li><p>Jobs arrive, are served (possibly after queuing) and leave.</p></li>
+<li><p>Only one job can be in service at a time.</p></li>
+<li><p>At each time epoch:</p>
+<ul>
+<li><p>The job currently in service, if any, will complete with probability p.</p></li>
+<li><p>Slightly after a possible job completion, a job in the queue, if any, will start service.</p></li>
+</ul>
+<p>a Slightly after that, anew job will arrive with probability q. If the queue is empty, this job starts service. If not, and if the queue is not full, it will join the queue. Otherwise, the job is discarded.</p></li>
+<li><p>The system is memoryless.</p></li>
+<li><p>The current state is the number of jobs in the system, taking on the values 0,1,2,..,m+1; that last state means m jobs in the queue and 1 in service.</p></li>
+</ul>
+<p>For instance, say p = 0.4, q = 0.2, m = 5, Suppose the current state is 3, so there is a job in service and two jobs in the queue. Our next state will be 2 with probability (0.4) (0.8); it will be 3 with probability (0.4) (0.2), and so on.</p>
+<p>Analyze this system for the case given above.` Find the approximate long-run distribution, and also the proportion of jobs that get discarded.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./preface.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./Ch2.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Matrix Inverse</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
