@@ -71,10 +71,10 @@ rref(ApA)
 ```
 
 Aha! Look at that row of 0s!  The row operations process ended
-prematurely. This matrix has no inverse. We say that the matrix has
-*rank* 4 -- 4 nonzero rows --  when it needs to be 5; we also say that
-the matrix is not of *full rank*. We will return to this point shortly,
-but first we formalize introduce the row operations process.
+prematurely. This matrix will be seen to have no inverse.  We say that
+the matrix has *rank* 4 -- 4 nonzero rows --  when it needs to be 5.  We
+still have not formally defined rank, just building intuition, but
+toward that end, let us first formalize the row operations process.
 
 ## Reduced Row Echelon Form (RREF) of a Matrix
 
@@ -133,6 +133,9 @@ properties:
 The reader should verify that the matrix at the end of 
 @sec-censusrref has these properties. 
 
+It is much easier to gain insight from RREF by viewing it in
+partitioned-matrix form:
+
 > Partioned-Matrix View
 >
 > Say $A$ is of size $m \textrm{ x } n$. Then $A_{rref}$ has the form
@@ -144,8 +147,11 @@ The reader should verify that the matrix at the end of
 > 0 & 0  \\
 > \end{array}
 > \right )
-> $$
-> where $r$ is the rank of $A$ and $U$ has dimension $r \textrm{ x } (n-r)$
+> $${#eq-rref}
+> where $I_r$ is the identity matrix of size $r$
+> and $U$ has dimension $r \textrm{ x } (n-r)$.
+
+It will turn out the $r$ is the rank of $A$.
 
 ### Review of @sec-pencilpaper{#sec-review}
 
@@ -166,6 +172,43 @@ for a sequence of  invertible elementary matrices.
     $B = (E_1)^{-1} (E_2)^{-1} ... (E_k)^{-1} B_{rref}$,
 
     where each $(E_i)^{-1}$ is itself an elementary row operation.
+
+## Formal Definitions
+
+> *Definition:* We say a set of vectors is *linearly dependent* if some
+> linear combination of them (excluding the trivial case in which all the
+> coefficients are 0) equals 0, as in both cases above.  If no nontrival
+> linear combination of the vectors is 0, we say the vectors are *linearly
+> independent*.
+
+Note that a set of vectors is linearly dependent if and only if one of
+the vectors is a linear combination of the others.
+
+So, here is the formal definition of rank:
+
+<blockquote>
+
+*Definition* The *rank* of a matrix $B$ is its maximal number of
+linearly independent rows.
+
+</blockquote>
+
+### Relevance
+
+::: {.callout-important}
+
+## A Central Concept
+As we will see, linear dependence of the rows or columns is the culprit
+in non-full rank matrices. This is a major issue for linear models, in
+which an inverse is necessary (or must be worked-around). 
+
+Moreover, in many cases a matrix will technically be invertible, but
+"approximately" nonfull rank. This can wreak havoc in linear models.
+
+The reader can see, then, that understanding of matrix rank is key. That
+will be our initial motivation for learning about vector spaces
+in the next chapter, which will in turn open the door to many central
+concepts and methods of linear algebra.
 
 
 ## Rank in Relation to Sets of Linear Dependent/Independent Vectors
@@ -189,84 +232,53 @@ the sum of the last two columns of $A$ was equal to the first column:
 
 column1 - column4 - column5 = 0
 
-Write this more fully as a formal linear combination of the columns of
+Write this more fully as an explicit linear combination of the columns of
 this matrix:
 
 1 column1 + 0 column2 + 0 column3 + (-1) column4 + (-1) column5 = 0
 
 The vector of coefficients is (1,0,0,-1,-1).
 
-### Formal definitions
-
-<blockquote>
-
-
-*Definition:* We say a set of vectors is *linearly dependent* if some
-linear combination of them (excluding the trivial case in which all the
-coefficients are 0) equals 0, as in both cases above.  If no nontrival
-linear combination of the vectors is 0, we say the vectors are *linearly
-independent*.
-
-</blockquote>
-
-So, here is the formal definition of rank:
-
-<blockquote>
-
-*Definition* The *rank* of a matrix $B$ is its maximal number of
-linearly independent rows.
-
-</blockquote>
-
-### Relevance
-
-::: {.callout-important}
-
-## A Central Concept
-As we will see, linear dependence of the rows or columns is the culprit
-in non-full rank matrices. This is a major issue for linear models, in
-which an inverse is necessary. 
-
-Moreover, in many cases a matrix will technically be invertible, but
-"approximately" nonfull rank. This can wreak havoc in linear models.
-
-The reader can see, then, that understanding of matrix rank is key. That
-will be our initial motivation for learning about vector spaces
-in the next chapter, which will in turn open the door to many central
-concepts and methods of linear algebra.
-
 :::
 
-## Some Properties of Rank
+### Row and column rank
+
+We have defined the rank of a matrix to be the number of maximally
+linearly independent rows. We'll now call that the *row rank*, and
+define the *column rank* to be the number of maximally 
+linearly independent columns.
+
+As will be seen below, the row and column ranks will turn out to be equal.
+Thus in the sequel, we will use the term *rank* to refer to their common
+value. For now, though the unmodified term "rank" will mean row rank.
+
+## Some Properties of Ranks
 
 In @sec-censusrref, we found the matrix $A'A$ to be noninvertible, as
 its RREF had a row of 0s. We mentioned a relation to rank, but didn't
 formalize it, which we will do now. 
 
-### Yes, one can tell the rank of a matrix by looking at its RREF{#sec-yessamerank}
-
-This is an important property:
+### Rank Is preserved in pre-/post-multiplication by invertible matrices
 
 ::: {#thm-ranknotchange}
 
-## Rank Is Preserved in Pre-/Post-multiplication by Invertible Matrices
-
 Let $A$ be any matrix, and let $V$ and $W$ be square, invertible
-matrices with sizes conformable with the products below. Then the ranks
-of $VA$ and $AW$ are equal to that of $A$.
+matrices with sizes conformable with the products below. Then the column
+rank of $VA$ is equal to that of $A$, and the row rank of
+AW$ are equal to that of $A$.
 :::
 
 ::: {.proof}
-Say $A$ has rank $r$. Then there exist $r$ linearly independent
-columns of $A$. For convenience of notation, say these are the first $r$
-columns, and call them $c_1,...,c_r$. Then the first $r$ columns of
-$WA$ are $Wc_1,...,Wc_r$, by matrix partitioning. 
+Say $A$ has rank $r$. Then there exist $r$ (and no more than $r$)
+linearly independent rows of $A$. For convenience of notation, say 
+these are the first $r$ columns, and call them $c_1,...,c_r$. Then 
+the first $r$ columns of $VA$ are $Vc_1,...,Vc_r$, by matrix partitioning. 
 
 Note that for a vector $x$, $Vx = 0$ if and only if $x = 0$. (Just
 multiply $Vx = 0$ on the left by $V^{-1}$.) So a linear combination
 $\lambda_1 c_1+...+\lambda_r c_r$ is 0 if and only if the corresponding
-linear combination $\lambda_1 Vc_1+...+\lambda_r Vc_r$ is 0. Thus $VA$
-has rank $r$.
+linear combination $\lambda_1 Vc_1+...+\lambda_r Vc_r$ is 0. Thus 
+the vectors $Vc_i$ are linearly independent, $VA$ has rank $r$.
 
 The argument for the case of $AW$ is identical, this time involving rows
 of $A$.
@@ -292,12 +304,7 @@ change its rank. Then invoke @eq-eeeb.
 </blockquote>
 
 
-### Row rank and column rank
-
-We have defined the rank of a matrix to be the number of maximally
-linearly independent rows. We'll now call that the *row rank*, and
-define the *column rank* to be the number of maximally 
-linearly independent columns.
+### Row rank and column rank are equal
 
 <blockquote>
 
@@ -372,6 +379,9 @@ rows and columns of $B$ .
 </blockquote>
 
 ## Your Turn
+
+❄️  **Your Turn:** Show that a set of vectors is linearly dependent if
+and only if one of the vectors is a linear combination of the others.
 
 ❄️  **Your Turn:** Consider an $m \textrm{x} n$ matrix $A$ with $m \geq n$.
 Then consider the partitioned matrix
