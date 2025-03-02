@@ -8,14 +8,14 @@ library(qeML)
 
 {{< pagebreak >}}
 
-# Matrix Multiplication
+# Matrices and Vectors
 
 ::: {.callout-note}
 
 ## Goals of this chapter:
 
 The two main structures in linear algebra are *matrices* and *vector
-speaces*. We begin the book with the former, introduced in this chapter,
+spaces*. We begin the book with the former, introduced in this chapter,
 inroducing matrix multiplication and presenting several applications.
 
 :::
@@ -103,7 +103,90 @@ column 5 element of the matrix $A$. If say $A$ has more than 9 rows,
 its row 11, column 5 element is denoted by a~11,5~, using the comma to
 avoid ambiguity.
 
-## Matrix Multiplication
+## Vectors
+
+Matrices are two-dimensional arrays. One-dimensional arrays are called
+*vectors*, either in row or column form, e.g.
+
+$$
+u = (12,5,13)
+$$
+
+and
+
+$$
+u = 
+\left (
+\begin{array}{r}
+12 \\
+5 \\
+13 \\
+\end{array}
+\right )
+$$
+
+Please note:
+
+* Vectors may also be viewed as one-row or one-column matrices.
+
+* When not otherwise stated, the term "vector" will mean column form.
+
+* The term *scalar* simply means a number, rather than a matrix or
+vector. It will be used quite frequently in this book.
+
+## Addition and Scalar Multiplication{#sec-easyops}
+
+Vectors of the same length may be summed, in elementwise form, e.g.
+
+$$
+\left (
+\begin{array}{r}
+12 \\
+5 \\
+13 \\
+\end{array}
+\right )
++
+\left (
+\begin{array}{r}
+-3 \\
+6 \\
+18.2 \\
+\end{array}
+\right ) =
+\left (
+\begin{array}{r}
+9 \\
+11 \\
+31.2 \\
+\end{array}
+\right )
+$$
+
+Similarly, two matrices may be added, again in elementwise fashion,
+provided the number of rows is the same for both, as well as the same
+condition for number of columns.
+
+Vectors and matrices can be multiplied by scalars, again elementwise,
+e.g.
+
+$$
+0.3
+\left (
+\begin{array}{r}
+6 \\
+15 \\
+\end{array}
+\right ) =
+\left (
+\begin{array}{r}
+1.8 \\
+4.5 \\
+\end{array}
+\right ) 
+$$
+
+## Matrix-Matrix Multiplication
 
 This is the most fundamental operation in linear algebra. It is defined
 as follows:
@@ -479,9 +562,6 @@ $$
 \end{array}
 \right )
 $$
-
-(Note: The term *scalar* simply means a number, rather than a matrix or
-vector. It will be used quite frequently in this book.)
 
 **Distributive property:**
 
