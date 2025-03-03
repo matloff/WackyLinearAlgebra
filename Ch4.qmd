@@ -342,7 +342,7 @@ $$
 a_1 r_1 + ... + a_m r_m \neq 0
 $$
 
-for any of the three elementary operations, the *same* linear
+For any of the three elementary operations, a slightly modified linear
 combination works with the modified matrix:
 
 * Swap rows $i$ and $j$: Swap $a_i$ and $a_j$.
@@ -350,7 +350,7 @@ combination works with the modified matrix:
 * Multiplying row $i$ by a constant $c$. Since $r_i \rightarrow $c r_i$,
 set $a_i \rightarrow (1/c) a_i$.
 
-* Add *c* times row $j$ to row $i$: Set $a_i \rightarrow a_i - c a_j$.
+* Add *c* times row $j$ to row $i$: Set $a_j \rightarrow a_j - c a_j$.
 
 $\square$
 
@@ -363,9 +363,10 @@ $\square$
 
 ::: {.proof}
 
-The lemma shows that the row rank of $A$ is the same as that of $A_{rref}$.
-But that is $s$ in @eq-rref, which we found earlier was equal to the
-column rank of $A$.
+The lemma shows that every nonzero linear combination of the rows of $A$
+corresponds to one for the rows of $A_{rref}$, and vice versa.  Thus the
+row rank of $A$ is the same as that of $A_{rref}$.  But that is $s$ in
+@eq-rref, which we found earlier was equal to the column rank of $A$.
 
 $\square$
 
@@ -386,53 +387,24 @@ linearly independent ones?[There are many subsets of 4 rows that are
 linearly independent. But no sets of 5 or more are linearly independent.
 ]{.column-margin} But it follows from this fact:
 
-<blockquote>
 
-For any $r \textrm{x} s$ matrix $G$, the rank of $G$ is less than or equal to 
-$\min(r,s)$.
+::: {#thm-narrowfat}
 
-</blockquote>
-
-But first, a more far-reaching theorem that will also imply the above:
-
-<blockquote>
-
-*Theorem:* The row rank and column rank of a matrix $B$ are equal.
-
-*Proof:* First, it's clear from looking at the form of the RREF that
-both the row rank and the column rank of an RREF are equal to the number
-of rows with leading 1s. (Again, see the example at the end of
-@sec-censusrref to picture this.) In other words,
-
-$$
-rowrank(B_{rref}) = colrank(B_{rref})
-$$
-
-But we found earlier that
-
-$$
-rowrank(B) =  rowrank(B_{rref})
-$$
-
-and
-
-$$
-colrank(B) =  colrank(B_{rref})
-$$
-
-The result follows.
-
-</blockquote>
-
-And thus:
-
-<blockquote>
-
-*Corollary:* The (common value of) row and column ranks of an $m x n$
+The (common value of) row and column ranks of an $m \textrm{ x } n$
 matrix $B$ must be less than or equal to the minimum of the number of
 rows and columns of $B$ .
 
-</blockquote>
+:::
+
+::: {.proof}
+
+The row rank of $b$ equals its column rank. The former is bounded above
+by $m$ while the latter's bound is $n$.
+
+$\square$
+
+:::
+
 
 ## Your Turn
 
