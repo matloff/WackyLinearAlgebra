@@ -373,10 +373,7 @@ been related to SVD.
 
 ### Motivating example
 
-Let's consider the Million Song Dataset, varous versions of which are on
-the Web. Ours is the one with 515345 rows and 91 columns. The first
-column is the year of release, followed by 90 columns of various audio
-measurements. The goal is to predict the year from the audio variables.
+Let's consider the Million Song Dataset from @sec-millionsong.
 
 ### Overfitting and BEYOND
 

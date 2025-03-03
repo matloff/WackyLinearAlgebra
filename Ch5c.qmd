@@ -19,14 +19,7 @@ data science applications, solutions with smaller norms may be more
 accurate. This point is explored here.
 
 :::
-
-## Ridge Regression
-
-In seminal paper, Hoerl and Kennard[*Technometrids*,
-Februaru1970]{.column-margin} discussed the problem of
-*multicollinearity* of predictor variables in a linear model.  
-
-### Multicollinearity{#sec-nearly}
+## Multicollinearity{#sec-nearly}
 
 The term *multicollinearity* refers to settings in which the following concerns
 arise:
@@ -46,7 +39,7 @@ bullet points, minus the word "nearly." However, informally, the term
 *multicollinearity* is usually taken to mean the approximate condition.)
 
 That latter point is often quantified by the *Variance Inflation
-Factor*. To motivate it, consider the usual "R-squared" value
+Factor*. To motivate it, consider the "R-squared" value
 from linear regression analyis, which is the squared correlation between
 "Y" and predicted "Y". Let $R^2_j$ denote that measure in the case of
 predicting column $j$ of $A$ from the other columns. The quantity
@@ -56,13 +49,70 @@ VIF_j = \frac{1}{1-R^2_j}
 $$
 
 then measures the negative impact due to multicollinearity on estimating 
-$\widehat{\beta}_j$.
+$\widehat{\beta}_j$. The intuition is that, say, column 3 of $A$ can be
+predicte well using a linear model, then that column is approximately
+equal to a linear combination of the other columns. This is worrisome in
+light of the problems described above.
 
 Needless to say, the word "nearly" above, e.g. in "nearly not of full
-rank," is vague, and leaves open the question of "How near is 'near'?"
-and "What can we do about it?" Ridge regression is Hoerl's and
-Kennards's answer to the latter question, and it is based on a parameter
-that can be used to explore the former one.
+rank," is vague, and leaves open the question of "What can we do about
+it?" We will present several answers to these questions in this and the
+succeeding chapters.
+
+### Example: Million Song dataset{#sec-millionsong}
+
+Let's consider the Million Song Dataset, varous versions of which are on
+the Web. Ours is the one with 515345 rows and 91 columns. The first
+column is the year of release, followed by 90 columns of various audio
+measurements. The goal is to predict the year, **V1**, from the audio variables
+**V2** through **V91**.
+
+The function **regclass::VIF** will compute the VIF values for us.
+
+``` r
+> lmout <- lm(V1 ~ .,data=s50)
+> VIF(lmout)
+     V2       V3       V4       V5       V6       V7       V8       V9
+3.215081 2.596474 4.236853 7.414375 1.534492 5.844729 2.794018 3.192805
+     V10      V11      V12      V13      V14      V15      V16      V17
+2.072851 3.673590 4.705886 1.708520 2.446279 2.827296 3.672250 7.409782
+     V18      V19      V20      V21      V22      V23      V24      V25
+2.634033 9.472261 4.217311 7.147952 5.122114 7.984860 9.675134 3.591586
+     V26      V27      V28      V29      V30      V31      V32      V33
+1.818596 1.758043 3.879968 1.663670 2.108174 2.321385 2.056017 1.854913
+     V34      V35      V36      V37      V38      V39      V40      V41
+3.011534 2.040587 2.760111 2.879667 1.918229 2.176048 2.074103 1.946859
+     V42      V43      V44      V45      V46      V47      V48      V49
+1.704259 2.138794 1.690651 1.556782 1.817380 3.000759 1.547592 2.140282
+     V50      V51      V52      V53      V54      V55      V56      V57
+2.496121 1.612253 2.042571 2.208492 1.723669 2.024290 2.016403 2.033654
+     V58      V59      V60      V61      V62      V63      V64      V65
+2.004260 2.998469 2.074152 3.410124 2.153116 1.378160 3.270617 1.502543
+     V66      V67      V68      V69      V70      V71      V72      V73
+2.581171 1.725809 2.167673 2.379354 2.062862 1.703360 2.036596 1.984427
+     V74      V75      V76      V77      V78      V79      V80      V81
+2.557163 1.465020 1.515436 2.260728 1.840509 2.078497 3.604771 1.595064
+     V82      V83      V84      V85      V86      V87      V88      V89
+2.528307 2.005876 2.283956 1.448379 1.895053 1.601004 1.581099 2.252362
+     V90      V91
+1.332590 1.570891
+```
+
+As a rough guide, values of VIF about 5.0 are considered concerning by
+many analysts. Under that criterion, variables **V5**, **V7**, **V17**
+and so on look troublesome.
+
+What can be done? One simple approach would be to delete those columns
+from the dataset. This is indeed is a common solution, but another is
+*ridge regression*, which we present next.
+
+
+## Ridge Regression
+
+In seminal paper, Hoerl and Kennard[*Technometrids*,
+Februaru1970]{.column-margin} discussed the problem of
+*multicollinearity* of predictor variables in a linear model.  
+
 
 ### The ridge solution
 
@@ -119,9 +169,9 @@ more precise below.
 ### Modern view{#sec-pgtn}
 
 There are many ways to deal with multicollinearity, which we must remind
-the reader only concerns *approximate* linear dependence pf the columns of
-$A$. These days, ridge is often used for situations in which there is
-*exact* linear dependence.
+the reader only concerns *approximate* linear dependence pf the columns
+of $A$. These days, many analysts go further, using ridge for situations
+in which there is *exact* linear dependence.
 
 We saw such a setting in @sec-censusrref. There we deliberately induced
 exact linear dependence by inclusion of both male and female dummy
@@ -148,8 +198,8 @@ Such deletion is easy in this case, but for large $p$, say in the
 hundreds or even more, some analysts prefer the convenience of ridge.
 
 Of course, there is still the issue of how to choose the value of
-$\lambda$. This is beyond the scope of this book, which focuses on linar
-algebra.
+$\lambda$. One common approach is *cross-validation*, to be presented in
+@sec-lassoxval.
 
 ### Formalizing the notion of shrinkage
 
