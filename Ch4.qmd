@@ -278,7 +278,7 @@ In @sec-censusrref, we found the matrix $A'A$ to be noninvertible, as
 its RREF had a row of 0s. We mentioned a relation to rank, but didn't
 formalize it, which we will do now. 
 
-### Rank Is preserved in pre-/post-multiplication by invertible matrices
+### Rank is preserved in pre-/post-multiplication by invertible matrices
 
 ::: {#thm-ranknotchange}
 
@@ -326,15 +326,48 @@ It is clear that any column in $U$ in @eq-rref can be written as a
 linear combination of the columns of $I_s$. Thus the column rank of $B$
 is $s$.
 
+$\square$
+
 :::
 
+::: {#lem-elemnotchangerank} 
+## The application of an elementary row operation on a matrix will will leave the row rank unchanged.
+:::
+
+::: {.proof}
+Let $r_i, i=1,...,m$ denote the rows of the matrix. Consider a 
+linear combination
+
+$$
+a_1 r_1 + ... + a_m r_m \neq 0
+$$
+
+for any of the three elementary operations, the *same* linear
+combination works with the modified matrix:
+
+* Swap rows $i$ and $j$: Swap $a_i$ and $a_j$.
+
+* Multiplying row $i$ by a constant $c$. Since $r_i \rightarrow $c r_i$,
+set $a_i \rightarrow (1/c) a_i$.
+
+* Add *c* times row $j$ to row $i$: Set $a_i \rightarrow a_i - c a_j$.
+
+$\square$
+
+:::
+
+
 ::: {#thm-tworankseq} 
-
 ## The row rank and column rank of a matrix are equal.
+:::
 
-EACH ELEMENTARY ROW OP LEAVES ROW RANK UNCHANGED. SAY WE HAVE A NONZRO LIN COM
-LAMBDA_I ETC. SHOW HOW EACH OF THE 3 KINDS OF ROW  OPS JUST CHANGES THE
-LAMBDAS.
+::: {.proof}
+
+The lemma shows that the row rank of $A$ is the same as that of $A_{rref}$.
+But that is $s$ in @eq-rref, which we found earlier was equal to the
+column rank of $A$.
+
+$\square$
 
 :::
 
