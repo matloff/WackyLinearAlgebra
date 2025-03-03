@@ -116,9 +116,9 @@ $$
 $D^k$ is equal to the diagonal matrix with elements $d_k^k$, so the
 computation of $M^k$ is easy.
 
-<blockquote>
+::: {#thm-symmeig}
 
-*Theorem:* Any symmetric matrix $M$ has the following properties
+Any symmetric matrix $M$ has the following properties
 
 * $M$ is diagonalizable. 
 
@@ -133,7 +133,11 @@ computation of $M^k$ is easy.
 * Moreover, the rank of $M$ is equal to the number of nonzero
   eigenvalues of $M$.
 
-*Proof:* Use partitioned matrices. 
+:::
+
+::: {.proof}
+
+Use partitioned matrices. 
 
 Let $D = diag(d_1,...,d_m)$, where the $d_i$ are the eigenvalues of $M$,
 corresponding to eigenvectors $P_i$. Set the latter to have length 1,
@@ -165,9 +169,11 @@ Regarding rank, @thm-ranknotchange tells us that pre- or postmultiplying
 by an invertible matrix does not change rank, and clearly the rank of a
 diagonal matrix is the number of nonzero elements.
 
-</blockquote>
+$\square$
 
-*Example:*
+:::
+
+### Example: Census dataset
 
 Let's illustrate all this with the data in @sec-pgtn. We will form the
 matrix $A'A$ in @sec-linregformula, which as mentioned, is symmetric.
@@ -195,6 +201,8 @@ Yes, that first column is indeed an eigenvector, with the claimed eigenvalue.
 
 Note that the expected 0 eigenvalue shows up as 2.801489e-12, quite
 small but nonzero, due to roundoff error.
+
+## Application to Detecting Multicollinearity
 
 ## Computation: the Power Method
 
