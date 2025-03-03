@@ -73,7 +73,13 @@ rref(ApA)
 Aha! Look at that row of 0s!  The row operations process ended
 prematurely. This matrix will be seen to have no inverse.  We say that
 the matrix has *rank* 4 -- meaning 4 nonzero rows --  when it needs to
-be 5.  We still have not formally defined rank, just building intuition,
+be 5.  
+
+Though we have motivated the concept of matrix rank here with a linear
+model example, and will do so below,  the notion pervades all of linear
+algebra, as will be seen in the succeeding chapters.
+
+We still have not formally defined rank, just building intuition,
 but toward that end, let us first formalize the row operations process.
 
 ## Reduced Row Echelon Form (RREF) of a Matrix
@@ -154,7 +160,7 @@ partitioned-matrix form:
 Clearly, the rank of $A_{rref}$ is $s$.  It will turn out the $s$ is the
 rank of $A$ as well.
 
-### Review of @sec-pencilpaper{#sec-review}
+### Recap of @sec-pencilpaper{#sec-review}
 
 * Each row operation can be performed via premultiplication by an
 elementary matrix. Each such matrix is invertible, and its inverse is
@@ -176,14 +182,47 @@ for a sequence of  invertible elementary matrices.
 
 ## Formal Definitions
 
+> *Definition:* A *linear combination* of vectors $v_1,v_2,...v_k$ is a
+> sum of scalar multiples of the vectors, i.e.
+> 
+> $$
+> a_1 v_1 + ... + a_k v_k
+> $$
+> 
+> where the $a_i$ are scalars.
+
+(The reader may wish to review @sec-easyops.)
+
 > *Definition:* We say a set of vectors is *linearly dependent* if some
 > linear combination of them (excluding the trivial case in which all the
 > coefficients are 0) equals 0, as in both cases above.  If no nontrival
 > linear combination of the vectors is 0, we say the vectors are *linearly
 > independent*.
 
-Note that a set of vectors is linearly dependent if and only if one of
-the vectors is a linear combination of the others.
+For instance, consider the matrix
+
+$$
+\left ( \begin{array}{rrr} 
+1 & 3 & 1 \\
+1 & 9 & 4 \\
+0 & 8 & 0 \\
+\end{array} \right )
+$$
+
+Denote its columns by $c_1$, $c_2$ and $c_3$. Observe that
+
+$$
+(-1) c_1 + (1) c_2 + (-2) c_3 =
+\left (
+\begin{array}{r}
+0 \\
+0 \\
+0 \\
+\end{array}
+\right )
+$$
+
+Then $c_1$, $c_2$ and $c_3$ are not linearly independent.
 
 So, here is the formal definition of rank:
 
@@ -194,27 +233,9 @@ linearly independent rows.
 
 </blockquote>
 
-### Relevance
-
-::: {.callout-important}
-
-## A Central Concept
-As we will see, linear dependence of the rows or columns is the culprit
-in non-full rank matrices. This is a major issue for linear models, in
-which an inverse is necessary (or must be worked-around). 
-
-Moreover, in many cases a matrix will technically be invertible, but
-"approximately" nonfull rank. This can wreak havoc in linear models.
-
-The reader can see, then, that understanding of matrix rank is key. That
-will be our initial motivation for learning about vector spaces
-in the next chapter, which will in turn open the door to many central
-concepts and methods of linear algebra.
-
-
 ## Rank in Relation to Sets of Linear Dependent/Independent Vectors
 
-Here we use rank as our entre'e to key concepts about sets of vectors.
+Here we use rank as our path to key concepts about sets of vectors.
 
 ### Motivation
 
@@ -240,8 +261,6 @@ this matrix:
 
 The vector of coefficients is (1,0,0,-1,-1).
 
-:::
-
 ### Row and column rank
 
 We have defined the rank of a matrix to be the number of maximally
@@ -251,7 +270,7 @@ linearly independent columns.
 
 As will be seen below, the row and column ranks will turn out to be equal.
 Thus in the sequel, we will use the term *rank* to refer to their common
-value. For now, though the unmodified term "rank" will mean row rank.
+value. For now, though, the unmodified term "rank" will mean row rank.
 
 ## Some Properties of Ranks
 
@@ -410,3 +429,6 @@ for the determinants of the three matrices.
 
 ❄️  **Your Turn:** Prove that if the matrix $A$ has a 0 row, then
 $det(A) =  0$.
+
+❄️  **Your Turn:** Show that a set of vectors is linearly dependent if
+and only if one of the vectors is a linear combination of the others.

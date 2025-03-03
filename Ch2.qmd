@@ -466,31 +466,32 @@ The standard definition is one of the ugliest, in all of mathematics.
 Instead we will define the term using one of the methods for calculating
 determinants.
 
-<blockquote>
+> Consider an $r \textrm{ x } r$ matrix $G$.  For $r = 2$, write $G$ as
+> 
+> $$
+>  G = 
+>  \left (
+>  \begin{array}{rr}
+>  a & b \\
+>  c & d  \\
+>  \end{array}
+>  \right )
+>  $$
+> 
+> and define $\det(G)$ to be $ad -bc$. For $r > 2$, 
+> define submatrices as follows. 
+> 
+> $G_i$ is the $(r-1) \textrm{ x } (r-1)$ submatrix obtained by removing row
+> 1 and column $j$ from $G$. Then $\det(G)$ is defined recursively as
+> 
+> $$
+> \sum_{i=1}^r (-1)^{i+1} \det(G_i)
+> $$
 
-Consider an $r \textrm{ x } r$ matrix $G$.  For $r = 2$, write $G$ as
+Actually, we can alternatively remove row $i$ instead of row 1. If $i$ 
+is an odd number, the same recursive formula holds, but for even $i$,
+replace $(-1)^{i+1}$ by $(-1)^i$.
 
-$$
- G = 
- \left (
- \begin{array}{rr}
- a & b \\
- c & d  \\
- \end{array}
- \right )
- $$
-
-and define $\det(G)$ to be $ad -bc$. For $r > 2$, 
-define submatrices as follows. 
-
-$G_i$ is the $(r-1) \textrm{ x } (r-1)$ submatrix obtained by removing row
-1 and column $j$ from $G$. Then $\det(G)$ is defined recursively as
-
-$$
-\sum_{i=1}^r (-1)^{i+1} \det(G_i)
-$$
-
-</blockquote>
 
 For instance, consider 
 
