@@ -301,12 +301,13 @@ min 0.2474   100   89.44 0.9201      90
 ```
 
 The $\lambda$ value that gave the smallest Mean Squared Prediction Error
-(MSE)
-as 0.2474. (Coincidentally, it was also the smallest value that the
-function tried; see **glmOut$lambda**.) A more conservative value of
+(MSE) as 0.2474. (Coincidentally, it was also the smallest value that
+the function tried; see **glmOut$lambda**.) A more conservative value of
 $\lambda$ was 0.9987, the largest $\lambda$ giving MSE within one
 standard error of the minimum; it's conservative in the sense of being
-less likely to overfit.
+less likely to overfit; its MSE value, 90.28, was only slightly larger
+than the best one. In each case, all 90 predictors had nonzero
+coefficient estimates.
 
 ## Modern View{#sec-pgtn}
 
@@ -463,6 +464,14 @@ $$
 As with $\lambda$ in the original formulation, $\gamma$ is a positive
 number chosen by the analyst.
 
+## Ridge vs. LASSO for Dimension Reduction
+
+Today's large datasets being so common, we need a way to "cut things
+down to size," i.e. *dimension reduction*, aimed at reducing the number
+of predictor variables. This is done both for the sake of simplicity and
+to over *overfitting*, in which fitting an overly complex model can
+reduce predictive power.
+
 ### Geometric view
 
 Comparison between the ridge and LASSO concepts is often done via this
@@ -498,33 +507,72 @@ represent $b_1$ and $b_2$.
 * On the one hand, we want to choose a $b$ for which $c(b)$ -- our total
   squared prediction error -- is small, thus a smaller ellipse. 
 
-
 * But on the other hand, we need at least one point on the ellipse to 
   be in common with the diamond.  
 
 * The solution is then a point $b$ in which the ellipse
   just barely touches the diamond, respectively.
 
+### Implication for dimension reduction.
+
 The key point is that that "barely touching" point 
 will be one of the four corners of the diamond, points at which either
-$b_1 = 0$ or $b_2 = 0$ -- *hence a sparse solution*.  
+$b_1 = 0$ or $b_2 = 0$ -- *hence a sparse solution*, meaning one in
+which many/most of the coefficients in the fitted model will be 0. This
+achieves the goal of dimension reduction.
 
-This will not happen with ridge. The diamond would now be a circle (not
-shown). The "barely touching point" will almost certainly will be at a
-place in which both $b_1$ and $b_2$ are nonzero. Hence no sparsity.
+Ridge will not produce a sparse solution. The diamond would now be a
+circle (not shown). The "barely touching point" will almost certainly
+will be at a place in which both $b_1$ and $b_2$ are nonzero. Hence no
+sparsity.
 
-### Use of LASSO for dimension reduction{#sec-lassoxval} 
+### Avoidance of overfitting *without* dimension reduction
 
-In prediction applications, one goal is to avoid *overfitting*, meaning
-using using such a complex model that it actually has poorer predictive
-power than a simpler one. An example is using too many predictors.
+As we've seen, both ridge and LASSO reduce the size of the
+$\widehat{\beta}$ vector of estimated coefficients. Smaller quantities
+have smaller statistical variances, hence a guard against overfitting.
+So, even ridge can be employed as an approach to the overfitting
+problem, even though it does not provide a sparse solution.
 
-The LASSO, in producing a sparse estimated coefficient vector, reduces
-the number of predictors. This would seem to achieve our goal, but a
-problem is that we must still choose $\lambda$. This is typically done
-via cross-validation.
+On the other hand, in some settings, it may be desirable to keep all
+predictors, as seen in the next section.
 
-## Ridge vs. LASSO for Prediction
+## Example: NYC Taxi Data
+
+The purpose of this data is to predict trip time in the New York City
+taxi system. The $qeML$ package includes a 10,000-row subset.
+
+```{r}
+library(qeML)
+data(nyctaxi)
+head(nyctaxi)
+dim(nyctaxi)
+length(unique(nyctaxi$PULocationID))
+length(unique(nyctaxi$DOLocationID))
+```
+
+An old rule of thumb says that if we have $p$ predictors and $n$ data
+points, we should keep $p < \sqrt{n}$ to avoid overfitting. As we will
+see in a later chapter, these days that rule is being questioned, but
+let's see how it fits in here. In our case here, $p = 1+143+205+1 =
+350$, much larger than $p = \sqrt{10000} = 100$. And if we are fitting a
+linear model, we may consider pickup/dropoff location interaction
+variables, basically products of the pickup and dropoff dummy variables.
+[To avoid exact multicollinearity, we will use only 142 and 204 of the
+pickup and dropoff variables.]{.column-margin}
+
+Thus we either should delete some of the pickup and dropoff variables,
+or use all of them but temper the fit using ridge. The latter may be
+more attractive, as riders would like a time estimate for their
+particular pickup and dropoff locations.
+
+```{r}
+library(glmnet)
+nycwide <- factorsToDummies(nyctaxi[,-1])
+glmOut <- cv.glmnet(x=nycwide,y=nyctaxi[,1],alpha=0)
+glmOut
+```
+
 
 ## A Warning
 
