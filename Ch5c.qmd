@@ -8,7 +8,7 @@ library(qeML)
 {{< pagebreak >}}
 
  
-# Shrinkage Estimators
+# Shrinkage Estimators 
 
 ::: {.callout-note}
 
@@ -62,7 +62,9 @@ succeeding chapters.
 ## Example: Million Song Dataset{#sec-millionsong}
 
 Let's consider the Million Song Dataset, varous versions of which are on
-the Web. Ours is a 50,000-line subset of the one with 515345 rows and 91
+the Web. 
+
+Ours is a 50,000-line subset of the one with 515345 rows and 91
 columns. The first column is the year of release, followed by 90 columns
 of various audio measurements. The goal is to predict the year, **V1**,
 from the audio variables **V2** through **V91**.
@@ -275,6 +277,37 @@ noted then, we could simply exclude it, but here under ridge, we see
 that it has been assigned a very small regression coefficient compared
 to most others.
 
+## Cross-Validation{#sec-xval}
+
+So, how do we choose $\lambda$?
+
+A common way to choose among models is *cross-validation*: We set aside
+a subset of the data, known as the *holdout* or *test* set, for use in
+testing predictive accuracy.  The remaining data is the *training set*.
+For each of our competing models -- in this case, competing values of
+$\lambda$ -- we fit the model on the training set, then use the result
+to predict the test set. We then use whichever model does best in the
+test set.
+
+*Example: Million Song data*
+
+``` r
+> library(glmnet)
+> glmOut <- cv.glmnet(x=as.matrix(s50[,-1]),y=s50$V1,alpha=0)
+> glmOut
+    Lambda Index Measure     SE Nonzero
+min 0.2474   100   89.44 0.9201      90
+1se 0.9987    85   90.28 0.9823      90
+```
+
+The $\lambda$ value that gave the smallest Mean Squared Prediction Error
+(MSE)
+as 0.2474. (Coincidentally, it was also the smallest value that the
+function tried; see **glmOut$lambda**.) A more conservative value of
+$\lambda$ was 0.9987, the largest $\lambda$ giving MSE within one
+standard error of the minimum; it's conservative in the sense of being
+less likely to overfit.
+
 ## Modern View{#sec-pgtn}
 
 There are many ways to deal with multicollinearity, which we must remind
@@ -305,10 +338,6 @@ one dummy, thus no linear dependence: Men still enjoy about an \$11,000
 advantage. But ridge allowed us to avoid deleting one of our dummies.
 Such deletion is easy in this case, but for large $p$, say in the
 hundreds or even more, some analysts prefer the convenience of ridge.
-
-Of course, there is still the issue of how to choose the value of
-$\lambda$. One common approach is *cross-validation*, to be presented in
-@sec-lassoxval.
 
 ## Formalizing the Notion of Shrinkage
 
@@ -492,38 +521,10 @@ power than a simpler one. An example is using too many predictors.
 
 The LASSO, in producing a sparse estimated coefficient vector, reduces
 the number of predictors. This would seem to achieve our goal, but a
-problem is that we must still choose $\lambda$. 
+problem is that we must still choose $\lambda$. This is typically done
+via cross-validation.
 
-A common way to choose among models is *cross-validation*: We set aside
-a subset of the data for use in testing predictive accuracy.  The
-remaining data is the *training set*. For each of our competing models,
-we fit the model on the training set, then use the result to predict the
-test set. We then use whichever model does best in the test set.
-
-*Example: Census data*
-
-Let's look once again at our census dataset (@sec-censusrref). With $n =
-20090$ and $p=14$, we probably would not have to worry about overfitting
-even if we used the full dataset, it is convenient to use as an example
-here.
-
-CRAN's **glmnet** does automatic cross-validation, but let's use the
-**lars** package here for simplicity, just to see the effects of using
-different values of $\lambda$.
-
-```{r}
-library(lars)
-# lars pkg needs numeric inputs
-svcdumm <- factorsToDummies(svcensus)
-colnames(svcdumm)
-z <- lars(svcdumm[,-11],svcdumm[,11],'lasso')
-z$lambda
-z$beta
-```
-
-Again, we are not doing cross-validation here, but it appears to
-Occupation 141 is an expendable predictor, and we might consider
-dropping, say, the **educ.14** variable.
+## Ridge vs. LASSO for Prediction
 
 ## A Warning
 
