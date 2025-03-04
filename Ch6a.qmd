@@ -202,8 +202,53 @@ Yes, that first column is indeed an eigenvector, with the claimed eigenvalue.
 Note that the expected 0 eigenvalue shows up as 2.801489e-12, quite
 small but nonzero, due to roundoff error.
 
-## Application to Detecting Multicollinearity
+## Application: Detecting Multicollinearity
 
+Consider the basic eigenanalysis equation,
+
+$$
+Ax = \lambda x
+$$
+
+for a square matrix $A$, a conformable vector $x$ and a scalar
+$\lambda$. Suppose that, roughly speaking, $\lambda x$ is small relative
+to $A$. Then
+
+$$
+Ax \approx 0
+$$
+
+and since $Ax$ is a linear combination of the columns of $A$,
+we thus we have found multicollinearity in $A$.
+
+One often sees use of the *condition number* of a matrix, which is the
+ratio of the largest eigenvalue to the smallest one. This too might be
+used as a suggestion of multicollinearity, though the main usage is as a
+signal that matrix operations such finding inverses may have significant
+problems with roundoff error.
+
+## Example: Currency Data
+
+This dataset tracks five pre-euro European currencies.
+
+```{r}
+library(qeML)
+data(currency)
+head(currency)
+dim(currency)
+crc <- currency
+crc <- as.matrix(crc)
+crcapa <- t(crc) %*% crc
+eigs <- eigen(crcapa)
+eigs
+# illustrate Ax = lambda x
+crcapa %*% eigs$vectors[,5]
+eigs$values[5] *  eigs$vectors[,5] 
+# is Ax small?
+head(crcapa)
+```
+
+So yes, this dataset has some multicollinearity.
 
 ## Computation: the Power Method
 
