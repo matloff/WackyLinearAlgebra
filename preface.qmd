@@ -105,13 +105,23 @@ operations concrete.
 
 ## R Packages Used
 
+``` r
 qeML
+glmnet
+igraph
 dsld
 networkdata
-igraph
 pracma
-lars
-glmnet
+regclass
+```
+
+
+## Data Availabilty
+
+Some of the datasets used are included with the packages. The others are
+in the **data/** directory within this Quarto project,
+*github.com/matloff/WackyLinearAlgebra*. Download the datasets of
+interest individually, or simply clone the entire project.
 
 ```{r}
 #| include: false
