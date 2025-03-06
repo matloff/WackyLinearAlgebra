@@ -27,7 +27,8 @@ To get things started, let's consider the African Soils dataset.
 Let's take a look around:
 
 ```{r}
-load('data/AfricanSoil.RData')
+library(WackyData) 
+data(AfricanSoil)
 dim(AfricanSoil)
 names(AfricanSoil)[1:25]
 names(AfricanSoil)[3576:3600]
