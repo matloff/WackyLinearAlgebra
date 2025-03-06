@@ -113,15 +113,12 @@ dsld
 networkdata
 pracma
 regclass
+WackyData
 ```
-
 
 ## Data Availabilty
 
-Some of the datasets used are included with the packages. The others are
-in the **data/** directory within this Quarto project,
-*github.com/matloff/WackyLinearAlgebra*. Download the datasets of
-interest individually, or simply clone the entire project.
+The datasets used are included with the packages. 
 
 ```{r}
 #| include: false
