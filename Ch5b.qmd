@@ -709,16 +709,28 @@ denoted $V = W \oplus W^{\perp}$.
 
 COMPAS is a software tool designed to aid judges in determining
 sentences in criminal trials, by assessing the probability that the
-defendant would recividate. It is a commercial product by Northpointe.
+defendant would recidivate. It is a commercial product by Northpointe.
 
 COMPAS came under intense scrutiny after [an
 investigation](https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing)
 by *ProPublica*, which asserted evidence of racial bias against black
 defendants compared to white defendants with similar profiles.
 Northpointe contested these findings, asserting that their software
-treated black and white defendants equally.  While this book does not
-take a position on the specific dispute, this case highlights the
-critical importance of addressing fairness in machine learning.
+treated black and white defendants equally.
+
+It should be noted the *ProPublica* did not accuse Northpointe of
+intentional bias. Instead, the issue largely concerns *proxies*,
+variables that are related to race, rather than race (or gender etc.)
+itself. If for example COMPAS were to use a person's home location as a
+predictor, that would be correlated to race, and thus would be unfair to
+use in prediction. On the other hand, if the prediction tool makes use
+of the number of prior criminal convictions, that would be reasonable,
+even though it too might be a proxy for race. 
+
+On the other hand, even using race indirectly for any reason would
+likely be unacceptable.  While this book does not take a position on the
+specific dispute, this case highlights the critical importance of
+addressing fairness in machine learning.
 
 ### Setting
 
