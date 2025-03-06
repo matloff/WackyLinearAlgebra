@@ -8,7 +8,7 @@ library(qeML)
 
 {{< pagebreak >}}
 
-# Covariance Matrices, Multivariate Normal Distribution, Delta Method
+# Covariance Matrices, MV Normal Distribution, Delta Method
 
 ::: {.callout-note}
 
@@ -637,7 +637,7 @@ We might be interested in the ratio $\omega = \mu_D / \mu_M$.  Our
 estimator will be $\widehat{\omega} = \bar{D} / \bar{M}$, the ratio of
 the sample means.
 
-So take $Q = \bar{D}$ and $R =  \bar{M}$.` Then in @eq-deltaquad, with
+So take $Q = \bar{D}$ and $R =  \bar{M}$. Then in @eq-deltaquad, with
 $f(q,r) = q/r$
 
 $$
@@ -663,7 +663,7 @@ $$
 $$
 
 As to $AVar(v,w)$ in @eq-deltaquad, we would use the multivariate analog
-of the usual $S^2$ in the univeriate case, taking advantage of
+of the usual $S^2$ in the univariate case, taking advantage of
 @eq-matrixdef:
 
 $$
@@ -681,11 +681,28 @@ $$
 }
 $$
 
+from which we can form a confidence interval.
 
-from which we can form a confidence
-interval.
+## Example: Mother/Daughter Height Data
 
-### Regarding those pesky derivatives
+```{r}
+library(WackyData)
+data(Heights)
+head(heights)
+m <- heights[,1]
+d <- heights[,2]
+meanm <- mean(m)
+meand <- mean(d)
+fDel <- matrix(c(1/meanm,-meand/meanm^2),ncol=1)
+sigma <- cov(cbind(m,d))
+se <- sqrt(t(fDel) %*% sigma %*% fDel)
+se
+meanmd <-meanm / meand
+meanmd
+c(meanmd - 1.96*se, meanmd + 1.96*se)
+```
+
+## Regarding Those Pesky Derivatives
 
 Though finding expressions for the derivatives in the above example was
 not onerous, the function $f$ can be rather complex, with the
@@ -710,8 +727,10 @@ $$
 Though of course there is an issue with one's choice of $w$, the point
 is that one can code the software to find approximate derivatives
 automatically using this device. *This is very common in Data Science
-libraries.*
+libraries.* 
 
+For example, the R package **numDeriv** will compute numerical
+derivatives.
 
 ## Your Turn
 
