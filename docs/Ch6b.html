@@ -150,7 +150,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Matrix Multiplication</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Matrices and Vectors</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -290,7 +290,7 @@ Goals of this chapter:
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Today’s large datasets being so common, we need a way to “cut things down to size,” i.e.&nbsp;<em>dimension reduction</em>. It turns out that eigenanalysis can be quite useful for this purpose, by determining the <em>principal components</em> of our data. This is the focus of the current chapter.</p>
+<p>It turns out that eigenanalysis can be quite useful for dimension reduction, by determining the <em>principal components</em> of our data. This is the focus of the current chapter.</p>
 </div>
 </div>
 <section id="example-african-soils-data" class="level2" data-number="11.1">
@@ -298,7 +298,7 @@ Goals of this chapter:
 <p>To get things started, let’s consider the African Soils dataset.</p>
 <p>Let’s take a look around:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">'data/AfricanSoil.Rd'</span>)</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">'data/AfricanSoil.RData'</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(AfricanSoil)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1157 3600</code></pre>
@@ -488,7 +488,7 @@ Au = 0
 </section>
 <section id="pca-in-detection-of-multicollinearity" class="level2" data-number="11.6">
 <h2 data-number="11.6" class="anchored" data-anchor-id="pca-in-detection-of-multicollinearity"><span class="header-section-number">11.6</span> PCA in Detection of Multicollinearity</h2>
-<p>Recall the itemized list in <a href="Ch5c.html#sec-nearly"><span>Section&nbsp;9.1.1</span></a> of various conditions under which we have multicollinearity. We can add the following item to that list:</p>
+<p>Recall the itemized list in <a href="Ch5c.html#sec-nearly"><span>Section&nbsp;9.1</span></a> of various conditions under which we have multicollinearity. We can add the following item to that list:</p>
 <ul>
 <li><span class="math inline">\(A\)</span> has an eigenvalue that is nearly 0.</li>
 </ul>
@@ -506,7 +506,7 @@ Au = 0
 <section id="how-many-principal-components-should-we-use" class="level2" data-number="11.7">
 <h2 data-number="11.7" class="anchored" data-anchor-id="how-many-principal-components-should-we-use"><span class="header-section-number">11.7</span> How Many Principal Components Should We Use?</h2>
 <p>We chose to use the first 9 principal components in our example here, but just for illustration purposes. There are no formal rules for how many to use. Many “rules of thumb” exist.</p>
-<p>If we are doing prediction, there is a very natural way to choose our number of PCs–do cross-validation (<a href="Ch5c.html#sec-lassoxval"><span>Section&nbsp;9.2.3</span></a>), and use whichever number gives the most accurate prediction.</p>
+<p>If we are doing prediction, there is a very natural way to choose our number of PCs–do cross-validation (<span class="quarto-unresolved-ref">?sec-lassoxval</span>), and use whichever number gives the most accurate prediction.</p>
 <section id="sec-nyc" class="level3" data-number="11.7.1">
 <h3 data-number="11.7.1" class="anchored" data-anchor-id="sec-nyc"><span class="header-section-number">11.7.1</span> Example: New York City taxi trips</h3>
 <p>This is a well-known dataset, a version of which is included in the <strong>qeML</strong> package. The object is to predict trip time, given pickup and dropoff locations, trip distance and day of the week.</p>

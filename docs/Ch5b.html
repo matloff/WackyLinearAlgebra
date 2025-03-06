@@ -150,7 +150,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Matrix Multiplication</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Matrices and Vectors</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -607,7 +607,7 @@ H = A(A'A)^{-1} A'
 h_{ii} = x_{i} (A'A)^{-1} x_i'
 \tag{8.3}\]</span></span></p>
 <p>The quantity <span class="math inline">\(h_{ii}\)</span> is called the <em>leverage</em> for datapoint <span class="math inline">\(i\)</span>.</p>
-<p>Ah, so we know <span class="math inline">\(h_{ii} \geq 0\)</span>. But also, using the material on circular shifts in <a href="Ch1.html#sec-trace"><span>Section&nbsp;2.8.3</span></a>, we have</p>
+<p>Ah, so we know <span class="math inline">\(h_{ii} \geq 0\)</span>. But also, using the material on circular shifts in <a href="Ch1.html#sec-trace"><span>Section&nbsp;2.10.3</span></a>, we have</p>
 <p><span class="math display">\[
 tr(H) =
 tr[\underbrace{A(A'A)^{-1}} A'] =
@@ -701,8 +701,10 @@ x = x_1 + x_2
 </section>
 <section id="sec-fairness" class="level2" data-number="8.11">
 <h2 data-number="8.11" class="anchored" data-anchor-id="sec-fairness"><span class="header-section-number">8.11</span> Application: Racial, Gender Etc. Fairness in Algorithms</h2>
-<p>COMPAS is a software tool designed to aid judges in determining sentences in criminal trials, by assessing the probability that the defendant would recividate. It is a commercial product by Northpointe.</p>
-<p>COMPAS came under intense scrutiny after <a href="https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing">an investigation</a> by <em>ProPublica</em>, which asserted evidence of racial bias against black defendants compared to white defendants with similar profiles. Northpointe contested these findings, asserting that their software treated black and white defendants equally. While this book does not take a position on the specific dispute, this case highlights the critical importance of addressing fairness in machine learning.</p>
+<p>COMPAS is a software tool designed to aid judges in determining sentences in criminal trials, by assessing the probability that the defendant would recidivate. It is a commercial product by Northpointe.</p>
+<p>COMPAS came under intense scrutiny after <a href="https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing">an investigation</a> by <em>ProPublica</em>, which asserted evidence of racial bias against black defendants compared to white defendants with similar profiles. Northpointe contested these findings, asserting that their software treated black and white defendants equally.</p>
+<p>It should be noted the <em>ProPublica</em> did not accuse Northpointe of intentional bias. Instead, the issue largely concerns <em>proxies</em>, variables that are related to race, rather than race (or gender etc.) itself. If for example COMPAS were to use a person’s home location as a predictor, that would be correlated to race, and thus would be unfair to use in prediction. On the other hand, if the prediction tool makes use of the number of prior criminal convictions, that would be reasonable, even though it too might be a proxy for race.</p>
+<p>On the other hand, even using race indirectly for any reason would likely be unacceptable. While this book does not take a position on the specific dispute, this case highlights the critical importance of addressing fairness in machine learning.</p>
 <section id="setting" class="level3" data-number="8.11.1">
 <h3 data-number="8.11.1" class="anchored" data-anchor-id="setting"><span class="header-section-number">8.11.1</span> Setting</h3>
 <p>We consider prediction of a variable <span class="math inline">\(Y\)</span> from a feature vector <span class="math inline">\(X\)</span> and a vector of sensitive variables <span class="math inline">\(S\)</span>. The target <span class="math inline">\(Y\)</span> may be either numeric (in a regression setting) or dichotomous (in a two-class classification setting where <span class="math inline">\(Y\)</span> = 1 or <span class="math inline">\(Y\)</span> = 0). The <span class="math inline">\(m\)</span>-class case can be handled using <span class="math inline">\(m\)</span> dichotomous variables. We will consider only the numeric case here.</p>

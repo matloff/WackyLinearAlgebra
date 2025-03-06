@@ -150,7 +150,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Matrix Multiplication</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Matrices and Vectors</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -248,10 +248,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#eigenvalues-are-real" id="toc-eigenvalues-are-real" class="nav-link" data-scroll-target="#eigenvalues-are-real"><span class="header-section-number">10.3.1</span> Eigenvalues are real</a></li>
   <li><a href="#sec-eigortho" id="toc-sec-eigortho" class="nav-link" data-scroll-target="#sec-eigortho"><span class="header-section-number">10.3.2</span> Eigenvectors are orthogonal</a></li>
   <li><a href="#sec-diagonalizable" id="toc-sec-diagonalizable" class="nav-link" data-scroll-target="#sec-diagonalizable"><span class="header-section-number">10.3.3</span> Symmetric matrices are diagonalizable</a></li>
+  <li><a href="#example-census-dataset" id="toc-example-census-dataset" class="nav-link" data-scroll-target="#example-census-dataset"><span class="header-section-number">10.3.4</span> Example: Census dataset</a></li>
   </ul></li>
-  <li><a href="#computation-the-power-method" id="toc-computation-the-power-method" class="nav-link" data-scroll-target="#computation-the-power-method"><span class="header-section-number">10.4</span> Computation: the Power Method</a></li>
-  <li><a href="#application-computation-of-long-run-distribution-in-markov-chains" id="toc-application-computation-of-long-run-distribution-in-markov-chains" class="nav-link" data-scroll-target="#application-computation-of-long-run-distribution-in-markov-chains"><span class="header-section-number">10.5</span> Application: Computation of Long-Run Distribution in Markov Chains</a></li>
-  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">10.6</span> Your Turn</a></li>
+  <li><a href="#application-detecting-multicollinearity" id="toc-application-detecting-multicollinearity" class="nav-link" data-scroll-target="#application-detecting-multicollinearity"><span class="header-section-number">10.4</span> Application: Detecting Multicollinearity</a></li>
+  <li><a href="#example-currency-data" id="toc-example-currency-data" class="nav-link" data-scroll-target="#example-currency-data"><span class="header-section-number">10.5</span> Example: Currency Data</a></li>
+  <li><a href="#computation-the-power-method" id="toc-computation-the-power-method" class="nav-link" data-scroll-target="#computation-the-power-method"><span class="header-section-number">10.6</span> Computation: the Power Method</a></li>
+  <li><a href="#application-computation-of-long-run-distribution-in-markov-chains" id="toc-application-computation-of-long-run-distribution-in-markov-chains" class="nav-link" data-scroll-target="#application-computation-of-long-run-distribution-in-markov-chains"><span class="header-section-number">10.7</span> Application: Computation of Long-Run Distribution in Markov Chains</a></li>
+  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">10.8</span> Your Turn</a></li>
   </ul>
 </nav>
     </div>
@@ -343,8 +346,8 @@ det(M - \lambda I) = 0
 R^k = P^{-1}RP ~ P^{-1}RP ~ ... ~ P^{-1}RP = P^{-1}D^kP
 \]</span></p>
 <p><span class="math inline">\(D^k\)</span> is equal to the diagonal matrix with elements <span class="math inline">\(d_k^k\)</span>, so the computation of <span class="math inline">\(M^k\)</span> is easy.</p>
-<blockquote class="blockquote">
-<p><em>Theorem:</em> Any symmetric matrix <span class="math inline">\(M\)</span> has the following properties</p>
+<div id="thm-symmeig" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 10.1 </strong></span>Any symmetric matrix <span class="math inline">\(M\)</span> has the following properties</p>
 <ul>
 <li><p><span class="math inline">\(M\)</span> is diagonalizable.</p></li>
 <li><p>In fact, the matrix <span class="math inline">\(P\)</span> is equal to the matrix whose columns are the eigenvectors of <span class="math inline">\(M\)</span>, chosen to have length 1.</p></li>
@@ -352,7 +355,9 @@ R^k = P^{-1}RP ~ P^{-1}RP ~ ... ~ P^{-1}RP = P^{-1}D^kP
 <li><p>The matrix <span class="math inline">\(P\)</span> has the property that <span class="math inline">\(P^{-1} = P'\)</span>.</p></li>
 <li><p>Moreover, the rank of <span class="math inline">\(M\)</span> is equal to the number of nonzero eigenvalues of <span class="math inline">\(M\)</span>.</p></li>
 </ul>
-<p><em>Proof:</em> Use partitioned matrices.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Use partitioned matrices.</p>
 <p>Let <span class="math inline">\(D = diag(d_1,...,d_m)\)</span>, where the <span class="math inline">\(d_i\)</span> are the eigenvalues of <span class="math inline">\(M\)</span>, corresponding to eigenvectors <span class="math inline">\(P_i\)</span>. Set the latter to have length 1, by dividing by their lengths.</p>
 <p>Recall that the eigenvectors of <span class="math inline">\(M\)</span>, i.e.&nbsp;the columns of <span class="math inline">\(P\)</span>, are orthogonal. That means the rows of <span class="math inline">\(P'\)</span> are orthogonal. Again using partitioning, we see that</p>
 <p><span class="math display">\[
@@ -367,9 +372,12 @@ MP = M(P_1 | ... | P_m) = (MP_1 | ... | MP_n) =
 \]</span></p>
 <p>Multiply on the left by <span class="math inline">\(P'\)</span>, and we are done.</p>
 <p>Regarding rank, <a href="Ch4.html#thm-ranknotchange">Theorem&nbsp;<span>6.1</span></a> tells us that pre- or postmultiplying by an invertible matrix does not change rank, and clearly the rank of a diagonal matrix is the number of nonzero elements.</p>
-</blockquote>
-<p><em>Example:</em></p>
-<p>Let’s illustrate all this with the data in <a href="Ch5c.html#sec-pgtn"><span>Section&nbsp;9.1.4</span></a>. We will form the matrix <span class="math inline">\(A'A\)</span> in <a href="Ch3.html#sec-linregformula"><span>Section&nbsp;5.3.3</span></a>, which as mentioned, is symmetric.</p>
+<p><span class="math inline">\(\square\)</span></p>
+</div>
+</section>
+<section id="example-census-dataset" class="level3" data-number="10.3.4">
+<h3 data-number="10.3.4" class="anchored" data-anchor-id="example-census-dataset"><span class="header-section-number">10.3.4</span> Example: Census dataset</h3>
+<p>Let’s illustrate all this with the data in <a href="Ch5c.html#sec-pgtn"><span>Section&nbsp;9.5</span></a>. We will form the matrix <span class="math inline">\(A'A\)</span> in <a href="Ch3.html#sec-linregformula"><span>Section&nbsp;5.3.3</span></a>, which as mentioned, is symmetric.</p>
 <p>Recall that in that example, <span class="math inline">\(A\)</span> is not of full rank. Thus we should expect to see a 0 eigenvalue.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qeML)</span>
@@ -415,8 +423,86 @@ woman     -289463.4</code></pre>
 <p>Note that the expected 0 eigenvalue shows up as 2.801489e-12, quite small but nonzero, due to roundoff error.</p>
 </section>
 </section>
-<section id="computation-the-power-method" class="level2" data-number="10.4">
-<h2 data-number="10.4" class="anchored" data-anchor-id="computation-the-power-method"><span class="header-section-number">10.4</span> Computation: the Power Method</h2>
+<section id="application-detecting-multicollinearity" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="application-detecting-multicollinearity"><span class="header-section-number">10.4</span> Application: Detecting Multicollinearity</h2>
+<p>Consider the basic eigenanalysis equation,</p>
+<p><span class="math display">\[
+Ax = \lambda x
+\]</span></p>
+<p>for a square matrix <span class="math inline">\(A\)</span>, a conformable vector <span class="math inline">\(x\)</span> and a scalar <span class="math inline">\(\lambda\)</span>. Suppose that, roughly speaking, <span class="math inline">\(\lambda x\)</span> is small relative to <span class="math inline">\(A\)</span>. Then</p>
+<p><span class="math display">\[
+Ax \approx 0
+\]</span></p>
+<p>and since <span class="math inline">\(Ax\)</span> is a linear combination of the columns of <span class="math inline">\(A\)</span>, we thus we have found multicollinearity in <span class="math inline">\(A\)</span>.</p>
+<p>One often sees use of the <em>condition number</em> of a matrix, which is the ratio of the largest eigenvalue to the smallest one. This too might be used as a suggestion of multicollinearity, though the main usage is as a signal that matrix operations such finding inverses may have significant problems with roundoff error.</p>
+</section>
+<section id="example-currency-data" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="example-currency-data"><span class="header-section-number">10.5</span> Example: Currency Data</h2>
+<p>This dataset tracks five pre-euro European currencies.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qeML)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(currency)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(currency)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Can..dollar Ger..mark Fr..franc UK.pound J..yen
+1          19       580     4.763       29    602
+2          18       609     4.818       44    609
+3          20       618     4.806       66    613
+4          46       635     4.825       79    607
+5          42       631     4.796       77    611
+6          45       635     4.818       74    610</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(currency)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 762   5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>crc <span class="ot">&lt;-</span> currency</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>crc <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(crc)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>crcapa <span class="ot">&lt;-</span> <span class="fu">t</span>(crc) <span class="sc">%*%</span> crc</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>eigs <span class="ot">&lt;-</span> <span class="fu">eigen</span>(crcapa)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>eigs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>eigen() decomposition
+$values
+[1] 4.180990e+08 5.356321e+07 8.199388e+06 4.686379e+06 4.764149e+02
+
+$vectors
+             [,1]         [,2]         [,3]          [,4]          [,5]
+[1,] -0.464701846 -0.589664107  0.573442227  0.3277874495 -0.0082362154
+[2,] -0.548123722  0.364936898 -0.424252867  0.6216029591 -0.0008432535
+[3,] -0.008118519 -0.002208129  0.005818183 -0.0005349635  0.9999475368
+[4,] -0.541352395 -0.364398075 -0.476833987 -0.5888747450 -0.0027404807
+[5,] -0.436445017  0.621551662  0.513584476 -0.3992385223 -0.0053728096</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># illustrate Ax = lambda x</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>crcapa <span class="sc">%*%</span> eigs<span class="sc">$</span>vectors[,<span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   [,1]
+Can..dollar  -3.9238561
+Ger..mark    -0.4017386
+Fr..franc   476.3899505
+UK.pound     -1.3056059
+J..yen       -2.5596868</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>eigs<span class="sc">$</span>values[<span class="dv">5</span>] <span class="sc">*</span>  eigs<span class="sc">$</span>vectors[,<span class="dv">5</span>] </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  -3.9238561  -0.4017386 476.3899505  -1.3056060  -2.5596868</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># is Ax small?</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(crcapa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            Can..dollar Ger..mark  Fr..franc  UK.pound    J..yen
+Can..dollar   112111475  93929522 1673631.29 113542760  66967756
+Ger..mark      93929522 136033582 1795560.29 116882053 109220119
+Fr..franc       1673631   1795560   28573.49   1859363   1433430
+UK.pound      113542760 116882053 1859363.20 133130962  85746625
+J..yen         66967756 109220119 1433430.43  85746625 103243878</code></pre>
+</div>
+</div>
+<p>So yes, this dataset has some multicollinearity.</p>
+</section>
+<section id="computation-the-power-method" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="computation-the-power-method"><span class="header-section-number">10.6</span> Computation: the Power Method</h2>
 <p>One way to compute eigenvalues and eigenvectors is the <em>power method</em>, a simple iteration. We begin with an initial guess, <span class="math inline">\(x_0\)</span> for an eigenvector. Substituting in <a href="#eq-simpledef">Equation&nbsp;<span>10.1</span></a>, we have the next guess:</p>
 <p><span class="math display">\[
 x_1 = M x_0
@@ -426,13 +512,13 @@ x_1 = M x_0
 x_i \leftarrow \frac{x_i}{||x_i||}
 \]</span></p>
 </section>
-<section id="application-computation-of-long-run-distribution-in-markov-chains" class="level2" data-number="10.5">
-<h2 data-number="10.5" class="anchored" data-anchor-id="application-computation-of-long-run-distribution-in-markov-chains"><span class="header-section-number">10.5</span> Application: Computation of Long-Run Distribution in Markov Chains</h2>
+<section id="application-computation-of-long-run-distribution-in-markov-chains" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="application-computation-of-long-run-distribution-in-markov-chains"><span class="header-section-number">10.7</span> Application: Computation of Long-Run Distribution in Markov Chains</h2>
 <p>We showed in <a href="Ch2.html#sec-markovsolve"><span>Section&nbsp;3.1</span></a> how matrix inverse can be used to compute the long-run distribution <span class="math inline">\(\nu\)</span> in a Markov chain. However, this is inefficient for very large transition matrices. For instance, in Google PageRank, there is a Markov state for every page on the Web!</p>
 <p>Instead, we exploit the fact that <a href="Ch2.html#eq-MarkovPi">Equation&nbsp;<span>3.1</span></a> says that the transition matrix has an eigenvector <span class="math inline">\(\nu\)</span> with eigenvalue 1. Due to the typical huge size of the matrix, the power method or a variant is often used.</p>
 </section>
-<section id="your-turn" class="level2" data-number="10.6">
-<h2 data-number="10.6" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">10.6</span> Your Turn</h2>
+<section id="your-turn" class="level2" data-number="10.8">
+<h2 data-number="10.8" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">10.8</span> Your Turn</h2>
 <p>❄️ <strong>Your Turn:</strong> Show that the diagonalizing matrix <span class="math inline">\(P\)</span> above must have determinant <span class="math inline">\(\pm 1\)</span>.</p>
 <p>❄️ <strong>Your Turn:</strong> Show that if <span class="math inline">\(x\)</span> is an eigenvector of <span class="math inline">\(M\)</span> with eigenvalue <span class="math inline">\(\lambda \neq 0\)</span>, then for any nonzero number <span class="math inline">\(c\)</span>, <span class="math inline">\(cx\)</span> will also be an eigenvector with eigenvalue <span class="math inline">\(\lambda\)</span>.</p>
 <p>❄️ <strong>Your Turn:</strong> Show that if a matrix <span class="math inline">\(M\)</span> has a 0 eigenvalue, <span class="math inline">\(M\)</span> must be singular. Also prove the converse. (Hint: Consider the column rank.)</p>

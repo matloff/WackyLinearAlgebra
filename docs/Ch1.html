@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Powered by Linear Algebra - 2&nbsp; Matrix Multiplication</title>
+<title>Powered by Linear Algebra - 2&nbsp; Matrices and Vectors</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -110,7 +110,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Ch1.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Matrix Multiplication</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Ch1.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Matrices and Vectors</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -150,7 +150,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch1.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Matrix Multiplication</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Matrices and Vectors</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -242,17 +242,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#a-random-walk-model" id="toc-a-random-walk-model" class="nav-link active" data-scroll-target="#a-random-walk-model"><span class="header-section-number">2.1</span> A Random Walk Model</a></li>
-  <li><a href="#matrix-multiplication" id="toc-matrix-multiplication" class="nav-link" data-scroll-target="#matrix-multiplication"><span class="header-section-number">2.2</span> Matrix Multiplication</a></li>
-  <li><a href="#the-identity-matrix" id="toc-the-identity-matrix" class="nav-link" data-scroll-target="#the-identity-matrix"><span class="header-section-number">2.3</span> The Identity Matrix</a></li>
-  <li><a href="#vectors" id="toc-vectors" class="nav-link" data-scroll-target="#vectors"><span class="header-section-number">2.4</span> Vectors</a></li>
-  <li><a href="#sec-introMCs" id="toc-sec-introMCs" class="nav-link" data-scroll-target="#sec-introMCs"><span class="header-section-number">2.5</span> Application to Markov Chain Transition Matrices</a></li>
-  <li><a href="#network-graph-models" id="toc-network-graph-models" class="nav-link" data-scroll-target="#network-graph-models"><span class="header-section-number">2.6</span> Network Graph Models</a></li>
-  <li><a href="#recommender-systems" id="toc-recommender-systems" class="nav-link" data-scroll-target="#recommender-systems"><span class="header-section-number">2.7</span> Recommender Systems</a></li>
-  <li><a href="#matrix-algebra" id="toc-matrix-algebra" class="nav-link" data-scroll-target="#matrix-algebra"><span class="header-section-number">2.8</span> Matrix Algebra</a>
+  <li><a href="#vectors" id="toc-vectors" class="nav-link" data-scroll-target="#vectors"><span class="header-section-number">2.2</span> Vectors</a></li>
+  <li><a href="#sec-easyops" id="toc-sec-easyops" class="nav-link" data-scroll-target="#sec-easyops"><span class="header-section-number">2.3</span> Addition and Scalar Multiplication</a></li>
+  <li><a href="#matrix-matrix-multiplication" id="toc-matrix-matrix-multiplication" class="nav-link" data-scroll-target="#matrix-matrix-multiplication"><span class="header-section-number">2.4</span> Matrix-Matrix Multiplication</a></li>
+  <li><a href="#the-identity-matrix" id="toc-the-identity-matrix" class="nav-link" data-scroll-target="#the-identity-matrix"><span class="header-section-number">2.5</span> The Identity Matrix</a></li>
+  <li><a href="#vectors-1" id="toc-vectors-1" class="nav-link" data-scroll-target="#vectors-1"><span class="header-section-number">2.6</span> Vectors</a></li>
+  <li><a href="#sec-introMCs" id="toc-sec-introMCs" class="nav-link" data-scroll-target="#sec-introMCs"><span class="header-section-number">2.7</span> Application to Markov Chain Transition Matrices</a></li>
+  <li><a href="#network-graph-models" id="toc-network-graph-models" class="nav-link" data-scroll-target="#network-graph-models"><span class="header-section-number">2.8</span> Network Graph Models</a></li>
+  <li><a href="#recommender-systems" id="toc-recommender-systems" class="nav-link" data-scroll-target="#recommender-systems"><span class="header-section-number">2.9</span> Recommender Systems</a></li>
+  <li><a href="#matrix-algebra" id="toc-matrix-algebra" class="nav-link" data-scroll-target="#matrix-algebra"><span class="header-section-number">2.10</span> Matrix Algebra</a>
   <ul class="collapse">
-  <li><a href="#other-basic-operations" id="toc-other-basic-operations" class="nav-link" data-scroll-target="#other-basic-operations"><span class="header-section-number">2.8.1</span> Other basic operations</a></li>
-  <li><a href="#sec-transpose" id="toc-sec-transpose" class="nav-link" data-scroll-target="#sec-transpose"><span class="header-section-number">2.8.2</span> Matrix transpose</a></li>
-  <li><a href="#sec-trace" id="toc-sec-trace" class="nav-link" data-scroll-target="#sec-trace"><span class="header-section-number">2.8.3</span> Trace of a square matrix</a></li>
+  <li><a href="#other-basic-operations" id="toc-other-basic-operations" class="nav-link" data-scroll-target="#other-basic-operations"><span class="header-section-number">2.10.1</span> Other basic operations</a></li>
+  <li><a href="#sec-transpose" id="toc-sec-transpose" class="nav-link" data-scroll-target="#sec-transpose"><span class="header-section-number">2.10.2</span> Matrix transpose</a></li>
+  <li><a href="#sec-trace" id="toc-sec-trace" class="nav-link" data-scroll-target="#sec-trace"><span class="header-section-number">2.10.3</span> Trace of a square matrix</a></li>
   </ul></li>
   <li><a href="#partitioned-matrices-an-invaluable-visualization-tool" id="toc-partitioned-matrices-an-invaluable-visualization-tool" class="nav-link" data-scroll-target="#partitioned-matrices-an-invaluable-visualization-tool"><span class="header-section-number">3</span> Partitioned Matrices: an Invaluable Visualization Tool</a>
   <ul class="collapse">
@@ -276,7 +278,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Matrix Multiplication</span></h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Matrices and Vectors</span></h1>
 </div>
 
 
@@ -302,7 +304,7 @@ Goals of this chapter:
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The two main structures in linear algebra are <em>matrices</em> and <em>vector speaces</em>. We begin the book with the former, introduced in this chapter, inroducing matrix multiplication and presenting several applications.</p>
+<p>The two main structures in linear algebra are <em>matrices</em> and <em>vector spaces</em>. We begin the book with the former, introduced in this chapter, inroducing matrix multiplication and presenting several applications.</p>
 </div>
 </div>
 <p>In this chapter, we will take as our main application <em>Markov chains</em>, a statistical model having wide applications in medicine, economics and so on. It is very simple to explain, thus making it a good choice for introducing matrices.</p>
@@ -343,8 +345,77 @@ P_2 =
 <p>The above random walk is a <em>Markov chain</em>. The Markov Property says that the system “has no memory.” If say we land at position 2, we will go to 1 or 3 with probability 1/2 <em>no matter what the previous history of the system was</em>; it doesn’t matter <em>how</em> we got to state 3. That in turn comes from the independence of the successive coin flips.</p>
 <p><strong>Notation:</strong> Individual elements of a matrix are usually written with double subscripts. For instance, a<sub>25</sub> will mean the row 2, column 5 element of the matrix <span class="math inline">\(A\)</span>. If say <span class="math inline">\(A\)</span> has more than 9 rows, its row 11, column 5 element is denoted by a<sub>11,5</sub>, using the comma to avoid ambiguity.</p>
 </section>
-<section id="matrix-multiplication" class="level2 page-columns page-full" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="matrix-multiplication"><span class="header-section-number">2.2</span> Matrix Multiplication</h2>
+<section id="vectors" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="vectors"><span class="header-section-number">2.2</span> Vectors</h2>
+<p>Matrices are two-dimensional arrays. One-dimensional arrays are called <em>vectors</em>, either in row or column form, e.g.</p>
+<p><span class="math display">\[
+u = (12,5,13)
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+u =
+\left (
+\begin{array}{r}
+12 \\
+5 \\
+13 \\
+\end{array}
+\right )
+\]</span></p>
+<p>Please note:</p>
+<ul>
+<li><p>Vectors may also be viewed as one-row or one-column matrices.</p></li>
+<li><p>When not otherwise stated, the term “vector” will mean column form.</p></li>
+<li><p>The term <em>scalar</em> simply means a number, rather than a matrix or vector. It will be used quite frequently in this book.</p></li>
+</ul>
+</section>
+<section id="sec-easyops" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="sec-easyops"><span class="header-section-number">2.3</span> Addition and Scalar Multiplication</h2>
+<p>Vectors of the same length may be summed, in elementwise form, e.g.</p>
+<p><span class="math display">\[
+\left (
+\begin{array}{r}
+12 \\
+5 \\
+13 \\
+\end{array}
+\right )
++
+\left (
+\begin{array}{r}
+-3 \\
+6 \\
+18.2 \\
+\end{array}
+\right ) =
+\left (
+\begin{array}{r}
+9 \\
+11 \\
+31.2 \\
+\end{array}
+\right )
+\]</span></p>
+<p>Similarly, two matrices may be added, again in elementwise fashion, provided the number of rows is the same for both, as well as the same condition for number of columns.</p>
+<p>Vectors and matrices can be multiplied by scalars, again elementwise, e.g.</p>
+<p><span class="math display">\[
+0.3
+\left (
+\begin{array}{r}
+6 \\
+15 \\
+\end{array}
+\right ) =
+\left (
+\begin{array}{r}
+1.8 \\
+4.5 \\
+\end{array}
+\right )
+\]</span></p>
+</section>
+<section id="matrix-matrix-multiplication" class="level2 page-columns page-full" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="matrix-matrix-multiplication"><span class="header-section-number">2.4</span> Matrix-Matrix Multiplication</h2>
 <p>This is the most fundamental operation in linear algebra. It is defined as follows:</p>
 <blockquote class="blockquote">
 <p>Given matrix A of k rows and m columns and matrix B of m rows and r columns, the product C = AB is a <span class="math inline">\(k \textrm{ x } m\)</span> matrix, whose row i, column j element is</p>
@@ -422,16 +493,16 @@ Tip
 </div>
 </div>
 </section>
-<section id="the-identity-matrix" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="the-identity-matrix"><span class="header-section-number">2.3</span> The Identity Matrix</h2>
+<section id="the-identity-matrix" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="the-identity-matrix"><span class="header-section-number">2.5</span> The Identity Matrix</h2>
 <p>The <em>identity matrix</em> <span class="math inline">\(I\)</span> of size n is the nxn matrix with 1s on the diagonal and 0s elsewhere. <span class="math inline">\(IB = B\)</span> and <span class="math inline">\(AI = A\)</span> for any conformable <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>.</p>
 </section>
-<section id="vectors" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="vectors"><span class="header-section-number">2.4</span> Vectors</h2>
+<section id="vectors-1" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="vectors-1"><span class="header-section-number">2.6</span> Vectors</h2>
 <p>A matrix that has only one row or only one column is called a <em>vector</em>. Depending on which of those two shapes it has, we may refer to it as a <em>row vector</em> or <em>column vector</em>. Usually we will simply say “vector,” in which case it will be meant as a column vector.</p>
 </section>
-<section id="sec-introMCs" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="sec-introMCs"><span class="header-section-number">2.5</span> Application to Markov Chain Transition Matrices</h2>
+<section id="sec-introMCs" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="sec-introMCs"><span class="header-section-number">2.7</span> Application to Markov Chain Transition Matrices</h2>
 <p>Now let’s return to the question of how to easily compute <span class="math inline">\(P_2\)</span>, the two-step transition matrix. It turns out that:</p>
 <blockquote class="blockquote">
 <p>Let P denote the transition matrix of a (finite-state) Markov chain. The k-step transition matrix is <span class="math inline">\(P^k\)</span>.</p>
@@ -482,8 +553,8 @@ a_{m1} b_{m1}
 </div>
 <p>So, no matter which state we start in, at time 25 we are about 20% likely to be at any of the states. In fact, as time n goes to infinity, this probability vector becomes exactly (0.20,0.20,0.20,0.20,0.20), as we will see in the next chapter.</p>
 </section>
-<section id="network-graph-models" class="level2 page-columns page-full" data-number="2.6">
-<h2 data-number="2.6" class="anchored" data-anchor-id="network-graph-models"><span class="header-section-number">2.6</span> Network Graph Models</h2>
+<section id="network-graph-models" class="level2 page-columns page-full" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="network-graph-models"><span class="header-section-number">2.8</span> Network Graph Models</h2>
 <p>There has always been lots of analysis of “Who is connected to who,” but activity soared after the advent of Facebook and the film, <em>A Social Network.</em> See for instance <em>Statistical Analysis of Network Data with R</em> by Eric Kolaczy and Gábor Csárdi. As the authors say,</p>
 <blockquote class="blockquote">
 <p>The oft-repeated statement that “we live in a connected world” perhaps best captures, in its simplicity…From on-line social networks like Facebook to the World Wide Web and the Internet itself, we are surrounded by examples of ways in which we interact with each other. Similarly, we are connected as well at the level of various human institutions (e.g., governments), processes (e.g., economies), and infrastructures (e.g., the global airline network). And, of course, humans are surely not unique in being members of various complex, inter-connected systems. Looking at the natural world around us, we see a wealth of examples of such systems, from entire eco-systems, to biological food webs, to collections of inter-acting genes or communicating neurons.</p>
@@ -568,8 +639,8 @@ a_{m1} b_{m1}
 <p>So, in this graph, no pair of nodes has 0 paths between them. The graph is connected.</p>
 <p>Making this kind of analysis fully correct requires paying attention to things such as cycles. The details are beyond the scope of this book.</p>
 </section>
-<section id="recommender-systems" class="level2 page-columns page-full" data-number="2.7">
-<h2 data-number="2.7" class="anchored" data-anchor-id="recommender-systems"><span class="header-section-number">2.7</span> Recommender Systems</h2>
+<section id="recommender-systems" class="level2 page-columns page-full" data-number="2.9">
+<h2 data-number="2.9" class="anchored" data-anchor-id="recommender-systems"><span class="header-section-number">2.9</span> Recommender Systems</h2>
 <p>If you inquire about some item at an online store, the software will also present you with some related items that it thinks would be of interest to you. How does the software make this guess?</p>
 <p>Clearly, the full answer is quite complex. But we can begin to see the process by looking at some real data.</p>
 <div class="cell">
@@ -621,10 +692,10 @@ a_{m1} b_{m1}
 <div class="sourceCode" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">makeSimilarityMatrix</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>that takes as input a matrix or data frame of user-movie-rating data, and returns a matrix as described above, i.e.&nbsp;one row per user, one column per movie, and so on.</p>
 </section>
-<section id="matrix-algebra" class="level2" data-number="2.8">
-<h2 data-number="2.8" class="anchored" data-anchor-id="matrix-algebra"><span class="header-section-number">2.8</span> Matrix Algebra</h2>
-<section id="other-basic-operations" class="level3" data-number="2.8.1">
-<h3 data-number="2.8.1" class="anchored" data-anchor-id="other-basic-operations"><span class="header-section-number">2.8.1</span> Other basic operations</h3>
+<section id="matrix-algebra" class="level2" data-number="2.10">
+<h2 data-number="2.10" class="anchored" data-anchor-id="matrix-algebra"><span class="header-section-number">2.10</span> Matrix Algebra</h2>
+<section id="other-basic-operations" class="level3" data-number="2.10.1">
+<h3 data-number="2.10.1" class="anchored" data-anchor-id="other-basic-operations"><span class="header-section-number">2.10.1</span> Other basic operations</h3>
 <p>Matrix multiplication may seem odd at first, but other operations are straightforward.</p>
 <p><strong>Addition:</strong> We just add corresponding elements. For instance,</p>
 <p><span class="math display">\[
@@ -661,13 +732,12 @@ A+B = \left (
 \end{array}
 \right )
 \]</span></p>
-<p>(Note: The term <em>scalar</em> simply means a number, rather than a matrix or vector. It will be used quite frequently in this book.)</p>
 <p><strong>Distributive property:</strong></p>
 <p>For matrices A, B and C of suitable conformability (A and B match in numbers of rows and columns, and their common number of columns matches the number of rows in C), we have</p>
 <p>(A+B) C = AC + BC</p>
 </section>
-<section id="sec-transpose" class="level3" data-number="2.8.2">
-<h3 data-number="2.8.2" class="anchored" data-anchor-id="sec-transpose"><span class="header-section-number">2.8.2</span> Matrix transpose</h3>
+<section id="sec-transpose" class="level3" data-number="2.10.2">
+<h3 data-number="2.10.2" class="anchored" data-anchor-id="sec-transpose"><span class="header-section-number">2.10.2</span> Matrix transpose</h3>
 <p>This is a very simple but very important operation: We merely exchange rows and columns of the given matrix. For instance, with A as above, its transpose (signified with “’”), is</p>
 <p><span class="math display">\[
 A' = \left (
@@ -684,8 +754,8 @@ A' = \left (
 <p>For some matrices C, we have C’ = C. C is then termed <em>symmetric</em>.</p>
 <p>We will often write a row vector in the form (a,b,c,…). So (5,1,88) means the 1x3 matrix with those elements. If we wish this to be a column vector, we use transpose, so that for instance (5,1,88)’ means a 3x1 matrix.</p>
 </section>
-<section id="sec-trace" class="level3" data-number="2.8.3">
-<h3 data-number="2.8.3" class="anchored" data-anchor-id="sec-trace"><span class="header-section-number">2.8.3</span> Trace of a square matrix</h3>
+<section id="sec-trace" class="level3" data-number="2.10.3">
+<h3 data-number="2.10.3" class="anchored" data-anchor-id="sec-trace"><span class="header-section-number">2.10.3</span> Trace of a square matrix</h3>
 <p>The <em>trace</em> of a square matrix <span class="math inline">\(A\)</span> is the sum of its diagonal elements, <span class="math inline">\(tr(A) = \sum_{i=1}^n A_{ii}\)</span>. This measure has various properties, some obvious (trace of the sum is sum of the traces), and some less so, such as:</p>
 <blockquote class="blockquote">
 <p>Suppose <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are square matrices of the same size. Then</p>
@@ -975,7 +1045,7 @@ d_j' = d_{j-1}' P
 <p><span class="math display">\[
 d_j = P' d_{j-1}
 \]</span></p>
-<p>Now suppose our chain as a long-run distribution, as in {<a href="#sec-introMCs"><span>Section&nbsp;2.5</span></a>}. Let’s call that distribution <span class="math inline">\(\nu\)</span>. By lettting <span class="math inline">\(j \rightarrow \infty\)</span> above, we have</p>
+<p>Now suppose our chain as a long-run distribution, as in {<a href="#sec-introMCs"><span>Section&nbsp;2.7</span></a>}. Let’s call that distribution <span class="math inline">\(\nu\)</span>. By lettting <span class="math inline">\(j \rightarrow \infty\)</span> above, we have</p>
 <p><span class="math display">\[
 \nu = P' \nu
 \]</span></p>
@@ -983,7 +1053,7 @@ d_j = P' d_{j-1}
 <section id="sec-pagerank" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="sec-pagerank"><span class="header-section-number">4.1</span> Application: Google PageRank</h2>
 <p>When Google was first formed, its key internal component was a method to rank Web sites in terms of popularity. They developed such a method, and named it PageRank, a pun combining the term <em>Web page</em> (i.e.&nbsp;Web site) and the name of one of the founders, Larry Page. It’s based on a Markov model.</p>
-<p>The transition matrix is modeled as follows. Row <span class="math inline">\(i\)</span> has <span class="math inline">\(o_i\)</span> nonzero entries, each of which is equal to <span class="math inline">\(1/o_i\)</span>. They define popularity as the resulting long-run distribution, i.e. <span class="math inline">\(\nu\)</span> in <a href="#sec-introMCs"><span>Section&nbsp;2.5</span></a>.</p>
+<p>The transition matrix is modeled as follows. Row <span class="math inline">\(i\)</span> has <span class="math inline">\(o_i\)</span> nonzero entries, each of which is equal to <span class="math inline">\(1/o_i\)</span>. They define popularity as the resulting long-run distribution, i.e. <span class="math inline">\(\nu\)</span> in <a href="#sec-introMCs"><span>Section&nbsp;2.7</span></a>.</p>
 </section>
 <section id="random-vectors" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="random-vectors"><span class="header-section-number">4.2</span> Random Vectors</h2>
