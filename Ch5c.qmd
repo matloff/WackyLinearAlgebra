@@ -482,5 +482,22 @@ inference (confidence intervals, hypothesis tests), e.g. those based on
 
 ❄️  **Your Turn:** Show that $A_{new}$ in @sec-matform is of full rank, $p$.
 
+❄️  **Your Turn:** Consider a generalization of ridge regression, in
+which we find
+
+$$
+\textrm{argmin}_b ~ 
+||{S} - {A} b||^2 + ||{D} b||^2
+$$
+
+for a diagonal matrix $D$. The idea is to allow different shrinkage
+parameters for different predictor variables. Show that 
+
+$$
+b = 
+ {[{A}' {A} + {D}^2]}^{-1}
+ {A}' {S}
+$$
+
 
 
