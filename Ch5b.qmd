@@ -815,8 +815,9 @@ Goal achieved.
 
 ## Your Turn
 
-❄️  **Your Turn:** Consider the space $\cal RV(\Omega)$.  Show that if
-$<X,X> = 0$, then $X$ must be the 0 vector. Make use of the facts that
+❄️  **Your Turn:** Consider the space $\cal RV(\Omega)$. In order for the
+claimed inner product to be valid, we must have that if $<X,X> = 0$,
+then $X$ must be the 0 vector. Prove this. Make use of the facts that
 $Var(X) = E(X^2) - [E(X)]^2$ and $Var(X) \geq 0$ with equality only of
 $X = c$ for some constant $c$.
 
@@ -941,3 +942,8 @@ so that $P$ thereby implements the projection.
 
 ❄️  **Your Turn:** Consider the quadratic form $x'Px$. Show that if $P$ 
 is a projection matrix, the form equals $||Px||^2$.
+
+❄️  **Your Turn:** Let $A$ be an $m \textrm{ x } n$ matrix. Consider the
+possible inner product on $\cal{R}^n$ defined by $<x,y> = x'A'A y$.
+State a condition on $A$ that is necessary and sufficient for the
+claimed inner product to be value, and prove this.
