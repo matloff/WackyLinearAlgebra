@@ -425,7 +425,7 @@ problem, even though it does not provide a sparse solution.
 On the other hand, in some settings, it may be desirable to keep all
 predictors, as seen in the next section.
 
-## Example: NYC Taxi Data
+## Example: NYC Taxi Data{#sec-useall}
 
 The purpose of this data is to predict trip time in the New York City
 taxi system. The $qeML$ package includes a 10,000-row subset.
@@ -499,5 +499,18 @@ b =
  {A}' {S}
 $$
 
+❄️  **Your Turn:** In @sec-useall, it was pointed out that in some
+settings we may prefer to retain all of our predictor variables, rather
+than do dimension reduction, thus preferring ridge to LASSO. But we
+might pay a price for that preference, in that the LASSO may actually
+give us better predictive power. Write an R function to investigate
+this, with call form
 
+``` r
+compareRidgeLASSO(data,yName)
+```
+
+where **data** and **yName** are in the format of the predictive $qeML$
+functions. Return the minimum Mean Squared Prediction Error for both
+algorithms.
 
