@@ -26,31 +26,39 @@ chapters.
 
 :::
 
-## Review of Matrix Rank Properties
+In @sec-rankprops, we briefly hinted at a possible relation between the
+rank of a matrix $A$ and that of $A'A$. It will turn out that the two
+ranks are the same. Such information can come in handy. For instance, in
+a linear regression model, we need $A'A$ to be invertible. So if in some
+setting we already know that $A$ is of nonfull rank, we know that the
+same is true for $A'A$; we need not bother finding the rank of the
+latter.
+
+This in turn will lead to study of *vector spaces*, a concept that goes
+hand-in-hand with matrices in forming the core of linear algebra.
+
+## Review of a Matrix Rank Property
 
 In the last chapter, we presented the concepts of matrix row and column
 rank, defined to be the maximal number of linearly independent
 combinations of the rows or columns of the matrix, respectively. We
 proved that
 
-<blockquote>
 
-For any matrix $B$, 
-
-$$
-\textrm{rowrank}(B)
-= \textrm{colrank}(B)
-= \textrm{rowrank}(B_{rref})
-= \textrm{colrank}(B_{rref})
-$$
-
-</blockquote>
+> For any matrix $B$, 
+> 
+> $$
+> \textrm{rowrank}(B)
+> = \textrm{colrank}(B)
+> = \textrm{rowrank}(B_{rref})
+> = \textrm{colrank}(B_{rref})
+> $$
 
 We can say something stronger: 
 
 ::: {#thm-span}
 
-Let $\cal V$ denote the *span* of the rows of $B$,i.e.\ the
+Let $\cal V$ denote the *span* of the rows of $B$, i.e. the
 set of all possible linear combinations of rows of $B$. Define $\cal
 V_{rref}$ similarly. Then
 
@@ -64,10 +72,9 @@ The analogous result holds for columns.
 
 ::: {.proof}
 
-Actually, we already proved this in the proof regarding rank in
-@sec-yessamerank, in which we wrote, 
-``any nonzero linear combination of rows in $B_{rref}$ will correspond
-to a nonzero linear combination of the rows of $B$,'' and vice versa.
+Actually, the theorem follows immediately from our comment following
+@lem-elemnotchangerank: "every nonzero linear combination of the rows of
+$A$ corresponds to one for the rows of $A_{rref}$, and vice versa."
 This showed a one-to-one correspondence between the two sets of linear
 combinations.
 
@@ -95,11 +102,11 @@ following conditions:
   We describe that latter property by saying $\cal W$ is *closed* under
   addition. 
 
-* There is a unique element called ``0'' such that  $u +
+* There is a unique element called "0" such that  $u +
   0 = 0 + u = u$.
 
 * Some form of scalar multiplication is defined, so that for any number
-  $c$ and and $u$ in $\cal W$, $cw$ exists and is in $\cal W$. 
+  $c$ and any $u$ in $\cal W$, $cw$ exists and is in $\cal W$. 
   We describe that latter property by saying $\cal W$ is *closed* 
   under scalar multiplication
 
@@ -118,23 +125,23 @@ $\cal R^{n}$.
 
 Here $\cal R$ represents the set of all real numbers, and $\cal R^{n}$ is
 simply the set of all vectors consisiting of $n$ real numbers. In an $m
-\textrm{x} k$ matrix the rows are members of so $\cal R^{m}$ and the
+\textrm{ x } k$ matrix the rows are members of $\cal R^{m}$ and the
 columns are in $\cal R^{k}$.
 
 ### The set C(0,1) of all continuous functions on the interval [0,1]
 
-No surprises here.  Vector addition and scalar multiplication are done
-as functions. If say $u$ is the squaring function and $v$$ is the sine
-function, then
+Vector addition and scalar multiplication are done
+as functions. If say $u$ is the squaring function and $v$ is the sine
+function, then for example $3u$ is the function
 
 $$
-3u = 3x^{0.5}
+f(x) = 3x^{0.5}
 $$
 
-and 
+and $u+v$ is defined to be
 
 $$
-u+v = x^{0.5} + \sin(x)
+f(x) = x^{0.5} + \sin(x)
 $$
 
 ### The set $\cal RV(\Omega)$ of all random variables defined on some probability space $\Omega$
