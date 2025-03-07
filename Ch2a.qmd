@@ -664,24 +664,73 @@ $$
 
 As to $AVar(v,w)$ in @eq-deltaquad, we would use the multivariate analog
 of the usual $S^2$ in the univariate case, taking advantage of
-@eq-matrixdef:
+@eq-matrixdef. One must be careful, though, making sure we choose the
+appropriate quantity for $AVar(v,w)$.
+
+For instance, in our ratio example here, $(Q,R)'$ is $(\bar{M},\bar{D}$.
+To obtain $AVar(v,w)$, let's first look at the covariance matrix $\Sigma$,
+
+$$
+\Sigma = E[(M - EM) (D - ED)']
+$$
+
+This is the average of $(M - EM) (D - ED)$ in the population. The sample
+analog average is[The reader may recall that in estmating a variance,
+it is customary to divide by $n-1$ instead of $n$, due to unbiasedness.
+The same is true for the multivariate analog of variance, i.e.
+covariance matrices, but we will use $n$ to retain the sample analog
+theme.]{.column-margin}
 
 $$
 \widehat{\Sigma} = 
-\frac{1}{n-1}
-\sum_{i=1}^n (X_i - \bar{X}) (X_i - \bar{X})'
+\frac{1}{n}
+\sum_{i=1}^n (M_i - \bar{M}) (D_i - \bar{D})'
 $$
 
-So now we have the estmated mean and variance, and can obtain a standard
-error for $\widehat{\omega}$: 
+where $(M_i,D_i)$ represents the $i^{th}$ mother-daughter pair in our
+dataset.
+
+But $\widehat{{\Sigma}}$ is not our $AVar(v,w)$ here, because we need,
+for instance, the variance of $\bar{M}$ rather than the variance of $M$.
+Recall that the former is $1/n$ times the latter. So in this case we
+have
+
+$$
+AVar(v,w) = \frac{1}{n} \widehat{\Sigma}
+$$
+
+So now we can obtain a standard error for $\widehat{\omega}$: 
 
 $$
 \sqrt{
+\frac{1}{n}
 \nabla f' \widehat{\Sigma} \nabla f
 }
 $$
 
 from which we can form a confidence interval.
+
+In R functions to do parametric regression modeling, Maximum Likelihood
+Estimation and so on, $AVar(v,w)$ is available from the function's
+return value.
+
+## Example: Iranian Churn Data
+
+Here we predict whether a telecom customer will move to another
+provider. Here we illustrate how to obtain $AVar(v,w)$.
+
+```{r}
+data(IranianChurn)
+glmOut <- glm(Exited ~ ., data = iranChurn, family = binomial)
+vcov(glmOut)
+```
+
+There are several categorical variables here, so after expansion to
+dummies, $AVar(v,w)$ is $12 \textrm{ x } 12$. This is the covariance
+matrix for the vector of estimated logistic regression coefficients
+$\widehat{\beta}$. There are many different functions $f(\beta)$ that
+might be of interest.
+
 
 ## Example: Mother/Daughter Height Data
 
@@ -694,7 +743,8 @@ d <- heights[,2]
 meanm <- mean(m)
 meand <- mean(d)
 fDel <- matrix(c(1/meanm,-meand/meanm^2),ncol=1)
-sigma <- cov(cbind(m,d))
+n <- length(m)
+sigma <- (1/n) * cov(cbind(m,d))
 se <- sqrt(t(fDel) %*% sigma %*% fDel)
 se
 meanmd <-meanm / meand
