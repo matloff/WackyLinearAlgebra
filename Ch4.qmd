@@ -261,7 +261,7 @@ As will be seen below, the row and column ranks will turn out to be equal.
 Thus in the sequel, we will use the term *rank* to refer to their common
 value. For now, though, the unmodified term "rank" will mean row rank.
 
-## Some Properties of Ranks
+## Some Properties of Ranks{#sec-rankprops}
 
 In @sec-censusrref, we found the matrix $A'A$ to be noninvertible, as
 its RREF had a row of 0s. We mentioned a relation to rank, but didn't
@@ -318,7 +318,9 @@ $\square$
 :::
 
 ::: {#lem-elemnotchangerank} 
-## The application of an elementary row operation on a matrix will will leave the row rank unchanged.
+
+An elementary row operation on a matrix leaves the row rank unchanged.  
+
 :::
 
 ::: {.proof}
@@ -330,11 +332,11 @@ a_1 r_1 + ... + a_m r_m \neq 0
 $$
 
 For any of the three elementary operations, a slightly modified linear
-combination works with the modified matrix:
+combination works (i.e. will be nonzero) with the modified matrix:
 
 * Swap rows $i$ and $j$: Swap $a_i$ and $a_j$.
 
-* Multiplying row $i$ by a constant $c$. Since $r_i \rightarrow $c r_i$,
+* Multiplying row $i$ by a constant $c$. Since $r_i \rightarrow c r_i$,
 set $a_i \rightarrow (1/c) a_i$.
 
 * Add *c* times row $j$ to row $i$: Set $a_j \rightarrow a_j - c a_j$.
