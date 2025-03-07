@@ -73,7 +73,7 @@ rref(ApA)
 Aha! Look at that row of 0s!  The row operations process ended
 prematurely. This matrix will be seen to have no inverse.  We say that
 the matrix has *rank* 4 -- meaning 4 nonzero rows --  when it needs to
-be 5.  
+be 5. We also say that the matrix is of *nonfull rank*.
 
 Though we have motivated the concept of matrix rank here with a linear
 model example, and will do so below,  the notion pervades all of linear
@@ -194,10 +194,9 @@ for a sequence of  invertible elementary matrices.
 (The reader may wish to review @sec-easyops.)
 
 > *Definition:* We say a set of vectors is *linearly dependent* if some
-> linear combination of them (excluding the trivial case in which all the
-> coefficients are 0) equals 0, as in both cases above.  If no nontrival
-> linear combination of the vectors is 0, we say the vectors are *linearly
-> independent*.
+> linear combination of them (excluding the trivial case in which all
+> the coefficients are 0) equals 0. If no nontrival linear combination
+> of the vectors is 0, we say the vectors are *linearly independent*.
 
 For instance, consider the matrix
 
@@ -226,31 +225,17 @@ Then $c_1$, $c_2$ and $c_3$ are not linearly independent.
 
 So, here is the formal definition of rank:
 
-<blockquote>
+> *Definition* The *rank* of a matrix $B$ is its maximal number of
+> linearly independent rows.
 
-*Definition* The *rank* of a matrix $B$ is its maximal number of
-linearly independent rows.
-
-</blockquote>
-
-## Rank in Relation to Sets of Linear Dependent/Independent Vectors
-
-Here we use rank as our path to key concepts about sets of vectors.
-
-### Motivation
-
-Recall that in the nonfull rank example we presented in @sec-noinverse,
-one row was double another, 
-
-row2 + 2 row1 = 0
-
-In the census example,
+As an example involving real data, recall that in the nonfull rank
+let's look again at the census example,
 
 ```{r}
 head(A)
 ```
 
-the sum of the last two columns of $A$ was equal to the first column:
+the sum of the last two columns of $A$ is equal to the first column, so
 
 column1 - column4 - column5 = 0
 
@@ -259,14 +244,18 @@ this matrix:
 
 1 column1 + 0 column2 + 0 column3 + (-1) column4 + (-1) column5 = 0
 
-The vector of coefficients is (1,0,0,-1,-1).
+So we have found a linear combination of the columsn of this matrix,
+with coefficients (1,0,0,-1,-1), that evaluates to 0. Though we have
+defined rank in terms of rows, one can do so in terms of columns as
+well:
 
-### Row and column rank
+## Row and Column Rank
 
 We have defined the rank of a matrix to be the number of maximally
 linearly independent rows. We'll now call that the *row rank*, and
-define the *column rank* to be the number of maximally 
-linearly independent columns.
+define the *column rank* to be the number of maximally linearly
+independent columns. So for instance the matrix analyzed at the end of
+the last section is seen to be of nonfull column rank.
 
 As will be seen below, the row and column ranks will turn out to be equal.
 Thus in the sequel, we will use the term *rank* to refer to their common
@@ -277,8 +266,6 @@ value. For now, though, the unmodified term "rank" will mean row rank.
 In @sec-censusrref, we found the matrix $A'A$ to be noninvertible, as
 its RREF had a row of 0s. We mentioned a relation to rank, but didn't
 formalize it, which we will do now. 
-
-### Rank is preserved in pre-/post-multiplication by invertible matrices
 
 ::: {#thm-ranknotchange}
 
@@ -372,8 +359,6 @@ $\square$
 
 :::
 
-### Rank is bounded above by the "narrow" dimension of the matrix
-
 In @sec-censusrref, we found the matrix $A'A$ to not be of full rank.
 It is surprising that so was $A$:
 
@@ -405,13 +390,12 @@ $\square$
 
 :::
 
-
 ## Your Turn
 
 ❄️  **Your Turn:** Show that a set of vectors is linearly dependent if
 and only if one of the vectors is a linear combination of the others.
 
-❄️  **Your Turn:** Consider an $m \textrm{x} n$ matrix $A$ with $m \geq n$.
+❄️  **Your Turn:** Consider an $m \textrm{ x } n$ matrix $A$ with $m \geq n$.
 Then consider the partitioned matrix
 
 $$
@@ -424,7 +408,7 @@ $$
  \right )
 $$
 
-where $I is the $n \textrm{x} n$ identity matrix. Prove that $B$ is of
+where $I is the $n \textrm{ x } n$ identity matrix. Prove that $B$ is of
 full rank.
 
 ❄️  **Your Turn:** Consider the three basic elementary matrices discussed
@@ -435,5 +419,3 @@ for the determinants of the three matrices.
 ❄️  **Your Turn:** Prove that if the matrix $A$ has a 0 row, then
 $det(A) =  0$.
 
-❄️  **Your Turn:** Show that a set of vectors is linearly dependent if
-and only if one of the vectors is a linear combination of the others.
