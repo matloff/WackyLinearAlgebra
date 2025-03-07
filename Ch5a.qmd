@@ -92,29 +92,25 @@ will now see.
 
 ## Vector Space Definition
 
-<blockquote>
-
-A set of objects $\cal W$ is called a *vector space* if it satisfies the
-following conditions:
-
-* Some form of addition between vectors $u$ and $v$, denoted $u+v$, is
-  defined in $\cal W$, with the result that *u+v* is also in $\cal W$.
-  We describe that latter property by saying $\cal W$ is *closed* under
-  addition. 
-
-* There is a unique element called "0" such that  $u +
-  0 = 0 + u = u$.
-
-* Some form of scalar multiplication is defined, so that for any number
-  $c$ and any $u$ in $\cal W$, $cw$ exists and is in $\cal W$. 
-  We describe that latter property by saying $\cal W$ is *closed* 
-  under scalar multiplication
-
-* This being a practical book with just a dash of theory, we'll skip the
-  remaining conditions, involving algebraic properties such as
-  commutativity of addition ($u+v = v+u$).
-
-</blockquote>
+> A set of objects $\cal W$ is called a *vector space* if it satisfies the
+> following conditions:
+> 
+> * Some form of addition between vectors $u$ and $v$, denoted $u+v$, is
+>   defined in $\cal W$, with the result that *u+v* is also in $\cal W$.
+>   We describe that latter property by saying $\cal W$ is *closed* under
+>   addition. 
+> 
+> * There is a unique element called "0" such that  $u +
+>   0 = 0 + u = u$.
+> 
+> * Some form of scalar multiplication is defined, so that for any number
+>   $c$ and any $u$ in $\cal W$, $cw$ exists and is in $\cal W$. 
+>   We describe that latter property by saying $\cal W$ is *closed* 
+>   under scalar multiplication
+> 
+> * This being a practical book with just a dash of theory, we'll skip the
+>   remaining conditions, involving algebraic properties such as
+>   commutativity of addition ($u+v = v+u$).
 
 ### Examples
 
@@ -180,15 +176,20 @@ $R^3$ and $R^n$:
 
 For instance, take $\cal W_{1}$ to be all vectors of the form
 (a,b,0). Clearly, $\cal W_{1}$ is closed under addition and scalar
-multiplication.
+multiplication, so it is subspace of $R^3$.
 
 Another subspace of $R^3$ is the set of vectors (a,a,b), i.e. those
 vectors whose first two element are equal. What about vectors of the
 form (a,b,a+b)? Yes.
 
-We saw earlier that the *row space* of an $m \textrm{x} n$ matrix $A$,
+We saw earlier that the *row space* of an $m \textrm{ x } n$ matrix $A$,
 consisting of all linear combinations of the rows of $A$, is a subspace
-of $R^m$. Similarly, the *column space* is a subspace of $R^n$.
+of $R^m$. Similarly, the *column space*, consisting of all linear
+combinations of columns of $A$, is a subspace of $R^n$.
+
+Another important subspace is the *null space*, the set of all $x$ 
+such that $Ax = 0$. The reader should verify that this is indeed a
+subspace of $R^n$.
 
 $C(0,1)$: 
 
@@ -205,8 +206,9 @@ subspace. Another subspace is the set of all random variable with mean
 
 ### Span of a set of vectors
 
-The *span* of a set of vectors $G = {v_1,...,v_k}$ is the set of all
-linear combinations of those vectors. It's a subspace of the main space.
+As noted earlier, the *span* of a set of vectors $G = {v_1,...,v_k}$ is
+the set of all linear combinations of those vectors. It's a subspace of
+the main space.
 
 ## Basis 
 
@@ -217,11 +219,11 @@ linear combinations of them. In verb form, we say that $u_1,...u_r$
 vectors via linear combinations. It's even nicer if the vectors are
 linearly independent:
 
-<blockquote>
+> We say the vectors $u_1,...u_r$ in a vector space $\cal W$ form a *basis*
+> for $\cal W$ if they are linearly independent and span $\cal W$.
 
-We say the vectors $u_1,...u_r$ in a vector space $\cal W$ form a *basis*
-for $\cal W$ if they are linearly independent and span $\cal W$.
-</blockquote>
+Note that subspaces are vector spaces in their own right, and thus also
+have bases.
 
 ### Examples
 
@@ -237,7 +239,7 @@ instance, to generate (3,1,-0.2), we use this linear combination:
 (3,1,-0.2) = 3 (1,0,0) + 1 (0,1,0) + (-0.2) (0,0,,1)
 
 But bases are not unique; for instance, the set (1,0,0, (0,1,0), (0,1,1) works
-equally well as a basis for this space, as are (infinitely) many others..
+equally well as a basis for this space, as do (infinitely) many others..
 
 A basis for the subspace of vectors of the form (a,a,b) is (1,1,0) and
 (0,0,1). 
@@ -251,7 +253,7 @@ with a subspace that is *dense* in the full space, i.e.\ any vector in
 the full space can be approximated to any precision by some linear
 combination of vectors in the dense set. For instance, the famoua
 Stone-Weierstrauss Theorem says that the set of all polynomials is dense
-in $C(0,1)$. One then defines the dense set to be a ``basis.'' The use
+in $C(0,1)$. One then defines the dense set to be a "basis." The use
 of trig functions as the dense set is much more common than use of
 polynomials, in the familiar *Fourier series*.]{.column-margin}
 
@@ -264,84 +266,62 @@ The situation here is the same as for C(0,1).
 Geometrically, we often refer to what is called $\cal R^3$ here as
 ``3-dimensional.'' We extend this to general vector spaces as follows:
 
-<blockquote>
-
-The *dimension* of a vector space is the number of vectors in any
-of its bases.
-
-</blockquote>
+> The *dimension* of a vector space is the number of vectors in any
+> of its bases.
 
 There is a bit of a landmine in that definition, as it presumes that all
 the bases do consist of the same number of vectors. This is true, but
-must be proven. Here we follow the 
-[elegant proof](https://www.google.com/books/edition/Algebra_and_Geometry/tVTd78vYzPkC?hl=en&gbpv=1&pg=PA106&printsec=frontcover) AF Beardon (*Algebra and Geometry*, 2005, Cambridge).
+must be proven. We will not do so here, and refer the interested reader
+to the [elegant
+proof](https://www.google.com/books/edition/Algebra_and_Geometry/tVTd78vYzPkC?hl=en&gbpv=1&pg=PA106&printsec=frontcover)
+AF Beardon (*Algebra and Geometry*, 2005, Cambridge).
 
-::: {#thm-allbases}
 
-The number of vectors is the same in every basis.
+## Linear Transformations
 
-:::
+Consider vector spaces $\cal{V}_1$ and $\cal{V}_2$. A function $f$ whose
+input is in $\cal{V}_1$ and output is in  $\cal{V}_2$ is called a
+*transformation* (or *map*) $\cal{V}_1$ to $\cal{V}_2$. 
 
-::: {.proof}
-
-Consider two bases, $b_u = u_1,...,u_m$ and $b_v = v_1,...,v_n$
-By definition, each $u_i$ in $b_u$ can be represented by $b_v$ and vice
-versa:
-
-$$
-u_i = r_{i1} v_1 + ... + r_{in} v_n = \sum_{q=1}^n r_{iq} v_q
-$${#eq-ui}
+An important special case is that in which  $f$ is linear, i.e.
 
 $$
-v_j = s_{j1} u_1 + ... + s_{jm} u_m \sum_{w=1}^m s_{jw} u_w
-$${#eq-vj}
-
-Substituting the second equation into the first, we have
-
-$$
-u_k = \sum_{q=1}^n r_{kq} \sum_{w=1}^m s_{qw} u_w =
-\sum_{q=1}^n \sum_{w=1}^m r_{kq}s_{qw} u_w
+f(av + bw) = a f(v) = b f(w)
 $$
 
-Since the $u_w$ form a basis, then the below Your Turn problem on the
-uniqueness of coefficients in a basis representation says we can equate
-coefficients on both sides of the last equation. The coefficient of
-$u_k$ on the right side is 
+for all scalars $a$ and $b$, and all vectors $v$ and $w$ in $\cal{V}_1 $. 
+
+A further important special case is that in which $\cal{V}_1$ and
+$\cal{V}_2$ are $R^n$ and $R^m$, respectively.  Then it can be shown
+that there a some $m \textrm{ x } n$ matrix $A$ that does its work, i.e.
 
 $$
-\sum_{q=1}^n r_{kq} s_{qk}
+f(x) = Ax
 $$
 
-whereas on the left side, it is 1. So, 
+for all $x$ in $R^n$. 
+
+Note that it is not necessarily true that a linear transformation will
+be *one-to-one* (*injective*), meaning that $x \neq y$ implies 
+$f(x) \neq f(y)$. Nor is it necessarily *onto* (*surjective*).
+
+To see that the first is false, consider the matrix $A$ above. If say
+$f(v) = w$ then we will also have $f(v+u) = w$ for any $u$ in the null
+space of $A$. To see that the second property also does not necessarily
+hold, suppose 
 
 $$
-1 = \sum_{q=1}^n r_{kq} s_{qk}
+A = 
+\left (
+\begin{array}{rrr}
+0 & 1 & 0 \\
+1 & 0 & 0 \\
+\end{array}
+\right )
 $$
 
-Summing over $k$, we obtain
+This can only produce outputs of the form $(a,**,0**$
 
-$$
-n = \sum_{k=1}^m \sum_{q=1}^n r_{kq} s_{qk}
-$$
-
-But going through the same steps as above, but now substituting @eq-ui
-into @eq-vj, we would have
-
-$$
-m = \sum_{p=1}^m \sum_{q=1}^m 
-r_{pq} 
-s_{qp}
-$$
-
-The sums in the last two equations are the same!
-
-Therefore $m = n$, i.e. the two bases are of the same size.
-
-$\square$
-
-:::
-
-## Row Space, Column Space, Null Space
 
 ## Your Turn
 
@@ -354,6 +334,6 @@ result does not hold for union.
 that the set of all random variable with mean 0 latter set is indeed a
 subspace of $\cal RV(\Omega)$.
 
-❄️  **Your Turn:** Prove that the coefficients in basis representations
+❄️  **Your Turn:** Prove that the coefficients in a basis representation
 are unique. In other words, in a representation of the vector $x$ in
 terms of a basis $u_1,...,u_n$,
