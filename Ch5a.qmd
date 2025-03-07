@@ -48,9 +48,9 @@ $$
 
 We can say something stronger: 
 
-<blockquote>
+::: {#thm-span}
 
-*Theorem:* Let $\cal V$ denote the *span* of the rows of $B$,i.e.\ the
+Let $\cal V$ denote the *span* of the rows of $B$,i.e.\ the
 set of all possible linear combinations of rows of $B$. Define $\cal
 V_{rref}$ similarly. Then
 
@@ -60,14 +60,20 @@ $$
 
 The analogous result holds for columns.
 
-*Proof:* Actually, we already proved this in the proof regarding rank in
+:::
+
+::: {.proof}
+
+Actually, we already proved this in the proof regarding rank in
 @sec-yessamerank, in which we wrote, 
 ``any nonzero linear combination of rows in $B_{rref}$ will correspond
 to a nonzero linear combination of the rows of $B$,'' and vice versa.
 This showed a one-to-one correspondence between the two sets of linear
 combinations.
 
-</blockquote>
+$\square$
+
+:::
 
 So, not only do the two matrices have the same maximal numbers of 
 linearly independent rows, they also generate *the same linear
@@ -263,11 +269,15 @@ the bases do consist of the same number of vectors. This is true, but
 must be proven. Here we follow the 
 [elegant proof](https://www.google.com/books/edition/Algebra_and_Geometry/tVTd78vYzPkC?hl=en&gbpv=1&pg=PA106&printsec=frontcover) AF Beardon (*Algebra and Geometry*, 2005, Cambridge).
 
-<blockquote>
+::: {#thm-allbases}
 
-*Theorem:* The number of vectors is the same in every basis.
+The number of vectors is the same in every basis.
 
-*Proof:* Consider two bases, $b_u = u_1,...,u_m$ and $b_v = v_1,...,v_n$
+:::
+
+::: {.proof}
+
+Consider two bases, $b_u = u_1,...,u_m$ and $b_v = v_1,...,v_n$
 By definition, each $u_i$ in $b_u$ can be represented by $b_v$ and vice
 versa:
 
@@ -320,7 +330,11 @@ The sums in the last two equations are the same!
 
 Therefore $m = n$, i.e. the two bases are of the same size.
 
-</blockquote>
+$\square$
+
+:::
+
+## Row Space, Column Space, Null Space
 
 ## Your Turn
 
