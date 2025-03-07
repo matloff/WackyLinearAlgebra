@@ -19,102 +19,11 @@ is the focus of the current chapter.
 
 ::: 
 
-
-## Example: African Soils Data
-
-To get things started, let's consider the African Soils dataset.
-
-Let's take a look around:
-
-```{r}
-library(WackyData) 
-data(AfricanSoil)
-dim(AfricanSoil)
-names(AfricanSoil)[1:25]
-names(AfricanSoil)[3576:3600]
-```
-
-Let's try predicting **pH**, the acidity. But that leaves 3599 possible
-predictors. There is an old rule of thumb that one should have 
-$p < \sqrt{n}$, for $p$ predictors and $n$ data points,
-to avoid overfitting, a rule which in our setting of $n = 1157$
-is grossly violated.  We need to do dimension reduction. One way to
-accomplish this is to use PCA. 
-
-(Note, though, that this presumes our goal is prediction, rather than
-effect estimation. In the latter case, our new variables will be
-principal components, and their regression coefficients may not be
-meaningful to us. If we are doing prediction, regression coefficients
-may not be of interest.)
-
-## Overall Idea 
-
-The goal is to find a few important linear combinations of our original
-predictor variables--important in the sense that they roughly summarize
-our data.  These new variables are called the *principal components*
-(PCs) of the data.  Let's see how this is done.
-
-### The first PC{#sec-firstPC}
-
-Let **X** denote a set of variables of interest (not necessarily in a
-prediction context).
-In searching for good linear combinations, we want to aim for ones with
-high variance. We certainly don't want ones with low variance; after
-all, a random variable with 0 variance is a constant.  So we wish to
-find linear combinations 
-
-$$
-Xu
-$$
-
-which maximize 
-
-$$
-Var(Xu) = u' Cov(X) u
-$$
-
-where we have invoked @eq-acova.
-
-But that goal is ill-defined, since we could take larger and larger
-vectors $u$, thus larger and larger vectors $Xu$, no maximum.  So, let's
-constrain it to vectors $u$ of length 1:
-
-$$
-u'u = 1
-$$
-
-The method of *Lagrange multipliers* is used to solve maximum/minimum
-problems that have constraints, by adding a new variable corresponding
-to the constraint. In our case, we maximize
-
-$$
-u'Cov(X)u + \gamma (u'u - 1)
-$$
-
-with respect to $u$ and $\gamma$.
-
-Setting derivatives to 0, we have
-
-$$
-0 = 
-2 Cov(X) u + 2 \gamma u
-$$
-
-and
-
-$$
-0 = u'u - 1
-$$
-
-In other words,
-
-$$
-Cov(X) u = -\gamma u
-$${#eq-aha}
-
-Aha! The vector $u$ is an eigenvector of the matrix $Cov(X)$ with
-eigenvalue $-\gamma$.  We've discovered that our quest for dimension
-reduction can be couched as an eigenanalysis problem!
+So we found in the last chapter that finding principal components
+entails finding eigenvectors and eigenvalues, at least for the first
+component. It turns out that this is true for the second, third and all
+the components. In other words, principal component analysis (PCA) is
+basically an eigenvectors and eigenvalues application.
 
 ### The second, third etc. PCs
 
@@ -241,6 +150,8 @@ proceed. We will also remove the nonnumeric columns,
 to better illustrate the concepts, we do things from scratch.
 
 ```{r} 
+library(WackyData)
+data(AfricanSoil)
 x <- AfricanSoil[,-c(1,3595,3598)]
 dim(x)
 xcov <- cov(x)
