@@ -195,13 +195,13 @@ is that number). Substitute for $M\nu$ and $M\mu$, then subtract.
 
 A square matrix $R$ is said to be *diagonalizable* if there exists an
 invertible matrix $P$ such that $P^{-1}RP$ is equal to some diagonal
-matrix $D$. We see that symmetric matrices fall into this category.
+matrix $D$. We will see that symmetric matrices fall into this category.
 
 One application of this is the computation of powers of a diagonal
 matrix:
 
 $$
-R^k = P^{-1}RP ~ P^{-1}RP ~ ... ~ P^{-1}RP = P^{-1}D^kP
+R^k = (P^{-1}RP) ~ (P^{-1}RP) ~ ... ~ (P^{-1}RP) = P^{-1}D^kP
 $$
 
 $D^k$ is equal to the diagonal matrix with elements $d_k^k$, so the
@@ -235,8 +235,7 @@ corresponding to eigenvectors $P_i$. Set the latter to have length 1,
 by dividing by their lengths.  
 
 Recall that the eigenvectors of $M$, i.e. the columns of $P$, are
-orthogonal. That means the rows of $P'$ are orthogonal. Again using
-partitioning, we see that 
+orthogonal. Again using partitioning, we see that 
 
 $$
 P'P = I
@@ -245,9 +244,9 @@ $$
 so that $P^{-1} = P'$.
 
 By the way, any square matrix $Q$ such that $Q'Q = I$ is said to be
-*orthogonal*.
+*orthogonal*. And, its inverse is its transpose.
 
-Now write
+Now use partitioning again:
 
 $$
 MP = M(P_1 | ... | P_m) = (MP_1 | ... | MP_n) =
