@@ -198,7 +198,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch6a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Eigenanalysis: Properties</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Eigenanalysis</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -426,17 +426,17 @@ woman   0   0       0   0     0</code></pre>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">runif</span>(<span class="dv">12</span>),<span class="at">nrow=</span><span class="dv">3</span>)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>           [,1]      [,2]        [,3]      [,4]
-[1,] 0.87978169 0.4641940 0.318226788 0.1562195
-[2,] 0.31795306 0.8364962 0.001461033 0.1944553
-[3,] 0.09688792 0.2262134 0.096807788 0.1231328</code></pre>
+<pre><code>          [,1]      [,2]      [,3]      [,4]
+[1,] 0.2981126 0.8630180 0.8557441 0.3872760
+[2,] 0.4526713 0.4371274 0.5401154 0.5009746
+[3,] 0.0424277 0.3434724 0.5158489 0.6168227</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>e <span class="sc">%*%</span> a  <span class="co"># matrix mult. is NOT e * a!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>           [,1]      [,2]        [,3]      [,4]
-[1,] 0.87978169 0.4641940 0.318226788 0.1562195
-[2,] 0.09688792 0.2262134 0.096807788 0.1231328
-[3,] 0.31795306 0.8364962 0.001461033 0.1944553</code></pre>
+<pre><code>          [,1]      [,2]      [,3]      [,4]
+[1,] 0.2981126 0.8630180 0.8557441 0.3872760
+[2,] 0.0424277 0.3434724 0.5158489 0.6168227
+[3,] 0.4526713 0.4371274 0.5401154 0.5009746</code></pre>
 </div>
 </div>
 <p>Yes, rows 2 and 3 were swapped.</p>

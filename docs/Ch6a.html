@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Powered by Linear Algebra - 10&nbsp; Eigenanalysis: Properties</title>
+<title>Powered by Linear Algebra - 10&nbsp; Eigenanalysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -110,7 +110,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Ch6a.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Eigenanalysis: Properties</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Ch6a.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Eigenanalysis</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -198,7 +198,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch6a.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Eigenanalysis: Properties</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Eigenanalysis</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -241,20 +241,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#definition" id="toc-definition" class="nav-link active" data-scroll-target="#definition"><span class="header-section-number">10.1</span> Definition</a></li>
-  <li><a href="#a-first-look" id="toc-a-first-look" class="nav-link" data-scroll-target="#a-first-look"><span class="header-section-number">10.2</span> A First Look</a></li>
-  <li><a href="#the-special-case-of-symmetric-matrices" id="toc-the-special-case-of-symmetric-matrices" class="nav-link" data-scroll-target="#the-special-case-of-symmetric-matrices"><span class="header-section-number">10.3</span> The Special Case of Symmetric Matrices</a>
+  <li><a href="#example-african-soils-data" id="toc-example-african-soils-data" class="nav-link active" data-scroll-target="#example-african-soils-data"><span class="header-section-number">10.1</span> Example: African Soils Data</a></li>
+  <li><a href="#overall-idea" id="toc-overall-idea" class="nav-link" data-scroll-target="#overall-idea"><span class="header-section-number">10.2</span> Overall Idea</a>
   <ul class="collapse">
-  <li><a href="#eigenvalues-are-real" id="toc-eigenvalues-are-real" class="nav-link" data-scroll-target="#eigenvalues-are-real"><span class="header-section-number">10.3.1</span> Eigenvalues are real</a></li>
-  <li><a href="#sec-eigortho" id="toc-sec-eigortho" class="nav-link" data-scroll-target="#sec-eigortho"><span class="header-section-number">10.3.2</span> Eigenvectors are orthogonal</a></li>
-  <li><a href="#sec-diagonalizable" id="toc-sec-diagonalizable" class="nav-link" data-scroll-target="#sec-diagonalizable"><span class="header-section-number">10.3.3</span> Symmetric matrices are diagonalizable</a></li>
-  <li><a href="#example-census-dataset" id="toc-example-census-dataset" class="nav-link" data-scroll-target="#example-census-dataset"><span class="header-section-number">10.3.4</span> Example: Census dataset</a></li>
+  <li><a href="#sec-firstPC" id="toc-sec-firstPC" class="nav-link" data-scroll-target="#sec-firstPC"><span class="header-section-number">10.2.1</span> The first PC</a></li>
   </ul></li>
-  <li><a href="#application-detecting-multicollinearity" id="toc-application-detecting-multicollinearity" class="nav-link" data-scroll-target="#application-detecting-multicollinearity"><span class="header-section-number">10.4</span> Application: Detecting Multicollinearity</a></li>
-  <li><a href="#example-currency-data" id="toc-example-currency-data" class="nav-link" data-scroll-target="#example-currency-data"><span class="header-section-number">10.5</span> Example: Currency Data</a></li>
-  <li><a href="#computation-the-power-method" id="toc-computation-the-power-method" class="nav-link" data-scroll-target="#computation-the-power-method"><span class="header-section-number">10.6</span> Computation: the Power Method</a></li>
-  <li><a href="#application-computation-of-long-run-distribution-in-markov-chains" id="toc-application-computation-of-long-run-distribution-in-markov-chains" class="nav-link" data-scroll-target="#application-computation-of-long-run-distribution-in-markov-chains"><span class="header-section-number">10.7</span> Application: Computation of Long-Run Distribution in Markov Chains</a></li>
-  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">10.8</span> Your Turn</a></li>
+  <li><a href="#definition" id="toc-definition" class="nav-link" data-scroll-target="#definition"><span class="header-section-number">10.3</span> Definition</a></li>
+  <li><a href="#a-first-look" id="toc-a-first-look" class="nav-link" data-scroll-target="#a-first-look"><span class="header-section-number">10.4</span> A First Look</a></li>
+  <li><a href="#the-special-case-of-symmetric-matrices" id="toc-the-special-case-of-symmetric-matrices" class="nav-link" data-scroll-target="#the-special-case-of-symmetric-matrices"><span class="header-section-number">10.5</span> The Special Case of Symmetric Matrices</a>
+  <ul class="collapse">
+  <li><a href="#eigenvalues-are-real" id="toc-eigenvalues-are-real" class="nav-link" data-scroll-target="#eigenvalues-are-real"><span class="header-section-number">10.5.1</span> Eigenvalues are real</a></li>
+  <li><a href="#sec-eigortho" id="toc-sec-eigortho" class="nav-link" data-scroll-target="#sec-eigortho"><span class="header-section-number">10.5.2</span> Eigenvectors are orthogonal</a></li>
+  <li><a href="#sec-diagonalizable" id="toc-sec-diagonalizable" class="nav-link" data-scroll-target="#sec-diagonalizable"><span class="header-section-number">10.5.3</span> Symmetric matrices are diagonalizable</a></li>
+  <li><a href="#example-census-dataset" id="toc-example-census-dataset" class="nav-link" data-scroll-target="#example-census-dataset"><span class="header-section-number">10.5.4</span> Example: Census dataset</a></li>
+  </ul></li>
+  <li><a href="#application-detecting-multicollinearity" id="toc-application-detecting-multicollinearity" class="nav-link" data-scroll-target="#application-detecting-multicollinearity"><span class="header-section-number">10.6</span> Application: Detecting Multicollinearity</a></li>
+  <li><a href="#example-currency-data" id="toc-example-currency-data" class="nav-link" data-scroll-target="#example-currency-data"><span class="header-section-number">10.7</span> Example: Currency Data</a></li>
+  <li><a href="#computation-the-power-method" id="toc-computation-the-power-method" class="nav-link" data-scroll-target="#computation-the-power-method"><span class="header-section-number">10.8</span> Computation: the Power Method</a></li>
+  <li><a href="#application-computation-of-long-run-distribution-in-markov-chains" id="toc-application-computation-of-long-run-distribution-in-markov-chains" class="nav-link" data-scroll-target="#application-computation-of-long-run-distribution-in-markov-chains"><span class="header-section-number">10.9</span> Application: Computation of Long-Run Distribution in Markov Chains</a></li>
+  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">10.10</span> Your Turn</a></li>
   </ul>
 </nav>
     </div>
@@ -263,7 +268,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Eigenanalysis: Properties</span></h1>
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Eigenanalysis</span></h1>
 </div>
 
 
@@ -292,19 +297,89 @@ Goals of this chapter:
 <p>The concept of eigenvalues and eigenvectors is one of the most important of all appplications of linear algebra to data science. We introduce the basic ideas and properties in this chapter.</p>
 </div>
 </div>
-<section id="definition" class="level2" data-number="10.1">
-<h2 data-number="10.1" class="anchored" data-anchor-id="definition"><span class="header-section-number">10.1</span> Definition</h2>
+<section id="example-african-soils-data" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="example-african-soils-data"><span class="header-section-number">10.1</span> Example: African Soils Data</h2>
+<p>To get things started, let’s consider the African Soils dataset.</p>
+<p>Let’s take a look around:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(WackyData) </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(AfricanSoil)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(AfricanSoil)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1157 3600</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(AfricanSoil)[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "PIDN"     "m7497.96" "m7496.04" "m7494.11" "m7492.18" "m7490.25"
+ [7] "m7488.32" "m7486.39" "m7484.46" "m7482.54" "m7480.61" "m7478.68"
+[13] "m7476.75" "m7474.82" "m7472.89" "m7470.97" "m7469.04" "m7467.11"
+[19] "m7465.18" "m7463.25" "m7461.32" "m7459.39" "m7457.47" "m7455.54"
+[25] "m7453.61"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(AfricanSoil)[<span class="dv">3576</span><span class="sc">:</span><span class="dv">3600</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "m605.545" "m603.617" "m601.688" "m599.76"  "BSAN"     "BSAS"    
+ [7] "BSAV"     "CTI"      "ELEV"     "EVI"      "LSTD"     "LSTN"    
+[13] "REF1"     "REF2"     "REF3"     "REF7"     "RELI"     "TMAP"    
+[19] "TMFI"     "Depth"    "Ca"       "P"        "pH"       "SOC"     
+[25] "Sand"    </code></pre>
+</div>
+</div>
+<p>Let’s try predicting <strong>pH</strong>, the acidity. But that leaves 3599 possible predictors. There is an old rule of thumb that one should have <span class="math inline">\(p &lt; \sqrt{n}\)</span>, for <span class="math inline">\(p\)</span> predictors and <span class="math inline">\(n\)</span> data points, to avoid overfitting, a rule which in our setting of <span class="math inline">\(n = 1157\)</span> is grossly violated. We need to do dimension reduction. One way to accomplish this is to use PCA.</p>
+<p>(Note, though, that this presumes our goal is prediction, rather than effect estimation. In the latter case, our new variables will be principal components, and their regression coefficients may not be meaningful to us. If we are doing prediction, regression coefficients may not be of interest.)</p>
+</section>
+<section id="overall-idea" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="overall-idea"><span class="header-section-number">10.2</span> Overall Idea</h2>
+<p>The goal is to find a few important linear combinations of our original predictor variables–important in the sense that they roughly summarize our data. These new variables are called the <em>principal components</em> (PCs) of the data. Let’s see how this is done.</p>
+<section id="sec-firstPC" class="level3" data-number="10.2.1">
+<h3 data-number="10.2.1" class="anchored" data-anchor-id="sec-firstPC"><span class="header-section-number">10.2.1</span> The first PC</h3>
+<p>Let <strong>X</strong> denote a set of variables of interest (not necessarily in a prediction context). In searching for good linear combinations, we want to aim for ones with high variance. We certainly don’t want ones with low variance; after all, a random variable with 0 variance is a constant. So we wish to find linear combinations</p>
+<p><span class="math display">\[
+Xu
+\]</span></p>
+<p>which maximize</p>
+<p><span class="math display">\[
+Var(Xu) = u' Cov(X) u
+\]</span></p>
+<p>where we have invoked <a href="Ch2a.html#eq-acova">Equation&nbsp;<span>4.4</span></a>.</p>
+<p>But that goal is ill-defined, since we could take larger and larger vectors <span class="math inline">\(u\)</span>, thus larger and larger vectors <span class="math inline">\(Xu\)</span>, no maximum. So, let’s constrain it to vectors <span class="math inline">\(u\)</span> of length 1:</p>
+<p><span class="math display">\[
+u'u = 1
+\]</span></p>
+<p>The method of <em>Lagrange multipliers</em> is used to solve maximum/minimum problems that have constraints, by adding a new variable corresponding to the constraint. In our case, we maximize</p>
+<p><span class="math display">\[
+u'Cov(X)u + \gamma (u'u - 1)
+\]</span></p>
+<p>with respect to <span class="math inline">\(u\)</span> and <span class="math inline">\(\gamma\)</span>.</p>
+<p>Setting derivatives to 0, we have</p>
+<p><span class="math display">\[
+0 =
+2 Cov(X) u + 2 \gamma u
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+0 = u'u - 1
+\]</span></p>
+<p>In other words,</p>
+<p><span id="eq-aha"><span class="math display">\[
+Cov(X) ~ u = -\gamma u
+\tag{10.1}\]</span></span></p>
+<p>A matrix times a vector equals a constant times that same vector. That opens a huge world. We will return to the notion of principal components in the next chapter, after laying the groundwork in the current chapter.</p>
+</section>
+</section>
+<section id="definition" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="definition"><span class="header-section-number">10.3</span> Definition</h2>
 <p>The concept itself is simple:</p>
 <blockquote class="blockquote">
 <p>Consider an <span class="math inline">\(m \textrm{ x } m\)</span> matrix <span class="math inline">\(M\)</span>. If there is a nonzero vector <span class="math inline">\(x\)</span> and a number <span class="math inline">\(\lambda\)</span> such that</p>
 <p><span id="eq-simpledef"><span class="math display">\[
 Mx = \lambda x
-\tag{10.1}\]</span></span></p>
+\tag{10.2}\]</span></span></p>
 <p>we say that <span class="math inline">\(\lambda\)</span> is an <em>eigenvalue</em> of <span class="math inline">\(M\)</span>, with <em>eigenvector</em> <span class="math inline">\(x\)</span>.</p>
 </blockquote>
 </section>
-<section id="a-first-look" class="level2" data-number="10.2">
-<h2 data-number="10.2" class="anchored" data-anchor-id="a-first-look"><span class="header-section-number">10.2</span> A First Look</h2>
+<section id="a-first-look" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="a-first-look"><span class="header-section-number">10.4</span> A First Look</h2>
 <p>Here are a few properties to start with:</p>
 <ul>
 <li><p>The definition is equivalent to</p>
@@ -320,15 +395,15 @@ det(M - \lambda I) = 0
 <li><p>There are much better ways to calculate the eigenvalues than this, but a useful piece information arising from that analysis is that <span class="math inline">\(M\)</span> as <span class="math inline">\(m\)</span> eigenvalues (not necessarily distinct).</p></li>
 </ul>
 </section>
-<section id="the-special-case-of-symmetric-matrices" class="level2" data-number="10.3">
-<h2 data-number="10.3" class="anchored" data-anchor-id="the-special-case-of-symmetric-matrices"><span class="header-section-number">10.3</span> The Special Case of Symmetric Matrices</h2>
+<section id="the-special-case-of-symmetric-matrices" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="the-special-case-of-symmetric-matrices"><span class="header-section-number">10.5</span> The Special Case of Symmetric Matrices</h2>
 <p>Many matrices in data science are symmetric, such as covariance matrices and <span class="math inline">\(A'A\)</span> in <a href="Ch3.html#eq-linregformula">Equation&nbsp;<span>5.4</span></a>.</p>
-<section id="eigenvalues-are-real" class="level3" data-number="10.3.1">
-<h3 data-number="10.3.1" class="anchored" data-anchor-id="eigenvalues-are-real"><span class="header-section-number">10.3.1</span> Eigenvalues are real</h3>
+<section id="eigenvalues-are-real" class="level3" data-number="10.5.1">
+<h3 data-number="10.5.1" class="anchored" data-anchor-id="eigenvalues-are-real"><span class="header-section-number">10.5.1</span> Eigenvalues are real</h3>
 <p>Some eigenvalues may be complex numbers, i.e.&nbsp;of the form <span class="math inline">\(a+bi\)</span>, but it can be shown that if <span class="math inline">\(M\)</span> is symmetric, its eigenvalues are guaranteed to be real. This is good news for data science, as many matrices in that field are symmetric, such covariance matrices.</p>
 </section>
-<section id="sec-eigortho" class="level3" data-number="10.3.2">
-<h3 data-number="10.3.2" class="anchored" data-anchor-id="sec-eigortho"><span class="header-section-number">10.3.2</span> Eigenvectors are orthogonal</h3>
+<section id="sec-eigortho" class="level3" data-number="10.5.2">
+<h3 data-number="10.5.2" class="anchored" data-anchor-id="sec-eigortho"><span class="header-section-number">10.5.2</span> Eigenvectors are orthogonal</h3>
 <blockquote class="blockquote">
 <p>Eigenvectors corresponding to distinct eigenvalues of a symmetric matrix <span class="math inline">\(M\)</span> are othogonal.</p>
 <p><em>Proof:</em> Let <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> be such eigenvectors, corresponding to eigenvalues <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\nu\)</span>.</p>
@@ -338,8 +413,8 @@ det(M - \lambda I) = 0
 <p>(in that first equality, we used the fact that the transpose of a number is that number). Substitute for <span class="math inline">\(M\nu\)</span> and <span class="math inline">\(M\mu\)</span>, then subtract.</p>
 </blockquote>
 </section>
-<section id="sec-diagonalizable" class="level3" data-number="10.3.3">
-<h3 data-number="10.3.3" class="anchored" data-anchor-id="sec-diagonalizable"><span class="header-section-number">10.3.3</span> Symmetric matrices are diagonalizable</h3>
+<section id="sec-diagonalizable" class="level3" data-number="10.5.3">
+<h3 data-number="10.5.3" class="anchored" data-anchor-id="sec-diagonalizable"><span class="header-section-number">10.5.3</span> Symmetric matrices are diagonalizable</h3>
 <p>A square matrix <span class="math inline">\(R\)</span> is said to be <em>diagonalizable</em> if there exists an invertible matrix <span class="math inline">\(P\)</span> such that <span class="math inline">\(P^{-1}RP\)</span> is equal to some diagonal matrix <span class="math inline">\(D\)</span>. We see that symmetric matrices fall into this category.</p>
 <p>One application of this is the computation of powers of a diagonal matrix:</p>
 <p><span class="math display">\[
@@ -375,22 +450,22 @@ MP = M(P_1 | ... | P_m) = (MP_1 | ... | MP_n) =
 <p><span class="math inline">\(\square\)</span></p>
 </div>
 </section>
-<section id="example-census-dataset" class="level3" data-number="10.3.4">
-<h3 data-number="10.3.4" class="anchored" data-anchor-id="example-census-dataset"><span class="header-section-number">10.3.4</span> Example: Census dataset</h3>
+<section id="example-census-dataset" class="level3" data-number="10.5.4">
+<h3 data-number="10.5.4" class="anchored" data-anchor-id="example-census-dataset"><span class="header-section-number">10.5.4</span> Example: Census dataset</h3>
 <p>Let’s illustrate all this with the data in <a href="Ch5c.html#sec-pgtn"><span>Section&nbsp;9.5</span></a>. We will form the matrix <span class="math inline">\(A'A\)</span> in <a href="Ch3.html#sec-linregformula"><span>Section&nbsp;5.3.3</span></a>, which as mentioned, is symmetric.</p>
 <p>Recall that in that example, <span class="math inline">\(A\)</span> is not of full rank. Thus we should expect to see a 0 eigenvalue.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qeML)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(svcensus)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>svc <span class="ot">&lt;-</span> svcensus[,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>)]</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>svc<span class="sc">$</span>man <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(svc<span class="sc">$</span>gender <span class="sc">==</span> <span class="st">'male'</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>svc<span class="sc">$</span>woman <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(svc<span class="sc">$</span>gender <span class="sc">==</span> <span class="st">'female'</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>svc<span class="sc">$</span>gender <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(svc[,<span class="sc">-</span><span class="dv">2</span>])</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>,a)  <span class="co"># add the column of 1s</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">t</span>(a) <span class="sc">%*%</span> a</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>eigs <span class="ot">&lt;-</span> <span class="fu">eigen</span>(m)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>eigs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qeML)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(svcensus)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>svc <span class="ot">&lt;-</span> svcensus[,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>)]</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>svc<span class="sc">$</span>man <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(svc<span class="sc">$</span>gender <span class="sc">==</span> <span class="st">'male'</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>svc<span class="sc">$</span>woman <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(svc<span class="sc">$</span>gender <span class="sc">==</span> <span class="st">'female'</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>svc<span class="sc">$</span>gender <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(svc[,<span class="sc">-</span><span class="dv">2</span>])</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>,a)  <span class="co"># add the column of 1s</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">t</span>(a) <span class="sc">%*%</span> a</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>eigs <span class="ot">&lt;-</span> <span class="fu">eigen</span>(m)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>eigs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>eigen() decomposition
 $values
@@ -404,7 +479,7 @@ $vectors
 [4,] -0.012070494  0.002130704 -0.724401141  0.37650952 -5.773503e-01
 [5,] -0.003811356  0.002258881  0.688405767  0.43902681 -5.773503e-01</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>m <span class="sc">%*%</span> eigs<span class="sc">$</span>vectors[,<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>m <span class="sc">%*%</span> eigs<span class="sc">$</span>vectors[,<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>               [,1]
          -1206188.6
@@ -413,7 +488,7 @@ wkswrkd -57716616.5
 man       -916725.2
 woman     -289463.4</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>eigs<span class="sc">$</span>values[<span class="dv">1</span>] <span class="sc">%*%</span> eigs<span class="sc">$</span>vectors[,<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>eigs<span class="sc">$</span>values[<span class="dv">1</span>] <span class="sc">%*%</span> eigs<span class="sc">$</span>vectors[,<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         [,1]      [,2]      [,3]      [,4]      [,5]
 [1,] -1206189 -49340181 -57716617 -916725.2 -289463.4</code></pre>
@@ -423,8 +498,8 @@ woman     -289463.4</code></pre>
 <p>Note that the expected 0 eigenvalue shows up as 2.801489e-12, quite small but nonzero, due to roundoff error.</p>
 </section>
 </section>
-<section id="application-detecting-multicollinearity" class="level2" data-number="10.4">
-<h2 data-number="10.4" class="anchored" data-anchor-id="application-detecting-multicollinearity"><span class="header-section-number">10.4</span> Application: Detecting Multicollinearity</h2>
+<section id="application-detecting-multicollinearity" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="application-detecting-multicollinearity"><span class="header-section-number">10.6</span> Application: Detecting Multicollinearity</h2>
 <p>Consider the basic eigenanalysis equation,</p>
 <p><span class="math display">\[
 Ax = \lambda x
@@ -436,13 +511,13 @@ Ax \approx 0
 <p>and since <span class="math inline">\(Ax\)</span> is a linear combination of the columns of <span class="math inline">\(A\)</span>, we thus we have found multicollinearity in <span class="math inline">\(A\)</span>.</p>
 <p>One often sees use of the <em>condition number</em> of a matrix, which is the ratio of the largest eigenvalue to the smallest one. This too might be used as a suggestion of multicollinearity, though the main usage is as a signal that matrix operations such finding inverses may have significant problems with roundoff error.</p>
 </section>
-<section id="example-currency-data" class="level2" data-number="10.5">
-<h2 data-number="10.5" class="anchored" data-anchor-id="example-currency-data"><span class="header-section-number">10.5</span> Example: Currency Data</h2>
+<section id="example-currency-data" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="example-currency-data"><span class="header-section-number">10.7</span> Example: Currency Data</h2>
 <p>This dataset tracks five pre-euro European currencies.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qeML)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(currency)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(currency)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qeML)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(currency)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(currency)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Can..dollar Ger..mark Fr..franc UK.pound J..yen
 1          19       580     4.763       29    602
@@ -452,15 +527,15 @@ Ax \approx 0
 5          42       631     4.796       77    611
 6          45       635     4.818       74    610</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(currency)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(currency)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 762   5</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>crc <span class="ot">&lt;-</span> currency</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>crc <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(crc)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>crcapa <span class="ot">&lt;-</span> <span class="fu">t</span>(crc) <span class="sc">%*%</span> crc</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>eigs <span class="ot">&lt;-</span> <span class="fu">eigen</span>(crcapa)</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>eigs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>crc <span class="ot">&lt;-</span> currency</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>crc <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(crc)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>crcapa <span class="ot">&lt;-</span> <span class="fu">t</span>(crc) <span class="sc">%*%</span> crc</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>eigs <span class="ot">&lt;-</span> <span class="fu">eigen</span>(crcapa)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>eigs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>eigen() decomposition
 $values
@@ -474,8 +549,8 @@ $vectors
 [4,] -0.541352395 -0.364398075 -0.476833987 -0.5888747450 -0.0027404807
 [5,] -0.436445017  0.621551662  0.513584476 -0.3992385223 -0.0053728096</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># illustrate Ax = lambda x</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>crcapa <span class="sc">%*%</span> eigs<span class="sc">$</span>vectors[,<span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># illustrate Ax = lambda x</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>crcapa <span class="sc">%*%</span> eigs<span class="sc">$</span>vectors[,<span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                   [,1]
 Can..dollar  -3.9238561
@@ -484,12 +559,12 @@ Fr..franc   476.3899505
 UK.pound     -1.3056059
 J..yen       -2.5596868</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>eigs<span class="sc">$</span>values[<span class="dv">5</span>] <span class="sc">*</span>  eigs<span class="sc">$</span>vectors[,<span class="dv">5</span>] </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>eigs<span class="sc">$</span>values[<span class="dv">5</span>] <span class="sc">*</span>  eigs<span class="sc">$</span>vectors[,<span class="dv">5</span>] </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  -3.9238561  -0.4017386 476.3899505  -1.3056060  -2.5596868</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># is Ax small?</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(crcapa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># is Ax small?</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(crcapa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            Can..dollar Ger..mark  Fr..franc  UK.pound    J..yen
 Can..dollar   112111475  93929522 1673631.29 113542760  66967756
@@ -501,9 +576,9 @@ J..yen         66967756 109220119 1433430.43  85746625 103243878</code></pre>
 </div>
 <p>So yes, this dataset has some multicollinearity.</p>
 </section>
-<section id="computation-the-power-method" class="level2" data-number="10.6">
-<h2 data-number="10.6" class="anchored" data-anchor-id="computation-the-power-method"><span class="header-section-number">10.6</span> Computation: the Power Method</h2>
-<p>One way to compute eigenvalues and eigenvectors is the <em>power method</em>, a simple iteration. We begin with an initial guess, <span class="math inline">\(x_0\)</span> for an eigenvector. Substituting in <a href="#eq-simpledef">Equation&nbsp;<span>10.1</span></a>, we have the next guess:</p>
+<section id="computation-the-power-method" class="level2" data-number="10.8">
+<h2 data-number="10.8" class="anchored" data-anchor-id="computation-the-power-method"><span class="header-section-number">10.8</span> Computation: the Power Method</h2>
+<p>One way to compute eigenvalues and eigenvectors is the <em>power method</em>, a simple iteration. We begin with an initial guess, <span class="math inline">\(x_0\)</span> for an eigenvector. Substituting in <a href="#eq-simpledef">Equation&nbsp;<span>10.2</span></a>, we have the next guess:</p>
 <p><span class="math display">\[
 x_1 = M x_0
 \]</span></p>
@@ -512,13 +587,13 @@ x_1 = M x_0
 x_i \leftarrow \frac{x_i}{||x_i||}
 \]</span></p>
 </section>
-<section id="application-computation-of-long-run-distribution-in-markov-chains" class="level2" data-number="10.7">
-<h2 data-number="10.7" class="anchored" data-anchor-id="application-computation-of-long-run-distribution-in-markov-chains"><span class="header-section-number">10.7</span> Application: Computation of Long-Run Distribution in Markov Chains</h2>
+<section id="application-computation-of-long-run-distribution-in-markov-chains" class="level2" data-number="10.9">
+<h2 data-number="10.9" class="anchored" data-anchor-id="application-computation-of-long-run-distribution-in-markov-chains"><span class="header-section-number">10.9</span> Application: Computation of Long-Run Distribution in Markov Chains</h2>
 <p>We showed in <a href="Ch2.html#sec-markovsolve"><span>Section&nbsp;3.1</span></a> how matrix inverse can be used to compute the long-run distribution <span class="math inline">\(\nu\)</span> in a Markov chain. However, this is inefficient for very large transition matrices. For instance, in Google PageRank, there is a Markov state for every page on the Web!</p>
 <p>Instead, we exploit the fact that <a href="Ch2.html#eq-MarkovPi">Equation&nbsp;<span>3.1</span></a> says that the transition matrix has an eigenvector <span class="math inline">\(\nu\)</span> with eigenvalue 1. Due to the typical huge size of the matrix, the power method or a variant is often used.</p>
 </section>
-<section id="your-turn" class="level2" data-number="10.8">
-<h2 data-number="10.8" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">10.8</span> Your Turn</h2>
+<section id="your-turn" class="level2" data-number="10.10">
+<h2 data-number="10.10" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">10.10</span> Your Turn</h2>
 <p>❄️ <strong>Your Turn:</strong> Show that the diagonalizing matrix <span class="math inline">\(P\)</span> above must have determinant <span class="math inline">\(\pm 1\)</span>.</p>
 <p>❄️ <strong>Your Turn:</strong> Show that if <span class="math inline">\(x\)</span> is an eigenvector of <span class="math inline">\(M\)</span> with eigenvalue <span class="math inline">\(\lambda \neq 0\)</span>, then for any nonzero number <span class="math inline">\(c\)</span>, <span class="math inline">\(cx\)</span> will also be an eigenvector with eigenvalue <span class="math inline">\(\lambda\)</span>.</p>
 <p>❄️ <strong>Your Turn:</strong> Show that if a matrix <span class="math inline">\(M\)</span> has a 0 eigenvalue, <span class="math inline">\(M\)</span> must be singular. Also prove the converse. (Hint: Consider the column rank.)</p>

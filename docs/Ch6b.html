@@ -198,7 +198,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch6a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Eigenanalysis: Properties</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Eigenanalysis</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -241,21 +241,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#example-african-soils-data" id="toc-example-african-soils-data" class="nav-link active" data-scroll-target="#example-african-soils-data"><span class="header-section-number">11.1</span> Example: African Soils Data</a></li>
-  <li><a href="#overall-idea" id="toc-overall-idea" class="nav-link" data-scroll-target="#overall-idea"><span class="header-section-number">11.2</span> Overall Idea</a>
+  <li><a href="#the-second-third-etc.-pcs" id="toc-the-second-third-etc.-pcs" class="nav-link active" data-scroll-target="#the-second-third-etc.-pcs"><span class="header-section-number">11.0.1</span> The second, third etc. PCs</a></li>
+  <li><a href="#properties" id="toc-properties" class="nav-link" data-scroll-target="#properties"><span class="header-section-number">11.1</span> Properties</a></li>
+  <li><a href="#eigenanalysis-relation-between-a-and-covx-in-linear-regression" id="toc-eigenanalysis-relation-between-a-and-covx-in-linear-regression" class="nav-link" data-scroll-target="#eigenanalysis-relation-between-a-and-covx-in-linear-regression"><span class="header-section-number">11.2</span> Eigenanalysis Relation between <span class="math inline">\(A\)</span> and <span class="math inline">\(Cov(X)\)</span> in Linear Regression</a></li>
+  <li><a href="#back-to-the-example" id="toc-back-to-the-example" class="nav-link" data-scroll-target="#back-to-the-example"><span class="header-section-number">11.3</span> Back to the Example</a></li>
+  <li><a href="#pca-in-detection-of-multicollinearity" id="toc-pca-in-detection-of-multicollinearity" class="nav-link" data-scroll-target="#pca-in-detection-of-multicollinearity"><span class="header-section-number">11.4</span> PCA in Detection of Multicollinearity</a></li>
+  <li><a href="#how-many-principal-components-should-we-use" id="toc-how-many-principal-components-should-we-use" class="nav-link" data-scroll-target="#how-many-principal-components-should-we-use"><span class="header-section-number">11.5</span> How Many Principal Components Should We Use?</a>
   <ul class="collapse">
-  <li><a href="#sec-firstPC" id="toc-sec-firstPC" class="nav-link" data-scroll-target="#sec-firstPC"><span class="header-section-number">11.2.1</span> The first PC</a></li>
-  <li><a href="#the-second-third-etc.-pcs" id="toc-the-second-third-etc.-pcs" class="nav-link" data-scroll-target="#the-second-third-etc.-pcs"><span class="header-section-number">11.2.2</span> The second, third etc. PCs</a></li>
+  <li><a href="#sec-nyc" id="toc-sec-nyc" class="nav-link" data-scroll-target="#sec-nyc"><span class="header-section-number">11.5.1</span> Example: New York City taxi trips</a></li>
   </ul></li>
-  <li><a href="#properties" id="toc-properties" class="nav-link" data-scroll-target="#properties"><span class="header-section-number">11.3</span> Properties</a></li>
-  <li><a href="#eigenanalysis-relation-between-a-and-covx-in-linear-regression" id="toc-eigenanalysis-relation-between-a-and-covx-in-linear-regression" class="nav-link" data-scroll-target="#eigenanalysis-relation-between-a-and-covx-in-linear-regression"><span class="header-section-number">11.4</span> Eigenanalysis Relation between <span class="math inline">\(A\)</span> and <span class="math inline">\(Cov(X)\)</span> in Linear Regression</a></li>
-  <li><a href="#back-to-the-example" id="toc-back-to-the-example" class="nav-link" data-scroll-target="#back-to-the-example"><span class="header-section-number">11.5</span> Back to the Example</a></li>
-  <li><a href="#pca-in-detection-of-multicollinearity" id="toc-pca-in-detection-of-multicollinearity" class="nav-link" data-scroll-target="#pca-in-detection-of-multicollinearity"><span class="header-section-number">11.6</span> PCA in Detection of Multicollinearity</a></li>
-  <li><a href="#how-many-principal-components-should-we-use" id="toc-how-many-principal-components-should-we-use" class="nav-link" data-scroll-target="#how-many-principal-components-should-we-use"><span class="header-section-number">11.7</span> How Many Principal Components Should We Use?</a>
-  <ul class="collapse">
-  <li><a href="#sec-nyc" id="toc-sec-nyc" class="nav-link" data-scroll-target="#sec-nyc"><span class="header-section-number">11.7.1</span> Example: New York City taxi trips</a></li>
-  </ul></li>
-  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">11.8</span> Your Turn</a></li>
+  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">11.6</span> Your Turn</a></li>
   </ul>
 </nav>
     </div>
@@ -293,77 +288,9 @@ Goals of this chapter:
 <p>It turns out that eigenanalysis can be quite useful for dimension reduction, by determining the <em>principal components</em> of our data. This is the focus of the current chapter.</p>
 </div>
 </div>
-<section id="example-african-soils-data" class="level2" data-number="11.1">
-<h2 data-number="11.1" class="anchored" data-anchor-id="example-african-soils-data"><span class="header-section-number">11.1</span> Example: African Soils Data</h2>
-<p>To get things started, let’s consider the African Soils dataset.</p>
-<p>Let’s take a look around:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(WackyData) </span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(AfricanSoil)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(AfricanSoil)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1157 3600</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(AfricanSoil)[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] "PIDN"     "m7497.96" "m7496.04" "m7494.11" "m7492.18" "m7490.25"
- [7] "m7488.32" "m7486.39" "m7484.46" "m7482.54" "m7480.61" "m7478.68"
-[13] "m7476.75" "m7474.82" "m7472.89" "m7470.97" "m7469.04" "m7467.11"
-[19] "m7465.18" "m7463.25" "m7461.32" "m7459.39" "m7457.47" "m7455.54"
-[25] "m7453.61"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(AfricanSoil)[<span class="dv">3576</span><span class="sc">:</span><span class="dv">3600</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] "m605.545" "m603.617" "m601.688" "m599.76"  "BSAN"     "BSAS"    
- [7] "BSAV"     "CTI"      "ELEV"     "EVI"      "LSTD"     "LSTN"    
-[13] "REF1"     "REF2"     "REF3"     "REF7"     "RELI"     "TMAP"    
-[19] "TMFI"     "Depth"    "Ca"       "P"        "pH"       "SOC"     
-[25] "Sand"    </code></pre>
-</div>
-</div>
-<p>Let’s try predicting <strong>pH</strong>, the acidity. But that leaves 3599 possible predictors. There is an old rule of thumb that one should have <span class="math inline">\(p &lt; \sqrt{n}\)</span>, for <span class="math inline">\(p\)</span> predictors and <span class="math inline">\(n\)</span> data points, to avoid overfitting, a rule which in our setting of <span class="math inline">\(n = 1157\)</span> is grossly violated. We need to do dimension reduction. One way to accomplish this is to use PCA.</p>
-<p>(Note, though, that this presumes our goal is prediction, rather than effect estimation. In the latter case, our new variables will be principal components, and their regression coefficients may not be meaningful to us. If we are doing prediction, regression coefficients may not be of interest.)</p>
-</section>
-<section id="overall-idea" class="level2" data-number="11.2">
-<h2 data-number="11.2" class="anchored" data-anchor-id="overall-idea"><span class="header-section-number">11.2</span> Overall Idea</h2>
-<p>The goal is to find a few important linear combinations of our original predictor variables–important in the sense that they roughly summarize our data. These new variables are called the <em>principal components</em> (PCs) of the data. Let’s see how this is done.</p>
-<section id="sec-firstPC" class="level3" data-number="11.2.1">
-<h3 data-number="11.2.1" class="anchored" data-anchor-id="sec-firstPC"><span class="header-section-number">11.2.1</span> The first PC</h3>
-<p>Let <strong>X</strong> denote a set of variables of interest (not necessarily in a prediction context). In searching for good linear combinations, we want to aim for ones with high variance. We certainly don’t want ones with low variance; after all, a random variable with 0 variance is a constant. So we wish to find linear combinations</p>
-<p><span class="math display">\[
-Xu
-\]</span></p>
-<p>which maximize</p>
-<p><span class="math display">\[
-Var(Xu) = u' Cov(X) u
-\]</span></p>
-<p>where we have invoked <a href="Ch2a.html#eq-acova">Equation&nbsp;<span>4.4</span></a>.</p>
-<p>But that goal is ill-defined, since we could take larger and larger vectors <span class="math inline">\(u\)</span>, thus larger and larger vectors <span class="math inline">\(Xu\)</span>, no maximum. So, let’s constrain it to vectors <span class="math inline">\(u\)</span> of length 1:</p>
-<p><span class="math display">\[
-u'u = 1
-\]</span></p>
-<p>The method of <em>Lagrange multipliers</em> is used to solve maximum/minimum problems that have constraints, by adding a new variable corresponding to the constraint. In our case, we maximize</p>
-<p><span class="math display">\[
-u'Cov(X)u + \gamma (u'u - 1)
-\]</span></p>
-<p>with respect to <span class="math inline">\(u\)</span> and <span class="math inline">\(\gamma\)</span>.</p>
-<p>Setting derivatives to 0, we have</p>
-<p><span class="math display">\[
-0 =
-2 Cov(X) u + 2 \gamma u
-\]</span></p>
-<p>and</p>
-<p><span class="math display">\[
-0 = u'u - 1
-\]</span></p>
-<p>In other words,</p>
-<p><span id="eq-aha"><span class="math display">\[
-Cov(X) u = -\gamma u
-\tag{11.1}\]</span></span></p>
-<p>Aha! The vector <span class="math inline">\(u\)</span> is an eigenvector of the matrix <span class="math inline">\(Cov(X)\)</span> with eigenvalue <span class="math inline">\(-\gamma\)</span>. We’ve discovered that our quest for dimension reduction can be couched as an eigenanalysis problem!</p>
-</section>
-<section id="the-second-third-etc.-pcs" class="level3" data-number="11.2.2">
-<h3 data-number="11.2.2" class="anchored" data-anchor-id="the-second-third-etc.-pcs"><span class="header-section-number">11.2.2</span> The second, third etc. PCs</h3>
+<p>So we found in the last chapter that finding principal components entails finding eigenvectors and eigenvalues, at least for the first component. It turns out that this is true for the second, third and all the components. In other words, principal component analysis (PCA) is basically an eigenvectors and eigenvalues application.</p>
+<section id="the-second-third-etc.-pcs" class="level3" data-number="11.0.1">
+<h3 data-number="11.0.1" class="anchored" data-anchor-id="the-second-third-etc.-pcs"><span class="header-section-number">11.0.1</span> The second, third etc. PCs</h3>
 <p>There are as many principal components as there are columns in columns in <span class="math inline">\(X\)</span>. So, how are the second, third and so on defined and computed?</p>
 <p>The key issue is that we want our PCs to be orthogonal, because as we have seen orthogonal random vectors are statistically uncorrelated, and independent in the multivariate normal case. So if we summarize our data with say, the first few PCs, the fact that they are (at least loosely speaking) uncorrelated makes for a neater summary.</p>
 <p>So with <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> denoting the first and second PCs, we want <span class="math inline">\(v\)</span> to maximize</p>
@@ -381,11 +308,11 @@ v'Cov(X)v + \omega (v'v - 1) + \eta u'v
 <p>Setting derivatives (with respect to <span class="math inline">\(v\)</span>) to 0, we have</p>
 <p><span id="eq-2ndeig"><span class="math display">\[
 0 = 2 Cov(X) v + 2 \omega v + \eta u
-\tag{11.2}\]</span></span></p>
+\tag{11.1}\]</span></span></p>
 <p>Multiplying on the left by <span class="math inline">\(u'\)</span>, we have</p>
 <p><span id="eq-ucovv"><span class="math display">\[
 0 = 2 u'Cov(X) v + 2 \omega u'v + \eta u'u
-\tag{11.3}\]</span></span></p>
+\tag{11.2}\]</span></span></p>
 <p>But from before we have</p>
 <p><span class="math display">\[
 u'Cov(X) = -\gamma u
@@ -394,24 +321,23 @@ u'Cov(X) = -\gamma u
 <p><span class="math display">\[
 u'Cov(X) v = 0
 \]</span></p>
-<p>in <a href="#eq-ucovv">Equation&nbsp;<span>11.3</span></a>. Moreover, <span class="math inline">\(u'v = 0\)</span> there as well, so that we have <span class="math inline">\(\eta = 0\)</span>, which reduces <a href="#eq-ucovv">Equation&nbsp;<span>11.3</span></a> to a statement that <span class="math inline">\(v\)</span> too must be an eigenvector of <span class="math inline">\(Cov(X)\)</span>.</p>
+<p>in <a href="#eq-ucovv">Equation&nbsp;<span>11.2</span></a>. Moreover, <span class="math inline">\(u'v = 0\)</span> there as well, so that we have <span class="math inline">\(\eta = 0\)</span>, which reduces <a href="#eq-ucovv">Equation&nbsp;<span>11.2</span></a> to a statement that <span class="math inline">\(v\)</span> too must be an eigenvector of <span class="math inline">\(Cov(X)\)</span>.</p>
 </section>
-</section>
-<section id="properties" class="level2" data-number="11.3">
-<h2 data-number="11.3" class="anchored" data-anchor-id="properties"><span class="header-section-number">11.3</span> Properties</h2>
+<section id="properties" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="properties"><span class="header-section-number">11.1</span> Properties</h2>
 <p>The full set of eigenvectors is then known as the <em>principal components</em> (PCs). They have some further important properties:</p>
 <blockquote class="blockquote">
 <ul>
 <li><p>The PCs are orthogonal to each other. This follows from our earlier finding that eigenvectors of a symmetric matrix, in this case <span class="math inline">\(Cov(X)\)</span>, are orthogonal. We say that a symmetric is <em>orthogonal</em> if its columns are orthogonal as vectors.</p></li>
 <li><p>This in turn implies that the PCs are uncorrelated, and in the multivariate normal case, statistically independent.</p></li>
 <li><p>The eigenvalues are the variances of the PCs. The PCs are in order of decreasing (or at least nonincreasing) variance.</p>
-<p>This first statement follows from pre-mutiplying <a href="#eq-aha">Equation&nbsp;<span>11.1</span></a> by <span class="math inline">\(u'\)</span>, giving us <span class="math inline">\(Var(u)\)</span> on the left and <span class="math inline">\(-\lambda u'u = -\lambda\)</span> on the right. The second statement follows from the fact that as we go from the first PC to the second, third and so on, we are maximizing under more and more constraints, hence smaller maxima.</p></li>
+<p>This first statement follows from pre-mutiplying <a href="Ch6a.html#eq-aha">Equation&nbsp;<span>10.1</span></a> by <span class="math inline">\(u'\)</span>, giving us <span class="math inline">\(Var(u)\)</span> on the left and <span class="math inline">\(-\lambda u'u = -\lambda\)</span> on the right. The second statement follows from the fact that as we go from the first PC to the second, third and so on, we are maximizing under more and more constraints, hence smaller maxima.</p></li>
 </ul>
 </blockquote>
 <p>By the way, though we used the covariance matrix here, it is also common to simply do eigenanalysis on the original data matrix.</p>
 </section>
-<section id="eigenanalysis-relation-between-a-and-covx-in-linear-regression" class="level2" data-number="11.4">
-<h2 data-number="11.4" class="anchored" data-anchor-id="eigenanalysis-relation-between-a-and-covx-in-linear-regression"><span class="header-section-number">11.4</span> Eigenanalysis Relation between <span class="math inline">\(A\)</span> and <span class="math inline">\(Cov(X)\)</span> in Linear Regression</h2>
+<section id="eigenanalysis-relation-between-a-and-covx-in-linear-regression" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="eigenanalysis-relation-between-a-and-covx-in-linear-regression"><span class="header-section-number">11.2</span> Eigenanalysis Relation between <span class="math inline">\(A\)</span> and <span class="math inline">\(Cov(X)\)</span> in Linear Regression</h2>
 <p>Consider our usual linear regression setting, in which the matrix <span class="math inline">\(A\)</span> contains our data for our predictor variables <span class="math inline">\(X\)</span>. If we center and scale our data, then ’</p>
 <p><span class="math display">\[
 Cov(X) = A'A
@@ -427,18 +353,20 @@ Au = 0
 <p>Since <span class="math inline">\(Au\)</span> is a linear combination of the columns of <span class="math inline">\(A\)</span>, we see that the columns of <span class="math inline">\(A\)</span> are linearly dependent.</p>
 <p>The same argument works in reverse. If <span class="math inline">\(Au = 0\)</span>, we fine that <span class="math inline">\(Var(u'X) = 0\)</span>, and since the eigenvalues of <span class="math inline">\(Cov(X)\)</span> are variances of linear combinations of <span class="math inline">\(X\)</span>, we see that one of those variances is 0.</p>
 </section>
-<section id="back-to-the-example" class="level2" data-number="11.5">
-<h2 data-number="11.5" class="anchored" data-anchor-id="back-to-the-example"><span class="header-section-number">11.5</span> Back to the Example</h2>
+<section id="back-to-the-example" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="back-to-the-example"><span class="header-section-number">11.3</span> Back to the Example</h2>
 <p>So, we remove the ``Y’’ variable, <span class="math inline">\(pH\)</span>, number 3598 as seen above, as proceed. We will also remove the nonnumeric columns, <strong>PIDN</strong> and <strong>Depth</strong>. We could use R’s <strong>prcomp</strong> function here, but to better illustrate the concepts, we do things from scratch.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> AfricanSoil[,<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3595</span>,<span class="dv">3598</span>)]</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(WackyData)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(AfricanSoil)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> AfricanSoil[,<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3595</span>,<span class="dv">3598</span>)]</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1157 3597</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>xcov <span class="ot">&lt;-</span> <span class="fu">cov</span>(x)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>eigs <span class="ot">&lt;-</span> <span class="fu">eigen</span>(xcov)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>eigs<span class="sc">$</span>values[<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>]  <span class="co"># don't print out all 3597!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>xcov <span class="ot">&lt;-</span> <span class="fu">cov</span>(x)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>eigs <span class="ot">&lt;-</span> <span class="fu">eigen</span>(xcov)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>eigs<span class="sc">$</span>values[<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>]  <span class="co"># don't print out all 3597!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  [1] 7.600042e+01 9.553189e+00 6.979629e+00 4.209555e+00 2.884526e+00
   [6] 2.175115e+00 1.954537e+00 1.321853e+00 9.375446e-01 6.453537e-01
@@ -464,31 +392,31 @@ Au = 0
 </div>
 <p>Ah, the eigenvalues fall off rapidly after the first few. So, let’s say we decide to use the first 9 <span class="math inline">\(u\)</span> vectors.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>eigvecs <span class="ot">&lt;-</span> eigs<span class="sc">$</span>vectors[,<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>]</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(eigvecs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>eigvecs <span class="ot">&lt;-</span> eigs<span class="sc">$</span>vectors[,<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>]</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(eigvecs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3597    9</code></pre>
 </div>
 </div>
-<p>So, recalling the sequence of equations leading to <a href="#eq-aha">Equation&nbsp;<span>11.1</span></a>, we are ready to replace our old variables by the new:</p>
+<p>So, recalling the sequence of equations leading to <a href="Ch6a.html#eq-aha">Equation&nbsp;<span>10.1</span></a>, we are ready to replace our old variables by the new:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(x)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(x)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1157 3597</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>xnew <span class="ot">&lt;-</span> x <span class="sc">%*%</span> eigvecs</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(xnew)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>xnew <span class="ot">&lt;-</span> x <span class="sc">%*%</span> eigvecs</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(xnew)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1157    9</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>ph <span class="ot">&lt;-</span> AfricanSoil[,<span class="dv">3595</span>]</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>lmout <span class="ot">&lt;-</span> <span class="fu">lm</span>(AfricanSoil<span class="sc">$</span>pH <span class="sc">~</span> xnew)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># and so on</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>ph <span class="ot">&lt;-</span> AfricanSoil[,<span class="dv">3595</span>]</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>lmout <span class="ot">&lt;-</span> <span class="fu">lm</span>(AfricanSoil<span class="sc">$</span>pH <span class="sc">~</span> xnew)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># and so on</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="pca-in-detection-of-multicollinearity" class="level2" data-number="11.6">
-<h2 data-number="11.6" class="anchored" data-anchor-id="pca-in-detection-of-multicollinearity"><span class="header-section-number">11.6</span> PCA in Detection of Multicollinearity</h2>
+<section id="pca-in-detection-of-multicollinearity" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="pca-in-detection-of-multicollinearity"><span class="header-section-number">11.4</span> PCA in Detection of Multicollinearity</h2>
 <p>Recall the itemized list in <a href="Ch5c.html#sec-nearly"><span>Section&nbsp;9.1</span></a> of various conditions under which we have multicollinearity. We can add the following item to that list:</p>
 <ul>
 <li><span class="math inline">\(A\)</span> has an eigenvalue that is nearly 0.</li>
@@ -497,30 +425,30 @@ Au = 0
 <p>In fact, PCA can warn us of specific linear combinations of <span class="math inline">\(Cov(A'A)\)</span> that are nearly 0, as follows.</p>
 <ul>
 <li><p>Say a PC corresponds to a small eigenvalue.</p></li>
-<li><p>Then from <a href="#sec-firstPC"><span>Section&nbsp;11.2.1</span></a> that linear combination has small variance.</p></li>
+<li><p>Then from <a href="Ch6a.html#sec-firstPC"><span>Section&nbsp;10.2.1</span></a> that linear combination has small variance.</p></li>
 <li><p>Random variables with small variance are nearly constant.</p></li>
 <li><p>Thus with high probability, the linear combination is near to <span class="math inline">\(c\)</span> for some number <span class="math inline">\(c\)</span>.</p></li>
 <li><p>If our design matrix <span class="math inline">\(A\)</span> includes a 1s column, then the above linear combination, together with this 1s column, gives us a linear combination that is usually close to the 0 vector, thus multicollinear.</p></li>
 </ul>
 <p>In other words, PCA can point out to us specific linear combinations of our variables that may be problematic. If we are considering solving the problem by removing one or more predictor variables, this analysis could suggest which ones to remove.</p>
 </section>
-<section id="how-many-principal-components-should-we-use" class="level2" data-number="11.7">
-<h2 data-number="11.7" class="anchored" data-anchor-id="how-many-principal-components-should-we-use"><span class="header-section-number">11.7</span> How Many Principal Components Should We Use?</h2>
+<section id="how-many-principal-components-should-we-use" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="how-many-principal-components-should-we-use"><span class="header-section-number">11.5</span> How Many Principal Components Should We Use?</h2>
 <p>We chose to use the first 9 principal components in our example here, but just for illustration purposes. There are no formal rules for how many to use. Many “rules of thumb” exist.</p>
 <p>If we are doing prediction, there is a very natural way to choose our number of PCs–do cross-validation (<span class="quarto-unresolved-ref">?sec-lassoxval</span>), and use whichever number gives the most accurate prediction.</p>
-<section id="sec-nyc" class="level3" data-number="11.7.1">
-<h3 data-number="11.7.1" class="anchored" data-anchor-id="sec-nyc"><span class="header-section-number">11.7.1</span> Example: New York City taxi trips</h3>
+<section id="sec-nyc" class="level3" data-number="11.5.1">
+<h3 data-number="11.5.1" class="anchored" data-anchor-id="sec-nyc"><span class="header-section-number">11.5.1</span> Example: New York City taxi trips</h3>
 <p>This is a well-known dataset, a version of which is included in the <strong>qeML</strong> package. The object is to predict trip time, given pickup and dropoff locations, trip distance and day of the week.</p>
 <p>In the raw form of the data, there are just 5 columns, thus 4 predictors. But the pickup and dropoff locations are R factors, coding numerous locations. These must be decoded to dummy variables (values 1 or 0, coding whether or not, say, a given trip began at pickup location 121. If for instance one calls the R linear regression function <strong>lm</strong>, that function will do the conversion internally, but in our case we will perform the conversion ourselves, using <strong>regtools::factorsToDummies</strong>. (The <strong>regtools</strong> package is included by <strong>qeML</strong>.)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qeML)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(nyctaxi)</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(nyctaxi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qeML)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(nyctaxi)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(nyctaxi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10000     5</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>nyc <span class="ot">&lt;-</span> <span class="fu">factorsToDummies</span>(nyctaxi,<span class="at">dfOut=</span>T)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(nyc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>nyc <span class="ot">&lt;-</span> <span class="fu">factorsToDummies</span>(nyctaxi,<span class="at">dfOut=</span>T)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(nyc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10000   357</code></pre>
 </div>
@@ -528,7 +456,7 @@ Au = 0
 <p>Wow! That’s quite a lot of predictors, and well in excess of the common rule of thumb that one should have no more than <span class="math inline">\(\sqrt{n}\)</span> predictors, 100 in this case.</p>
 <p>So, we might try dimension reduction via PCA, then use the PCs as predictors. The function <strong>qeML::qePCA</strong> combines these two operations. Let’s see how it works.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">args</span>(qePCA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">args</span>(qePCA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>function (data, yName, qeName, opts = NULL, pcaProp, holdout = floor(min(1000, 
     0.1 * nrow(data)))) 
@@ -541,12 +469,12 @@ NULL</code></pre>
 <li><p>We are mainly interested in the first few PCs. The later ones have small variance, which makes them approximately constant and thus of no use to us.</p></li>
 </ul>
 <p>The name ‘pcaProp’ stands for “proportion of total variance.” If we set this to, say, 0.25, we are saying “Give us whatever number of the first few PCs that have a total variance of at least 25% of the total.” Let’s give that a try:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qePCA</span>(nyc,<span class="st">'tripTime'</span>,<span class="st">'qeLin'</span>,<span class="at">pcaProp=</span><span class="fl">0.25</span>)<span class="sc">$</span>testAcc</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="fl">311.9159</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qePCA</span>(nyc,<span class="st">'tripTime'</span>,<span class="st">'qeLin'</span>,<span class="at">pcaProp=</span><span class="fl">0.25</span>)<span class="sc">$</span>testAcc</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="fl">311.9159</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>We asked to predict the column ‘tripTime’ in the dataset <strong>nyc</strong> using the <strong>qeLin</strong> function, based on as many of the PCs that will give us 25% of the total variance. As seen above, most of the <strong>qeML</strong> prediction functions split the data into a training set and a holdout set. The model is fit to the training set, and then applied to prediction of the holdout set. The output value is the mean absolute prediction error (MAPE).</p>
 <p>However, since the holdout set is randomly generated, the MAPE value is random, so we should do multiple runs. Some experimentation showed that MAPE here is highly variable, so we decided to perform 500 runs, e.g.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">500</span>,<span class="cf">function</span>(i) <span class="fu">qePCA</span>(nyc,<span class="st">'tripTime'</span>,<span class="st">'qeLin'</span>,<span class="at">pcaProp=</span><span class="fl">0.1</span>)<span class="sc">$</span>testAcc)) </span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="fl">359.663</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">500</span>,<span class="cf">function</span>(i) <span class="fu">qePCA</span>(nyc,<span class="st">'tripTime'</span>,<span class="st">'qeLin'</span>,<span class="at">pcaProp=</span><span class="fl">0.1</span>)<span class="sc">$</span>testAcc)) </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="fl">359.663</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <table class="table">
 <caption>Mean Absolute Predictive Error</caption>
 <thead>
@@ -597,8 +525,8 @@ NULL</code></pre>
 <p>Among other things, this shows the dangers of overfitting, in this case using too many PCs in our linear regression model. It seems best here to use only the first 10 or 20% of the PCs.</p>
 </section>
 </section>
-<section id="your-turn" class="level2" data-number="11.8">
-<h2 data-number="11.8" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">11.8</span> Your Turn</h2>
+<section id="your-turn" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">11.6</span> Your Turn</h2>
 <p>❄️ <strong>Your Turn:</strong> Modify the code for <strong>qePCA</strong> for the case of linear regression by addig a component <strong>xCoeffs</strong> to its return value. This will give the regression coefficients in terms of the original X predictors.</p>
 <p>❄️ <strong>Your Turn:</strong> Say the symmetric matrix <span class="math inline">\(A\)</span> has <em>block diagonal</em> form</p>
 <p><span class="math display">\[
@@ -860,7 +788,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./Ch6a.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Eigenanalysis: Properties</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Eigenanalysis</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

@@ -198,7 +198,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch6a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Eigenanalysis: Properties</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Eigenanalysis</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -326,11 +326,11 @@ A = \sum_{i=1}^n \sigma_i u_i v_i'
 </section>
 <section id="solution" class="level2" data-number="12.2">
 <h2 data-number="12.2" class="anchored" data-anchor-id="solution"><span class="header-section-number">12.2</span> Solution</h2>
-<p>There are various derivations, e.g.&nbsp;along the lines of <a href="Ch6b.html#sec-firstPC"><span>Section&nbsp;11.2.1</span></a> (one maximizes the quantity <span class="math inline">\(U A V'\)</span>), but let’s go quickly to the answer:</p>
+<p>There are various derivations, e.g.&nbsp;along the lines of <a href="Ch6a.html#sec-firstPC"><span>Section&nbsp;10.2.1</span></a> (one maximizes the quantity <span class="math inline">\(U A V'\)</span>), but let’s go quickly to the answer:</p>
 <ol type="1">
 <li><p>Compute the eigenvalues <span class="math inline">\(\sigma_1,...,\sigma_n\)</span> and eigenvectors <span class="math inline">\(q_1,...,q_n\)</span> of <span class="math inline">\(A'A\)</span>.</p></li>
 <li><p>Since <span class="math inline">\(A'A\)</span> is symmetric and positive-semidefinite, its eigenvalues will be nonnegative and its length-1 eigenvectors will be orthogonal.</p></li>
-<li><p>Set <span class="math inline">\(\Sigma\)</span> to <span class="math inline">\(diag(\sqrt{\sigma_1},...,\sqrt{\sigma_n})\)</span>, the nonincreasing list of eigenvalues. Set the columns of <span class="math inline">\(V\)</span> to the corresponding eigenvectors (recall <a href="Ch6a.html#sec-diagonalizable"><span>Section&nbsp;10.3.3</span></a>).</p></li>
+<li><p>Set <span class="math inline">\(\Sigma\)</span> to <span class="math inline">\(diag(\sqrt{\sigma_1},...,\sqrt{\sigma_n})\)</span>, the nonincreasing list of eigenvalues. Set the columns of <span class="math inline">\(V\)</span> to the corresponding eigenvectors (recall <a href="Ch6a.html#sec-diagonalizable"><span>Section&nbsp;10.5.3</span></a>).</p></li>
 <li><p>Set</p></li>
 </ol>
 <p><span class="math display">\[
@@ -347,7 +347,7 @@ U = (u_1|...|u_m)
 <ul>
 <li><p><span class="math inline">\(U\)</span> is orthogonal.</p>
 <p>This follows immediately from the fact that the columns of <span class="math inline">\(U\)</span> are an orthonormal basis from <span class="math inline">\(\mathcal{R}^m\)</span>.</p></li>
-<li><p><span class="math inline">\(V\)</span> is orthogonal, by <a href="Ch6a.html#sec-eigortho"><span>Section&nbsp;10.3.2</span></a>.</p></li>
+<li><p><span class="math inline">\(V\)</span> is orthogonal, by <a href="Ch6a.html#sec-eigortho"><span>Section&nbsp;10.5.2</span></a>.</p></li>
 <li><p>The product evaluates to <span class="math inline">\(A\)</span>, as claimed.</p>
 <p>Using matrix partitioning, we have</p>
 <p><span class="math display">\[
