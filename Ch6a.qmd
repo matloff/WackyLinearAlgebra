@@ -38,20 +38,16 @@ predictors. There is an old rule of thumb that one should have
 $p < \sqrt{n}$, for $p$ predictors and $n$ data points,
 to avoid overfitting, a rule which in our setting of $n = 1157$
 is grossly violated.  We need to do dimension reduction. One way to
-accomplish this is to use PCA. 
-
-(Note, though, that this presumes our goal is prediction, rather than
-effect estimation. In the latter case, our new variables will be
-principal components, and their regression coefficients may not be
-meaningful to us. If we are doing prediction, regression coefficients
-may not be of interest.)
+accomplish this is to use Principal Components Analysis (PCA). 
 
 ## Overall Idea 
 
 The goal is to find a few important linear combinations of our original
 predictor variables--important in the sense that they roughly summarize
 our data.  These new variables are called the *principal components*
-(PCs) of the data.  Let's see how this is done.
+(PCs) of the data. PCA will be covered in detail in the next chapter,
+but our preview here will set the stage for important general concepts
+that we will develop in the current chapter.
 
 ### The first PC{#sec-firstPC}
 
@@ -111,9 +107,11 @@ $$
 Cov(X) ~ u = -\gamma u
 $${#eq-aha}
 
-A matrix times a vector equals a constant times that same vector. That
-opens a huge world. We will return to the notion of principal components
-in the next chapter, after laying the groundwork in the current chapter.
+A matrix times a vector equals a constant times that same vector.  We
+say that $-\gamma$ is an *eigenvalue* of the matrix $Cov(X)$, and that
+$u$ is a corresponding *eigenvector*.  Seems innocuous, but it opens a
+huge new world! We will return to the notion of principal components in
+the next chapter, after laying the groundwork in the current chapter.
 
 ## Definition
 
@@ -157,13 +155,10 @@ Here are a few properties to start with:
   with multiplicity $n$.
 
 * In principle, that means we can solve the above determinant equation
-  to find the eigenvalues of the matrix. The comments in @sec-detdef
-  regarding the "ugly" definition of determinants imply that the
-  equation involves a degree-$m$ polynomial in $\lambda$.
-
-* There are much better ways to calculate the eigenvalues than this, but
-  a useful piece information arising from that analysis is that $M$ as
-  $m$ eigenvalues (not necessarily distinct).  
+  to find the eigenvalues of the matrix, though There are much better
+  ways to calculate the eigenvalues than this, but a useful piece
+  information arising from that analysis is that $M$ as $m$ eigenvalues
+  (not necessarily distinct). 
 
 ## The Special Case of Symmetric Matrices
 
