@@ -8,8 +8,8 @@ under Creative Commons Zero v1.0 Universal]{.column-margin}
 
 ## Subtlety in the Title
 
-Let's start with the title of this book, "Powered by Linear Algebra: The
-central role of matrices and vector spaces in Data Science." It's
+Let's start with the title of this book, *Powered by Linear Algebra: The
+central role of matrices and vector spaces in Data Science*. It's
 important to understand why the title is NOT "Linear Algebra for Data
 Scientists." That latter would connote that people in Data Science
 (DS)will first learn linear algebra purely as a branch of math in this
@@ -51,8 +51,13 @@ models (e.g. social networks) to motivate the notion of a matrix and
 matrix multiplication. An interest in finding the stationary
 distribution of a Markov chain then leads to the concept of matrix
 inverses. (Linear models are presented later, after groundwork of matrix
-rank is laid.) A criminal recidivism dataset is used to illustrate
-issues of projections and subspaces.
+rank is laid.) 
+
+The chapter on matrix rank starts with a dataset right off the bat, and
+shows that R's linear model function **lm** fails if categorical
+variables are fully specified. This motivates the notion of rank, and
+the dataset dovetails with the theory throughout the chapter, which
+culminates in a proof that row rank equals column rank.
 
 Above all, this book does not allow rote memorization, merely "knowing
 the name of something." The focus on How? and Why? is on every page.
