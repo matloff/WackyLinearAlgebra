@@ -46,18 +46,28 @@ suddenly realizes they've just learned a new general concept! And the
 reader knows where the concept fits into the Big Picture, and can
 distill the abstraction into an intuitive summary.
 
-For instance, we use Markov chain transition matrices and network graph
-models (e.g. social networks) to motivate the notion of a matrix and
-matrix multiplication. An interest in finding the stationary
-distribution of a Markov chain then leads to the concept of matrix
-inverses. (Linear models are presented later, after groundwork of matrix
-rank is laid.) 
+Examples:
 
-The chapter on matrix rank starts with a dataset right off the bat, and
-shows that R's linear model function **lm** fails if categorical
-variables are fully specified. This motivates the notion of rank, and
-the dataset dovetails with the theory throughout the chapter, which
-culminates in a proof that row rank equals column rank.
+* We use Markov chain transition matrices and network graph
+  models (e.g. social networks) to motivate the notion of a matrix and
+  matrix multiplication. An interest in finding the stationary
+  distribution of a Markov chain then leads to the concept of matrix
+  inverses. (Linear models are presented later, after groundwork of matrix
+  rank is laid.) 
+
+* The chapter on matrix rank starts with a dataset right off the bat, and
+  shows that R's linear model function **lm** fails if categorical
+  variables are fully specified. This motivates the notion of rank, and
+  the dataset dovetails with the theory throughout the chapter, which
+  culminates in a proof that row rank equals column rank.
+
+* The chapter on eigenanalysis begins with explaining the goals of PCA
+  (with a real dataset). We derive the first PC as a constrained
+  minimization of variance, and behold! -- the solution has the form 
+  $Ax = \lambda x$! So eigenanalysis comes from solving a Data Science
+  problem. PCA is later covered in detail in the following chapter,
+  but with this motivation we develop the properties of eigenvalues and
+  eigenvectors in the current chapter.
 
 Above all, this book does not allow rote memorization, merely "knowing
 the name of something." The focus on How? and Why? is on every page.
