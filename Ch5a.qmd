@@ -306,32 +306,19 @@ be *one-to-one* (*injective*), meaning that $x \neq y$ implies
 $f(x) \neq f(y)$. Nor is it necessarily *onto* (*surjective*).
 
 To see that the first is false, consider the matrix $A$ above. If say
-$f(v) = w$ then we will also have $f(v+u) = w$ for any $u$ in the null
-space of $A$. To see that the second property also does not necessarily
-hold, suppose 
-
-$$
-A = 
-\left (
-\begin{array}{rrr}
-0 & 1 & 0 \\
-1 & 0 & 0 \\
-\end{array}
-\right )
-$$
-
-This can only produce outputs of the form $(a,**,0**$
-
+$f(v) = w$ then we will also have $f(v+s) = f(v) + f(s) = w$ for any $s$
+in the null space of $A$. The reader is encouraged to verify that the
+second property also does not necessarily hold either.
 
 ## Your Turn
 
-❄️  **Your Turn:** Say $U$ and $V$ are subspaces of $W$. Show that
-$U \cap V$ is also a subspace, and that its dimension is at most the
-minimum of the dimensions of $U$ and $V$. Show by counterexample tha
-result does not hold for union.
+❄️  **Your Turn:** Say $U$ and $V$ are subspaces of $W$. Show that $U
+\cap V$ is also a subspace, and that its dimension is at most the
+minimum of the dimensions of $U$ and $V$. Show by counterexample that
+the result does not hold for union.
 
 ❄️  **Your Turn:** Citing the properties of expected value, E(), show
-that the set of all random variable with mean 0 latter set is indeed a
+that the set of all random variable with mean 0 is a
 subspace of $\cal RV(\Omega)$.
 
 ❄️  **Your Turn:** Prove that the coefficients in a basis representation
