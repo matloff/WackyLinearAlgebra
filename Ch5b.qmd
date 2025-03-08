@@ -59,8 +59,8 @@ definition is as follows.
 
 <blockquote>
 
-An *inner product* on a vector space $\cal V$, denoted by the ``angle
-brackets'' notation $<u,v>$, is a function with two vectors as arguments
+An *inner product* on a vector space $\cal V$, denoted by the "angle
+brackets" notation $<u,v>$, is a function with two vectors as arguments
 and a numerical output, with the following properties:
 
 * $<u,v> = <v,u>$
@@ -71,7 +71,7 @@ and a numerical output, with the following properties:
   <u,av+bw> = a <u,v> + b <u,w>
   $$
 
-* $<u,u> ~ \geq 0$, with equality if and only if $u = 0$.
+* $<u,u> \geq 0$, with equality if and only if $u = 0$.
 
 </blockquote>
 
@@ -84,17 +84,6 @@ space.
 
 $<(a_1,...,a_n),(b_1,...,b_n> =
 a_1 b_1 + ... + a_n b_n$
-
-An $n ~ \textrm{x} ~ n$ symmetric matrix $M$ is called *positive
-definite* if 
-
-$$
-w'Mw > 0
-$$
-
-for all nonzero vectors $w$. (And the term used is *nonnegative
-definite* if $>$ is replaced by $ \geq$.) Show that $<u,v> = u'Mv$ is an
-inner product on $\cal R^n$.)
 
 *C(0,1)*:
 
@@ -131,14 +120,8 @@ $$
 <X,Y> = E(XY)
 $$
 
-The properties of expected value, e.g. linearity, show most of the
-requirements for an inner product hold.  But again, we need to show that
-
-$$
-<X,X> = E(X^2) > 0 
-$$
-
-for any nonzero $X$, i.e. any $X$ such that $P(X = 0) < 1$. 
+The properties of expected value, e.g. linearity, show that the
+requirements for an inner product hold.  
 
 ## Norm of a Vector
 
@@ -163,11 +146,7 @@ $$
 
 </blockquote>
 
-## Important Inequalities
-
-These relations are highly useful, as we will see in the sequel.
-
-### The Cauchy-Schwarz Inequality
+## The Cauchy-Schwarz Inequality
 
 ::: {#thm-cs}
 
@@ -235,14 +214,13 @@ $$
 
 which says the correlation is between -1 and 1 inclusive.
 
-### The Triangle Inequality
-
-<blockquote>
+## The Triangle Inequality
 
 In the world of ordinary physical geometry, we know the following
 
 *The distance from A to B is less than or equal to the sum of the
-distances from A to C and C to B.* 
+distances from A to C and C to B.* This is true as well in general,
+abstract inner product spaces.
 
 ::: {#thm-triangle}
 
@@ -259,6 +237,8 @@ $$
 ::: {.proof}
 
 See the Your Turn problem below.
+
+:::
 
 ## Projections{#sec-projections}
 
@@ -277,8 +257,8 @@ geometry. Then we have the following:
 ## Projection Theorem
 
 Consider an inner product space $\cal V$, with subspace $\cal W$.  Then
-for any vector $x$ in $\cal W$, there is a unique vector $z$ in $\cal
-V$, such that $z$ is the closest vector to $x$ in $\cal W$. 
+for any vector $x$ in $\cal V$, there is a unique vector $z$ in $\cal
+W$, such that $z$ is the closest vector to $x$ in $\cal W$. 
 
 Furthermore, $x-z$ is orthogonal to any vector $r$ in $\cal W$.
 
@@ -305,16 +285,12 @@ the matrix equation above, this means $P_W^2 = P_W$. This makes sense;
 once you drop down to the subspace, there is no further dropping down to
 that same space.
 
-The case of $\cal RV(\Omega)$ deserves its own section, coming up next.
-
 ### The Pythagorean Theorem
 
 That this ancient theorem in geometry still holds in general inner
 product spaces is a tribute to the power of abstraction.
 
-<blockquote>
-
-The Pythagorean Theorem
+::: {#thm-pythag}
 
 If vectors $X$ and $Y$ are orthogonal, then
 
@@ -322,27 +298,40 @@ $$
 ||X+Y||^2 = ||X||^2 + ||Y||^2
 $${#eq-pythag}
 
-</blockquote>
+:::
 
-## Projections in$\cal RV(\Omega)$
+::: {.proof}
 
-Here is what this very abstract vector space becomes useful in practical
-applications, such as will be presented in @sec-fairness. We will need
-to build a bit of infrastructure.[The material in this section is rather
-involved, but it is needed for the section on racial, gender etc.
-fairness in machine learning, @sec-fairness, which hopefully makes it
-worthwhile.]{.column-margin}
+Replace the norms by expression in inner products. Simplify using
+properties of inner product.
+
+:::
+
+
+## Projections in $\cal RV(\Omega)$
+
+The material here is rather involved, consisting of applying inner
+product spaces to various probability calculations. Since $\cal
+RV(\Omega)$ is a vector space of random variables, the focus below will
+sometimes be on such an entity as a random variable but at other times will
+view it as a member of a vector space.
+
+The reader may skip this section without affecting the ability to learn the
+sequel.  But you are urged to work through it, as it is an excellent
+example of a very abstract vector space that is useful in practical
+applications, such as will be presented in @sec-fairness. It is
+mathematical but not deep, and should be accessible to all readers.
+
+We will need to build a bit of infrastructure.
 
 ### Conditional expectation
 
 One of the Your Turn problems at the end of this chapter covers this
 setting: 
 
-<blockquote>
-Say we roll a die once, producing $X$ dots. If $X = 6$,
-we get a bonus roll, yielding $B$ additional dots; otherwise, $B = 0$.
-Let $Y = X+B$.
-</blockquote>
+> Say we roll a die once, producing $X$ dots. If $X = 6$,
+> we get a bonus roll, yielding $B$ additional dots; otherwise, $B = 0$.
+> Let $Y = X+B$.
 
 *The basic form:*
 
@@ -353,12 +342,18 @@ $$
 E(Y | B = 2) = 8
 $$
 
-More generally, 
+The quantity $E(Y | B = 1)$ and so on are handled similarly.
+
+What about $E(Y | B = 0)$? Here, alas, we did not get a bonus roll. If
+that is all we know, then $Y$ could be any of 1,2,3,4,5,6 with each
+probability, thus mean 3.5.
+
+In other words,
 
 $$
 E(Y | B = i) =
 \begin{cases}
-3 & i = 0 \\
+3.5 & i = 0 \\
 6 + i & i = 1,2,3,4,5
 \end{cases}
 $$
@@ -366,36 +361,32 @@ $$
 *The random variable form:*
 
 The quantity $E(Y | B = i)$, a number, can be converted to a random
-variable, in the form of a function of $B$, which we will call $Q$, and 
+variable, in the form of a function of $B$, which we will call $q$(B), and 
 denoted $E(Y | B)$, where
 
 $$
-Q = 
+q(B) = 
 \begin{cases}
-3 & B = 0 \\
+3.5 & B = 0 \\
 6 + B & B = 1,2,3,4,5
 \end{cases}
 $$
 
-$B$ is random, so $r(B)$ is also random, and here is its distribution:
+$B$ is random, so $q(B)$ is also random, and here is its distribution:
 
-<blockquote>
-
-$$
-Q \textrm{ takes on the values } 3,7,8,9,10,11 \textrm{ with
-probabilities } 
-$$
-$$
-1/6, 1/36, 1/36, 1/36, 1/36, 1/36
-$$ 
-
-</blockquote>
+> $$
+> q(B) \textrm{ takes on the values } 3,7,8,9,10,11 \textrm{ with
+> probabilities } 
+> $$
+> $$
+> 1/6, 1/36, 1/36, 1/36, 1/36, 1/36
+> $$ 
 
 We need one more thing:
 
 *The Law of Iterated Expectation:*
 
-For random variable $U$ and $V$, set
+For random variables $U$ and $V$, set
 
 $$
 R = E[V |U]
@@ -431,8 +422,9 @@ the distribution of $D$.
 
 Consider random variables $X$ and $Y$. Let $W$ be the set of all
 functions of $X$ with finite variance, which is a subspace of the vector
-space $\cal RV(\Omega)$. The above theorem talks of a closest vector $C$ in
-$W$ to $Y$. Let's see what form $C$ might take in this vector space.
+space $\cal RV(\Omega)$. @thm-projection talks of a closest vector $C$ in
+$W$ to $Y$. Note that $C$, being a member of $\cal RV(\Omega)$, is a
+random variable.  Let's see what form $C$ might take. 
 
 Remember, the (squared) distance from $Y$ to $C$ is
 
@@ -440,7 +432,7 @@ $$
 ||Y - C||^2 = <Y-C,Y-C> = E[(Y-C)^2]
 $$
 
-That last term is 
+By the Law of Iterated Expectation, that last term is 
 
 $$
 E[ E((Y-C)^2 | X) ]
@@ -448,10 +440,9 @@ $$
 
 For any random variable $Q$ of finite variance, the minimum value of
 $E[(Q-d)^2]$ over all constants $d$ is attained by $d = E(Q)$. (See Your
-Turn problem below.) So, the minimum of $E((Y-C)^2 | C)$, for all random
-variables $C$, is attained by the conditional mean,[Note that since we
-are conditioning on the random variable $C$, it becomes a constant, like
-$d$ above.]{.column-margin}
+Turn problem below.) So, the minimum of $E((Y-C)^2 | X)$, is attained by
+the conditional mean,[Note that since we are conditioning on the random
+variable $C$, it becomes a constant, like $d$ above.]{.column-margin}
 
 $$
 C = E(Y | X)
@@ -459,24 +450,17 @@ $$
 
 In other words:
 
-<blockquote>
-
-Projections in $\cal RV(\Omega)$ are conditional means.
-
-</blockquote>
+> Projections in $\cal RV(\Omega)$ are conditional means.
 
 Moreover:
 
 Since the difference between a vector and its projection onto a subspace
-is orthogonal to that subspace we have:
+is orthogonal to that subspace, and since in $\cal RV(\Omega)$
+orthogonality means 0 correlation, we have:
 
-<blockquote>
-
-The vector $Y - E(Y|X)$ is uncorrelated with $E(Y|X)$.  In other words,
-the prediction error (also called the *residual* has 0 correlation with
-the prediction itself.
-
-</blockquote>
+> The vector $Y - E(Y|X)$ is uncorrelated with $E(Y|X)$.  In other words,
+> the prediction error (also called the *residual*) has 0 correlation with
+> the prediction itself.
 
 ## Projections in the Linear Model
 
@@ -929,7 +913,7 @@ first algebraically using @eq-iterexpect and the relation $Var(R) =
 E(R^2) - (E(R))^2$, and then using the Pythagorean Theorem for a much
 quicker proof.  As before, assume $X$ and $Y$ are centered.
 
-❄️  **your turn:** show that @eq-hii holds. holds. holds.
+❄️  **your turn:** show that @eq-hii holds. 
 
 ❄️  **Your Turn:** Say $\cal V$ is $R^n$. Form the matrix $A$ whose
 columns are the $u_i$, and let $P = AA'$. Show that
