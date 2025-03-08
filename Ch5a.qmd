@@ -26,17 +26,6 @@ chapters.
 
 :::
 
-In @sec-rankprops, we briefly hinted at a possible relation between the
-rank of a matrix $A$ and that of $A'A$. It will turn out that the two
-ranks are the same. Such information can come in handy. For instance, in
-a linear regression model, we need $A'A$ to be invertible. So if in some
-setting we already know that $A$ is of nonfull rank, we know that the
-same is true for $A'A$; we need not bother finding the rank of the
-latter.
-
-This in turn will lead to study of *vector spaces*, a concept that goes
-hand-in-hand with matrices in forming the core of linear algebra.
-
 ## Review of a Matrix Rank Property
 
 In the last chapter, we presented the concepts of matrix row and column
