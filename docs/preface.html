@@ -283,15 +283,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="philosophy">Philosophy</h2>
 <p><em>I learned very early the difference between knowing the name of something and knowing something</em> – physicist Richard Feynman</p>
 <p><em>…it felt random. “Follow these steps and you get the result you are looking for.” But why does it work? What possessed you to follow this path as opposed to any other? How might I have come up with this myself?</em> – <a href="https://loreley.one/2024-09-pca">comment</a> by a reader of a famous linear algebra book</p>
-<p>A fundamental philosophy of my book here is to avoid such reader frustration. It’s easy to define, say the dimension of a vector subspace, but that’s definitely not enough. What is the underlying intuition? Why is the concept important, especially in Data Science?</p>
+<p>This book does not allow rote memorization, merely “knowing the name of something.” The focus on How? and Why? is on every page.</p>
+<p>A fundamental philosophy of my book here is to avoid reader frustration. It’s easy to define, say the dimension of a vector subspace, but that’s definitely not enough. What is the underlying intuition? Why is the concept important, especially in Data Science?</p>
 <p>The presentation of each concept in this book begins with a problem to be solved, almost always from Data Science, then leading up to a linear algebra solution. Basically, the math sneaks up on the reader, who suddenly realizes they’ve just learned a new general concept! And the reader knows where the concept fits into the Big Picture, and can distill the abstraction into an intuitive summary.</p>
 <p>Examples:</p>
 <ul>
-<li><p>We use Markov chain transition matrices and network graph models (e.g.&nbsp;social networks) to motivate the notion of a matrix and matrix multiplication. An interest in finding the stationary distribution of a Markov chain then leads to the concept of matrix inverses. (Linear models are presented later, after groundwork of matrix rank is laid.)</p></li>
+<li><p>In Chapter 1, we use Markov chain transition matrices and network graph models (e.g.&nbsp;social networks) to motivate the notion of a matrix and matrix multiplication. An interest in finding the stationary distribution of a Markov chain then leads to the concept of matrix inverses. (Linear models are presented later, after groundwork of matrix rank is laid.)</p></li>
 <li><p>The chapter on matrix rank starts with a dataset right off the bat, and shows that R’s linear model function <strong>lm</strong> fails if categorical variables are fully specified. This motivates the notion of rank, and the dataset dovetails with the theory throughout the chapter, which culminates in a proof that row rank equals column rank.</p></li>
 <li><p>The chapter on eigenanalysis begins with explaining the goals of PCA (with a real dataset). We derive the first PC as a constrained minimization of variance, and behold! – the solution has the form <span class="math inline">\(Ax = \lambda x\)</span>! So eigenanalysis comes from solving a Data Science problem. PCA is later covered in detail in the following chapter, but with this motivation we develop the properties of eigenvalues and eigenvectors in the current chapter.</p></li>
 </ul>
-<p>Above all, this book does not allow rote memorization, merely “knowing the name of something.” The focus on How? and Why? is on every page.</p>
 </section>
 <section id="who-is-this-book-for" class="level2">
 <h2 class="anchored" data-anchor-id="who-is-this-book-for">Who Is This Book For?</h2>

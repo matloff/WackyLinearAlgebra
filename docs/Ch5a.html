@@ -207,7 +207,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#review-of-matrix-rank-properties" id="toc-review-of-matrix-rank-properties" class="nav-link active" data-scroll-target="#review-of-matrix-rank-properties"><span class="header-section-number">7.1</span> Review of Matrix Rank Properties</a></li>
+  <li><a href="#review-of-a-matrix-rank-property" id="toc-review-of-a-matrix-rank-property" class="nav-link active" data-scroll-target="#review-of-a-matrix-rank-property"><span class="header-section-number">7.1</span> Review of a Matrix Rank Property</a></li>
   <li><a href="#vector-space-definition" id="toc-vector-space-definition" class="nav-link" data-scroll-target="#vector-space-definition"><span class="header-section-number">7.2</span> Vector Space Definition</a>
   <ul class="collapse">
   <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples"><span class="header-section-number">7.2.1</span> Examples</a></li>
@@ -225,7 +225,8 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#examples-2" id="toc-examples-2" class="nav-link" data-scroll-target="#examples-2"><span class="header-section-number">7.4.1</span> Examples</a></li>
   </ul></li>
   <li><a href="#dimension" id="toc-dimension" class="nav-link" data-scroll-target="#dimension"><span class="header-section-number">7.5</span> Dimension</a></li>
-  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">7.6</span> Your Turn</a></li>
+  <li><a href="#linear-transformations" id="toc-linear-transformations" class="nav-link" data-scroll-target="#linear-transformations"><span class="header-section-number">7.6</span> Linear Transformations</a></li>
+  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">7.7</span> Your Turn</a></li>
   </ul>
 </nav>
     </div>
@@ -266,8 +267,10 @@ Goals of this chapter:
 <p>As noted earlier, the two main structures in linear algebra are matrices and vector spaces. We now introduce the latter, a bit more abstract than matrices but even more powerful. We lay the crucial foundation in this chapter, then reap the benefits in the applications in the remaining chapters.</p>
 </div>
 </div>
-<section id="review-of-matrix-rank-properties" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="review-of-matrix-rank-properties"><span class="header-section-number">7.1</span> Review of Matrix Rank Properties</h2>
+<p>In <a href="Ch4.html#sec-rankprops"><span>Section&nbsp;6.5</span></a>, we briefly hinted at a possible relation between the rank of a matrix <span class="math inline">\(A\)</span> and that of <span class="math inline">\(A'A\)</span>. It will turn out that the two ranks are the same. Such information can come in handy. For instance, in a linear regression model, we need <span class="math inline">\(A'A\)</span> to be invertible. So if in some setting we already know that <span class="math inline">\(A\)</span> is of nonfull rank, we know that the same is true for <span class="math inline">\(A'A\)</span>; we need not bother finding the rank of the latter.</p>
+<p>This in turn will lead to study of <em>vector spaces</em>, a concept that goes hand-in-hand with matrices in forming the core of linear algebra.</p>
+<section id="review-of-a-matrix-rank-property" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="review-of-a-matrix-rank-property"><span class="header-section-number">7.1</span> Review of a Matrix Rank Property</h2>
 <p>In the last chapter, we presented the concepts of matrix row and column rank, defined to be the maximal number of linearly independent combinations of the rows or columns of the matrix, respectively. We proved that</p>
 <blockquote class="blockquote">
 <p>For any matrix <span class="math inline">\(B\)</span>,</p>
@@ -279,14 +282,17 @@ Goals of this chapter:
 \]</span></p>
 </blockquote>
 <p>We can say something stronger:</p>
-<blockquote class="blockquote">
-<p><em>Theorem:</em> Let <span class="math inline">\(\cal V\)</span> denote the <em>span</em> of the rows of <span class="math inline">\(B\)</span>,i.e.&nbsp;the set of all possible linear combinations of rows of <span class="math inline">\(B\)</span>. Define <span class="math inline">\(\cal V_{rref}\)</span> similarly. Then</p>
+<div id="thm-span" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 7.1 </strong></span>Let <span class="math inline">\(\cal V\)</span> denote the <em>span</em> of the rows of <span class="math inline">\(B\)</span>, i.e.&nbsp;the set of all possible linear combinations of rows of <span class="math inline">\(B\)</span>. Define <span class="math inline">\(\cal V_{rref}\)</span> similarly. Then</p>
 <p><span class="math display">\[
 \cal V = \cal V_{rref}
 \]</span></p>
 <p>The analogous result holds for columns.</p>
-<p><em>Proof:</em> Actually, we already proved this in the proof regarding rank in <span class="quarto-unresolved-ref">?sec-yessamerank</span>, in which we wrote, ``any nonzero linear combination of rows in <span class="math inline">\(B_{rref}\)</span> will correspond to a nonzero linear combination of the rows of <span class="math inline">\(B\)</span>,’’ and vice versa. This showed a one-to-one correspondence between the two sets of linear combinations.</p>
-</blockquote>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Actually, the theorem follows immediately from our comment following <a href="Ch4.html#lem-elemnotchangerank">Lemma&nbsp;<span>6.1</span></a>: “every nonzero linear combination of the rows of <span class="math inline">\(A\)</span> corresponds to one for the rows of <span class="math inline">\(A_{rref}\)</span>, and vice versa.” This showed a one-to-one correspondence between the two sets of linear combinations.</p>
+<p><span class="math inline">\(\square\)</span></p>
+</div>
 <p>So, not only do the two matrices have the same maximal numbers of linearly independent rows, they also generate <em>the same linear combinations</em> of those rows.</p>
 <p>The sets <span class="math inline">\(\cal V\)</span> and <span class="math inline">\(\cal V_{rref}\)</span> are called the <em>row spaces</em> of the two matrices, and yes, they are examples of vector spaces, as we will now see.</p>
 </section>
@@ -296,8 +302,8 @@ Goals of this chapter:
 <p>A set of objects <span class="math inline">\(\cal W\)</span> is called a <em>vector space</em> if it satisfies the following conditions:</p>
 <ul>
 <li><p>Some form of addition between vectors <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span>, denoted <span class="math inline">\(u+v\)</span>, is defined in <span class="math inline">\(\cal W\)</span>, with the result that <em>u+v</em> is also in <span class="math inline">\(\cal W\)</span>. We describe that latter property by saying <span class="math inline">\(\cal W\)</span> is <em>closed</em> under addition.</p></li>
-<li><p>There is a unique element called ``0’’ such that <span class="math inline">\(u + 0 = 0 + u = u\)</span>.</p></li>
-<li><p>Some form of scalar multiplication is defined, so that for any number <span class="math inline">\(c\)</span> and and <span class="math inline">\(u\)</span> in <span class="math inline">\(\cal W\)</span>, <span class="math inline">\(cw\)</span> exists and is in <span class="math inline">\(\cal W\)</span>. We describe that latter property by saying <span class="math inline">\(\cal W\)</span> is <em>closed</em> under scalar multiplication</p></li>
+<li><p>There is a unique element called “0” such that <span class="math inline">\(u + 0 = 0 + u = u\)</span>.</p></li>
+<li><p>Some form of scalar multiplication is defined, so that for any number <span class="math inline">\(c\)</span> and any <span class="math inline">\(u\)</span> in <span class="math inline">\(\cal W\)</span>, <span class="math inline">\(cw\)</span> exists and is in <span class="math inline">\(\cal W\)</span>. We describe that latter property by saying <span class="math inline">\(\cal W\)</span> is <em>closed</em> under scalar multiplication</p></li>
 <li><p>This being a practical book with just a dash of theory, we’ll skip the remaining conditions, involving algebraic properties such as commutativity of addition (<span class="math inline">\(u+v = v+u\)</span>).</p></li>
 </ul>
 </blockquote>
@@ -307,17 +313,17 @@ Goals of this chapter:
 <section id="cal-rn" class="level3" data-number="7.2.2">
 <h3 data-number="7.2.2" class="anchored" data-anchor-id="cal-rn"><span class="header-section-number">7.2.2</span> <span class="math inline">\(\cal R^{n}\)</span></h3>
 <p>In the vast majority of examples in this book, our vector space will be <span class="math inline">\(\cal R^{n}\)</span>.</p>
-<p>Here <span class="math inline">\(\cal R\)</span> represents the set of all real numbers, and <span class="math inline">\(\cal R^{n}\)</span> is simply the set of all vectors consisiting of <span class="math inline">\(n\)</span> real numbers. In an <span class="math inline">\(m \textrm{x} k\)</span> matrix the rows are members of so <span class="math inline">\(\cal R^{m}\)</span> and the columns are in <span class="math inline">\(\cal R^{k}\)</span>.</p>
+<p>Here <span class="math inline">\(\cal R\)</span> represents the set of all real numbers, and <span class="math inline">\(\cal R^{n}\)</span> is simply the set of all vectors consisiting of <span class="math inline">\(n\)</span> real numbers. In an <span class="math inline">\(m \textrm{ x } k\)</span> matrix the rows are members of <span class="math inline">\(\cal R^{m}\)</span> and the columns are in <span class="math inline">\(\cal R^{k}\)</span>.</p>
 </section>
 <section id="the-set-c01-of-all-continuous-functions-on-the-interval-01" class="level3" data-number="7.2.3">
 <h3 data-number="7.2.3" class="anchored" data-anchor-id="the-set-c01-of-all-continuous-functions-on-the-interval-01"><span class="header-section-number">7.2.3</span> The set C(0,1) of all continuous functions on the interval [0,1]</h3>
-<p>No surprises here. Vector addition and scalar multiplication are done as functions. If say <span class="math inline">\(u\)</span> is the squaring function and <span class="math inline">\(v\)</span>$ is the sine function, then</p>
+<p>Vector addition and scalar multiplication are done as functions. If say <span class="math inline">\(u\)</span> is the squaring function and <span class="math inline">\(v\)</span> is the sine function, then for example <span class="math inline">\(3u\)</span> is the function</p>
 <p><span class="math display">\[
-3u = 3x^{0.5}
+f(x) = 3x^{0.5}
 \]</span></p>
-<p>and</p>
+<p>and <span class="math inline">\(u+v\)</span> is defined to be</p>
 <p><span class="math display">\[
-u+v = x^{0.5} + \sin(x)
+f(x) = x^{0.5} + \sin(x)
 \]</span></p>
 </section>
 <section id="the-set-cal-rvomega-of-all-random-variables-defined-on-some-probability-space-omega" class="level3" data-number="7.2.4">
@@ -337,9 +343,10 @@ u+v = x^{0.5} + \sin(x)
 <section id="examples-1" class="level3" data-number="7.3.1">
 <h3 data-number="7.3.1" class="anchored" data-anchor-id="examples-1"><span class="header-section-number">7.3.1</span> Examples</h3>
 <p><span class="math inline">\(R^3\)</span> and <span class="math inline">\(R^n\)</span>:</p>
-<p>For instance, take <span class="math inline">\(\cal W_{1}\)</span> to be all vectors of the form (a,b,0). Clearly, <span class="math inline">\(\cal W_{1}\)</span> is closed under addition and scalar multiplication.</p>
+<p>For instance, take <span class="math inline">\(\cal W_{1}\)</span> to be all vectors of the form (a,b,0). Clearly, <span class="math inline">\(\cal W_{1}\)</span> is closed under addition and scalar multiplication, so it is subspace of <span class="math inline">\(R^3\)</span>.</p>
 <p>Another subspace of <span class="math inline">\(R^3\)</span> is the set of vectors (a,a,b), i.e.&nbsp;those vectors whose first two element are equal. What about vectors of the form (a,b,a+b)? Yes.</p>
-<p>We saw earlier that the <em>row space</em> of an <span class="math inline">\(m \textrm{x} n\)</span> matrix <span class="math inline">\(A\)</span>, consisting of all linear combinations of the rows of <span class="math inline">\(A\)</span>, is a subspace of <span class="math inline">\(R^m\)</span>. Similarly, the <em>column space</em> is a subspace of <span class="math inline">\(R^n\)</span>.</p>
+<p>We saw earlier that the <em>row space</em> of an <span class="math inline">\(m \textrm{ x } n\)</span> matrix <span class="math inline">\(A\)</span>, consisting of all linear combinations of the rows of <span class="math inline">\(A\)</span>, is a subspace of <span class="math inline">\(R^m\)</span>. Similarly, the <em>column space</em>, consisting of all linear combinations of columns of <span class="math inline">\(A\)</span>, is a subspace of <span class="math inline">\(R^n\)</span>.</p>
+<p>Another important subspace is the <em>null space</em>, the set of all <span class="math inline">\(x\)</span> such that <span class="math inline">\(Ax = 0\)</span>. The reader should verify that this is indeed a subspace of <span class="math inline">\(R^n\)</span>.</p>
 <p><span class="math inline">\(C(0,1)\)</span>:</p>
 <p>One subspace is the set of all polynomial functions. Again, the sum of two polynomials is a polynomial, and the same holds for scalar multiplication, so the set of polynomials is closed under those operations, and is a subspace.</p>
 <p><span class="math inline">\(\cal RV(\Omega)\)</span>:</p>
@@ -347,24 +354,25 @@ u+v = x^{0.5} + \sin(x)
 </section>
 <section id="span-of-a-set-of-vectors" class="level3" data-number="7.3.2">
 <h3 data-number="7.3.2" class="anchored" data-anchor-id="span-of-a-set-of-vectors"><span class="header-section-number">7.3.2</span> Span of a set of vectors</h3>
-<p>The <em>span</em> of a set of vectors <span class="math inline">\(G = {v_1,...,v_k}\)</span> is the set of all linear combinations of those vectors. It’s a subspace of the main space.</p>
+<p>As noted earlier, the <em>span</em> of a set of vectors <span class="math inline">\(G = {v_1,...,v_k}\)</span> is the set of all linear combinations of those vectors. It’s a subspace of the main space.</p>
 </section>
 </section>
 <section id="basis" class="level2 page-columns page-full" data-number="7.4">
 <h2 data-number="7.4" class="anchored" data-anchor-id="basis"><span class="header-section-number">7.4</span> Basis</h2>
 <p>Consider a set of vectors <span class="math inline">\(u_1,...u_r\)</span> in a vector space <span class="math inline">\(\cal W\)</span>. Recall that the span of these vectors is defined to be the set of all linear combinations of them. In verb form, we say that <span class="math inline">\(u_1,...u_r\)</span> <em>spans</em> <span class="math inline">\(\cal W\)</span> if we can generate the entire vector space from those vectors via linear combinations. It’s even nicer if the vectors are linearly independent:</p>
 <blockquote class="blockquote">
-We say the vectors <span class="math inline">\(u_1,...u_r\)</span> in a vector space <span class="math inline">\(\cal W\)</span> form a <em>basis</em> for <span class="math inline">\(\cal W\)</span> if they are linearly independent and span <span class="math inline">\(\cal W\)</span>.
+<p>We say the vectors <span class="math inline">\(u_1,...u_r\)</span> in a vector space <span class="math inline">\(\cal W\)</span> form a <em>basis</em> for <span class="math inline">\(\cal W\)</span> if they are linearly independent and span <span class="math inline">\(\cal W\)</span>.</p>
 </blockquote>
+<p>Note that subspaces are vector spaces in their own right, and thus also have bases.</p>
 <section id="examples-2" class="level3 page-columns page-full" data-number="7.4.1">
 <h3 data-number="7.4.1" class="anchored" data-anchor-id="examples-2"><span class="header-section-number">7.4.1</span> Examples</h3>
 <p><span class="math inline">\(\cal R^3\)</span>:</p>
 <div class="page-columns page-full"><p>The vectors (1,0,0), (0,1,0) and (0,0,1) are easily seen to be a basis here. They are linearly independent, and clearly span <span class="math inline">\(\cal R^3\)</span>. For instance, to generate (3,1,-0.2), we use this linear combination:</p><div class="no-row-height column-margin column-container"><span class="">Our convention has been that vectors are considered in matrix terms as column vectors by default. However, in nonmatrix contexts, it will be convenient to write <span class="math inline">\(\cal R^n\)</span> vectors as rows.</span></div></div>
 <p>(3,1,-0.2) = 3 (1,0,0) + 1 (0,1,0) + (-0.2) (0,0,,1)</p>
-<p>But bases are not unique; for instance, the set (1,0,0, (0,1,0), (0,1,1) works equally well as a basis for this space, as are (infinitely) many others..</p>
+<p>But bases are not unique; for instance, the set (1,0,0, (0,1,0), (0,1,1) works equally well as a basis for this space, as do (infinitely) many others..</p>
 <p>A basis for the subspace of vectors of the form (a,a,b) is (1,1,0) and (0,0,1).</p>
 <p><span class="math inline">\(C(0,1)\)</span>:</p>
-<div class="page-columns page-full"><p>Alas, there is no finite basis here. Even infinite ones have issues in their mathematical formulation.</p><div class="no-row-height column-margin column-container"><span class="">For those with a background in mathematical analysis, here is how the problem is handled. One starts with a subspace that is <em>dense</em> in the full space, i.e.&nbsp;any vector in the full space can be approximated to any precision by some linear combination of vectors in the dense set. For instance, the famoua Stone-Weierstrauss Theorem says that the set of all polynomials is dense in <span class="math inline">\(C(0,1)\)</span>. One then defines the dense set to be a ``basis.’’ The use of trig functions as the dense set is much more common than use of polynomials, in the familiar <em>Fourier series</em>.</span></div></div>
+<div class="page-columns page-full"><p>Alas, there is no finite basis here. Even infinite ones have issues in their mathematical formulation.</p><div class="no-row-height column-margin column-container"><span class="">For those with a background in mathematical analysis, here is how the problem is handled. One starts with a subspace that is <em>dense</em> in the full space, i.e.&nbsp;any vector in the full space can be approximated to any precision by some linear combination of vectors in the dense set. For instance, the famoua Stone-Weierstrauss Theorem says that the set of all polynomials is dense in <span class="math inline">\(C(0,1)\)</span>. One then defines the dense set to be a “basis.” The use of trig functions as the dense set is much more common than use of polynomials, in the familiar <em>Fourier series</em>.</span></div></div>
 <p><span class="math inline">\(\cal RV(\Omega)\)</span>:</p>
 <p>The situation here is the same as for C(0,1).</p>
 </section>
@@ -375,48 +383,29 @@ We say the vectors <span class="math inline">\(u_1,...u_r\)</span> in a vector s
 <blockquote class="blockquote">
 <p>The <em>dimension</em> of a vector space is the number of vectors in any of its bases.</p>
 </blockquote>
-<p>There is a bit of a landmine in that definition, as it presumes that all the bases do consist of the same number of vectors. This is true, but must be proven. Here we follow the <a href="https://www.google.com/books/edition/Algebra_and_Geometry/tVTd78vYzPkC?hl=en&amp;gbpv=1&amp;pg=PA106&amp;printsec=frontcover">elegant proof</a> AF Beardon (<em>Algebra and Geometry</em>, 2005, Cambridge).</p>
-<blockquote class="blockquote">
-<p><em>Theorem:</em> The number of vectors is the same in every basis.</p>
-<p><em>Proof:</em> Consider two bases, <span class="math inline">\(b_u = u_1,...,u_m\)</span> and <span class="math inline">\(b_v = v_1,...,v_n\)</span> By definition, each <span class="math inline">\(u_i\)</span> in <span class="math inline">\(b_u\)</span> can be represented by <span class="math inline">\(b_v\)</span> and vice versa:</p>
-<p><span id="eq-ui"><span class="math display">\[
-u_i = r_{i1} v_1 + ... + r_{in} v_n = \sum_{q=1}^n r_{iq} v_q
-\tag{7.1}\]</span></span></p>
-<p><span id="eq-vj"><span class="math display">\[
-v_j = s_{j1} u_1 + ... + s_{jm} u_m \sum_{w=1}^m s_{jw} u_w
-\tag{7.2}\]</span></span></p>
-<p>Substituting the second equation into the first, we have</p>
-<p><span class="math display">\[
-u_k = \sum_{q=1}^n r_{kq} \sum_{w=1}^m s_{qw} u_w =
-\sum_{q=1}^n \sum_{w=1}^m r_{kq}s_{qw} u_w
-\]</span></p>
-<p>Since the <span class="math inline">\(u_w\)</span> form a basis, then the below Your Turn problem on the uniqueness of coefficients in a basis representation says we can equate coefficients on both sides of the last equation. The coefficient of <span class="math inline">\(u_k\)</span> on the right side is</p>
-<p><span class="math display">\[
-\sum_{q=1}^n r_{kq} s_{qk}
-\]</span></p>
-<p>whereas on the left side, it is 1. So,</p>
-<p><span class="math display">\[
-1 = \sum_{q=1}^n r_{kq} s_{qk}
-\]</span></p>
-<p>Summing over <span class="math inline">\(k\)</span>, we obtain</p>
-<p><span class="math display">\[
-n = \sum_{k=1}^m \sum_{q=1}^n r_{kq} s_{qk}
-\]</span></p>
-<p>But going through the same steps as above, but now substituting <a href="#eq-ui">Equation&nbsp;<span>7.1</span></a> into <a href="#eq-vj">Equation&nbsp;<span>7.2</span></a>, we would have</p>
-<p><span class="math display">\[
-m = \sum_{p=1}^m \sum_{q=1}^m
-r_{pq}
-s_{qp}
-\]</span></p>
-<p>The sums in the last two equations are the same!</p>
-<p>Therefore <span class="math inline">\(m = n\)</span>, i.e.&nbsp;the two bases are of the same size.</p>
-</blockquote>
+<p>There is a bit of a landmine in that definition, as it presumes that all the bases do consist of the same number of vectors. This is true, but must be proven. We will not do so here, and refer the interested reader to the <a href="https://www.google.com/books/edition/Algebra_and_Geometry/tVTd78vYzPkC?hl=en&amp;gbpv=1&amp;pg=PA106&amp;printsec=frontcover">elegant proof</a> AF Beardon (<em>Algebra and Geometry</em>, 2005, Cambridge).</p>
 </section>
-<section id="your-turn" class="level2" data-number="7.6">
-<h2 data-number="7.6" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">7.6</span> Your Turn</h2>
-<p>❄️ <strong>Your Turn:</strong> Say <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> are subspaces of <span class="math inline">\(W\)</span>. Show that <span class="math inline">\(U \cap V\)</span> is also a subspace, and that its dimension is at most the minimum of the dimensions of <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span>. Show by counterexample tha result does not hold for union.</p>
-<p>❄️ <strong>Your Turn:</strong> Citing the properties of expected value, E(), show that the set of all random variable with mean 0 latter set is indeed a subspace of <span class="math inline">\(\cal RV(\Omega)\)</span>.</p>
-<p>❄️ <strong>Your Turn:</strong> Prove that the coefficients in basis representations are unique. In other words, in a representation of the vector <span class="math inline">\(x\)</span> in terms of a basis <span class="math inline">\(u_1,...,u_n\)</span>,</p>
+<section id="linear-transformations" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="linear-transformations"><span class="header-section-number">7.6</span> Linear Transformations</h2>
+<p>Consider vector spaces <span class="math inline">\(\cal{V}_1\)</span> and <span class="math inline">\(\cal{V}_2\)</span>. A function <span class="math inline">\(f\)</span> whose input is in <span class="math inline">\(\cal{V}_1\)</span> and output is in <span class="math inline">\(\cal{V}_2\)</span> is called a <em>transformation</em> (or <em>map</em>) <span class="math inline">\(\cal{V}_1\)</span> to <span class="math inline">\(\cal{V}_2\)</span>.</p>
+<p>An important special case is that in which <span class="math inline">\(f\)</span> is linear, i.e.</p>
+<p><span class="math display">\[
+f(av + bw) = a f(v) = b f(w)
+\]</span></p>
+<p>for all scalars <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>, and all vectors <span class="math inline">\(v\)</span> and <span class="math inline">\(w\)</span> in $_1 $.</p>
+<p>A further important special case is that in which <span class="math inline">\(\cal{V}_1\)</span> and <span class="math inline">\(\cal{V}_2\)</span> are <span class="math inline">\(R^n\)</span> and <span class="math inline">\(R^m\)</span>, respectively. Then it can be shown that there a some <span class="math inline">\(m \textrm{ x } n\)</span> matrix <span class="math inline">\(A\)</span> that does its work, i.e.</p>
+<p><span class="math display">\[
+f(x) = Ax
+\]</span></p>
+<p>for all <span class="math inline">\(x\)</span> in <span class="math inline">\(R^n\)</span>.</p>
+<p>Note that it is not necessarily true that a linear transformation will be <em>one-to-one</em> (<em>injective</em>), meaning that <span class="math inline">\(x \neq y\)</span> implies <span class="math inline">\(f(x) \neq f(y)\)</span>. Nor is it necessarily <em>onto</em> (<em>surjective</em>).</p>
+<p>To see that the first is false, consider the matrix <span class="math inline">\(A\)</span> above. If say <span class="math inline">\(f(v) = w\)</span> then we will also have <span class="math inline">\(f(v+s) = f(v) + f(s) = w\)</span> for any <span class="math inline">\(s\)</span> in the null space of <span class="math inline">\(A\)</span>. The reader is encouraged to verify that the second property also does not necessarily hold either.</p>
+</section>
+<section id="your-turn" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">7.7</span> Your Turn</h2>
+<p>❄️ <strong>Your Turn:</strong> Say <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> are subspaces of <span class="math inline">\(W\)</span>. Show that <span class="math inline">\(U \cap V\)</span> is also a subspace, and that its dimension is at most the minimum of the dimensions of <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span>. Show by counterexample that the result does not hold for union.</p>
+<p>❄️ <strong>Your Turn:</strong> Citing the properties of expected value, E(), show that the set of all random variable with mean 0 is a subspace of <span class="math inline">\(\cal RV(\Omega)\)</span>.</p>
+<p>❄️ <strong>Your Turn:</strong> Prove that the coefficients in a basis representation are unique. In other words, in a representation of the vector <span class="math inline">\(x\)</span> in terms of a basis <span class="math inline">\(u_1,...,u_n\)</span>,</p>
 
 
 </section>

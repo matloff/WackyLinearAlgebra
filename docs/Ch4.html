@@ -249,16 +249,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#sec-review" id="toc-sec-review" class="nav-link" data-scroll-target="#sec-review"><span class="header-section-number">6.2.3</span> Recap of <span>Section&nbsp;3.3.1</span></a></li>
   </ul></li>
   <li><a href="#formal-definitions" id="toc-formal-definitions" class="nav-link" data-scroll-target="#formal-definitions"><span class="header-section-number">6.3</span> Formal Definitions</a></li>
-  <li><a href="#rank-in-relation-to-sets-of-linear-dependentindependent-vectors" id="toc-rank-in-relation-to-sets-of-linear-dependentindependent-vectors" class="nav-link" data-scroll-target="#rank-in-relation-to-sets-of-linear-dependentindependent-vectors"><span class="header-section-number">6.4</span> Rank in Relation to Sets of Linear Dependent/Independent Vectors</a>
-  <ul class="collapse">
-  <li><a href="#motivation" id="toc-motivation" class="nav-link" data-scroll-target="#motivation"><span class="header-section-number">6.4.1</span> Motivation</a></li>
-  <li><a href="#row-and-column-rank" id="toc-row-and-column-rank" class="nav-link" data-scroll-target="#row-and-column-rank"><span class="header-section-number">6.4.2</span> Row and column rank</a></li>
-  </ul></li>
-  <li><a href="#some-properties-of-ranks" id="toc-some-properties-of-ranks" class="nav-link" data-scroll-target="#some-properties-of-ranks"><span class="header-section-number">6.5</span> Some Properties of Ranks</a>
-  <ul class="collapse">
-  <li><a href="#rank-is-preserved-in-pre-post-multiplication-by-invertible-matrices" id="toc-rank-is-preserved-in-pre-post-multiplication-by-invertible-matrices" class="nav-link" data-scroll-target="#rank-is-preserved-in-pre-post-multiplication-by-invertible-matrices"><span class="header-section-number">6.5.1</span> Rank is preserved in pre-/post-multiplication by invertible matrices</a></li>
-  <li><a href="#rank-is-bounded-above-by-the-narrow-dimension-of-the-matrix" id="toc-rank-is-bounded-above-by-the-narrow-dimension-of-the-matrix" class="nav-link" data-scroll-target="#rank-is-bounded-above-by-the-narrow-dimension-of-the-matrix"><span class="header-section-number">6.5.2</span> Rank is bounded above by the “narrow” dimension of the matrix</a></li>
-  </ul></li>
+  <li><a href="#row-and-column-rank" id="toc-row-and-column-rank" class="nav-link" data-scroll-target="#row-and-column-rank"><span class="header-section-number">6.4</span> Row and Column Rank</a></li>
+  <li><a href="#sec-rankprops" id="toc-sec-rankprops" class="nav-link" data-scroll-target="#sec-rankprops"><span class="header-section-number">6.5</span> Some Properties of Ranks</a></li>
   <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">6.6</span> Your Turn</a></li>
   </ul>
 </nav>
@@ -390,7 +382,7 @@ man     0   0       0   1    -1
 woman   0   0       0   0     0</code></pre>
 </div>
 </div>
-<p>Aha! Look at that row of 0s! The row operations process ended prematurely. This matrix will be seen to have no inverse. We say that the matrix has <em>rank</em> 4 – meaning 4 nonzero rows – when it needs to be 5.</p>
+<p>Aha! Look at that row of 0s! The row operations process ended prematurely. This matrix will be seen to have no inverse. We say that the matrix has <em>rank</em> 4 – meaning 4 nonzero rows – when it needs to be 5. We also say that the matrix is of <em>nonfull rank</em>.</p>
 <p>Though we have motivated the concept of matrix rank here with a linear model example, and will do so below, the notion pervades all of linear algebra, as will be seen in the succeeding chapters.</p>
 <p>We still have not formally defined rank, just building intuition, but toward that end, let us first formalize the row operations process.</p>
 </section>
@@ -426,17 +418,17 @@ woman   0   0       0   0     0</code></pre>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">runif</span>(<span class="dv">12</span>),<span class="at">nrow=</span><span class="dv">3</span>)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>          [,1]       [,2]      [,3]       [,4]
-[1,] 0.5251102 0.59366785 0.7957800 0.04106358
-[2,] 0.9324232 0.01551493 0.2478667 0.48262729
-[3,] 0.8123284 0.28399419 0.1139751 0.64479930</code></pre>
+<pre><code>          [,1]      [,2]      [,3]      [,4]
+[1,] 0.5763491 0.7406745 0.1571611 0.8489129
+[2,] 0.4503427 0.7102825 0.3361227 0.6153014
+[3,] 0.9698943 0.9743277 0.1525974 0.7018638</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>e <span class="sc">%*%</span> a  <span class="co"># matrix mult. is NOT e * a!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>          [,1]       [,2]      [,3]       [,4]
-[1,] 0.5251102 0.59366785 0.7957800 0.04106358
-[2,] 0.8123284 0.28399419 0.1139751 0.64479930
-[3,] 0.9324232 0.01551493 0.2478667 0.48262729</code></pre>
+<pre><code>          [,1]      [,2]      [,3]      [,4]
+[1,] 0.5763491 0.7406745 0.1571611 0.8489129
+[2,] 0.9698943 0.9743277 0.1525974 0.7018638
+[3,] 0.4503427 0.7102825 0.3361227 0.6153014</code></pre>
 </div>
 </div>
 <p>Yes, rows 2 and 3 were swapped.</p>
@@ -494,7 +486,7 @@ a_1 v_1 + ... + a_k v_k
 </blockquote>
 <p>(The reader may wish to review <a href="Ch1.html#sec-easyops"><span>Section&nbsp;2.3</span></a>.)</p>
 <blockquote class="blockquote">
-<p><em>Definition:</em> We say a set of vectors is <em>linearly dependent</em> if some linear combination of them (excluding the trivial case in which all the coefficients are 0) equals 0, as in both cases above. If no nontrival linear combination of the vectors is 0, we say the vectors are <em>linearly independent</em>.</p>
+<p><em>Definition:</em> We say a set of vectors is <em>linearly dependent</em> if some linear combination of them (excluding the trivial case in which all the coefficients are 0) equals 0. If no nontrival linear combination of the vectors is 0, we say the vectors are <em>linearly independent</em>.</p>
 </blockquote>
 <p>For instance, consider the matrix</p>
 <p><span class="math display">\[
@@ -520,15 +512,7 @@ a_1 v_1 + ... + a_k v_k
 <blockquote class="blockquote">
 <p><em>Definition</em> The <em>rank</em> of a matrix <span class="math inline">\(B\)</span> is its maximal number of linearly independent rows.</p>
 </blockquote>
-</section>
-<section id="rank-in-relation-to-sets-of-linear-dependentindependent-vectors" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="rank-in-relation-to-sets-of-linear-dependentindependent-vectors"><span class="header-section-number">6.4</span> Rank in Relation to Sets of Linear Dependent/Independent Vectors</h2>
-<p>Here we use rank as our path to key concepts about sets of vectors.</p>
-<section id="motivation" class="level3" data-number="6.4.1">
-<h3 data-number="6.4.1" class="anchored" data-anchor-id="motivation"><span class="header-section-number">6.4.1</span> Motivation</h3>
-<p>Recall that in the nonfull rank example we presented in <a href="Ch2.html#sec-noinverse"><span>Section&nbsp;3.4</span></a>, one row was double another,</p>
-<p>row2 + 2 row1 = 0</p>
-<p>In the census example,</p>
+<p>As an example involving real data, recall that in the nonfull rank let’s look again at the census example,</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -541,23 +525,20 @@ a_1 v_1 + ... + a_k v_k
 6 1 57.70413       0   1     0</code></pre>
 </div>
 </div>
-<p>the sum of the last two columns of <span class="math inline">\(A\)</span> was equal to the first column:</p>
+<p>the sum of the last two columns of <span class="math inline">\(A\)</span> is equal to the first column, so</p>
 <p>column1 - column4 - column5 = 0</p>
 <p>Write this more fully as an explicit linear combination of the columns of this matrix:</p>
 <p>1 column1 + 0 column2 + 0 column3 + (-1) column4 + (-1) column5 = 0</p>
-<p>The vector of coefficients is (1,0,0,-1,-1).</p>
+<p>So we have found a linear combination of the columsn of this matrix, with coefficients (1,0,0,-1,-1), that evaluates to 0. Though we have defined rank in terms of rows, one can do so in terms of columns as well:</p>
 </section>
-<section id="row-and-column-rank" class="level3" data-number="6.4.2">
-<h3 data-number="6.4.2" class="anchored" data-anchor-id="row-and-column-rank"><span class="header-section-number">6.4.2</span> Row and column rank</h3>
-<p>We have defined the rank of a matrix to be the number of maximally linearly independent rows. We’ll now call that the <em>row rank</em>, and define the <em>column rank</em> to be the number of maximally linearly independent columns.</p>
+<section id="row-and-column-rank" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="row-and-column-rank"><span class="header-section-number">6.4</span> Row and Column Rank</h2>
+<p>We have defined the rank of a matrix to be the number of maximally linearly independent rows. We’ll now call that the <em>row rank</em>, and define the <em>column rank</em> to be the number of maximally linearly independent columns. So for instance the matrix analyzed at the end of the last section is seen to be of nonfull column rank.</p>
 <p>As will be seen below, the row and column ranks will turn out to be equal. Thus in the sequel, we will use the term <em>rank</em> to refer to their common value. For now, though, the unmodified term “rank” will mean row rank.</p>
 </section>
-</section>
-<section id="some-properties-of-ranks" class="level2 page-columns page-full" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="some-properties-of-ranks"><span class="header-section-number">6.5</span> Some Properties of Ranks</h2>
+<section id="sec-rankprops" class="level2 page-columns page-full" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="sec-rankprops"><span class="header-section-number">6.5</span> Some Properties of Ranks</h2>
 <p>In <a href="#sec-censusrref"><span>Section&nbsp;6.1</span></a>, we found the matrix <span class="math inline">\(A'A\)</span> to be noninvertible, as its RREF had a row of 0s. We mentioned a relation to rank, but didn’t formalize it, which we will do now.</p>
-<section id="rank-is-preserved-in-pre-post-multiplication-by-invertible-matrices" class="level3" data-number="6.5.1">
-<h3 data-number="6.5.1" class="anchored" data-anchor-id="rank-is-preserved-in-pre-post-multiplication-by-invertible-matrices"><span class="header-section-number">6.5.1</span> Rank is preserved in pre-/post-multiplication by invertible matrices</h3>
 <div id="thm-ranknotchange" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 6.1 </strong></span>Let <span class="math inline">\(A\)</span> be any matrix, and let <span class="math inline">\(V\)</span> and <span class="math inline">\(W\)</span> be square, invertible matrices with sizes conformable with the products below. Then the column rank of <span class="math inline">\(VA\)</span> is equal to that of <span class="math inline">\(A\)</span>, and the row rank of <span class="math inline">\(AW\)</span> is equal to that of <span class="math inline">\(A\)</span>.</p>
 </div>
@@ -576,17 +557,17 @@ a_1 v_1 + ... + a_k v_k
 <p><span class="math inline">\(\square\)</span></p>
 </div>
 <div id="lem-elemnotchangerank" class="theorem lemma">
-<p><span class="theorem-title"><strong>Lemma 6.1 (The application of an elementary row operation on a matrix will will leave the row rank unchanged.) </strong></span>&nbsp;</p>
+<p><span class="theorem-title"><strong>Lemma 6.1 </strong></span>An elementary row operation on a matrix leaves the row rank unchanged.</p>
 </div>
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>Let <span class="math inline">\(r_i, i=1,...,m\)</span> denote the rows of the matrix. Consider a linear combination</p>
 <p><span class="math display">\[
 a_1 r_1 + ... + a_m r_m \neq 0
 \]</span></p>
-<p>For any of the three elementary operations, a slightly modified linear combination works with the modified matrix:</p>
+<p>For any of the three elementary operations, a slightly modified linear combination works (i.e.&nbsp;will be nonzero) with the modified matrix:</p>
 <ul>
 <li><p>Swap rows <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span>: Swap <span class="math inline">\(a_i\)</span> and <span class="math inline">\(a_j\)</span>.</p></li>
-<li><p>Multiplying row <span class="math inline">\(i\)</span> by a constant <span class="math inline">\(c\)</span>. Since $r_i <span class="math inline">\(c r_i\)</span>, set <span class="math inline">\(a_i \rightarrow (1/c) a_i\)</span>.</p></li>
+<li><p>Multiplying row <span class="math inline">\(i\)</span> by a constant <span class="math inline">\(c\)</span>. Since <span class="math inline">\(r_i \rightarrow c r_i\)</span>, set <span class="math inline">\(a_i \rightarrow (1/c) a_i\)</span>.</p></li>
 <li><p>Add <em>c</em> times row <span class="math inline">\(j\)</span> to row <span class="math inline">\(i\)</span>: Set <span class="math inline">\(a_j \rightarrow a_j - c a_j\)</span>.</p></li>
 </ul>
 <p><span class="math inline">\(\square\)</span></p>
@@ -598,9 +579,6 @@ a_1 r_1 + ... + a_m r_m \neq 0
 <p><span class="proof-title"><em>Proof</em>. </span>The lemma shows that every nonzero linear combination of the rows of <span class="math inline">\(A\)</span> corresponds to one for the rows of <span class="math inline">\(A_{rref}\)</span>, and vice versa. Thus the row rank of <span class="math inline">\(A\)</span> is the same as that of <span class="math inline">\(A_{rref}\)</span>. But that is <span class="math inline">\(s\)</span> in <a href="#eq-rref">Equation&nbsp;<span>6.1</span></a>, which we found earlier was equal to the column rank of <span class="math inline">\(A\)</span>.</p>
 <p><span class="math inline">\(\square\)</span></p>
 </div>
-</section>
-<section id="rank-is-bounded-above-by-the-narrow-dimension-of-the-matrix" class="level3 page-columns page-full" data-number="6.5.2">
-<h3 data-number="6.5.2" class="anchored" data-anchor-id="rank-is-bounded-above-by-the-narrow-dimension-of-the-matrix"><span class="header-section-number">6.5.2</span> Rank is bounded above by the “narrow” dimension of the matrix</h3>
 <p>In <a href="#sec-censusrref"><span>Section&nbsp;6.1</span></a>, we found the matrix <span class="math inline">\(A'A\)</span> to not be of full rank. It is surprising that so was <span class="math inline">\(A\)</span>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qr</span>(ApA)<span class="sc">$</span>rank  <span class="co"># qr is a built-in R function</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -621,11 +599,10 @@ a_1 r_1 + ... + a_m r_m \neq 0
 <p><span class="math inline">\(\square\)</span></p>
 </div>
 </section>
-</section>
 <section id="your-turn" class="level2" data-number="6.6">
 <h2 data-number="6.6" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">6.6</span> Your Turn</h2>
 <p>❄️ <strong>Your Turn:</strong> Show that a set of vectors is linearly dependent if and only if one of the vectors is a linear combination of the others.</p>
-<p>❄️ <strong>Your Turn:</strong> Consider an <span class="math inline">\(m \textrm{x} n\)</span> matrix <span class="math inline">\(A\)</span> with <span class="math inline">\(m \geq n\)</span>. Then consider the partitioned matrix</p>
+<p>❄️ <strong>Your Turn:</strong> Consider an <span class="math inline">\(m \textrm{ x } n\)</span> matrix <span class="math inline">\(A\)</span> with <span class="math inline">\(m \geq n\)</span>. Then consider the partitioned matrix</p>
 <p><span class="math display">\[
 B =
 \left (
@@ -635,10 +612,9 @@ I \\
 \end{array}
 \right )
 \]</span></p>
-<p>where $I is the <span class="math inline">\(n \textrm{x} n\)</span> identity matrix. Prove that <span class="math inline">\(B\)</span> is of full rank.</p>
+<p>where $I is the <span class="math inline">\(n \textrm{ x } n\)</span> identity matrix. Prove that <span class="math inline">\(B\)</span> is of full rank.</p>
 <p>❄️ <strong>Your Turn:</strong> Consider the three basic elementary matrices discussed here: Swap rows <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span>; multiply row <span class="math inline">\(i\)</span> by a constant <span class="math inline">\(b\)</span>; adding <span class="math inline">\(c\)</span> times row <span class="math inline">\(i\)</span> to row <span class="math inline">\(j\)</span>, for a constant <span class="math inline">\(c\)</span>. Find general formulas for the determinants of the three matrices.</p>
 <p>❄️ <strong>Your Turn:</strong> Prove that if the matrix <span class="math inline">\(A\)</span> has a 0 row, then <span class="math inline">\(det(A) = 0\)</span>.</p>
-<p>❄️ <strong>Your Turn:</strong> Show that a set of vectors is linearly dependent if and only if one of the vectors is a linear combination of the others.</p>
 
 
 </section>

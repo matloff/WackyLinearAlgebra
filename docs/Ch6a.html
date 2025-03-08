@@ -325,12 +325,11 @@ Goals of this chapter:
 [25] "Sand"    </code></pre>
 </div>
 </div>
-<p>Let’s try predicting <strong>pH</strong>, the acidity. But that leaves 3599 possible predictors. There is an old rule of thumb that one should have <span class="math inline">\(p &lt; \sqrt{n}\)</span>, for <span class="math inline">\(p\)</span> predictors and <span class="math inline">\(n\)</span> data points, to avoid overfitting, a rule which in our setting of <span class="math inline">\(n = 1157\)</span> is grossly violated. We need to do dimension reduction. One way to accomplish this is to use PCA.</p>
-<p>(Note, though, that this presumes our goal is prediction, rather than effect estimation. In the latter case, our new variables will be principal components, and their regression coefficients may not be meaningful to us. If we are doing prediction, regression coefficients may not be of interest.)</p>
+<p>Let’s try predicting <strong>pH</strong>, the acidity. But that leaves 3599 possible predictors. There is an old rule of thumb that one should have <span class="math inline">\(p &lt; \sqrt{n}\)</span>, for <span class="math inline">\(p\)</span> predictors and <span class="math inline">\(n\)</span> data points, to avoid overfitting, a rule which in our setting of <span class="math inline">\(n = 1157\)</span> is grossly violated. We need to do dimension reduction. One way to accomplish this is to use Principal Components Analysis (PCA).</p>
 </section>
 <section id="overall-idea" class="level2" data-number="10.2">
 <h2 data-number="10.2" class="anchored" data-anchor-id="overall-idea"><span class="header-section-number">10.2</span> Overall Idea</h2>
-<p>The goal is to find a few important linear combinations of our original predictor variables–important in the sense that they roughly summarize our data. These new variables are called the <em>principal components</em> (PCs) of the data. Let’s see how this is done.</p>
+<p>The goal is to find a few important linear combinations of our original predictor variables–important in the sense that they roughly summarize our data. These new variables are called the <em>principal components</em> (PCs) of the data. PCA will be covered in detail in the next chapter, but our preview here will set the stage for important general concepts that we will develop in the current chapter.</p>
 <section id="sec-firstPC" class="level3" data-number="10.2.1">
 <h3 data-number="10.2.1" class="anchored" data-anchor-id="sec-firstPC"><span class="header-section-number">10.2.1</span> The first PC</h3>
 <p>Let <strong>X</strong> denote a set of variables of interest (not necessarily in a prediction context). In searching for good linear combinations, we want to aim for ones with high variance. We certainly don’t want ones with low variance; after all, a random variable with 0 variance is a constant. So we wish to find linear combinations</p>
@@ -364,7 +363,7 @@ u'Cov(X)u + \gamma (u'u - 1)
 <p><span id="eq-aha"><span class="math display">\[
 Cov(X) ~ u = -\gamma u
 \tag{10.1}\]</span></span></p>
-<p>A matrix times a vector equals a constant times that same vector. That opens a huge world. We will return to the notion of principal components in the next chapter, after laying the groundwork in the current chapter.</p>
+<p>A matrix times a vector equals a constant times that same vector. We say that <span class="math inline">\(-\gamma\)</span> is an <em>eigenvalue</em> of the matrix <span class="math inline">\(Cov(X)\)</span>, and that <span class="math inline">\(u\)</span> is a corresponding <em>eigenvector</em>. Seems innocuous, but it opens a huge new world! We will return to the notion of principal components in the next chapter, after laying the groundwork in the current chapter.</p>
 </section>
 </section>
 <section id="definition" class="level2" data-number="10.3">
@@ -391,8 +390,7 @@ Mx = \lambda x
 det(M - \lambda I) = 0
 \]</span></p></li>
 <li><p>The left-hand side of this equation is a polynomial in <span class="math inline">\(\lambda\)</span>. So for an <span class="math inline">\(n \textrm{ x } n\)</span> matrix <span class="math inline">\(M\)</span>, there are <span class="math inline">\(n\)</span> roots of the equation and thus <span class="math inline">\(n\)</span> eigenvalues. Note that some roots may be repeated; if <span class="math inline">\(M\)</span> is the zero matrix, it will have an eigenvalue <span class="math inline">\(0\)</span> with multiplicity <span class="math inline">\(n\)</span>.</p></li>
-<li><p>In principle, that means we can solve the above determinant equation to find the eigenvalues of the matrix. The comments in <a href="Ch2.html#sec-detdef"><span>Section&nbsp;3.5.1</span></a> regarding the “ugly” definition of determinants imply that the equation involves a degree-<span class="math inline">\(m\)</span> polynomial in <span class="math inline">\(\lambda\)</span>.</p></li>
-<li><p>There are much better ways to calculate the eigenvalues than this, but a useful piece information arising from that analysis is that <span class="math inline">\(M\)</span> as <span class="math inline">\(m\)</span> eigenvalues (not necessarily distinct).</p></li>
+<li><p>In principle, that means we can solve the above determinant equation to find the eigenvalues of the matrix, though There are much better ways to calculate the eigenvalues than this, but a useful piece information arising from that analysis is that <span class="math inline">\(M\)</span> as <span class="math inline">\(m\)</span> eigenvalues (not necessarily distinct).</p></li>
 </ul>
 </section>
 <section id="the-special-case-of-symmetric-matrices" class="level2" data-number="10.5">
@@ -415,10 +413,10 @@ det(M - \lambda I) = 0
 </section>
 <section id="sec-diagonalizable" class="level3" data-number="10.5.3">
 <h3 data-number="10.5.3" class="anchored" data-anchor-id="sec-diagonalizable"><span class="header-section-number">10.5.3</span> Symmetric matrices are diagonalizable</h3>
-<p>A square matrix <span class="math inline">\(R\)</span> is said to be <em>diagonalizable</em> if there exists an invertible matrix <span class="math inline">\(P\)</span> such that <span class="math inline">\(P^{-1}RP\)</span> is equal to some diagonal matrix <span class="math inline">\(D\)</span>. We see that symmetric matrices fall into this category.</p>
+<p>A square matrix <span class="math inline">\(R\)</span> is said to be <em>diagonalizable</em> if there exists an invertible matrix <span class="math inline">\(P\)</span> such that <span class="math inline">\(P^{-1}RP\)</span> is equal to some diagonal matrix <span class="math inline">\(D\)</span>. We will see that symmetric matrices fall into this category.</p>
 <p>One application of this is the computation of powers of a diagonal matrix:</p>
 <p><span class="math display">\[
-R^k = P^{-1}RP ~ P^{-1}RP ~ ... ~ P^{-1}RP = P^{-1}D^kP
+R^k = (P^{-1}RP) ~ (P^{-1}RP) ~ ... ~ (P^{-1}RP) = P^{-1}D^kP
 \]</span></p>
 <p><span class="math inline">\(D^k\)</span> is equal to the diagonal matrix with elements <span class="math inline">\(d_k^k\)</span>, so the computation of <span class="math inline">\(M^k\)</span> is easy.</p>
 <div id="thm-symmeig" class="theorem">
@@ -434,13 +432,13 @@ R^k = P^{-1}RP ~ P^{-1}RP ~ ... ~ P^{-1}RP = P^{-1}D^kP
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>Use partitioned matrices.</p>
 <p>Let <span class="math inline">\(D = diag(d_1,...,d_m)\)</span>, where the <span class="math inline">\(d_i\)</span> are the eigenvalues of <span class="math inline">\(M\)</span>, corresponding to eigenvectors <span class="math inline">\(P_i\)</span>. Set the latter to have length 1, by dividing by their lengths.</p>
-<p>Recall that the eigenvectors of <span class="math inline">\(M\)</span>, i.e.&nbsp;the columns of <span class="math inline">\(P\)</span>, are orthogonal. That means the rows of <span class="math inline">\(P'\)</span> are orthogonal. Again using partitioning, we see that</p>
+<p>Recall that the eigenvectors of <span class="math inline">\(M\)</span>, i.e.&nbsp;the columns of <span class="math inline">\(P\)</span>, are orthogonal. Again using partitioning, we see that</p>
 <p><span class="math display">\[
 P'P = I
 \]</span></p>
 <p>so that <span class="math inline">\(P^{-1} = P'\)</span>.</p>
-<p>By the way, any square matrix <span class="math inline">\(Q\)</span> such that <span class="math inline">\(Q'Q = I\)</span> is said to be <em>orthogonal</em>.</p>
-<p>Now write</p>
+<p>By the way, any square matrix <span class="math inline">\(Q\)</span> such that <span class="math inline">\(Q'Q = I\)</span> is said to be <em>orthogonal</em>. And, its inverse is its transpose.</p>
+<p>Now use partitioning again:</p>
 <p><span class="math display">\[
 MP = M(P_1 | ... | P_m) = (MP_1 | ... | MP_n) =
 (d_1 P_1 | ... | (d_m P_m) = PD
