@@ -141,3 +141,13 @@ library(dsld)
 library(qeML)
 ```
 
+## Web Site
+
+*github.com/matloff/WackyLinear Algebra*
+
+## Thanks
+
+I deeply appreciate feedback from: Mike Hannon, Sana Vaziri, Nick
+Knueppel and Joe Rickert.
+
+
