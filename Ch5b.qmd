@@ -793,6 +793,9 @@ Goal achieved.
 
 ## Your Turn
 
+Note: In these problems, assume that $\cal RV(\Omega)$ is restricted to
+random variables of finite variance.
+
 ❄️  **Your Turn:** Show that for any random variable $Q$ of finite
 variance, the minimum value of $E[(Q-d)^2]$ over all constants $d$ is
 attained by taking $d$ to be the mean of $Q$, i.e.  $d = E(Q)$.
@@ -843,7 +846,7 @@ closest polynomial of degree $m$. Write functions to do this, with the
 following call forms:
 
 ``` r
-gsc01(m)  # performs Gram-Schmidt and returns the result
+gsc01(f,m)  # performs Gram-Schmidt and returns the result
 bestpoly(f,gsout)  # approx. f by output from gsc01
 
 ```
@@ -873,15 +876,15 @@ Triangle Inequality, using the following algebraic outline.
 of your own choosing, verify that the Cauchy-Schwarz and Triangle
 Inequalities hold in that case.
 
+❄️  **Your Turn:** Say we roll a die once, producing $X$ dots. If $X = 6$,
+we get a bonus roll, yielding $B$ additional dots; otherwise, $B = 0$.
+Let $Y = X+B$.
+
 ❄️  **Your Turn:** In the die rolling example, verify that
 
 $$
 E[E(Y|B)] = E(Y)
 $$
-
-❄️  **Your Turn:** Say we roll a die once, producing $X$ dots. If $X = 6$,
-we get a bonus roll, yielding $B$ additional dots; otherwise, $B = 0$.
-Let $Y = X+B$...
 
 ❄️  **Your Turn:** Say we roll a die once, producing $X$ dots. If $X = 6$,
 we get a bonus roll, yielding $B$ additional dots; otherwise, $B = 0$.
@@ -909,7 +912,7 @@ first algebraically using @eq-iterexpect and the relation $Var(R) =
 E(R^2) - (E(R))^2$, and then using the Pythagorean Theorem for a much
 quicker proof.  As before, assume $X$ and $Y$ are centered.
 
-❄️  **your turn:** show that @eq-hii holds. 
+❄️  **Your turn:** show that @eq-hii holds. 
 
 ❄️  **Your Turn:** Say $\cal V$ is $R^n$. Form the matrix $A$ whose
 columns are the $u_i$, and let $P = AA'$. Show that
