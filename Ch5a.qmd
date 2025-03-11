@@ -129,7 +129,11 @@ $$
 f(x) = x^{0.5} + \sin(x)
 $$
 
-### The set $\cal RV(\Omega)$ of all random variables defined on some probability space $\Omega$
+### A set $\cal RV(\Omega)$ of random variables 
+
+This vector space will consist of all random variables $X$
+defined on some probability space $\Omega$, with the additional
+restriction that $E(X^2) < \infty$, i.e. $X$ has finite variance.
 
 Consider the example in {@sec-mlb} on major league baseball players.  We
 choose a player at random.  Denote weight, height and age by $W$, $H$

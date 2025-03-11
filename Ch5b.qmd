@@ -113,9 +113,6 @@ a nonzero contribution to the integral and thus to the inner product.
 
 $\cal RV(\Omega)$:
 
-From here on, we'll restrict to the vector space of all random variables
-on $\Omega$ having finite variance.  (i.e. finite second moment).
-
 We will take covariance as our inner project:
 
 $$
@@ -793,9 +790,6 @@ Goal achieved.
 
 ## Your Turn
 
-Note: In these problems, assume that $\cal RV(\Omega)$ is restricted to
-random variables of finite variance.
-
 ❄️  **Your Turn:** Show that for any random variable $Q$ of finite
 variance, the minimum value of $E[(Q-d)^2]$ over all constants $d$ is
 attained by taking $d$ to be the mean of $Q$, i.e.  $d = E(Q)$.
@@ -934,5 +928,5 @@ claimed inner product to be value, and prove this.
 ❄️  **Your Turn:** Show that the hat matrix is symmetric.
 
 ❄️  **Your Turn:** Show that for any vector $w$ and symmetric matrix $M$,
-the *quadratic form* $w'Mw \geq 0$.
+the quadratic form $w'Mw \geq 0$.
 
