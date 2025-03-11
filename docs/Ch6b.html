@@ -288,40 +288,21 @@ Goals of this chapter:
 <p>It turns out that eigenanalysis can be quite useful for dimension reduction, by determining the <em>principal components</em> of our data. This is the focus of the current chapter.</p>
 </div>
 </div>
-<p>So we found in the last chapter that finding principal components entails finding eigenvectors and eigenvalues, at least for the first component. It turns out that this is true for the second, third and all the components. In other words, principal component analysis (PCA) is basically an eigenvectors and eigenvalues application.</p>
+<p>So in the last chapter we had a very brief introduction to Principal Components Analysis (PCA), and that finding the first component entails finding an eigenvector and eigenvalue. It turns out that this is true for the second, third and all the components. In other words, PCA is basically an eigenvectors and eigenvalues application.</p>
 <section id="the-second-third-etc.-pcs" class="level3" data-number="11.0.1">
 <h3 data-number="11.0.1" class="anchored" data-anchor-id="the-second-third-etc.-pcs"><span class="header-section-number">11.0.1</span> The second, third etc. PCs</h3>
-<p>There are as many principal components as there are columns in columns in <span class="math inline">\(X\)</span>. So, how are the second, third and so on defined and computed?</p>
+<p>Say we have a dataset <span class="math inline">\(X\)</span> in matrix form. There are as many principal components as there are columns in <span class="math inline">\(X\)</span>. So, how are the second, third and so on components defined and computed?</p>
 <p>The key issue is that we want our PCs to be orthogonal, because as we have seen orthogonal random vectors are statistically uncorrelated, and independent in the multivariate normal case. So if we summarize our data with say, the first few PCs, the fact that they are (at least loosely speaking) uncorrelated makes for a neater summary.</p>
 <p>So with <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> denoting the first and second PCs, we want <span class="math inline">\(v\)</span> to maximize</p>
 <p><span class="math display">\[
-v'Cov(X)v + \gamma (v'v - 1)
+v'Cov(X)v + \omega (v'v - 1)
 \]</span></p>
-<p>subject to</p>
-<p><span class="math display">\[
-u'v = 0
-\]</span></p>
-<p>For the latter condition, let’s add another Lagrange multiplier term:</p>
-<p><span class="math display">\[
-v'Cov(X)v + \omega (v'v - 1) + \eta u'v
-\]</span></p>
-<p>Setting derivatives (with respect to <span class="math inline">\(v\)</span>) to 0, we have</p>
+<p>We also need <span class="math inline">\(u'v = 0\)</span>, but we do not need to add a Lagrangian term for this, as you will see.</p>
+<p>Setting the derivative with respect to <span class="math inline">\(v\)</span> to 0, we have</p>
 <p><span id="eq-2ndeig"><span class="math display">\[
-0 = 2 Cov(X) v + 2 \omega v + \eta u
+0 = 2 Cov(X) v + 2 \omega v
 \tag{11.1}\]</span></span></p>
-<p>Multiplying on the left by <span class="math inline">\(u'\)</span>, we have</p>
-<p><span id="eq-ucovv"><span class="math display">\[
-0 = 2 u'Cov(X) v + 2 \omega u'v + \eta u'u
-\tag{11.2}\]</span></span></p>
-<p>But from before we have</p>
-<p><span class="math display">\[
-u'Cov(X) = -\gamma u
-\]</span></p>
-<p>so that</p>
-<p><span class="math display">\[
-u'Cov(X) v = 0
-\]</span></p>
-<p>in <a href="#eq-ucovv">Equation&nbsp;<span>11.2</span></a>. Moreover, <span class="math inline">\(u'v = 0\)</span> there as well, so that we have <span class="math inline">\(\eta = 0\)</span>, which reduces <a href="#eq-ucovv">Equation&nbsp;<span>11.2</span></a> to a statement that <span class="math inline">\(v\)</span> too must be an eigenvector of <span class="math inline">\(Cov(X)\)</span>.</p>
+<p>So <span class="math inline">\(v\)</span> is another eigenvector of <span class="math inline">\(Cov(X)\)</span>. If <span class="math inline">\(\omega \neq \gamma\)</span> (which we will not prove here), then <span class="math inline">\(u'v = 0\)</span> comes from <a href="Ch6a.html#thm-eigortho">Theorem&nbsp;<span>10.2</span></a>.</p>
 </section>
 <section id="properties" class="level2" data-number="11.1">
 <h2 data-number="11.1" class="anchored" data-anchor-id="properties"><span class="header-section-number">11.1</span> Properties</h2>

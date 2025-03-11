@@ -213,7 +213,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples"><span class="header-section-number">7.2.1</span> Examples</a></li>
   <li><a href="#cal-rn" id="toc-cal-rn" class="nav-link" data-scroll-target="#cal-rn"><span class="header-section-number">7.2.2</span> <span class="math inline">\(\cal R^{n}\)</span></a></li>
   <li><a href="#the-set-c01-of-all-continuous-functions-on-the-interval-01" id="toc-the-set-c01-of-all-continuous-functions-on-the-interval-01" class="nav-link" data-scroll-target="#the-set-c01-of-all-continuous-functions-on-the-interval-01"><span class="header-section-number">7.2.3</span> The set C(0,1) of all continuous functions on the interval [0,1]</a></li>
-  <li><a href="#the-set-cal-rvomega-of-all-random-variables-defined-on-some-probability-space-omega" id="toc-the-set-cal-rvomega-of-all-random-variables-defined-on-some-probability-space-omega" class="nav-link" data-scroll-target="#the-set-cal-rvomega-of-all-random-variables-defined-on-some-probability-space-omega"><span class="header-section-number">7.2.4</span> The set <span class="math inline">\(\cal RV(\Omega)\)</span> of all random variables defined on some probability space <span class="math inline">\(\Omega\)</span></a></li>
+  <li><a href="#a-set-cal-rvomega-of-random-variables" id="toc-a-set-cal-rvomega-of-random-variables" class="nav-link" data-scroll-target="#a-set-cal-rvomega-of-random-variables"><span class="header-section-number">7.2.4</span> A set <span class="math inline">\(\cal RV(\Omega)\)</span> of random variables</a></li>
   </ul></li>
   <li><a href="#subspaces" id="toc-subspaces" class="nav-link" data-scroll-target="#subspaces"><span class="header-section-number">7.3</span> Subspaces</a>
   <ul class="collapse">
@@ -324,8 +324,9 @@ f(x) = 3x^{0.5}
 f(x) = x^{0.5} + \sin(x)
 \]</span></p>
 </section>
-<section id="the-set-cal-rvomega-of-all-random-variables-defined-on-some-probability-space-omega" class="level3" data-number="7.2.4">
-<h3 data-number="7.2.4" class="anchored" data-anchor-id="the-set-cal-rvomega-of-all-random-variables-defined-on-some-probability-space-omega"><span class="header-section-number">7.2.4</span> The set <span class="math inline">\(\cal RV(\Omega)\)</span> of all random variables defined on some probability space <span class="math inline">\(\Omega\)</span></h3>
+<section id="a-set-cal-rvomega-of-random-variables" class="level3" data-number="7.2.4">
+<h3 data-number="7.2.4" class="anchored" data-anchor-id="a-set-cal-rvomega-of-random-variables"><span class="header-section-number">7.2.4</span> A set <span class="math inline">\(\cal RV(\Omega)\)</span> of random variables</h3>
+<p>This vector space will consist of all random variables <span class="math inline">\(X\)</span> defined on some probability space <span class="math inline">\(\Omega\)</span>, with the additional restriction that <span class="math inline">\(E(X^2) &lt; \infty\)</span>, i.e.&nbsp;<span class="math inline">\(X\)</span> has finite variance.</p>
 <p>Consider the example in {<a href="Ch3.html#sec-mlb"><span>Section&nbsp;5.3.5</span></a>} on major league baseball players. We choose a player at random. Denote weight, height and age by <span class="math inline">\(W\)</span>, <span class="math inline">\(H\)</span> and <span class="math inline">\(A\)</span>.</p>
 <p>Vector addition and scalar multiplication are defined in a straightforward manner. For instance, the sum of <span class="math inline">\(H\)</span> and <span class="math inline">\(A\)</span> is simply height + age. This may seem like a rather nonsensical sum, but it fits the technical definition, and moreover, we have already been doing things like this! This after all is what is happening in our prediction expression from that section,</p>
 <p><span class="math display">\[

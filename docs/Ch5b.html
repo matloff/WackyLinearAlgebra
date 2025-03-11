@@ -265,20 +265,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#motivation" id="toc-motivation" class="nav-link" data-scroll-target="#motivation"><span class="header-section-number">8.9.1</span> Motivation</a></li>
   <li><a href="#the-virtues-of-orthogonality" id="toc-the-virtues-of-orthogonality" class="nav-link" data-scroll-target="#the-virtues-of-orthogonality"><span class="header-section-number">8.9.2</span> The virtues of orthogonality</a></li>
-  <li><a href="#sec-gramschmidt" id="toc-sec-gramschmidt" class="nav-link" data-scroll-target="#sec-gramschmidt"><span class="header-section-number">8.9.3</span> The Gram-Schmidt Method</a></li>
   </ul></li>
-  <li><a href="#orthogonal-complements-and-direct-sums" id="toc-orthogonal-complements-and-direct-sums" class="nav-link" data-scroll-target="#orthogonal-complements-and-direct-sums"><span class="header-section-number">8.10</span> Orthogonal Complements and Direct Sums</a></li>
-  <li><a href="#projections-incal-rvomega" id="toc-projections-incal-rvomega" class="nav-link" data-scroll-target="#projections-incal-rvomega"><span class="header-section-number">8.11</span> Projections in<span class="math inline">\(\cal RV(\Omega)\)</span></a>
+  <li><a href="#sec-gramschmidt" id="toc-sec-gramschmidt" class="nav-link" data-scroll-target="#sec-gramschmidt"><span class="header-section-number">8.10</span> The Gram-Schmidt Method</a></li>
+  <li><a href="#orthogonal-complements-and-direct-sums" id="toc-orthogonal-complements-and-direct-sums" class="nav-link" data-scroll-target="#orthogonal-complements-and-direct-sums"><span class="header-section-number">8.11</span> Orthogonal Complements and Direct Sums</a></li>
+  <li><a href="#projections-in-cal-rvomega" id="toc-projections-in-cal-rvomega" class="nav-link" data-scroll-target="#projections-in-cal-rvomega"><span class="header-section-number">8.12</span> Projections in <span class="math inline">\(\cal RV(\Omega)\)</span></a>
   <ul class="collapse">
-  <li><a href="#conditional-expectation" id="toc-conditional-expectation" class="nav-link" data-scroll-target="#conditional-expectation"><span class="header-section-number">8.11.1</span> Conditional expectation</a></li>
-  <li><a href="#projections-in-cal-rvomega-how-they-work" id="toc-projections-in-cal-rvomega-how-they-work" class="nav-link" data-scroll-target="#projections-in-cal-rvomega-how-they-work"><span class="header-section-number">8.11.2</span> Projections in <span class="math inline">\(\cal RV(\Omega)\)</span>: how they work</a></li>
+  <li><a href="#conditional-expectation" id="toc-conditional-expectation" class="nav-link" data-scroll-target="#conditional-expectation"><span class="header-section-number">8.12.1</span> Conditional expectation</a></li>
+  <li><a href="#projections-in-cal-rvomega-how-they-work" id="toc-projections-in-cal-rvomega-how-they-work" class="nav-link" data-scroll-target="#projections-in-cal-rvomega-how-they-work"><span class="header-section-number">8.12.2</span> Projections in <span class="math inline">\(\cal RV(\Omega)\)</span>: how they work</a></li>
   </ul></li>
-  <li><a href="#sec-fairness" id="toc-sec-fairness" class="nav-link" data-scroll-target="#sec-fairness"><span class="header-section-number">8.12</span> Application: Fairness in Algorithms</a>
+  <li><a href="#sec-fairness" id="toc-sec-fairness" class="nav-link" data-scroll-target="#sec-fairness"><span class="header-section-number">8.13</span> Application: Fairness in Algorithms</a>
   <ul class="collapse">
-  <li><a href="#setting" id="toc-setting" class="nav-link" data-scroll-target="#setting"><span class="header-section-number">8.12.1</span> Setting</a></li>
-  <li><a href="#the-method-of-scutari-et-al" id="toc-the-method-of-scutari-et-al" class="nav-link" data-scroll-target="#the-method-of-scutari-et-al"><span class="header-section-number">8.12.2</span> The method of Scutari <em>et al</em></a></li>
+  <li><a href="#setting" id="toc-setting" class="nav-link" data-scroll-target="#setting"><span class="header-section-number">8.13.1</span> Setting</a></li>
+  <li><a href="#the-method-of-scutari-et-al" id="toc-the-method-of-scutari-et-al" class="nav-link" data-scroll-target="#the-method-of-scutari-et-al"><span class="header-section-number">8.13.2</span> The method of Scutari <em>et al</em></a></li>
   </ul></li>
-  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">8.13</span> Your Turn</a></li>
+  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">8.14</span> Your Turn</a></li>
   </ul>
 </nav>
     </div>
@@ -369,9 +369,9 @@ Goals of this chapter:
 </div>
 <div class="page-columns page-full"><p>This clearly fits most requirements for inner products, but what about <span class="math inline">\(&lt;f,f&gt; = 0\)</span> only if <span class="math inline">\(f = 0\)</span>? A non-0 <span class="math inline">\(f\)</span> will have <span class="math inline">\(f^2(t) &gt; 0\)</span> for at least one <span class="math inline">\(t\)</span>, and by continuity, <span class="math inline">\(f^2(t) &gt; 0\)</span> on an interval containing that <span class="math inline">\(t\)</span>, thus making a nonzero contribution to the integral and thus to the inner product.</p><div class="no-row-height column-margin column-container"><span class="">Note that the 0 vector in this space is the function that is identically 0, not just 0 at some points</span></div></div>
 <p><span class="math inline">\(\cal RV(\Omega)\)</span>:</p>
-<p>From here on, we’ll restrict to the vector space of all random variables on <span class="math inline">\(\Omega\)</span> having finite variance. We define</p>
+<p>We will take covariance as our inner project:</p>
 <p><span class="math display">\[
-&lt;X,Y&gt; = E(XY)
+&lt;U,V&gt; = cov(U,V) = E[(U - EU) (V - EV)]
 \]</span></p>
 <p>The properties of expected value, e.g.&nbsp;linearity, show that the requirements for an inner product hold.</p>
 </section>
@@ -579,23 +579,23 @@ p = &lt;x,u_1&gt; u_1+...+&lt;x,u_k&gt; u_k.
 </blockquote>
 <p>But how do we obtain an orthogonal basis, if we only have a nonorthogonal one? That’s next…</p>
 </section>
-<section id="sec-gramschmidt" class="level3" data-number="8.9.3">
-<h3 data-number="8.9.3" class="anchored" data-anchor-id="sec-gramschmidt"><span class="header-section-number">8.9.3</span> The Gram-Schmidt Method</h3>
+</section>
+<section id="sec-gramschmidt" class="level2" data-number="8.10">
+<h2 data-number="8.10" class="anchored" data-anchor-id="sec-gramschmidt"><span class="header-section-number">8.10</span> The Gram-Schmidt Method</h2>
 <p>As seen in the last section, it is desirable to have an orthogonal basis, and it’s even more convenient if its vectors have length 1 (an <em>orthonormal</em> basis). Converting to length 1 is trivial – just divide the vector by its length.</p>
-<p>But if we start with a basis <span class="math inline">\(b_i\)</span> and generate, say, orthogonal, length 1 vectors <span class="math inline">\(u_1,...,u_m\)</span>, how do we get <span class="math inline">\(u_{m+1}\)</span> from <span class="math inline">\(b_{m+1}\)</span>? the answer lies in <a href="#eq-orthoproj">Equation&nbsp;<span>8.4</span></a>: Take the projection <span class="math inline">\(q\)</span> of <span class="math inline">\(b_{m+1}\)</span> onto the subspace generated by <span class="math inline">\(u_1,...,u_m\)</span>; <span class="math inline">\(b_{m+1}-q\)</span> will be orthogonal to <span class="math inline">\(u_1,...,u_m\)</span>, so we can take <span class="math inline">\(u_{m+1}\)</span> to be <span class="math inline">\(b_{m+1}-q\)</span>! We then normalize it.</p>
-<p>So, here is the process for conversion:</p>
+<p>But if we start with a basis <span class="math inline">\(b_1,b_2,...,b_m\)</span>, how can we generate an orthonormal basis from this?</p>
 <blockquote class="blockquote">
 <p><em>The Gram-Schmidt Method</em></p>
 <p>Say we have a basis <span class="math inline">\(b_1,...,b_k\)</span> for some vector space. Convert it to an orthonormal basis as follows.</p>
 <ol type="1">
 <li><p>Set <span class="math inline">\(u_1 = b_1/||b_1||\)</span>.</p></li>
-<li><p>For each <span class="math inline">\(i = 2,...,k\)</span>, find the projection <span class="math inline">\(q\)</span> of <span class="math inline">\(b_{i}\)</span> onto the subspace generated by <span class="math inline">\(u_1,...,u_{i-1}\)</span>. Set <span class="math inline">\(u_i\)</span> to <span class="math inline">\(b_i-q\)</span>, and normalize.</p></li>
+<li><p>For each <span class="math inline">\(i = 2,...,k\)</span>, find the projection <span class="math inline">\(q\)</span> of <span class="math inline">\(b_{i}\)</span> onto the subspace generated by <span class="math inline">\(u_1,...,u_{i-1}\)</span>. Set <span class="math inline">\(u_i\)</span> to <span class="math inline">\(b_i-q\)</span>, and normalize it.</p></li>
 </ol>
 </blockquote>
+<p>Wny does this work? Let <span class="math inline">\(\cal{W}\)</span> denote the subspace generated by <span class="math inline">\(u_1,...,u_{i-1}\)</span>. Since <span class="math inline">\(q\)</span> is the projection of <span class="math inline">\(b_i\)</span> onto <span class="math inline">\(\cal{W}\)</span>, <span class="math inline">\(b_i - q\)</span> will be orthogonal to <span class="math inline">\(\cal{W}\)</span>, thus to <span class="math inline">\(u_1,...,u_{i-1}\)</span> – exactly what we need.</p>
 </section>
-</section>
-<section id="orthogonal-complements-and-direct-sums" class="level2" data-number="8.10">
-<h2 data-number="8.10" class="anchored" data-anchor-id="orthogonal-complements-and-direct-sums"><span class="header-section-number">8.10</span> Orthogonal Complements and Direct Sums</h2>
+<section id="orthogonal-complements-and-direct-sums" class="level2" data-number="8.11">
+<h2 data-number="8.11" class="anchored" data-anchor-id="orthogonal-complements-and-direct-sums"><span class="header-section-number">8.11</span> Orthogonal Complements and Direct Sums</h2>
 <p>Consider a subspace <span class="math inline">\(W\)</span> of an inner product space <span class="math inline">\(V\)</span>. The set of vectors having inner product 0 with vectors in <span class="math inline">\(W\)</span> is denoted <span class="math inline">\(W^{\perp}\)</span>, known as the <em>orthogonal complement</em> of <span class="math inline">\(W\)</span>. It too is a subpace, and jointly <span class="math inline">\(W\)</span> and <span class="math inline">\(W^{\perp}\)</span> span all of <span class="math inline">\(V\)</span>.</p>
 <p>From <a href="#sec-projections"><span>Section&nbsp;8.7</span></a>, we know that for any <span class="math inline">\(x\)</span> in <span class="math inline">\(V\)</span>, one can uniquely write</p>
 <p><span class="math display">\[
@@ -605,11 +605,12 @@ x = x_1 + x_2
 <p>Say <span class="math inline">\(u_1,...,u_r\)</span> and <span class="math inline">\(v_1,...,v_s\)</span> are bases for <span class="math inline">\(W\)</span> and <span class="math inline">\(W^{\perp}\)</span>. Then together they form a basis for all of <span class="math inline">\(V\)</span>. Typically they are chosen to be orthonormal.</p>
 <p>Finally, we say that <span class="math inline">\(V\)</span> is the <em>direct sum</em> of <span class="math inline">\(W\)</span> and <span class="math inline">\(W^{\perp}\)</span>, denoted <span class="math inline">\(V = W \oplus W^{\perp}\)</span>.</p>
 </section>
-<section id="projections-incal-rvomega" class="level2 page-columns page-full" data-number="8.11">
-<h2 data-number="8.11" class="anchored" data-anchor-id="projections-incal-rvomega"><span class="header-section-number">8.11</span> Projections in<span class="math inline">\(\cal RV(\Omega)\)</span></h2>
-<div class="page-columns page-full"><p>Here is where this very abstract vector space becomes useful in practical applications, such as will be presented in <a href="#sec-fairness"><span>Section&nbsp;8.12</span></a>. We will need to build a bit of infrastructure.</p><div class="no-row-height column-margin column-container"><span class="">The material in this section is rather involved, but it is needed for the section on racial, gender etc. fairness in machine learning, <a href="#sec-fairness"><span>Section&nbsp;8.12</span></a>, which hopefully makes it worthwhile.</span></div></div>
-<section id="conditional-expectation" class="level3" data-number="8.11.1">
-<h3 data-number="8.11.1" class="anchored" data-anchor-id="conditional-expectation"><span class="header-section-number">8.11.1</span> Conditional expectation</h3>
+<section id="projections-in-cal-rvomega" class="level2 page-columns page-full" data-number="8.12">
+<h2 data-number="8.12" class="anchored" data-anchor-id="projections-in-cal-rvomega"><span class="header-section-number">8.12</span> Projections in <span class="math inline">\(\cal RV(\Omega)\)</span></h2>
+<p>Here is a good example of how a very abstract vector space becomes useful in practical applications, such as will be presented in <a href="#sec-fairness"><span>Section&nbsp;8.13</span></a>. The material is rather involved, consisting of computation of various probabilistic quantities. Since <span class="math inline">\(\cal RV(\Omega)\)</span> is a vector space of random variables, each entity is both a random variable and a vector. Sometimes the latter will be the focus, sometimes the former. We request the reader’s patience in following this duality.</p>
+<section id="conditional-expectation" class="level3" data-number="8.12.1">
+<h3 data-number="8.12.1" class="anchored" data-anchor-id="conditional-expectation"><span class="header-section-number">8.12.1</span> Conditional expectation</h3>
+<p>It will turn out that in <span class="math inline">\(\cal RV(\Omega)\)</span>, projections take the form of conditional means. Let’s see how that arises.</p>
 <p>One of the Your Turn problems at the end of this chapter covers this setting:</p>
 <blockquote class="blockquote">
 <p>Say we roll a die once, producing <span class="math inline">\(X\)</span> dots. If <span class="math inline">\(X = 6\)</span>, we get a bonus roll, yielding <span class="math inline">\(B\)</span> additional dots; otherwise, <span class="math inline">\(B = 0\)</span>. Let <span class="math inline">\(Y = X+B\)</span>.</p>
@@ -618,6 +619,15 @@ x = x_1 + x_2
 <p>Now, what is <span class="math inline">\(E(Y | B = 2)\)</span>? If <span class="math inline">\(B = 2\)</span>, then we got the bonus roll, so <span class="math inline">\(X = 6\)</span> and <span class="math inline">\(Y = X + B = 8\)</span>:</p>
 <p><span class="math display">\[
 E(Y | B = 2) = 8
+\]</span></p>
+<p>Similarly,</p>
+<p><span class="math display">\[
+E(Y | B = 3) = 9
+\]</span></p>
+<p>and so on.</p>
+<p>But what about <span class="math inline">\(E(Y | B=0)\)</span>? In that case, <span class="math inline">\(Y = X\)</span>, so</p>
+<p><span class="math display">\[
+P(Y = i | B = 0) = P(X = i | X \neq 6) = \frac{1}{5}, ~ i=1,2,3,4,5
 \]</span></p>
 <p>More generally,</p>
 <p><span class="math display">\[
@@ -628,26 +638,18 @@ E(Y | B = i) =
 \end{cases}
 \]</span></p>
 <p><em>The random variable form:</em></p>
-<p>The quantity <span class="math inline">\(E(Y | B = i)\)</span>, a number, can be converted to a random variable, in the form of a function of <span class="math inline">\(B\)</span>, which we will call <span class="math inline">\(Q\)</span>, and denoted <span class="math inline">\(E(Y | B)\)</span>, where</p>
+<p>The quantity <span class="math inline">\(E(Y | B = i)\)</span>, a number, can be converted to a random variable, in the form of a function of <span class="math inline">\(B\)</span>, which we will call <span class="math inline">\(q(B)\)</span>, and denoted <span class="math inline">\(E(Y | B)\)</span> – without “= i” – where</p>
 <p><span class="math display">\[
-Q =
+q(B) =
 \begin{cases}
 3 &amp; B = 0 \\
 6 + B &amp; B = 1,2,3,4,5
 \end{cases}
 \]</span></p>
-<p><span class="math inline">\(B\)</span> is random, so <span class="math inline">\(r(B)\)</span> is also random, and here is its distribution:</p>
-<blockquote class="blockquote">
-<p><span class="math display">\[
-Q \textrm{ takes on the values } 3,7,8,9,10,11 \textrm{ with
-probabilities }
-\]</span> <span class="math display">\[
-1/6, 1/36, 1/36, 1/36, 1/36, 1/36
-\]</span></p>
-</blockquote>
+<p><span class="math inline">\(B\)</span> is random, so <span class="math inline">\(q(B)\)</span> is also random.</p>
 <p>We need one more thing:</p>
 <p><em>The Law of Iterated Expectation:</em></p>
-<p>For random variable <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span>, set</p>
+<p>For random variables <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span>, set</p>
 <p><span class="math display">\[
 R = E[V |U]
 \]</span></p>
@@ -665,9 +667,9 @@ E[E(H|D)] = E(H)
 \]</span></p>
 <p>Note, though that that outer <span class="math inline">\(E()\)</span> (the first ‘E’) is a weighted average, since some departments are larger than others. The weights are the distribution of <span class="math inline">\(D\)</span>.</p>
 </section>
-<section id="projections-in-cal-rvomega-how-they-work" class="level3 page-columns page-full" data-number="8.11.2">
-<h3 data-number="8.11.2" class="anchored" data-anchor-id="projections-in-cal-rvomega-how-they-work"><span class="header-section-number">8.11.2</span> Projections in <span class="math inline">\(\cal RV(\Omega)\)</span>: how they work</h3>
-<p>Consider random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. Let <span class="math inline">\(W\)</span> be the set of all functions of <span class="math inline">\(X\)</span> with finite variance, which is a subspace of the vector space <span class="math inline">\(\cal RV(\Omega)\)</span>. The above theorem talks of a closest vector <span class="math inline">\(C\)</span> in <span class="math inline">\(W\)</span> to <span class="math inline">\(Y\)</span>. Let’s see what form <span class="math inline">\(C\)</span> might take in this vector space.</p>
+<section id="projections-in-cal-rvomega-how-they-work" class="level3 page-columns page-full" data-number="8.12.2">
+<h3 data-number="8.12.2" class="anchored" data-anchor-id="projections-in-cal-rvomega-how-they-work"><span class="header-section-number">8.12.2</span> Projections in <span class="math inline">\(\cal RV(\Omega)\)</span>: how they work</h3>
+<div class="page-columns page-full"><p>Consider random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. Let <span class="math inline">\(W\)</span> be the set of all functions of <span class="math inline">\(X\)</span> with finite variance, which is a subspace of the vector space <span class="math inline">\(\cal RV(\Omega)\)</span>. <a href="#thm-projection">Theorem&nbsp;<span>8.3</span></a> talks of a closest vector <span class="math inline">\(C\)</span> in <span class="math inline">\(W\)</span> to <span class="math inline">\(Y\)</span>. Let’s see what form <span class="math inline">\(C\)</span> might take in this vector space. For convenience, let’s assume that our variables have mean 0.</p><div class="no-row-height column-margin column-container"><span class="">Recall that we can convert a random variable to mean-0 by subtracting its mean.</span></div></div>
 <p>Remember, the (squared) distance from <span class="math inline">\(Y\)</span> to <span class="math inline">\(C\)</span> is</p>
 <p><span class="math display">\[
 ||Y - C||^2 = &lt;Y-C,Y-C&gt; = E[(Y-C)^2]
@@ -676,42 +678,41 @@ E[E(H|D)] = E(H)
 <p><span class="math display">\[
 E[ E((Y-C)^2 | X) ]
 \]</span></p>
-<div class="page-columns page-full"><p>For any random variable <span class="math inline">\(Q\)</span> of finite variance, the minimum value of <span class="math inline">\(E[(Q-d)^2]\)</span> over all constants <span class="math inline">\(d\)</span> is attained by <span class="math inline">\(d = E(Q)\)</span>. (See Your Turn problem below.) So, the minimum of <span class="math inline">\(E((Y-C)^2 | C)\)</span>, for all random variables <span class="math inline">\(C\)</span>, is attained by the conditional mean,</p><div class="no-row-height column-margin column-container"><span class="">Note that since we are conditioning on the random variable <span class="math inline">\(C\)</span>, it becomes a constant, like <span class="math inline">\(d\)</span> above.</span></div></div>
+<div class="page-columns page-full"><p>For any random variable <span class="math inline">\(Q\)</span> of finite variance, the minimum value of <span class="math inline">\(E[(Q-d)^2]\)</span> over all constants <span class="math inline">\(d\)</span> is attained by taking <span class="math inline">\(d\)</span> to be the mean of <span class="math inline">\(Q\)</span>, i.e.&nbsp;<span class="math inline">\(d = E(Q)\)</span>. (See Your Turn problem below.) So, the minimum of <span class="math inline">\(E((Y-C)^2 | C)\)</span>, for all random variables <span class="math inline">\(C\)</span>, is attained by the <em>conditional</em> mean,</p><div class="no-row-height column-margin column-container"><span class="">Note that since we are conditioning on the random variable <span class="math inline">\(C\)</span>, it becomes a constant, like <span class="math inline">\(d\)</span> above.</span></div></div>
 <p><span class="math display">\[
 C = E(Y | X)
 \]</span></p>
 <p>In other words:</p>
 <blockquote class="blockquote">
-<p>Projections in <span class="math inline">\(\cal RV(\Omega)\)</span> are conditional means.</p>
-</blockquote>
+<p>Projections in <span class="math inline">\(\cal RV(\Omega)\)</span> take the form of conditional means.</p>
 <p>Moreover:</p>
 <p>Since the difference between a vector and its projection onto a subspace is orthogonal to that subspace we have:</p>
+</blockquote>
 <blockquote class="blockquote">
-<p>The vector <span class="math inline">\(Y - E(Y|X)\)</span> is uncorrelated with <span class="math inline">\(E(Y|X)\)</span>. In other words, the prediction error (also called the <em>residual</em> has 0 correlation with the prediction itself.</p>
+<p>The vector <span class="math inline">\(Y - E(Y|X)\)</span> is uncorrelated with <span class="math inline">\(E(Y|X)\)</span>. In other words, the prediction error (also called the <em>residual</em>) has 0 correlation with the prediction itself.</p>
 </blockquote>
 </section>
 </section>
-<section id="sec-fairness" class="level2" data-number="8.12">
-<h2 data-number="8.12" class="anchored" data-anchor-id="sec-fairness"><span class="header-section-number">8.12</span> Application: Fairness in Algorithms</h2>
+<section id="sec-fairness" class="level2" data-number="8.13">
+<h2 data-number="8.13" class="anchored" data-anchor-id="sec-fairness"><span class="header-section-number">8.13</span> Application: Fairness in Algorithms</h2>
 <p>COMPAS is a software tool designed to aid judges in determining sentences in criminal trials, by assessing the probability that the defendant would recidivate. It is a commercial product by Northpointe.</p>
 <p>COMPAS came under intense scrutiny after <a href="https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing">an investigation</a> by <em>ProPublica</em>, which asserted evidence of racial bias against black defendants compared to white defendants with similar profiles. Northpointe contested these findings, asserting that their software treated black and white defendants equally.</p>
-<p>It should be noted the <em>ProPublica</em> did not accuse Northpointe of intentional bias. Instead, the issue largely concerns <em>proxies</em>, variables that are related to race, rather than race (or gender etc.) itself. If for example COMPAS were to use a person’s home location as a predictor, that would be correlated to race, and thus would be unfair to use in prediction. On the other hand, if the prediction tool makes use of the number of prior criminal convictions, that would be reasonable, even though it too might be a proxy for race.</p>
-<p>On the other hand, even using race indirectly for any reason would likely be unacceptable. While this book does not take a position on the specific dispute, this case highlights the critical importance of addressing fairness in machine learning.</p>
-<section id="setting" class="level3" data-number="8.12.1">
-<h3 data-number="8.12.1" class="anchored" data-anchor-id="setting"><span class="header-section-number">8.12.1</span> Setting</h3>
-<p>We consider prediction of a variable <span class="math inline">\(Y\)</span> from a feature vector <span class="math inline">\(X\)</span> and a vector of sensitive variables <span class="math inline">\(S\)</span>. The target <span class="math inline">\(Y\)</span> may be either numeric (in a regression setting) or dichotomous (in a two-class classification setting where <span class="math inline">\(Y\)</span> = 1 or <span class="math inline">\(Y\)</span> = 0). The <span class="math inline">\(m\)</span>-class case can be handled using <span class="math inline">\(m\)</span> dichotomous variables. We will consider only the numeric case here.</p>
-<p>Our goal is to reduce or eliminate the influence of the sensitive variable <span class="math inline">\(S\)</span>. One might ask, why not simply remove <span class="math inline">\(S\)</span> from our model-fitting process? The problem is that <span class="math inline">\(X\)</span> may include variables that are related to <span class="math inline">\(S\)</span>. In the COMPAS example, race has some correlation with another variable, number of prior convictions.</p>
+<p>It should be noted the <em>ProPublica</em> did not accuse Northpointe of intentional bias. Instead, the issue largely concerns <em>proxies</em>, variables that are related to race, rather than race (or gender etc.) itself. If for example COMPAS were to use a person’s home location as a predictor, that would be correlated to race, and thus would be unfair to use in prediction. The point here is that, due to proxies, we cannot solve the problem by simply removing <span class="math inline">\(S\)</span> from our analysis; we would still be using correlates of <span class="math inline">\(S\)</span>.</p>
+<p>While this book does not take a position on the specific dispute, this case highlights the critical importance of addressing fairness in machine learning.</p>
+<section id="setting" class="level3" data-number="8.13.1">
+<h3 data-number="8.13.1" class="anchored" data-anchor-id="setting"><span class="header-section-number">8.13.1</span> Setting</h3>
+<p>We consider prediction of a variable <span class="math inline">\(Y\)</span> from a feature vector <span class="math inline">\(X\)</span> and a vector of sensitive variables <span class="math inline">\(S\)</span>. The target <span class="math inline">\(Y\)</span> may be either numeric (in a regression setting) or dichotomous (in a two-class classification setting where <span class="math inline">\(Y\)</span> = 1 or <span class="math inline">\(Y\)</span> = 0). The <span class="math inline">\(m\)</span>-class case can be handled using <span class="math inline">\(m\)</span> dichotomous variables. We will consider only the numeric case here. Our goal is to eliminate the influence of <span class="math inline">\(S\)</span>.</p>
 </section>
-<section id="the-method-of-scutari-et-al" class="level3" data-number="8.12.2">
-<h3 data-number="8.12.2" class="anchored" data-anchor-id="the-method-of-scutari-et-al"><span class="header-section-number">8.12.2</span> The method of Scutari <em>et al</em></h3>
+<section id="the-method-of-scutari-et-al" class="level3" data-number="8.13.2">
+<h3 data-number="8.13.2" class="anchored" data-anchor-id="the-method-of-scutari-et-al"><span class="header-section-number">8.13.2</span> The method of Scutari <em>et al</em></h3>
 <p>The basic assumption (BA) amounts to <span class="math inline">\((Y,X,S)\)</span> having a multivariate Gaussian distribution, with <span class="math inline">\(Y\)</span> scalar and <span class="math inline">\(X\)</span> being a vector of length <span class="math inline">\(p\)</span>. For convenience, assume here that <span class="math inline">\(S\)</span> is scalar. As in <a href="#sec-corr"><span>Section&nbsp;8.5.1</span></a>, all variables are assumed centered, i.e.&nbsp;mean 0.</p>
 <p>Let’s review the material in <a href="Ch2a.html#sec-mvn"><span>Section&nbsp;4.2</span></a>: Say we have <span class="math inline">\(W\)</span> with a multivariate normal distribution, and wish to predict one of its components, <span class="math inline">\(Y\)</span>, from a vector <span class="math inline">\(X\)</span> consisting of one or more of the other components, or linear combinations of them. Then</p>
 <ul>
-<li><p>the distribution of <span class="math inline">\(Y|X\)</span> is univeriate normal</p></li>
+<li><p>the distribution of <span class="math inline">\(Y|X\)</span> is univariate normal</p></li>
 <li><p>E(Y|X=t) is a linear function of <span class="math inline">\(t\)</span></p></li>
 <li><p>Var(Y|X=t) is independent of <span class="math inline">\(t\)</span></p></li>
 </ul>
-<p>Let’s add:</p>
+<p>And most importantly:</p>
 <ul>
 <li>though having 0 correlation does not in general imply independence, it does so in the multivariate normal case</li>
 </ul>
@@ -731,7 +732,7 @@ U = X - S \gamma
 <li><p><span class="math inline">\(X - E(X|S)\)</span> (original vector minus the projection) is orthogonal to <span class="math inline">\(S\)</span>.</p></li>
 <li><p>That is,</p>
 <p><span class="math display">\[
-0 = &lt;S,X - E(X|S)&gt; = E[S (X - E(X|S))] = E(SU)
+0 = &lt;S,X - E(X|S)&gt; = E[S (X - E(X|S))] = E(SU) = Cov(S,U)
 \]</span></p></li>
 <li><p>Thus <span class="math inline">\(S\)</span> and <span class="math inline">\(U\)</span> are uncorrelated.</p></li>
 <li><p>Due to the BA, that means <span class="math inline">\(S\)</span> and <span class="math inline">\(U\)</span> are independent.</p></li>
@@ -741,9 +742,10 @@ U = X - S \gamma
 <p>Goal achieved.</p>
 </section>
 </section>
-<section id="your-turn" class="level2" data-number="8.13">
-<h2 data-number="8.13" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">8.13</span> Your Turn</h2>
-<p>❄️ <strong>Your Turn:</strong> Consider the space <span class="math inline">\(\cal RV(\Omega)\)</span>. In order for the claimed inner product to be valid, we must have that if <span class="math inline">\(&lt;X,X&gt; = 0\)</span>, then <span class="math inline">\(X\)</span> must be the 0 vector. Prove this. Make use of the facts that <span class="math inline">\(Var(X) = E(X^2) - [E(X)]^2\)</span> and <span class="math inline">\(Var(X) \geq 0\)</span> with equality only of <span class="math inline">\(X = c\)</span> for some constant <span class="math inline">\(c\)</span>.</p>
+<section id="your-turn" class="level2" data-number="8.14">
+<h2 data-number="8.14" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">8.14</span> Your Turn</h2>
+<p>❄️ <strong>Your Turn:</strong> Show that for any random variable <span class="math inline">\(Q\)</span> of finite variance, the minimum value of <span class="math inline">\(E[(Q-d)^2]\)</span> over all constants <span class="math inline">\(d\)</span> is attained by taking <span class="math inline">\(d\)</span> to be the mean of <span class="math inline">\(Q\)</span>, i.e.&nbsp;<span class="math inline">\(d = E(Q)\)</span>.</p>
+<p>❄️ <strong>Your Turn:</strong> Consider the space <span class="math inline">\(\cal RV(\Omega)\)</span>. In order for the claimed inner product to be valid, we must have that if <span class="math inline">\(&lt;X,X&gt; = 0\)</span>, then <span class="math inline">\(X\)</span> must be the 0 vector. Prove this.</p>
 <p>❄️ <strong>Your Turn:</strong> Derive the Cauchy-Schwarz Inequality, using the following algebraic outline:</p>
 <ul>
 <li><p>The inequality</p>
@@ -767,7 +769,7 @@ u = a_1 v_1 + ... + a_k v_k +v
 &lt;v,v_i&gt; = 0 \textrm{ for all i}
 \]</span></p>
 <p>❄️ <strong>Your Turn:</strong> Say in <span class="math inline">\(C(0,1)\)</span> we want to approximate functions by polynomials. Specifically, for any <span class="math inline">\(f\)</span> in <span class="math inline">\(C(0,1)\)</span>, we want to find the closest polynomial of degree <span class="math inline">\(m\)</span>. Write functions to do this, with the following call forms:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gsc01</span>(m)  <span class="co"># performs Gram-Schmidt and returns the result</span></span>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gsc01</span>(f,m)  <span class="co"># performs Gram-Schmidt and returns the result</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bestpoly</span>(f,gsout)  <span class="co"># approx. f by output from gsc01</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Hint: Since the vectors here are functions, you’ll need a data structure capable of storing functions. An R <strong>list</strong> will work well here.</p>
 <p>❄️ <strong>Your Turn:</strong> Show that the hat matrix is symmetric.</p>
@@ -782,11 +784,11 @@ u = a_1 v_1 + ... + a_k v_k +v
 <li><p>Collect terms to yield the Triangle Inequality.</p></li>
 </ul>
 <p>❄️ <strong>Your Turn:</strong> Consider the space <span class="math inline">\(C(0,1)\)</span>. For function <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> of your own choosing, verify that the Cauchy-Schwarz and Triangle Inequalities hold in that case.</p>
+<p>❄️ <strong>Your Turn:</strong> Say we roll a die once, producing <span class="math inline">\(X\)</span> dots. If <span class="math inline">\(X = 6\)</span>, we get a bonus roll, yielding <span class="math inline">\(B\)</span> additional dots; otherwise, <span class="math inline">\(B = 0\)</span>. Let <span class="math inline">\(Y = X+B\)</span>.</p>
 <p>❄️ <strong>Your Turn:</strong> In the die rolling example, verify that</p>
 <p><span class="math display">\[
 E[E(Y|B)] = E(Y)
 \]</span></p>
-<p>❄️ <strong>Your Turn:</strong> Say we roll a die once, producing <span class="math inline">\(X\)</span> dots. If <span class="math inline">\(X = 6\)</span>, we get a bonus roll, yielding <span class="math inline">\(B\)</span> additional dots; otherwise, <span class="math inline">\(B = 0\)</span>. Let <span class="math inline">\(Y = X+B\)</span>…</p>
 <p>❄️ <strong>Your Turn:</strong> Say we roll a die once, producing <span class="math inline">\(X\)</span> dots. If <span class="math inline">\(X = 6\)</span>, we get a bonus roll, yielding <span class="math inline">\(B\)</span> additional dots; otherwise, <span class="math inline">\(B = 0\)</span>. Let <span class="math inline">\(Y = X+B\)</span>. Verify that <span class="math inline">\(X\)</span> and <span class="math inline">\(B\)</span> satisfy the Cauchy-Schwarz and Triangle Inequalities, and also find <span class="math inline">\(\rho(X,B)\)</span>.</p>
 <p>❄️ <strong>Your Turn:</strong> Show that any set of orthogonal vectors is linearly independent.</p>
 <p>❄️ <strong>Your Turn:</strong> Prove <a href="#eq-pythag">Equation&nbsp;<span>8.1</span></a> by expanding the inner product and simplifying algebraically.</p>
@@ -797,7 +799,7 @@ E[E(Y|B)] = E(Y)
 Var(Y) = E[Var(Y|X)] + Var[E(Y|X)],
 \]</span></p>
 <p>first algebraically using <a href="#eq-iterexpect">Equation&nbsp;<span>8.5</span></a> and the relation <span class="math inline">\(Var(R) = E(R^2) - (E(R))^2\)</span>, and then using the Pythagorean Theorem for a much quicker proof. As before, assume <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are centered.</p>
-<p>❄️ <strong>your turn:</strong> show that <a href="#eq-hii">Equation&nbsp;<span>8.2</span></a> holds.</p>
+<p>❄️ <strong>Your turn:</strong> show that <a href="#eq-hii">Equation&nbsp;<span>8.2</span></a> holds.</p>
 <p>❄️ <strong>Your Turn:</strong> Say <span class="math inline">\(\cal V\)</span> is <span class="math inline">\(R^n\)</span>. Form the matrix <span class="math inline">\(A\)</span> whose columns are the <span class="math inline">\(u_i\)</span>, and let <span class="math inline">\(P = AA'\)</span>. Show that</p>
 <p><span class="math display">\[
 Px = &lt;x,u_1&gt; u_1+...+&lt;x,u_k&gt; u_k
@@ -806,7 +808,7 @@ Px = &lt;x,u_1&gt; u_1+...+&lt;x,u_k&gt; u_k
 <p>❄️ <strong>Your Turn:</strong> Consider the quadratic form <span class="math inline">\(x'Px\)</span>. Show that if <span class="math inline">\(P\)</span> is a projection matrix, the form equals <span class="math inline">\(||Px||^2\)</span>.</p>
 <p>❄️ <strong>Your Turn:</strong> Let <span class="math inline">\(A\)</span> be an <span class="math inline">\(m \textrm{ x } n\)</span> matrix. Consider the possible inner product on <span class="math inline">\(\cal{R}^n\)</span> defined by <span class="math inline">\(&lt;x,y&gt; = x'A'A y\)</span>. State a condition on <span class="math inline">\(A\)</span> that is necessary and sufficient for the claimed inner product to be value, and prove this.</p>
 <p>❄️ <strong>Your Turn:</strong> Show that the hat matrix is symmetric.</p>
-<p>❄️ <strong>Your Turn:</strong> Show that for any vector <span class="math inline">\(w\)</span> and symmetric matrix <span class="math inline">\(M\)</span>, the <em>quadratic form</em> <span class="math inline">\(w'Mw \geq 0\)</span>.</p>
+<p>❄️ <strong>Your Turn:</strong> Show that for any vector <span class="math inline">\(w\)</span> and symmetric matrix <span class="math inline">\(M\)</span>, the quadratic form <span class="math inline">\(w'Mw \geq 0\)</span>.</p>
 
 
 </section>
