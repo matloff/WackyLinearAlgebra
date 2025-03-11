@@ -182,11 +182,17 @@ Let $u$ and $v$ be such eigenvectors, corresponding to
 eigenvalues $\mu$ and $\nu$.
 
 $$
-\mu' M \nu = (\mu' M \nu)' = \nu' M' \mu = \nu' M \mu
+u' M u = (u' M u)' = u' M' u = u' M u
 $$
 
-(in that first equality, we used the fact that the transpose of a number
-is that number). Substitute for $M\nu$ and $M\mu$, then subtract.
+$$
+u'v = (u'v)' = [u'(\frac{-1}{\nu} M v)]' = \frac{-1}{\nu}v'M'u =
+\frac{-1}{\nu}v'Mu =
+\frac{\mu}{\nu}v'u 
+$$
+
+We see that $u'v$, a number, is equal to $\mu/\nu$ times itself, and
+since that fraction is not equal to 1 by assumption, $u'v$ must be 0
 
 $\square$
 

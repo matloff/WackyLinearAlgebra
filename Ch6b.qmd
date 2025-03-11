@@ -53,28 +53,8 @@ $$
 0 = 2 Cov(X) v + 2 \omega v 
 $${#eq-2ndeig}
 
-So $v$ is another eigenvector of $Cov(X)$
-
-
-$$
-0 = 2 u'Cov(X) v + 2 \omega u'v + \eta u'u
-$${#eq-ucovv}
-
-But from @eq-aha, we have 
-
-$$
-u'Cov(X) = u' Cov(X)' = 
-$$
-
-so that
-
-$$
-u'Cov(X) v = -\gamma u
-$$
-
-in @eq-ucovv. Moreover, $u'v = 0$ there as well, so that we have $\eta =
-0$, which reduces @eq-ucovv to a statement that $v$ too must be an
-eigenvector of $Cov(X)$.
+So $v$ is another eigenvector of $Cov(X)$. If $\omega \neq \gamma$
+(which we will not prove here), then $u'v = 0$ comes from @thm-eigortho.
 
 ## Properties
 
