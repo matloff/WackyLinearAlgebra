@@ -95,41 +95,33 @@ $$
 2 Cov(X) u + 2 \gamma u
 $$
 
-and
-
-$$
-0 = u'u - 1
-$$
-
 In other words,
 
 $$
 Cov(X) ~ u = -\gamma u
 $${#eq-aha}
 
-A matrix times a vector equals a constant times that same vector.  We
-say that $-\gamma$ is an *eigenvalue* of the matrix $Cov(X)$, and that
-$u$ is a corresponding *eigenvector*.  Seems innocuous, but it opens a
-huge new world! We will return to the notion of principal components in
-the next chapter, after laying the groundwork in the current chapter.
+We see a situation in which a matrix ($Cov(X)$) times a vector ($u$)
+equals a constant ($-\gamma$) times that same vector.  We say that
+$-\gamma$ is an *eigenvalue* of the matrix $Cov(X)$, and that $u$ is a
+corresponding *eigenvector*.  Seems innocuous, but it opens a huge new
+world! We will return to the notion of principal components in the next
+chapter, after laying the groundwork in the current chapter.
 
 ## Definition
 
 The concept itself is simple:
 
-<blockquote>
 
-Consider an $m \textrm{ x } m$ matrix $M$. If there is a nonzero vector
-$x$ and a number $\lambda$ such that
-
-$$
-Mx = \lambda x
-$${#eq-simpledef}
-
-we say that $\lambda$ is an *eigenvalue* of $M$, with *eigenvector*
-$x$.
-  
-</blockquote>
+> Consider an $m \textrm{ x } m$ matrix $M$. If there is a nonzero vector
+> $x$ and a number $\lambda$ such that
+> 
+> $$
+> Mx = \lambda x
+> $${#eq-simpledef}
+> 
+> we say that $\lambda$ is an *eigenvalue* of $M$, with *eigenvector*
+> $x$.
 
 ## A First Look
 
@@ -165,21 +157,28 @@ Here are a few properties to start with:
 Many matrices in data science are symmetric, such as covariance matrices
 and $A'A$ in @eq-linregformula. 
 
-### Eigenvalues are real
-
 Some eigenvalues may be complex numbers, i.e. of the form $a+bi$, but it
 can be shown that if $M$ is symmetric, its eigenvalues are guaranteed to
 be real. This is good news for data science, as many matrices in that
 field are symmetric, such covariance matrices.
 
-### Eigenvectors are orthogonal{#sec-eigortho}
+::: {#thm-eigreal}
 
-<blockquote>
+Eigenvalues of a symmetric matrix are real, not complex numbers, i.e. not of
+the form $a+bi$.
+
+:::
+
+::: {#thm-eigortho}
 
 Eigenvectors corresponding to distinct eigenvalues of a symmetric matrix
-$M$ are othogonal.
+$M$ are orthogonal.
 
-*Proof:* Let $u$ and $v$ be such eigenvectors, corresponding to
+:::
+
+::: {.proof}
+
+Let $u$ and $v$ be such eigenvectors, corresponding to
 eigenvalues $\mu$ and $\nu$.
 
 $$
@@ -189,9 +188,9 @@ $$
 (in that first equality, we used the fact that the transpose of a number
 is that number). Substitute for $M\nu$ and $M\mu$, then subtract.
 
-</blockquote>
+$\square$
 
-### Symmetric matrices are diagonalizable{#sec-diagonalizable}
+::: 
 
 A square matrix $R$ is said to be *diagonalizable* if there exists an
 invertible matrix $P$ such that $P^{-1}RP$ is equal to some diagonal

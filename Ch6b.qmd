@@ -19,16 +19,17 @@ is the focus of the current chapter.
 
 ::: 
 
-So we found in the last chapter that finding principal components
-entails finding eigenvectors and eigenvalues, at least for the first
-component. It turns out that this is true for the second, third and all
-the components. In other words, principal component analysis (PCA) is
+So in the last chapter we had a very brief introduction to Principal
+Components Analysis (PCA), and that finding the first component entails
+finding an eigenvector and eigenvalue.  It turns out that this is true
+for the second, third and all the components. In other words, PCA is
 basically an eigenvectors and eigenvalues application.
 
 ### The second, third etc. PCs
 
-There are as many principal components as there are columns in columns
-in $X$. So, how are the second, third and so on defined and computed?
+Say we have a dataset $X$ in matrix form.  There are as many principal
+components as there are columns in $X$. So, how are the second, third
+and so on components defined and computed?
 
 The key issue is that we want our PCs to be orthogonal, because as we
 have seen orthogonal random vectors are statistically uncorrelated, and
@@ -40,43 +41,35 @@ So with $u$ and $v$ denoting the first and second PCs, we want $v$
 to maximize
 
 $$
-v'Cov(X)v + \gamma (v'v - 1)
+v'Cov(X)v + \omega (v'v - 1) 
 $$
 
-subject to 
+We also need $u'v = 0$, but we do not need to add a Lagrangian term 
+for this, as you will see.
+
+Setting the derivative with respect to $v$ to 0, we have
 
 $$
-u'v = 0
-$$
-
-For the latter condition, let's add another Lagrange multiplier term:
-
-$$
-v'Cov(X)v + \omega (v'v - 1) + \eta u'v
-$$
-
-Setting derivatives (with respect to $v$) to 0, we have
-
-$$
-0 = 2 Cov(X) v + 2 \omega v + \eta u
+0 = 2 Cov(X) v + 2 \omega v 
 $${#eq-2ndeig}
 
-Multiplying on the left by $u'$, we have
+So $v$ is another eigenvector of $Cov(X)$
+
 
 $$
 0 = 2 u'Cov(X) v + 2 \omega u'v + \eta u'u
 $${#eq-ucovv}
 
-But from before we have 
+But from @eq-aha, we have 
 
 $$
-u'Cov(X) = -\gamma u
+u'Cov(X) = u' Cov(X)' = 
 $$
 
 so that
 
 $$
-u'Cov(X) v = 0
+u'Cov(X) v = -\gamma u
 $$
 
 in @eq-ucovv. Moreover, $u'v = 0$ there as well, so that we have $\eta =
