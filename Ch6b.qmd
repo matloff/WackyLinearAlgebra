@@ -38,23 +38,32 @@ with say, the first few PCs, the fact that they are (at least loosely
 speaking) uncorrelated makes for a neater summary.
 
 So with $u$ and $v$ denoting the first and second PCs, we want $v$ 
-to maximize
+to maximize $v'Cov(X)v$ so we set the derivative of
 
 $$
-v'Cov(X)v + \omega (v'v - 1) 
+v'Cov(X)v + \omega (v'v - 1) + \tau (u'v - 0)
 $$
 
-We also need $u'v = 0$, but we do not need to add a Lagrangian term 
-for this, as you will see.
-
-Setting the derivative with respect to $v$ to 0, we have
+with respect to $v$ to 0. 
 
 $$
-0 = 2 Cov(X) v + 2 \omega v 
-$${#eq-2ndeig}
+0 = 2 Cov(X) v + 2 \omega v + \tau u 
+$${#eq-eig2a}
 
-So $v$ is another eigenvector of $Cov(X)$. If $\omega \neq \gamma$
-(which we will not prove here), then $u'v = 0$ comes from @thm-eigortho.
+Pre-multiply by $u'$:
+
+$$
+0 = 2 u' Cov(X) v + 2 \omega u'v + \tau u'u = 2 u' Cov(X) v + \tau 1
+$${#eq-eig2b}
+
+Also, since $Cov(X)$ is symmetric,
+
+$$
+u' Cov(X) v = [Cov(X) u]' v = \gamma u' v = 0
+$$
+
+So @eq-eig2b now tells us that $\tau = 0$, so that @eq-eig2a shows that
+the second PC is again an eigenvector of $Cov(X)$.
 
 ## Properties
 
