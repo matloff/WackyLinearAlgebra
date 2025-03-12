@@ -62,50 +62,50 @@ $$
 u' Cov(X) v = [Cov(X) u]' v = \gamma u' v = 0
 $$
 
-So @eq-eig2b now tells us that $\tau = 0$, so that @eq-eig2a shows that
-the second PC is again an eigenvector of $Cov(X)$.
+So @eq-eig2b now tells us that $\tau = 0$, and thus @eq-eig2a 
+reduces to
+
+$$
+Cov(X) v = -\omega v 
+$${#eq-eig2c}
+
+showing that the second PC is again an eigenvector of $Cov(X)$.
 
 ## Properties
 
 The full set of eigenvectors is then known as the *principal
 components* (PCs). They have some further important properties:
 
-<blockquote>
+> * The PCs are orthogonal to each other. This follows from our earlier
+>   finding that eigenvectors of a symmetric matrix, in this case
+>   $Cov(X)$, are orthogonal. We say that a symmetric is *orthogonal*
+>   if its columns are orthogonal as vectors.
+> 
+> * This in turn implies that the PCs are uncorrelated, and in the
+>   multivariate normal case, statistically independent.  
+> 
+> * The eigenvalues are the variances of the PCs. The PCs are in order of
+>   decreasing (or at least nonincreasing) variance. 
+> 
+>   This first statement follows from pre-mutiplying @eq-aha by $u'$,
+>   giving us $Var(u)$ on the left and $-\lambda u'u = -\lambda$ on the
+>   right. The second statement follows from the fact that as we go from
+>   the first PC to the second, third and so on, we are maximizing under
+>   more and more constraints, hence smaller maxima.
 
-* The PCs are orthogonal to each other. This follows from our earlier
-  finding that eigenvectors of a symmetric matrix, in this case
-  $Cov(X)$, are orthogonal. We say that a symmetric is *orthogonal*
-  if its columns are orthogonal as vectors.
-
-* This in turn implies that the PCs are uncorrelated, and in the
-  multivariate normal case, statistically independent.  
-
-* The eigenvalues are the variances of the PCs. The PCs are in order of
-  decreasing (or at least nonincreasing) variance. 
-
-  This first statement follows from pre-mutiplying @eq-aha by $u'$,
-  giving us $Var(u)$ on the left and $-\lambda u'u = -\lambda$ on the
-  right. The second statement follows from the fact that as we go from
-  the first PC to the second, third and so on, we are maximizing under
-  more and more constraints, hence smaller maxima.
-
-</blockquote>
-
-By the way, though we used the covariance matrix here, it is also common
-to simply do eigenanalysis on the original data matrix.
-
-## Eigenanalysis Relation between $A$ and $Cov(X)$ in Linear Regression
+## Eigenanalysis Relation between $A$ and $Cov(X)$ in Linear Regression{#sec-eiglm}
 
 Consider our usual linear regression setting, in which the matrix $A$
-contains our data for our predictor variables $X$.  If we center and
-scale our data, then '
+contains the data for our predictor variables $X$.  If we center and
+scale our data, then 
 
 $$
 Cov(X) = A'A 
 $$
 
-Now say the PCA of X has a 0 eigenvalue. That implies that some linear
-combination $u'X$ has 0 variance. Then
+To see an example of the implications of this, say the PCA of X has a 0
+eigenvalue. That implies that some linear combination $u'X$ has 0
+variance. Then
 
 $$
 0 = Var(u'X) = u' Cov(X) u = u' A'A u = (Au)'Au
@@ -124,9 +124,9 @@ The same argument works in reverse. If $Au = 0$, we fine that $Var(u'X)
 = 0$, and since the eigenvalues of $Cov(X)$ are variances of linear
 combinations of $X$, we see that one of those variances is 0.
 
-## Back to the Example
+## Back to the African Soils Example
 
-So, we remove the ``Y'' variable, $pH$, number 3598 as seen above, as
+So, we remove the ``Y'' variable, **pH**, number 3598 as seen above, and
 proceed. We will also remove the nonnumeric columns,
 **PIDN** and **Depth**. We could use R's **prcomp** function here, but
 to better illustrate the concepts, we do things from scratch.
@@ -150,19 +150,19 @@ dim(eigvecs)
 ```
 
 So, recalling the sequence of equations leading to @eq-aha, we are ready
-to replace our old variables by the new:
+to replace our old variables by the new ones, which are linear
+combinations of the old ones.
 
 ```{r} 
 x <- as.matrix(x)
 dim(x)
 xnew <- x %*% eigvecs
 dim(xnew)  
-ph <- AfricanSoil[,3595]
 lmout <- lm(AfricanSoil$pH ~ xnew)
 # and so on
 ```
 
-## PCA in Detection of Multicollinearity
+## PCA in Detection of Multicollinearity{#sec-detect}
 
 Recall the itemized list in @sec-nearly of various conditions 
 under which we have multicollinearity. We can add the following item to
@@ -170,11 +170,10 @@ that list:
 
 * $A$ has an eigenvalue that is nearly 0.
 
-The reasons are straightforward. If $Ax = 0$ for some nonzero $x, then
-the material in @sec-partitioned on partitioning says that the
-coefficients in $x$ form a linear combination of the columns of $A$ that
-results in the 0 vector, i.e. $A$ is not of full rank.
-
+This follows from what we found about 0 eigenvalues in @sec-eiglm.     
+If an eigenvalue is 0, the rank is exactly less than full. If it is
+approximately 0, the rank is technically full, but there is a linear
+combination of the variables that is approximately 0.
 
 In fact, PCA can warn us of specific linear combinations of $Cov(A'A)$
 that are nearly 0, as follows.
@@ -186,7 +185,8 @@ that are nearly 0, as follows.
 * Random variables with small variance are nearly constant.
 
 * Thus with high probability, the linear combination is near to $c$
-for some number $c$.
+for some number $c$. If we are working with numerical data, that number
+$c$ is nonzero with high probability.
 
 * If our design matrix $A$ includes a 1s column, then the above linear
   combination, together with this 1s column, gives us a linear
@@ -202,11 +202,11 @@ suggest which ones to remove.
 ## How Many Principal Components Should We Use?
 
 We chose to use the first 9 principal components in our example here,
-but just for illustration purposes.  There are no formal rules for how
-many to use.  Many "rules of thumb" exist. 
+but that was just for illustration purposes.  There are no formal rules
+for how many to use. Various "rules of thumb" exist. 
 
 If we are doing prediction, there is a very natural way to choose our
-number of PCs--do cross-validation (@sec-lassoxval), and use whichever
+number of PCs -- do cross-validation (@sec-xval), and use whichever 
 number gives the most accurate prediction.
 
 ### Example: New York City taxi trips{#sec-nyc}
@@ -219,7 +219,7 @@ In the raw form of the data, there are just 5 columns, thus 4
 predictors.  But the pickup and dropoff locations are R factors, coding
 numerous locations. These must be decoded to dummy variables (values 1
 or 0, coding whether or not, say, a given trip began at pickup location
-121. If for instance one calls the R linear regression function **lm**,
+121). If for instance one calls the R linear regression function **lm**,
 that function will do the conversion internally, but in our case we will
 perform the conversion ourselves, using **regtools::factorsToDummies**.
 (The **regtools** package is included by **qeML**.)
@@ -263,13 +263,13 @@ give that a try:
 qePCA(nyc,'tripTime','qeLin',pcaProp=0.25)$testAcc
 [1] 311.9159
 ```
+
 We asked to predict the column 'tripTime' in the dataset **nyc** using
 the **qeLin** function, based on as many of the PCs that will give us
-25% of the total variance.  As seen above, most of the **qeML**
-prediction functions split the data into a training set and a holdout
-set.  The model is fit to the training set, and then applied to
-prediction of the holdout set. The output value is the mean absolute
-prediction error (MAPE).
+25% of the total variance.  Most **qeML** prediction functions split the
+data into a training set and a holdout set.  The model is fit to the
+training set, and then applied to prediction of the holdout set. The
+output value is the mean absolute prediction error (MAPE).
 
 However, since the holdout set is randomly generated, the MAPE value is
 random, so we should do multiple runs. Some experimentation showed that
@@ -301,7 +301,7 @@ use only the first 10 or 20% of the PCs.
 ## Your Turn
 
 ❄️  **Your Turn:** Modify the code for **qePCA** for the case of linear
-regression by addig a component **xCoeffs** to its return value. This
+regression by adding a component **xCoeffs** to its return value. This
 will give the regression coefficients in terms of the original X
 predictors.
 
@@ -324,8 +324,15 @@ where $A_i$ ($i=1,...,r)$
 
 * is of size $k_i \textrm{ x } k_i$
 
-* has eigenvalues $\gamma_{1},...,\gamma_{k}$
+* has eigenvalues $\gamma_{1},...,\gamma_{k_i}$
 
-* has eigenvectors $u{1,j},...,u{k,j}$, where $j=1,...,k_i$
+* has eigenvectors $u_{1,j},...,u_{k,j}$, where $j=1,...,k_i$
 
 State the form of the eigenvalues and eigenvectors of $A$.
+
+❄️  **Your Turn:** In @sec-detect,
+there was a statement "$c$ is nonzero with high probability." Why was
+that important?
+
+❄️  **Your Turn:** Use PCA to do dimension reduction on the **s50**
+dataset.
