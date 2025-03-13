@@ -419,7 +419,10 @@ R^k = (P^{-1}RP) ~ (P^{-1}RP) ~ ... ~ (P^{-1}RP) = P^{-1}D^kP
 <p><span class="theorem-title"><strong>Theorem 10.3 </strong></span>Any symmetric matrix <span class="math inline">\(M\)</span> has the following properties</p>
 <ul>
 <li><p><span class="math inline">\(M\)</span> is diagonalizable.</p></li>
-<li><p>In fact, the matrix <span class="math inline">\(P\)</span> is equal to the matrix whose columns are the eigenvectors of <span class="math inline">\(M\)</span>, chosen to have length 1.</p></li>
+<li><p>In fact, the matrix <span class="math inline">\(P\)</span> is equal to the matrix whose columns are the eigenvectors <span class="math inline">\(u_i\)</span> of <span class="math inline">\(M\)</span>, chosen to have norm 1. Thus the same holds for the rows of <span class="math inline">\(P'\)</span>, so that</p>
+<p><span id="eq-pcols"><span class="math display">\[
+P'u_i = \lambda_i u_i
+\tag{10.3}\]</span></span></p></li>
 <li><p>The associated diagonal matrix has as its diagonal elements the eigenvalues of <span class="math inline">\(M\)</span>.</p></li>
 <li><p>The matrix <span class="math inline">\(P\)</span> has the property that <span class="math inline">\(P^{-1} = P'\)</span>.</p></li>
 <li><p>Moreover, the rank of <span class="math inline">\(M\)</span> is equal to the number of nonzero eigenvalues of <span class="math inline">\(M\)</span>.</p></li>
@@ -439,7 +442,10 @@ P'P = I
 MP = M(P_1 | ... | P_m) = (MP_1 | ... | MP_n) =
 (d_1 P_1 | ... | (d_m P_m) = PD
 \]</span></p>
-<p>Multiply on the left by <span class="math inline">\(P'\)</span>, and we are done.</p>
+<p>Multiply on the left by <span class="math inline">\(P'\)</span>, and we are done:</p>
+<p><span class="math display">\[
+P'MP = P'P D = D
+\]</span></p>
 <p>Regarding rank, <a href="Ch4.html#thm-ranknotchange">Theorem&nbsp;<span>6.1</span></a> tells us that pre- or postmultiplying by an invertible matrix does not change rank, and clearly the rank of a diagonal matrix is the number of nonzero elements.</p>
 <p><span class="math inline">\(\square\)</span></p>
 </div>
@@ -593,6 +599,14 @@ x_i \leftarrow \frac{x_i}{||x_i||}
 <p>❄️ <strong>Your Turn:</strong> Consider a projection matrix <span class="math inline">\(P_W\)</span>. Show that the only possible eigenvalues are 0 and 1. Hint: Recall that projection matrices are idempotent.</p>
 <p>❄️ <strong>Your Turn:</strong> Say <span class="math inline">\(A\)</span> is an invertible matrix with eigenvalue <span class="math inline">\(\lambda\)</span> and eigenvector <span class="math inline">\(v\)</span>. Show that <span class="math inline">\(v\)</span> is also an eigenvector of <span class="math inline">\(A^{-1}\)</span>, with eigenvalue <span class="math inline">\(1/\lambda\)</span>.</p>
 <p>❄️ <strong>Your Turn:</strong> Show that if <span class="math inline">\(A\)</span> is nonnegative-definite, its eigenvalues must be nonnegative.</p>
+<p>❄️ <strong>Your Turn:</strong> <a href="#thm-symmeig">Theorem&nbsp;<span>10.3</span></a> says that for any symmetric matrix <span class="math inline">\(M\)</span> is diagonalizable: There is an orthogonal matrix <span class="math inline">\(P\)</span> such that <span class="math inline">\(P' M P\)</span> is equal to a diagonal matrix <span class="math inline">\(D\)</span>, the latter consisting of the eigenvalues of <span class="math inline">\(M\)</span>. Use this to show that</p>
+<p><span class="math display">\[
+x' M x \leq \lambda_{max} ||x||^{2}
+\]</span></p>
+<p>where <span class="math inline">\(\lambda_{max}\)</span> is the largest eigenvalue. Hint: First show that</p>
+<p><span class="math display">\[
+x'Mx = (Px)' D (Px)
+\]</span></p>
 
 
 </section>
