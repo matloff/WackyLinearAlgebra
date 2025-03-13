@@ -219,7 +219,12 @@ Any symmetric matrix $M$ has the following properties
 * $M$ is diagonalizable. 
 
 * In fact, the matrix $P$ is equal to the matrix whose columns are the
-  eigenvectors of $M$, chosen to have length 1. 
+  eigenvectors $u_i$ of $M$, chosen to have norm 1. Thus the same holds for
+  the rows of $P'$, so that 
+
+  $$
+  P'u_i = \lambda_i u_i
+  $${#eq-pcols}
 
 * The associated diagonal matrix has as its diagonal elements the
   eigenvalues of $M$. 
@@ -258,7 +263,11 @@ MP = M(P_1 | ... | P_m) = (MP_1 | ... | MP_n) =
 (d_1 P_1 | ... | (d_m P_m) = PD
 $$
 
-Multiply on the left by $P'$, and we are done.
+Multiply on the left by $P'$, and we are done:
+
+$$
+P'MP = P'P D = D
+$$
 
 Regarding rank, @thm-ranknotchange tells us that pre- or postmultiplying
 by an invertible matrix does not change rank, and clearly the rank of a
@@ -396,4 +405,20 @@ $A^{-1}$, with eigenvalue $1/\lambda$.
 
 ❄️  **Your Turn:** Show that if $A$ is nonnegative-definite, its
 eigenvalues must be nonnegative.
+
+❄️  **Your Turn:** @thm-symmeig says that for any symmetric matrix $M$
+is diagonalizable: There is an orthogonal matrix $P$ such that
+$P' M P$ is equal to a diagonal matrix $D$, the latter consisting of the
+eigenvalues of $M$. Use this to show that 
+
+$$
+x' M x \leq \lambda_{max} ||x||^{2}
+$$
+
+where $\lambda_{max}$ is the largest eigenvalue. Hint: First show that
+
+$$
+x'Mx = (Px)' D (Px)
+$$
+
 
