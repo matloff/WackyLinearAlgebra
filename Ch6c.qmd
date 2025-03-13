@@ -74,11 +74,11 @@ maximizes the quantity $U A V'$), but let's go quickly to the answer:
 and eigenvectors $q_1,...,q_n$ of $A'A$. 
 
 2. Since $A'A$ is symmetric and positive-semidefinite, its eigenvalues 
-   will be nonnegative and its length-1 eigenvectors will be orthogonal. 
+   will be nonnegative and its eigenvectors will be orthogonal. 
 
 3. Set $\Sigma$ to $diag(\sqrt{\sigma_1},...,\sqrt{\sigma_n})$, the
    nonincreasing list of eigenvalues. Set the columns of $V$ to
-   the corresponding eigenvectors (recall @sec-diagonalizable). 
+   the corresponding eigenvectors.
 
 4. Set 
 
