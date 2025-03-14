@@ -15,7 +15,8 @@ library(qeML)
 
 We've seen the notion of eigenanalysis for square matrices. Well, it
 turns out this can be extended usefully for nonsquare matrices, via
-*Singular Value Decomposition* (SVD), the topic of this chapter.
+*Singular Value Decomposition* (SVD), the topic of this chapter,
+with important applications.
 
 ::: 
 
@@ -81,18 +82,20 @@ One can define four fundamental subspaces for any matrix $A$:
 
 * $\textrm{left null space}(A) = \mathcal{N}(A')$: $\{x: x'A = 0\}$ 
 
+These will play a prominent role in this chapter.
+
 ## Solution to Our SVD Goal
 
 There are various derivations, e.g. along the lines of @sec-firstPC (one
 maximizes the quantity $U A V'$), but let's go quickly to the answer:  
 
-1  Say $A$ is $p \textrm{ x } n$, so that $A'A$ will be of size $n
+1. Say $A$ is $p \textrm{ x } n$, so that $A'A$ will be of size $n
    \textrm{ x } n$. Let $r$ denote the rank of $A$, which will be the same
-   as the rank of $A'A$.
+   as the rank of $A'A$ (from @thm-rankapa).
 
-2.  Compute the eigenvalues $\sigma_1,...,\sigma_n$
+2. Compute the eigenvalues $\sigma_1,...,\sigma_n$
    and eigenvectors $q_1,...,q_n$ of $A'A$. Normalize the $q_i$ by
-   dividing by their lengths. (The eigenvalues will still hold.)
+   dividing by their lengths. (The same eigenvalues will still hold.)
    Order the $\sigma_i$ from largest to smallest, and use the same
    ordering for the $q_i$.
 
