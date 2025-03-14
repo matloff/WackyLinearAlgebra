@@ -70,7 +70,8 @@ turn out that $\sigma_i = 0$ for $i=r+1,...,n$.
 
 ## The Four Fundamental Subspaces of a Matrix
 
-One can define four fundamental subspaces for any matrix $A$: 
+Before going to SVD, let us first define four fundamental subspaces for
+any matrix $A$: 
 
 * $\textrm{row space}(A), \mathcal{R}(A)$: $\{x'A\}~~$ (all linear
   combinations of rows of $A$)
@@ -82,7 +83,33 @@ One can define four fundamental subspaces for any matrix $A$:
 
 * $\textrm{left null space}(A) = \mathcal{N}(A')$: $\{x: x'A = 0\}$ 
 
-These will play a prominent role in this chapter.
+These will play a prominent role in this chapter. Say $A$ is of size $m
+\textrm{ x } n$.  Here is our first of several characterizations of
+these subspaces:
+
+::: {#thm-colnullspaces}
+
+$$
+dim(\mathcal{R}(A)) + dim(\mathcal{N}(A)) = m
+$$
+
+:::
+
+::: {.proof}
+
+Let $w_1,...,w_q$ be an orthonormal basis for $\mathcal{R}(A)$, where $q
+= dim(\mathcal{R}(A))$. By Gram-Schmidt (@sec-gramschmidt), we can
+extend that to an orthonormal basis $w_1,...,w_q,w_{q+1},...,w_m$ for
+all of $\mathcal{R}^{m}$. The Projection Theorem (@thm-projection) tells
+us that any vector in $\mathcal{R}^{m}$ can be written uniquely as a sum
+of its projection on to dim(\mathcal{R}(A)) and the subspace spanned by
+$w_{q+1},...,w_m$
+
+$\square$
+:::
+
+
+
 
 ## Solution to Our SVD Goal
 
