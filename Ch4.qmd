@@ -147,11 +147,11 @@ an elementary matrix.
 
 * Thus 
 
-$$
-B_{rref} = E_k ... E_2 E_1 B
-$$ {#eq-eeeb}
-
-for a sequence of  invertible elementary matrices.
+  $$
+  B_{rref} = E_k ... E_2 E_1 B
+  $$ {#eq-eeeb}
+  
+  for a sequence of  invertible elementary matrices.
 
 * And 
 
@@ -416,6 +416,23 @@ The matrix $A'A$ has the same rank as $A$.
 
 ::: {.proof}
 
+Using the column analog of @eq-eeeb, we can write 
+
+$$
+A_{cref} = AF
+$$
+
+where $F$ is an invertible product of matrices for elementary column
+operations. Then
+
+$$
+(A_{rref})' A_{rref}) = F'A'AF
+$$
+
+@thm-ranknotchange tells us that the rank of $F'A'A$ has the same rank
+as $A'A$, and $F'A'AF$ has the same rank as $F'A'A$, in turn the same
+rank as $A'A$. So we can concentrate on $(A_{rref})' A_{rref})$
+
 Using @eq-rref, we have
 
 $$
@@ -430,15 +447,44 @@ $$
 
 The presence of $I_s$ tells us there are at least $s$ linearly
 independent rows, thus rank at least $s$. So the rank of $A'A$ is at
-least that of $A$. On the other hand, apply our knowlege of
-partitioning:
+least that of $A$. 
 
-* Each row of $A'A$ is a linear combination of the rows of $A'$. 
+On the other hand, apply our knowlege of partitioning. 
 
-* So a linear combination of the rows of $A'A$ is a linear combination
-  of linear combinations of rows of $A$ -- still a linear combination of
-  the rows of $A$! At most $s$ members of that linear combination are
-  linearly independent.
+* Say $A$ is $m \textrm{ x } n$. Write
+
+  $$
+  A'A = 
+  \left (
+  \begin{array}{r}
+  c_1 \\
+  ... \\
+  c_n \\
+  \end{array}
+  \right )
+  A =
+  \left (
+  \begin{array}{r}
+  c_1 A \\
+  ... \\
+  c_n A \\
+  \end{array}
+  \right )
+  $$
+  
+  where the $c_i$ are the columns of $A$, thus the rows of $A'$.
+
+  Thus each row $c_i A$ of $A'A$ is a linear combination of the rows of $A$. 
+
+* Recall that the rank of $A'A$ is its maximal number of linearly
+  independent rows. We saw above that each row of $A'A$ is a linear
+  combination of the rows of $A$. Thus in turn, each linear combination 
+  of the rows of $A'A$ is a linear combination of linear combinations of 
+  rows of $A$ -- still a linear combination of the rows of $A$! 
+
+* At most $s$ members of that latter linear combination are
+  linearly independent. In other words, the rank of $A'A$ is 
+  at most $s$.
 
 * Thus the rank of $A'A$ is also $s$.
 
