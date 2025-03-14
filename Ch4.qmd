@@ -139,27 +139,6 @@ properties:
 The reader should verify that the matrix at the end of 
 @sec-censusrref has these properties. 
 
-It is much easier to gain insight from RREF by viewing it in
-partitioned-matrix form:
-
-> Partitioned-Matrix View
->
-> Say $A$ is of size $m \textrm{ x } n$. Then $A_{rref}$ has the form
-> 
-> $$
-> \left (
-> \begin{array}{rr}
-> I_{s} & U \\
-> 0 & 0  \\
-> \end{array}
-> \right )
-> $${#eq-rref}
-> where $I_s$ is an identity matrix of some size $s$
-> and $U$ has dimension $s \textrm{ x } (n-s)$.
-
-Clearly, the rank of $A_{rref}$ is $s$.  It will turn out the $s$ is the
-rank of $A$ as well.
-
 ### Recap of @sec-pencilpaper{#sec-review}
 
 * Each row operation can be performed via premultiplication by an
@@ -179,6 +158,42 @@ for a sequence of  invertible elementary matrices.
     $B = (E_1)^{-1} (E_2)^{-1} ... (E_k)^{-1} B_{rref}$,
 
     where each $(E_i)^{-1}$ is itself an elementary row operation.
+
+### Partitioned-matrix view of Reduced Echelon Forms
+
+It is much easier to gain insight from RREF by viewing it in
+partitioned-matrix form:
+
+> Say $A$ is of size $m \textrm{ x } n$. Then $A_{rref}$ has the form
+> 
+> $$
+> \left (
+> \begin{array}{rr}
+> I_{s} & U \\
+> 0 & 0  \\
+> \end{array}
+> \right )
+> $${#eq-rref}
+> where $I_s$ is an identity matrix of some size $s$
+> and $U$ has dimension $s \textrm{ x } (n-s)$.
+
+The Column-Reduced Echelon Form is similar:
+
+$$
+A_{cref} =
+\left (
+\begin{array}{rr}
+I_{t} & 0 \\
+V & 0  \\
+\end{array}
+\right )
+$${#eq-cref}
+
+where $I_t$ is an identity matrix of some size $t$
+and $V$ has dimension $(m-t) \textrm{ x } t$.
+
+Clearly, the row rank of $A_{rref}$ is $s$, and its column rank is $t$.
+We will prove shortly that the $s$ is the column rank of $A$ as well.
 
 ## Formal Definitions
 
@@ -287,7 +302,7 @@ Note that for a vector $x$, $Vx = 0$ if and only if $x = 0$. (Just
 multiply $Vx = 0$ on the left by $V^{-1}$.) So a linear combination
 $\lambda_1 c_1+...+\lambda_r c_r$ is 0 if and only if the corresponding
 linear combination $\lambda_1 Vc_1+...+\lambda_r Vc_r$ is 0. Thus 
-the vectors $Vc_i$ are linearly independent, $VA$ has column rank $r$.
+the vectors $Vc_i$ are linearly independent, and $VA$ has column rank $r$.
 
 The argument for the case of $AW$ is identical, this time involving rows
 of $A$.
@@ -331,8 +346,9 @@ $$
 a_1 r_1 + ... + a_m r_m \neq 0
 $$
 
-For any of the three elementary operations, a slightly modified linear
-combination works (i.e. will be nonzero) with the modified matrix:
+For any of the three elementary operations, a slightly modified set of
+the $a_i$ works (i.e. will be nonzero), using the modified elementary
+matrix:
 
 * Swap rows $i$ and $j$: Swap $a_i$ and $a_j$.
 
