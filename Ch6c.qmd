@@ -52,6 +52,8 @@ $$
 A = \sum_{i=1}^n \sigma_i u_i v_i'
 $${#eq-aissumuivi}
 
+where $u_i$ and $v_i$ are the $i^{th}$ rows of $U$ and $V$.
+
 :::
 
 Note the dimensions: 
@@ -65,22 +67,43 @@ Note the dimensions:
 Let $r$ denote the rank of $A$. Recall that $r \leq \min(m,n)$. It will
 turn out that $\sigma_i = 0$ for $i=r+1,...,n$.
 
-## Solution
+## The Four Fundamental Subspaces of a Matrix
+
+One can define four fundamental subspaces for any matrix $A$: 
+
+* $\textrm{row space}(A), \mathcal{R}(A)$: $\{x'A\}~~$ (all linear
+  combinations of rows of $A$)
+
+* $\textrm{column space}(A), \mathcal{C}(A)$: $\{Ax\}~~$ (all linear
+  combinations of columns of $A$)
+
+* $\textrm{null space}(A), \mathcal{N}(A)$: $\{x: Ax = 0\}$
+
+* $\textrm{left null space}(A) = \mathcal{N}(A')$: $\{x: x'A = 0\}$ 
+
+## Solution to Our SVD Goal
 
 There are various derivations, e.g. along the lines of @sec-firstPC (one
 maximizes the quantity $U A V'$), but let's go quickly to the answer:  
 
-1. Compute the eigenvalues $\sigma_1,...,\sigma_n$
-and eigenvectors $q_1,...,q_n$ of $A'A$. 
+1  Say $A$ is $p \textrm{ x } n$, so that $A'A$ will be of size $n
+   \textrm{ x } n$. Let $r$ denote the rank of $A$, which will be the same
+   as the rank of $A'A$.
 
-2. Since $A'A$ is symmetric and positive-semidefinite, its eigenvalues 
-   will be nonnegative and its eigenvectors will be orthogonal. 
+2.  Compute the eigenvalues $\sigma_1,...,\sigma_n$
+   and eigenvectors $q_1,...,q_n$ of $A'A$. Normalize the $q_i$ by
+   dividing by their lengths. (The eigenvalues will still hold.)
+   Order the $\sigma_i$ from largest to smallest, and use the same
+   ordering for the $q_i$.
 
-3. Set $\Sigma$ to $diag(\sqrt{\sigma_1},...,\sqrt{\sigma_n})$, the
+3. Since $A'A$ is symmetric and positive-semidefinite, its eigenvalues 
+   will be nonnegative and its eigenvectors will be orthogonal for 
+
+4. Set $\Sigma$ to $diag(\sqrt{\sigma_1},...,\sqrt{\sigma_n})$, the
    nonincreasing list of eigenvalues. Set the columns of $V$ to
    the corresponding eigenvectors.
 
-4. Set 
+5. Set 
 
 $$
 u_i = \frac{1}{\sigma_i} Av_i, ~ i=1,...,r
@@ -105,7 +128,7 @@ to be $A$?
   This follows immediately from the fact that the columns of $U$ are an
   orthonormal basis from $\mathcal{R}^m$.
 
-* $V$ is orthogonal, by @sec-eigortho.
+* $V$ is orthogonal, by @thm-eigortho.
 
 * The product evaluates to $A$, as claimed.
 
@@ -138,22 +161,6 @@ If the latter exist, one can permute the corresponding columns of $U$
 and $V$, but otherwise uniqueness holds.
 
 ## The Fundamental Theorem of Linear Algebra
-
-One can define four fundamental subspaces for any matrix $A$. We will
-need the following:
-
-* $\textrm{row space}(A), \mathcal{R}(A)$: $\{x'A\}~~$ (all linear
-  combinations of rows of $A$)
-
-* $\textrm{column space}(A), \mathcal{C}(A)$: $\{Ax\}~~$ (all linear
-  combinations of columns of $A$)
-
-* $\textrm{null space}(A), \mathcal{N}(A)$: $\{x: Ax = 0\}$
-
-* $\textrm{left null space}(A) = \mathcal{N}(A')$: $\{x: x'A = 0\}$ 
-
-These subspaces have various properties, which may be verified via
-SVD. @eq-aissumuivi will come in very handy. 
 
 Consider the column space first. From @eq-aissumuivi write
 
@@ -200,11 +207,7 @@ as desired, so @eq-colsubset is actually an equality.
 
 We have thus characterized one of the four fundamental subspaces:
 
-<blockquote>
-
-$\mathcal{C}(A)$ has dimension $r$, with basis $u_1,...,u_r$.
-
-</blockquote>
+> $\mathcal{C}(A)$ has dimension $r$, with basis $u_1,...,u_r$.
 
 Now look at the null space.  $Ax = 0$ means that 
 the vector $x$ is orthogonal to each row of $A$. Thus
@@ -222,15 +225,11 @@ with basis $v_1,...,v_r$. Applying $\perp$, and noting that
 orthogonality of $v_1,...,v_n$, we can now characterize a second, and
 even a third,  of the four subspaces:
 
-<blockquote>
-
-$\mathcal{N}(A)$ is of dimension $n-r$, with basis 
-$v_{r+1},...,v_n$.
-
-$\mathcal{R}(A)$ is of dimension $r$, with basis 
-$v_1,...,v_r$.
-
-</blockquote>
+> $\mathcal{N}(A)$ is of dimension $n-r$, with basis 
+> $v_{r+1},...,v_n$.
+> 
+> $\mathcal{R}(A)$ is of dimension $r$, with basis 
+> $v_1,...,v_r$.
 
 We leave the fourth subspace as a Your Turn problem.
 

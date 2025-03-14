@@ -142,7 +142,7 @@ The reader should verify that the matrix at the end of
 It is much easier to gain insight from RREF by viewing it in
 partitioned-matrix form:
 
-> Partioned-Matrix View
+> Partitioned-Matrix View
 >
 > Say $A$ is of size $m \textrm{ x } n$. Then $A_{rref}$ has the form
 > 
@@ -387,6 +387,44 @@ rows and columns of $B$ .
 
 The row rank of $b$ equals its column rank. The former is bounded above
 by $m$ while the latter's bound is $n$.
+
+$\square$
+
+:::
+
+::: {#thm-rankapa}
+
+The matrix $A'A$ has the same rank as $A$.
+
+:::
+
+::: {.proof}
+
+Using @eq-rref, we have
+
+$$
+(A_{rref})' A_{rref})  = 
+\left (
+\begin{array}{rr}
+I_s & U \\
+U' & U'U  \\
+\end{array}
+\right )
+$$
+
+The presence of $I_s$ tells us there are at least $s$ linearly
+independent rows, thus rank at least $s$. So the rank of $A'A$ is at
+least that of $A$. On the other hand, apply our knowlege of
+partitioning:
+
+* Each row of $A'A$ is a linear combination of the rows of $A'$. 
+
+* So a linear combination of the rows of $A'A$ is a linear combination
+  of linear combinations of rows of $A$ -- still a linear combination of
+  the rows of $A$! At most $s$ members of that linear combination are
+  linearly independent.
+
+* Thus the rank of $A'A$ is also $s$.
 
 $\square$
 
