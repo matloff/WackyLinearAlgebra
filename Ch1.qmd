@@ -440,7 +440,7 @@ is connected.
 Making this kind of analysis fully correct requires paying attention to
 things such as cycles.  The details are beyond the scope of this book.
 
-## Recommender Systems
+## Recommender Systems{#sec-recsys}
 
 If you inquire about some item at an online store, the software will
 also present you with some related items that it thinks would be of

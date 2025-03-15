@@ -68,6 +68,13 @@ Note the dimensions:
 Let $r$ denote the rank of $A$. Recall that $r \leq \min(m,n)$. It will
 turn out that $\sigma_i = 0$ for $i=r+1,...,n$.
 
+## Application: Recommender Systems
+
+Recall @sec-recsys, which began with movie ratings data. We would like
+to predict the rating some particular user would give to some particular
+movie. It will turn out that we can set up SVD in such a way that $U$
+contains movie data and $V$ contains user data.
+
 ## The Four Fundamental Subspaces of a Matrix
 
 Before going to SVD, let us first define four fundamental subspaces for
@@ -84,26 +91,41 @@ any matrix $A$:
 * $\textrm{left null space}(A) = \mathcal{N}(A')$: $\{x: x'A = 0\}$ 
 
 These will play a prominent role in this chapter. Say $A$ is of size $m
-\textrm{ x } n$.  Here is our first of several characterizations of
-these subspaces:
+\textrm{ x } n$. Use 'dim()' to indicate vector space dimension, and
+'rank()' for matrix rank.  Here are the first of several
+characterizations of these subspaces:
 
-::: {#thm-colnullspaces}
+::: {#thm-colspacerank}
 
 $$
-dim(\mathcal{R}(A)) + dim(\mathcal{N}(A)) = m
+rank(A) = dim(\mathcal{C}(A))
 $$
 
 :::
 
 ::: {.proof}
 
-Let $w_1,...,w_q$ be an orthonormal basis for $\mathcal{R}(A)$, where $q
-= dim(\mathcal{R}(A))$. By Gram-Schmidt (@sec-gramschmidt), we can
+
+$\square$
+
+:::
+
+::: {#thm-colnullspaces}
+
+$$
+dim(\mathcal{C}(A)) + dim(\mathcal{N}(A)) = m
+$$
+
+:::
+
+::: {.proof}
+
+Let $w_1,...,w_q$ be an orthonormal basis for $\mathcal{C}(A)$, where $q
+= dim(\mathcal{C}(A))$. By Gram-Schmidt (@sec-gramschmidt), we can
 extend that to an orthonormal basis $w_1,...,w_q,w_{q+1},...,w_m$ for
-all of $\mathcal{R}^{m}$. The Projection Theorem (@thm-projection) tells
-us that any vector in $\mathcal{R}^{m}$ can be written uniquely as a sum
-of its projection on to dim(\mathcal{R}(A)) and the subspace spanned by
-$w_{q+1},...,w_m$
+all of $\mathcal{R}^{m}$. A vector $x$ is in $dim(\mathcal{N}(A))$ if
+and only if it is in the span of $w_{q+1},...,w_m$, thus establishing
+the result.
 
 $\square$
 :::
@@ -118,7 +140,7 @@ maximizes the quantity $U A V'$), but let's go quickly to the answer:
 
 1. Say $A$ is $p \textrm{ x } n$, so that $A'A$ will be of size $n
    \textrm{ x } n$. Let $r$ denote the rank of $A$, which will be the same
-   as the rank of $A'A$ (from @thm-rankapa).
+   as the rank of $A'A$ from @thm-rankapa.
 
 2. Compute the eigenvalues $\sigma_1,...,\sigma_n$
    and eigenvectors $q_1,...,q_n$ of $A'A$. Normalize the $q_i$ by
