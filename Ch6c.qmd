@@ -123,6 +123,12 @@ $\square$
 ::: {#thm-colnullspaces}
 
 $$
+\mathcal{C}(A)^{\perp} = \mathcal{N}(A)
+$$
+
+and
+
+$$
 dim(\mathcal{C}(A)) + dim(\mathcal{N}(A)) = m
 $$
 
@@ -130,11 +136,14 @@ $$
 
 ::: {.proof}
 
-Let $w_1,...,w_q$ be an orthonormal basis for $\mathcal{C}(A)$, where $q
-= dim(\mathcal{C}(A))$. By Gram-Schmidt (@sec-gramschmidt), we can
-extend that to an orthonormal basis $w_1,...,w_q,w_{q+1},...,w_m$ for
-all of $\mathcal{R}^{m}$. A vector $x$ is in $dim(\mathcal{N}(A))$ if
-and only if it is in the span of $w_{q+1},...,w_m$, thus establishing
+Let $w_1,...,w_r$ be an orthonormal basis for $\mathcal{C}(A)$, where $r
+= dim(\mathcal{C}(A)) = rank(A)$. Using Gram-Schmidt (@sec-gramschmidt),
+we can extend that to an orthonormal basis $w_1,...,w_r,w_{r+1},...,w_m$
+for all of $\mathcal{R}^{m}$. By the Projection Theorem
+(@thm-projection), a nonzero vector $x$ can be expressed as 
+
+is in $\mathcal{N}(A)$ if
+and only if it is in the span of $w_{r+1},...,w_m$, thus establishing
 the result.
 
 $\square$
