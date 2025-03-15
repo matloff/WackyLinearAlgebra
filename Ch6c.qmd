@@ -105,6 +105,16 @@ $$
 
 ::: {.proof}
 
+Let $z_1,...,z_r$ be a maximal linearly independent set of columns of
+$A$, where $r$ is the rank of that matrix. Then this set is in
+$\mathcal{C}(A)$, and in fact must span that subspace. If not, there
+would be some vector $x$ outside the span of $z_1,...,z_r$, i.e. no
+linear combination of those vectors would equal $x$. Then
+$z_1,...,z_r,x$ would be a linearly independent set, contradicting the
+maximal nature of the $z_i$.
+
+In other words, the $z_i$ form a basis for $\mathcal{C}(A)$, and thus
+the dimension of that subspace is $r$.
 
 $\square$
 
@@ -149,40 +159,36 @@ maximizes the quantity $U A V'$), but let's go quickly to the answer:
    ordering for the $q_i$.
 
 3. Since $A'A$ is symmetric and positive-semidefinite, its eigenvalues 
-   will be nonnegative and its eigenvectors will be orthogonal for 
+   will be nonnegative and its eigenvectors $q_1,...,q_r$ will be orthogonal as 
+   long as $\sigma_1,...,\sigma_r$ are distinct, as is the case for
+   numeric data (@sec-prob0). We will have $\sigma_{r+1} = ... =
+   \sigma_n = 0$.
 
 4. Set $\Sigma$ to $diag(\sqrt{\sigma_1},...,\sqrt{\sigma_n})$, the
-   nonincreasing list of eigenvalues. Set the columns of $V$ to
-   the corresponding eigenvectors.
+   nonincreasing list of those eigenvalues. Set the first $r$ columns of
+   $V$ to the corresponding eigenvectors. Use the Gram-Schmidt Method
+   (see @sec-gramschmidt) to add $n-r$ more vectors. $V$ will then have
+   orthonormal columns, and thus be an orthogonal matrix.
 
 5. Set 
 
-$$
-u_i = \frac{1}{\sigma_i} Av_i, ~ i=1,...,r
-$$
-
-Using the Gram-Schmidt Method (@sec-gramschmidt), we can compute (if $r
-< m$ necessitates it) vectors $u_{r+1},...u_m$ so that $u_1,...,u_m$ is
-an orthonormal basis for $\mathcal{R}^m$.  Set $U$, decribed in
-partitioning terms: to 
-
-$$
-U = (u_1|...|u_m)
-$$
+   $$ u_i = \frac{1}{\sigma_i} Av_i, ~ i=1,...,r $$
+   
+   Using Gram-Schmidt, we can compute (if $r < m$ necessitates it)
+   vectors $u_{r+1},...u_m$ so that $u_1,...,u_m$ is an orthonormal
+   basis for $\mathcal{R}^m$.  Set $U$, decribed in partitioning terms:
+   to 
+   
+   $$ U = (u_1|...|u_m) $$
 
 ## Checking the Formula
 
 Are $U$ and $V$ really orthogonal, and does $U \Sigma V'$ really work out
 to be $A$?
 
-* $U$ is orthogonal.
+* $U$ and $V$ are orthogonal, by construction.
 
-  This follows immediately from the fact that the columns of $U$ are an
-  orthonormal basis from $\mathcal{R}^m$.
-
-* $V$ is orthogonal, by @thm-eigortho.
-
-* The product evaluates to $A$, as claimed.
+* The product evaluates to $A$, as claimed:
 
     Using matrix partitioning, we have
     
@@ -205,12 +211,6 @@ to be $A$?
     $$
     
     That last expression is equal to $A$, by @eq-aissumuivi.
-
-## Uniqueness
-
-The SVD can be shown to be unique, if there are no repeated eigenvalues.
-If the latter exist, one can permute the corresponding columns of $U$
-and $V$, but otherwise uniqueness holds.
 
 ## The Fundamental Theorem of Linear Algebra
 
