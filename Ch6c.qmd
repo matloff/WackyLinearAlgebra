@@ -153,16 +153,16 @@ maximizes the quantity $U A V'$), but let's go quickly to the answer:
    as the rank of $A'A$ from @thm-rankapa.
 
 2. Compute the eigenvalues $\sigma_1,...,\sigma_n$
-   and eigenvectors $q_1,...,q_n$ of $A'A$. Normalize the $q_i$ by
+   and eigenvectors $v_1,...,v_n$ of $A'A$. Normalize the $v_i$ by
    dividing by their lengths. (The same eigenvalues will still hold.)
    Order the $\sigma_i$ from largest to smallest, and use the same
-   ordering for the $q_i$.
+   ordering for the $v_i$.
 
-3. Since $A'A$ is symmetric and positive-semidefinite, its eigenvalues 
-   will be nonnegative and its eigenvectors $q_1,...,q_r$ will be orthogonal as 
-   long as $\sigma_1,...,\sigma_r$ are distinct, as is the case for
-   numeric data (@sec-prob0). We will have $\sigma_{r+1} = ... =
-   \sigma_n = 0$.
+3. Since $A'A$ is symmetric and positive-semidefinite, its eigenvalues
+   will be nonnegative and its eigenvectors $v_1,...,v_r$ will be
+   orthogonal as long as $\sigma_1,...,\sigma_r$ are distinct, as is the
+   case for numeric data (@sec-prob0). We will have $\sigma_{r+1} = ...
+   = \sigma_n = 0$.
 
 4. Set $\Sigma$ to $diag(\sqrt{\sigma_1},...,\sqrt{\sigma_n})$, the
    nonincreasing list of those eigenvalues. Set the first $r$ columns of
@@ -173,6 +173,17 @@ maximizes the quantity $U A V'$), but let's go quickly to the answer:
 5. Set 
 
    $$ u_i = \frac{1}{\sigma_i} Av_i, ~ i=1,...,r $$
+
+   The $u_i$ will be orthogonal: For $i \neq j$,
+
+   $$
+   u_i' u_j = \frac{1}{\sigma_i \sigma_j} v_i' A'A v_j =
+   \frac{1}{\sigma_i \sigma_j} v_i' v_j = 0
+   $$
+
+   where we have used the facts that $v_j$ is an eigenvector of $A'A$
+   and the $v_k$ are orthogonal.
+
    
    Using Gram-Schmidt, we can compute (if $r < m$ necessitates it)
    vectors $u_{r+1},...u_m$ so that $u_1,...,u_m$ is an orthonormal
