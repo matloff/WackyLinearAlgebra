@@ -246,11 +246,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#sec-eiglm" id="toc-sec-eiglm" class="nav-link" data-scroll-target="#sec-eiglm"><span class="header-section-number">11.2</span> Eigenanalysis Relation between <span class="math inline">\(A\)</span> and <span class="math inline">\(Cov(X)\)</span> in Linear Regression</a></li>
   <li><a href="#back-to-the-african-soils-example" id="toc-back-to-the-african-soils-example" class="nav-link" data-scroll-target="#back-to-the-african-soils-example"><span class="header-section-number">11.3</span> Back to the African Soils Example</a></li>
   <li><a href="#sec-detect" id="toc-sec-detect" class="nav-link" data-scroll-target="#sec-detect"><span class="header-section-number">11.4</span> PCA in Detection of Multicollinearity</a></li>
-  <li><a href="#how-many-principal-components-should-we-use" id="toc-how-many-principal-components-should-we-use" class="nav-link" data-scroll-target="#how-many-principal-components-should-we-use"><span class="header-section-number">11.5</span> How Many Principal Components Should We Use?</a>
+  <li><a href="#sec-prob0" id="toc-sec-prob0" class="nav-link" data-scroll-target="#sec-prob0"><span class="header-section-number">11.5</span> An Important Property of All-Numeric Predictor Data</a></li>
+  <li><a href="#how-many-principal-components-should-we-use" id="toc-how-many-principal-components-should-we-use" class="nav-link" data-scroll-target="#how-many-principal-components-should-we-use"><span class="header-section-number">11.6</span> How Many Principal Components Should We Use?</a>
   <ul class="collapse">
-  <li><a href="#sec-nyc" id="toc-sec-nyc" class="nav-link" data-scroll-target="#sec-nyc"><span class="header-section-number">11.5.1</span> Example: New York City taxi trips</a></li>
+  <li><a href="#sec-nyc" id="toc-sec-nyc" class="nav-link" data-scroll-target="#sec-nyc"><span class="header-section-number">11.6.1</span> Example: New York City taxi trips</a></li>
   </ul></li>
-  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">11.6</span> Your Turn</a></li>
+  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">11.7</span> Your Turn</a></li>
   </ul>
 </nav>
     </div>
@@ -320,7 +321,8 @@ Cov(X) v = -\omega v
 <p>The full set of eigenvectors is then known as the <em>principal components</em> (PCs). They have some further important properties:</p>
 <blockquote class="blockquote">
 <ul>
-<li><p>The PCs are orthogonal to each other. This follows from our earlier finding that eigenvectors of a symmetric matrix, in this case <span class="math inline">\(Cov(X)\)</span>, are orthogonal. We say that a symmetric is <em>orthogonal</em> if its columns are orthogonal as vectors.</p></li>
+<li><p>The PCs are orthogonal to each other.</p>
+<p>This follows from our earlier finding that eigenvectors of a symmetric matrix, in this case <span class="math inline">\(Cov(X)\)</span>, are orthogonal. We say that a symmetric is <em>orthogonal</em> if its columns are orthogonal as vectors.</p></li>
 <li><p>This in turn implies that the PCs are uncorrelated, and in the multivariate normal case, statistically independent.</p></li>
 <li><p>The eigenvalues are the variances of the PCs. The PCs are in order of decreasing (or at least nonincreasing) variance.</p>
 <p>This first statement follows from pre-mutiplying <a href="Ch6a.html#eq-aha">Equation&nbsp;<span>10.1</span></a> by <span class="math inline">\(u'\)</span>, giving us <span class="math inline">\(Var(u)\)</span> on the left and <span class="math inline">\(-\lambda u'u = -\lambda\)</span> on the right. The second statement follows from the fact that as we go from the first PC to the second, third and so on, we are maximizing under more and more constraints, hence smaller maxima.</p></li>
@@ -418,17 +420,27 @@ If an eigenvalue is 0, the rank is exactly less than full. If it is approximatel
 <li><p>Say a PC corresponds to a small eigenvalue.</p></li>
 <li><p>Then from <a href="Ch6a.html#sec-firstPC"><span>Section&nbsp;10.2.1</span></a> that linear combination has small variance.</p></li>
 <li><p>Random variables with small variance are nearly constant.</p></li>
-<li><p>Thus with high probability, the linear combination is near to <span class="math inline">\(c\)</span> for some number <span class="math inline">\(c\)</span>. If we are working with numerical data, that number <span class="math inline">\(c\)</span> is nonzero with high probability.</p></li>
+<li><p>Thus with high probability, the linear combination is near to <span class="math inline">\(c\)</span> for some number <span class="math inline">\(c\)</span>. If we are working with numerical data, that number <span class="math inline">\(c\)</span> is nonzero with high probability (see <span class="citation" data-cites="imp-prob0">@imp-prob0</span>).</p></li>
 <li><p>If our design matrix <span class="math inline">\(A\)</span> includes a 1s column, then the above linear combination, together with this 1s column, gives us a linear combination that is usually close to the 0 vector, thus multicollinear.</p></li>
 </ul>
 <p>In other words, PCA can point out to us specific linear combinations of our variables that may be problematic. If we are considering solving the problem by removing one or more predictor variables, this analysis could suggest which ones to remove.</p>
 </section>
-<section id="how-many-principal-components-should-we-use" class="level2" data-number="11.5">
-<h2 data-number="11.5" class="anchored" data-anchor-id="how-many-principal-components-should-we-use"><span class="header-section-number">11.5</span> How Many Principal Components Should We Use?</h2>
+<section id="sec-prob0" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="sec-prob0"><span class="header-section-number">11.5</span> An Important Property of All-Numeric Predictor Data</h2>
+<p>Say we throw a dart at the interval (0,1). If the distribution of the hitting location <span class="math inline">\(D\)</span> is U(0,1) or any other continuous distribution, the probability of hitting a specific point is 0, e.g.&nbsp;<span class="math inline">\(P(D = 0.324) = 0\)</span>. Such is the nature of continuous distributions. The problem is that the length of the line segment (0.324,0.324) is 0. In math, we say it has <em>measure</em> 0.</p>
+<p>If we throw our dart at the unit square, <span class="math inline">\((0,1) \textrm{ x } (0,1)\)</span>, then e.g.&nbsp;the probability that <span class="math inline">\(D\)</span> lies on a specified straight line or some other specified curve is also 0. Here the problem is that the area of that line or curve is 0.</p>
+<p>This has implications for material in this book. For instance, consider linear regression models. If our <span class="math inline">\(A\)</span> matrix consists of all numeric data, then (in the absence of perfect correlation among the columns), we will have</p>
+<p><span class="math display">\[
+P(determinant(A'A) = 0) = 0
+\]</span></p>
+<p>for the same 0-measure reasons. In other words, <span class="math inline">\(A'A\)</span> will be invertible with probability 1.</p>
+</section>
+<section id="how-many-principal-components-should-we-use" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="how-many-principal-components-should-we-use"><span class="header-section-number">11.6</span> How Many Principal Components Should We Use?</h2>
 <p>We chose to use the first 9 principal components in our example here, but that was just for illustration purposes. There are no formal rules for how many to use. Various “rules of thumb” exist.</p>
 <p>If we are doing prediction, there is a very natural way to choose our number of PCs – do cross-validation (<a href="Ch5c.html#sec-xval"><span>Section&nbsp;9.4</span></a>), and use whichever number gives the most accurate prediction.</p>
-<section id="sec-nyc" class="level3" data-number="11.5.1">
-<h3 data-number="11.5.1" class="anchored" data-anchor-id="sec-nyc"><span class="header-section-number">11.5.1</span> Example: New York City taxi trips</h3>
+<section id="sec-nyc" class="level3" data-number="11.6.1">
+<h3 data-number="11.6.1" class="anchored" data-anchor-id="sec-nyc"><span class="header-section-number">11.6.1</span> Example: New York City taxi trips</h3>
 <p>This is a well-known dataset, a version of which is included in the <strong>qeML</strong> package. The object is to predict trip time, given pickup and dropoff locations, trip distance and day of the week.</p>
 <p>In the raw form of the data, there are just 5 columns, thus 4 predictors. But the pickup and dropoff locations are R factors, coding numerous locations. These must be decoded to dummy variables (values 1 or 0, coding whether or not, say, a given trip began at pickup location 121). If for instance one calls the R linear regression function <strong>lm</strong>, that function will do the conversion internally, but in our case we will perform the conversion ourselves, using <strong>regtools::factorsToDummies</strong>. (The <strong>regtools</strong> package is included by <strong>qeML</strong>.)</p>
 <div class="cell">
@@ -516,8 +528,8 @@ NULL</code></pre>
 <p>Among other things, this shows the dangers of overfitting, in this case using too many PCs in our linear regression model. It seems best here to use only the first 10 or 20% of the PCs.</p>
 </section>
 </section>
-<section id="your-turn" class="level2" data-number="11.6">
-<h2 data-number="11.6" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">11.6</span> Your Turn</h2>
+<section id="your-turn" class="level2" data-number="11.7">
+<h2 data-number="11.7" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">11.7</span> Your Turn</h2>
 <p>❄️ <strong>Your Turn:</strong> Modify the code for <strong>qePCA</strong> for the case of linear regression by adding a component <strong>xCoeffs</strong> to its return value. This will give the regression coefficients in terms of the original X predictors.</p>
 <p>❄️ <strong>Your Turn:</strong> Say the symmetric matrix <span class="math inline">\(A\)</span> has <em>block diagonal</em> form</p>
 <p><span class="math display">\[

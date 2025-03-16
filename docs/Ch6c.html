@@ -242,14 +242,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#basic-idea" id="toc-basic-idea" class="nav-link active" data-scroll-target="#basic-idea"><span class="header-section-number">12.1</span> Basic Idea</a></li>
-  <li><a href="#solution" id="toc-solution" class="nav-link" data-scroll-target="#solution"><span class="header-section-number">12.2</span> Solution</a></li>
-  <li><a href="#checking-the-formula" id="toc-checking-the-formula" class="nav-link" data-scroll-target="#checking-the-formula"><span class="header-section-number">12.3</span> Checking the Formula</a></li>
-  <li><a href="#uniqueness" id="toc-uniqueness" class="nav-link" data-scroll-target="#uniqueness"><span class="header-section-number">12.4</span> Uniqueness</a></li>
-  <li><a href="#the-fundamental-theorem-of-linear-algebra" id="toc-the-fundamental-theorem-of-linear-algebra" class="nav-link" data-scroll-target="#the-fundamental-theorem-of-linear-algebra"><span class="header-section-number">12.5</span> The Fundamental Theorem of Linear Algebra</a></li>
-  <li><a href="#the-data-scientists-swiss-army-knife" id="toc-the-data-scientists-swiss-army-knife" class="nav-link" data-scroll-target="#the-data-scientists-swiss-army-knife"><span class="header-section-number">12.6</span> The Data Scientist’s Swiss Army Knife</a>
+  <li><a href="#application-recommender-systems" id="toc-application-recommender-systems" class="nav-link" data-scroll-target="#application-recommender-systems"><span class="header-section-number">12.2</span> Application: Recommender Systems</a></li>
+  <li><a href="#the-four-fundamental-subspaces-of-a-matrix" id="toc-the-four-fundamental-subspaces-of-a-matrix" class="nav-link" data-scroll-target="#the-four-fundamental-subspaces-of-a-matrix"><span class="header-section-number">12.3</span> The Four Fundamental Subspaces of a Matrix</a></li>
+  <li><a href="#solution-to-our-svd-goal" id="toc-solution-to-our-svd-goal" class="nav-link" data-scroll-target="#solution-to-our-svd-goal"><span class="header-section-number">12.4</span> Solution to Our SVD Goal</a></li>
+  <li><a href="#checking-the-formula" id="toc-checking-the-formula" class="nav-link" data-scroll-target="#checking-the-formula"><span class="header-section-number">12.5</span> Checking the Formula</a></li>
+  <li><a href="#svd-the-data-scientists-swiss-army-knife" id="toc-svd-the-data-scientists-swiss-army-knife" class="nav-link" data-scroll-target="#svd-the-data-scientists-swiss-army-knife"><span class="header-section-number">12.6</span> SVD: the Data Scientist’s Swiss Army Knife</a>
   <ul class="collapse">
   <li><a href="#rank-of-a" id="toc-rank-of-a" class="nav-link" data-scroll-target="#rank-of-a"><span class="header-section-number">12.6.1</span> Rank of <span class="math inline">\(A\)</span></a></li>
-  <li><a href="#svd-as-matrix-pseudoinverse" id="toc-svd-as-matrix-pseudoinverse" class="nav-link" data-scroll-target="#svd-as-matrix-pseudoinverse"><span class="header-section-number">12.6.2</span> SVD as matrix pseudoinverse</a></li>
+  <li><a href="#svd-as-a-basis-for-matrix-generalized-inverse" id="toc-svd-as-a-basis-for-matrix-generalized-inverse" class="nav-link" data-scroll-target="#svd-as-a-basis-for-matrix-generalized-inverse"><span class="header-section-number">12.6.2</span> SVD as a basis for matrix generalized inverse</a></li>
   <li><a href="#svd-in-linear-models" id="toc-svd-in-linear-models" class="nav-link" data-scroll-target="#svd-in-linear-models"><span class="header-section-number">12.6.3</span> SVD in linear models</a></li>
   </ul></li>
   <li><a href="#example-census-data" id="toc-example-census-data" class="nav-link" data-scroll-target="#example-census-data"><span class="header-section-number">12.7</span> Example: Census Data</a></li>
@@ -289,7 +289,7 @@ Goals of this chapter:
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>We’ve seen the notion of eigenanalysis for square matrices. Well, it turns out this can be extended usefully for nonsquare matrices, via <em>Singular Value Decomposition</em> (SVD), the topic of this chapter.</p>
+<p>We’ve seen the notion of eigenanalysis for square matrices. Well, it turns out this can be extended usefully for nonsquare matrices, via <em>Singular Value Decomposition</em> (SVD), the topic of this chapter, with important applications.</p>
 </div>
 </div>
 <section id="basic-idea" class="level2" data-number="12.1">
@@ -314,6 +314,7 @@ A = U \Sigma V'
 <p><span id="eq-aissumuivi"><span class="math display">\[
 A = \sum_{i=1}^n \sigma_i u_i v_i'
 \tag{12.2}\]</span></span></p>
+<p>where <span class="math inline">\(u_i\)</span> and <span class="math inline">\(v_i\)</span> are the <span class="math inline">\(i^{th}\)</span> rows of <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span>.</p>
 </div>
 </div>
 <p>Note the dimensions:</p>
@@ -324,31 +325,93 @@ A = \sum_{i=1}^n \sigma_i u_i v_i'
 </ul>
 <p>Let <span class="math inline">\(r\)</span> denote the rank of <span class="math inline">\(A\)</span>. Recall that <span class="math inline">\(r \leq \min(m,n)\)</span>. It will turn out that <span class="math inline">\(\sigma_i = 0\)</span> for <span class="math inline">\(i=r+1,...,n\)</span>.</p>
 </section>
-<section id="solution" class="level2" data-number="12.2">
-<h2 data-number="12.2" class="anchored" data-anchor-id="solution"><span class="header-section-number">12.2</span> Solution</h2>
+<section id="application-recommender-systems" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="application-recommender-systems"><span class="header-section-number">12.2</span> Application: Recommender Systems</h2>
+<p>Recall <a href="Ch1.html#sec-recsys"><span>Section&nbsp;2.9</span></a>, which began with movie ratings data. We would like to predict the rating some particular user would give to some particular movie. It will turn out that we can set up SVD in such a way that <span class="math inline">\(U\)</span> contains movie data and <span class="math inline">\(V\)</span> contains user data.</p>
+</section>
+<section id="the-four-fundamental-subspaces-of-a-matrix" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="the-four-fundamental-subspaces-of-a-matrix"><span class="header-section-number">12.3</span> The Four Fundamental Subspaces of a Matrix</h2>
+<p>Before going to SVD, let us first define four fundamental subspaces for any matrix <span class="math inline">\(A\)</span>:</p>
+<ul>
+<li><p><span class="math inline">\(\textrm{row space}(A), \mathcal{R}(A)\)</span>: <span class="math inline">\(\{x'A\}~~\)</span> (all linear combinations of rows of <span class="math inline">\(A\)</span>)</p></li>
+<li><p><span class="math inline">\(\textrm{column space}(A), \mathcal{C}(A)\)</span>: <span class="math inline">\(\{Ax\}~~\)</span> (all linear combinations of columns of <span class="math inline">\(A\)</span>)</p></li>
+<li><p><span class="math inline">\(\textrm{null space}(A), \mathcal{N}(A)\)</span>: <span class="math inline">\(\{x: Ax = 0\}\)</span></p></li>
+<li><p><span class="math inline">\(\textrm{left null space}(A) = \mathcal{N}(A')\)</span>: <span class="math inline">\(\{x: x'A = 0\}\)</span></p></li>
+</ul>
+<p>The null space is also called the <em>kernel</em> of <span class="math inline">\(A\)</span>, viewing the matrix as a function from <span class="math inline">\(\mathcal{R}^n\)</span> to <span class="math inline">\(\mathcal{R}^n\)</span>; what vectors are mapped to 0?</p>
+<p>These subspaces will play a prominent role in this chapter. Say <span class="math inline">\(A\)</span> is of size <span class="math inline">\(m \textrm{ x } n\)</span>. Use ‘dim()’ to indicate vector space dimension, and ‘rank()’ for matrix rank.</p>
+<div id="thm-colspacerank" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 12.1 </strong></span><span class="math display">\[
+rank(A) = dim(\mathcal{C}(A))
+\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Let <span class="math inline">\(z_1,...,z_r\)</span> be a maximal linearly independent set of columns of <span class="math inline">\(A\)</span>, where <span class="math inline">\(r\)</span> is the rank of that matrix. Then this set is in <span class="math inline">\(\mathcal{C}(A)\)</span>, and in fact must span that subspace. If not, there would be some vector <span class="math inline">\(x\)</span> outside the span of <span class="math inline">\(z_1,...,z_r\)</span>, i.e.&nbsp;no linear combination of those vectors would equal <span class="math inline">\(x\)</span>. Then <span class="math inline">\(z_1,...,z_r,x\)</span> would be a linearly independent set, contradicting the maximal nature of the <span class="math inline">\(z_i\)</span>.</p>
+<p>In other words, the <span class="math inline">\(z_i\)</span> form a basis for <span class="math inline">\(\mathcal{C}(A)\)</span>, and thus the dimension of that subspace is <span class="math inline">\(r\)</span>.</p>
+<p><span class="math inline">\(\square\)</span></p>
+</div>
+<div id="thm-colnullspaces" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 12.2 </strong></span>The <span class="math inline">\(\mathcal{C}(A) \textrm{ and } \mathcal{N}(A)\)</span> subspaces are closely related:</p>
+<p><span class="math display">\[
+\mathcal{C}(A')^{\perp} = \mathcal{N}(A)
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+dim(\mathcal{C}(A')) + dim(\mathcal{N}(A)) = m
+\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Say <span class="math inline">\(w\)</span> is in <span class="math inline">\(\mathcal{N}(A)\)</span>. Once again using partitioning, we have</p>
+<p><span class="math display">\[
+\left (
+\begin{array}{r}
+0 \\
+... \\
+0 \\
+\end{array}
+\right )
+=
+Aw
+=
+\left (
+\begin{array}{r}
+a_1 w \\
+... \\
+a_m w \\
+\end{array}
+\right )
+\]</span></p>
+<p>where <span class="math inline">\(a_i\)</span> is row <span class="math inline">\(i\)</span> of <span class="math inline">\(A\)</span>. Thus <span class="math inline">\(w\)</span> is orthogonal to the rows of <span class="math inline">\(A\)</span>, thus to the row space of <span class="math inline">\(A\)</span>. The latter is the column space of <span class="math inline">\(A'\)</span>. Thus <span class="math inline">\(\mathcal{N}(A)\)</span> is a subset of <span class="math inline">\(\mathcal{C}(A')^{\perp}\)</span>. This argument works exactly in reverse, so the first claim is established.</p>
+<p>The second claim follows from first forming an orthonormal basis <span class="math inline">\(q_1,...,q_r\)</span> for <span class="math inline">\(\mathcal{C}(A')\)</span>, then extending it to one for all of <span class="math inline">\(\mathcal{R}^m\)</span>, <span class="math inline">\(q_1,...,q_r,q_{r+1},...,m\)</span>.</p>
+<p><span class="math inline">\(\square\)</span></p>
+</div>
+</section>
+<section id="solution-to-our-svd-goal" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="solution-to-our-svd-goal"><span class="header-section-number">12.4</span> Solution to Our SVD Goal</h2>
 <p>There are various derivations, e.g.&nbsp;along the lines of <a href="Ch6a.html#sec-firstPC"><span>Section&nbsp;10.2.1</span></a> (one maximizes the quantity <span class="math inline">\(U A V'\)</span>), but let’s go quickly to the answer:</p>
 <ol type="1">
-<li><p>Compute the eigenvalues <span class="math inline">\(\sigma_1,...,\sigma_n\)</span> and eigenvectors <span class="math inline">\(q_1,...,q_n\)</span> of <span class="math inline">\(A'A\)</span>.</p></li>
-<li><p>Since <span class="math inline">\(A'A\)</span> is symmetric and positive-semidefinite, its eigenvalues will be nonnegative and its eigenvectors will be orthogonal.</p></li>
-<li><p>Set <span class="math inline">\(\Sigma\)</span> to <span class="math inline">\(diag(\sqrt{\sigma_1},...,\sqrt{\sigma_n})\)</span>, the nonincreasing list of eigenvalues. Set the columns of <span class="math inline">\(V\)</span> to the corresponding eigenvectors.</p></li>
-<li><p>Set</p></li>
+<li><p>Say <span class="math inline">\(A\)</span> is <span class="math inline">\(p \textrm{ x } n\)</span>, so that <span class="math inline">\(A'A\)</span> will be of size <span class="math inline">\(n \textrm{ x } n\)</span>. Let <span class="math inline">\(r\)</span> denote the rank of <span class="math inline">\(A\)</span>, which will be the same as the rank of <span class="math inline">\(A'A\)</span> from <a href="Ch4.html#thm-rankapa">Theorem&nbsp;<span>6.5</span></a>.</p></li>
+<li><p>Compute the eigenvalues <span class="math inline">\(\sigma_1,...,\sigma_n\)</span> and eigenvectors <span class="math inline">\(v_1,...,v_n\)</span> of <span class="math inline">\(A'A\)</span>. Normalize the <span class="math inline">\(v_i\)</span> by dividing by their lengths. (The same eigenvalues will still hold.) Order the <span class="math inline">\(\sigma_i\)</span> from largest to smallest, and use the same ordering for the <span class="math inline">\(v_i\)</span>.</p></li>
+<li><p>Since <span class="math inline">\(A'A\)</span> is symmetric and positive-semidefinite, its eigenvalues will be nonnegative and its eigenvectors <span class="math inline">\(v_1,...,v_r\)</span> will be orthogonal as long as <span class="math inline">\(\sigma_1,...,\sigma_r\)</span> are distinct, as is the case for numeric data (<a href="Ch6b.html#sec-prob0"><span>Section&nbsp;11.5</span></a>). We will have <span class="math inline">\(\sigma_{r+1} = ... = \sigma_n = 0\)</span>.</p></li>
+<li><p>Set <span class="math inline">\(\Sigma\)</span> to <span class="math inline">\(diag(\sqrt{\sigma_1},...,\sqrt{\sigma_n})\)</span>, the nonincreasing list of those eigenvalues. Set the first <span class="math inline">\(r\)</span> columns of <span class="math inline">\(V\)</span> to the corresponding eigenvectors. Use the Gram-Schmidt Method (see <a href="Ch5b.html#sec-gramschmidt"><span>Section&nbsp;8.10</span></a>) to add <span class="math inline">\(n-r\)</span> more vectors. <span class="math inline">\(V\)</span> will then have orthonormal columns, and thus be an orthogonal matrix.</p></li>
+<li><p>Set</p>
+<p><span class="math display">\[ u_i = \frac{1}{\sigma_i} Av_i, ~ i=1,...,r \]</span></p>
+<p>The <span class="math inline">\(u_i\)</span> will be orthogonal: For <span class="math inline">\(i \neq j\)</span>,</p>
+<p><span class="math display">\[
+u_i' u_j = \frac{1}{\sigma_i \sigma_j} v_i' A'A v_j =
+\frac{1}{\sigma_i \sigma_j} v_i' v_j = 0
+\]</span></p>
+<p>where we have used the facts that <span class="math inline">\(v_j\)</span> is an eigenvector of <span class="math inline">\(A'A\)</span> and the <span class="math inline">\(v_k\)</span> are orthogonal.</p>
+<p>Using Gram-Schmidt, we can compute (if <span class="math inline">\(r &lt; m\)</span> necessitates it) vectors <span class="math inline">\(u_{r+1},...u_m\)</span> so that <span class="math inline">\(u_1,...,u_m\)</span> is an orthonormal basis for <span class="math inline">\(\mathcal{R}^m\)</span>. Set <span class="math inline">\(U\)</span>, decribed in partitioning terms: to</p>
+<p><span class="math display">\[ U = (u_1|...|u_m) \]</span></p></li>
 </ol>
-<p><span class="math display">\[
-u_i = \frac{1}{\sigma_i} Av_i, ~ i=1,...,r
-\]</span></p>
-<p>Using the Gram-Schmidt Method (<a href="Ch5b.html#sec-gramschmidt"><span>Section&nbsp;8.10</span></a>), we can compute (if <span class="math inline">\(r &lt; m\)</span> necessitates it) vectors <span class="math inline">\(u_{r+1},...u_m\)</span> so that <span class="math inline">\(u_1,...,u_m\)</span> is an orthonormal basis for <span class="math inline">\(\mathcal{R}^m\)</span>. Set <span class="math inline">\(U\)</span>, decribed in partitioning terms: to</p>
-<p><span class="math display">\[
-U = (u_1|...|u_m)
-\]</span></p>
 </section>
-<section id="checking-the-formula" class="level2" data-number="12.3">
-<h2 data-number="12.3" class="anchored" data-anchor-id="checking-the-formula"><span class="header-section-number">12.3</span> Checking the Formula</h2>
+<section id="checking-the-formula" class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="checking-the-formula"><span class="header-section-number">12.5</span> Checking the Formula</h2>
 <p>Are <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> really orthogonal, and does <span class="math inline">\(U \Sigma V'\)</span> really work out to be <span class="math inline">\(A\)</span>?</p>
 <ul>
-<li><p><span class="math inline">\(U\)</span> is orthogonal.</p>
-<p>This follows immediately from the fact that the columns of <span class="math inline">\(U\)</span> are an orthonormal basis from <span class="math inline">\(\mathcal{R}^m\)</span>.</p></li>
-<li><p><span class="math inline">\(V\)</span> is orthogonal, by <span class="quarto-unresolved-ref">?sec-eigortho</span>.</p></li>
-<li><p>The product evaluates to <span class="math inline">\(A\)</span>, as claimed.</p>
+<li><p><span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> are orthogonal, by construction.</p></li>
+<li><p>The product evaluates to <span class="math inline">\(A\)</span>, as claimed:</p>
 <p>Using matrix partitioning, we have</p>
 <p><span class="math display">\[
   U \Sigma = (\sigma_1 u_1 | ... | \sigma_n u_n)
@@ -368,82 +431,22 @@ U = (u_1|...|u_m)
 <p>That last expression is equal to <span class="math inline">\(A\)</span>, by <a href="#eq-aissumuivi">Equation&nbsp;<span>12.2</span></a>.</p></li>
 </ul>
 </section>
-<section id="uniqueness" class="level2" data-number="12.4">
-<h2 data-number="12.4" class="anchored" data-anchor-id="uniqueness"><span class="header-section-number">12.4</span> Uniqueness</h2>
-<p>The SVD can be shown to be unique, if there are no repeated eigenvalues. If the latter exist, one can permute the corresponding columns of <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span>, but otherwise uniqueness holds.</p>
-</section>
-<section id="the-fundamental-theorem-of-linear-algebra" class="level2" data-number="12.5">
-<h2 data-number="12.5" class="anchored" data-anchor-id="the-fundamental-theorem-of-linear-algebra"><span class="header-section-number">12.5</span> The Fundamental Theorem of Linear Algebra</h2>
-<p>One can define four fundamental subspaces for any matrix <span class="math inline">\(A\)</span>. We will need the following:</p>
-<ul>
-<li><p><span class="math inline">\(\textrm{row space}(A), \mathcal{R}(A)\)</span>: <span class="math inline">\(\{x'A\}~~\)</span> (all linear combinations of rows of <span class="math inline">\(A\)</span>)</p></li>
-<li><p><span class="math inline">\(\textrm{column space}(A), \mathcal{C}(A)\)</span>: <span class="math inline">\(\{Ax\}~~\)</span> (all linear combinations of columns of <span class="math inline">\(A\)</span>)</p></li>
-<li><p><span class="math inline">\(\textrm{null space}(A), \mathcal{N}(A)\)</span>: <span class="math inline">\(\{x: Ax = 0\}\)</span></p></li>
-<li><p><span class="math inline">\(\textrm{left null space}(A) = \mathcal{N}(A')\)</span>: <span class="math inline">\(\{x: x'A = 0\}\)</span></p></li>
-</ul>
-<p>These subspaces have various properties, which may be verified via SVD. <a href="#eq-aissumuivi">Equation&nbsp;<span>12.2</span></a> will come in very handy.</p>
-<p>Consider the column space first. From <a href="#eq-aissumuivi">Equation&nbsp;<span>12.2</span></a> write</p>
-<p><span id="eq-Ax"><span class="math display">\[
-Ax = \sum_{i=1}^n \sigma_i u_i v_i' x
-\tag{12.3}\]</span></span></p>
-<p>Note that <span class="math inline">\(v_i'x\)</span> is a scalar, so we have</p>
-<p><span id="eq-Ax1"><span class="math display">\[
-\begin{aligned}
-Ax &amp;= \sum_{i=1}^n [\sigma_i (v_i' x)] u_i \\
-&amp;= \sum_{i=1}^r [\sigma_i (v_i' x)] u_i
-\end{aligned}
-\tag{12.4}\]</span></span></p>
-<p>So</p>
-<p><span id="eq-colsubset"><span class="math display">\[
-\mathcal{C}(A) \subset \textrm{ span}(u_1,...,u_r)
-\tag{12.5}\]</span></span></p>
-<p>Now, is the left side equal to all of the right side? Say a member of the right side is <span class="math inline">\(c_1 u_1+...+c_r u_r\)</span>. Then, using the fact that <span class="math inline">\(\{v_1....,v_r\}\)</span> is an orthonormal set, take <span class="math inline">\(x\)</span> to be</p>
-<p><span class="math display">\[
-x = \sum_{j=1}^r \frac{c_j}{\sigma_j} v_j
-\]</span></p>
-<p>Then for each <span class="math inline">\(i\)</span>, we have</p>
-<p><span class="math display">\[
-\sigma_i v_i'x =c_i
-\]</span></p>
-<p>and</p>
-<p><span class="math display">\[
-Ax = \sum_{i=1}^r c_i u_i
-\]</span></p>
-<p>as desired, so <a href="#eq-colsubset">Equation&nbsp;<span>12.5</span></a> is actually an equality.</p>
-<p>We have thus characterized one of the four fundamental subspaces:</p>
-<blockquote class="blockquote">
-<p><span class="math inline">\(\mathcal{C}(A)\)</span> has dimension <span class="math inline">\(r\)</span>, with basis <span class="math inline">\(u_1,...,u_r\)</span>.</p>
-</blockquote>
-<p>Now look at the null space. <span class="math inline">\(Ax = 0\)</span> means that the vector <span class="math inline">\(x\)</span> is orthogonal to each row of <span class="math inline">\(A\)</span>. Thus</p>
-<p><span class="math display">\[
-\begin{aligned}
-\mathcal{N}(A) &amp;= \mathcal{R}(A)^{\perp} \\
-&amp;= \mathcal{C}(A')^{\perp}
-\end{aligned}
-\]</span></p>
-<p>We already found above a characterization of the column space of a matrix, which we now apply to <span class="math inline">\(A'\)</span>: <span class="math inline">\(\mathcal{C}(A')\)</span> has dimension <span class="math inline">\(r\)</span>, with basis <span class="math inline">\(v_1,...,v_r\)</span>. Applying <span class="math inline">\(\perp\)</span>, and noting that orthogonality of <span class="math inline">\(v_1,...,v_n\)</span>, we can now characterize a second, and even a third, of the four subspaces:</p>
-<blockquote class="blockquote">
-<p><span class="math inline">\(\mathcal{N}(A)\)</span> is of dimension <span class="math inline">\(n-r\)</span>, with basis <span class="math inline">\(v_{r+1},...,v_n\)</span>.</p>
-<p><span class="math inline">\(\mathcal{R}(A)\)</span> is of dimension <span class="math inline">\(r\)</span>, with basis <span class="math inline">\(v_1,...,v_r\)</span>.</p>
-</blockquote>
-<p>We leave the fourth subspace as a Your Turn problem.</p>
-</section>
-<section id="the-data-scientists-swiss-army-knife" class="level2 page-columns page-full" data-number="12.6">
-<h2 data-number="12.6" class="anchored" data-anchor-id="the-data-scientists-swiss-army-knife"><span class="header-section-number">12.6</span> The Data Scientist’s Swiss Army Knife</h2>
+<section id="svd-the-data-scientists-swiss-army-knife" class="level2 page-columns page-full" data-number="12.6">
+<h2 data-number="12.6" class="anchored" data-anchor-id="svd-the-data-scientists-swiss-army-knife"><span class="header-section-number">12.6</span> SVD: the Data Scientist’s Swiss Army Knife</h2>
 <p>There are a great many pieces of information and sources of tools packed into this innocuous-looking factorization. Let’s take a look at some:</p>
 <section id="rank-of-a" class="level3" data-number="12.6.1">
 <h3 data-number="12.6.1" class="anchored" data-anchor-id="rank-of-a"><span class="header-section-number">12.6.1</span> Rank of <span class="math inline">\(A\)</span></h3>
 <p>This is the number of nonzero values in <span class="math inline">\(\Sigma\)</span>. This follows from <a href="Ch4.html#thm-ranknotchange">Theorem&nbsp;<span>6.1</span></a>, since <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span>, as orthogonal matrices, are invertible.</p>
 <p>It should be noted, though, that if there are some really tiny elements there, one might also entertain the thought that the true rank is less than this size, as these tiny values may be due to roundoff error from 0.</p>
 </section>
-<section id="svd-as-matrix-pseudoinverse" class="level3" data-number="12.6.2">
-<h3 data-number="12.6.2" class="anchored" data-anchor-id="svd-as-matrix-pseudoinverse"><span class="header-section-number">12.6.2</span> SVD as matrix pseudoinverse</h3>
+<section id="svd-as-a-basis-for-matrix-generalized-inverse" class="level3" data-number="12.6.2">
+<h3 data-number="12.6.2" class="anchored" data-anchor-id="svd-as-a-basis-for-matrix-generalized-inverse"><span class="header-section-number">12.6.2</span> SVD as a basis for matrix generalized inverse</h3>
 <p>Recall the example in <a href="Ch4.html#sec-censusrref"><span>Section&nbsp;6.1</span></a>. We could not have dummy-variable columns for both male and female, as their sum would be a column of all 1s, in addition to a column the X data matrix already had. The three columns would then have a nonzero linear combination that evaluates to the 0 vector. Then in <a href="Ch3.html#eq-linregformula">Equation&nbsp;<span>5.4</span></a>, <span class="math inline">\(A\)</span> (i.e.&nbsp;X) would not be of full rank, and <span class="math inline">\((A'A)^{-1}\)</span> would not exist.</p>
 <p>And yet the equation from which that comes,</p>
 <p><span id="eq-overdetermined"><span class="math display">\[
 A'A b = A'S
-\tag{12.6}\]</span></span></p>
-<p>is still valid. We could, as in that example, remove one of the gender columns, thus solving the problem of less than full rank, but the use of <em>pseudoinverses</em> (also known as <em>generalized inverses</em>) solves the problem directly. If <span class="math inline">\(A\)</span> has hundreds or thousands of columns, say, the use of pseudoinverses may be more convenient.</p>
+\tag{12.3}\]</span></span></p>
+<p>is still valid. We could, as in that example, remove one of the gender columns, thus solving the problem of less than full rank, but the use of <em>generalized inverses</em> solves the problem directly. If <span class="math inline">\(A\)</span> has hundreds or thousands of columns, say, the use of generalized inverses may be more convenient.</p>
 <p>We omit the formal definition of pseudoinverses and their properties. We will note the use of the latter as the need arises. For now, we state without proof that:</p>
 <ul>
 <li><p>One of the most famous forms of pseudoinverse, Moore-Penrose, is based on SVD. Given the SVD of a matrix <span class="math inline">\(M\)</span>,</p>
@@ -545,8 +548,7 @@ A'A b &amp;= (U \Sigma V')' (U \Sigma V') (U \Sigma V')^{-} S \\
 <section id="your-turn" class="level2" data-number="12.9">
 <h2 data-number="12.9" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">12.9</span> Your Turn</h2>
 <p>❄️ <strong>Your Turn:</strong> Show that in the SVD factorization, <span class="math inline">\(U\)</span> consists of the eigenvectors of <span class="math inline">\(AA'\)</span>.</p>
-<p>❄️ <strong>Your Turn:</strong> Find a characterization of the left null space of a matrix.</p>
-<p>❄️ <strong>Your Turn:</strong> Write an R function with a matrix as its sole argument, with return value consisting of an R list containing four matrices, representing the four fundamental subspaces of the input argument. Each matrix will consist of columns equal to a basis for the given subspace.</p>
+<p>❄️ <strong>Your Turn:</strong> Find a characterization of the left null space of a matrix <span class="math inline">\(A\)</span>.</p>
 
 
 </section>

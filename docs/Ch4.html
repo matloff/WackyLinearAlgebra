@@ -247,6 +247,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#elementary-row-operations" id="toc-elementary-row-operations" class="nav-link" data-scroll-target="#elementary-row-operations"><span class="header-section-number">6.2.1</span> Elementary row operations</a></li>
   <li><a href="#the-rref" id="toc-the-rref" class="nav-link" data-scroll-target="#the-rref"><span class="header-section-number">6.2.2</span> The RREF</a></li>
   <li><a href="#sec-review" id="toc-sec-review" class="nav-link" data-scroll-target="#sec-review"><span class="header-section-number">6.2.3</span> Recap of <span>Section&nbsp;3.3.1</span></a></li>
+  <li><a href="#partitioned-matrix-view-of-reduced-echelon-forms" id="toc-partitioned-matrix-view-of-reduced-echelon-forms" class="nav-link" data-scroll-target="#partitioned-matrix-view-of-reduced-echelon-forms"><span class="header-section-number">6.2.4</span> Partitioned-matrix view of Reduced Echelon Forms</a></li>
   </ul></li>
   <li><a href="#formal-definitions" id="toc-formal-definitions" class="nav-link" data-scroll-target="#formal-definitions"><span class="header-section-number">6.3</span> Formal Definitions</a></li>
   <li><a href="#row-and-column-rank" id="toc-row-and-column-rank" class="nav-link" data-scroll-target="#row-and-column-rank"><span class="header-section-number">6.4</span> Row and Column Rank</a></li>
@@ -418,17 +419,17 @@ woman   0   0       0   0     0</code></pre>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">runif</span>(<span class="dv">12</span>),<span class="at">nrow=</span><span class="dv">3</span>)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>          [,1]      [,2]      [,3]      [,4]
-[1,] 0.9270624 0.6938635 0.8141162 0.7038448
-[2,] 0.5689796 0.8883285 0.3286322 0.1612031
-[3,] 0.3772642 0.9901592 0.9279360 0.3257558</code></pre>
+<pre><code>           [,1]      [,2]       [,3]       [,4]
+[1,] 0.01571801 0.1350974 0.45373734 0.73174629
+[2,] 0.94233729 0.8159685 0.09609275 0.19683882
+[3,] 0.87632979 0.3633880 0.92852526 0.02661296</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>e <span class="sc">%*%</span> a  <span class="co"># matrix mult. is NOT e * a!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>          [,1]      [,2]      [,3]      [,4]
-[1,] 0.9270624 0.6938635 0.8141162 0.7038448
-[2,] 0.3772642 0.9901592 0.9279360 0.3257558
-[3,] 0.5689796 0.8883285 0.3286322 0.1612031</code></pre>
+<pre><code>           [,1]      [,2]       [,3]       [,4]
+[1,] 0.01571801 0.1350974 0.45373734 0.73174629
+[2,] 0.87632979 0.3633880 0.92852526 0.02661296
+[3,] 0.94233729 0.8159685 0.09609275 0.19683882</code></pre>
 </div>
 </div>
 <p>Yes, rows 2 and 3 were swapped.</p>
@@ -443,9 +444,25 @@ woman   0   0       0   0     0</code></pre>
 <li><p>Each pivot is the only nonzero entry in its column.</p></li>
 </ul>
 <p>The reader should verify that the matrix at the end of <a href="#sec-censusrref"><span>Section&nbsp;6.1</span></a> has these properties.</p>
+</section>
+<section id="sec-review" class="level3" data-number="6.2.3">
+<h3 data-number="6.2.3" class="anchored" data-anchor-id="sec-review"><span class="header-section-number">6.2.3</span> Recap of <a href="Ch2.html#sec-pencilpaper"><span>Section&nbsp;3.3.1</span></a></h3>
+<ul>
+<li><p>Each row operation can be performed via premultiplication by an elementary matrix. Each such matrix is invertible, and its inverse is an elementary matrix.</p></li>
+<li><p>Thus</p>
+<p><span id="eq-eeeb"><span class="math display">\[
+B_{rref} = E_k ... E_2 E_1 B
+\tag{6.1}\]</span></span></p>
+<p>for a sequence of invertible elementary matrices.</p></li>
+<li><p>And</p>
+<p><span class="math inline">\(B = (E_1)^{-1} (E_2)^{-1} ... (E_k)^{-1} B_{rref}\)</span>,</p>
+<p>where each <span class="math inline">\((E_i)^{-1}\)</span> is itself an elementary row operation.</p></li>
+</ul>
+</section>
+<section id="partitioned-matrix-view-of-reduced-echelon-forms" class="level3" data-number="6.2.4">
+<h3 data-number="6.2.4" class="anchored" data-anchor-id="partitioned-matrix-view-of-reduced-echelon-forms"><span class="header-section-number">6.2.4</span> Partitioned-matrix view of Reduced Echelon Forms</h3>
 <p>It is much easier to gain insight from RREF by viewing it in partitioned-matrix form:</p>
 <blockquote class="blockquote">
-<p>Partioned-Matrix View</p>
 <p>Say <span class="math inline">\(A\)</span> is of size <span class="math inline">\(m \textrm{ x } n\)</span>. Then <span class="math inline">\(A_{rref}\)</span> has the form</p>
 <p><span id="eq-rref"><span class="math display">\[
 \left (
@@ -454,25 +471,20 @@ I_{s} &amp; U \\
 0 &amp; 0  \\
 \end{array}
 \right )
-\tag{6.1}\]</span></span> where <span class="math inline">\(I_s\)</span> is an identity matrix of some size <span class="math inline">\(s\)</span> and <span class="math inline">\(U\)</span> has dimension <span class="math inline">\(s \textrm{ x } (n-s)\)</span>.</p>
+\tag{6.2}\]</span></span> where <span class="math inline">\(I_s\)</span> is an identity matrix of some size <span class="math inline">\(s\)</span> and <span class="math inline">\(U\)</span> has dimension <span class="math inline">\(s \textrm{ x } (n-s)\)</span>.</p>
 </blockquote>
-<p>Clearly, the rank of <span class="math inline">\(A_{rref}\)</span> is <span class="math inline">\(s\)</span>. It will turn out the <span class="math inline">\(s\)</span> is the rank of <span class="math inline">\(A\)</span> as well.</p>
-</section>
-<section id="sec-review" class="level3" data-number="6.2.3">
-<h3 data-number="6.2.3" class="anchored" data-anchor-id="sec-review"><span class="header-section-number">6.2.3</span> Recap of <a href="Ch2.html#sec-pencilpaper"><span>Section&nbsp;3.3.1</span></a></h3>
-<ul>
-<li><p>Each row operation can be performed via premultiplication by an elementary matrix. Each such matrix is invertible, and its inverse is an elementary matrix.</p></li>
-<li><p>Thus</p></li>
-</ul>
-<p><span id="eq-eeeb"><span class="math display">\[
-B_{rref} = E_k ... E_2 E_1 B
-\tag{6.2}\]</span></span></p>
-<p>for a sequence of invertible elementary matrices.</p>
-<ul>
-<li><p>And</p>
-<p><span class="math inline">\(B = (E_1)^{-1} (E_2)^{-1} ... (E_k)^{-1} B_{rref}\)</span>,</p>
-<p>where each <span class="math inline">\((E_i)^{-1}\)</span> is itself an elementary row operation.</p></li>
-</ul>
+<p>The Column-Reduced Echelon Form is similar:</p>
+<p><span id="eq-cref"><span class="math display">\[
+A_{cref} =
+\left (
+\begin{array}{rr}
+I_{t} &amp; 0 \\
+V &amp; 0  \\
+\end{array}
+\right )
+\tag{6.3}\]</span></span></p>
+<p>where <span class="math inline">\(I_t\)</span> is an identity matrix of some size <span class="math inline">\(t\)</span> and <span class="math inline">\(V\)</span> has dimension <span class="math inline">\((m-t) \textrm{ x } t\)</span>.</p>
+<p>Clearly, the row rank of <span class="math inline">\(A_{rref}\)</span> is <span class="math inline">\(s\)</span>, and its column rank is <span class="math inline">\(t\)</span>. We will prove shortly that the <span class="math inline">\(s\)</span> is the column rank of <span class="math inline">\(A\)</span> as well.</p>
 </section>
 </section>
 <section id="formal-definitions" class="level2" data-number="6.3">
@@ -544,16 +556,16 @@ a_1 v_1 + ... + a_k v_k
 </div>
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>Say <span class="math inline">\(A\)</span> has column rank <span class="math inline">\(r\)</span>. Then there exist <span class="math inline">\(r\)</span> (and no more than <span class="math inline">\(r\)</span>) linearly independent columns of <span class="math inline">\(A\)</span>. For convenience of notation, say these are the first <span class="math inline">\(r\)</span> columns, and call them <span class="math inline">\(c_1,...,c_r\)</span>. Then the first <span class="math inline">\(r\)</span> columns of <span class="math inline">\(VA\)</span> are <span class="math inline">\(Vc_1,...,Vc_r\)</span>, by matrix partitioning.</p>
-<p>Note that for a vector <span class="math inline">\(x\)</span>, <span class="math inline">\(Vx = 0\)</span> if and only if <span class="math inline">\(x = 0\)</span>. (Just multiply <span class="math inline">\(Vx = 0\)</span> on the left by <span class="math inline">\(V^{-1}\)</span>.) So a linear combination <span class="math inline">\(\lambda_1 c_1+...+\lambda_r c_r\)</span> is 0 if and only if the corresponding linear combination <span class="math inline">\(\lambda_1 Vc_1+...+\lambda_r Vc_r\)</span> is 0. Thus the vectors <span class="math inline">\(Vc_i\)</span> are linearly independent, <span class="math inline">\(VA\)</span> has column rank <span class="math inline">\(r\)</span>.</p>
+<p>Note that for a vector <span class="math inline">\(x\)</span>, <span class="math inline">\(Vx = 0\)</span> if and only if <span class="math inline">\(x = 0\)</span>. (Just multiply <span class="math inline">\(Vx = 0\)</span> on the left by <span class="math inline">\(V^{-1}\)</span>.) So a linear combination <span class="math inline">\(\lambda_1 c_1+...+\lambda_r c_r\)</span> is 0 if and only if the corresponding linear combination <span class="math inline">\(\lambda_1 Vc_1+...+\lambda_r Vc_r\)</span> is 0. Thus the vectors <span class="math inline">\(Vc_i\)</span> are linearly independent, and <span class="math inline">\(VA\)</span> has column rank <span class="math inline">\(r\)</span>.</p>
 <p>The argument for the case of <span class="math inline">\(AW\)</span> is identical, this time involving rows of <span class="math inline">\(A\)</span>.</p>
 <p><span class="math inline">\(\square\)</span></p>
 </div>
 <div id="thm-twocolranks" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 6.2 </strong></span>The column rank of a matrix <span class="math inline">\(B\)</span> is equal to the column rank of its RREF, <span class="math inline">\(B_{rref}\)</span>, which in turn is <span class="math inline">\(s\)</span> in <a href="#eq-rref">Equation&nbsp;<span>6.1</span></a>.</p>
+<p><span class="theorem-title"><strong>Theorem 6.2 </strong></span>The column rank of a matrix <span class="math inline">\(B\)</span> is equal to the column rank of its RREF, <span class="math inline">\(B_{rref}\)</span>, which in turn is <span class="math inline">\(s\)</span> in <a href="#eq-rref">Equation&nbsp;<span>6.2</span></a>.</p>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>The above <a href="#thm-ranknotchange">Theorem&nbsp;<span>6.1</span></a> says that pre-postmultiplying <span class="math inline">\(B\)</span> will not change its column rank. Then invoke <a href="#eq-eeeb">Equation&nbsp;<span>6.2</span></a>.</p>
-<p>It is clear that any column in <span class="math inline">\(U\)</span> in <a href="#eq-rref">Equation&nbsp;<span>6.1</span></a> can be written as a linear combination of the columns of <span class="math inline">\(I_s\)</span>. Thus the column rank of <span class="math inline">\(B\)</span> is <span class="math inline">\(s\)</span>.</p>
+<p><span class="proof-title"><em>Proof</em>. </span>The above <a href="#thm-ranknotchange">Theorem&nbsp;<span>6.1</span></a> says that pre-postmultiplying <span class="math inline">\(B\)</span> will not change its column rank. Then invoke <a href="#eq-eeeb">Equation&nbsp;<span>6.1</span></a>.</p>
+<p>It is clear that any column in <span class="math inline">\(U\)</span> in <a href="#eq-rref">Equation&nbsp;<span>6.2</span></a> can be written as a linear combination of the columns of <span class="math inline">\(I_s\)</span>. Thus the column rank of <span class="math inline">\(B\)</span> is <span class="math inline">\(s\)</span>.</p>
 <p><span class="math inline">\(\square\)</span></p>
 </div>
 <div id="lem-elemnotchangerank" class="theorem lemma">
@@ -564,7 +576,7 @@ a_1 v_1 + ... + a_k v_k
 <p><span class="math display">\[
 a_1 r_1 + ... + a_m r_m \neq 0
 \]</span></p>
-<p>For any of the three elementary operations, a slightly modified linear combination works (i.e.&nbsp;will be nonzero) with the modified matrix:</p>
+<p>For any of the three elementary operations, a slightly modified set of the <span class="math inline">\(a_i\)</span> works (i.e.&nbsp;will be nonzero), using the modified elementary matrix:</p>
 <ul>
 <li><p>Swap rows <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span>: Swap <span class="math inline">\(a_i\)</span> and <span class="math inline">\(a_j\)</span>.</p></li>
 <li><p>Multiplying row <span class="math inline">\(i\)</span> by a constant <span class="math inline">\(c\)</span>. Since <span class="math inline">\(r_i \rightarrow c r_i\)</span>, set <span class="math inline">\(a_i \rightarrow (1/c) a_i\)</span>.</p></li>
@@ -576,7 +588,7 @@ a_1 r_1 + ... + a_m r_m \neq 0
 <p><span class="theorem-title"><strong>Theorem 6.3 (The row rank and column rank of a matrix are equal.) </strong></span>&nbsp;</p>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>The lemma shows that every nonzero linear combination of the rows of <span class="math inline">\(A\)</span> corresponds to one for the rows of <span class="math inline">\(A_{rref}\)</span>, and vice versa. Thus the row rank of <span class="math inline">\(A\)</span> is the same as that of <span class="math inline">\(A_{rref}\)</span>. But that is <span class="math inline">\(s\)</span> in <a href="#eq-rref">Equation&nbsp;<span>6.1</span></a>, which we found earlier was equal to the column rank of <span class="math inline">\(A\)</span>.</p>
+<p><span class="proof-title"><em>Proof</em>. </span>The lemma shows that every nonzero linear combination of the rows of <span class="math inline">\(A\)</span> corresponds to one for the rows of <span class="math inline">\(A_{rref}\)</span>, and vice versa. Thus the row rank of <span class="math inline">\(A\)</span> is the same as that of <span class="math inline">\(A_{rref}\)</span>. But that is <span class="math inline">\(s\)</span> in <a href="#eq-rref">Equation&nbsp;<span>6.2</span></a>, which we found earlier was equal to the column rank of <span class="math inline">\(A\)</span>.</p>
 <p><span class="math inline">\(\square\)</span></p>
 </div>
 <p>In <a href="#sec-censusrref"><span>Section&nbsp;6.1</span></a>, we found the matrix <span class="math inline">\(A'A\)</span> to not be of full rank. It is surprising that so was <span class="math inline">\(A\)</span>:</p>
@@ -596,6 +608,59 @@ a_1 r_1 + ... + a_m r_m \neq 0
 </div>
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>The row rank of <span class="math inline">\(b\)</span> equals its column rank. The former is bounded above by <span class="math inline">\(m\)</span> while the latter’s bound is <span class="math inline">\(n\)</span>.</p>
+<p><span class="math inline">\(\square\)</span></p>
+</div>
+<div id="thm-rankapa" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 6.5 </strong></span>The matrix <span class="math inline">\(A'A\)</span> has the same rank as <span class="math inline">\(A\)</span>.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Using the column analog of <a href="#eq-eeeb">Equation&nbsp;<span>6.1</span></a>, we can write</p>
+<p><span class="math display">\[
+A_{cref} = AF
+\]</span></p>
+<p>where <span class="math inline">\(F\)</span> is an invertible product of matrices for elementary column operations. Then</p>
+<p><span class="math display">\[
+(A_{rref})' A_{rref}) = F'A'AF
+\]</span></p>
+<p><a href="#thm-ranknotchange">Theorem&nbsp;<span>6.1</span></a> tells us that the rank of <span class="math inline">\(F'A'A\)</span> has the same rank as <span class="math inline">\(A'A\)</span>, and <span class="math inline">\(F'A'AF\)</span> has the same rank as <span class="math inline">\(F'A'A\)</span>, in turn the same rank as <span class="math inline">\(A'A\)</span>. So we can concentrate on <span class="math inline">\((A_{rref})' A_{rref})\)</span></p>
+<p>Using <a href="#eq-rref">Equation&nbsp;<span>6.2</span></a>, we have</p>
+<p><span class="math display">\[
+(A_{rref})' A_{rref})  =
+\left (
+\begin{array}{rr}
+I_s &amp; U \\
+U' &amp; U'U  \\
+\end{array}
+\right )
+\]</span></p>
+<p>The presence of <span class="math inline">\(I_s\)</span> tells us there are at least <span class="math inline">\(s\)</span> linearly independent rows, thus rank at least <span class="math inline">\(s\)</span>. So the rank of <span class="math inline">\(A'A\)</span> is at least that of <span class="math inline">\(A\)</span>.</p>
+<p>On the other hand, apply our knowlege of partitioning.</p>
+<ul>
+<li><p>Say <span class="math inline">\(A\)</span> is <span class="math inline">\(m \textrm{ x } n\)</span>. Write</p>
+<p><span class="math display">\[
+A'A =
+\left (
+\begin{array}{r}
+c_1 \\
+... \\
+c_n \\
+\end{array}
+\right )
+A =
+\left (
+\begin{array}{r}
+c_1 A \\
+... \\
+c_n A \\
+\end{array}
+\right )
+\]</span></p>
+<p>where the <span class="math inline">\(c_i\)</span> are the columns of <span class="math inline">\(A\)</span>, thus the rows of <span class="math inline">\(A'\)</span>.</p>
+<p>Thus each row <span class="math inline">\(c_i A\)</span> of <span class="math inline">\(A'A\)</span> is a linear combination of the rows of <span class="math inline">\(A\)</span>.</p></li>
+<li><p>Recall that the rank of <span class="math inline">\(A'A\)</span> is its maximal number of linearly independent rows. We saw above that each row of <span class="math inline">\(A'A\)</span> is a linear combination of the rows of <span class="math inline">\(A\)</span>. Thus in turn, each linear combination of the rows of <span class="math inline">\(A'A\)</span> is a linear combination of linear combinations of rows of <span class="math inline">\(A\)</span> – still a linear combination of the rows of <span class="math inline">\(A\)</span>!</p></li>
+<li><p>At most <span class="math inline">\(s\)</span> members of that latter linear combination are linearly independent. In other words, the rank of <span class="math inline">\(A'A\)</span> is at most <span class="math inline">\(s\)</span>.</p></li>
+<li><p>Thus the rank of <span class="math inline">\(A'A\)</span> is also <span class="math inline">\(s\)</span>.</p></li>
+</ul>
 <p><span class="math inline">\(\square\)</span></p>
 </div>
 </section>
