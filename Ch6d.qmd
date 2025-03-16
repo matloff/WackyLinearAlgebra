@@ -7,7 +7,7 @@ library(qeML)
 
 {{< pagebreak >}}
 
-# Pseudoinverse and Double Descent
+# Pseudoinverse and Double Descent {#sec-chapDD}
 
 ::: {.callout-note}
 

@@ -296,8 +296,8 @@ columns, thus solving the problem of less than full rank, but the use of
 or thousands of columns, say, the use of generalized inverses may be more
 convenient.
 
-We omit the formal definition of pseudoinverses and their properties. We
-will note the use of the latter as the need arises. For now, we state
+We will omit the formal definition of pseudoinverses and their
+properties, returning to the topic in @sec-chapDD.  For now, we state
 without proof that:
 
 * One of the most famous forms of pseudoinverse, Moore-Penrose, is 
@@ -374,7 +374,7 @@ $$
 -13361.634-(-2660.821) = -10700.81
 $$
 
-## Application: SVD as the Best Low-Rank Approximation
+## Dimension Reduction: SVD as the Best Low-Rank Approximation
 
 
 ## Your Turn
@@ -385,3 +385,11 @@ the eigenvectors of $AA'$.
 ❄️  **Your Turn:** Find a characterization of the left null space of a
 matrix $A$.
 
+❄️  **Your Turn:** Write an R function will call form
+
+``` r
+getLowRank(A,lowrank)
+```
+
+that uses SVD to find the best approximation to the matrix **A** of rank
+**lowrank**.
