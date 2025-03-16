@@ -73,7 +73,32 @@ turn out that $\sigma_i = 0$ for $i=r+1,...,n$.
 Recall @sec-recsys, which began with movie ratings data. We would like
 to predict the rating some particular user would give to some particular
 movie. It will turn out that we can set up SVD in such a way that $U$
-contains movie data and $V$ contains user data.
+contains movie data and $V$ contains user data. We will explore this and
+other methods in @sec-recsys.
+
+## Application: Text Classification
+
+An oft-used example is that in which we have a collection of newspaper
+articles that we wish to categorize, say politics, sports, health,
+finance and so on. Say one of the articles includes the word *bonds*; is
+it referring to financial instruments, family relations, former baseball
+star Barry Bonds etc.?
+
+In spite of today's dazzling array of Large Language Models, a simple problem 
+like this may be better solved using straightforward methods, such as
+SVD. We set up a *document-term matrix*, with element $(i,j)$ being 1 or
+0, according to whether document $i$ contains word $j$. Applying SVD to
+this matrix, we have a setting with similar appeal to the recommender 
+systems example above, in which $U$ contains our data on documents and
+$V$ does the same for words.
+
+## Application: Dimension Reduction
+
+Recall that in the matrix $\Sigma$, the eigenvalues are arranged in
+decreasing order, possibly followed by 0s. This suggests that we can
+achieve dimension reduction by replacing the smaller eigenvalues by 0s,
+with corresponding adjustments to the columns of $U$ and $V$. We will
+discuss this below in @sec-svddimred. 
 
 ## The Four Fundamental Subspaces of a Matrix
 
@@ -261,21 +286,7 @@ to be $A$?
     
     That last expression is equal to $A$, by @eq-aissumuivi.
 
-## SVD: the Data Scientist's Swiss Army Knife
-
-There are a great many pieces of information and sources of tools packed
-into this innocuous-looking factorization.  Let's take a look at some:
-
-### Rank of $A$
-
-This is the number of nonzero values in $\Sigma$. This follows from
-@thm-ranknotchange, since $U$ and $V$, as orthogonal matrices, are invertible.
-
-It should be noted, though, that if there are some really tiny elements
-there, one might also entertain the thought that the true rank is less
-than this size, as these tiny values may be due to roundoff error from 0.
-
-### SVD as a basis for matrix generalized inverse
+## SVD as a basis for matrix generalized inverse
 
 Recall the example in @sec-censusrref. We could not have dummy-variable
 columns for both male and female, as their sum would be a column of all
@@ -296,39 +307,40 @@ columns, thus solving the problem of less than full rank, but the use of
 or thousands of columns, say, the use of generalized inverses may be more
 convenient.
 
-We will omit the formal definition of pseudoinverses and their
-properties, returning to the topic in @sec-chapDD.  For now, we state
-without proof that:
+We will omit the formal definition of inverses and their
+properties, returning to the topic in @sec-chapDD.  For now, we note the
+following:
 
-* One of the most famous forms of pseudoinverse, Moore-Penrose, is 
-  based on SVD.  Given the SVD of a matrix $M$, 
+One of the most famous forms of generalized inverse, is the
+Moore-Penrose *pseudoinverse*, based on SVD.  Given the SVD of a matrix
+$M$, 
 
-  $$
-  M = U_M \Sigma_M V_{M}'
-  $$
+$$
+M = U_M \Sigma_M V_{M}'
+$$
 
-  its Moore-Penrose inverse, denoted by $M^{-1}$ is 
+its Moore-Penrose inverse, denoted by $M^{+}$ is 
 
-  $$
-  M^{-} = V_M \Sigma_M^{-} U_{M}'
-  $$
+$$
+M^{+} = V_M \Sigma_M^{+} U_{M}'
+$$
 
-  where $\Sigma_M^{-}$ is the diagonal matrix obtained form $\Sigma_M$
-  by replacing each nonzero element by its reciprocal.
+where $\Sigma_M^{+}$ is the diagonal matrix obtained form $\Sigma_M$
+by replacing each nonzero element by its reciprocal.
 
-* The Moore-Penrose solution of $Mz = w$ for vectors $z$ and $w$, is
-  $M^{-} w$.
+The Moore-Penrose solution of $Mz = w$ for vectors $z$ and $w$, is
+$M^{+} w$.
 
-By the way, the R function **MASS::ginv** performs the necessary
+The R function **MASS::ginv** performs the necessary
 computation for us; we need not call **svd()**.
 
-### SVD in linear models
+## SVD in linear models
 
 Now apply this to our linear model problem @eq-overdetermined. The
 claim is that 
 
 $$
-b = A^{-} S = V \Sigma^{-} U' S
+b = A^{+} S = V \Sigma^{+} U' S
 $$ 
 
 solves the equation. [As in @sec-matalg, where we found that the inverse of
@@ -338,10 +350,10 @@ messy):
 
 $$
 \begin{aligned}
-A'A b &= (U \Sigma V')' (U \Sigma V') (U \Sigma V')^{-} S \\
-&= (V \Sigma U') (U \Sigma V') (V \Sigma^{-} U') S \\
-&= V \Sigma^2 V'V \Sigma^{-} U' S \\
-&= V \Sigma^{-} U' S
+A'A b &= (U \Sigma V')' (U \Sigma V') (U \Sigma V')^{+} S \\
+&= (V \Sigma U') (U \Sigma V') (V \Sigma^{+} U') S \\
+&= V \Sigma^2 V'V \Sigma^{+} U' S \\
+&= V \Sigma^{+} U' S
 \end{aligned}
 $$
 
@@ -374,7 +386,7 @@ $$
 -13361.634-(-2660.821) = -10700.81
 $$
 
-## Dimension Reduction: SVD as the Best Low-Rank Approximation
+## Dimension Reduction: SVD as the Best Low-Rank Approximation{#sec-svddimred}
 
 
 ## Your Turn
@@ -393,3 +405,5 @@ getLowRank(A,lowrank)
 
 that uses SVD to find the best approximation to the matrix **A** of rank
 **lowrank**.
+
+❄️  **Your Turn:**  xval dim red
