@@ -66,7 +66,7 @@ Examples:
 
 * The chapter on eigenanalysis begins with explaining the goals of PCA
   (with a real dataset). We derive the first PC as a constrained
-  minimization of variance, and behold! -- the solution has the form 
+  maximization of variance, and behold! -- the solution has the form 
   $Ax = \lambda x$! So eigenanalysis comes from solving a Data Science
   problem. PCA is later covered in detail in the following chapter,
   but with this motivation we develop the properties of eigenvalues and
@@ -74,14 +74,14 @@ Examples:
 
 ## Who Is This Book For?
 
-Of course the book should work well as a classroom textbook. If a Data
+Of course the book should work very well as a classroom textbook. If a Data
 Science or Statistics program requires linear algebra offered by a Math
 Department, the level and content of this book should be similar to that
 math course, but with much better student motivation due to the Data
 Science emphasis of the book.  The "applications first" approach is key
 to that motivational power.
 
-Actually, the applications-center nature of the book should make
+Actually, the applications-centered nature of the book should make
 teaching the course more rewarding for instructors as well, and the use
 of Quarto enables easy conversion to Powerpoint by instructors.
 
@@ -116,9 +116,9 @@ methods.
 
 Thus the many R examples are meant to make the mathematical concepts
 concrete. This is definitely not an "how to do linear algebra in R"
-book.  In the software context, the Feynman quote above might be,
-"Knowing how to use code libraries for something is useless if one
-doesn't understand the nature of that thing."
+book.  In the software context, the Feynman quote above might be, "There
+is a difference between knowing how to use code libraries for something
+and knowing the core nature of that thing."
 
 That said, the code examples do serve a vital role in making the math
 operations concrete.
@@ -154,7 +154,8 @@ library(qeML)
 
 ## Thanks
 
-I deeply appreciate feedback from: Mike Hannon, Sana Vaziri, Nick
-Knueppel and Joe Rickert.
+I deeply appreciate feedback from: Mike Hannon, Nick
+Knueppel, Joe Rickert and Noah Perry.
+
 
 

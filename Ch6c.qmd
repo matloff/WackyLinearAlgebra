@@ -68,7 +68,9 @@ Note the dimensions:
 Let $r$ denote the rank of $A$. Recall that $r \leq \min(m,n)$. It will
 turn out that $\sigma_i = 0$ for $i=r+1,...,n$.
 
-## Application: Recommender Systems
+## Example Applications 
+
+### Recommender Systems
 
 Recall @sec-recsys, which began with movie ratings data. We would like
 to predict the rating some particular user would give to some particular
@@ -76,7 +78,7 @@ movie. It will turn out that we can set up SVD in such a way that $U$
 contains movie data and $V$ contains user data. We will explore this and
 other methods in @sec-recsys.
 
-## Application: Text Classification
+### Text Classification
 
 An oft-used example is that in which we have a collection of newspaper
 articles that we wish to categorize, say politics, sports, health,
@@ -92,7 +94,7 @@ this matrix, we have a setting with similar appeal to the recommender
 systems example above, in which $U$ contains our data on documents and
 $V$ does the same for words.
 
-## Application: Dimension Reduction
+### Dimension Reduction
 
 Recall that in the matrix $\Sigma$, the eigenvalues are arranged in
 decreasing order, possibly followed by 0s. This suggests that we can
@@ -299,7 +301,7 @@ And yet the equation from which that comes,
 
 $$
 A'A b = A'S
-$${#eq-overdetermined}
+$${#eq-overdetermined}  
 
 is still valid. We could, as in that example, remove one of the gender
 columns, thus solving the problem of less than full rank, but the use of
@@ -334,19 +336,23 @@ $M^{+} w$.
 The R function **MASS::ginv** performs the necessary
 computation for us; we need not call **svd()**.
 
-## SVD in linear models
+## SVD in linear models  
 
-Now apply this to our linear model problem @eq-overdetermined. The
-claim is that 
+Now apply this to our linear model problem (@eq-overdetermined).
+We claim that 
 
 $$
 b = A^{+} S = V \Sigma^{+} U' S
 $$ 
 
-solves the equation. [As in @sec-matalg, where we found that the inverse of
-a product is the reverse product of the inverses, the same holds for
-pseudoinverses.]{.column-margin} Let's check (warning: this will be
-messy):
+solves the equation. (Actually if $A$ is of less than full rank, there
+are infinitely many solutions, a point discussed in detail in
+@sec-chapDD.)
+
+Let's check. Before beginning, note that as in @sec-matalg, where we
+found that the inverse of a product is the reverse product of the
+inverses, the same holds for pseudoinverses.  Also, recall that the
+orthogonal nature of $U$ and $V$ implies that $U'U = I$ and $V'V = I$.
 
 $$
 \begin{aligned}
@@ -357,7 +363,7 @@ A'A b &= (U \Sigma V')' (U \Sigma V') (U \Sigma V')^{+} S \\
 \end{aligned}
 $$
 
-But that is exactly the expression we found for $A^{-1}S$ above.
+But that is exactly the expression we found for $A^{+}S$ above.
 
 $\square$
 
@@ -373,8 +379,8 @@ svc <- factorsToDummies(svc)
 head(svc)
 x <- cbind(1,svc[,-2])
 head(x)
-xminus <- MASS::ginv(x)
-bhat <- xminus %*% svc[,2]
+xplus <- MASS::ginv(x)
+bhat <- xplus %*% svc[,2]
 bhat
 lm(wageinc ~ .,svcensus[,-c(2,3)])$coef
 ```
@@ -406,4 +412,3 @@ getLowRank(A,lowrank)
 that uses SVD to find the best approximation to the matrix **A** of rank
 **lowrank**.
 
-❄️  **Your Turn:**  xval dim red
