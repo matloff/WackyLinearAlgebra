@@ -96,7 +96,7 @@ Their solution is simple; Add some quantity to the diagonal of $A'A$.
 Specifically, @eq-linregformula now becomes
 
 $$
-\widehat{\beta} - (A'A + \lambda I)^{-1} A'S
+\widehat{\beta} = (A'A + \lambda I)^{-1} A'S
 $${#eq-ridge}
 
 where $\lambda$ is a positive number chosen by the analyst.
@@ -200,6 +200,8 @@ l2norm(bhOLS)
 
 ```
 
+## Shrinkage May Occur More for Some $\widehat{\beta}_i$ than Others
+
 ## Choosing the Value of $\lambda$
 
 So, how do we choose $\lambda$? We need to note a couple of very
@@ -268,6 +270,17 @@ less likely to overfit; its MSE value, 90.28, was only slightly larger
 than the best one. In each case, all 90 predictors had nonzero
 coefficient estimates.
 
+We can then predict as usual. Say we have a song similar to that in
+**s50[1,]**, but with **V2** equal to 25.0.
+
+```{r}
+z <- s50[1,-1]  # exclude Y
+z[1,1] <- 25.0
+predict(glmOut,z)
+```
+
+The year of release is predicted to be 2003.
+
 ## Modern View{#sec-pgtn}
 
 There are many ways to deal with multicollinearity other than shrinkage,
@@ -310,8 +323,10 @@ hundreds or even more, some analysts prefer the convenience of ridge.
 
 ## Formalizing the Notion of Shrinkage
 
-In the early 1980s, the statistical world was shocked by research by
-James and Stein that found, in short that:
+How in the world did statisticians develop an interest in shrinking
+estimators? A watershed event occurred in the early 1980s, when the
+statistical world was shocked by research by James and Stein that found,
+in short that:
 
 <blockquote>
 
@@ -336,6 +351,9 @@ amount of shrinkage is minor.
 
 In the case of linear regression, shrinkage works there too, with $q$
 being the number of columns in the $A$ matrix. 
+
+So, let's view the issue of shrinkage more formally, first  for ridge
+and later for the LASSO.
 
 ### Shrinkage through length penalization
 
@@ -459,6 +477,9 @@ represent $b_1$ and $b_2$.
   requires us to choose a point $b$ somewhere in the
   diamond, including the boundary.
 
+* Note that each of the four corners of the diamond represents a sparse
+  solution. For instance, the point $(0,\gamma)$ has $b_2 = 0$
+
 * The concentric ellipses depict the values of $c(b) = (S - Ab)'(S -
   Ab)$, as follows.  
 
@@ -481,10 +502,16 @@ represent $b_1$ and $b_2$.
 * The solution is then a point $b$ in which the ellipse
   just barely touches the diamond.
 
-* The same argument applies to ridge, where we have a circle rather than
-  a diamond. The major difference, though, is that with the LASSO, the
-  solution will almost certainly be one of the corners of the diamond,
-  each of which sets some $b_i$ to 0.
+* Picture in your mind an ellipse, say the inner one in the graph,
+  growing larger and larger, while retaining the same center and
+  orientation, until it hits the diamond. That is the outer ellipse,
+  which indeed hits the diamond at one of the corners.
+
+* Then picture other ellipses, at other centers with other orientations,
+  and go through the same process in your mind's eye. You will see that
+  [Of course, we are in just two dimensions here. With $p = 10$ predictor variables, the graph would be in 10 dimensions, beyond our human ability to picture. But we still would have a diamong in that space, with $2p$ corners etc.]{.column-margin}
+  typically the solution turns out to be one of the corners. Again, this
+  is important because it gives us a sparse solution.
 
 ### Implication for dimension reduction.
 
@@ -524,15 +551,13 @@ length(unique(nyctaxi$PULocationID))
 length(unique(nyctaxi$DOLocationID))
 ```
 
+If we fit, say, a linear model, $lm$ will form a dummy variable for each
+of the pickup and dropoff locations. Thus we will have $p = 1+143+205+1 = 350$. 
 An old rule of thumb says that if we have $p$ predictors and $n$ data
 points, we should keep $p < \sqrt{n}$ to avoid overfitting. As we will
-see in a later chapter, these days that rule is being questioned, but
-let's see how it fits in here. In our case here, $p = 1+143+205+1 =
-350$, much larger than $p = \sqrt{10000} = 100$. And if we are fitting a
-linear model, we may consider pickup/dropoff location interaction
-variables, basically products of the pickup and dropoff dummy variables.
-[To avoid exact multicollinearity, we will use only 142 and 204 of the
-pickup and dropoff variables.]{.column-margin}
+see in a later chapter, these days that rule is being questioned, so
+[The problem would be even worse if we add  pickup/dropoff location interaction variables, basically products of the pickup and dropoff dummy variables.]{.column-margin} since here we have $\sqrt{n} = 100$, there is a strong suggestion that
+we do some dimension reduction.
 
 Thus we either should delete some of the pickup and dropoff variables,
 or use all of them but temper the fit using ridge. The latter may be
@@ -545,6 +570,33 @@ nycwide <- factorsToDummies(nyctaxi[,-1])
 glmOut <- cv.glmnet(x=nycwide,y=nyctaxi[,1],alpha=0)
 glmOut
 ```
+
+The best $\lambda$ value was found to be 0.3002.
+
+## Iterative Calculation{#sec-iter}
+
+An advantage of ridge over LASSO is that the former has an explicit (we
+day *closed-form*) solution, which is not the case for the LASSO. In
+fact, many algorithms in statistics/machine learning lack closed-form
+solutions, in which case one must resort to *iterative* computation.
+
+The basis idea is to first (somehow) make some guess as to the value
+of the desired quantity, say $\widehat{\beta}$ in the LASSO. The
+algorithm crunches this to make a new guess, hopefully one that is more
+accurate than the first. One continues this process until, hopefully, it
+*converges*, meaning that it no longer changes much from one iteration
+to the next. The current guess is then deemed to be the correct value.
+
+At first one may think that such internal details of computation need
+not concern the end user of the software. But the fact is that often an
+algorithm will fail to converge, and the user may need to get more
+directly involved, say in suggesting the value of the initial guess.
+Or, as we will see later, some machine learning algorithm have a
+parameter called the *learning rate*; a small value directs the
+algorithm to take smaller steps in generating new guesses. On the one
+hand, this can slow the computation but on the other, we may be less
+likely to overshoot the true value.
+
 
 
 ## A Warning
