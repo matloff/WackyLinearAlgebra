@@ -241,18 +241,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#svd-in-linear-models" id="toc-svd-in-linear-models" class="nav-link active" data-scroll-target="#svd-in-linear-models"><span class="header-section-number">13.0.1</span> SVD in linear models</a></li>
-  <li><a href="#example-census-data" id="toc-example-census-data" class="nav-link" data-scroll-target="#example-census-data"><span class="header-section-number">13.1</span> Example: Census Data</a></li>
-  <li><a href="#svd-as-the-minimum-norm-solution" id="toc-svd-as-the-minimum-norm-solution" class="nav-link" data-scroll-target="#svd-as-the-minimum-norm-solution"><span class="header-section-number">13.2</span> SVD as the Minimum-Norm Solution</a></li>
-  <li><a href="#application-explaining-the-mystery-of-double-descent" id="toc-application-explaining-the-mystery-of-double-descent" class="nav-link" data-scroll-target="#application-explaining-the-mystery-of-double-descent"><span class="header-section-number">13.3</span> Application: Explaining the Mystery of ``Double Descent”</a>
+  <li><a href="#svd-as-the-minimum-norm-solution" id="toc-svd-as-the-minimum-norm-solution" class="nav-link active" data-scroll-target="#svd-as-the-minimum-norm-solution"><span class="header-section-number">13.1</span> SVD as the Minimum-Norm Solution</a></li>
+  <li><a href="#application-explaining-the-mystery-of-double-descent" id="toc-application-explaining-the-mystery-of-double-descent" class="nav-link" data-scroll-target="#application-explaining-the-mystery-of-double-descent"><span class="header-section-number">13.2</span> Application: Explaining the Mystery of ``Double Descent”</a>
   <ul class="collapse">
-  <li><a href="#motivating-example" id="toc-motivating-example" class="nav-link" data-scroll-target="#motivating-example"><span class="header-section-number">13.3.1</span> Motivating example</a></li>
-  <li><a href="#overfitting-and-beyond" id="toc-overfitting-and-beyond" class="nav-link" data-scroll-target="#overfitting-and-beyond"><span class="header-section-number">13.3.2</span> Overfitting and BEYOND</a></li>
-  <li><a href="#the-classic-and-modern-views" id="toc-the-classic-and-modern-views" class="nav-link" data-scroll-target="#the-classic-and-modern-views"><span class="header-section-number">13.3.3</span> The classic and modern views</a></li>
-  <li><a href="#how-can-this-bizarre-effect-occur" id="toc-how-can-this-bizarre-effect-occur" class="nav-link" data-scroll-target="#how-can-this-bizarre-effect-occur"><span class="header-section-number">13.3.4</span> How can this bizarre effect occur?</a></li>
+  <li><a href="#motivating-example" id="toc-motivating-example" class="nav-link" data-scroll-target="#motivating-example"><span class="header-section-number">13.2.1</span> Motivating example</a></li>
+  <li><a href="#overfitting-and-beyond" id="toc-overfitting-and-beyond" class="nav-link" data-scroll-target="#overfitting-and-beyond"><span class="header-section-number">13.2.2</span> Overfitting and BEYOND</a></li>
+  <li><a href="#the-classic-and-modern-views" id="toc-the-classic-and-modern-views" class="nav-link" data-scroll-target="#the-classic-and-modern-views"><span class="header-section-number">13.2.3</span> The classic and modern views</a></li>
+  <li><a href="#how-can-this-bizarre-effect-occur" id="toc-how-can-this-bizarre-effect-occur" class="nav-link" data-scroll-target="#how-can-this-bizarre-effect-occur"><span class="header-section-number">13.2.4</span> How can this bizarre effect occur?</a></li>
   </ul></li>
-  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">13.4</span> Your Turn</a></li>
-  <li><a href="#your-turn-1" id="toc-your-turn-1" class="nav-link" data-scroll-target="#your-turn-1"><span class="header-section-number">13.5</span> Your Turn</a></li>
+  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">13.3</span> Your Turn</a></li>
+  <li><a href="#your-turn-1" id="toc-your-turn-1" class="nav-link" data-scroll-target="#your-turn-1"><span class="header-section-number">13.4</span> Your Turn</a></li>
   </ul>
 </nav>
     </div>
@@ -261,7 +259,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Pseudoinverse and Double Descent</span></h1>
+<h1 class="title"><span id="sec-chapDD" class="quarto-section-identifier"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Pseudoinverse and Double Descent</span></span></h1>
 </div>
 
 
@@ -290,108 +288,9 @@ Goals of this chapter:
 <p>We learned earlier that in a linear regression model, a certain matrix inverse needs to exist in order to calculate the standard least-squares solution. But solutions do exist more generally, and that fact will turn out to be useful, even exposing some very surprising numerical behavior.</p>
 </div>
 </div>
-<p>Recall the example in <a href="Ch4.html#sec-censusrref"><span>Section&nbsp;6.1</span></a>. We could not have dummy-variable columns for both male and female, as their sum would be a column of all 1s, in addition to a column the X data matrix already had. The three columns would then have a nonzero linear combination that evaluates to the 0 vector. Then in <a href="Ch3.html#eq-linregformula">Equation&nbsp;<span>5.4</span></a>, <span class="math inline">\(A\)</span> (i.e.&nbsp;X) would not be of full rank, and <span class="math inline">\((A'A)^{-1}\)</span> would not exist.</p>
-<p>And yet the equation from which that comes,</p>
-<p><span id="eq-overdetermined"><span class="math display">\[
-A'A b = A'S
-\tag{13.1}\]</span></span></p>
-<p>is still valid. We could, as in that example, remove one of the gender columns, thus solving the problem of less than full rank, but the use of <em>pseudoinverses</em> (special cases of <em>generalized inverses</em>) solves the problem directly. If <span class="math inline">\(A\)</span> has hundreds or thousands of columns, say, the use of pseudoinverses may be more convenient.</p>
-<p>We omit the formal definition of pseudoinverses and their properties. We will note the use of the latter as the need arises. For now, we state without proof that:</p>
-<ul>
-<li><p>One of the most famous forms of pseudoinverse, Moore-Penrose, is based on SVD. Given the SVD of a matrix <span class="math inline">\(M\)</span>,</p>
-<p><span class="math display">\[
-M = U_M \Sigma_M V_{M}'
-\]</span></p>
-<p>its Moore-Penrose inverse, denoted by <span class="math inline">\(M^{-1}\)</span> is</p>
-<p><span class="math display">\[
-M^{-} = V_M \Sigma_M^{-} U_{M}'
-\]</span></p>
-<p>where <span class="math inline">\(\Sigma_M^{-}\)</span> is the diagonal matrix obtained form <span class="math inline">\(\Sigma_M\)</span> by replacing each nonzero element by its reciprocal.</p></li>
-<li><p>The Moore-Penrose solution of <span class="math inline">\(Mz = w\)</span> for vectors <span class="math inline">\(z\)</span> and <span class="math inline">\(w\)</span>, is <span class="math inline">\(M^{-} w\)</span>.</p></li>
-</ul>
-<p>By the way, the R function <strong>MASS::ginv</strong> performs the necessary computation for us; we need not call <strong>svd()</strong>.</p>
-<section id="svd-in-linear-models" class="level3 page-columns page-full" data-number="13.0.1">
-<h3 data-number="13.0.1" class="anchored" data-anchor-id="svd-in-linear-models"><span class="header-section-number">13.0.1</span> SVD in linear models</h3>
-<p>Now apply this to our linear model problem <a href="#eq-overdetermined">Equation&nbsp;<span>13.1</span></a>. The claim is that</p>
-<p><span class="math display">\[
-b = A^{-} S = V \Sigma^{-} U' S
-\]</span></p>
-<div class="page-columns page-full"><p>solves the equation.  Let’s check (warning: this will be messy):</p><div class="no-row-height column-margin column-container"><span class="">As in <a href="Ch2.html#sec-matalg"><span>Section&nbsp;3.2</span></a>, where we found that the inverse of a product is the reverse product of the inverses, the same holds for pseudoinverses.</span></div></div>
-<p><span class="math display">\[
-\begin{aligned}
-A'A b &amp;= (U \Sigma V')' (U \Sigma V') (U \Sigma V')^{-} S \\
-&amp;= (V \Sigma U') (U \Sigma V') (V \Sigma^{-} U') S \\
-&amp;= V \Sigma^2 V'V \Sigma^{-} U' S \\
-&amp;= V \Sigma^{-} U' S
-\end{aligned}
-\]</span></p>
-<p>But that is exactly the expression we found for <span class="math inline">\(A^{-1}S\)</span> above.</p>
-<p><span class="math inline">\(\square\)</span></p>
-</section>
-<section id="example-census-data" class="level2" data-number="13.1">
-<h2 data-number="13.1" class="anchored" data-anchor-id="example-census-data"><span class="header-section-number">13.1</span> Example: Census Data</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qeML)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(svcensus)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># have only 1 categorical/dichotomous variable, for simple example</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(svcensus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>       age     educ occ wageinc wkswrkd gender
-1 50.30082 zzzOther 102   75000      52 female
-2 41.10139 zzzOther 101   12300      20   male
-3 24.67374 zzzOther 102   15400      52 female
-4 50.19951 zzzOther 100       0      52   male
-5 51.18112 zzzOther 100     160       1 female
-6 57.70413 zzzOther 100       0       0   male</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>svc <span class="ot">&lt;-</span> svcensus[,<span class="sc">-</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>)]</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>svc <span class="ot">&lt;-</span> <span class="fu">factorsToDummies</span>(svc)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(svc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>          age wageinc wkswrkd gender.female gender.male
-[1,] 50.30082   75000      52             1           0
-[2,] 41.10139   12300      20             0           1
-[3,] 24.67374   15400      52             1           0
-[4,] 50.19951       0      52             0           1
-[5,] 51.18112     160       1             1           0
-[6,] 57.70413       0       0             0           1</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>,svc[,<span class="sc">-</span><span class="dv">2</span>])</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>            age wkswrkd gender.female gender.male
-[1,] 1 50.30082      52             1           0
-[2,] 1 41.10139      20             0           1
-[3,] 1 24.67374      52             1           0
-[4,] 1 50.19951      52             0           1
-[5,] 1 51.18112       1             1           0
-[6,] 1 57.70413       0             0           1</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>xminus <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">ginv</span>(x)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>bhat <span class="ot">&lt;-</span> xminus <span class="sc">%*%</span> svc[,<span class="dv">2</span>]</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>bhat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>           [,1]
-[1,] -16022.454
-[2,]    496.747
-[3,]   1372.756
-[4,] -13361.634
-[5,]  -2660.821</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(wageinc <span class="sc">~</span> .,svcensus[,<span class="sc">-</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>)])<span class="sc">$</span>coef</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>(Intercept)         age     wkswrkd  gendermale 
- -29384.088     496.747    1372.756   10700.813 </code></pre>
-</div>
-</div>
-<p>The two approaches are consistent with each other (though internally they are solving slightly different problems). Note that</p>
-<p><span class="math display">\[
--13361.634-(-2660.821) = -10700.81
-\]</span></p>
-</section>
-<section id="svd-as-the-minimum-norm-solution" class="level2 page-columns page-full" data-number="13.2">
-<h2 data-number="13.2" class="anchored" data-anchor-id="svd-as-the-minimum-norm-solution"><span class="header-section-number">13.2</span> SVD as the Minimum-Norm Solution</h2>
-<p>In an overdetermined linear system such as <a href="#eq-overdetermined">Equation&nbsp;<span>13.1</span></a>, there are many solutions. However, an advantage of Moore-Penrose is that it gives us the <em>minimum norm</em> solution. We’ll discuss the significance of this shortly, but let’s prove it first.</p>
+<section id="svd-as-the-minimum-norm-solution" class="level2 page-columns page-full" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="svd-as-the-minimum-norm-solution"><span class="header-section-number">13.1</span> SVD as the Minimum-Norm Solution</h2>
+<p>In an overdetermined linear system such as <a href="Ch6c.html#eq-overdetermined">Equation&nbsp;<span>12.3</span></a>, there are many solutions. However, an advantage of Moore-Penrose is that it gives us the <em>minimum norm</em> solution. We’ll discuss the significance of this shortly, but let’s prove it first.</p>
 <p>We will need this:</p>
 <div id="thm-samenorm" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 13.1 (Multiplication by an Orthogonal Matrix Preserves Norm) </strong></span>For an orthogonal matrix <span class="math inline">\(M\)</span> and a vector <span class="math inline">\(w\)</span>, <span class="math inline">\(||Mw|| = ||w||\)</span>.</p>
@@ -403,7 +302,7 @@ A'A b &amp;= (U \Sigma V')' (U \Sigma V') (U \Sigma V')^{-} S \\
 <p><span class="theorem-title"><strong>Theorem 13.2 (The Moore-Penrose Solution Is Min-Norm) </strong></span>Consider a matrix <span class="math inline">\(B\)</span> and vector <span class="math inline">\(q\)</span>. Of all solutions <span class="math inline">\(x\)</span> to</p>
 <p><span id="eq-linsyst"><span class="math display">\[
 Bx = q
-\tag{13.2}\]</span></span></p>
+\tag{13.1}\]</span></span></p>
 <p>the Moore-Penrose solution minimizes <span class="math inline">\(||x||\)</span>.</p>
 </div>
 <div class="proof page-columns page-full">
@@ -414,16 +313,16 @@ B = U \Sigma V',
 <p>and consider the residual sum of squares</p>
 <p><span id="eq-RSS"><span class="math display">\[
 ||Bx - q||^2 = ||U (\Sigma V' x - U'q)||^2
-\tag{13.3}\]</span></span></p>
+\tag{13.2}\]</span></span></p>
 <p>since <span class="math inline">\(UU'=I\)</span>.</p>
-<p>Thus we can remove the factor <span class="math inline">\(U\)</span> in <a href="#eq-RSS">Equation&nbsp;<span>13.3</span></a>, yielding</p>
+<p>Thus we can remove the factor <span class="math inline">\(U\)</span> in <a href="#eq-RSS">Equation&nbsp;<span>13.2</span></a>, yielding</p>
 <p><span id="eq-RSS1"><span class="math display">\[
 ||Bx - q||^2 = ||\Sigma V' x - U'q||^2
-\tag{13.4}\]</span></span></p>
+\tag{13.3}\]</span></span></p>
 <p>Rename <span class="math display">\[V'x\]</span> to <span class="math inline">\(y\)</span>:</p>
 <p><span id="eq-RSS2"><span class="math display">\[
 ||Bx - q||^2 = ||\Sigma y - U'q||^2
-\tag{13.5}\]</span></span></p>
+\tag{13.4}\]</span></span></p>
 <p>Now bring in the fact that <span class="math inline">\(\sigma_i = 0\)</span> for <span class="math inline">\(i &gt; r\)</span>, by writing everything in partitioned fashion. Break <span class="math inline">\(U\)</span> into <span class="math inline">\(r\)</span> and <span class="math inline">\(n-r\)</span> rows,</p>
 <p><span class="math display">\[
 U =
@@ -457,7 +356,7 @@ y_2 \\
 \end{array}
 \right )
 \]</span></p>
-<p>Substituting into <a href="#eq-RSS2">Equation&nbsp;<span>13.5</span></a>, we have</p>
+<p>Substituting into <a href="#eq-RSS2">Equation&nbsp;<span>13.4</span></a>, we have</p>
 <p><span id="eq-RSS3"><span class="math display">\[
 ||Bx - q||^2
 = ||
@@ -474,14 +373,14 @@ U_2q \\
 \end{array}
 \right )
 ||^2
-\tag{13.6}\]</span></span></p>
+\tag{13.5}\]</span></span></p>
 <p>This means that <span class="math inline">\(y_2\)</span> can be anything at all, without changing the residual sum of squares, confirming that there are infinitely many equally-effective solutions!</p>
 <p>But if we want <span class="math inline">\(x\)</span> to be of minimum length, we need <span class="math inline">\(y\)</span> to be of minimum length (the shortest <span class="math inline">\(y\)</span> gives us the shortest <span class="math inline">\(x = Vy\)</span>, again by the Your Turn problem). And,</p>
 <p><span class="math display">\[
 ||y||^2 = ||y_2||^2 + ||y_2||^2
 \]</span></p>
 <p>Thus we take <span class="math inline">\(y_2 = 0\)</span>.</p>
-<p>Now, reviewing <a href="#eq-RSS3">Equation&nbsp;<span>13.7</span></a>, note that the equation</p>
+<p>Now, reviewing <a href="#eq-RSS3">Equation&nbsp;<span>13.6</span></a>, note that the equation</p>
 <p><span class="math display">\[
 \Sigma_1 y_1 = U_1 q
 \]</span></p>
@@ -500,7 +399,7 @@ U_2q \\
 \end{array}
 \right )
 ||^2,
-\tag{13.7}\]</span></span></p>
+\tag{13.6}\]</span></span></p>
 <p>i.e.&nbsp;the residual sum of squares depends only on <span class="math inline">\(U_2\)</span>, not <span class="math inline">\(U_1\)</span>. But returning to our quest for the minimum-norm solution, we map back to <span class="math inline">\(x = Vy\)</span>, and have</p>
 <p><span class="math display">\[
 x_1 = V_1 \Sigma_1^{-1} U_1'q
@@ -522,159 +421,159 @@ x_1 = V_1 \Sigma_1^{-1} U_1'q
  > o1 <- ovrf(1,30,30)  USE THIS
 <-->
 </section>
-<section id="application-explaining-the-mystery-of-double-descent" class="level2" data-number="13.3">
-<h2 data-number="13.3" class="anchored" data-anchor-id="application-explaining-the-mystery-of-double-descent"><span class="header-section-number">13.3</span> Application: Explaining the Mystery of ``Double Descent”</h2>
+<section id="application-explaining-the-mystery-of-double-descent" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="application-explaining-the-mystery-of-double-descent"><span class="header-section-number">13.2</span> Application: Explaining the Mystery of ``Double Descent”</h2>
 <p>Around 2018-2019, one of the statistics field’s most deeply-held notions was thrown off its pedestal, largely by some researchers in machine learning. (This is arguably when the idea first became widespread, but for earlier instances, see Marco Loog <em>et al</em>, <em>A brief prehistory of double descent</em>, PNAS, 2020.) And many of the explanations given have been related to SVD.</p>
-<section id="motivating-example" class="level3" data-number="13.3.1">
-<h3 data-number="13.3.1" class="anchored" data-anchor-id="motivating-example"><span class="header-section-number">13.3.1</span> Motivating example</h3>
+<section id="motivating-example" class="level3" data-number="13.2.1">
+<h3 data-number="13.2.1" class="anchored" data-anchor-id="motivating-example"><span class="header-section-number">13.2.1</span> Motivating example</h3>
 <p>Let’s consider the Million Song Dataset from <a href="Ch5c.html#sec-millionsong"><span>Section&nbsp;9.2</span></a>.</p>
 </section>
-<section id="overfitting-and-beyond" class="level3" data-number="13.3.2">
-<h3 data-number="13.3.2" class="anchored" data-anchor-id="overfitting-and-beyond"><span class="header-section-number">13.3.2</span> Overfitting and BEYOND</h3>
+<section id="overfitting-and-beyond" class="level3" data-number="13.2.2">
+<h3 data-number="13.2.2" class="anchored" data-anchor-id="overfitting-and-beyond"><span class="header-section-number">13.2.2</span> Overfitting and BEYOND</h3>
 <p>Recall that a well-known rule of thumb is that the number <span class="math inline">\(p\)</span> of predictors should be less than <span class="math inline">\(\sqrt{n}\)</span>, where <span class="math inline">\(n\)</span> is the number of data points. We will abandon this and see what happens.</p>
 <p>We will add predictors one at a time, to form models of increasing complexity. As usual, let <span class="math inline">\(p\)</span> denote the number of predictors in a given model. We will also use only a small number of rows, say <span class="math inline">\(n = 30\)</span>. We start with <span class="math inline">\(p=1\)</span>, then <span class="math inline">\(p=2\)</span>, eventually reaching <span class="math inline">\(p = n-1\)</span> (accounting for the 1s column in the <span class="math inline">\(A\)</span> matrix in <a href="Ch3.html#eq-betahat">Equation&nbsp;<span>5.6</span></a>), and not stopping even there. We go to <span class="math inline">\(p=n\)</span>, <span class="math inline">\(p=n+1\)</span> and so on.</p>
 <p>When we reach <span class="math inline">\(p=n+2\)</span>, the matrix <span class="math inline">\(A\)</span> will have more columns than rows, and <span class="math inline">\((A'A)^{-1}\)</span> will not exist. (See Your Turn problem below.) We can still use SVD to solve for <span class="math inline">\(b\)</span>, but intuitively some kind of major change may happen at that point.</p>
 <p>Here is the code and output</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>ovrf <span class="ot">&lt;-</span> <span class="cf">function</span>(nreps,n,maxP)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a> {</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">load</span>(<span class="st">'YearData.save'</span>)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># yr &lt;- yr[,1:2]</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    nas <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>,nreps<span class="sc">*</span>(maxP<span class="dv">-1</span>))</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    outdf <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">p=</span>nas,<span class="at">mape=</span>nas)</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    rownum <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nreps) {</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>       idxs <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(yr),n)</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>       trn <span class="ot">&lt;-</span> yr[idxs,]</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>       tst <span class="ot">&lt;-</span> yr[<span class="sc">-</span>idxs,]</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>       <span class="cf">for</span> (p <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>maxP) {</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>          rownum <span class="ot">&lt;-</span> rownum <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>          <span class="co"># don't use lm or qeLin, since no SVD; instead, fit polynomial</span></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>          <span class="co"># of degree 1, i.e. linear model</span></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>          out <span class="ot">&lt;-</span> <span class="fu">qePolyLin</span>(trn[,<span class="dv">1</span><span class="sc">:</span>(p<span class="sc">+</span><span class="dv">1</span>)],<span class="st">'V1'</span>,<span class="dv">1</span>,<span class="at">holdout=</span><span class="cn">NULL</span>)</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>          preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(out,tst[,<span class="dv">2</span><span class="sc">:</span>(p<span class="sc">+</span><span class="dv">1</span>)])</span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>          mape <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">abs</span>(preds <span class="sc">-</span> tst[,<span class="dv">1</span>]))</span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>          outdf[rownum,<span class="dv">1</span>] <span class="ot">&lt;-</span> p</span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>          outdf[rownum,<span class="dv">2</span>] <span class="ot">&lt;-</span> mape</span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>          <span class="fu">print</span>(outdf[rownum,])</span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>       }</span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>    outdf  <span class="co">#run through tapply() for the graph</span></span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a> }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">set.seed</span>(<span class="dv">111111</span>); o1 <span class="ot">&lt;-</span> <span class="fu">ovrf</span>(<span class="dv">1</span>,<span class="dv">30</span>,<span class="dv">40</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  p     mape</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="dv">2</span> <span class="fl">7.865117</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  p     mape</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="dv">3</span> <span class="fl">7.876853</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  p     mape</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="dv">4</span> <span class="fl">7.984233</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  p     mape</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> <span class="dv">5</span> <span class="fl">8.631492</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  p     mape</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="dv">6</span> <span class="fl">8.608561</span></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  p     mape</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="dv">6</span> <span class="dv">7</span> <span class="fl">8.734537</span></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  p    mape</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span> <span class="dv">8</span> <span class="fl">8.74647</span></span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  p     mape</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="dv">8</span> <span class="dv">9</span> <span class="fl">8.746996</span></span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>   p     mape</span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="dv">9</span> <span class="dv">10</span> <span class="fl">9.042233</span></span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="dv">11</span> <span class="fl">8.795864</span></span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    p    mape</span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="dv">11</span> <span class="dv">12</span> <span class="fl">8.88431</span></span>
-<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="dv">12</span> <span class="dv">13</span> <span class="fl">10.06747</span></span>
-<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="dv">13</span> <span class="dv">14</span> <span class="fl">10.17324</span></span>
-<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="dv">14</span> <span class="dv">15</span> <span class="fl">10.68381</span></span>
-<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a><span class="dv">15</span> <span class="dv">16</span> <span class="fl">10.41553</span></span>
-<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a><span class="dv">16</span> <span class="dv">17</span> <span class="fl">9.892437</span></span>
-<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>    p    mape</span>
-<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a><span class="dv">17</span> <span class="dv">18</span> <span class="fl">9.71409</span></span>
-<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a><span class="dv">18</span> <span class="dv">19</span> <span class="fl">11.25314</span></span>
-<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a><span class="dv">19</span> <span class="dv">20</span> <span class="fl">11.88647</span></span>
-<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a><span class="dv">20</span> <span class="dv">21</span> <span class="fl">17.94607</span></span>
-<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a><span class="dv">21</span> <span class="dv">22</span> <span class="fl">18.63847</span></span>
-<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a><span class="dv">22</span> <span class="dv">23</span> <span class="fl">15.26327</span></span>
-<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a><span class="dv">23</span> <span class="dv">24</span> <span class="fl">19.50255</span></span>
-<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a><span class="dv">24</span> <span class="dv">25</span> <span class="fl">24.53056</span></span>
-<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a><span class="dv">25</span> <span class="dv">26</span> <span class="fl">23.60238</span></span>
-<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a><span class="dv">26</span> <span class="dv">27</span> <span class="fl">25.35561</span></span>
-<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a>    p    mape</span>
-<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a><span class="dv">27</span> <span class="dv">28</span> <span class="fl">36.1927</span></span>
-<span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a><span class="dv">28</span> <span class="dv">29</span> <span class="fl">57.97567</span></span>
-<span id="cb12-58"><a href="#cb12-58" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb12-59"><a href="#cb12-59" aria-hidden="true" tabindex="-1"></a><span class="dv">29</span> <span class="dv">30</span> <span class="fl">754.9635</span></span>
-<span id="cb12-60"><a href="#cb12-60" aria-hidden="true" tabindex="-1"></a>P <span class="sc">&gt;</span> N. With polynomial terms and interactions, P is <span class="fl">31.</span></span>
-<span id="cb12-61"><a href="#cb12-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-62"><a href="#cb12-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-63"><a href="#cb12-63" aria-hidden="true" tabindex="-1"></a>    p    mape</span>
-<span id="cb12-64"><a href="#cb12-64" aria-hidden="true" tabindex="-1"></a><span class="dv">30</span> <span class="dv">31</span> <span class="fl">741.573</span></span>
-<span id="cb12-65"><a href="#cb12-65" aria-hidden="true" tabindex="-1"></a>P <span class="sc">&gt;</span> N. With polynomial terms and interactions, P is <span class="fl">32.</span></span>
-<span id="cb12-66"><a href="#cb12-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-67"><a href="#cb12-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-68"><a href="#cb12-68" aria-hidden="true" tabindex="-1"></a>    p  mape</span>
-<span id="cb12-69"><a href="#cb12-69" aria-hidden="true" tabindex="-1"></a><span class="dv">31</span> <span class="dv">32</span> <span class="fl">477.3</span></span>
-<span id="cb12-70"><a href="#cb12-70" aria-hidden="true" tabindex="-1"></a>P <span class="sc">&gt;</span> N. With polynomial terms and interactions, P is <span class="fl">33.</span></span>
-<span id="cb12-71"><a href="#cb12-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-72"><a href="#cb12-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-73"><a href="#cb12-73" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb12-74"><a href="#cb12-74" aria-hidden="true" tabindex="-1"></a><span class="dv">32</span> <span class="dv">33</span> <span class="fl">525.8362</span></span>
-<span id="cb12-75"><a href="#cb12-75" aria-hidden="true" tabindex="-1"></a>P <span class="sc">&gt;</span> N. With polynomial terms and interactions, P is <span class="fl">34.</span></span>
-<span id="cb12-76"><a href="#cb12-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-77"><a href="#cb12-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-78"><a href="#cb12-78" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb12-79"><a href="#cb12-79" aria-hidden="true" tabindex="-1"></a><span class="dv">33</span> <span class="dv">34</span> <span class="fl">465.0518</span></span>
-<span id="cb12-80"><a href="#cb12-80" aria-hidden="true" tabindex="-1"></a>P <span class="sc">&gt;</span> N. With polynomial terms and interactions, P is <span class="fl">35.</span></span>
-<span id="cb12-81"><a href="#cb12-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-82"><a href="#cb12-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-83"><a href="#cb12-83" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb12-84"><a href="#cb12-84" aria-hidden="true" tabindex="-1"></a><span class="dv">34</span> <span class="dv">35</span> <span class="fl">761.3692</span></span>
-<span id="cb12-85"><a href="#cb12-85" aria-hidden="true" tabindex="-1"></a>P <span class="sc">&gt;</span> N. With polynomial terms and interactions, P is <span class="fl">36.</span></span>
-<span id="cb12-86"><a href="#cb12-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-87"><a href="#cb12-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-88"><a href="#cb12-88" aria-hidden="true" tabindex="-1"></a>    p    mape</span>
-<span id="cb12-89"><a href="#cb12-89" aria-hidden="true" tabindex="-1"></a><span class="dv">35</span> <span class="dv">36</span> <span class="fl">689.829</span></span>
-<span id="cb12-90"><a href="#cb12-90" aria-hidden="true" tabindex="-1"></a>P <span class="sc">&gt;</span> N. With polynomial terms and interactions, P is <span class="fl">37.</span></span>
-<span id="cb12-91"><a href="#cb12-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-92"><a href="#cb12-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-93"><a href="#cb12-93" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb12-94"><a href="#cb12-94" aria-hidden="true" tabindex="-1"></a><span class="dv">36</span> <span class="dv">37</span> <span class="fl">673.8049</span></span>
-<span id="cb12-95"><a href="#cb12-95" aria-hidden="true" tabindex="-1"></a>P <span class="sc">&gt;</span> N. With polynomial terms and interactions, P is <span class="fl">38.</span></span>
-<span id="cb12-96"><a href="#cb12-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-97"><a href="#cb12-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-98"><a href="#cb12-98" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb12-99"><a href="#cb12-99" aria-hidden="true" tabindex="-1"></a><span class="dv">37</span> <span class="dv">38</span> <span class="fl">728.8918</span></span>
-<span id="cb12-100"><a href="#cb12-100" aria-hidden="true" tabindex="-1"></a>P <span class="sc">&gt;</span> N. With polynomial terms and interactions, P is <span class="fl">39.</span></span>
-<span id="cb12-101"><a href="#cb12-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-102"><a href="#cb12-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-103"><a href="#cb12-103" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb12-104"><a href="#cb12-104" aria-hidden="true" tabindex="-1"></a><span class="dv">38</span> <span class="dv">39</span> <span class="fl">666.2301</span></span>
-<span id="cb12-105"><a href="#cb12-105" aria-hidden="true" tabindex="-1"></a>P <span class="sc">&gt;</span> N. With polynomial terms and interactions, P is <span class="fl">40.</span></span>
-<span id="cb12-106"><a href="#cb12-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-107"><a href="#cb12-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-108"><a href="#cb12-108" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb12-109"><a href="#cb12-109" aria-hidden="true" tabindex="-1"></a><span class="dv">39</span> <span class="dv">40</span> <span class="fl">621.9375</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ovrf <span class="ot">&lt;-</span> <span class="cf">function</span>(nreps,n,maxP)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> {</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">load</span>(<span class="st">'YearData.save'</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># yr &lt;- yr[,1:2]</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    nas <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>,nreps<span class="sc">*</span>(maxP<span class="dv">-1</span>))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    outdf <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">p=</span>nas,<span class="at">mape=</span>nas)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    rownum <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nreps) {</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>       idxs <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(yr),n)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>       trn <span class="ot">&lt;-</span> yr[idxs,]</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>       tst <span class="ot">&lt;-</span> yr[<span class="sc">-</span>idxs,]</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>       <span class="cf">for</span> (p <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>maxP) {</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>          rownum <span class="ot">&lt;-</span> rownum <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>          <span class="co"># don't use lm or qeLin, since no SVD; instead, fit polynomial</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>          <span class="co"># of degree 1, i.e. linear model</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>          out <span class="ot">&lt;-</span> <span class="fu">qePolyLin</span>(trn[,<span class="dv">1</span><span class="sc">:</span>(p<span class="sc">+</span><span class="dv">1</span>)],<span class="st">'V1'</span>,<span class="dv">1</span>,<span class="at">holdout=</span><span class="cn">NULL</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>          preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(out,tst[,<span class="dv">2</span><span class="sc">:</span>(p<span class="sc">+</span><span class="dv">1</span>)])</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>          mape <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">abs</span>(preds <span class="sc">-</span> tst[,<span class="dv">1</span>]))</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>          outdf[rownum,<span class="dv">1</span>] <span class="ot">&lt;-</span> p</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>          outdf[rownum,<span class="dv">2</span>] <span class="ot">&lt;-</span> mape</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>          <span class="fu">print</span>(outdf[rownum,])</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>       }</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    outdf  <span class="co">#run through tapply() for the graph</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a> }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">set.seed</span>(<span class="dv">111111</span>); o1 <span class="ot">&lt;-</span> <span class="fu">ovrf</span>(<span class="dv">1</span>,<span class="dv">30</span>,<span class="dv">40</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  p     mape</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="dv">2</span> <span class="fl">7.865117</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  p     mape</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="dv">3</span> <span class="fl">7.876853</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  p     mape</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="dv">4</span> <span class="fl">7.984233</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  p     mape</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> <span class="dv">5</span> <span class="fl">8.631492</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  p     mape</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="dv">6</span> <span class="fl">8.608561</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  p     mape</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="dv">6</span> <span class="dv">7</span> <span class="fl">8.734537</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  p    mape</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span> <span class="dv">8</span> <span class="fl">8.74647</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  p     mape</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="dv">8</span> <span class="dv">9</span> <span class="fl">8.746996</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>   p     mape</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="dv">9</span> <span class="dv">10</span> <span class="fl">9.042233</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="dv">11</span> <span class="fl">8.795864</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    p    mape</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="dv">11</span> <span class="dv">12</span> <span class="fl">8.88431</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="dv">12</span> <span class="dv">13</span> <span class="fl">10.06747</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="dv">13</span> <span class="dv">14</span> <span class="fl">10.17324</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="dv">14</span> <span class="dv">15</span> <span class="fl">10.68381</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="dv">15</span> <span class="dv">16</span> <span class="fl">10.41553</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="dv">16</span> <span class="dv">17</span> <span class="fl">9.892437</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    p    mape</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="dv">17</span> <span class="dv">18</span> <span class="fl">9.71409</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="dv">18</span> <span class="dv">19</span> <span class="fl">11.25314</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="dv">19</span> <span class="dv">20</span> <span class="fl">11.88647</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="dv">20</span> <span class="dv">21</span> <span class="fl">17.94607</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="dv">21</span> <span class="dv">22</span> <span class="fl">18.63847</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="dv">22</span> <span class="dv">23</span> <span class="fl">15.26327</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="dv">23</span> <span class="dv">24</span> <span class="fl">19.50255</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="dv">24</span> <span class="dv">25</span> <span class="fl">24.53056</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a><span class="dv">25</span> <span class="dv">26</span> <span class="fl">23.60238</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="dv">26</span> <span class="dv">27</span> <span class="fl">25.35561</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>    p    mape</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="dv">27</span> <span class="dv">28</span> <span class="fl">36.1927</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="dv">28</span> <span class="dv">29</span> <span class="fl">57.97567</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="dv">29</span> <span class="dv">30</span> <span class="fl">754.9635</span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>P <span class="sc">&gt;</span> N. With polynomial terms and interactions, P is <span class="fl">31.</span></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>    p    mape</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a><span class="dv">30</span> <span class="dv">31</span> <span class="fl">741.573</span></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>P <span class="sc">&gt;</span> N. With polynomial terms and interactions, P is <span class="fl">32.</span></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>    p  mape</span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a><span class="dv">31</span> <span class="dv">32</span> <span class="fl">477.3</span></span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>P <span class="sc">&gt;</span> N. With polynomial terms and interactions, P is <span class="fl">33.</span></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a><span class="dv">32</span> <span class="dv">33</span> <span class="fl">525.8362</span></span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>P <span class="sc">&gt;</span> N. With polynomial terms and interactions, P is <span class="fl">34.</span></span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a><span class="dv">33</span> <span class="dv">34</span> <span class="fl">465.0518</span></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>P <span class="sc">&gt;</span> N. With polynomial terms and interactions, P is <span class="fl">35.</span></span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a><span class="dv">34</span> <span class="dv">35</span> <span class="fl">761.3692</span></span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>P <span class="sc">&gt;</span> N. With polynomial terms and interactions, P is <span class="fl">36.</span></span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a>    p    mape</span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a><span class="dv">35</span> <span class="dv">36</span> <span class="fl">689.829</span></span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>P <span class="sc">&gt;</span> N. With polynomial terms and interactions, P is <span class="fl">37.</span></span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a><span class="dv">36</span> <span class="dv">37</span> <span class="fl">673.8049</span></span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>P <span class="sc">&gt;</span> N. With polynomial terms and interactions, P is <span class="fl">38.</span></span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a><span class="dv">37</span> <span class="dv">38</span> <span class="fl">728.8918</span></span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a>P <span class="sc">&gt;</span> N. With polynomial terms and interactions, P is <span class="fl">39.</span></span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a><span class="dv">38</span> <span class="dv">39</span> <span class="fl">666.2301</span></span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a>P <span class="sc">&gt;</span> N. With polynomial terms and interactions, P is <span class="fl">40.</span></span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a><span class="dv">39</span> <span class="dv">40</span> <span class="fl">621.9375</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>MAPE here is mean absolute prediction error (calculated on the holdout set).</p>
 <p>Here <span class="math inline">\(n = 30\)</span>, so <span class="math inline">\(p = 30, 31,...\)</span> uses SVD, and is overfitting. Indeed, much smaller values of <span class="math inline">\(p\)</span> seem to have overfit as well. But the point is that once we got to the point at which there is no unique solution, MAPE actually improved, a huge shock to the field. It was always assumed that there is no point going beyond the values of <span class="math inline">\(p\)</span> that gives us 0 for the sum of squares.</p>
 <p>The graph of MAPE is typically a U-shape. In this case, we seem to have only the right half of a U, but still a U. What was shocking was that sometimes there is a <em>second</em> U-shape after we reach 0 sum of squares. Even more shocking, in some case the low point of the second U is lower than that of the first–it pays to radically ovefit.</p>
 </section>
-<section id="the-classic-and-modern-views" class="level3" data-number="13.3.3">
-<h3 data-number="13.3.3" class="anchored" data-anchor-id="the-classic-and-modern-views"><span class="header-section-number">13.3.3</span> The classic and modern views</h3>
+<section id="the-classic-and-modern-views" class="level3" data-number="13.2.3">
+<h3 data-number="13.2.3" class="anchored" data-anchor-id="the-classic-and-modern-views"><span class="header-section-number">13.2.3</span> The classic and modern views</h3>
 <p>In other words, here is the sea change that occurred in the field around 2018-2019.</p>
 <p>Let <span class="math inline">\(\kappa\)</span> denote the complexity of a model. In the case of a linear model, <span class="math inline">\(\kappa\)</span> would be the number of predictor columns in our dataset, and there are ways of defining it for other methods.</p>
 <p>We might try several values of <span class="math inline">\(\kappa\)</span>, as we did in the table in <span class="quarto-unresolved-ref">?eq-nyc</span>, and then choose the one with smallest MAPE or other accuracy measure.</p>
@@ -690,8 +589,8 @@ x_1 = V_1 \Sigma_1^{-1} U_1'q
 </blockquote>
 <p>This is a rare sea change in classic quantitative analysis.</p>
 </section>
-<section id="how-can-this-bizarre-effect-occur" class="level3" data-number="13.3.4">
-<h3 data-number="13.3.4" class="anchored" data-anchor-id="how-can-this-bizarre-effect-occur"><span class="header-section-number">13.3.4</span> How can this bizarre effect occur?</h3>
+<section id="how-can-this-bizarre-effect-occur" class="level3" data-number="13.2.4">
+<h3 data-number="13.2.4" class="anchored" data-anchor-id="how-can-this-bizarre-effect-occur"><span class="header-section-number">13.2.4</span> How can this bizarre effect occur?</h3>
 <p>Let’s look further. If at least some our predictors are numeric (with Million Song, they all are), then for <span class="math inline">\(p = n-1\)</span>, the (square) matrix <span class="math inline">\(A\)</span> itself will very likely be invertible, and setting</p>
 <p><span class="math display">\[
 b = A^{-1} S
@@ -729,13 +628,13 @@ Var(w'b) = w' Cov(b) w
 <p>Thus it is at least plausible that we might get a second U-shape, as the impact of the minimum-norm nature of SVD kicks in. On the other hand, as <span class="math inline">\(p\)</span> grows further, <span class="math inline">\(b\)</span> has more and more components, and likely that minmum-norm <span class="math inline">\(b\)</span> will grow in length at some point, hence the typical later turn back upward of the second U.</p>
 </section>
 </section>
-<section id="your-turn" class="level2" data-number="13.4">
-<h2 data-number="13.4" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">13.4</span> Your Turn</h2>
+<section id="your-turn" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">13.3</span> Your Turn</h2>
 <p>❄️ <strong>Your Turn:</strong> Show that for an orthogonal matrix <span class="math inline">\(M\)</span> and a vector <span class="math inline">\(w\)</span>, <span class="math inline">\(||Mw|| = ||w||\)</span>.</p>
 <p>❄️ <strong>Your Turn:</strong> Using properties of matrix rank, show that if <span class="math inline">\(p+1 &gt; n\)</span> in <a href="Ch3.html#eq-betahat">Equation&nbsp;<span>5.6</span></a>, the inverse will not exist.</p>
 </section>
-<section id="your-turn-1" class="level2" data-number="13.5">
-<h2 data-number="13.5" class="anchored" data-anchor-id="your-turn-1"><span class="header-section-number">13.5</span> Your Turn</h2>
+<section id="your-turn-1" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="your-turn-1"><span class="header-section-number">13.4</span> Your Turn</h2>
 
 
 </section>

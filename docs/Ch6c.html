@@ -101,7 +101,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar floating slimcontent">
+<body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -242,24 +242,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#basic-idea" id="toc-basic-idea" class="nav-link active" data-scroll-target="#basic-idea"><span class="header-section-number">12.1</span> Basic Idea</a></li>
-  <li><a href="#application-recommender-systems" id="toc-application-recommender-systems" class="nav-link" data-scroll-target="#application-recommender-systems"><span class="header-section-number">12.2</span> Application: Recommender Systems</a></li>
+  <li><a href="#example-applications" id="toc-example-applications" class="nav-link" data-scroll-target="#example-applications"><span class="header-section-number">12.2</span> Example Applications</a>
+  <ul class="collapse">
+  <li><a href="#recommender-systems" id="toc-recommender-systems" class="nav-link" data-scroll-target="#recommender-systems"><span class="header-section-number">12.2.1</span> Recommender Systems</a></li>
+  <li><a href="#text-classification" id="toc-text-classification" class="nav-link" data-scroll-target="#text-classification"><span class="header-section-number">12.2.2</span> Text Classification</a></li>
+  <li><a href="#dimension-reduction" id="toc-dimension-reduction" class="nav-link" data-scroll-target="#dimension-reduction"><span class="header-section-number">12.2.3</span> Dimension Reduction</a></li>
+  </ul></li>
   <li><a href="#the-four-fundamental-subspaces-of-a-matrix" id="toc-the-four-fundamental-subspaces-of-a-matrix" class="nav-link" data-scroll-target="#the-four-fundamental-subspaces-of-a-matrix"><span class="header-section-number">12.3</span> The Four Fundamental Subspaces of a Matrix</a></li>
   <li><a href="#solution-to-our-svd-goal" id="toc-solution-to-our-svd-goal" class="nav-link" data-scroll-target="#solution-to-our-svd-goal"><span class="header-section-number">12.4</span> Solution to Our SVD Goal</a></li>
   <li><a href="#checking-the-formula" id="toc-checking-the-formula" class="nav-link" data-scroll-target="#checking-the-formula"><span class="header-section-number">12.5</span> Checking the Formula</a></li>
-  <li><a href="#svd-the-data-scientists-swiss-army-knife" id="toc-svd-the-data-scientists-swiss-army-knife" class="nav-link" data-scroll-target="#svd-the-data-scientists-swiss-army-knife"><span class="header-section-number">12.6</span> SVD: the Data Scientist’s Swiss Army Knife</a>
-  <ul class="collapse">
-  <li><a href="#rank-of-a" id="toc-rank-of-a" class="nav-link" data-scroll-target="#rank-of-a"><span class="header-section-number">12.6.1</span> Rank of <span class="math inline">\(A\)</span></a></li>
-  <li><a href="#svd-as-a-basis-for-matrix-generalized-inverse" id="toc-svd-as-a-basis-for-matrix-generalized-inverse" class="nav-link" data-scroll-target="#svd-as-a-basis-for-matrix-generalized-inverse"><span class="header-section-number">12.6.2</span> SVD as a basis for matrix generalized inverse</a></li>
-  <li><a href="#svd-in-linear-models" id="toc-svd-in-linear-models" class="nav-link" data-scroll-target="#svd-in-linear-models"><span class="header-section-number">12.6.3</span> SVD in linear models</a></li>
-  </ul></li>
-  <li><a href="#example-census-data" id="toc-example-census-data" class="nav-link" data-scroll-target="#example-census-data"><span class="header-section-number">12.7</span> Example: Census Data</a></li>
-  <li><a href="#application-svd-as-the-best-low-rank-approximation" id="toc-application-svd-as-the-best-low-rank-approximation" class="nav-link" data-scroll-target="#application-svd-as-the-best-low-rank-approximation"><span class="header-section-number">12.8</span> Application: SVD as the Best Low-Rank Approximation</a></li>
-  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">12.9</span> Your Turn</a></li>
+  <li><a href="#svd-as-a-basis-for-matrix-generalized-inverse" id="toc-svd-as-a-basis-for-matrix-generalized-inverse" class="nav-link" data-scroll-target="#svd-as-a-basis-for-matrix-generalized-inverse"><span class="header-section-number">12.6</span> SVD as a basis for matrix generalized inverse</a></li>
+  <li><a href="#svd-in-linear-models" id="toc-svd-in-linear-models" class="nav-link" data-scroll-target="#svd-in-linear-models"><span class="header-section-number">12.7</span> SVD in linear models</a></li>
+  <li><a href="#example-census-data" id="toc-example-census-data" class="nav-link" data-scroll-target="#example-census-data"><span class="header-section-number">12.8</span> Example: Census Data</a></li>
+  <li><a href="#sec-svddimred" id="toc-sec-svddimred" class="nav-link" data-scroll-target="#sec-svddimred"><span class="header-section-number">12.9</span> Dimension Reduction: SVD as the Best Low-Rank Approximation</a></li>
+  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">12.10</span> Your Turn</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -325,9 +326,21 @@ A = \sum_{i=1}^n \sigma_i u_i v_i'
 </ul>
 <p>Let <span class="math inline">\(r\)</span> denote the rank of <span class="math inline">\(A\)</span>. Recall that <span class="math inline">\(r \leq \min(m,n)\)</span>. It will turn out that <span class="math inline">\(\sigma_i = 0\)</span> for <span class="math inline">\(i=r+1,...,n\)</span>.</p>
 </section>
-<section id="application-recommender-systems" class="level2" data-number="12.2">
-<h2 data-number="12.2" class="anchored" data-anchor-id="application-recommender-systems"><span class="header-section-number">12.2</span> Application: Recommender Systems</h2>
-<p>Recall <a href="Ch1.html#sec-recsys"><span>Section&nbsp;2.9</span></a>, which began with movie ratings data. We would like to predict the rating some particular user would give to some particular movie. It will turn out that we can set up SVD in such a way that <span class="math inline">\(U\)</span> contains movie data and <span class="math inline">\(V\)</span> contains user data.</p>
+<section id="example-applications" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="example-applications"><span class="header-section-number">12.2</span> Example Applications</h2>
+<section id="recommender-systems" class="level3" data-number="12.2.1">
+<h3 data-number="12.2.1" class="anchored" data-anchor-id="recommender-systems"><span class="header-section-number">12.2.1</span> Recommender Systems</h3>
+<p>Recall <a href="Ch7a.html"><span>Chapter&nbsp;14</span></a>, which began with movie ratings data. We would like to predict the rating some particular user would give to some particular movie. It will turn out that we can set up SVD in such a way that <span class="math inline">\(U\)</span> contains movie data and <span class="math inline">\(V\)</span> contains user data. We will explore this and other methods in <a href="Ch7a.html"><span>Chapter&nbsp;14</span></a>.</p>
+</section>
+<section id="text-classification" class="level3" data-number="12.2.2">
+<h3 data-number="12.2.2" class="anchored" data-anchor-id="text-classification"><span class="header-section-number">12.2.2</span> Text Classification</h3>
+<p>An oft-used example is that in which we have a collection of newspaper articles that we wish to categorize, say politics, sports, health, finance and so on. Say one of the articles includes the word <em>bonds</em>; is it referring to financial instruments, family relations, former baseball star Barry Bonds etc.?</p>
+<p>In spite of today’s dazzling array of Large Language Models, a simple problem like this may be better solved using straightforward methods, such as SVD. We set up a <em>document-term matrix</em>, with element <span class="math inline">\((i,j)\)</span> being 1 or 0, according to whether document <span class="math inline">\(i\)</span> contains word <span class="math inline">\(j\)</span>. Applying SVD to this matrix, we have a setting with similar appeal to the recommender systems example above, in which <span class="math inline">\(U\)</span> contains our data on documents and <span class="math inline">\(V\)</span> does the same for words.</p>
+</section>
+<section id="dimension-reduction" class="level3" data-number="12.2.3">
+<h3 data-number="12.2.3" class="anchored" data-anchor-id="dimension-reduction"><span class="header-section-number">12.2.3</span> Dimension Reduction</h3>
+<p>Recall that in the matrix <span class="math inline">\(\Sigma\)</span>, the eigenvalues are arranged in decreasing order, possibly followed by 0s. This suggests that we can achieve dimension reduction by replacing the smaller eigenvalues by 0s, with corresponding adjustments to the columns of <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span>. We will discuss this below in <a href="#sec-svddimred"><span>Section&nbsp;12.9</span></a>.</p>
+</section>
 </section>
 <section id="the-four-fundamental-subspaces-of-a-matrix" class="level2" data-number="12.3">
 <h2 data-number="12.3" class="anchored" data-anchor-id="the-four-fundamental-subspaces-of-a-matrix"><span class="header-section-number">12.3</span> The Four Fundamental Subspaces of a Matrix</h2>
@@ -431,58 +444,48 @@ u_i' u_j = \frac{1}{\sigma_i \sigma_j} v_i' A'A v_j =
 <p>That last expression is equal to <span class="math inline">\(A\)</span>, by <a href="#eq-aissumuivi">Equation&nbsp;<span>12.2</span></a>.</p></li>
 </ul>
 </section>
-<section id="svd-the-data-scientists-swiss-army-knife" class="level2 page-columns page-full" data-number="12.6">
-<h2 data-number="12.6" class="anchored" data-anchor-id="svd-the-data-scientists-swiss-army-knife"><span class="header-section-number">12.6</span> SVD: the Data Scientist’s Swiss Army Knife</h2>
-<p>There are a great many pieces of information and sources of tools packed into this innocuous-looking factorization. Let’s take a look at some:</p>
-<section id="rank-of-a" class="level3" data-number="12.6.1">
-<h3 data-number="12.6.1" class="anchored" data-anchor-id="rank-of-a"><span class="header-section-number">12.6.1</span> Rank of <span class="math inline">\(A\)</span></h3>
-<p>This is the number of nonzero values in <span class="math inline">\(\Sigma\)</span>. This follows from <a href="Ch4.html#thm-ranknotchange">Theorem&nbsp;<span>6.1</span></a>, since <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span>, as orthogonal matrices, are invertible.</p>
-<p>It should be noted, though, that if there are some really tiny elements there, one might also entertain the thought that the true rank is less than this size, as these tiny values may be due to roundoff error from 0.</p>
-</section>
-<section id="svd-as-a-basis-for-matrix-generalized-inverse" class="level3" data-number="12.6.2">
-<h3 data-number="12.6.2" class="anchored" data-anchor-id="svd-as-a-basis-for-matrix-generalized-inverse"><span class="header-section-number">12.6.2</span> SVD as a basis for matrix generalized inverse</h3>
+<section id="svd-as-a-basis-for-matrix-generalized-inverse" class="level2" data-number="12.6">
+<h2 data-number="12.6" class="anchored" data-anchor-id="svd-as-a-basis-for-matrix-generalized-inverse"><span class="header-section-number">12.6</span> SVD as a basis for matrix generalized inverse</h2>
 <p>Recall the example in <a href="Ch4.html#sec-censusrref"><span>Section&nbsp;6.1</span></a>. We could not have dummy-variable columns for both male and female, as their sum would be a column of all 1s, in addition to a column the X data matrix already had. The three columns would then have a nonzero linear combination that evaluates to the 0 vector. Then in <a href="Ch3.html#eq-linregformula">Equation&nbsp;<span>5.4</span></a>, <span class="math inline">\(A\)</span> (i.e.&nbsp;X) would not be of full rank, and <span class="math inline">\((A'A)^{-1}\)</span> would not exist.</p>
 <p>And yet the equation from which that comes,</p>
 <p><span id="eq-overdetermined"><span class="math display">\[
 A'A b = A'S
 \tag{12.3}\]</span></span></p>
 <p>is still valid. We could, as in that example, remove one of the gender columns, thus solving the problem of less than full rank, but the use of <em>generalized inverses</em> solves the problem directly. If <span class="math inline">\(A\)</span> has hundreds or thousands of columns, say, the use of generalized inverses may be more convenient.</p>
-<p>We omit the formal definition of pseudoinverses and their properties. We will note the use of the latter as the need arises. For now, we state without proof that:</p>
-<ul>
-<li><p>One of the most famous forms of pseudoinverse, Moore-Penrose, is based on SVD. Given the SVD of a matrix <span class="math inline">\(M\)</span>,</p>
+<p>We will omit the formal definition of inverses and their properties, returning to the topic in <a href="Ch6d.html"><span>Chapter&nbsp;13</span></a>. For now, we note the following:</p>
+<p>One of the most famous forms of generalized inverse, is the Moore-Penrose <em>pseudoinverse</em>, based on SVD. Given the SVD of a matrix <span class="math inline">\(M\)</span>,</p>
 <p><span class="math display">\[
 M = U_M \Sigma_M V_{M}'
 \]</span></p>
-<p>its Moore-Penrose inverse, denoted by <span class="math inline">\(M^{-1}\)</span> is</p>
+<p>its Moore-Penrose inverse, denoted by <span class="math inline">\(M^{+}\)</span> is</p>
 <p><span class="math display">\[
-M^{-} = V_M \Sigma_M^{-} U_{M}'
+M^{+} = V_M \Sigma_M^{+} U_{M}'
 \]</span></p>
-<p>where <span class="math inline">\(\Sigma_M^{-}\)</span> is the diagonal matrix obtained form <span class="math inline">\(\Sigma_M\)</span> by replacing each nonzero element by its reciprocal.</p></li>
-<li><p>The Moore-Penrose solution of <span class="math inline">\(Mz = w\)</span> for vectors <span class="math inline">\(z\)</span> and <span class="math inline">\(w\)</span>, is <span class="math inline">\(M^{-} w\)</span>.</p></li>
-</ul>
-<p>By the way, the R function <strong>MASS::ginv</strong> performs the necessary computation for us; we need not call <strong>svd()</strong>.</p>
+<p>where <span class="math inline">\(\Sigma_M^{+}\)</span> is the diagonal matrix obtained form <span class="math inline">\(\Sigma_M\)</span> by replacing each nonzero element by its reciprocal.</p>
+<p>The Moore-Penrose solution of <span class="math inline">\(Mz = w\)</span> for vectors <span class="math inline">\(z\)</span> and <span class="math inline">\(w\)</span>, is <span class="math inline">\(M^{+} w\)</span>.</p>
+<p>The R function <strong>MASS::ginv</strong> performs the necessary computation for us; we need not call <strong>svd()</strong>.</p>
 </section>
-<section id="svd-in-linear-models" class="level3 page-columns page-full" data-number="12.6.3">
-<h3 data-number="12.6.3" class="anchored" data-anchor-id="svd-in-linear-models"><span class="header-section-number">12.6.3</span> SVD in linear models</h3>
-<p>Now apply this to our linear model problem <a href="Ch6d.html#eq-overdetermined">Equation&nbsp;<span>13.1</span></a>. The claim is that</p>
+<section id="svd-in-linear-models" class="level2" data-number="12.7">
+<h2 data-number="12.7" class="anchored" data-anchor-id="svd-in-linear-models"><span class="header-section-number">12.7</span> SVD in linear models</h2>
+<p>Now apply this to our linear model problem (<a href="#eq-overdetermined">Equation&nbsp;<span>12.3</span></a>). We claim that</p>
 <p><span class="math display">\[
-b = A^{-} S = V \Sigma^{-} U' S
+b = A^{+} S = V \Sigma^{+} U' S
 \]</span></p>
-<div class="page-columns page-full"><p>solves the equation.  Let’s check (warning: this will be messy):</p><div class="no-row-height column-margin column-container"><span class="">As in <a href="Ch2.html#sec-matalg"><span>Section&nbsp;3.2</span></a>, where we found that the inverse of a product is the reverse product of the inverses, the same holds for pseudoinverses.</span></div></div>
+<p>solves the equation. (Actually if <span class="math inline">\(A\)</span> is of less than full rank, there are infinitely many solutions, a point discussed in detail in <a href="Ch6d.html"><span>Chapter&nbsp;13</span></a>.)</p>
+<p>Let’s check. Before beginning, note that as in <a href="Ch2.html#sec-matalg"><span>Section&nbsp;3.2</span></a>, where we found that the inverse of a product is the reverse product of the inverses, the same holds for pseudoinverses. Also, recall that the orthogonal nature of <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> implies that <span class="math inline">\(U'U = I\)</span> and <span class="math inline">\(V'V = I\)</span>.</p>
 <p><span class="math display">\[
 \begin{aligned}
-A'A b &amp;= (U \Sigma V')' (U \Sigma V') (U \Sigma V')^{-} S \\
-&amp;= (V \Sigma U') (U \Sigma V') (V \Sigma^{-} U') S \\
-&amp;= V \Sigma^2 V'V \Sigma^{-} U' S \\
-&amp;= V \Sigma^{-} U' S
+A'A b &amp;= (U \Sigma V')' (U \Sigma V') (U \Sigma V')^{+} S \\
+&amp;= (V \Sigma U') (U \Sigma V') (V \Sigma^{+} U') S \\
+&amp;= V \Sigma^2 V'V \Sigma^{+} U' S \\
+&amp;= V \Sigma^{+} U' S
 \end{aligned}
 \]</span></p>
-<p>But that is exactly the expression we found for <span class="math inline">\(A^{-1}S\)</span> above.</p>
+<p>But that is exactly the expression we found for <span class="math inline">\(A^{+}S\)</span> above.</p>
 <p><span class="math inline">\(\square\)</span></p>
 </section>
-</section>
-<section id="example-census-data" class="level2" data-number="12.7">
-<h2 data-number="12.7" class="anchored" data-anchor-id="example-census-data"><span class="header-section-number">12.7</span> Example: Census Data</h2>
+<section id="example-census-data" class="level2" data-number="12.8">
+<h2 data-number="12.8" class="anchored" data-anchor-id="example-census-data"><span class="header-section-number">12.8</span> Example: Census Data</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qeML)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(svcensus)</span>
@@ -520,8 +523,8 @@ A'A b &amp;= (U \Sigma V')' (U \Sigma V') (U \Sigma V')^{-} S \\
 [5,] 1 51.18112       1             1           0
 [6,] 1 57.70413       0             0           1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>xminus <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">ginv</span>(x)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>bhat <span class="ot">&lt;-</span> xminus <span class="sc">%*%</span> svc[,<span class="dv">2</span>]</span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>xplus <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">ginv</span>(x)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>bhat <span class="ot">&lt;-</span> xplus <span class="sc">%*%</span> svc[,<span class="dv">2</span>]</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>bhat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           [,1]
@@ -542,13 +545,16 @@ A'A b &amp;= (U \Sigma V')' (U \Sigma V') (U \Sigma V')^{-} S \\
 -13361.634-(-2660.821) = -10700.81
 \]</span></p>
 </section>
-<section id="application-svd-as-the-best-low-rank-approximation" class="level2" data-number="12.8">
-<h2 data-number="12.8" class="anchored" data-anchor-id="application-svd-as-the-best-low-rank-approximation"><span class="header-section-number">12.8</span> Application: SVD as the Best Low-Rank Approximation</h2>
+<section id="sec-svddimred" class="level2" data-number="12.9">
+<h2 data-number="12.9" class="anchored" data-anchor-id="sec-svddimred"><span class="header-section-number">12.9</span> Dimension Reduction: SVD as the Best Low-Rank Approximation</h2>
 </section>
-<section id="your-turn" class="level2" data-number="12.9">
-<h2 data-number="12.9" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">12.9</span> Your Turn</h2>
+<section id="your-turn" class="level2" data-number="12.10">
+<h2 data-number="12.10" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">12.10</span> Your Turn</h2>
 <p>❄️ <strong>Your Turn:</strong> Show that in the SVD factorization, <span class="math inline">\(U\)</span> consists of the eigenvectors of <span class="math inline">\(AA'\)</span>.</p>
 <p>❄️ <strong>Your Turn:</strong> Find a characterization of the left null space of a matrix <span class="math inline">\(A\)</span>.</p>
+<p>❄️ <strong>Your Turn:</strong> Write an R function will call form</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getLowRank</span>(A,lowrank)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>that uses SVD to find the best approximation to the matrix <strong>A</strong> of rank <strong>lowrank</strong>.</p>
 
 
 </section>

@@ -292,13 +292,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li><p>In Chapter 1, we use Markov chain transition matrices and network graph models (e.g.&nbsp;social networks) to motivate the notion of a matrix and matrix multiplication. An interest in finding the stationary distribution of a Markov chain then leads to the concept of matrix inverses. (Linear models are presented later, after groundwork of matrix rank is laid.)</p></li>
 <li><p>The chapter on matrix rank starts with a dataset right off the bat, and shows that R’s linear model function <strong>lm</strong> fails if categorical variables are fully specified. This motivates the notion of rank, and the dataset dovetails with the theory throughout the chapter, which culminates in a proof that row rank equals column rank.</p></li>
-<li><p>The chapter on eigenanalysis begins with explaining the goals of PCA (with a real dataset). We derive the first PC as a constrained minimization of variance, and behold! – the solution has the form <span class="math inline">\(Ax = \lambda x\)</span>! So eigenanalysis comes from solving a Data Science problem. PCA is later covered in detail in the following chapter, but with this motivation we develop the properties of eigenvalues and eigenvectors in the current chapter.</p></li>
+<li><p>The chapter on eigenanalysis begins with explaining the goals of PCA (with a real dataset). We derive the first PC as a constrained maximization of variance, and behold! – the solution has the form <span class="math inline">\(Ax = \lambda x\)</span>! So eigenanalysis comes from solving a Data Science problem. PCA is later covered in detail in the following chapter, but with this motivation we develop the properties of eigenvalues and eigenvectors in the current chapter.</p></li>
 </ul>
 </section>
 <section id="who-is-this-book-for" class="level2">
 <h2 class="anchored" data-anchor-id="who-is-this-book-for">Who Is This Book For?</h2>
-<p>Of course the book should work well as a classroom textbook. If a Data Science or Statistics program requires linear algebra offered by a Math Department, the level and content of this book should be similar to that math course, but with much better student motivation due to the Data Science emphasis of the book. The “applications first” approach is key to that motivational power.</p>
-<p>Actually, the applications-center nature of the book should make teaching the course more rewarding for instructors as well, and the use of Quarto enables easy conversion to Powerpoint by instructors.</p>
+<p>Of course the book should work very well as a classroom textbook. If a Data Science or Statistics program requires linear algebra offered by a Math Department, the level and content of this book should be similar to that math course, but with much better student motivation due to the Data Science emphasis of the book. The “applications first” approach is key to that motivational power.</p>
+<p>Actually, the applications-centered nature of the book should make teaching the course more rewarding for instructors as well, and the use of Quarto enables easy conversion to Powerpoint by instructors.</p>
 <p>I also hope the book’s emphasis on the How? and Why? especially appeals to do-it-yourselfers, those whose engagement in self-study is motivated by intellectual curiosity rather than a course grade.</p>
 </section>
 <section id="prerequisite-background" class="level2 page-columns page-full">
@@ -323,7 +323,7 @@ This book is “mathematical but not very theoretical.”
 </div>
 <div class="callout-body-container callout-body">
 <p>Theorems are mainly limited to results with practical importance, and proofs are sometimes rather informal. But the subject matter is indeed mathematical. The goal is to develop in the reader mathematical skill and intuition into this powerful tool, rather than coding of linear algebra methods.</p>
-<p>Thus the many R examples are meant to make the mathematical concepts concrete. This is definitely not an “how to do linear algebra in R” book. In the software context, the Feynman quote above might be, “Knowing how to use code libraries for something is useless if one doesn’t understand the nature of that thing.”</p>
+<p>Thus the many R examples are meant to make the mathematical concepts concrete. This is definitely not an “how to do linear algebra in R” book. In the software context, the Feynman quote above might be, “There is a difference between knowing how to use code libraries for something and knowing the core nature of that thing.”</p>
 <p>That said, the code examples do serve a vital role in making the math operations concrete.</p>
 </div>
 </div>
@@ -349,7 +349,7 @@ This book is “mathematical but not very theoretical.”
 </section>
 <section id="thanks" class="level2">
 <h2 class="anchored" data-anchor-id="thanks">Thanks</h2>
-<p>I deeply appreciate feedback from: Mike Hannon, Sana Vaziri, Nick Knueppel and Joe Rickert.</p>
+<p>I deeply appreciate feedback from: Mike Hannon, Nick Knueppel, Joe Rickert and Noah Perry.</p>
 
 
 </section>

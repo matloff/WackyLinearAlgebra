@@ -419,17 +419,17 @@ woman   0   0       0   0     0</code></pre>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">runif</span>(<span class="dv">12</span>),<span class="at">nrow=</span><span class="dv">3</span>)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>           [,1]      [,2]       [,3]       [,4]
-[1,] 0.01571801 0.1350974 0.45373734 0.73174629
-[2,] 0.94233729 0.8159685 0.09609275 0.19683882
-[3,] 0.87632979 0.3633880 0.92852526 0.02661296</code></pre>
+<pre><code>           [,1]       [,2]      [,3]      [,4]
+[1,] 0.09419453 0.49140325 0.3239281 0.8821053
+[2,] 0.70591270 0.09776282 0.9007023 0.6238653
+[3,] 0.75204524 0.02243489 0.8351596 0.1232264</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>e <span class="sc">%*%</span> a  <span class="co"># matrix mult. is NOT e * a!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>           [,1]      [,2]       [,3]       [,4]
-[1,] 0.01571801 0.1350974 0.45373734 0.73174629
-[2,] 0.87632979 0.3633880 0.92852526 0.02661296
-[3,] 0.94233729 0.8159685 0.09609275 0.19683882</code></pre>
+<pre><code>           [,1]       [,2]      [,3]      [,4]
+[1,] 0.09419453 0.49140325 0.3239281 0.8821053
+[2,] 0.75204524 0.02243489 0.8351596 0.1232264
+[3,] 0.70591270 0.09776282 0.9007023 0.6238653</code></pre>
 </div>
 </div>
 <p>Yes, rows 2 and 3 were swapped.</p>

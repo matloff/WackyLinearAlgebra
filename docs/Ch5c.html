@@ -249,26 +249,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#sec-matform" id="toc-sec-matform" class="nav-link" data-scroll-target="#sec-matform"><span class="header-section-number">9.3.2</span> Matrix formulation</a></li>
   <li><a href="#example-million-song-dataset" id="toc-example-million-song-dataset" class="nav-link" data-scroll-target="#example-million-song-dataset"><span class="header-section-number">9.3.3</span> Example: Million Song dataset</a></li>
   </ul></li>
-  <li><a href="#sec-xval" id="toc-sec-xval" class="nav-link" data-scroll-target="#sec-xval"><span class="header-section-number">9.4</span> Cross-Validation</a></li>
-  <li><a href="#sec-pgtn" id="toc-sec-pgtn" class="nav-link" data-scroll-target="#sec-pgtn"><span class="header-section-number">9.5</span> Modern View</a></li>
-  <li><a href="#formalizing-the-notion-of-shrinkage" id="toc-formalizing-the-notion-of-shrinkage" class="nav-link" data-scroll-target="#formalizing-the-notion-of-shrinkage"><span class="header-section-number">9.6</span> Formalizing the Notion of Shrinkage</a>
+  <li><a href="#shrinkage-may-occur-more-for-some-widehatbeta_i-than-others" id="toc-shrinkage-may-occur-more-for-some-widehatbeta_i-than-others" class="nav-link" data-scroll-target="#shrinkage-may-occur-more-for-some-widehatbeta_i-than-others"><span class="header-section-number">9.4</span> Shrinkage May Occur More for Some <span class="math inline">\(\widehat{\beta}_i\)</span> than Others</a></li>
+  <li><a href="#choosing-the-value-of-lambda" id="toc-choosing-the-value-of-lambda" class="nav-link" data-scroll-target="#choosing-the-value-of-lambda"><span class="header-section-number">9.5</span> Choosing the Value of <span class="math inline">\(\lambda\)</span></a>
   <ul class="collapse">
-  <li><a href="#shrinkage-through-length-penalization" id="toc-shrinkage-through-length-penalization" class="nav-link" data-scroll-target="#shrinkage-through-length-penalization"><span class="header-section-number">9.6.1</span> Shrinkage through length penalization</a></li>
-  <li><a href="#shrinkage-through-length-limitation" id="toc-shrinkage-through-length-limitation" class="nav-link" data-scroll-target="#shrinkage-through-length-limitation"><span class="header-section-number">9.6.2</span> Shrinkage through length limitation</a></li>
+  <li><a href="#two-key-general-statistical-properties" id="toc-two-key-general-statistical-properties" class="nav-link" data-scroll-target="#two-key-general-statistical-properties"><span class="header-section-number">9.5.1</span> Two key general statistical properties</a></li>
+  <li><a href="#sec-xval" id="toc-sec-xval" class="nav-link" data-scroll-target="#sec-xval"><span class="header-section-number">9.5.2</span> Cross-validation</a></li>
   </ul></li>
-  <li><a href="#the-lasso" id="toc-the-lasso" class="nav-link" data-scroll-target="#the-lasso"><span class="header-section-number">9.7</span> The LASSO</a>
+  <li><a href="#example-million-song-data" id="toc-example-million-song-data" class="nav-link" data-scroll-target="#example-million-song-data"><span class="header-section-number">9.6</span> Example: Million Song Data</a></li>
+  <li><a href="#sec-pgtn" id="toc-sec-pgtn" class="nav-link" data-scroll-target="#sec-pgtn"><span class="header-section-number">9.7</span> Modern View</a></li>
+  <li><a href="#formalizing-the-notion-of-shrinkage" id="toc-formalizing-the-notion-of-shrinkage" class="nav-link" data-scroll-target="#formalizing-the-notion-of-shrinkage"><span class="header-section-number">9.8</span> Formalizing the Notion of Shrinkage</a>
   <ul class="collapse">
-  <li><a href="#properties" id="toc-properties" class="nav-link" data-scroll-target="#properties"><span class="header-section-number">9.7.1</span> Properties</a></li>
+  <li><a href="#shrinkage-through-length-penalization" id="toc-shrinkage-through-length-penalization" class="nav-link" data-scroll-target="#shrinkage-through-length-penalization"><span class="header-section-number">9.8.1</span> Shrinkage through length penalization</a></li>
+  <li><a href="#shrinkage-through-length-limitation" id="toc-shrinkage-through-length-limitation" class="nav-link" data-scroll-target="#shrinkage-through-length-limitation"><span class="header-section-number">9.8.2</span> Shrinkage through length limitation</a></li>
   </ul></li>
-  <li><a href="#ridge-vs.-lasso-for-dimension-reduction" id="toc-ridge-vs.-lasso-for-dimension-reduction" class="nav-link" data-scroll-target="#ridge-vs.-lasso-for-dimension-reduction"><span class="header-section-number">9.8</span> Ridge vs.&nbsp;LASSO for Dimension Reduction</a>
+  <li><a href="#the-lasso" id="toc-the-lasso" class="nav-link" data-scroll-target="#the-lasso"><span class="header-section-number">9.9</span> The LASSO</a>
   <ul class="collapse">
-  <li><a href="#geometric-view" id="toc-geometric-view" class="nav-link" data-scroll-target="#geometric-view"><span class="header-section-number">9.8.1</span> Geometric view</a></li>
-  <li><a href="#implication-for-dimension-reduction." id="toc-implication-for-dimension-reduction." class="nav-link" data-scroll-target="#implication-for-dimension-reduction."><span class="header-section-number">9.8.2</span> Implication for dimension reduction.</a></li>
-  <li><a href="#avoidance-of-overfitting-without-dimension-reduction" id="toc-avoidance-of-overfitting-without-dimension-reduction" class="nav-link" data-scroll-target="#avoidance-of-overfitting-without-dimension-reduction"><span class="header-section-number">9.8.3</span> Avoidance of overfitting <em>without</em> dimension reduction</a></li>
+  <li><a href="#properties" id="toc-properties" class="nav-link" data-scroll-target="#properties"><span class="header-section-number">9.9.1</span> Properties</a></li>
   </ul></li>
-  <li><a href="#sec-useall" id="toc-sec-useall" class="nav-link" data-scroll-target="#sec-useall"><span class="header-section-number">9.9</span> Example: NYC Taxi Data</a></li>
-  <li><a href="#a-warning" id="toc-a-warning" class="nav-link" data-scroll-target="#a-warning"><span class="header-section-number">9.10</span> A Warning</a></li>
-  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">9.11</span> Your Turn</a></li>
+  <li><a href="#sec-dimred" id="toc-sec-dimred" class="nav-link" data-scroll-target="#sec-dimred"><span class="header-section-number">9.10</span> Ridge vs.&nbsp;LASSO for Dimension Reduction</a>
+  <ul class="collapse">
+  <li><a href="#geometric-view" id="toc-geometric-view" class="nav-link" data-scroll-target="#geometric-view"><span class="header-section-number">9.10.1</span> Geometric view</a></li>
+  <li><a href="#implication-for-dimension-reduction." id="toc-implication-for-dimension-reduction." class="nav-link" data-scroll-target="#implication-for-dimension-reduction."><span class="header-section-number">9.10.2</span> Implication for dimension reduction.</a></li>
+  <li><a href="#avoidance-of-overfitting-without-dimension-reduction" id="toc-avoidance-of-overfitting-without-dimension-reduction" class="nav-link" data-scroll-target="#avoidance-of-overfitting-without-dimension-reduction"><span class="header-section-number">9.10.3</span> Avoidance of overfitting <em>without</em> dimension reduction</a></li>
+  </ul></li>
+  <li><a href="#sec-useall" id="toc-sec-useall" class="nav-link" data-scroll-target="#sec-useall"><span class="header-section-number">9.11</span> Example: NYC Taxi Data</a></li>
+  <li><a href="#sec-iter" id="toc-sec-iter" class="nav-link" data-scroll-target="#sec-iter"><span class="header-section-number">9.12</span> Iterative Calculation</a></li>
+  <li><a href="#a-warning" id="toc-a-warning" class="nav-link" data-scroll-target="#a-warning"><span class="header-section-number">9.13</span> A Warning</a></li>
+  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">9.14</span> Your Turn</a></li>
   </ul>
 </nav>
     </div>
@@ -308,19 +315,18 @@ Goals of this chapter:
 </div>
 <section id="sec-nearly" class="level2" data-number="9.1">
 <h2 data-number="9.1" class="anchored" data-anchor-id="sec-nearly"><span class="header-section-number">9.1</span> Multicollinearity</h2>
-<p>The term <em>multicollinearity</em> refers to settings in which the following concerns arise:</p>
+<p>The notion of <em>multicollinearity</em> was the original motivation for shrinkage estimators. It refers to settings in which the following concerns arise:</p>
 <ul>
 <li><p>One column of the matrix <span class="math inline">\(A\)</span> in <a href="Ch3.html#eq-linregformula">Equation&nbsp;<span>5.4</span></a> is nearly equal to some linear combination of the others.</p></li>
 <li><p>Thus <span class="math inline">\(A\)</span> is nearly not of full rank.</p></li>
 <li><p>Thus <span class="math inline">\(A'A\)</span> is nearly not of full rank.</p></li>
 <li><p>Thus <span class="math inline">\(\widehat{\beta}\)</span> is unstable, in the form of high variance.</p></li>
 </ul>
-<p>(Technically, the above conditions refer to <em>approximate</em> multicollinearity, with the exact version consisting of the first three bullet points, minus the word “nearly.” However, informally, the term <em>multicollinearity</em> is usually taken to mean the approximate condition.)</p>
-<p>That latter point is often quantified by the <em>Variance Inflation Factor</em>. To motivate it, consider the “R-squared” value from linear regression analyis, which is the squared correlation between “Y” and predicted “Y”. Let <span class="math inline">\(R^2_j\)</span> denote that measure in the case of predicting column <span class="math inline">\(j\)</span> of <span class="math inline">\(A\)</span> from the other columns. The quantity</p>
+<p>That latter point is often quantified by the <em>Variance Inflation Factor</em>. To motivate it, consider the “R-squared” value from linear regression analyis, which is the squared correlation between true “Y” and predicted “Y”. Let <span class="math inline">\(R^2_j\)</span> denote that measure in the case of predicting column <span class="math inline">\(j\)</span> of <span class="math inline">\(A\)</span> from the other columns. The quantity</p>
 <p><span class="math display">\[
 VIF_j = \frac{1}{1-R^2_j}
 \]</span></p>
-<p>then measures the negative impact due to multicollinearity on estimating <span class="math inline">\(\widehat{\beta}_j\)</span>. The intuition is that, say, column 3 of <span class="math inline">\(A\)</span> can be predicte well using a linear model, then that column is approximately equal to a linear combination of the other columns. This is worrisome in light of the problems described above.</p>
+<p>then measures the negative impact due to multicollinearity on estimating <span class="math inline">\(\widehat{\beta}_j\)</span>. The intuition is that, say, column 3 of <span class="math inline">\(A\)</span> can be predicted well using a linear model, then that column is approximately equal to a linear combination of the other “X” columns. This is worrisome in light of the problems described above.</p>
 <p>Needless to say, the word “nearly” above, e.g.&nbsp;in “nearly not of full rank,” is vague, and leaves open the question of “What can we do about it?” We will present several answers to these questions in this and the succeeding chapters.</p>
 </section>
 <section id="sec-millionsong" class="level2" data-number="9.2">
@@ -366,12 +372,12 @@ VIF_j = \frac{1}{1-R^2_j}
 </section>
 <section id="ridge-regression" class="level2 page-columns page-full" data-number="9.3">
 <h2 data-number="9.3" class="anchored" data-anchor-id="ridge-regression"><span class="header-section-number">9.3</span> Ridge Regression</h2>
-<div class="page-columns page-full"><p>In seminal paper, Hoerl and Kennard discussed the problem of <em>multicollinearity</em> of predictor variables in a linear model.</p><div class="no-row-height column-margin column-container"><span class=""><em>Technometrids</em>, Februaru1970</span></div></div>
+<div class="page-columns page-full"><p>In seminal paper, Hoerl and Kennard presented a new approach to the problem of multicollinearity of predictor variables in a linear model.</p><div class="no-row-height column-margin column-container"><span class=""><em>Technometrids</em>, Februaru1970</span></div></div>
 <section id="the-ridge-solution" class="level3" data-number="9.3.1">
 <h3 data-number="9.3.1" class="anchored" data-anchor-id="the-ridge-solution"><span class="header-section-number">9.3.1</span> The ridge solution</h3>
 <p>Their solution is simple; Add some quantity to the diagonal of <span class="math inline">\(A'A\)</span>. Specifically, <a href="Ch3.html#eq-linregformula">Equation&nbsp;<span>5.4</span></a> now becomes</p>
 <p><span id="eq-ridge"><span class="math display">\[
-\widehat{\beta} - (A'A + \lambda I)^{-1} A'S
+\widehat{\beta} = (A'A + \lambda I)^{-1} A'S
 \tag{9.1}\]</span></span></p>
 <p>where <span class="math inline">\(\lambda\)</span> is a positive number chosen by the analyst.</p>
 <p>Here <span class="math inline">\(A\)</span> has dimensions <span class="math inline">\(n \textrm{ x } p\)</span>, and <span class="math inline">\(I\)</span> is the <span class="math inline">\(p \textrm{ x } p\)</span> identity matrix.</p>
@@ -403,7 +409,7 @@ S \\
 </section>
 <section id="example-million-song-dataset" class="level3" data-number="9.3.3">
 <h3 data-number="9.3.3" class="anchored" data-anchor-id="example-million-song-dataset"><span class="header-section-number">9.3.3</span> Example: Million Song dataset</h3>
-<p>We will use <strong>glmnet</strong>, one of the most widely-used R package.</p>
+<p>We will use <strong>glmnet</strong>, one of the most widely-used R packages.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glmnet)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> s50[,<span class="sc">-</span><span class="dv">1</span>]</span>
@@ -509,37 +515,141 @@ V91         -3.614719e-05</code></pre>
 </div>
 </div>
 <p>We had earlier flagged variable <span class="math inline">\(V5\)</span> as causing multicollinearity. As noted then, we could simply exclude it, but here under ridge, we see that it has been assigned a very small regression coefficient compared to most others.</p>
+<p>So, did the estimated coefficient vector shrink?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>l2norm <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">sqrt</span>(<span class="fu">sum</span>(x<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>bh01<span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">glmnet</span>(x,y,<span class="at">alpha=</span><span class="dv">0</span>,<span class="at">lambda=</span><span class="fl">0.1</span>))</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">l2norm</span>(bh01)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1952.612</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>bhOLS <span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">lm</span>(V1 <span class="sc">~</span> .,s50))</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">l2norm</span>(bhOLS)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1951.028</code></pre>
+</div>
+</div>
+<p>No, the vector got larger!</p>
+<p>The culprit is the intercept term, <span class="math inline">\(\widehat{\beta}_0\)</span>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>bh01[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1952.611</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>bhOLS[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept) 
+   1951.028 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">l2norm</span>(bh01[<span class="sc">-</span><span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9080075</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">l2norm</span>(bhOLS[<span class="sc">-</span><span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9451025</code></pre>
+</div>
+</div>
+<p>The rest of the vector did shrink (though not necessily element-by-element).</p>
+<p>Actually, we should have centered and scaled “X” before applying ridge, since the predictors are of such different magnitudes. This also makes the intercept 0.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>s50a <span class="ot">&lt;-</span> s50</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>s50a[,<span class="sc">-</span><span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">scale</span>(s50[,<span class="sc">-</span><span class="dv">1</span>])</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>s50a[,<span class="dv">1</span>] <span class="ot">&lt;-</span> s50a[,<span class="dv">1</span>] <span class="sc">-</span> <span class="fu">mean</span>(s50a[,<span class="dv">1</span>])</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>bh01<span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">glmnet</span>(s50a[,<span class="sc">-</span><span class="dv">1</span>],s50a[,<span class="dv">1</span>],<span class="at">alpha=</span><span class="dv">0</span>,<span class="at">lambda=</span><span class="fl">0.1</span>))</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">l2norm</span>(bh01)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7.570367</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>bhOLS <span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">lm</span>(V1 <span class="sc">~</span> .,s50a))</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">l2norm</span>(bhOLS)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7.886902</code></pre>
+</div>
+</div>
 </section>
 </section>
-<section id="sec-xval" class="level2" data-number="9.4">
-<h2 data-number="9.4" class="anchored" data-anchor-id="sec-xval"><span class="header-section-number">9.4</span> Cross-Validation</h2>
-<p>So, how do we choose <span class="math inline">\(\lambda\)</span>?</p>
-<p>A common way to choose among models is <em>cross-validation</em>: We set aside a subset of the data, known as the <em>holdout</em> or <em>test</em> set, for use in testing predictive accuracy. The remaining data is the <em>training set</em>. For each of our competing models – in this case, competing values of <span class="math inline">\(\lambda\)</span> – we fit the model on the training set, then use the result to predict the test set. We then use whichever model does best in the test set.</p>
-<p><em>Example: Million Song data</em></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">library</span>(glmnet)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> glmOut <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(<span class="at">x=</span><span class="fu">as.matrix</span>(s50[,<span class="sc">-</span><span class="dv">1</span>]),<span class="at">y=</span>s50<span class="sc">$</span>V1,<span class="at">alpha=</span><span class="dv">0</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> glmOut</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    Lambda Index Measure     SE Nonzero</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>min <span class="fl">0.2474</span>   <span class="dv">100</span>   <span class="fl">89.44</span> <span class="fl">0.9201</span>      <span class="dv">90</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>1se <span class="fl">0.9987</span>    <span class="dv">85</span>   <span class="fl">90.28</span> <span class="fl">0.9823</span>      <span class="dv">90</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The <span class="math inline">\(\lambda\)</span> value that gave the smallest Mean Squared Prediction Error (MSE) as 0.2474. (Coincidentally, it was also the smallest value that the function tried; see <strong>glmOut$lambda</strong>.) A more conservative value of <span class="math inline">\(\lambda\)</span> was 0.9987, the largest <span class="math inline">\(\lambda\)</span> giving MSE within one standard error of the minimum; it’s conservative in the sense of being less likely to overfit; its MSE value, 90.28, was only slightly larger than the best one. In each case, all 90 predictors had nonzero coefficient estimates.</p>
+<section id="shrinkage-may-occur-more-for-some-widehatbeta_i-than-others" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="shrinkage-may-occur-more-for-some-widehatbeta_i-than-others"><span class="header-section-number">9.4</span> Shrinkage May Occur More for Some <span class="math inline">\(\widehat{\beta}_i\)</span> than Others</h2>
 </section>
-<section id="sec-pgtn" class="level2" data-number="9.5">
-<h2 data-number="9.5" class="anchored" data-anchor-id="sec-pgtn"><span class="header-section-number">9.5</span> Modern View</h2>
-<p>There are many ways to deal with multicollinearity, which we must remind the reader only concerns <em>approximate</em> linear dependence pf the columns of <span class="math inline">\(A\)</span>. These days, many analysts go further, using ridge for situations in which there is <em>exact</em> linear dependence.</p>
+<section id="choosing-the-value-of-lambda" class="level2 page-columns page-full" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="choosing-the-value-of-lambda"><span class="header-section-number">9.5</span> Choosing the Value of <span class="math inline">\(\lambda\)</span></h2>
+<p>So, how do we choose <span class="math inline">\(\lambda\)</span>? We need to note a couple of very important principles first.</p>
+<section id="two-key-general-statistical-properties" class="level3 page-columns page-full" data-number="9.5.1">
+<h3 data-number="9.5.1" class="anchored" data-anchor-id="two-key-general-statistical-properties"><span class="header-section-number">9.5.1</span> Two key general statistical properties</h3>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Subtracting the mean of a variable from that variable results in a mean-0 entity. In the linear regression context, centering both “X” and “Y” will result in the model having 0 as its intercept term.</p>
+</div>
+</div>
+<div id="nte-monkeys" class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In a set of 10,000 randomly typing monkeys, one of them will accidentally type a Shakespearian sonnet.</p>
+<p>Some readers have heard this before in the context of <em>p-hacking</em>, in which an analyst poses a large collection of research questions, and runs a statistical hypothesis on each of them. Even if the null hypothesis is true for all of them, each will have a 5% chance of being  rejected, and since there are many, the chance that at least one will be rejected and declared “significant.”</p>
+<p>This problem arises in many, many Data Science contexts, and a good analyst must be vigilant to recognize the potential to mislead.</p>
+</div>
+</div>
+<div class="no-row-height column-margin column-container"><span class="callout-margin-content">One should not be doing hypothesis tests in the first place. See <a href="https://cran.rstudio.com/web/packages/qeML/vignettes/NoPValues.html">these notes</a>.</span></div></section>
+<section id="sec-xval" class="level3 page-columns page-full" data-number="9.5.2">
+<h3 data-number="9.5.2" class="anchored" data-anchor-id="sec-xval"><span class="header-section-number">9.5.2</span> Cross-validation</h3>
+<div class="page-columns page-full"><p>A common way to choose among models is <em>cross-validation</em>: We set aside  a subset of the data, known as the <em>holdout</em> or <em>test</em> set, for use in testing predictive accuracy. The remaining data is the <em>training set</em>. For each of our competing models – in this case, competing values of <span class="math inline">\(\lambda\)</span> – we fit the model on the training set, then use the result to predict the test set. We then use whichever model does best in the test set.</p><div class="no-row-height column-margin column-container"><span class="">Some analysts break the data into three sets, including a <em>validation set</em>, considered even “fresher.”</span></div></div>
+<p>The test set serves as “fresh data,” simulating how our fitted model might do in the real world (assuming our data is representative of the real world). Predicting on the training set is not as good, since our fit was by design tailored to that data.</p>
+</section>
+</section>
+<section id="example-million-song-data" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="example-million-song-data"><span class="header-section-number">9.6</span> Example: Million Song Data</h2>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">library</span>(glmnet)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> glmOut <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(<span class="at">x=</span><span class="fu">as.matrix</span>(s50[,<span class="sc">-</span><span class="dv">1</span>]),<span class="at">y=</span>s50<span class="sc">$</span>V1,<span class="at">alpha=</span><span class="dv">0</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> glmOut</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    Lambda Index Measure     SE Nonzero</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>min <span class="fl">0.2474</span>   <span class="dv">100</span>   <span class="fl">89.44</span> <span class="fl">0.9201</span>      <span class="dv">90</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>1se <span class="fl">0.9987</span>    <span class="dv">85</span>   <span class="fl">90.28</span> <span class="fl">0.9823</span>      <span class="dv">90</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The <span class="math inline">\(\lambda\)</span> value that gave the smallest Mean Squared Prediction Error (MSE) was 0.2474. (Coincidentally, it was also the smallest value that the function tried; see <strong>glmOut$lambda</strong>.) A more conservative value of <span class="math inline">\(\lambda\)</span> was 0.9987, the largest <span class="math inline">\(\lambda\)</span> giving MSE within one standard error of the minimum; it’s conservative in the sense of being less likely to overfit; its MSE value, 90.28, was only slightly larger than the best one. In each case, all 90 predictors had nonzero coefficient estimates.</p>
+<p>We can then predict as usual. Say we have a song similar to that in <strong>s50[1,]</strong>, but with <strong>V2</strong> equal to 25.0.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> s50[<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>]  <span class="co"># exclude Y</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>z[<span class="dv">1</span>,<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fl">25.0</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(glmOut,z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           s0
+[1,] 2003.235</code></pre>
+</div>
+</div>
+<p>The year of release is predicted to be 2003.</p>
+</section>
+<section id="sec-pgtn" class="level2" data-number="9.7">
+<h2 data-number="9.7" class="anchored" data-anchor-id="sec-pgtn"><span class="header-section-number">9.7</span> Modern View</h2>
+<p>There are many ways to deal with multicollinearity other than shrinkage, and indeed, these days one seldom hears mention of multicollinearity in discussions of shrinkage. Instead, the goal is <em>dimension reduction</em>, meaning to reduce the complexity of a model in order to avoid overfitting; the LASSO, introduced below, does this explicitly, while ridge accomplishes it via pure size reduction.</p>
+<p>We will discuss this further in <a href="#sec-dimred"><span>Section&nbsp;9.10</span></a>, but one more point about the discussion no longer being motivated explicitly by multicollinearity: One can apply ridge to situations of <strong>exact</strong> dependence among the columns of X, as opposed to the original motivation of dealing with <em>approximate</em> linear dependence. in which there is <em>exact</em> linear dependence.</p>
 <p>We saw such a setting in <a href="Ch4.html#sec-censusrref"><span>Section&nbsp;6.1</span></a>. There we deliberately induced exact linear dependence by inclusion of both male and female dummy variables. Let’s apply ridge:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qeML) </span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(svcensus) </span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>svc <span class="ot">&lt;-</span> svcensus[,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>)]  </span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>svc<span class="sc">$</span>man <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(svc<span class="sc">$</span>gender <span class="sc">==</span> <span class="st">'male'</span>) </span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>svc<span class="sc">$</span>woman <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(svc<span class="sc">$</span>gender <span class="sc">==</span> <span class="st">'female'</span>) </span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>svc<span class="sc">$</span>gender <span class="ot">&lt;-</span> <span class="cn">NULL</span> </span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> svc[,<span class="sc">-</span><span class="dv">2</span>] </span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> <span class="fl">0.1</span> </span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(a) </span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>tmp1 <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">t</span>(a) <span class="sc">%*%</span> a <span class="sc">+</span> lambda <span class="sc">*</span> <span class="fu">diag</span>(<span class="dv">4</span>)) </span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>tmp1 <span class="sc">%*%</span> <span class="fu">t</span>(a) <span class="sc">%*%</span> <span class="fu">as.matrix</span>(svc<span class="sc">$</span>wageinc) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qeML) </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(svcensus) </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>svc <span class="ot">&lt;-</span> svcensus[,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>)]  </span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>svc<span class="sc">$</span>man <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(svc<span class="sc">$</span>gender <span class="sc">==</span> <span class="st">'male'</span>) </span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>svc<span class="sc">$</span>woman <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(svc<span class="sc">$</span>gender <span class="sc">==</span> <span class="st">'female'</span>) </span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>svc<span class="sc">$</span>gender <span class="ot">&lt;-</span> <span class="cn">NULL</span> </span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> svc[,<span class="sc">-</span><span class="dv">2</span>] </span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> <span class="fl">0.1</span> </span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(a) </span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>tmp1 <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">t</span>(a) <span class="sc">%*%</span> a <span class="sc">+</span> lambda <span class="sc">*</span> <span class="fu">diag</span>(<span class="dv">4</span>)) </span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>tmp1 <span class="sc">%*%</span> <span class="fu">t</span>(a) <span class="sc">%*%</span> <span class="fu">as.matrix</span>(svc<span class="sc">$</span>wageinc) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>               [,1]
 age        496.6716
@@ -550,9 +660,9 @@ woman   -29378.3086</code></pre>
 </div>
 <p>The results essentially are the same as what we obtained by having only one dummy, thus no linear dependence: Men still enjoy about an $11,000 advantage. But ridge allowed us to avoid deleting one of our dummies. Such deletion is easy in this case, but for large <span class="math inline">\(p\)</span>, say in the hundreds or even more, some analysts prefer the convenience of ridge.</p>
 </section>
-<section id="formalizing-the-notion-of-shrinkage" class="level2" data-number="9.6">
-<h2 data-number="9.6" class="anchored" data-anchor-id="formalizing-the-notion-of-shrinkage"><span class="header-section-number">9.6</span> Formalizing the Notion of Shrinkage</h2>
-<p>In the early 1980s, the statistical world was shocked by research by James and Stein that found, in short that:</p>
+<section id="formalizing-the-notion-of-shrinkage" class="level2" data-number="9.8">
+<h2 data-number="9.8" class="anchored" data-anchor-id="formalizing-the-notion-of-shrinkage"><span class="header-section-number">9.8</span> Formalizing the Notion of Shrinkage</h2>
+<p>How in the world did statisticians develop an interest in shrinking estimators? A watershed event occurred in the early 1980s, when the statistical world was shocked by research by James and Stein that found, in short that:</p>
 <blockquote class="blockquote">
 <p>Say <span class="math inline">\(W\)</span> has <span class="math inline">\(q\)</span>-dimensional normal distribution with mean vector <span class="math inline">\(\mu\)</span> and independent components having variance <span class="math inline">\(\sigma^2\)</span>, each. We have a random sample of size <span class="math inline">\(n\)</span>, i.e.&nbsp;<span class="math inline">\(n\)</span> independent observations on <span class="math inline">\(W\)</span>. Then if <span class="math inline">\(q \geq 3\)</span>, in terms of Mean Squared Estimation Error, the best estimator of <span class="math inline">\(\mu\)</span> is NOT the sample mean <span class="math inline">\(\bar{W}\)</span>. Instead, it’s</p>
 <p><span class="math display">\[
@@ -564,8 +674,9 @@ woman   -29378.3086</code></pre>
 </blockquote>
 <p>The quantity within the parentheses is typically smaller than 1, giving us the shrinkage property. Note, though, that with larger <span class="math inline">\(n\)</span>, the amount of shrinkage is minor.</p>
 <p>In the case of linear regression, shrinkage works there too, with <span class="math inline">\(q\)</span> being the number of columns in the <span class="math inline">\(A\)</span> matrix.</p>
-<section id="shrinkage-through-length-penalization" class="level3" data-number="9.6.1">
-<h3 data-number="9.6.1" class="anchored" data-anchor-id="shrinkage-through-length-penalization"><span class="header-section-number">9.6.1</span> Shrinkage through length penalization</h3>
+<p>So, let’s view the issue of shrinkage more formally, first for ridge and later for the LASSO.</p>
+<section id="shrinkage-through-length-penalization" class="level3" data-number="9.8.1">
+<h3 data-number="9.8.1" class="anchored" data-anchor-id="shrinkage-through-length-penalization"><span class="header-section-number">9.8.1</span> Shrinkage through length penalization</h3>
 <p>Say instead of minimizing <a href="Ch3.html#eq-matrixss">Equation&nbsp;<span>5.1</span></a>, we minimize</p>
 <p><span id="eq-matrixssridge"><span class="math display">\[
 (S - Ab)'(S - Ab) + \lambda ||b||^2
@@ -582,10 +693,10 @@ woman   -29378.3086</code></pre>
 <p><span class="math display">\[
 \widehat{\beta} = (A'A+\lambda I)^{-1} A'S
 \]</span></p>
-<p>It’s ridge! So here is formalization of our “almost singular” etc. language above to justify ridge as a shrinkage estimator..</p>
+<p>It’s ridge! So ridge, originally motivated by “almost singular” settings, actually turns out to justify ridge as a shrinkage estimator..</p>
 </section>
-<section id="shrinkage-through-length-limitation" class="level3" data-number="9.6.2">
-<h3 data-number="9.6.2" class="anchored" data-anchor-id="shrinkage-through-length-limitation"><span class="header-section-number">9.6.2</span> Shrinkage through length limitation</h3>
+<section id="shrinkage-through-length-limitation" class="level3" data-number="9.8.2">
+<h3 data-number="9.8.2" class="anchored" data-anchor-id="shrinkage-through-length-limitation"><span class="header-section-number">9.8.2</span> Shrinkage through length limitation</h3>
 <p>Instead of penalizing <span class="math inline">\(||b||\)</span>, we could simply constrain it, i.e.&nbsp;we could set our optimization problem to:</p>
 <blockquote class="blockquote">
 <p>minimize <span class="math inline">\((S-Ab)'(S-Ab)\)</span>, subject to the constraint <span class="math inline">\(||b||^2 \leq \gamma\)</span></p>
@@ -593,8 +704,8 @@ woman   -29378.3086</code></pre>
 <p>We say that this new formulation is the <em>dual</em> of the first one. One can show that they are typically equivalent.</p>
 </section>
 </section>
-<section id="the-lasso" class="level2" data-number="9.7">
-<h2 data-number="9.7" class="anchored" data-anchor-id="the-lasso"><span class="header-section-number">9.7</span> The LASSO</h2>
+<section id="the-lasso" class="level2" data-number="9.9">
+<h2 data-number="9.9" class="anchored" data-anchor-id="the-lasso"><span class="header-section-number">9.9</span> The LASSO</h2>
 <p>The LASSO (Least Absolute Shrinkage and Selection Operator) was developed by Robert Tibshirani in 1996, following earlier work by Leo Breiman. It takes <span class="math inline">\(\widehat{\beta}\)</span> to be the value of <span class="math inline">\(b\)</span> that minimizes</p>
 <p><span id="eq-matrixsslasso"><span class="math display">\[
 (S - Ab)'(S - Ab) + \lambda ||b||_1
@@ -605,8 +716,8 @@ woman   -29378.3086</code></pre>
 \]</span></p>
 <p>We will write our original norm as <span class="math inline">\(||b||_2\)</span>.</p>
 <p>This is a seemingly minor change, but with important implications. What Breiman and Tibshirani were trying to do was to obtain a <em>sparse</em> <span class="math inline">\(\widehat{\beta}\)</span> , i.e.&nbsp;a solution with lots of 0s, thereby providing a method for predictor variable selection. This is important because so-called “parsimonious” prediction models are desirable.</p>
-<section id="properties" class="level3" data-number="9.7.1">
-<h3 data-number="9.7.1" class="anchored" data-anchor-id="properties"><span class="header-section-number">9.7.1</span> Properties</h3>
+<section id="properties" class="level3" data-number="9.9.1">
+<h3 data-number="9.9.1" class="anchored" data-anchor-id="properties"><span class="header-section-number">9.9.1</span> Properties</h3>
 <p>To that end, first note that it can be shown that, under some technical conditions, that the ridge solution minimizes</p>
 <p><span class="math display">\[
 (S - Ab)'(S - Ab)
@@ -622,11 +733,11 @@ woman   -29378.3086</code></pre>
 <p>As with <span class="math inline">\(\lambda\)</span> in the original formulation, <span class="math inline">\(\gamma\)</span> is a positive number chosen by the analyst.</p>
 </section>
 </section>
-<section id="ridge-vs.-lasso-for-dimension-reduction" class="level2" data-number="9.8">
-<h2 data-number="9.8" class="anchored" data-anchor-id="ridge-vs.-lasso-for-dimension-reduction"><span class="header-section-number">9.8</span> Ridge vs.&nbsp;LASSO for Dimension Reduction</h2>
+<section id="sec-dimred" class="level2 page-columns page-full" data-number="9.10">
+<h2 data-number="9.10" class="anchored" data-anchor-id="sec-dimred"><span class="header-section-number">9.10</span> Ridge vs.&nbsp;LASSO for Dimension Reduction</h2>
 <p>Today’s large datasets being so common, we need a way to “cut things down to size,” i.e.&nbsp;<em>dimension reduction</em>, aimed at reducing the number of predictor variables. This is done both for the sake of simplicity and to over <em>overfitting</em>, in which fitting an overly complex model can reduce predictive power.</p>
-<section id="geometric-view" class="level3" data-number="9.8.1">
-<h3 data-number="9.8.1" class="anchored" data-anchor-id="geometric-view"><span class="header-section-number">9.8.1</span> Geometric view</h3>
+<section id="geometric-view" class="level3 page-columns page-full" data-number="9.10.1">
+<h3 data-number="9.10.1" class="anchored" data-anchor-id="geometric-view"><span class="header-section-number">9.10.1</span> Geometric view</h3>
 <p>Comparison between the ridge and LASSO concepts is often done via this graph depicting the LASSO setting:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -637,6 +748,7 @@ woman   -29378.3086</code></pre>
 <p>Here <span class="math inline">\(p = 2\)</span>, with <span class="math inline">\(b = (b_1,b_2)'\)</span>. The horizontal and vertical axes represent <span class="math inline">\(b_1\)</span> and <span class="math inline">\(b_2\)</span>.</p>
 <ul>
 <li><p>The constraint <span class="math inline">\(||b||_1 \leq \gamma\)</span> then takes the form of a diamond, with corners at <span class="math inline">\((\gamma,0)\)</span>, <span class="math inline">\((0,\gamma)\)</span>, <span class="math inline">\((-\gamma,0)\)</span> and <span class="math inline">\((0,-\gamma)\)</span>. The constraint <span class="math inline">\(||b||_1 \leq \gamma\)</span> requires us to choose a point <span class="math inline">\(b\)</span> somewhere in the diamond, including the boundary.</p></li>
+<li><p>Note that each of the four corners of the diamond represents a sparse solution. For instance, the point <span class="math inline">\((0,\gamma)\)</span> has <span class="math inline">\(b_2 = 0\)</span></p></li>
 <li><p>The concentric ellipses depict the values of <span class="math inline">\(c(b) = (S - Ab)'(S - Ab)\)</span>, as follows.</p></li>
 <li><p>Consider one particular value of <span class="math inline">\(c(b)\)</span>, say 1.68.</p></li>
 <li><p>Many different points <span class="math inline">\(b\)</span> in the graph will have <span class="math inline">\(c(b) = 1.68\)</span>; in fact, the locus of all such points is an ellipse.</p></li>
@@ -644,27 +756,29 @@ woman   -29378.3086</code></pre>
 <li><p>Larger values of <span class="math inline">\(c(b)\)</span> yield larger ellipses.</p></li>
 <li><p>On the one hand, we want to choose a <span class="math inline">\(b\)</span> for which <span class="math inline">\(c(b)\)</span> – our total squared prediction error – is small, thus a smaller ellipse.</p></li>
 <li><p>But on the other hand, we need at least one point on the ellipse to be in common with the diamond.</p></li>
-<li><p>The solution is then a point <span class="math inline">\(b\)</span> in which the ellipse just barely touches the diamond, respectively.</p></li>
+<li><p>The solution is then a point <span class="math inline">\(b\)</span> in which the ellipse just barely touches the diamond.</p></li>
+<li><p>Picture in your mind an ellipse, say the inner one in the graph, growing larger and larger, while retaining the same center and orientation, until it hits the diamond. That is the outer ellipse, which indeed hits the diamond at one of the corners.</p></li>
+<li><p>Then picture other ellipses, at other centers with other orientations, and go through the same process in your mind’s eye. You will see that  typically the solution turns out to be one of the corners. Again, this is important because it gives us a sparse solution.</p></li>
 </ul>
-</section>
-<section id="implication-for-dimension-reduction." class="level3" data-number="9.8.2">
-<h3 data-number="9.8.2" class="anchored" data-anchor-id="implication-for-dimension-reduction."><span class="header-section-number">9.8.2</span> Implication for dimension reduction.</h3>
+<div class="no-row-height column-margin column-container"><span class="">Of course, we are in just two dimensions here. With <span class="math inline">\(p = 10\)</span> predictor variables, the graph would be in 10 dimensions, beyond our human ability to picture. But we still would have a diamong in that space, with <span class="math inline">\(2p\)</span> corners etc.</span></div></section>
+<section id="implication-for-dimension-reduction." class="level3" data-number="9.10.2">
+<h3 data-number="9.10.2" class="anchored" data-anchor-id="implication-for-dimension-reduction."><span class="header-section-number">9.10.2</span> Implication for dimension reduction.</h3>
 <p>The key point is that that “barely touching” point will be one of the four corners of the diamond, points at which either <span class="math inline">\(b_1 = 0\)</span> or <span class="math inline">\(b_2 = 0\)</span> – <em>hence a sparse solution</em>, meaning one in which many/most of the coefficients in the fitted model will be 0. This achieves the goal of dimension reduction.</p>
 <p>Ridge will not produce a sparse solution. The diamond would now be a circle (not shown). The “barely touching point” will almost certainly will be at a place in which both <span class="math inline">\(b_1\)</span> and <span class="math inline">\(b_2\)</span> are nonzero. Hence no sparsity.</p>
 </section>
-<section id="avoidance-of-overfitting-without-dimension-reduction" class="level3" data-number="9.8.3">
-<h3 data-number="9.8.3" class="anchored" data-anchor-id="avoidance-of-overfitting-without-dimension-reduction"><span class="header-section-number">9.8.3</span> Avoidance of overfitting <em>without</em> dimension reduction</h3>
+<section id="avoidance-of-overfitting-without-dimension-reduction" class="level3" data-number="9.10.3">
+<h3 data-number="9.10.3" class="anchored" data-anchor-id="avoidance-of-overfitting-without-dimension-reduction"><span class="header-section-number">9.10.3</span> Avoidance of overfitting <em>without</em> dimension reduction</h3>
 <p>As we’ve seen, both ridge and LASSO reduce the size of the <span class="math inline">\(\widehat{\beta}\)</span> vector of estimated coefficients. Smaller quantities have smaller statistical variances, hence a guard against overfitting. So, even ridge can be employed as an approach to the overfitting problem, even though it does not provide a sparse solution.</p>
 <p>On the other hand, in some settings, it may be desirable to keep all predictors, as seen in the next section.</p>
 </section>
 </section>
-<section id="sec-useall" class="level2 page-columns page-full" data-number="9.9">
-<h2 data-number="9.9" class="anchored" data-anchor-id="sec-useall"><span class="header-section-number">9.9</span> Example: NYC Taxi Data</h2>
+<section id="sec-useall" class="level2 page-columns page-full" data-number="9.11">
+<h2 data-number="9.11" class="anchored" data-anchor-id="sec-useall"><span class="header-section-number">9.11</span> Example: NYC Taxi Data</h2>
 <p>The purpose of this data is to predict trip time in the New York City taxi system. The <span class="math inline">\(qeML\)</span> package includes a 10,000-row subset.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qeML)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(nyctaxi)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(nyctaxi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qeML)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(nyctaxi)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(nyctaxi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        trip_distance PULocationID DOLocationID tripTime DayOfWeek
 2969561          1.37          236           43      598         1
@@ -674,26 +788,26 @@ woman   -29378.3086</code></pre>
 3893911          1.20          236          163      648         5
 4108506          2.40          161          164      977         5</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(nyctaxi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(nyctaxi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10000     5</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(nyctaxi<span class="sc">$</span>PULocationID))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(nyctaxi<span class="sc">$</span>PULocationID))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 143</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(nyctaxi<span class="sc">$</span>DOLocationID))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(nyctaxi<span class="sc">$</span>DOLocationID))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 205</code></pre>
 </div>
 </div>
-<div class="page-columns page-full"><p>An old rule of thumb says that if we have <span class="math inline">\(p\)</span> predictors and <span class="math inline">\(n\)</span> data points, we should keep <span class="math inline">\(p &lt; \sqrt{n}\)</span> to avoid overfitting. As we will see in a later chapter, these days that rule is being questioned, but let’s see how it fits in here. In our case here, <span class="math inline">\(p = 1+143+205+1 = 350\)</span>, much larger than <span class="math inline">\(p = \sqrt{10000} = 100\)</span>. And if we are fitting a linear model, we may consider pickup/dropoff location interaction variables, basically products of the pickup and dropoff dummy variables. </p><div class="no-row-height column-margin column-container"><span class="">To avoid exact multicollinearity, we will use only 142 and 204 of the pickup and dropoff variables.</span></div></div>
+<div class="page-columns page-full"><p>If we fit, say, a linear model, <span class="math inline">\(lm\)</span> will form a dummy variable for each of the pickup and dropoff locations. Thus we will have <span class="math inline">\(p = 1+143+205+1 = 350\)</span>. An old rule of thumb says that if we have <span class="math inline">\(p\)</span> predictors and <span class="math inline">\(n\)</span> data points, we should keep <span class="math inline">\(p &lt; \sqrt{n}\)</span> to avoid overfitting. As we will see in a later chapter, these days that rule is being questioned, so  since here we have <span class="math inline">\(\sqrt{n} = 100\)</span>, there is a strong suggestion that we do some dimension reduction.</p><div class="no-row-height column-margin column-container"><span class="">The problem would be even worse if we add pickup/dropoff location interaction variables, basically products of the pickup and dropoff dummy variables.</span></div></div>
 <p>Thus we either should delete some of the pickup and dropoff variables, or use all of them but temper the fit using ridge. The latter may be more attractive, as riders would like a time estimate for their particular pickup and dropoff locations.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glmnet)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>nycwide <span class="ot">&lt;-</span> <span class="fu">factorsToDummies</span>(nyctaxi[,<span class="sc">-</span><span class="dv">1</span>])</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>glmOut <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(<span class="at">x=</span>nycwide,<span class="at">y=</span>nyctaxi[,<span class="dv">1</span>],<span class="at">alpha=</span><span class="dv">0</span>)</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>glmOut</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glmnet)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>nycwide <span class="ot">&lt;-</span> <span class="fu">factorsToDummies</span>(nyctaxi[,<span class="sc">-</span><span class="dv">1</span>])</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>glmOut <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(<span class="at">x=</span>nycwide,<span class="at">y=</span>nyctaxi[,<span class="dv">1</span>],<span class="at">alpha=</span><span class="dv">0</span>)</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>glmOut</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:  cv.glmnet(x = nycwide, y = nyctaxi[, 1], alpha = 0) 
@@ -701,13 +815,20 @@ Call:  cv.glmnet(x = nycwide, y = nyctaxi[, 1], alpha = 0)
 Measure: Mean-Squared Error 
 
     Lambda Index Measure     SE Nonzero
-min 0.3002   100   2.949 0.1581     356
-1se 0.9169    88   3.079 0.1673     356</code></pre>
+min 0.3002   100   2.918 0.1680     356
+1se 1.0063    87   3.080 0.1908     356</code></pre>
 </div>
 </div>
+<p>The best <span class="math inline">\(\lambda\)</span> value was found to be 0.3002.</p>
 </section>
-<section id="a-warning" class="level2" data-number="9.10">
-<h2 data-number="9.10" class="anchored" data-anchor-id="a-warning"><span class="header-section-number">9.10</span> A Warning</h2>
+<section id="sec-iter" class="level2" data-number="9.12">
+<h2 data-number="9.12" class="anchored" data-anchor-id="sec-iter"><span class="header-section-number">9.12</span> Iterative Calculation</h2>
+<p>An advantage of ridge over LASSO is that the former has an explicit (we day <em>closed-form</em>) solution, which is not the case for the LASSO. In fact, many algorithms in statistics/machine learning lack closed-form solutions, in which case one must resort to <em>iterative</em> computation.</p>
+<p>The basis idea is to first (somehow) make some guess as to the value of the desired quantity, say <span class="math inline">\(\widehat{\beta}\)</span> in the LASSO. The algorithm crunches this to make a new guess, hopefully one that is more accurate than the first. One continues this process until, hopefully, it <em>converges</em>, meaning that it no longer changes much from one iteration to the next. The current guess is then deemed to be the correct value.</p>
+<p>At first one may think that such internal details of computation need not concern the end user of the software. But the fact is that often an algorithm will fail to converge, and the user may need to get more directly involved, say in suggesting the value of the initial guess. Or, as we will see later, some machine learning algorithm have a parameter called the <em>learning rate</em>; a small value directs the algorithm to take smaller steps in generating new guesses. On the one hand, this can slow the computation but on the other, we may be less likely to overshoot the true value.</p>
+</section>
+<section id="a-warning" class="level2" data-number="9.13">
+<h2 data-number="9.13" class="anchored" data-anchor-id="a-warning"><span class="header-section-number">9.13</span> A Warning</h2>
 <p>Many statistical quantities now have <em>regularized</em>, i.e.&nbsp;shrunken versions. It is also standard practice in neural networks. This may be quite helpful in prediction contexts. However, note the following:</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -723,8 +844,8 @@ No Statistical Inference on Shrinkage Estimators
 </div>
 </div>
 </section>
-<section id="your-turn" class="level2" data-number="9.11">
-<h2 data-number="9.11" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">9.11</span> Your Turn</h2>
+<section id="your-turn" class="level2" data-number="9.14">
+<h2 data-number="9.14" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">9.14</span> Your Turn</h2>
 <p>❄️ <strong>Your Turn:</strong> Show that <span class="math inline">\(A_{new}\)</span> in <a href="#sec-matform"><span>Section&nbsp;9.3.2</span></a> is of full rank, <span class="math inline">\(p\)</span>.</p>
 <p>❄️ <strong>Your Turn:</strong> Consider a generalization of ridge regression, in which we find</p>
 <p><span class="math display">\[
@@ -737,8 +858,8 @@ b =
 {[{A}' {A} + {D}^2]}^{-1}
 {A}' {S}
 \]</span></p>
-<p>❄️ <strong>Your Turn:</strong> In <a href="#sec-useall"><span>Section&nbsp;9.9</span></a>, it was pointed out that in some settings we may prefer to retain all of our predictor variables, rather than do dimension reduction, thus preferring ridge to LASSO. But we might pay a price for that preference, in that the LASSO may actually give us better predictive power. Write an R function to investigate this, with call form</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">compareRidgeLASSO</span>(data,yName)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>❄️ <strong>Your Turn:</strong> In <a href="#sec-useall"><span>Section&nbsp;9.11</span></a>, it was pointed out that in some settings we may prefer to retain all of our predictor variables, rather than do dimension reduction, thus preferring ridge to LASSO. But we might pay a price for that preference, in that the LASSO may actually give us better predictive power. Write an R function to investigate this, with call form</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">compareRidgeLASSO</span>(data,yName)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>where <strong>data</strong> and <strong>yName</strong> are in the format of the predictive <span class="math inline">\(qeML\)</span> functions. Return the minimum Mean Squared Prediction Error for both algorithms.</p>
 
 
