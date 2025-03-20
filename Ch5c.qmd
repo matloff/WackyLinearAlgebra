@@ -200,8 +200,6 @@ l2norm(bhOLS)
 
 ```
 
-## Shrinkage May Occur More for Some $\widehat{\beta}_i$ than Others
-
 ## Choosing the Value of $\lambda$
 
 So, how do we choose $\lambda$? We need to note a couple of very
