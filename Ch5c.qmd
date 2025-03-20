@@ -368,7 +368,7 @@ to 0:
 
 $$
 0 = A'(S-Ab) + \lambda b
-$$
+$${#eq-ridgederiv}
 
 i.e.
 
@@ -584,6 +584,8 @@ algorithm crunches this to make a new guess, hopefully one that is more
 accurate than the first. One continues this process until, hopefully, it
 *converges*, meaning that it no longer changes much from one iteration
 to the next. The current guess is then deemed to be the correct value.
+(In **glmnet**, the argument **thresh** defines what we mean by "no
+longer changes much.")
 
 At first one may think that such internal details of computation need
 not concern the end user of the software. But the fact is that often an
@@ -595,7 +597,22 @@ algorithm to take smaller steps in generating new guesses. On the one
 hand, this can slow the computation but on the other, we may be less
 likely to overshoot the true value.
 
+The case of computation of the LASSO is further complicated by its being
+based on the $l_1$ norm, which in turn uses absolute values, i.e. $|x|$.
+These have no derivative in the calculus sense, say as used in
+@eq-ridgederiv for ridge. This is a problem because many iterative
+methods are based on derivatives, as follows.
 
+Say we have a function $f$ that we wish to minimize, i.e. find $t$ such
+that $f(t)$ is minimal over all $f(x)$. As we try various guesses, 
+the derivative $f'(x)$ tells us the direction in which $f$ is
+decreasing, exactly the information we need.
+
+So, if say **glmnet** fails to converge, what can be done? One can
+increase **thresh**, for instance, and make sure to center and scale our
+X data. Tweaking other parameters may help as well, but in the end,
+there are no magic solutions. It may well be that one's basic model is
+flawed.
 
 ## A Warning
 
