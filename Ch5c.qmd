@@ -663,6 +663,21 @@ compareRidgeLASSO(data,yName)
 ```
 
 where **data** and **yName** are in the format of the predictive $qeML$
-functions. Return the minimum Mean Squared Prediction Error for both
-algorithms.
+functions, and the minimum Mean Squared Prediction Error is returned for
+both algorithms. Try your function on some of our datasets, or others.
+
+❄️  **Your Turn:** The LASSO will tend to produce solutions with lesser
+sparsity if the dataset is large.
+Write an R function to illustrate this, with call form
+
+``` r
+dependN(data,yName,n=seq(1,nrow(data),100,nReps=1)
+```
+
+where: where **data** and **yName** are in the format of the predictive
+$qeML$ functions; the LASSO is applied to **n** randomly chosen rows of
+**data**; and **nReps** is the number of replicates to run at each value
+of **n**. The function will compute the number of nonzero elements in
+the $\widehat{\beta}$ chosen by cross-validation in **cv.glmnet**.
+Try your code on a few datasets.
 
