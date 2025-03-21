@@ -571,12 +571,18 @@ glmOut
 
 The best $\lambda$ value was found to be 0.3002.
 
+## Other Shrinkage Estimators
+
+The huge popular success of the LASSO inspired applying shrinkage to
+lots of other estimators.
+
 ## Iterative Calculation{#sec-iter}
 
-An advantage of ridge over LASSO is that the former has an explicit (we
-day *closed-form*) solution, which is not the case for the LASSO. In
-fact, many algorithms in statistics/machine learning lack closed-form
-solutions, in which case one must resort to *iterative* computation.
+An advantage of ridge over LASSO and other l1 shrinkage estimators is
+that the former has an explicit (we day *closed-form*) solution, which
+is not the case for the LASSO. In fact, many algorithms in
+statistics/machine learning lack closed-form solutions, in which case
+one must resort to *iterative* computation.
 
 The basis idea is to first (somehow) make some guess as to the value
 of the desired quantity, say $\widehat{\beta}$ in the LASSO. The
