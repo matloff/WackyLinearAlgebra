@@ -29,12 +29,13 @@ book:
      - Ch6b.qmd
      - Ch6c.qmd
      - Ch6d.qmd
-     - Ch7a.qmd
      - Ch8a.qmd
    
 format:
   html:
      toc: true
+     toc-depth: 3
+     toc-title: Contents
      number-sections: true
      fig_caption: no
      fig_numbers: no
