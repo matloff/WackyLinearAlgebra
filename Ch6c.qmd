@@ -394,6 +394,8 @@ $$
 
 ## Dimension Reduction: SVD as the Best Low-Rank Approximation{#sec-svddimred}
 
+## Matrix Factorization in Recommender Systems
+
 
 ## Your Turn
 
