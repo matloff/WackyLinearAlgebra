@@ -574,7 +574,7 @@ The best $\lambda$ value was found to be 0.3002.
 ## Other Shrinkage Estimators
 
 The huge popular success of the LASSO inspired applying shrinkage to
-lots of other estimators.
+lots of other estimators. We will give an example in @sec-svd.
 
 ## Iterative Calculation{#sec-iter}
 
