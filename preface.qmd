@@ -65,11 +65,17 @@ Examples:
 
 * The chapter on eigenanalysis begins with explaining the goals of PCA
   (with a real dataset). We derive the first PC as a constrained
-  maximization of variance, and behold! -- the solution has the form 
-  $Ax = \lambda x$! So eigenanalysis comes from solving a Data Science
-  problem. PCA is later covered in detail in the following chapter,
-  but with this motivation we develop the properties of eigenvalues and
-  eigenvectors in the current chapter.
+  maximization of variance, and behold! -- the solution turns out to
+  have the form $Ax = \lambda x$! So eigenanalysis comes from solving a
+  Data Science problem. PCA is later covered in detail in the following
+  chapter, but with this motivation we develop the properties of
+  eigenvalues and eigenvectors in the current chapter.
+
+Furthermore, our presentation of the linear algebra connections to Data
+Science goes far beyond the "obvious" ones of linear models, PCA and
+SVD. We discussion recommender systems, for instance, not only in
+connection to SVD and the like, but also as an application of shrinkage
+estimators.
 
 ## Who Is This Book For?
 
