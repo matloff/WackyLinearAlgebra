@@ -364,3 +364,15 @@ that important?
 
 ❄️  **Your Turn:** Use PCA to do dimension reduction on the **s50**
 dataset.
+
+❄️  **Your Turn:** Write an R function with call form
+
+``` r
+bestPCAPred(data,yName)
+```
+
+It will apply PCA to the X portion of **data**, then apply **lm**
+successivly to the first PC, then the first two, then the first three
+and so on assessing with cross-validation in each case. It will then
+return the number of PCs (and the PCs themselves) that predicts best.
+Try your function on various datasets.
