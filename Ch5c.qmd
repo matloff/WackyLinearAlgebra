@@ -579,19 +579,33 @@ lots of other estimators. We will give an example in @sec-svd.
 ## Iterative Calculation{#sec-iter}
 
 An advantage of ridge over LASSO and other l1 shrinkage estimators is
-that the former has an explicit (we day *closed-form*) solution, which
-is not the case for the LASSO. In fact, many algorithms in
-statistics/machine learning lack closed-form solutions, in which case
-one must resort to *iterative* computation.
+that the former has an explicit (we say *closed-form*) solution, which
+is not the case for the LASSO. In fact, as will be seen often in this
+book, many algorithms in statistics/machine learning lack closed-form
+solutions, in which case one must resort to *iterative* computation.
 
-The basis idea is to first (somehow) make some guess as to the value
-of the desired quantity, say $\widehat{\beta}$ in the LASSO. The
-algorithm crunches this to make a new guess, hopefully one that is more
-accurate than the first. One continues this process until, hopefully, it
-*converges*, meaning that it no longer changes much from one iteration
-to the next. The current guess is then deemed to be the correct value.
-(In **glmnet**, the argument **thresh** defines what we mean by "no
-longer changes much.")
+These means we make a series of guesses as the to value of the desired
+quantity, hopefully each more accurate that the last, eventually
+settling on a final guess.
+
+This may or may not work well.  Here are some of the major
+issues/perils:
+
+* initial guess
+
+* updating method
+
+* convergence
+
+* presence or lack of (calculus) derivatives
+
+The basic idea is to first (somehow) make some guess as to the value of
+the desired quantity, say $\widehat{\beta}$ in the LASSO. The algorithm
+crunches this to make a new, updated guess, hopefully one that is more
+accurate than the first. One then updates the new guess, continuing this
+process until, hopefully, it *converges*, meaning that it no longer
+changes much from one iteration to the next. The current guess is then
+deemed to be the correct value.  
 
 At first one may think that such internal details of computation need
 not concern the end user of the software. But the fact is that often an
@@ -609,16 +623,30 @@ These have no derivative in the calculus sense, say as used in
 @eq-ridgederiv for ridge. This is a problem because many iterative
 methods are based on derivatives, as follows.
 
-Say we have a function $f$ that we wish to minimize, i.e. find $t$ such
-that $f(t)$ is minimal over all $f(x)$. As we try various guesses, 
-the derivative $f'(x)$ tells us the direction in which $f$ is
-decreasing, exactly the information we need.
+Say we have a function $f$ whose root $r$ is of interest to
+us.[Our quest for a root may arise for instance in a minimization problem, where we set a derivative to 0 and solve for that root.]{.column-margin}
+We might make a series of guesses for $r$ by considering the 
+derivative $f'$.  As we try various guesses, the derivative $f'(x)$ 
+tells us the direction in which $f$ is decreasing, exactly the 
+information we need.
 
-So, if say **glmnet** fails to converge, what can be done? One can
-increase **thresh**, for instance, and make sure to center and scale our
-X data. Tweaking other parameters may help as well, but in the end,
-there are no magic solutions. It may well be that one's basic model is
-flawed.
+This is illustrated in the figure. Unknown to us, $r = 2$. Our current
+guess is $x = 3$. We draw $f'$, i.e. the tangent line to the curve at
+our current guess, and temporarily pretend that the line is the curve.
+We thus compute the root for the line, which is x = 2.5, and then take
+2.5 as our updated guess for the root of the curve.
+
+![root hunting](NewtonRaph.png)
+
+So if the quantity $f$ that we are working with does not have a
+derivative, our work is extra difficult.
+
+So, if say **glmnet** fails to converge, what can be done?  For example,
+in **glmnet**, the argument **thresh** defines what we mean by "no
+longer changes much"; we can decrease or even increase that value.  One
+can make sure to center and scale the X data. Tweaking other parameters
+may help as well, but in the end, there are no magic solutions. It may
+well be that one's basic model is flawed.
 
 ## A Warning
 
