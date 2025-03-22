@@ -65,8 +65,8 @@ Note the dimensions:
 
 * $\Sigma$ is $n \times n$
 
-Let $r$ denote the rank of $A$. Recall that $r \leq \min(m,n)$. It will
-turn out that $\sigma_i = 0$ for $i=r+1,...,n$.
+Let $r$ denote the rank of $A$. It will turn out that $\sigma_i = 0$ for
+$i=r+1,...,n$.
 
 ## Example Applications 
 
@@ -75,8 +75,7 @@ turn out that $\sigma_i = 0$ for $i=r+1,...,n$.
 Recall @sec-recsys, which began with movie ratings data. We would like
 to predict the rating some particular user would give to some particular
 movie. It will turn out that we can set up SVD in such a way that $U$
-contains movie data and $V$ contains user data. We will explore this and
-other methods in @sec-recsys.
+contains movie data and $V$ contains user data. 
 
 ### Text Classification
 
@@ -105,7 +104,7 @@ discuss this below in @sec-svddimred.
 ## The Four Fundamental Subspaces of a Matrix
 
 Before going to SVD, let us first define four fundamental subspaces for
-any matrix $A$: 
+any $m \textrm{ x } n$ matrix $A$: 
 
 * $\textrm{row space}(A), \mathcal{R}(A)$: $\{x'A\}~~$ (all linear
   combinations of rows of $A$)
@@ -118,12 +117,21 @@ any matrix $A$:
 * $\textrm{left null space}(A) = \mathcal{N}(A')$: $\{x: x'A = 0\}$ 
 
 The null space is also called the *kernel* of $A$, viewing the matrix as
-a function from $\mathcal{R}^n$ to $\mathcal{R}^n$; what vectors are
+a function from $\mathcal{R}^n$ to $\mathcal{R}^m$; what vectors are
 mapped to 0?
 
-These subspaces will play a prominent role in this chapter. Say $A$ is
-of size $m \textrm{ x } n$. Use 'dim()' to indicate vector space
-dimension, and 'rank()' for matrix rank.  
+Use 'dim()' to indicate vector space dimension, and 'rank()' for matrix
+rank. Following are a few important facts about these spaces.
+
+::: {#thm-ranka}
+
+rank(A) = dim(\mathcal{R}(A))
+
+:::
+
+::: {.proof}
+
+:::
 
 ::: {#thm-colspacerank}
 
@@ -162,14 +170,14 @@ $$
 and
 
 $$
-dim(\mathcal{C}(A')) + dim(\mathcal{N}(A)) = m
+dim(\mathcal{C}(A')) + dim(\mathcal{N}(A)) = n
 $$
 
 :::
 
 ::: {.proof}
 
-Say $w$ is in $\mathcal{N}(A)$. Once again using partitioning, we have
+Say $w$ is in $\mathcal{N}(A)$. Using partitioning, we have
 
 $$
 \left (

@@ -848,8 +848,6 @@ bestpoly(f,gsout)  # approx. f by output from gsc01
 Hint: Since the vectors here are functions, you'll need a data structure
 capable of storing functions. An R **list** will work well here.
 
-❄️  **Your Turn:** Show that the hat matrix is symmetric.
-
 ❄️  **Your Turn:** Use the Cauchy-Schwarz Inequality to prove the
 Triangle Inequality, using the following algebraic outline.
 
@@ -924,8 +922,6 @@ is a projection matrix, the form equals $||Px||^2$.
 possible inner product on $\cal{R}^n$ defined by $<x,y> = x'A'A y$.
 State a condition on $A$ that is necessary and sufficient for the
 claimed inner product to be value, and prove this.
-
-❄️  **Your Turn:** Show that the hat matrix is symmetric.
 
 ❄️  **Your Turn:** Show that for any vector $w$ and symmetric matrix $M$,
 the quadratic form $w'Mw \geq 0$.
