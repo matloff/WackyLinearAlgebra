@@ -1,0 +1,133 @@
+```{r}
+#| include: false
+library(dsld)
+library(qeML)
+```
+
+{{< pagebreak >}}
+
+ 
+# Four Fundamental Spaces {#sec-fourspaces}
+
+::: {.callout-note}
+
+## Goals of this chapter:
+
+This chapter will introduce four subspaces considered central to linear
+algebra.
+
+:::
+
+
+## The Four Fundamental Subspaces of a Matrix
+
+Before going to SVD, let us first define four fundamental subspaces for
+any $m \textrm{ x } n$ matrix $A$: 
+
+* $\textrm{row space}(A), \mathcal{R}(A)$: $\{x'A\}~~$ (all linear
+  combinations of rows of $A$)
+
+* $\textrm{column space}(A), \mathcal{C}(A)$: $\{Ax\}~~$ (all linear
+  combinations of columns of $A$)
+
+* $\textrm{null space}(A), \mathcal{N}(A)$: $\{x: Ax = 0\}$
+
+* $\textrm{left null space}(A) = \mathcal{N}(A')$: $\{x: x'A = 0\}$ 
+
+The null space is also called the *kernel* of $A$, viewing the matrix as
+a function from $\mathcal{R}^n$ to $\mathcal{R}^m$; what vectors are
+mapped to 0?
+
+Use 'dim()' to indicate vector space dimension, and 'rank()' for matrix
+rank. Following are a few important facts about these spaces.
+
+::: {#thm-ranka}
+
+rank(A) = dim(\mathcal{R}(A))
+
+:::
+
+::: {.proof}
+
+:::
+
+::: {#thm-colspacerank}
+
+$$
+rank(A) = dim(\mathcal{C}(A))
+$$
+
+:::
+
+::: {.proof}
+
+Let $z_1,...,z_r$ be a maximal linearly independent set of columns of
+$A$, where $r$ is the rank of that matrix. Then this set is in
+$\mathcal{C}(A)$, and in fact must span that subspace. If not, there
+would be some vector $x$ outside the span of $z_1,...,z_r$, i.e. no
+linear combination of those vectors would equal $x$. Then
+$z_1,...,z_r,x$ would be a linearly independent set, contradicting the
+maximal nature of the $z_i$.
+
+In other words, the $z_i$ form a basis for $\mathcal{C}(A)$, and thus
+the dimension of that subspace is $r$.
+
+$\square$
+
+:::
+
+::: {#thm-colnullspaces}
+
+The $\mathcal{C}(A) \textrm{ and } \mathcal{N}(A)$ subspaces
+are closely related:
+
+$$
+\mathcal{C}(A')^{\perp} = \mathcal{N}(A)
+$$
+
+and
+
+$$
+dim(\mathcal{C}(A')) + dim(\mathcal{N}(A)) = n
+$$
+
+:::
+
+::: {.proof}
+
+Say $w$ is in $\mathcal{N}(A)$. Using partitioning, we have
+
+$$
+\left (
+\begin{array}{r}
+0 \\
+... \\
+0 \\
+\end{array}
+\right )
+=
+Aw
+=
+\left (
+\begin{array}{r}
+a_1 w \\
+... \\
+a_m w \\
+\end{array}
+\right )
+$$
+
+where $a_i$ is row $i$ of $A$. Thus $w$ is orthogonal to the rows of
+$A$, thus to the row space of $A$. The latter is the column space of $A'$.
+Thus $\mathcal{N}(A)$ is a subset of $\mathcal{C}(A')^{\perp}$. This
+argument works exactly in reverse, so the first claim is established.
+
+The second claim follows from first forming an orthonormal basis
+$q_1,...,q_r$ for $\mathcal{C}(A')$, then extending it to one for all of
+$\mathcal{R}^m$, $q_1,...,q_r,q_{r+1},...,m$.
+
+
+
+$\square$
+:::
+
