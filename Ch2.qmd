@@ -22,24 +22,43 @@ related quantities are often used instead of using the inverse directly).
 
 :::
 
+## Definition
+
+> For any square matrix $A$, it's *inverse* $B$ (if it exists)
+> is a square matrix of the same size such that
+> 
+> $$
+> AB = BA = I
+> $$
+> 
+> where $I$ is the identity matrix of that size.
+
+As hinted, many matrices do not have inverses. For instance, if $A$
+consists of all 0s, there is no way to get $I$ for $AB$.
+
+In very rough terms, it sometimes helps the intuition to think of an
+inverse as the "reciprocal" of the matrix.
+
+We will often speak of *the* inverse of $A$. In fact, if $A$ is
+invertible, its inverse is unique.
+
 ## Example: Computing Long-Run Markov Distribution{#sec-markovsolve}
 
-At the end of the last chapter, we found that for a Markov chain with
-transition matrix P and stationary distribution $\nu$,
+Recall @eq-stationMarkov, which expresses the vector of long-run state
+probabilities for a Markov chain with transition matrix P and stationary
+distribution $\nu$,
 
 $$
-\nu = P' \nu
+\nu = P \nu
 $${#eq-MarkovPi}
 
 This suggests a method for computing $\nu$, by solving the above
-equation.[]{.column-margin}
+equation.
 
-Rewrite it using the identity matrix:[Recall that for any square matrix
-C and identity matrix I of the same size, $IC = CI =
-C$.]{.column-margin}
+Rewrite it using the identity matrix:
 
 $$
-(I - P') \nu = 0
+(I - P) \nu = 0
 $$
 
 For the random walk chain in Chapter 1, we had[In that particular model,
@@ -102,7 +121,7 @@ $$
 -0.5 \nu_3 + \nu_4 - 0.5 \nu_5 = 0 \\
 -0.5 \nu_4 + 0.5 \nu_5 = 0 \\
 \end{array}
-$$
+$${#eq-all0s}
 
 This is high school math, and we could solve the equations that way. But
 this is literally what linear algebra was invented for, solving systems
@@ -112,9 +131,10 @@ But first, we have a problem to solve: The only solution to the above
 system is with all $\nu_i = 0$. We need an equation involving a nonzero
 quantity.
 
-But we do have such an equation. The vector $\nu$ is a stationary distribution
-for a Markov chain, and thus must sum to 1.0. Let's replace the last row
-by that relation:
+But we do have such an equation. The vector $\nu$ is a stationary
+distribution for a Markov chain, i.e. the set of long-run probabilities,
+and thus it must sum to 1.0. Let's replace the last row by that
+relation:
 
 $$
 \left (
@@ -144,48 +164,43 @@ $$
 1 \\
 \end{array}
 \right )
-$$
+$${#eq-lastRow1s}
 
 More compactly, 
 
 $$
-B \nu = d
+G \nu = q
 $$
 
-Many square matrices $A$ have a multiplicative inverse, denoted by
-$A^{-1}$, with the property that
-
-$$
-A^{-1} A = A A^{-1} = I
-$$
-
-(We will often speak of *the* inverse of $A$. In fact, if $A$ is
-invertible, its inverse is unique.)
-
-If our matrix $B$ is invertible, we can premultiply both sides of our
+If our matrix $G$ is invertible, we can premultiply both sides of our
 equation above, yielding
 
 $$
-B^{-1} d = B^{-1} B \nu = \nu
+G^{-1} q = G^{-1} G \nu = \nu
 $$
 
-So, we have obtained our solution for the stationary distribution $\nu$.
+So, we have obtained our solution for the stationary distribution $\nu$,
+
+$$
+\nu = G^{-1} q
+$$
+
 We can evaluate it numerically via the R **solve** function, which finds
 matrix inverse:
 
 ```{r}
-B <-
+G <-
 rbind(c(0.5,-0.5,0,0,0), c(-0.5,1,-0.5,0,0), c(0,-0.5,1,-0.5,0),
    c(0,0,-0.5,1,-0.5), c(1,1,1,1,1))
-B
-Binv <- solve(B)
+G
+Ginv <- solve(G)
 # check the inverse
-Binv %*% B  # yes, get I (of course with some roundoff error)
-nu <- Binv %*% c(0,0,0,0,1)
+Ginv %*% G  # yes, get I (of course with some roundoff error)
+nu <- Ginv %*% c(0,0,0,0,1)  # recall that q = c(0,0,0,0,1)
 nu
 ```
 
-This confirms our earlier speculation based on powers of $P'$.
+This confirms our earlier speculation based on powers of $P$.
 
 ## Matrix Algebra{#sec-matalg}
 

@@ -421,4 +421,6 @@ $$
 x'Mx = (Px)' D (Px)
 $$
 
+❄️  **Your Turn:** Show that any Markov transition matrix has an
+eigenvalue 1, with eigenvector consisting of all 1s.
 

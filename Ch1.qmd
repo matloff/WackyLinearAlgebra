@@ -347,9 +347,16 @@ matpow(p1,25)
 
 So, no matter which state we start in, at time 25 we are about 20%
 likely to be at any of the states. In fact, as time n goes to infinity,
-this probability vector becomes exactly (0.20,0.20,0.20,0.20,0.20), as
-we will see in the next chapter.
+this probability vector becomes exactly (0.20,0.20,0.20,0.20,0.20).
 
+It can be shown that the vector of long-run state probabilities $\nu$ is
+the solution of 
+
+$$
+P \nu = \nu
+$${#eq-stationMarkov}
+
+where $P$ is the transition matrix for the Markov chain.
 
 ## Network Graph Models
 

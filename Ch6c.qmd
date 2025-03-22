@@ -226,7 +226,10 @@ where $\Sigma_M^{+}$ is the diagonal matrix obtained form $\Sigma_M$
 by replacing each nonzero element by its reciprocal.
 
 The Moore-Penrose solution of $Mz = w$ for vectors $z$ and $w$, is
-$M^{+} w$.
+
+$$
+M^{+} w
+$${#eq-MoorePenrose}
 
 The R function **MASS::ginv** performs the necessary
 computation for us; we need not call **svd()**.
@@ -368,3 +371,35 @@ getLowRank(A,lowrank)
 that uses SVD to find the best approximation to the matrix **A** of rank
 **lowrank**.
 
+❄️  **Your Turn:** Our equation @eq-lastRow1s resulted from replacing
+one row (the last, but could have been any) by all 1s, with a
+corresponding change on the right-hand side. But now that we have
+pseudoinverses at our disposal, we could *add* a row rather than
+*replacing* a row:
+
+$$
+\left (
+\begin{array}{r}
+P \\
+1 \\
+\end{array}
+\right ) \nu =
+\left (
+\begin{array}{r}
+0 \\
+1 \\
+\end{array}
+\right ) 
+$$
+
+where 1 on the left side means a row of 1s, 0 on the right side is a
+column of 0s, and 1 on the right side means the scalar 1.
+
+Write an R function with call form
+
+``` r
+findNuPseudoInv(p)
+```
+
+to implement this approach. Here **p** is a Markov transition matrix.
+Try your code on a couple of examples.
