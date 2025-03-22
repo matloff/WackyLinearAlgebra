@@ -585,7 +585,7 @@ book, many algorithms in statistics/machine learning lack closed-form
 solutions, in which case one must resort to *iterative* computation.
 
 These means we make a series of guesses as the to value of the desired
-quantity, hopefully each more accurate that the last, eventually
+quantity, hopefully each more accurate than the last, eventually
 settling on a final guess.
 
 This may or may not work well.  Here are some of the major
@@ -594,6 +594,8 @@ issues/perils:
 * initial guess
 
 * updating method
+
+* learning rate
 
 * convergence
 
@@ -607,39 +609,40 @@ process until, hopefully, it *converges*, meaning that it no longer
 changes much from one iteration to the next. The current guess is then
 deemed to be the correct value.  
 
-At first one may think that such internal details of computation need
-not concern the end user of the software. But the fact is that often an
-algorithm will fail to converge, and the user may need to get more
-directly involved, say in suggesting the value of the initial guess.
-Or, as we will see later, some machine learning algorithm have a
-parameter called the *learning rate*; a small value directs the
-algorithm to take smaller steps in generating new guesses. On the one
-hand, this can slow the computation but on the other, we may be less
-likely to overshoot the true value.
-
 The case of computation of the LASSO is further complicated by its being
 based on the $l_1$ norm, which in turn uses absolute values, i.e. $|x|$.
 These have no derivative in the calculus sense, say as used in
 @eq-ridgederiv for ridge. This is a problem because many iterative
 methods are based on derivatives, as follows.
 
-Say we have a function $f$ whose root $r$ is of interest to
-us.[Our quest for a root may arise for instance in a minimization problem, where we set a derivative to 0 and solve for that root.]{.column-margin}
-We might make a series of guesses for $r$ by considering the 
-derivative $f'$.  As we try various guesses, the derivative $f'(x)$ 
-tells us the direction in which $f$ is decreasing, exactly the 
-information we need.
-
-This is illustrated in the figure. Unknown to us, $r = 2$. Our current
-guess is $x = 3$. We draw $f'$, i.e. the tangent line to the curve at
-our current guess, and temporarily pretend that the line is the curve.
-We thus compute the root for the line, which is x = 2.5, and then take
-2.5 as our updated guess for the root of the curve.
+Say we have a function $f$ whose root $r$ is of interest to us.[Our
+quest for a root may arise for instance in a minimization problem, where
+we set a derivative to 0 and solve for that root.]{.column-margin} We
+might make a series of guesses for $r$ by considering the derivative
+$f'$.  This is illustrated in the figure. Unknown to us, $r = 2$. Our
+current guess is $x = 3$. We draw $f'$, i.e. the tangent line to the
+curve at our current guess, and temporarily pretend that the line is the
+curve.  We thus compute the root for the line, which is seen here to be
+near 2.0, and then take this tangent root  as our updated guess for the
+root of the curve.
 
 ![root hunting](NewtonRaph.png)
 
-So if the quantity $f$ that we are working with does not have a
-derivative, our work is extra difficult.
+Some machine learning algorithm have a parameter called the *learning
+rate*, which is motivated by a concern that the process may overshoot
+the root.  A smaller learning rate value directs the algorithm to take
+smaller steps in generating new guesses.  In this case, we might go only
+partway to the tangent root.  On the one hand, this can slow the
+computation but on the other, we may be less likely to overshoot the
+true value.
+
+At any rate, if the quantity $f$ that we are working with does not have
+a derivative, our work is extra difficult.
+
+At first one may think that such internal details of computation need
+not concern the end user of the software. But the fact is that often an
+algorithm will fail to converge, and the user may need to get more
+directly involved, say in suggesting the value of the initial guess.
 
 So, if say **glmnet** fails to converge, what can be done?  For example,
 in **glmnet**, the argument **thresh** defines what we mean by "no
