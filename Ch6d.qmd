@@ -454,9 +454,8 @@ Let $\kappa$ denote the complexity of a model. In the case of a linear
 model, $\kappa$ would be the number of predictor columns in our dataset,
 and there are ways of defining it for other methods.
 
-We might try several values of $\kappa$, as we did in the table
-in @eq-nyc, and then choose the one with smallest MAPE or other accuracy
-measure.
+We might try several values of $\kappa$, and then choose the one with
+smallest MAPE or other accuracy measure.
 
 Before 2018-2019, the view was:
 

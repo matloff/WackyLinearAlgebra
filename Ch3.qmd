@@ -12,7 +12,7 @@ library(qeML)
 
 ::: {.callout-note}
 
-## Goals of this chapter:
+## Goals of this chapter: 
 
 Here we bring together the concepts of previous chapters by presenting
 the *linear model*, one of the most fundamental techniques in 

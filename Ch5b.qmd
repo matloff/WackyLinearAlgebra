@@ -170,7 +170,7 @@ See the Your Turn problem below.
 *Correlation coefficients* are ubiquitous in data science. It is well
 known that their values fall into the interval [-1,1]. Let's prove that.
 
-Recall from @sec-cov the notion of the covariance between two random
+Recall from @sec-covar the notion of the covariance between two random
 variables (from which the covariance matrix of a random vector is
 formed). We remarked that covariance is intuitively like correlation,but
 that latter is a scaled form. Formally,

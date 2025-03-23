@@ -8,7 +8,7 @@ library(qeML)
 
 {{< pagebreak >}}
 
-# Covariance Matrices, MV Normal Distribution, Delta Method
+# Covariance Matrices, MV Normal Distribution, Delta Method {#sec-covar}
 
 ::: {.callout-note}
 

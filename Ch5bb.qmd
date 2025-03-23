@@ -43,7 +43,9 @@ rank. Following are a few important facts about these spaces.
 
 ::: {#thm-ranka}
 
+$$
 rank(A) = dim(\mathcal{R}(A))
+$$
 
 :::
 
