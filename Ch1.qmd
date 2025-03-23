@@ -509,12 +509,6 @@ users becomes a matter of measuring similarity of rows of $S$. This
 paves the way to exploiting the wealth of matrix-centric methodology we
 will develop in this book.
 
-❄️  **Your Turn:** Write a function with call form
-
-``` r
-makeSimilarityMatrix(m)
-```
-
 that takes as input a matrix or data frame of user-movie-rating data,
 and returns a matrix as described above, i.e. one row per user, one
 column per movie, and so on.
@@ -1013,7 +1007,7 @@ d_j' = d_{j-1}' P
 $$
 
 For convenience, let's take transposes:[Recall that $(AB)' =
-B'A'$.
+B'A'$.]
 
 $$
 d_j = P' d_{j-1}
@@ -1105,7 +1099,7 @@ randomness of the data by mentioning the "data generating mechanism."
 
 ## Your Turn
 
-❄️  **Your Turn:** The long-run probabilities here turned out to be
+❄️  **Your Turn:** The long-run probabilities in @sec-introMCs turned out to be
 uniform, with value 0.20 for all five states. In fact, that is usually
 not the case.  Make a small change to $P_1$ -- remember to keep the row
 sums to 1 -- and compute a high power to check whether the long-run
@@ -1156,4 +1150,10 @@ probability (0.4) (0.2), and so on.
 Analyze this system for the case given above.` Find the approximate
 long-run distribution, and also the proportion of jobs that get
 discarded.
+
+❄️  **Your Turn:** Write a function with call form
+
+``` r
+makeSimilarityMatrix(m)
+```
 
