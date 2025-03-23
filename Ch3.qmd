@@ -473,7 +473,7 @@ There should be more variation in weight among taller people than above
 shorter people. But it's a simplifying assumption without really good
 alternatives, so it is commonly used.
 
-And in that setting, our formulas from {@sec-covar} come in
+And in that setting, our formulas from @sec-covar come in
 handy, as follows.
 
 Recall that $\widehat{\beta}$ is our estimate of the unknown population
