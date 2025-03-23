@@ -106,7 +106,7 @@ discuss this below in @sec-svddimred.
 ## Solution to Our SVD Goal
 
 There are various derivations, e.g. along the lines of @sec-firstPC (one
-maximizes the quantity $U A V'$), but let's go quickly to the answer:  
+maximizes the quantity $U A V'$), but let's go directly to the answer:  
 
 1. Say $A$ is $p \textrm{ x } n$, so that $A'A$ will be of size $n
    \textrm{ x } n$. Let $r$ denote the rank of $A$, which will be the same
@@ -124,7 +124,7 @@ maximizes the quantity $U A V'$), but let's go quickly to the answer:
    case for numeric data (@sec-prob0). We will have $\sigma_{r+1} = ...
    = \sigma_n = 0$.
 
-4. Set $\Sigma$ to $diag(\sqrt{\sigma_1},...,\sqrt{\sigma_n})$, the
+4. Set $\Sigma$ to $diag(\sigma_1,...,\sigma_n)$, the
    nonincreasing list of those eigenvalues. Set the first $r$ columns of
    $V$ to the corresponding eigenvectors. Use the Gram-Schmidt Method
    (see @sec-gramschmidt) to add $n-r$ more vectors. $V$ will then have
@@ -145,17 +145,17 @@ maximizes the quantity $U A V'$), but let's go quickly to the answer:
    and the $v_k$ are orthogonal.
 
    
-   Using Gram-Schmidt, we can compute (if $r < m$ necessitates it)
-   vectors $u_{r+1},...u_m$ so that $u_1,...,u_m$ is an orthonormal
+   Using Gram-Schmidt, we can compute (if $r < n$ necessitates it)
+   vectors $u_{r+1},...u_n$ so that $u_1,...,u_n$ is an orthonormal
    basis for $\mathcal{R}^m$.  Set $U$, decribed in partitioning terms:
    to 
    
-   $$ U = (u_1|...|u_m) $$
+   $$ U = (u_1|...|u_n) $$
 
 ## Checking the Formula
 
 Are $U$ and $V$ really orthogonal, and does $U \Sigma V'$ really work out
-to be $A$?
+to be $A$ in @eq-svd?
 
 * $U$ and $V$ are orthogonal, by construction.
 
@@ -187,10 +187,11 @@ to be $A$?
 
 Recall the example in @sec-censusrref. We could not have dummy-variable
 columns for both male and female, as their sum would be a column of all
-1s, in addition to a column the X data matrix already had. The three columns
-would then have a nonzero linear combination that evaluates to the 0
-vector.  Then in @eq-linregformula, $A$ (i.e. X) would not be of full
-rank, and $(A'A)^{-1}$ would not exist.
+1s, in addition to a column of 1s the X data matrix already had. The
+three columns would then have a nonzero linear combination that
+evaluates to the 0 vector.  Then in @eq-linregformula, $A$ (i.e. X)
+would not be of full rank, nor would $A'A$, so that
+$(A'A)^{-1}$ would not exist.
 
 And yet the equation from which that comes,
 
@@ -247,21 +248,18 @@ solves the equation. (Actually if $A$ is of less than full rank, there
 are infinitely many solutions, a point discussed in detail in
 @sec-chapDD.)
 
-Let's check. Before beginning, note that as in @sec-matalg, where we
-found that the inverse of a product is the reverse product of the
-inverses, the same holds for pseudoinverses.  Also, recall that the
-orthogonal nature of $U$ and $V$ implies that $U'U = I$ and $V'V = I$.
+Let's check. Before beginning, recall that the orthogonal nature of $U$
+and $V$ implies that $U'U = I$ and $V'V = I$.
 
 $$
 \begin{aligned}
 A'A b &= (U \Sigma V')' (U \Sigma V') (U \Sigma V')^{+} S \\
-&= (V \Sigma U') (U \Sigma V') (V \Sigma^{+} U') S \\
-&= V \Sigma^2 V'V \Sigma^{+} U' S \\
-&= V \Sigma^{+} U' S
+&= (V \Sigma U') (U \Sigma V') (V \Sigma^{+} U' S) \\
+&= V \Sigma^2 V'(V \Sigma^{+} U' S) \\
+&= V \Sigma U' S \\
+&= A'S
 \end{aligned}
 $$
-
-But that is exactly the expression we found for $A^{+}S$ above.
 
 $\square$
 
@@ -270,9 +268,9 @@ $\square$
 ```{r}
 library(qeML)
 data(svcensus)
-# have only 1 categorical/dichotomous variable, for simple example
 head(svcensus)
 svc <- svcensus[,-c(2,3)]
+# have only 1 categorical/dichotomous variable, for simple example
 svc <- factorsToDummies(svc)
 head(svc)
 x <- cbind(1,svc[,-2])
@@ -283,8 +281,10 @@ bhat
 lm(wageinc ~ .,svcensus[,-c(2,3)])$coef
 ```
 
-The two approaches are consistent with each other (though internally
-they are solving slightly different problems). Note that
+Since the two analyses use different sets of predictors, it is not
+surprising that the intercept terms differ, but otherwise
+the two approaches are consistent with each other. This includes the
+gender variables, since
 
 $$
 -13361.634-(-2660.821) = -10700.81

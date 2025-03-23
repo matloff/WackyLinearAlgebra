@@ -449,7 +449,7 @@ The presence of $I_s$ tells us there are at least $s$ linearly
 independent rows, thus rank at least $s$. So the rank of $A'A$ is at
 least that of $A$. 
 
-On the other hand, apply our knowlege of partitioning. 
+On the other hand, again pply our knowlege of partitioning. 
 
 * Say $A$ is $m \textrm{ x } n$. Write
 
