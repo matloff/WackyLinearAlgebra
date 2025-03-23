@@ -16,7 +16,7 @@ library(qeML)
 
 The two main structures in linear algebra are *matrices* and *vector
 spaces*. We begin the book with the former, introduced in this chapter,
-inroducing matrix multiplication and presenting several applications.
+motivating matrix multiplication and presenting several applications.
 
 :::
 
@@ -52,16 +52,15 @@ P_1 =
 \right )
 $$
 
-For instance, look at Row 2. There are 0.5 values in Columns 1 and 3,
-meaning there is a 0.5 chance of a move 2 $\rightarrow$ 1,
-and a 0.5 chance of a move 2 $\rightarrow$ 3.
-[Note that each row in a transition matrix must sum to 1. After, from
-state i we must go *somewhere*.]{.column-margin}
+For instance, look at row 2. There are 0.5 values in columns 1 and 3,
+meaning there is a 0.5 chance of a move 2 $\rightarrow$ 1, and a 0.5
+chance of a move 2 $\rightarrow$ 3.
 
-We use a subscript 1 here in $P_1$, meaning "one step." We go from,
-say, state 2 to state 1 in one step with probability 0.5. $P_1$ is
-called the *one-step transition matrix* (or simply the
-*transition matrix*) for this process.
+We use a subscript 1 here in $P_1$, meaning "one step." We go from, say,
+state 2 to state 1 in one step with probability 0.5. $P_1$ is called the
+*one-step transition matrix* (or simply the *transition matrix*) for
+this process.  Note that each row in a transition matrix must sum to 1.
+After all, from state i we must go *somewhere*.
 
 What about the two-step transition matrix $P_2$? From state 3, we could
 go to state 1 in two steps, by two tails flips of the coin.  The
@@ -1034,10 +1033,9 @@ and named it PageRank, a pun combining the term *Web page* (i.e. Web
 site) and the name of one of the founders, Larry Page. It's based on a
 Markov model.
 
-The transition matrix is modeled as follows. Row $i$ has $o_i$ nonzero
-entries, each of which is equal to $1/o_i$.
-They define popularity as the resulting long-run distribution, i.e.
-$\nu$ in @sec-introMCs.
+The transition matrix is modeled as follows. row $i$ has $o_i$ nonzero
+entries, each of which is equal to $1/o_i$.  They define popularity as
+the resulting long-run distribution, i.e.  $\nu$ in @sec-introMCs.
 
 ## Random Vectors
 
