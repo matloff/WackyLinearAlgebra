@@ -2,8 +2,7 @@
 # Preface {.unnumbered} 
 
 Welcome to my magnum opus! :-) I've written a number of books, but
-consider this one to be the most important.  [This work is licensed
-under Creative Commons Zero v1.0 Universal]{.column-margin}
+consider this one to be the most important.  
 
 ## Subtlety in the Title
 
@@ -154,6 +153,15 @@ library(qeML)
 ## Web Site
 
 *github.com/matloff/WackyLinear Algebra*
+
+## Edition Number
+
+Currently 1.0.0. Correction of typos etc. will usually increment the
+third digit.
+
+## Permission to Copy
+
+This work is licensed under Creative Commons Zero v1.0 Universal.
 
 ## Thanks
 
