@@ -59,15 +59,18 @@ chance of a move 2 $\rightarrow$ 3.
 We use a subscript 1 here in $P_1$, meaning "one step." We go from, say,
 state 2 to state 1 in one step with probability 0.5. $P_1$ is called the
 *one-step transition matrix* (or simply the *transition matrix*) for
-this process.  Note that each row in a transition matrix must sum to 1.
-After all, from state i we must go *somewhere*.
+this process.  
 
-What about the two-step transition matrix $P_2$? From state 3, we could
-go to state 1 in two steps, by two tails flips of the coin.  The
-probability of that is $0.5^2 = 0.25$. So the row 3, column 1 element in
-$P_2$ is 0.25. On the other hand, if from state 3 we flip tails then
-heads, or heads then tails, we are back to state 3. So, the row 3,
-column 3 element in  $P_2$ is 0.25 + 0.25 = 0.5.
+Note that each row in a transition matrix must sum to 1.  After all,
+from state i we must go *somewhere*.
+
+What about the two-step transition matrix $P_2$? For instance, what
+should be in the row 3, column 1 position in that matrix?  From state 3,
+we could go to state 1 in two steps, by two tails flips of the coin.
+The probability of that is $0.5^2 = 0.25$. So the row 3, column 1
+element in $P_2$ is 0.25. On the other hand, if from state 3 we flip
+tails then heads, or heads then tails, we are back to state 3. So, the
+row 3, column 3 element in  $P_2$ is 0.25 + 0.25 = 0.5.
 
 The reader should verify the correctness here:
 
