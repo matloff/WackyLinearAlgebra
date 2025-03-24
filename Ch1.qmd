@@ -97,7 +97,7 @@ The above random walk is a *Markov chain*. The Markov Property says that
 the system "has no memory." If say we land at position 2, we will go to
 1 or 3 with probability 1/2 *no matter what the previous history of the
 system was*; it doesn't matter *how* we got to state 3. That in turn
-comes from the independence of the successive coin flips.
+comes in this example from the independence of the successive coin flips.
 
 **Notation:** Individual elements of a matrix are usually written with
 double subscripts. For instance, a~25~ will mean the row 2,
@@ -194,17 +194,17 @@ This is the most fundamental operation in linear algebra. It is defined
 as follows:
 
 
-> Given matrix A of k rows and m columns and
-> matrix B of m rows and r columns, the product C = AB is
-> a $k \textrm{ x } m$ matrix, whose row i, column j element is
+> Given matrix $A$ of $k$ rows and $m$ columns and
+> matrix $B$ of $m$ rows and $r$ columns, the product $C = AB$ is
+> a $k \textrm{ x } m$ matrix, whose row $i$, column $j$ element is
 > 
 > $$
-> a_{i1} b_{i1} +
-> a_{i2} b_{i1} + ... +
-> a_{m1} b_{m1} 
+> a_{i1} b_{1j} +
+> a_{i2} b_{2j} + ... +
+> a_{im} b_{mj} 
 > $$
 > 
-> This is the "dot product" of row i of A and column j of B:  Find the
+> This is the "dot product" of row $i$ of A and column $j$ of B:  Find the
 > products of the paired elements in the two vectors, then sum.
 
 For example, set 
@@ -230,8 +230,8 @@ B = \left (
 \right )
 $$
 
-Let's find the row 2, column 2 element of C = AB.  Again, that means
-taking the dot product of row 2 of A and column 2 of B, which we've
+Let's find the row 2, column 2 element of $C = AB$.  Again, that means
+taking the dot product of row 2 of $A$ and $column$ 2 of $B$, which we've
 highlighted below.
 
 $$
@@ -261,14 +261,14 @@ The value in question is then
 
 Let's check it, with R:
 
-[.The **rbind** and **cbind** functions ("row bind" and "column bind")
-are very handy tools for creating matrices.]{.column-margin}
-
 ```{r}
 a <- rbind(c(5,2,6),c(1,1,1))
 b <- cbind(c(5,1,0),c(-1,0,8))
 a %*% b
 ```
+
+The **rbind** and **cbind** functions ("row bind" and "column bind") are
+very handy tools for creating matrices.
 The reader should make sure to check the other elements by hand.
 
 ::: {#tip-conformable .callout-tip}  
@@ -281,16 +281,9 @@ then said to be *conformable*.
 
 ## The Identity Matrix
 
-The *identity matrix* $I$ of size n is the nxn matrix with 1s on the
-diagonal and 0s elsewhere.  $IB = B$ and $AI = A$ for any conformable
-$A$ and $B$.
-
-## Vectors
-
-A matrix that has only one row or only one column is called a *vector*.
-Depending on which of those two shapes it has, we may refer to it as a
-*row vector* or *column vector*. Usually we will simply say "vector," in
-which case it will be meant as a column vector.
+The *identity matrix* $I$ of size $n$ is the $n \textrm{ x } n$ matrix
+with 1s on the diagonal and 0s elsewhere.  $IB = B$ and $AI = A$ for any
+conformable $A$ and $B$.
 
 ## Application to Markov Chain Transition Matrices {#sec-introMCs}
 
@@ -320,11 +313,12 @@ a_{i2} b_{i1} + ... +
 a_{m1} b_{m1} 
 $$
 
-Then $P$~3~ stores the 3-step probabilities and so on.
+Then $P^3$ stores the 3-step probabilities and so on.
 
 
 Statisticians and computer scientists like to look at the *asymptotic*
-behavior of systems. Let's see where we might be after say, 6
+behavior of systems, meaning what happens to a quantity when time or
+size or some other value grows.  Let's see where we might be after say, 6
 steps:
 
 ```{r}
@@ -348,10 +342,9 @@ matpow(p1,25)
 ```
 
 So, no matter which state we start in, at time 25 we are about 20%
-likely to be at any of the states. In fact, as time n goes to infinity,
+likely to be at any of the states. In fact, as time $n$ goes to infinity,
 this probability vector becomes exactly (0.20,0.20,0.20,0.20,0.20).
-
-It can be shown that the vector of long-run state probabilities $\nu$ is
+It will be shown below that the vector of long-run state probabilities $\nu$ is
 the solution of 
 
 $$
@@ -362,13 +355,14 @@ where $P$ is the transition matrix for the Markov chain.
 
 ## Network Graph Models
 
-There has always been lots of analysis of "Who is connected to who,"
+There has always been lots of analysis of "Who is connected to whom,"
 but activity soared after the advent of Facebook and the film, *A Social
 Network.*  See for instance *Statistical Analysis of Network Data with R*
 by Eric Kolaczy and Gábor Csárdi. As the authors say, 
 
 > The oft-repeated statement that “we live in a connected world” perhaps
-> best captures, in its simplicity...From on-line social networks like
+> best captures, in its simplicity why networks have come to hold 
+> such interest in recent years. From on-line social networks like
 > Facebook to the World Wide Web and the Internet itself, we are
 > surrounded by examples of ways in which we interact with each other.
 > Similarly, we are connected as well at the level of various human
@@ -427,9 +421,12 @@ adjK2 <- adjK %*% adjK
 We see that **adjK2[11,1]** is 2. Inspection of **adjK** shows that its
 row 11, columns 6 and 7 are 1s, and that rows 6 and 7, column 1 are 1s
 as well. So there are indeed two two-hop paths from node 11 to node 1,
-specifically $11 \rightarrow 6 \rightarrow 1$ and $
+specifically $11 \rightarrow 6 \rightarrow 1$ and 
 $11 \rightarrow 7 \rightarrow 1$. Thus the 2 we see in **adjK2[11,1]**
 was correct.
+
+In other words, $A^k$ for a network adjacency matrix $A$ shows the
+number of paths from each node to each of the others.
 
 Actually, what is typically of interest is *connectivity* rather than
 number of paths. For any given pair of nodes, is there a multihop path
@@ -443,7 +440,8 @@ u <- matpow(adjK,33)
 sum(u == 0)
 ```
 
-So, in this graph, no pair of nodes has 0 paths between them. The graph
+So, in that graph representing paths of 33 links, there are no 0s.
+In this graph, no pair of nodes has 0 paths between them. The graph
 is connected.
 
 Making this kind of analysis fully correct requires paying attention to
