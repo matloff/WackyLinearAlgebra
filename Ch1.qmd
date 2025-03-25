@@ -1016,7 +1016,9 @@ single-server queue:
       room.  If the queue is not full when this job arrives,
       it will join the queue; otherwise, the job is discarded.
 
-* The system is memoryless.
+* The system is memoryless in the Markov sense. If a job has been in
+  service for many epochs now, the probability that it finishes in the
+  next epoch is still $p$.
 
 * The current state is the number of jobs in the system, taking on the
 values 0,1,2,..,m+1; that last state means m jobs in the queue and 1 in

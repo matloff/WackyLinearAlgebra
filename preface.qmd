@@ -106,11 +106,9 @@ lessons.]{.column-margin}
 
 * Basics of random variables, expected value and variance.
 
-## The Role of Theory (and R)
+## The Role of Math (and R)
 
-::: {.callout-important}
-
-## This book is "mathematical but not very theoretical."
+This book is "mathematical but not very theoretical."
 
 Theorems are mainly limited to results with practical importance, and
 proofs are sometimes rather informal. But the subject matter is indeed
@@ -125,7 +123,11 @@ is a difference between knowing how to use code libraries for something
 and knowing the core nature of that thing." That said, the code examples
 do serve a vital role. 
 
-:::
+*The applied nature of the book is a double-edged sword.* Understanding
+applications is actually more challenging than a purely mathematical
+treatment, not less so. Math is more crisply-defined, while applications
+can be "fuzzy." The need for (a) developing student intuition and (b)
+nonpassive learning are paramount.
 
 ## R Packages Used
 
