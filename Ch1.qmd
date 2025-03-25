@@ -640,7 +640,11 @@ highlighting certain submatrices.
 
 ::: {#tip-partitioned .callout-tip}  
 
-## Crucial Tool
+## A Crucial Tool
+
+Matrix partitioning is amazingly powerful, given its utter simplicity.
+It compactifies matrix algebra, making complex expressions easier to
+visualize and discuss.
 
 The techniques introduced in this section will be used repeatedly
 throughout the book. Readers should spend extra time here, devising some
@@ -650,9 +654,32 @@ of their own examples.
 
 ## How It Works
 
-Consider a matrix-vector product $Mv$. Of course, that means that $v$ is
-a column vector $(v_1,v_2,...,v_n)'$.  If $M$ is of size $m \textrm{ x }
-n$, then $v$ is $n \textrm{ x } 1$.
+Consider a matrix-matrix product $MQ$. The use of partitioning works on
+"pretending":
+
+> Matrix Partioning
+> 
+> 1. Partition $M$ and $Q$ into groups of contiguous rows or columns,
+>    respectively. Let $g_m$ and $g_q$ denote the number of groups.
+>    (A group size of 1 is permissible.)
+> 
+> 2. Enter Pretend Mode: Pretend that each group is a number. Now $M$ 
+>    and $Q$ look like vectors, of lengths $g_m$ and $g_q$.
+> 
+> 3. Go ahead and "multiply" the two "vectors."
+> 
+> 4. Re-enter Reality Mode. Replace the elements of the "product" in step
+>    3 by the groups' rows and columns.
+> 
+> 4. Marvel at the fact that this bit of "alchemy" actually produces the
+>    correct matrix equation.
+
+
+
+It will be easier to see how this works by considering the special case
+of $Q$ being a vector $v$.  Of course, that means that $v$ is a column
+vector $(v_1,v_2,...,v_n)'$.  If $M$ is of size $m \textrm{ x } n$, then
+$v$ is $n \textrm{ x } 1$.
 
 Now, we ask for the reader's patience here, as we will move back and
 forth between a symbolic "pretend world" and reality. We promise, it
@@ -664,9 +691,11 @@ $$
 M = (c_1,c_2,...,c_n) 
 $$
 
-which, treating the $c_j$ as "numbers," again symbolically, looks like a
-$1 \textrm{ x } n$ matrix.  We temporarily pretend it's  $1 \textrm{ x }
-n$ even though it's actually $m \textrm{ x } n$. Then
+so the group size in this case is 1, with $n$ groups of columns.
+Treating the $c_j$ as "numbers," again symbolically, $M$ looks like a $1
+\textrm{ x } n$ matrix.  We temporarily pretend it's $1 \textrm{ x } n$
+even though it's actually $m \textrm{ x } n$, and that the $c_j$ are
+numbers, even though they are vectors. Then
 
 $$
 Mv =
