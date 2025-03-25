@@ -433,7 +433,7 @@ number of paths. For any given pair of nodes, is there a multihop path
 between them?  Or does the graph break down to several "islands" of
 connected nodes?
 
-Again consider the karate club data.
+Again consider the Karate Club data.
 
 ```{r}
 u <- matpow(adjK,33)
@@ -792,6 +792,10 @@ $$
 
 i.e. to $Av$. It works!
 
+Note that *we choose the partitioning*; there is no inherent partition
+structure. In some settings, there is a structure that fits our needs,
+and we use that.
+
 ## Linear Combinations of Rows and Columns of a Matrix
 
 Note that the above expression @eq-lincomb1,
@@ -977,6 +981,81 @@ A similar result holds for the rows of the product.
 :::
 
 ## Your Turn
+
+❄️  **Your Turn:** Fill in the blank with a term from this chapter: 
+The adjacency matrix of an undirected graph is nessarily ________.
+
+❄️  **Your Turn:** Consider the Karate Club dataset.
+
+* Which members is member 6 linked with?
+
+* Which member is linked to the most number of members? How about the
+  least number?
+
+* Find an example of a *triad*, i.e. a set of 3 members who are all
+  linked to each other?
+
+❄️  **Your Turn:** write an R function with call form
+
+``` r
+outLinks(adj)
+```
+
+where **adj** is the adjacency matrix of some network graph, possibly
+directed. The function will return an R list, whos
+
+❄️  **Your Turn:** Consider the matrix 
+
+$$
+A =
+\left (
+\begin{array}{rr}
+3 & -1 \\
+0 & 8  \\
+4 & 5  \\
+1 & 0  \\
+0 & 1  \\
+\end{array}
+\right )
+$$
+
+Say we decide to partition it as
+
+$$
+A = 
+\left (
+\begin{array}{r}
+B \\
+I \\
+\end{array}
+\right )
+$$
+
+Now consider the product $AA'$. Using partitioning, we would 
+treat $B$ and $I$ numbers and the product as having factors of size $2
+\textrm{ x } 1$ and $1 \textrm{ x } 2$. That would give us a 
+$2 \textrm{ x } 2$ "matrix"
+
+$$
+AA' =
+\left (
+\begin{array}{r}
+B \\
+I \\
+\end{array}
+\right ) 
+(B',I) =
+\left (
+\begin{array}{rr}
+BB' & B \\
+B' & I  \\
+\end{array}
+\right )
+$${#eq-yt1}
+
+Evaluate $AA'$ and the far-right side of @eq-yt1 to verify that the
+partitioning did indeed give us the right answer.
+
 
 ❄️  **Your Turn:** The long-run probabilities in @sec-introMCs turned out to be
 uniform, with value 0.20 for all five states. In fact, that is usually
