@@ -995,14 +995,15 @@ The adjacency matrix of an undirected graph is nessarily ________.
 * Find an example of a *triad*, i.e. a set of 3 members who are all
   linked to each other?
 
-❄️  **Your Turn:** write an R function with call form
+❄️  **Your Turn:** Write an R function with call form
 
 ``` r
 outLinks(adj)
 ```
 
 where **adj** is the adjacency matrix of some network graph, possibly
-directed. The function will return an R list, whos
+directed. The function will return an R list, whose $i^{th}$ element is
+a vector of all the nodes that have exactly $i$ outgoing links.
 
 ❄️  **Your Turn:** Consider the matrix 
 
@@ -1108,15 +1109,9 @@ For instance, say p = 0.4, q = 0.2, m = 5, Suppose the current state is
 state will be 2 with probability (0.4) (0.8); it will be 3 with
 probability (0.4) (0.2), and so on.
 
-Analyze this system for the case given above.` Find the approximate
+Analyze this system for the case given above. Find the approximate
 long-run distribution, and also the proportion of jobs that get
 discarded.
-
-❄️  **Your Turn:** Write a function with call form
-
-``` r
-makeSimilarityMatrix(m)
-```
 
 ❄️  **Your Turn:** Prove @eq-traceab.  Hint: Write out the left-hand side
 as a double sum.  Reverse the order of summation, and work toward the
