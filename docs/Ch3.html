@@ -670,7 +670,7 @@ Cov(S | A) = \sigma^2 I
 \]</span></p>
 <p>where <span class="math inline">\(\sigma\)</span> is an unknown constant to be estimated from the data.</p>
 <p>So <span class="math inline">\(Var(S_i) = \sigma^2\)</span> for all <span class="math inline">\(i\)</span>. It is usually not a realistic assumption. Say for instance we are predicting human weight from height. There should be more variation in weight among taller people than above shorter people. But it’s a simplifying assumption without really good alternatives, so it is commonly used.</p>
-<p>And in that setting, our formulas from {<a href="Ch2a.html"><span>Chapter&nbsp;4</span></a>} come in handy, as follows.</p>
+<p>And in that setting, our formulas from <a href="Ch2a.html"><span>Chapter&nbsp;4</span></a> come in handy, as follows.</p>
 <p>Recall that <span class="math inline">\(\widehat{\beta}\)</span> is our estimate of the unknown population parameter <span class="math inline">\(\beta\)</span>, based on our random sample data. But that means that <span class="math inline">\(\widehat{\beta}\)</span> is a random vector, and thus has a covariance matrix. Using <a href="Ch2a.html#eq-acova">Equation&nbsp;<span>4.4</span></a> and setting <span class="math inline">\(R = (A'A)^{-1} A'\)</span>$, we have</p>
 <p><span id="eq-varcovar"><span class="math display">\[
 Cov(\widehat{\beta}|A) = R Cov(S|A) R' = R \sigma^2 I R' = \sigma^2 R R' =

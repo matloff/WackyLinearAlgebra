@@ -513,7 +513,7 @@ H = A(A'A)^{-1} A'
 h_{ii} = x_{i} (A'A)^{-1} x_i'
 \tag{8.2}\]</span></span></p>
 <p>The quantity <span class="math inline">\(h_{ii}\)</span> is called the <em>leverage</em> for datapoint <span class="math inline">\(i\)</span>, with the metaphor alluding to the impact of datapoint <span class="math inline">\(i\)</span> on <span class="math inline">\(\widehat{\beta}\)</span></p>
-<p>Using the material on circular shifts in <a href="Ch1.html#sec-trace"><span>Section&nbsp;2.10.3</span></a>, we have</p>
+<p>Using the material on circular shifts in <a href="Ch1.html#sec-trace"><span>Section&nbsp;2.9.3</span></a>, we have</p>
 <p><span class="math display">\[
 tr(H) =
 tr[\underbrace{A(A'A)^{-1}} A'] =
@@ -706,7 +706,7 @@ C = E(Y | X)
 <section id="the-method-of-scutari-et-al" class="level3" data-number="8.13.2">
 <h3 data-number="8.13.2" class="anchored" data-anchor-id="the-method-of-scutari-et-al"><span class="header-section-number">8.13.2</span> The method of Scutari <em>et al</em></h3>
 <p>The basic assumption (BA) amounts to <span class="math inline">\((Y,X,S)\)</span> having a multivariate Gaussian distribution, with <span class="math inline">\(Y\)</span> scalar and <span class="math inline">\(X\)</span> being a vector of length <span class="math inline">\(p\)</span>. For convenience, assume here that <span class="math inline">\(S\)</span> is scalar. As in <a href="#sec-corr"><span>Section&nbsp;8.5.1</span></a>, all variables are assumed centered, i.e.&nbsp;mean 0.</p>
-<p>Let’s review the material in <a href="Ch2a.html#sec-mvn"><span>Section&nbsp;4.2</span></a>: Say we have <span class="math inline">\(W\)</span> with a multivariate normal distribution, and wish to predict one of its components, <span class="math inline">\(Y\)</span>, from a vector <span class="math inline">\(X\)</span> consisting of one or more of the other components, or linear combinations of them. Then</p>
+<p>Let’s review the material in <a href="Ch2a.html#sec-mvn"><span>Section&nbsp;4.3</span></a>: Say we have <span class="math inline">\(W\)</span> with a multivariate normal distribution, and wish to predict one of its components, <span class="math inline">\(Y\)</span>, from a vector <span class="math inline">\(X\)</span> consisting of one or more of the other components, or linear combinations of them. Then</p>
 <ul>
 <li><p>the distribution of <span class="math inline">\(Y|X\)</span> is univariate normal</p></li>
 <li><p>E(Y|X=t) is a linear function of <span class="math inline">\(t\)</span></p></li>

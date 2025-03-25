@@ -246,7 +246,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#elementary-row-operations" id="toc-elementary-row-operations" class="nav-link" data-scroll-target="#elementary-row-operations"><span class="header-section-number">6.2.1</span> Elementary row operations</a></li>
   <li><a href="#the-rref" id="toc-the-rref" class="nav-link" data-scroll-target="#the-rref"><span class="header-section-number">6.2.2</span> The RREF</a></li>
-  <li><a href="#sec-review" id="toc-sec-review" class="nav-link" data-scroll-target="#sec-review"><span class="header-section-number">6.2.3</span> Recap of <span>Section&nbsp;3.4.1</span></a></li>
+  <li><a href="#sec-review" id="toc-sec-review" class="nav-link" data-scroll-target="#sec-review"><span class="header-section-number">6.2.3</span> Recap of <span>Section&nbsp;3.5.1</span></a></li>
   <li><a href="#partitioned-matrix-view-of-reduced-echelon-forms" id="toc-partitioned-matrix-view-of-reduced-echelon-forms" class="nav-link" data-scroll-target="#partitioned-matrix-view-of-reduced-echelon-forms"><span class="header-section-number">6.2.4</span> Partitioned-matrix view of Reduced Echelon Forms</a></li>
   </ul></li>
   <li><a href="#formal-definitions" id="toc-formal-definitions" class="nav-link" data-scroll-target="#formal-definitions"><span class="header-section-number">6.3</span> Formal Definitions</a></li>
@@ -370,7 +370,7 @@ man      15182.0   600860.8   692076  15182.0      0.0
 woman     4908.0   193719.9   215164      0.0   4908.0</code></pre>
 </div>
 </div>
-<p>Is this matrix invertible? Let’s apply the elementary row operations introduced in <a href="Ch2.html#sec-pencilpaper"><span>Section&nbsp;3.4.1</span></a>:</p>
+<p>Is this matrix invertible? Let’s apply the elementary row operations introduced in <a href="Ch2.html#sec-pencilpaper"><span>Section&nbsp;3.5.1</span></a>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pracma)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rref</span>(ApA) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -389,7 +389,7 @@ woman   0   0       0   0     0</code></pre>
 </section>
 <section id="reduced-row-echelon-form-rref-of-a-matrix" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="reduced-row-echelon-form-rref-of-a-matrix"><span class="header-section-number">6.2</span> Reduced Row Echelon Form (RREF) of a Matrix</h2>
-<p>We formalize and extend <a href="Ch2.html#sec-pencilpaper"><span>Section&nbsp;3.4.1</span></a>.</p>
+<p>We formalize and extend <a href="Ch2.html#sec-pencilpaper"><span>Section&nbsp;3.5.1</span></a>.</p>
 <section id="elementary-row-operations" class="level3" data-number="6.2.1">
 <h3 data-number="6.2.1" class="anchored" data-anchor-id="elementary-row-operations"><span class="header-section-number">6.2.1</span> Elementary row operations</h3>
 <p>These are:</p>
@@ -419,17 +419,17 @@ woman   0   0       0   0     0</code></pre>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">runif</span>(<span class="dv">12</span>),<span class="at">nrow=</span><span class="dv">3</span>)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>            [,1]       [,2]       [,3]      [,4]
-[1,] 0.004726557 0.81381767 0.39452114 0.3094611
-[2,] 0.817216643 0.48749057 0.46615789 0.6836059
-[3,] 0.658976504 0.03545127 0.00107962 0.2369409</code></pre>
+<pre><code>          [,1]      [,2]      [,3]      [,4]
+[1,] 0.8959371 0.7354808 0.9689987 0.7249077
+[2,] 0.6835063 0.7947643 0.1405612 0.2327877
+[3,] 0.7135227 0.4396183 0.6640941 0.6434623</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>e <span class="sc">%*%</span> a  <span class="co"># matrix mult. is NOT e * a!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>            [,1]       [,2]       [,3]      [,4]
-[1,] 0.004726557 0.81381767 0.39452114 0.3094611
-[2,] 0.658976504 0.03545127 0.00107962 0.2369409
-[3,] 0.817216643 0.48749057 0.46615789 0.6836059</code></pre>
+<pre><code>          [,1]      [,2]      [,3]      [,4]
+[1,] 0.8959371 0.7354808 0.9689987 0.7249077
+[2,] 0.7135227 0.4396183 0.6640941 0.6434623
+[3,] 0.6835063 0.7947643 0.1405612 0.2327877</code></pre>
 </div>
 </div>
 <p>Yes, rows 2 and 3 were swapped.</p>
@@ -446,7 +446,7 @@ woman   0   0       0   0     0</code></pre>
 <p>The reader should verify that the matrix at the end of <a href="#sec-censusrref"><span>Section&nbsp;6.1</span></a> has these properties.</p>
 </section>
 <section id="sec-review" class="level3" data-number="6.2.3">
-<h3 data-number="6.2.3" class="anchored" data-anchor-id="sec-review"><span class="header-section-number">6.2.3</span> Recap of <a href="Ch2.html#sec-pencilpaper"><span>Section&nbsp;3.4.1</span></a></h3>
+<h3 data-number="6.2.3" class="anchored" data-anchor-id="sec-review"><span class="header-section-number">6.2.3</span> Recap of <a href="Ch2.html#sec-pencilpaper"><span>Section&nbsp;3.5.1</span></a></h3>
 <ul>
 <li><p>Each row operation can be performed via premultiplication by an elementary matrix. Each such matrix is invertible, and its inverse is an elementary matrix.</p></li>
 <li><p>Thus</p>
