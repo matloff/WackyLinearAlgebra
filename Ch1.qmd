@@ -500,7 +500,7 @@ here.]{.column-margin}
 
 In order to assess interuser similarity of the nature described above,
 we might form a matrix $S$, as follows. There would be 943 rows, one
-for each user, and 1682 columns, one for each moview. The element in row
+for each user, and 1682 columns, one for each movie. The element in row
 $i$, column $j$ would be the rating user $i$ gave to movie $j$. Most of
 the matrix would be 0s.
 
@@ -508,10 +508,6 @@ The point of constructing $S$ is that determining the similarity of
 users becomes a matter of measuring similarity of rows of $S$. This
 paves the way to exploiting the wealth of matrix-centric methodology we
 will develop in this book.
-
-that takes as input a matrix or data frame of user-movie-rating data,
-and returns a matrix as described above, i.e. one row per user, one
-column per movie, and so on.
 
 ## Matrix Algebra
 
@@ -588,13 +584,16 @@ A' = \left (
 \right )
 $$
 
+Some books use the notation $A^t$ or $A^T$ instead of $A'$.
 The R function for transpose is **t()**.
 
-It can be shown that if A and B are conformable, then
+It can be shown that if $A$ and $B$ are conformable, then
 
+$$
 (AB)' = B'A'
+$$
 
-For some matrices C, we have C' = C. C is then termed *symmetric*.
+For some matrices $C$, we have $C' = C$. $C$ is then termed *symmetric*.
 
 We will often write a row vector in the form (a,b,c,...). So
 (5,1,88) means the 1x3 matrix with those elements. If we wish this to
@@ -608,21 +607,13 @@ $tr(A) = \sum_{i=1}^n A_{ii}$. This measure has various properties, some
 obvious (trace of the sum is sum of the traces), and some less so, such
 as:
 
-<blockquote>
-
-Suppose $A$ and $B$ are square matrices of the same size. Then
-
-$$
-tr(AB) = tr(BA)
-$${#eq-traceab}
-
-*Proof:* See Your Turn problem.
-
-</blockquote>
-
-❄️  **Your Turn:** Prove @eq-traceab.  Hint: Write out the left-hand side
-as a double sum.  Reverse the order of summation, and work toward the
-right-hand side.
+> Suppose $A$ and $B$ are square matrices of the same size. Then
+> 
+> $$
+> tr(AB) = tr(BA)
+> $${#eq-traceab}
+> 
+> *Proof:* See Your Turn problem.
 
 And furthermore:
 
@@ -1155,4 +1146,8 @@ discarded.
 ``` r
 makeSimilarityMatrix(m)
 ```
+
+❄️  **Your Turn:** Prove @eq-traceab.  Hint: Write out the left-hand side
+as a double sum.  Reverse the order of summation, and work toward the
+right-hand side.
 
