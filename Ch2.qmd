@@ -22,6 +22,129 @@ related quantities are often used instead of using the inverse directly).
 
 :::
 
+To motivate our discussion of matrix inverse, we first revisit the topic
+of Markov chains.
+
+## A Further Look at Markov Chains
+
+Suppose $X_0$, our state at time 0, is random. Let $f$ denote its
+distribution, i.e. its list of probabilities:
+$f_i = P(X_0 = i)$, i = 1,...,k, where k is the number
+of states in the chain. What about $X_1$, the state at time 1?
+Let's find an expression for $g$, the distribution of $X_1$.
+
+$$
+g_j = P(X_1 = j)
+= \sum_{i=1}^k P(X_0 = i) P(X_1 = j | X_0 = i)
+= \sum_{i=1}^k f_i a_{ij}
+$$
+
+where $a_{ij}$ is the row i, column j element of the chain's transition
+matrix $P$.
+
+For example, consider $g_5$. How could we be at state 5 at time 1? We
+could start in state 1, probability $f_1$, then move to state 5,
+probability $a_{15}$, for a total probability of $f_1 a_{15}$. 
+Or, we could start in state 2, probability $f_2$, then move to state 5,
+probability $a_{25}$, for a total probability of $f_2 a_{25}$.
+And so on.
+
+So,
+
+$$
+g_j = \sum_{i=1}^k f_i a_{ij}
+$$
+
+Putting this is more explicit matrix terms,
+
+$$
+g = \left (
+\begin{array}{r}
+g_1 \\
+g_2 \\
+... \\
+g_k \\
+\end{array}
+\right )
+=
+\left (
+\begin{array}{r}
+f_1 a_{11} + f_2 a_{21} + ... + f_k a_{k1} \\
+f_1 a_{12} + f_2 a_{22} + ... + f_k a_{k2} \\
+... \\
+f_1 a_{1k} + f_2 a_{2k} + ... + f_k a_{kk} \\
+\end{array}
+\right )
+$$
+
+That last expression is
+
+$$
+f'P
+$$
+
+so we have the nice compact relation for the distribution of $X_1$ in
+terms of the distribution of $X_0$.[By the way, it won't be used here, but
+just for practice, note that the right-hand side, Pf, here is
+a linear combination of the columns of P, from our above material on
+partitioning.]{.column-margin}
+
+$$
+g' = f'P
+$$
+
+
+And setting h to the distribution of $X_2$, the same reasoning gives us
+
+$$
+h' = g'P 
+$$
+
+Then since $g' = f'P$, we have
+[Note that we used the Markov property, 
+"memorylessness." Once we reach time 1, "time starts over," regradless
+of the previous history, i.e. regardless of where we were at time 0.]{.column-margin}
+
+$$
+h' = f'P^2 
+$$
+
+and so on. Iterating, we obtain
+
+$$
+d_j' = d_0' P^j 
+$$
+
+where $d_i$ is the distribution of $X_i$.
+
+Similarly, 
+
+$$
+d_j' = d_{j-1}' P
+$$
+
+For convenience, let's take transposes:[Recall that $(AB)' =
+B'A'$.]
+
+$$
+d_j = P' d_{j-1}
+$$
+
+Now suppose our chain as a long-run distribution, as in {@sec-introMCs}.
+Let's call that distribution $\nu$. By lettting $j \rightarrow \infty$
+above, we have
+
+$$
+\nu = P' \nu
+$$
+
+Since P is known, this provides us with a way to compute $\nu$. Yes,
+finding a high power of P would do this too, but that would involve a lot
+of computation, and even then it would not yield the exact answer. We
+will return to this in the next chapter. 
+
+
+
 ## Definition
 
 > For any square matrix $A$, it's *inverse* $B$ (if it exists)

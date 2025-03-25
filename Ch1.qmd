@@ -652,7 +652,7 @@ of their own examples.
 
 :::
 
-## How It Works
+### How partitioning works
 
 Consider a matrix-matrix product $MQ$. The use of partitioning works on
 "pretending":
@@ -695,7 +695,7 @@ so the group size in this case is 1, with $n$ groups of columns.
 Treating the $c_j$ as "numbers," again symbolically, $M$ looks like a $1
 \textrm{ x } n$ matrix.  We temporarily pretend it's $1 \textrm{ x } n$
 even though it's actually $m \textrm{ x } n$, and that the $c_j$ are
-numbers, even though they are vectors. Then
+numbers, even though they are vectors. Then the "product"
 
 $$
 Mv =
@@ -713,8 +713,8 @@ v_2 c_{2} + ... +
 v_s c_{n}  
 $$
 
-looks, once again symbolically like the product of a $1 \textrm{ x } n$
-and an $n \textrm{ x } 1$, resulting in a $1 \textrm{ x } 1$, i.e. a
+looks, once again symbolically like the product of $1 \textrm{ x } n$
+and $n \textrm{ x } 1$ vectors, resulting in a $1 \textrm{ x } 1$, i.e. a
 number.
 
 The wonderful thing about all this is that if we now stop pretending, we
@@ -740,7 +740,7 @@ A = \left (
 1 & 2.6 & -1.2 \\
 \end{array}
 \right )
-$$
+$${#eq-matrixA}
 
 and 
 
@@ -752,7 +752,7 @@ v = \left (
 1 \\
 \end{array}
 \right )
-$$
+$${#eq-vInAv}
 
 The reader should check that
 
@@ -777,10 +777,9 @@ $$
 -1.2 \\
 \end{array}
 \right )
-= Av
-$$
+$${#eq-lincomb1}
 
-where the latter is
+does indeed work out to 
 
 $$
 \left (
@@ -791,7 +790,11 @@ $$
 \right )
 $$
 
-Note that the above expression,
+i.e. to $Av$. It works!
+
+## Linear Combinations of Rows and Columns of a Matrix
+
+Note that the above expression @eq-lincomb1,
 
 $$
 10 \left (
@@ -820,28 +823,28 @@ is a sum of scalar products of vectors, which is called a *linear
 combination* of those vectors. The quantities 10, 2 and 1 are the
 *coefficients* in that linear combination.
 
-In other words, we have that:
+In view of the fact that that linear combination worked out to be $Av$,
+we have that:
 
-<blockquote>
+::: {#thm-lincombRows}
 
 The product $Av$ of a matrix times a column vector is equal to a linear
 combination of the columns of the matrix, with coefficients equal to the
 column vector.
 
-</blockquote>
+:::
 
 Similarly,
 
-<blockquote>
+::: {#thm-lincombCols}
 
 The product $wA$ of a row vector and a matrix is equal to a linear
 combination of the rows of the matrix, with the coefficients coming from
 the row vector.
 
-</blockquote>
+:::
 
-To further illustrate partitioned matrices, write the above matrix $A$
-as 
+To further illustrate all this, write the above matrix @eq-matrixA as 
 
 $$
 A = 
@@ -850,7 +853,7 @@ A =
 A_{11} & A_{21} \\
 \end{array}
 \right )
-$$
+$${#eq-matrixApart}
 
 where 
 
@@ -877,7 +880,8 @@ A_{12} =
  \right )
 $$
 
-Symbolically, $A$ now looks like a 1x2 "matrix." Similarly, writing
+Symbolically, in @eq-matrixApart, $A$ now looks like a 1x2 "matrix."
+Similarly, rewriting @eq-vInAv}, we have
 
 $$
 v = 
@@ -904,7 +908,7 @@ $$
 and $v_{21} = 1$ (a 1x1 matrix), $v$ looks to be 2x1.
 
 So, again pretending, treat the product $Av$ as the multiplication of a
-1x2 "matrix" and 2x1 "vector", yielding a 1x1 result,
+1 x 2 "matrix" and a 2 x 1 "vector", yielding a 1 x 1 result,
 
 $$
 A_{11} v_{11} + A_{12} v_{21}
@@ -943,6 +947,8 @@ A_{11} v_{11} + A_{12} v_{21} =
  \right )
 $$
 
+which is the true value of $Av$.
+
 We can extend that reasoning further. Say $A$ and $B$ are matrices of
 sizes $m \textrm{x} n$ and $n \textrm{x} k$, and consider the product
 $AB$. Partition $B$ by its columns,
@@ -960,208 +966,15 @@ $$
 
 In other words,
 
-<blockquote>
+::: {#thm-abPart}
 
 In the product $AB$, column $j$ is a linear combination of the columns
 of $A$, and the coefficients in that linear combination are the elements
 of column $j$ of $B$.
 
-A similar result holds for the row of the product.
+A similar result holds for the rows of the product.
 
-</blockquote>
-
-❄️  **Your Turn:** Write out the details of that "similar result."
-
-# A Further Look at Markov Chains
-
-Suppose $X_0$, our state at time 0, is random. Let $f$ denote its
-distribution, i.e. its list of probabilities:
-$f_i = P(X_0 = i)$, i = 1,...,k, where k is the number
-of states in the chain. What about $X_1$, the state at time 1?
-Let's find an expression for $g$, the distribution of $X_1$.[This
-section will be longer than previous ones, but will bring together many
-of the concepts. The reader's patience here will be an investment paying
-great dividends in the sequel.]{.column-margin}
-
-$$
-g_j = P(X_1 = j)
-= \sum_{i=1}^k P(X_0 = i) P(X_1 = j | X_0 = i)
-= \sum_{i=1}^k f_i a_{ij}
-$$
-
-where $a_{ij}$ is the row i, column j element of the chain's transition
-matrix $P$.
-
-For example, consider $g_5$. How could we be at state 5 at time 1? We
-could start in state 1, probability $f_1$, then move to state 5,
-probability $a_{15}$, for a total probability of $f_1 a_{15}$. 
-Or, we could start in state 2, probability $f_2$, then move to state 5,
-probability $a_{25}$, for a total probability of $f_2 a_{25}$.
-And so on.
-
-So,
-
-$$
-g_j = \sum_{i=1}^k f_i a_{ij}
-$$
-
-Putting this is more explicit matrix terms,
-
-$$
-g = \left (
-\begin{array}{r}
-g_1 \\
-g_2 \\
-... \\
-g_k \\
-\end{array}
-\right )
-=
-\left (
-\begin{array}{r}
-f_1 a_{11} + f_2 a_{21} + ... + f_k a_{k1} \\
-f_1 a_{12} + f_2 a_{22} + ... + f_k a_{k2} \\
-... \\
-f_1 a_{1k} + f_2 a_{2k} + ... + f_k a_{kk} \\
-\end{array}
-\right )
-$$
-
-That last expression is
-
-$$
-f'P
-$$
-
-so we have the nice compact relation for the distribution of $X_1$ in
-terms of the distribution of $X_0$.[By the way, it won't be used here, but
-just for practice, note that the right-hand side, Pf, here is
-a linear combination of the columns of P, from our above material on
-partitioning.]{.column-margin}
-
-$$
-g' = f'P
-$$
-
-
-And setting h to the distribution of $X_2$, the same reasoning gives us
-
-$$
-h' = g'P 
-$$
-
-Then since $g' = f'P$, we have
-[Note that we used the Markov property, 
-"memorylessness." Once we reach time 1, "time starts over," regradless
-of the previous history, i.e. regardless of where we were at time 0.]{.column-margin}
-
-$$
-h' = f'P^2 
-$$
-
-and so on. Iterating, we obtain
-
-$$
-d_j' = d_0' P^j 
-$$
-
-where $d_i$ is the distribution of $X_i$.
-
-Similarly, 
-
-$$
-d_j' = d_{j-1}' P
-$$
-
-For convenience, let's take transposes:[Recall that $(AB)' =
-B'A'$.]
-
-$$
-d_j = P' d_{j-1}
-$$
-
-Now suppose our chain as a long-run distribution, as in {@sec-introMCs}.
-Let's call that distribution $\nu$. By lettting $j \rightarrow \infty$
-above, we have
-
-$$
-\nu = P' \nu
-$$
-
-Since P is known, this provides us with a way to compute $\nu$. Yes,
-finding a high power of P would do this too, but that would involve a lot
-of computation, and even then it would not yield the exact answer. We
-will return to this in the next chapter. 
-
-## Application: Google PageRank{#sec-pagerank}
-
-When Google was first formed, its key internal component was a method to
-rank Web sites in terms of popularity.  They developed such a method,
-and named it PageRank, a pun combining the term *Web page* (i.e. Web
-site) and the name of one of the founders, Larry Page. It's based on a
-Markov model.
-
-The transition matrix is modeled as follows. row $i$ has $o_i$ nonzero
-entries, each of which is equal to $1/o_i$.  They define popularity as
-the resulting long-run distribution, i.e.  $\nu$ in @sec-introMCs.
-
-## Random Vectors
-
-You are probably familiar with the concept of a random variable, but of
-even greater importance is random *vectors*.
-
-Say we are jointly modeling height, weight, age, systolic blood pressure
-and cholesterol, and are especially interested in relations between
-these quantities.  We then have the random vector
-
-$$
- X 
-=
- \left (
- \begin{array}{r}
- X_1 \\
- X_2 \\
- X_3 \\
- X_4 \\
- X_5 \\
-  \end{array}
- \right )
-=
- \left (
- \begin{array}{r}
- \textrm{height} \\
- \textrm{weight} \\
- \textrm{age} \\
- \textrm{bp} \\
- \textrm{chol} \\
-  \end{array}
- \right )
-$$
-
-### Sample vs. population
-
-We may observe $n$ realizations of $X$ in the form of sample data, say
-on $n = 100$ people. In the statistics world, we treat this data as a
-random sample from some population, say all Americans. Usually, we are
-just given the data rather then having actual random sampling, but this
-view recognizes that there are a lot more people out there than our
-data.
-
-We speak of estimating population quantities. For instance, we can
-estimate the population value $E(X1), i.e. mean of $X_1$ throughout the
-population, by the sammple analog,
-
-$$
-\frac{1}{n} \sum_{i=1}^n X_{1j}
-$$
-
-where $X_{ij}$ denotes the value of $X_i$ for the $j^{th}$ person in our
-sample.
-
-By contrast, this view is rarely taken in the machine learning
-community. The data is the data, and the fact that it is a small subset
-of a much larger group is irrelevant. They will often allude to the
-randomness of the data by mentioning the "data generating mechanism."
+:::
 
 ## Your Turn
 
@@ -1227,3 +1040,5 @@ makeSimilarityMatrix(m)
 as a double sum.  Reverse the order of summation, and work toward the
 right-hand side.
 
+❄️  **Your Turn:** Write out the details of the "similar result" in the
+statement of @thm-abPart.
