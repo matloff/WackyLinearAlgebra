@@ -992,11 +992,12 @@ so that states 1 and 5 (and all the others) have that property. Then
 compute $P^n$ for various large values of $n$ and observe oscillatory
 behavior, rather than long-run convergence.
 
-❄️  **Your Turn:** Consider the following model of a discrete-time,
+❄️  **Your Turn:** Consider the following Markov model of a discrete-time,
 single-server queue:
 
-* Model parameters are p (probability of job completion), q 
-  (probability of new job arriving) and m (size of the buffer).
+* Model parameters are $p$ (probability of job completion), $q$ 
+  (probability of new job arriving) and $m$ (size of the customer
+  waiting area).
 
 * Jobs arrive, are served (possibly after queuing) and leave.
 
@@ -1005,15 +1006,15 @@ single-server queue:
 * At each time epoch:
 
     * The job currently in service, if any, will complete with
-      probability p.
+      probability $p$.
 
-    * Slightly after a possible job completion, a job in the queue,
+    * After a job completion, a job in the queue,
       if any, will start service.
 
-    a Slightly after that, anew job will arrive with probability q.
-      If the queue is empty, this job starts service. If not, and if the
-      queue is not full, it will join the queue.  Otherwise, the job is
-      discarded.
+    * A new job will arrive with probability $q$. If the server is free,
+      this new job will start service, rather than going to the waiting
+      room.  If the queue is not full when this job arrives,
+      it will join the queue; otherwise, the job is discarded.
 
 * The system is memoryless.
 
