@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Powered by Linear Algebra - 12&nbsp; Principal Components</title>
+<title>12&nbsp; Principal Components – Powered by Linear Algebra</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -71,17 +71,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-5e2915e4d4df5928b2b0a61215b328b6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -90,14 +96,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -107,13 +141,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Ch6b.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Principal Components</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Ch6b.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Principal Components</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -122,7 +156,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Powered by Linear Algebra</a> 
@@ -234,7 +268,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -273,7 +307,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+
 </header>
+
 
 <div style="page-break-after: always;"></div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -310,7 +346,7 @@ v'Cov(X)v + \omega (v'v - 1) + \tau (u'v - 0)
 <p><span class="math display">\[
 u' Cov(X) v = [Cov(X) u]' v = \gamma u' v = 0
 \]</span></p>
-<p>So <a href="#eq-eig2b">Equation&nbsp;<span>12.2</span></a> now tells us that <span class="math inline">\(\tau = 0\)</span>, and thus <a href="#eq-eig2a">Equation&nbsp;<span>12.1</span></a> reduces to</p>
+<p>So <a href="#eq-eig2b" class="quarto-xref">Equation&nbsp;<span>12.2</span></a> now tells us that <span class="math inline">\(\tau = 0\)</span>, and thus <a href="#eq-eig2a" class="quarto-xref">Equation&nbsp;<span>12.1</span></a> reduces to</p>
 <p><span id="eq-eig2c"><span class="math display">\[
 Cov(X) v = -\omega v
 \tag{12.3}\]</span></span></p>
@@ -325,7 +361,7 @@ Cov(X) v = -\omega v
 <p>This follows from our earlier finding that eigenvectors of a symmetric matrix, in this case <span class="math inline">\(Cov(X)\)</span>, are orthogonal. We say that a symmetric is <em>orthogonal</em> if its columns are orthogonal as vectors.</p></li>
 <li><p>This in turn implies that the PCs are uncorrelated, and in the multivariate normal case, statistically independent.</p></li>
 <li><p>The eigenvalues are the variances of the PCs. The PCs are in order of decreasing (or at least nonincreasing) variance.</p>
-<p>This first statement follows from pre-mutiplying <a href="Ch6a.html#eq-aha">Equation&nbsp;<span>11.1</span></a> by <span class="math inline">\(u'\)</span>, giving us <span class="math inline">\(Var(u)\)</span> on the left and <span class="math inline">\(-\lambda u'u = -\lambda\)</span> on the right. The second statement follows from the fact that as we go from the first PC to the second, third and so on, we are maximizing under more and more constraints, hence smaller maxima.</p></li>
+<p>This first statement follows from pre-mutiplying <a href="Ch6a.html#eq-aha" class="quarto-xref">Equation&nbsp;<span>11.1</span></a> by <span class="math inline">\(u'\)</span>, giving us <span class="math inline">\(Var(u)\)</span> on the left and <span class="math inline">\(-\lambda u'u = -\lambda\)</span> on the right. The second statement follows from the fact that as we go from the first PC to the second, third and so on, we are maximizing under more and more constraints, hence smaller maxima.</p></li>
 </ul>
 </blockquote>
 </section>
@@ -344,7 +380,8 @@ Cov(X) = A'A
 Au = 0
 \]</span></p>
 <p>Since <span class="math inline">\(Au\)</span> is a linear combination of the columns of <span class="math inline">\(A\)</span>, we see that the columns of <span class="math inline">\(A\)</span> are linearly dependent.</p>
-<p>The same argument works in reverse. If <span class="math inline">\(Au = 0\)</span>, we fine that <span class="math inline">\(Var(u'X) = 0\)</span>, and since the eigenvalues of <span class="math inline">\(Cov(X)\)</span> are variances of linear combinations of <span class="math inline">\(X\)</span>, we see that one of those variances is 0.</p>
+<p>The same argument works in reverse. If <span class="math inline">\(Au = 0\)</span>, we fine that <span class="math inline">\(Var(u'X)
+= 0\)</span>, and since the eigenvalues of <span class="math inline">\(Cov(X)\)</span> are variances of linear combinations of <span class="math inline">\(X\)</span>, we see that one of those variances is 0.</p>
 </section>
 <section id="back-to-the-african-soils-example" class="level2" data-number="12.3">
 <h2 data-number="12.3" class="anchored" data-anchor-id="back-to-the-african-soils-example"><span class="header-section-number">12.3</span> Back to the African Soils Example</h2>
@@ -391,7 +428,7 @@ Au = 0
 <pre><code>[1] 3597    9</code></pre>
 </div>
 </div>
-<p>So, recalling the sequence of equations leading to <a href="Ch6a.html#eq-aha">Equation&nbsp;<span>11.1</span></a>, we are ready to replace our old variables by the new ones, which are linear combinations of the old ones.</p>
+<p>So, recalling the sequence of equations leading to <a href="Ch6a.html#eq-aha" class="quarto-xref">Equation&nbsp;<span>11.1</span></a>, we are ready to replace our old variables by the new ones, which are linear combinations of the old ones.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(x)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -409,18 +446,18 @@ Au = 0
 </section>
 <section id="sec-detect" class="level2" data-number="12.4">
 <h2 data-number="12.4" class="anchored" data-anchor-id="sec-detect"><span class="header-section-number">12.4</span> PCA in Detection of Multicollinearity</h2>
-<p>Recall the itemized list in <a href="Ch5c.html#sec-nearly"><span>Section&nbsp;10.1</span></a> of various conditions under which we have multicollinearity. We can add the following item to that list:</p>
+<p>Recall the itemized list in <a href="Ch5c.html#sec-nearly" class="quarto-xref"><span>Section 10.1</span></a> of various conditions under which we have multicollinearity. We can add the following item to that list:</p>
 <ul>
 <li><span class="math inline">\(A\)</span> has an eigenvalue that is nearly 0.</li>
 </ul>
-<p>This follows from what we found about 0 eigenvalues in <a href="#sec-eiglm"><span>Section&nbsp;12.2</span></a>.<br>
+<p>This follows from what we found about 0 eigenvalues in <a href="#sec-eiglm" class="quarto-xref"><span>Section 12.2</span></a>.<br>
 If an eigenvalue is 0, the rank is exactly less than full. If it is approximately 0, the rank is technically full, but there is a linear combination of the variables that is approximately 0.</p>
 <p>In fact, PCA can warn us of specific linear combinations of <span class="math inline">\(Cov(A'A)\)</span> that are nearly 0, as follows.</p>
 <ul>
 <li><p>Say a PC corresponds to a small eigenvalue.</p></li>
-<li><p>Then from <a href="Ch6a.html#sec-firstPC"><span>Section&nbsp;11.2.1</span></a> that linear combination has small variance.</p></li>
+<li><p>Then from <a href="Ch6a.html#sec-firstPC" class="quarto-xref"><span>Section 11.2.1</span></a> that linear combination has small variance.</p></li>
 <li><p>Random variables with small variance are nearly constant.</p></li>
-<li><p>Thus with high probability, the linear combination is near to <span class="math inline">\(c\)</span> for some number <span class="math inline">\(c\)</span>. If we are working with numerical data, that number <span class="math inline">\(c\)</span> is nonzero with high probability (see <span class="citation" data-cites="imp-prob0">@imp-prob0</span>).</p></li>
+<li><p>Thus with high probability, the linear combination is near to <span class="math inline">\(c\)</span> for some number <span class="math inline">\(c\)</span>. If we are working with numerical data, that number <span class="math inline">\(c\)</span> is nonzero with high probability (see <span class="quarto-unresolved-ref">?imp-prob0</span>).</p></li>
 <li><p>If our design matrix <span class="math inline">\(A\)</span> includes a 1s column, then the above linear combination, together with this 1s column, gives us a linear combination that is usually close to the 0 vector, thus multicollinear.</p></li>
 </ul>
 <p>In other words, PCA can point out to us specific linear combinations of our variables that may be problematic. If we are considering solving the problem by removing one or more predictor variables, this analysis could suggest which ones to remove.</p>
@@ -438,7 +475,7 @@ P(determinant(A'A) = 0) = 0
 <section id="how-many-principal-components-should-we-use" class="level2" data-number="12.6">
 <h2 data-number="12.6" class="anchored" data-anchor-id="how-many-principal-components-should-we-use"><span class="header-section-number">12.6</span> How Many Principal Components Should We Use?</h2>
 <p>We chose to use the first 9 principal components in our example here, but that was just for illustration purposes. There are no formal rules for how many to use. Various “rules of thumb” exist.</p>
-<p>If we are doing prediction, there is a very natural way to choose our number of PCs – do cross-validation (<a href="Ch5c.html#sec-xval"><span>Section&nbsp;10.4.2</span></a>), and use whichever number gives the most accurate prediction.</p>
+<p>If we are doing prediction, there is a very natural way to choose our number of PCs – do cross-validation (<a href="Ch5c.html#sec-xval" class="quarto-xref"><span>Section 10.4.2</span></a>), and use whichever number gives the most accurate prediction.</p>
 <section id="sec-nyc" class="level3" data-number="12.6.1">
 <h3 data-number="12.6.1" class="anchored" data-anchor-id="sec-nyc"><span class="header-section-number">12.6.1</span> Example: New York City taxi trips</h3>
 <p>This is a well-known dataset, a version of which is included in the <strong>qeML</strong> package. The object is to predict trip time, given pickup and dropoff locations, trip distance and day of the week.</p>
@@ -478,7 +515,7 @@ NULL</code></pre>
 <p>However, since the holdout set is randomly generated, the MAPE value is random, so we should do multiple runs. Some experimentation showed that MAPE here is highly variable, so we decided to perform 500 runs, e.g.</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">500</span>,<span class="cf">function</span>(i) <span class="fu">qePCA</span>(nyc,<span class="st">'tripTime'</span>,<span class="st">'qeLin'</span>,<span class="at">pcaProp=</span><span class="fl">0.1</span>)<span class="sc">$</span>testAcc)) </span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="fl">359.663</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<table class="table">
+<table class="caption-top table">
 <caption>Mean Absolute Predictive Error</caption>
 <thead>
 <tr class="header">
@@ -550,7 +587,7 @@ A_1 &amp; 0 &amp; 0 ... \\
 <li><p>has eigenvectors <span class="math inline">\(u_{1,j},...,u_{k,j}\)</span>, where <span class="math inline">\(j=1,...,k_i\)</span></p></li>
 </ul>
 <p>State the form of the eigenvalues and eigenvectors of <span class="math inline">\(A\)</span>.</p>
-<p>❄️ <strong>Your Turn:</strong> In <a href="#sec-detect"><span>Section&nbsp;12.4</span></a>, there was a statement “<span class="math inline">\(c\)</span> is nonzero with high probability.” Why was that important?</p>
+<p>❄️ <strong>Your Turn:</strong> In <a href="#sec-detect" class="quarto-xref"><span>Section 12.4</span></a>, there was a statement “<span class="math inline">\(c\)</span> is nonzero with high probability.” Why was that important?</p>
 <p>❄️ <strong>Your Turn:</strong> Use PCA to do dimension reduction on the <strong>s50</strong> dataset.</p>
 <p>❄️ <strong>Your Turn:</strong> Write an R function with call form</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bestPCAPred</span>(data,yName)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -595,18 +632,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -638,11 +664,48 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -652,8 +715,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -665,7 +737,129 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -709,6 +903,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -734,6 +929,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -795,17 +1016,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./Ch6a.html" class="pagination-link">
+      <a href="./Ch6a.html" class="pagination-link" aria-label="Eigenanalysis">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Eigenanalysis</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Ch6c.html" class="pagination-link">
+      <a href="./Ch6c.html" class="pagination-link" aria-label="Singular Value Decomposition">
         <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Singular Value Decomposition</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
+
 
 
 

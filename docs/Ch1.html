@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Powered by Linear Algebra - 2&nbsp; Matrices and Vectors</title>
+<title>2&nbsp; Matrices and Vectors – Powered by Linear Algebra</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -71,17 +71,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-5e2915e4d4df5928b2b0a61215b328b6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -90,14 +96,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -107,13 +141,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Ch1.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Matrices and Vectors</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Ch1.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Matrices and Vectors</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -122,7 +156,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Powered by Linear Algebra</a> 
@@ -234,7 +268,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -282,7 +316,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+
 </header>
+
 
 <div style="page-break-after: always;"></div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -476,7 +512,7 @@ B = \left (
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tip
+Tip&nbsp;2.1
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -560,7 +596,11 @@ P \nu = \nu
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(igraph)</span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(karate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Ch1_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="Ch1_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="page-columns page-full"><p>There is a link between node 13 and node 4, meaning that club members 13 and 4 are friends.</p><div class="no-row-height column-margin column-container"><span class="">This graph is <em>undirected</em>, as friendship is mutual. Many graphs are <em>directed</em>, but we will assume undirected here.</span></div></div>
@@ -749,7 +789,7 @@ A' = \left (
 <h3 data-number="2.9.3" class="anchored" data-anchor-id="sec-trace"><span class="header-section-number">2.9.3</span> Trace of a square matrix</h3>
 <p>The <em>trace</em> of a square matrix <span class="math inline">\(A\)</span> is the sum of its diagonal elements, <span class="math inline">\(tr(A) = \sum_{i=1}^n A_{ii}\)</span>. This measure has various properties, some obvious (trace of the sum is sum of the traces), and some less so, such as:</p>
 <div id="thm-trabba" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 2.1 </strong></span>Suppose <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are square matrices of the same size. Then</p>
+<p><span class="theorem-title"><strong>Theorem 2.1</strong></span> Suppose <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are square matrices of the same size. Then</p>
 <p><span id="eq-traceab"><span class="math display">\[
 tr(AB) = tr(BA)
 \tag{2.2}\]</span></span></p>
@@ -759,7 +799,7 @@ tr(AB) = tr(BA)
 </div>
 <p>And furthermore:</p>
 <div id="thm-trinvar" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 2.2 </strong></span>Trace is invariant under <em>circular shifts</em>, e.g.&nbsp;<span class="math inline">\(UVW\)</span>, <span class="math inline">\(VWU\)</span> and <span class="math inline">\(WUV\)</span> all have the same trace.</p>
+<p><span class="theorem-title"><strong>Theorem 2.2</strong></span> Trace is invariant under <em>circular shifts</em>, e.g.&nbsp;<span class="math inline">\(UVW\)</span>, <span class="math inline">\(VWU\)</span> and <span class="math inline">\(WUV\)</span> all have the same trace.</p>
 </div>
 </section>
 </section>
@@ -772,7 +812,7 @@ tr(AB) = tr(BA)
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-A Crucial Tool
+Tip&nbsp;3.1: A Crucial Tool
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -799,7 +839,8 @@ A Crucial Tool
 <p><span class="math display">\[
 M = (c_1,c_2,...,c_n)
 \]</span></p>
-<p>so the group size in this case is 1, with <span class="math inline">\(n\)</span> groups of columns. Treating the <span class="math inline">\(c_j\)</span> as “numbers,” again symbolically, <span class="math inline">\(M\)</span> looks like a <span class="math inline">\(1 \textrm{ x } n\)</span> matrix. We temporarily pretend it’s <span class="math inline">\(1 \textrm{ x } n\)</span> even though it’s actually <span class="math inline">\(m \textrm{ x } n\)</span>, and that the <span class="math inline">\(c_j\)</span> are numbers, even though they are vectors. Then the “product”</p>
+<p>so the group size in this case is 1, with <span class="math inline">\(n\)</span> groups of columns. Treating the <span class="math inline">\(c_j\)</span> as “numbers,” again symbolically, <span class="math inline">\(M\)</span> looks like a <span class="math inline">\(1
+\textrm{ x } n\)</span> matrix. We temporarily pretend it’s <span class="math inline">\(1 \textrm{ x } n\)</span> even though it’s actually <span class="math inline">\(m \textrm{ x } n\)</span>, and that the <span class="math inline">\(c_j\)</span> are numbers, even though they are vectors. Then the “product”</p>
 <p><span class="math display">\[
 Mv =
 (c_1,c_2,...,c_n) %*%
@@ -880,7 +921,7 @@ v = \left (
 </section>
 <section id="linear-combinations-of-rows-and-columns-of-a-matrix" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="linear-combinations-of-rows-and-columns-of-a-matrix"><span class="header-section-number">3.1</span> Linear Combinations of Rows and Columns of a Matrix</h2>
-<p>Note that the above expression <a href="#eq-lincomb1">Equation&nbsp;<span>3.3</span></a>,</p>
+<p>Note that the above expression <a href="#eq-lincomb1" class="quarto-xref">Equation&nbsp;<span>3.3</span></a>,</p>
 <p><span class="math display">\[
 10 \left (
 \begin{array}{r}
@@ -906,13 +947,13 @@ v = \left (
 <p>is a sum of scalar products of vectors, which is called a <em>linear combination</em> of those vectors. The quantities 10, 2 and 1 are the <em>coefficients</em> in that linear combination.</p>
 <p>In view of the fact that that linear combination worked out to be <span class="math inline">\(Av\)</span>, we have that:</p>
 <div id="thm-lincombRows" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 3.1 </strong></span>The product <span class="math inline">\(Av\)</span> of a matrix times a column vector is equal to a linear combination of the columns of the matrix, with coefficients equal to the column vector.</p>
+<p><span class="theorem-title"><strong>Theorem 3.1</strong></span> The product <span class="math inline">\(Av\)</span> of a matrix times a column vector is equal to a linear combination of the columns of the matrix, with coefficients equal to the column vector.</p>
 </div>
 <p>Similarly,</p>
 <div id="thm-lincombCols" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 3.2 </strong></span>The product <span class="math inline">\(wA\)</span> of a row vector and a matrix is equal to a linear combination of the rows of the matrix, with the coefficients coming from the row vector.</p>
+<p><span class="theorem-title"><strong>Theorem 3.2</strong></span> The product <span class="math inline">\(wA\)</span> of a row vector and a matrix is equal to a linear combination of the rows of the matrix, with the coefficients coming from the row vector.</p>
 </div>
-<p>To further illustrate all this, write the above matrix <a href="#eq-matrixA">Equation&nbsp;<span>3.1</span></a> as</p>
+<p>To further illustrate all this, write the above matrix <a href="#eq-matrixA" class="quarto-xref">Equation&nbsp;<span>3.1</span></a> as</p>
 <p><span id="eq-matrixApart"><span class="math display">\[
 A =
 \left (
@@ -941,7 +982,7 @@ A_{12} =
 \end{array}
 \right )
 \]</span></p>
-<p>Symbolically, in <a href="#eq-matrixApart">Equation&nbsp;<span>3.4</span></a>, <span class="math inline">\(A\)</span> now looks like a 1x2 “matrix.” Similarly, rewriting <a href="#eq-vInAv">Equation&nbsp;<span>3.2</span></a>}, we have</p>
+<p>Symbolically, in <a href="#eq-matrixApart" class="quarto-xref">Equation&nbsp;<span>3.4</span></a>, <span class="math inline">\(A\)</span> now looks like a 1x2 “matrix.” Similarly, rewriting <a href="#eq-vInAv" class="quarto-xref">Equation&nbsp;<span>3.2</span></a>}, we have</p>
 <p><span class="math display">\[
 v =
 \left (
@@ -1008,7 +1049,7 @@ AB = (AB^{(1)},AB^{(2)},..., AB^{(k)})
 \]</span></p>
 <p>In other words,</p>
 <div id="thm-abPart" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 3.3 </strong></span>In the product <span class="math inline">\(AB\)</span>, column <span class="math inline">\(j\)</span> is a linear combination of the columns of <span class="math inline">\(A\)</span>, and the coefficients in that linear combination are the elements of column <span class="math inline">\(j\)</span> of <span class="math inline">\(B\)</span>.</p>
+<p><span class="theorem-title"><strong>Theorem 3.3</strong></span> In the product <span class="math inline">\(AB\)</span>, column <span class="math inline">\(j\)</span> is a linear combination of the columns of <span class="math inline">\(A\)</span>, and the coefficients in that linear combination are the elements of column <span class="math inline">\(j\)</span> of <span class="math inline">\(B\)</span>.</p>
 <p>A similar result holds for the rows of the product.</p>
 </div>
 </section>
@@ -1021,9 +1062,9 @@ AB = (AB^{(1)},AB^{(2)},..., AB^{(k)})
 <li><p>Which member is linked to the most number of members? How about the least number?</p></li>
 <li><p>Find an example of a <em>triad</em>, i.e.&nbsp;a set of 3 members who are all linked to each other?</p></li>
 </ul>
-<p>❄️ <strong>Your Turn:</strong> write an R function with call form</p>
+<p>❄️ <strong>Your Turn:</strong> Write an R function with call form</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">outLinks</span>(adj)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>where <strong>adj</strong> is the adjacency matrix of some network graph, possibly directed. The function will return an R list, whos</p>
+<p>where <strong>adj</strong> is the adjacency matrix of some network graph, possibly directed. The function will return an R list, whose <span class="math inline">\(i^{th}\)</span> element is a vector of all the nodes that have exactly <span class="math inline">\(i\)</span> outgoing links.</p>
 <p>❄️ <strong>Your Turn:</strong> Consider the matrix</p>
 <p><span class="math display">\[
 A =
@@ -1047,7 +1088,8 @@ I \\
 \end{array}
 \right )
 \]</span></p>
-<p>Now consider the product <span class="math inline">\(AA'\)</span>. Using partitioning, we would treat <span class="math inline">\(B\)</span> and <span class="math inline">\(I\)</span> numbers and the product as having factors of size <span class="math inline">\(2 \textrm{ x } 1\)</span> and <span class="math inline">\(1 \textrm{ x } 2\)</span>. That would give us a <span class="math inline">\(2 \textrm{ x } 2\)</span> “matrix”</p>
+<p>Now consider the product <span class="math inline">\(AA'\)</span>. Using partitioning, we would treat <span class="math inline">\(B\)</span> and <span class="math inline">\(I\)</span> numbers and the product as having factors of size <span class="math inline">\(2
+\textrm{ x } 1\)</span> and <span class="math inline">\(1 \textrm{ x } 2\)</span>. That would give us a <span class="math inline">\(2 \textrm{ x } 2\)</span> “matrix”</p>
 <p><span id="eq-yt1"><span class="math display">\[
 AA' =
 \left (
@@ -1064,8 +1106,8 @@ B' &amp; I  \\
 \end{array}
 \right )
 \tag{3.5}\]</span></span></p>
-<p>Evaluate <span class="math inline">\(AA'\)</span> and the far-right side of <a href="#eq-yt1">Equation&nbsp;<span>3.5</span></a> to verify that the partitioning did indeed give us the right answer.</p>
-<p>❄️ <strong>Your Turn:</strong> The long-run probabilities in <a href="#sec-introMCs"><span>Section&nbsp;2.6</span></a> turned out to be uniform, with value 0.20 for all five states. In fact, that is usually not the case. Make a small change to <span class="math inline">\(P_1\)</span> – remember to keep the row sums to 1 – and compute a high power to check whether the long-run distribution seems nonuniform.</p>
+<p>Evaluate <span class="math inline">\(AA'\)</span> and the far-right side of <a href="#eq-yt1" class="quarto-xref">Equation&nbsp;<span>3.5</span></a> to verify that the partitioning did indeed give us the right answer.</p>
+<p>❄️ <strong>Your Turn:</strong> The long-run probabilities in <a href="#sec-introMCs" class="quarto-xref"><span>Section 2.6</span></a> turned out to be uniform, with value 0.20 for all five states. In fact, that is usually not the case. Make a small change to <span class="math inline">\(P_1\)</span> – remember to keep the row sums to 1 – and compute a high power to check whether the long-run distribution seems nonuniform.</p>
 <p>❄️ <strong>Your Turn:</strong> Not every Markov chain, even ones with finitely many states, have long-run distributions. Some chains have <em>periodic</em> states. It may be, for instance, that after leaving state <span class="math inline">\(i\)</span>, once can return only after an even number of hops. Modify our example chain here so that states 1 and 5 (and all the others) have that property. Then compute <span class="math inline">\(P^n\)</span> for various large values of <span class="math inline">\(n\)</span> and observe oscillatory behavior, rather than long-run convergence.</p>
 <p>❄️ <strong>Your Turn:</strong> Consider the following Markov model of a discrete-time, single-server queue:</p>
 <ul>
@@ -1082,11 +1124,9 @@ B' &amp; I  \\
 <li><p>The current state is the number of jobs in the system, taking on the values 0,1,2,..,m+1; that last state means m jobs in the queue and 1 in service.</p></li>
 </ul>
 <p>For instance, say p = 0.4, q = 0.2, m = 5, Suppose the current state is 3, so there is a job in service and two jobs in the queue. Our next state will be 2 with probability (0.4) (0.8); it will be 3 with probability (0.4) (0.2), and so on.</p>
-<p>Analyze this system for the case given above.` Find the approximate long-run distribution, and also the proportion of jobs that get discarded.</p>
-<p>❄️ <strong>Your Turn:</strong> Write a function with call form</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">makeSimilarityMatrix</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>❄️ <strong>Your Turn:</strong> Prove <a href="#eq-traceab">Equation&nbsp;<span>2.2</span></a>. Hint: Write out the left-hand side as a double sum. Reverse the order of summation, and work toward the right-hand side.</p>
-<p>❄️ <strong>Your Turn:</strong> Write out the details of the “similar result” in the statement of <a href="#thm-abPart">Theorem&nbsp;<span>3.3</span></a>.</p>
+<p>Analyze this system for the case given above. Find the approximate long-run distribution, and also the proportion of jobs that get discarded.</p>
+<p>❄️ <strong>Your Turn:</strong> Prove <a href="#eq-traceab" class="quarto-xref">Equation&nbsp;<span>2.2</span></a>. Hint: Write out the left-hand side as a double sum. Reverse the order of summation, and work toward the right-hand side.</p>
+<p>❄️ <strong>Your Turn:</strong> Write out the details of the “similar result” in the statement of <a href="#thm-abPart" class="quarto-xref">Theorem&nbsp;<span>3.3</span></a>.</p>
 
 
 </section>
@@ -1128,18 +1168,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1171,11 +1200,48 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1185,8 +1251,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1198,7 +1273,129 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1242,6 +1439,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1267,6 +1465,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1328,17 +1552,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./preface.html" class="pagination-link">
+      <a href="./preface.html" class="pagination-link" aria-label="Preface">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Ch2.html" class="pagination-link">
+      <a href="./Ch2.html" class="pagination-link" aria-label="Matrix Inverse">
         <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Matrix Inverse</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
+
 
 
 

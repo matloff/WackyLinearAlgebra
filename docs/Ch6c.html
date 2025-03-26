@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Powered by Linear Algebra - 13&nbsp; Singular Value Decomposition</title>
+<title>13&nbsp; Singular Value Decomposition – Powered by Linear Algebra</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -71,17 +71,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-5e2915e4d4df5928b2b0a61215b328b6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -90,14 +96,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -107,13 +141,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Ch6c.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Singular Value Decomposition</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Ch6c.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Singular Value Decomposition</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -122,7 +156,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Powered by Linear Algebra</a> 
@@ -234,7 +268,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -278,7 +312,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+
 </header>
+
 
 <div style="page-break-after: always;"></div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -312,7 +348,7 @@ Our target relation:
 A = U \Sigma V'
 \tag{13.1}\]</span></span></p>
 <p>By convention the ordering of columns is set so that the <span class="math inline">\(\sigma_i\)</span> occur in nonincreasing order.</p>
-<p>Note that, by matrix partitioning, <a href="#eq-svd">Equation&nbsp;<span>13.1</span></a> also says that</p>
+<p>Note that, by matrix partitioning, <a href="#eq-svd" class="quarto-xref">Equation&nbsp;<span>13.1</span></a> also says that</p>
 <p><span id="eq-aissumuivi"><span class="math display">\[
 A = \sum_{i=1}^n \sigma_i u_i v_i'
 \tag{13.2}\]</span></span></p>
@@ -331,7 +367,7 @@ A = \sum_{i=1}^n \sigma_i u_i v_i'
 <h2 data-number="13.2" class="anchored" data-anchor-id="example-applications"><span class="header-section-number">13.2</span> Example Applications</h2>
 <section id="recommender-systems" class="level3" data-number="13.2.1">
 <h3 data-number="13.2.1" class="anchored" data-anchor-id="recommender-systems"><span class="header-section-number">13.2.1</span> Recommender Systems</h3>
-<p>Recall <a href="Ch1.html#sec-recsys"><span>Section&nbsp;2.8</span></a>, which began with movie ratings data. We would like to predict the rating some particular user would give to some particular movie. It will turn out that we can set up SVD in such a way that <span class="math inline">\(U\)</span> contains movie data and <span class="math inline">\(V\)</span> contains user data.</p>
+<p>Recall <a href="Ch1.html#sec-recsys" class="quarto-xref"><span>Section 2.8</span></a>, which began with movie ratings data. We would like to predict the rating some particular user would give to some particular movie. It will turn out that we can set up SVD in such a way that <span class="math inline">\(U\)</span> contains movie data and <span class="math inline">\(V\)</span> contains user data.</p>
 </section>
 <section id="text-classification" class="level3" data-number="13.2.2">
 <h3 data-number="13.2.2" class="anchored" data-anchor-id="text-classification"><span class="header-section-number">13.2.2</span> Text Classification</h3>
@@ -340,17 +376,19 @@ A = \sum_{i=1}^n \sigma_i u_i v_i'
 </section>
 <section id="dimension-reduction" class="level3" data-number="13.2.3">
 <h3 data-number="13.2.3" class="anchored" data-anchor-id="dimension-reduction"><span class="header-section-number">13.2.3</span> Dimension Reduction</h3>
-<p>Recall that in the matrix <span class="math inline">\(\Sigma\)</span>, the eigenvalues are arranged in decreasing order, possibly followed by 0s. This suggests that we can achieve dimension reduction by replacing the smaller eigenvalues by 0s, with corresponding adjustments to the columns of <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span>. We will discuss this below in <a href="#sec-svddimred"><span>Section&nbsp;13.8</span></a>.</p>
+<p>Recall that in the matrix <span class="math inline">\(\Sigma\)</span>, the eigenvalues are arranged in decreasing order, possibly followed by 0s. This suggests that we can achieve dimension reduction by replacing the smaller eigenvalues by 0s, with corresponding adjustments to the columns of <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span>. We will discuss this below in <a href="#sec-svddimred" class="quarto-xref"><span>Section 13.8</span></a>.</p>
 </section>
 </section>
 <section id="solution-to-our-svd-goal" class="level2" data-number="13.3">
 <h2 data-number="13.3" class="anchored" data-anchor-id="solution-to-our-svd-goal"><span class="header-section-number">13.3</span> Solution to Our SVD Goal</h2>
-<p>There are various derivations, e.g.&nbsp;along the lines of <a href="Ch6a.html#sec-firstPC"><span>Section&nbsp;11.2.1</span></a> (one maximizes the quantity <span class="math inline">\(U A V'\)</span>), but let’s go directly to the answer:</p>
+<p>There are various derivations, e.g.&nbsp;along the lines of <a href="Ch6a.html#sec-firstPC" class="quarto-xref"><span>Section 11.2.1</span></a> (one maximizes the quantity <span class="math inline">\(U A V'\)</span>), but let’s go directly to the answer:</p>
 <ol type="1">
-<li><p>Say <span class="math inline">\(A\)</span> is <span class="math inline">\(p \textrm{ x } n\)</span>, so that <span class="math inline">\(A'A\)</span> will be of size <span class="math inline">\(n \textrm{ x } n\)</span>. Let <span class="math inline">\(r\)</span> denote the rank of <span class="math inline">\(A\)</span>, which will be the same as the rank of <span class="math inline">\(A'A\)</span> from <a href="Ch4.html#thm-rankapa">Theorem&nbsp;<span>6.5</span></a>.</p></li>
+<li><p>Say <span class="math inline">\(A\)</span> is <span class="math inline">\(p \textrm{ x } n\)</span>, so that <span class="math inline">\(A'A\)</span> will be of size <span class="math inline">\(n
+\textrm{ x } n\)</span>. Let <span class="math inline">\(r\)</span> denote the rank of <span class="math inline">\(A\)</span>, which will be the same as the rank of <span class="math inline">\(A'A\)</span> from <a href="Ch4.html#thm-rankapa" class="quarto-xref">Theorem&nbsp;<span>6.5</span></a>.</p></li>
 <li><p>Compute the eigenvalues <span class="math inline">\(\sigma_1,...,\sigma_n\)</span> and eigenvectors <span class="math inline">\(v_1,...,v_n\)</span> of <span class="math inline">\(A'A\)</span>. Normalize the <span class="math inline">\(v_i\)</span> by dividing by their lengths. (The same eigenvalues will still hold.) Order the <span class="math inline">\(\sigma_i\)</span> from largest to smallest, and use the same ordering for the <span class="math inline">\(v_i\)</span>.</p></li>
-<li><p>Since <span class="math inline">\(A'A\)</span> is symmetric and positive-semidefinite, its eigenvalues will be nonnegative and its eigenvectors <span class="math inline">\(v_1,...,v_r\)</span> will be orthogonal as long as <span class="math inline">\(\sigma_1,...,\sigma_r\)</span> are distinct, as is the case for numeric data (<a href="Ch6b.html#sec-prob0"><span>Section&nbsp;12.5</span></a>). We will have <span class="math inline">\(\sigma_{r+1} = ... = \sigma_n = 0\)</span>.</p></li>
-<li><p>Set <span class="math inline">\(\Sigma\)</span> to <span class="math inline">\(diag(\sigma_1,...,\sigma_n)\)</span>, the nonincreasing list of those eigenvalues. Set the first <span class="math inline">\(r\)</span> columns of <span class="math inline">\(V\)</span> to the corresponding eigenvectors. Use the Gram-Schmidt Method (see <a href="Ch5b.html#sec-gramschmidt"><span>Section&nbsp;8.10</span></a>) to add <span class="math inline">\(n-r\)</span> more vectors. <span class="math inline">\(V\)</span> will then have orthonormal columns, and thus be an orthogonal matrix.</p></li>
+<li><p>Since <span class="math inline">\(A'A\)</span> is symmetric and positive-semidefinite, its eigenvalues will be nonnegative and its eigenvectors <span class="math inline">\(v_1,...,v_r\)</span> will be orthogonal as long as <span class="math inline">\(\sigma_1,...,\sigma_r\)</span> are distinct, as is the case for numeric data (<a href="Ch6b.html#sec-prob0" class="quarto-xref"><span>Section 12.5</span></a>). We will have <span class="math inline">\(\sigma_{r+1} = ...
+= \sigma_n = 0\)</span>.</p></li>
+<li><p>Set <span class="math inline">\(\Sigma\)</span> to <span class="math inline">\(diag(\sigma_1,...,\sigma_n)\)</span>, the nonincreasing list of those eigenvalues. Set the first <span class="math inline">\(r\)</span> columns of <span class="math inline">\(V\)</span> to the corresponding eigenvectors. Use the Gram-Schmidt Method (see <a href="Ch5b.html#sec-gramschmidt" class="quarto-xref"><span>Section 8.10</span></a>) to add <span class="math inline">\(n-r\)</span> more vectors. <span class="math inline">\(V\)</span> will then have orthonormal columns, and thus be an orthogonal matrix.</p></li>
 <li><p>Set</p>
 <p><span class="math display">\[ u_i = \frac{1}{\sigma_i} Av_i, ~ i=1,...,r \]</span></p>
 <p>The <span class="math inline">\(u_i\)</span> will be orthogonal: For <span class="math inline">\(i \neq j\)</span>,</p>
@@ -365,7 +403,7 @@ u_i' u_j = \frac{1}{\sigma_i \sigma_j} v_i' A'A v_j =
 </section>
 <section id="checking-the-formula" class="level2" data-number="13.4">
 <h2 data-number="13.4" class="anchored" data-anchor-id="checking-the-formula"><span class="header-section-number">13.4</span> Checking the Formula</h2>
-<p>Are <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> really orthogonal, and does <span class="math inline">\(U \Sigma V'\)</span> really work out to be <span class="math inline">\(A\)</span> in <a href="#eq-svd">Equation&nbsp;<span>13.1</span></a>?</p>
+<p>Are <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> really orthogonal, and does <span class="math inline">\(U \Sigma V'\)</span> really work out to be <span class="math inline">\(A\)</span> in <a href="#eq-svd" class="quarto-xref">Equation&nbsp;<span>13.1</span></a>?</p>
 <ul>
 <li><p><span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> are orthogonal, by construction.</p></li>
 <li><p>The product evaluates to <span class="math inline">\(A\)</span>, as claimed:</p>
@@ -385,18 +423,18 @@ u_i' u_j = \frac{1}{\sigma_i \sigma_j} v_i' A'A v_j =
    \right )
   = \sum_{i=1}^n \sigma_i u_i v_i'  
   \]</span></p>
-<p>That last expression is equal to <span class="math inline">\(A\)</span>, by <a href="#eq-aissumuivi">Equation&nbsp;<span>13.2</span></a>.</p></li>
+<p>That last expression is equal to <span class="math inline">\(A\)</span>, by <a href="#eq-aissumuivi" class="quarto-xref">Equation&nbsp;<span>13.2</span></a>.</p></li>
 </ul>
 </section>
 <section id="svd-as-a-basis-for-matrix-generalized-inverse" class="level2" data-number="13.5">
 <h2 data-number="13.5" class="anchored" data-anchor-id="svd-as-a-basis-for-matrix-generalized-inverse"><span class="header-section-number">13.5</span> SVD as a basis for matrix generalized inverse</h2>
-<p>Recall the example in <a href="Ch4.html#sec-censusrref"><span>Section&nbsp;6.1</span></a>. We could not have dummy-variable columns for both male and female, as their sum would be a column of all 1s, in addition to a column of 1s the X data matrix already had. The three columns would then have a nonzero linear combination that evaluates to the 0 vector. Then in <a href="Ch3.html#eq-linregformula">Equation&nbsp;<span>5.4</span></a>, <span class="math inline">\(A\)</span> (i.e.&nbsp;X) would not be of full rank, nor would <span class="math inline">\(A'A\)</span>, so that <span class="math inline">\((A'A)^{-1}\)</span> would not exist.</p>
+<p>Recall the example in <a href="Ch4.html#sec-censusrref" class="quarto-xref"><span>Section 6.1</span></a>. We could not have dummy-variable columns for both male and female, as their sum would be a column of all 1s, in addition to a column of 1s the X data matrix already had. The three columns would then have a nonzero linear combination that evaluates to the 0 vector. Then in <a href="Ch3.html#eq-linregformula" class="quarto-xref">Equation&nbsp;<span>5.4</span></a>, <span class="math inline">\(A\)</span> (i.e.&nbsp;X) would not be of full rank, nor would <span class="math inline">\(A'A\)</span>, so that <span class="math inline">\((A'A)^{-1}\)</span> would not exist.</p>
 <p>And yet the equation from which that comes,</p>
 <p><span id="eq-overdetermined"><span class="math display">\[
 A'A b = A'S
 \tag{13.3}\]</span></span></p>
 <p>is still valid. We could, as in that example, remove one of the gender columns, thus solving the problem of less than full rank, but the use of <em>generalized inverses</em> solves the problem directly. If <span class="math inline">\(A\)</span> has hundreds or thousands of columns, say, the use of generalized inverses may be more convenient.</p>
-<p>We will omit the formal definition of inverses and their properties, returning to the topic in <a href="Ch6d.html"><span>Chapter&nbsp;14</span></a>. For now, we note the following:</p>
+<p>We will omit the formal definition of inverses and their properties, returning to the topic in <a href="Ch6d.html" class="quarto-xref"><span>Chapter 14</span></a>. For now, we note the following:</p>
 <p>One of the most famous forms of generalized inverse, is the Moore-Penrose <em>pseudoinverse</em>, based on SVD. Given the SVD of a matrix <span class="math inline">\(M\)</span>,</p>
 <p><span class="math display">\[
 M = U_M \Sigma_M V_{M}'
@@ -414,11 +452,11 @@ M^{+} w
 </section>
 <section id="svd-in-linear-models" class="level2" data-number="13.6">
 <h2 data-number="13.6" class="anchored" data-anchor-id="svd-in-linear-models"><span class="header-section-number">13.6</span> SVD in linear models</h2>
-<p>Now apply this to our linear model problem (<a href="#eq-overdetermined">Equation&nbsp;<span>13.3</span></a>). We claim that</p>
+<p>Now apply this to our linear model problem (<a href="#eq-overdetermined" class="quarto-xref">Equation&nbsp;<span>13.3</span></a>). We claim that</p>
 <p><span class="math display">\[
 b = A^{+} S = V \Sigma^{+} U' S
 \]</span></p>
-<p>solves the equation. (Actually if <span class="math inline">\(A\)</span> is of less than full rank, there are infinitely many solutions, a point discussed in detail in <a href="Ch6d.html"><span>Chapter&nbsp;14</span></a>.)</p>
+<p>solves the equation. (Actually if <span class="math inline">\(A\)</span> is of less than full rank, there are infinitely many solutions, a point discussed in detail in <a href="Ch6d.html" class="quarto-xref"><span>Chapter 14</span></a>.)</p>
 <p>Let’s check. Before beginning, recall that the orthogonal nature of <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> implies that <span class="math inline">\(U'U = I\)</span> and <span class="math inline">\(V'V = I\)</span>.</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -518,7 +556,7 @@ A = U \Sigma V' = (U \Sigma^{0.5}) (\Sigma^{0.5} V') = WH
 </section>
 <section id="svd-as-a-basis-for-the-four-fundamental-subspaces" class="level2" data-number="13.10">
 <h2 data-number="13.10" class="anchored" data-anchor-id="svd-as-a-basis-for-the-four-fundamental-subspaces"><span class="header-section-number">13.10</span> SVD As a Basis for the Four Fundamental Subspaces</h2>
-<p>Recall the four subspaces discussed in <a href="Ch5bb.html"><span>Chapter&nbsp;9</span></a>. We can quickly obtain much information about them from the SVD.</p>
+<p>Recall the four subspaces discussed in <a href="Ch5bb.html" class="quarto-xref"><span>Chapter 9</span></a>. We can quickly obtain much information about them from the SVD.</p>
 <p>Let <span class="math inline">\(u_i\)</span> and <span class="math inline">\(v_i\)</span> denote the colums of <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span>. Then:</p>
 <ul>
 <li><p><span class="math inline">\(u_1,...,u_r\)</span> is an orthonormal basis for <span class="math inline">\(\mathcal{C}(A)\)</span></p></li>
@@ -534,7 +572,7 @@ A = U \Sigma V' = (U \Sigma^{0.5}) (\Sigma^{0.5} V') = WH
 <p>❄️ <strong>Your Turn:</strong> Write an R function will call form</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getLowRank</span>(A,lowrank)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>that uses SVD to find the best approximation to the matrix <strong>A</strong> of rank <strong>lowrank</strong>.</p>
-<p>❄️ <strong>Your Turn:</strong> Our equation <a href="Ch2.html#eq-lastRow1s">Equation&nbsp;<span>3.3</span></a> resulted from replacing one row (the last, but could have been any) by all 1s, with a corresponding change on the right-hand side. But now that we have pseudoinverses at our disposal, we could <em>add</em> a row rather than <em>replacing</em> a row:</p>
+<p>❄️ <strong>Your Turn:</strong> Our equation <a href="Ch2.html#eq-lastRow1s" class="quarto-xref">Equation&nbsp;<span>3.5</span></a> resulted from replacing one row (the last, but could have been any) by all 1s, with a corresponding change on the right-hand side. But now that we have pseudoinverses at our disposal, we could <em>add</em> a row rather than <em>replacing</em> a row:</p>
 <p><span class="math display">\[
 \left (
 \begin{array}{r}
@@ -593,18 +631,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -636,11 +663,48 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -650,8 +714,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -663,7 +736,129 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -707,6 +902,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -732,6 +928,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -793,17 +1015,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./Ch6b.html" class="pagination-link">
+      <a href="./Ch6b.html" class="pagination-link" aria-label="Principal Components">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Principal Components</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Ch6d.html" class="pagination-link">
+      <a href="./Ch6d.html" class="pagination-link" aria-label="Pseudoinverse and Double Descent">
         <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Pseudoinverse and Double Descent</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
+
 
 
 

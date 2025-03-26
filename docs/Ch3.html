@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Powered by Linear Algebra - 5&nbsp; Linear Statistical Models</title>
+<title>5&nbsp; Linear Statistical Models – Powered by Linear Algebra</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -71,17 +71,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-5e2915e4d4df5928b2b0a61215b328b6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -90,14 +96,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -107,13 +141,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Ch3.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Linear Statistical Models</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Ch3.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Linear Statistical Models</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -122,7 +156,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Powered by Linear Algebra</a> 
@@ -234,7 +268,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -283,7 +317,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+
 </header>
+
 
 <div style="page-break-after: always;"></div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -321,7 +357,11 @@ Goals of this chapter:
 </div>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(n1,n2,<span class="at">cex=</span><span class="fl">0.4</span>,<span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1400</span>),<span class="at">yli=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1400</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Ch3_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="Ch3_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>We would like to fit a straight line through that data point cloud. We might have two motivations for doing this:</p>
@@ -346,8 +386,11 @@ Model Validity
 </div>
 <section id="least-squares-approach" class="level3 page-columns page-full" data-number="5.1.1">
 <h3 data-number="5.1.1" class="anchored" data-anchor-id="least-squares-approach"><span class="header-section-number">5.1.1</span> Least squares approach</h3>
-<div class="page-columns page-full"><p>We wish to estimate <span class="math inline">\(\beta\)</span> from our data, which we regard as a sample from the data generating process. Denote our data by <span class="math inline">\((C_i,V_i), i = 1,...,100\)</span>. Let <span class="math inline">\(\widehat{\beta}\)</span> denote our estimate. How should we obtain it?</p><div class="no-row-height column-margin column-container"><span class="">This too is something all data scientists should keep at the forefronts of their minds. We are always working with sample data, subject to intersample variations. The quantity <span class="math inline">\(\widehat{\beta}\)</span> is a random variable.</span><span class="">The “hat” notation ‘^’ is statistical convention for “estimate of”; <span class="math inline">\(\widehat{\beta}\)</span> is our estimate of the unknown parameter <span class="math inline">\(\beta\)</span>.</span></div></div>
-<p>Pretend for a moment that we don’t know, say, <span class="math inline">\(C_{28}\)</span>. Using our estimated <span class="math inline">\(\beta\)</span>, our predicted value would be <span class="math inline">\(\widehat{\beta} V_{28}\)</span>. Our squared prediction error would then be <span class="math inline">\((C_{28} - \widehat{\beta} W_{28})^2\)</span>.</p>
+<div class="page-columns page-full"><p>We wish to estimate <span class="math inline">\(\beta\)</span> from our data, which we regard as a sample from the data generating process. Denote our data by <span class="math inline">\((C_i,V_i), i =
+1,...,100\)</span>. Let <span class="math inline">\(\widehat{\beta}\)</span> denote our estimate. How should we obtain it?</p><div class="no-row-height column-margin column-container"><span class="">This too is something all data scientists should keep at the forefronts of their minds. We are always working with sample data, subject to intersample variations. The quantity <span class="math inline">\(\widehat{\beta}\)</span> is a random variable.</span><span class="">The “hat” notation ‘^’ is statistical convention for “estimate of”; <span class="math inline">\(\widehat{\beta}\)</span> is our estimate of the unknown parameter <span class="math inline">\(\beta\)</span>.</span></div></div>
+<p>Pretend for a moment that we don’t know, say, <span class="math inline">\(C_{28}\)</span>. Using our estimated <span class="math inline">\(\beta\)</span>, our predicted value would be <span class="math inline">\(\widehat{\beta}
+V_{28}\)</span>. Our squared prediction error would then be <span class="math inline">\((C_{28} - \widehat{\beta}
+W_{28})^2\)</span>.</p>
 <p>Well, we actually do know <span class="math inline">\(C_{28}\)</span> (and the others in our data), so we can answer the question:</p>
 <blockquote class="blockquote page-columns page-full">
 <p>In our search for a good value of <span class="math inline">\(\widehat{\beta}\)</span>, we can ask how well we would predict our known data, using that candidate value of <span class="math inline">\(\widehat{\beta}\)</span> in our data. Our total squared prediction error would be</p>
@@ -529,7 +572,7 @@ u = 2x + 3y^2 + xy
 <p><span id="eq-dda"><span class="math display">\[
 \frac{d}{da} a'a = 2a
 \tag{5.3}\]</span></span></p>
-<p><a href="#eq-rss">Equation&nbsp;<span>5.2</span></a> is indeed of the form <span class="math inline">\(a'a\)</span>, but the problem here is that <span class="math inline">\(a\)</span> in turn is a function of <span class="math inline">\(b\)</span>, This calls for the Chain Rule, which does exist at the matrix level:</p>
+<p><a href="#eq-rss" class="quarto-xref">Equation&nbsp;<span>5.2</span></a> is indeed of the form <span class="math inline">\(a'a\)</span>, but the problem here is that <span class="math inline">\(a\)</span> in turn is a function of <span class="math inline">\(b\)</span>, This calls for the Chain Rule, which does exist at the matrix level:</p>
 <p>For example if <span class="math inline">\(u = Mv + w\)</span>, with <span class="math inline">\(M\)</span> and <span class="math inline">\(w\)</span> constants (i.e.&nbsp;not functions of <span class="math inline">\(v\)</span>, then</p>
 <div class="page-columns page-full"><p><span class="math display">\[
 \frac{d}{dv} u'u = 2M'u
@@ -664,14 +707,14 @@ Coefficients:
 <p><span class="math display">\[
 E(S | A) = A \beta
 \]</span></p>
-<div class="page-columns page-full"><p>it is often assumed that</p><div class="no-row-height column-margin column-container"><span class="">In some applications, <span class="math inline">\(A\)</span> is actually chosen by an experimenter, so that it is not random. But even in the random case, it is standard to condition on <span class="math inline">\(A\)</span>. By <a href="Ch5b.html#eq-iterexpect">Equation&nbsp;<span>8.5</span></a>, a conditional confidence interval, say, at the 95% level also has the level unconditionally.</span></div></div>
+<div class="page-columns page-full"><p>it is often assumed that</p><div class="no-row-height column-margin column-container"><span class="">In some applications, <span class="math inline">\(A\)</span> is actually chosen by an experimenter, so that it is not random. But even in the random case, it is standard to condition on <span class="math inline">\(A\)</span>. By <a href="Ch5b.html#eq-iterexpect" class="quarto-xref">Equation&nbsp;<span>8.5</span></a>, a conditional confidence interval, say, at the 95% level also has the level unconditionally.</span></div></div>
 <p><span class="math display">\[
 Cov(S | A) = \sigma^2 I
 \]</span></p>
 <p>where <span class="math inline">\(\sigma\)</span> is an unknown constant to be estimated from the data.</p>
 <p>So <span class="math inline">\(Var(S_i) = \sigma^2\)</span> for all <span class="math inline">\(i\)</span>. It is usually not a realistic assumption. Say for instance we are predicting human weight from height. There should be more variation in weight among taller people than above shorter people. But it’s a simplifying assumption without really good alternatives, so it is commonly used.</p>
-<p>And in that setting, our formulas from <a href="Ch2a.html"><span>Chapter&nbsp;4</span></a> come in handy, as follows.</p>
-<p>Recall that <span class="math inline">\(\widehat{\beta}\)</span> is our estimate of the unknown population parameter <span class="math inline">\(\beta\)</span>, based on our random sample data. But that means that <span class="math inline">\(\widehat{\beta}\)</span> is a random vector, and thus has a covariance matrix. Using <a href="Ch2a.html#eq-acova">Equation&nbsp;<span>4.4</span></a> and setting <span class="math inline">\(R = (A'A)^{-1} A'\)</span>$, we have</p>
+<p>And in that setting, our formulas from <a href="Ch2a.html" class="quarto-xref"><span>Chapter 4</span></a> come in handy, as follows.</p>
+<p>Recall that <span class="math inline">\(\widehat{\beta}\)</span> is our estimate of the unknown population parameter <span class="math inline">\(\beta\)</span>, based on our random sample data. But that means that <span class="math inline">\(\widehat{\beta}\)</span> is a random vector, and thus has a covariance matrix. Using <a href="Ch2a.html#eq-acova" class="quarto-xref">Equation&nbsp;<span>4.4</span></a> and setting <span class="math inline">\(R = (A'A)^{-1} A'\)</span>$, we have</p>
 <p><span id="eq-varcovar"><span class="math display">\[
 Cov(\widehat{\beta}|A) = R Cov(S|A) R' = R \sigma^2 I R' = \sigma^2 R R' =
 \sigma^2 (A'A)^{-1}
@@ -689,11 +732,19 @@ Cov(\widehat{\beta}|A) = R Cov(S|A) R' = R \sigma^2 I R' = \sigma^2 R R' =
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(forest500)  <span class="co"># data on forest ground cover</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(forest500<span class="sc">$</span>V1,<span class="at">breaks=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Ch3_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="Ch3_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(forest500<span class="sc">$</span>V1,<span class="at">breaks=</span><span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Ch3_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="Ch3_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="page-columns page-full"><p>In a histogram, we are estimating the heights of the bins. With 10 bins we obtained a smooth graph, but with 100 bins it became choppy. So again, we are estimating too many things, given the capacity of the data.</p><div class="no-row-height column-margin column-container"><span class="">A histogram is an estimate of the probability density function of the observed random variable. Having more, thus narrower, bins reduces bias but increases variance.</span></div></div>
@@ -719,7 +770,7 @@ C = B + uv'
 B^{-1} - \frac{1}{1+v'B^{-1}u} B^{-1} (uv') B^{-1}
 \]</span></p>
 </blockquote>
-<p>Now, how can we apply this to the Leave One Out method? In the matrix <span class="math inline">\(A\)</span> in Equation <a href="#eq-designmat">Equation&nbsp;<span>5.5</span></a>, we wish to remove row <span class="math inline">\(i\)</span>; call the result <span class="math inline">\(A_{-i}\)</span>. Our new version of <span class="math inline">\(A'A\)</span> is then</p>
+<p>Now, how can we apply this to the Leave One Out method? In the matrix <span class="math inline">\(A\)</span> in Equation <a href="#eq-designmat" class="quarto-xref">Equation&nbsp;<span>5.5</span></a>, we wish to remove row <span class="math inline">\(i\)</span>; call the result <span class="math inline">\(A_{-i}\)</span>. Our new version of <span class="math inline">\(A'A\)</span> is then</p>
 <p><span class="math display">\[
 A_{-i}' A_{-i}
 \]</span></p>
@@ -741,7 +792,8 @@ a_n \\
 \end{array}
 \right )
 \]</span></p>
-<p>We pretend it is a <span class="math inline">\(2 \textrm{x} 1\)</span> “matrix,” and <span class="math inline">\(A'\)</span> is then “<span class="math inline">\(1 \textrm{x} 2\)</span>”:</p>
+<p>We pretend it is a <span class="math inline">\(2 \textrm{x} 1\)</span> “matrix,” and <span class="math inline">\(A'\)</span> is then “<span class="math inline">\(1
+\textrm{x} 2\)</span>”:</p>
 <p><span class="math display">\[
 A' =
 \left (
@@ -798,7 +850,7 @@ B^{-1} (a_i a_i') B^{-1}
 </section>
 <section id="your-turn" class="level2" data-number="5.5">
 <h2 data-number="5.5" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">5.5</span> Your Turn</h2>
-<p>❄️ <strong>Your Turn:</strong> Show <a href="#eq-dda">Equation&nbsp;<span>5.3</span></a>. Write <span class="math inline">\(a = (a_1,...,a_k)'\)</span> and find the gradient “by hand.” Compare to <span class="math inline">\(2a\)</span>.</p>
+<p>❄️ <strong>Your Turn:</strong> Show <a href="#eq-dda" class="quarto-xref">Equation&nbsp;<span>5.3</span></a>. Write <span class="math inline">\(a = (a_1,...,a_k)'\)</span> and find the gradient “by hand.” Compare to <span class="math inline">\(2a\)</span>.</p>
 <p>❄️ <strong>Your Turn:</strong> Show that</p>
 <p><span class="math display">\[
 \frac{d}{du} u'Qu = 2Qu
@@ -844,18 +896,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -887,11 +928,48 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -901,8 +979,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -914,7 +1001,129 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -958,6 +1167,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -983,6 +1193,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1044,17 +1280,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./Ch2a.html" class="pagination-link">
+      <a href="./Ch2a.html" class="pagination-link" aria-label="Covariance Matrices, MV Normal Distribution, Delta Method">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Covariance Matrices, MV Normal Distribution, Delta Method</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Ch4.html" class="pagination-link">
+      <a href="./Ch4.html" class="pagination-link" aria-label="Matrix Rank">
         <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Matrix Rank</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
+
 
 
 

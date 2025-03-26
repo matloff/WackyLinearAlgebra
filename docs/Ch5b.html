@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Powered by Linear Algebra - 8&nbsp; Inner Product Spaces</title>
+<title>8&nbsp; Inner Product Spaces – Powered by Linear Algebra</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -71,17 +71,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-5e2915e4d4df5928b2b0a61215b328b6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -90,14 +96,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -107,13 +141,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Ch5b.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Inner Product Spaces</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Ch5b.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Inner Product Spaces</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -122,7 +156,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Powered by Linear Algebra</a> 
@@ -234,7 +268,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -300,7 +334,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+
 </header>
+
 
 <div style="page-break-after: always;"></div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -324,7 +360,7 @@ Goals of this chapter:
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="Projections.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Projections</figcaption>
+<figcaption>Projections</figcaption>
 </figure>
 </div>
 <p>The point at the end of the green vector is projected onto the mustard-colored plane, producing the red vector. It in turn is projected onto the blue line. There are right angles in each case.</p>
@@ -351,7 +387,8 @@ Goals of this chapter:
 <h2 data-number="8.3" class="anchored" data-anchor-id="examples"><span class="header-section-number">8.3</span> Examples</h2>
 <p><span class="math inline">\(\cal R^n\)</span>:</p>
 <p>As noted, ordinary dot product is the most common inner product on this space.</p>
-<p><span class="math inline">\(&lt;(a_1,...,a_n),(b_1,...,b_n&gt; = a_1 b_1 + ... + a_n b_n\)</span></p>
+<p><span class="math inline">\(&lt;(a_1,...,a_n),(b_1,...,b_n&gt; =
+a_1 b_1 + ... + a_n b_n\)</span></p>
 <p><em>C(0,1)</em>:</p>
 <p>One inner product on this space is</p>
 <p><span class="math display">\[
@@ -393,7 +430,7 @@ Goals of this chapter:
 <section id="the-cauchy-schwarz-inequality" class="level2 page-columns page-full" data-number="8.5">
 <h2 data-number="8.5" class="anchored" data-anchor-id="the-cauchy-schwarz-inequality"><span class="header-section-number">8.5</span> The Cauchy-Schwarz Inequality</h2>
 <div id="thm-cs" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 8.1 (Cauchy-Schwarz Inequality) </strong></span>Say <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> are vectors in an inner product space. Then</p>
+<p><span class="theorem-title"><strong>Theorem 8.1 (Cauchy-Schwarz Inequality)</strong></span> Say <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> are vectors in an inner product space. Then</p>
 <p><span class="math display">\[
 |&lt;u,v&gt;| \leq ||u|| ~ ||v||
 \]</span></p>
@@ -404,7 +441,7 @@ Goals of this chapter:
 <section id="sec-corr" class="level3 page-columns page-full" data-number="8.5.1">
 <h3 data-number="8.5.1" class="anchored" data-anchor-id="sec-corr"><span class="header-section-number">8.5.1</span> Application: Correlation</h3>
 <p><em>Correlation coefficients</em> are ubiquitous in data science. It is well known that their values fall into the interval [-1,1]. Let’s prove that.</p>
-<p>Recall from <a href="Ch2a.html"><span>Chapter&nbsp;4</span></a> the notion of the covariance between two random variables (from which the covariance matrix of a random vector is formed). We remarked that covariance is intuitively like correlation,but that latter is a scaled form. Formally,</p>
+<p>Recall from <a href="Ch2a.html" class="quarto-xref"><span>Chapter 4</span></a> the notion of the covariance between two random variables (from which the covariance matrix of a random vector is formed). We remarked that covariance is intuitively like correlation,but that latter is a scaled form. Formally,</p>
 <p><span class="math display">\[
 \rho(X,Y) =
 \frac{E[(X-EX)(Y-EY)]}{\sqrt{Var(X)} \sqrt{Var(Y)}}
@@ -432,7 +469,7 @@ Goals of this chapter:
 <p>In the world of ordinary physical geometry, we know the following</p>
 <p><em>The distance from A to B is less than or equal to the sum of the distances from A to C and C to B.</em> This is true as well in general, abstract inner product spaces.</p>
 <div id="thm-triangle" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 8.2 (Triangle Inequality) </strong></span>In a general inner product space,</p>
+<p><span class="theorem-title"><strong>Theorem 8.2 (Triangle Inequality)</strong></span> In a general inner product space,</p>
 <p><span class="math display">\[
 ||x - z|| \leq ||x - y|| + ||y - z||
 \]</span></p>
@@ -448,7 +485,8 @@ Goals of this chapter:
 <h3 data-number="8.7.1" class="anchored" data-anchor-id="theorem"><span class="header-section-number">8.7.1</span> Theorem</h3>
 <p>We say that vectors <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> are <em>orthogonal</em> if <span class="math inline">\(&lt;u,v&gt; = 0\)</span>. This is the general extension of the notion of perpendicularity in high school geometry. Then we have the following:</p>
 <div id="thm-projection" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 8.3 (Projection Theorem) </strong></span>Consider an inner product space <span class="math inline">\(\cal V\)</span>, with subspace <span class="math inline">\(\cal W\)</span>. Then for any vector <span class="math inline">\(x\)</span> in <span class="math inline">\(\cal V\)</span>, there is a unique vector <span class="math inline">\(z\)</span> in <span class="math inline">\(\cal W\)</span>, such that <span class="math inline">\(z\)</span> is the closest vector to <span class="math inline">\(x\)</span> in <span class="math inline">\(\cal W\)</span>.</p>
+<p><span class="theorem-title"><strong>Theorem 8.3 (Projection Theorem)</strong></span> Consider an inner product space <span class="math inline">\(\cal V\)</span>, with subspace <span class="math inline">\(\cal W\)</span>. Then for any vector <span class="math inline">\(x\)</span> in <span class="math inline">\(\cal V\)</span>, there is a unique vector <span class="math inline">\(z\)</span> in <span class="math inline">\(\cal
+W\)</span>, such that <span class="math inline">\(z\)</span> is the closest vector to <span class="math inline">\(x\)</span> in <span class="math inline">\(\cal W\)</span>.</p>
 <p>Furthermore, <span class="math inline">\(x-z\)</span> is orthogonal to any vector <span class="math inline">\(r\)</span> in <span class="math inline">\(\cal W\)</span>.</p>
 </div>
 <div class="page-columns page-full"><p>The full proof is beyond the scope of this book, as it requires background in real analysis. Indeed, even the statement of the theorem is not mathematically tight.</p><div class="no-row-height column-margin column-container"><span class="">For readers who do have such background, this is the Hilbert Projection Theorem. “Closest” is defined in terms of infimum, and <span class="math inline">\(\cal W\)</span> needs to be a topologically closed set. See for example <a href="https://en.wikipedia.org/wiki/Hilbert_projection_theorem">the Wikipedia entry.l</a></span></div></div>
@@ -462,7 +500,7 @@ z = P_W x
 <h3 data-number="8.7.2" class="anchored" data-anchor-id="the-pythagorean-theorem"><span class="header-section-number">8.7.2</span> The Pythagorean Theorem</h3>
 <p>That this ancient theorem in geometry still holds in general inner product spaces is a tribute to the power of abstraction.</p>
 <div id="thm-pythag" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 8.4 </strong></span>If vectors <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are orthogonal, then</p>
+<p><span class="theorem-title"><strong>Theorem 8.4</strong></span> If vectors <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are orthogonal, then</p>
 <p><span id="eq-pythag"><span class="math display">\[
 ||X+Y||^2 = ||X||^2 + ||Y||^2
 \tag{8.1}\]</span></span></p>
@@ -477,7 +515,7 @@ z = P_W x
 <p>The case of the linear model will deepen our understanding, and will lead to a method for outlier detection that is commonly used in practice.</p>
 <section id="the-least-squares-solution-is-a-projection" class="level3 page-columns page-full" data-number="8.8.1">
 <h3 data-number="8.8.1" class="anchored" data-anchor-id="the-least-squares-solution-is-a-projection"><span class="header-section-number">8.8.1</span> The least-squares solution is a projection</h3>
-<p>Armed with our new expertise on inner product spaces, we see that <a href="Ch3.html#eq-matrixss">Equation&nbsp;<span>5.1</span></a> is</p>
+<p>Armed with our new expertise on inner product spaces, we see that <a href="Ch3.html#eq-matrixss" class="quarto-xref">Equation&nbsp;<span>5.1</span></a> is</p>
 <p><span class="math display">\[
 &lt;S-Ab,S-Ab&gt;
 \]</span></p>
@@ -490,11 +528,11 @@ z = P_W x
 </section>
 <section id="the-hat-matrix" class="level3" data-number="8.8.2">
 <h3 data-number="8.8.2" class="anchored" data-anchor-id="the-hat-matrix"><span class="header-section-number">8.8.2</span> The “hat” matrix</h3>
-<p>Recall <a href="Ch3.html#eq-linregformula">Equation&nbsp;<span>5.4</span></a>, which showed that the general solution to our linear regression model:</p>
+<p>Recall <a href="Ch3.html#eq-linregformula" class="quarto-xref">Equation&nbsp;<span>5.4</span></a>, which showed that the general solution to our linear regression model:</p>
 <p><span class="math display">\[
 \widehat{\beta} = (A'A)^{-1} A'S
 \]</span></p>
-<p>The projection itself, i.e.&nbsp;the matrix <span class="math inline">\(P_W\)</span> in <a href="#sec-projections"><span>Section&nbsp;8.7</span></a>, is then</p>
+<p>The projection itself, i.e.&nbsp;the matrix <span class="math inline">\(P_W\)</span> in <a href="#sec-projections" class="quarto-xref"><span>Section 8.7</span></a>, is then</p>
 <p><span class="math display">\[
 A \widehat{\beta} = A(A'A)^{-1} A'S = HS
 \]</span></p>
@@ -513,7 +551,7 @@ H = A(A'A)^{-1} A'
 h_{ii} = x_{i} (A'A)^{-1} x_i'
 \tag{8.2}\]</span></span></p>
 <p>The quantity <span class="math inline">\(h_{ii}\)</span> is called the <em>leverage</em> for datapoint <span class="math inline">\(i\)</span>, with the metaphor alluding to the impact of datapoint <span class="math inline">\(i\)</span> on <span class="math inline">\(\widehat{\beta}\)</span></p>
-<p>Using the material on circular shifts in <a href="Ch1.html#sec-trace"><span>Section&nbsp;2.9.3</span></a>, we have</p>
+<p>Using the material on circular shifts in <a href="Ch1.html#sec-trace" class="quarto-xref"><span>Section 2.9.3</span></a>, we have</p>
 <p><span class="math display">\[
 tr(H) =
 tr[\underbrace{A(A'A)^{-1}} A'] =
@@ -521,7 +559,7 @@ tr[A'\underbrace{A(A'A)^{-1}}] = tr(I) = p
 \]</span></p>
 <p>for <span class="math inline">\(A\)</span> of size <span class="math inline">\(n \textrm{ x } p\)</span>.</p>
 <p>Thus the average value of <span class="math inline">\(h_{ii}\)</span> is <span class="math inline">\(p/n\)</span>. Accordingly, we might suspect an outlier if <span class="math inline">\(h_{ii}\)</span> is considerably larger than <span class="math inline">\(p/n\)</span>.</p>
-<p>For example, let’s look at the Major League Baseball player data we’ve seen earlier (<a href="Ch3.html#sec-mlb"><span>Section&nbsp;5.3.5</span></a>):</p>
+<p>For example, let’s look at the Major League Baseball player data we’ve seen earlier (<a href="Ch3.html#sec-mlb" class="quarto-xref"><span>Section 5.3.5</span></a>):</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qeML)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mlb1)</span>
@@ -535,7 +573,11 @@ tr[A'\underbrace{A(A'A)^{-1}}] = tr(I) = p
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>H <span class="ot">&lt;-</span> A <span class="sc">%*%</span> <span class="fu">solve</span>(<span class="fu">t</span>(A) <span class="sc">%*%</span> A) <span class="sc">%*%</span> <span class="fu">t</span>(A)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">diag</span>(H))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Ch5b_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="Ch5b_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The ratio <span class="math inline">\(p/n\)</span> here is 3/1015, about 0.003. We might take a look at the observations having <span class="math inline">\(h_{ii}\)</span> above 0.01, say.</p>
@@ -597,7 +639,7 @@ p = &lt;x,u_1&gt; u_1+...+&lt;x,u_k&gt; u_k.
 <section id="orthogonal-complements-and-direct-sums" class="level2" data-number="8.11">
 <h2 data-number="8.11" class="anchored" data-anchor-id="orthogonal-complements-and-direct-sums"><span class="header-section-number">8.11</span> Orthogonal Complements and Direct Sums</h2>
 <p>Consider a subspace <span class="math inline">\(W\)</span> of an inner product space <span class="math inline">\(V\)</span>. The set of vectors having inner product 0 with vectors in <span class="math inline">\(W\)</span> is denoted <span class="math inline">\(W^{\perp}\)</span>, known as the <em>orthogonal complement</em> of <span class="math inline">\(W\)</span>. It too is a subpace, and jointly <span class="math inline">\(W\)</span> and <span class="math inline">\(W^{\perp}\)</span> span all of <span class="math inline">\(V\)</span>.</p>
-<p>From <a href="#sec-projections"><span>Section&nbsp;8.7</span></a>, we know that for any <span class="math inline">\(x\)</span> in <span class="math inline">\(V\)</span>, one can uniquely write</p>
+<p>From <a href="#sec-projections" class="quarto-xref"><span>Section 8.7</span></a>, we know that for any <span class="math inline">\(x\)</span> in <span class="math inline">\(V\)</span>, one can uniquely write</p>
 <p><span class="math display">\[
 x = x_1 + x_2
 \]</span></p>
@@ -607,7 +649,7 @@ x = x_1 + x_2
 </section>
 <section id="projections-in-cal-rvomega" class="level2 page-columns page-full" data-number="8.12">
 <h2 data-number="8.12" class="anchored" data-anchor-id="projections-in-cal-rvomega"><span class="header-section-number">8.12</span> Projections in <span class="math inline">\(\cal RV(\Omega)\)</span></h2>
-<p>Here is a good example of how a very abstract vector space becomes useful in practical applications, such as will be presented in <a href="#sec-fairness"><span>Section&nbsp;8.13</span></a>. The material is rather involved, consisting of computation of various probabilistic quantities. Since <span class="math inline">\(\cal RV(\Omega)\)</span> is a vector space of random variables, each entity is both a random variable and a vector. Sometimes the latter will be the focus, sometimes the former. We request the reader’s patience in following this duality.</p>
+<p>Here is a good example of how a very abstract vector space becomes useful in practical applications, such as will be presented in <a href="#sec-fairness" class="quarto-xref"><span>Section 8.13</span></a>. The material is rather involved, consisting of computation of various probabilistic quantities. Since <span class="math inline">\(\cal RV(\Omega)\)</span> is a vector space of random variables, each entity is both a random variable and a vector. Sometimes the latter will be the focus, sometimes the former. We request the reader’s patience in following this duality.</p>
 <section id="conditional-expectation" class="level3" data-number="8.12.1">
 <h3 data-number="8.12.1" class="anchored" data-anchor-id="conditional-expectation"><span class="header-section-number">8.12.1</span> Conditional expectation</h3>
 <p>It will turn out that in <span class="math inline">\(\cal RV(\Omega)\)</span>, projections take the form of conditional means. Let’s see how that arises.</p>
@@ -669,7 +711,7 @@ E[E(H|D)] = E(H)
 </section>
 <section id="projections-in-cal-rvomega-how-they-work" class="level3 page-columns page-full" data-number="8.12.2">
 <h3 data-number="8.12.2" class="anchored" data-anchor-id="projections-in-cal-rvomega-how-they-work"><span class="header-section-number">8.12.2</span> Projections in <span class="math inline">\(\cal RV(\Omega)\)</span>: how they work</h3>
-<div class="page-columns page-full"><p>Consider random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. Let <span class="math inline">\(W\)</span> be the set of all functions of <span class="math inline">\(X\)</span> with finite variance, which is a subspace of the vector space <span class="math inline">\(\cal RV(\Omega)\)</span>. <a href="#thm-projection">Theorem&nbsp;<span>8.3</span></a> talks of a closest vector <span class="math inline">\(C\)</span> in <span class="math inline">\(W\)</span> to <span class="math inline">\(Y\)</span>. Let’s see what form <span class="math inline">\(C\)</span> might take in this vector space. For convenience, let’s assume that our variables have mean 0.</p><div class="no-row-height column-margin column-container"><span class="">Recall that we can convert a random variable to mean-0 by subtracting its mean.</span></div></div>
+<div class="page-columns page-full"><p>Consider random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. Let <span class="math inline">\(W\)</span> be the set of all functions of <span class="math inline">\(X\)</span> with finite variance, which is a subspace of the vector space <span class="math inline">\(\cal RV(\Omega)\)</span>. <a href="#thm-projection" class="quarto-xref">Theorem&nbsp;<span>8.3</span></a> talks of a closest vector <span class="math inline">\(C\)</span> in <span class="math inline">\(W\)</span> to <span class="math inline">\(Y\)</span>. Let’s see what form <span class="math inline">\(C\)</span> might take in this vector space. For convenience, let’s assume that our variables have mean 0.</p><div class="no-row-height column-margin column-container"><span class="">Recall that we can convert a random variable to mean-0 by subtracting its mean.</span></div></div>
 <p>Remember, the (squared) distance from <span class="math inline">\(Y\)</span> to <span class="math inline">\(C\)</span> is</p>
 <p><span class="math display">\[
 ||Y - C||^2 = &lt;Y-C,Y-C&gt; = E[(Y-C)^2]
@@ -705,8 +747,8 @@ C = E(Y | X)
 </section>
 <section id="the-method-of-scutari-et-al" class="level3" data-number="8.13.2">
 <h3 data-number="8.13.2" class="anchored" data-anchor-id="the-method-of-scutari-et-al"><span class="header-section-number">8.13.2</span> The method of Scutari <em>et al</em></h3>
-<p>The basic assumption (BA) amounts to <span class="math inline">\((Y,X,S)\)</span> having a multivariate Gaussian distribution, with <span class="math inline">\(Y\)</span> scalar and <span class="math inline">\(X\)</span> being a vector of length <span class="math inline">\(p\)</span>. For convenience, assume here that <span class="math inline">\(S\)</span> is scalar. As in <a href="#sec-corr"><span>Section&nbsp;8.5.1</span></a>, all variables are assumed centered, i.e.&nbsp;mean 0.</p>
-<p>Let’s review the material in <a href="Ch2a.html#sec-mvn"><span>Section&nbsp;4.3</span></a>: Say we have <span class="math inline">\(W\)</span> with a multivariate normal distribution, and wish to predict one of its components, <span class="math inline">\(Y\)</span>, from a vector <span class="math inline">\(X\)</span> consisting of one or more of the other components, or linear combinations of them. Then</p>
+<p>The basic assumption (BA) amounts to <span class="math inline">\((Y,X,S)\)</span> having a multivariate Gaussian distribution, with <span class="math inline">\(Y\)</span> scalar and <span class="math inline">\(X\)</span> being a vector of length <span class="math inline">\(p\)</span>. For convenience, assume here that <span class="math inline">\(S\)</span> is scalar. As in <a href="#sec-corr" class="quarto-xref"><span>Section 8.5.1</span></a>, all variables are assumed centered, i.e.&nbsp;mean 0.</p>
+<p>Let’s review the material in <a href="Ch2a.html#sec-mvn" class="quarto-xref"><span>Section 4.3</span></a>: Say we have <span class="math inline">\(W\)</span> with a multivariate normal distribution, and wish to predict one of its components, <span class="math inline">\(Y\)</span>, from a vector <span class="math inline">\(X\)</span> consisting of one or more of the other components, or linear combinations of them. Then</p>
 <ul>
 <li><p>the distribution of <span class="math inline">\(Y|X\)</span> is univariate normal</p></li>
 <li><p>E(Y|X=t) is a linear function of <span class="math inline">\(t\)</span></p></li>
@@ -790,15 +832,16 @@ E[E(Y|B)] = E(Y)
 \]</span></p>
 <p>❄️ <strong>Your Turn:</strong> Say we roll a die once, producing <span class="math inline">\(X\)</span> dots. If <span class="math inline">\(X = 6\)</span>, we get a bonus roll, yielding <span class="math inline">\(B\)</span> additional dots; otherwise, <span class="math inline">\(B = 0\)</span>. Let <span class="math inline">\(Y = X+B\)</span>. Verify that <span class="math inline">\(X\)</span> and <span class="math inline">\(B\)</span> satisfy the Cauchy-Schwarz and Triangle Inequalities, and also find <span class="math inline">\(\rho(X,B)\)</span>.</p>
 <p>❄️ <strong>Your Turn:</strong> Show that any set of orthogonal vectors is linearly independent.</p>
-<p>❄️ <strong>Your Turn:</strong> Prove <a href="#eq-pythag">Equation&nbsp;<span>8.1</span></a> by expanding the inner product and simplifying algebraically.</p>
-<p>❄️ <strong>Your Turn:</strong> Prove <a href="#thm-triangle">Theorem&nbsp;<span>8.2</span></a>.</p>
+<p>❄️ <strong>Your Turn:</strong> Prove <a href="#eq-pythag" class="quarto-xref">Equation&nbsp;<span>8.1</span></a> by expanding the inner product and simplifying algebraically.</p>
+<p>❄️ <strong>Your Turn:</strong> Prove <a href="#thm-triangle" class="quarto-xref">Theorem&nbsp;<span>8.2</span></a>.</p>
 <p>❄️ <strong>Your Turn:</strong> Prove that the vector <span class="math inline">\(Y - E(Y|X)\)</span> is uncorrelated with <span class="math inline">\(E(Y|X)\)</span></p>
 <p>❄️ <strong>Your Turn:</strong> For <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> in <span class="math inline">\(\cal RV(\Omega\)</span>, prove that</p>
 <p><span class="math display">\[
 Var(Y) = E[Var(Y|X)] + Var[E(Y|X)],
 \]</span></p>
-<p>first algebraically using <a href="#eq-iterexpect">Equation&nbsp;<span>8.5</span></a> and the relation <span class="math inline">\(Var(R) = E(R^2) - (E(R))^2\)</span>, and then using the Pythagorean Theorem for a much quicker proof. As before, assume <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are centered.</p>
-<p>❄️ <strong>Your turn:</strong> show that <a href="#eq-hii">Equation&nbsp;<span>8.2</span></a> holds.</p>
+<p>first algebraically using <a href="#eq-iterexpect" class="quarto-xref">Equation&nbsp;<span>8.5</span></a> and the relation <span class="math inline">\(Var(R) =
+E(R^2) - (E(R))^2\)</span>, and then using the Pythagorean Theorem for a much quicker proof. As before, assume <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are centered.</p>
+<p>❄️ <strong>Your turn:</strong> show that <a href="#eq-hii" class="quarto-xref">Equation&nbsp;<span>8.2</span></a> holds.</p>
 <p>❄️ <strong>Your Turn:</strong> Say <span class="math inline">\(\cal V\)</span> is <span class="math inline">\(R^n\)</span>. Form the matrix <span class="math inline">\(A\)</span> whose columns are the <span class="math inline">\(u_i\)</span>, and let <span class="math inline">\(P = AA'\)</span>. Show that</p>
 <p><span class="math display">\[
 Px = &lt;x,u_1&gt; u_1+...+&lt;x,u_k&gt; u_k
@@ -847,18 +890,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -890,11 +922,48 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -904,8 +973,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -917,7 +995,129 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -961,6 +1161,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -986,6 +1187,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1047,17 +1274,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./Ch5a.html" class="pagination-link">
+      <a href="./Ch5a.html" class="pagination-link" aria-label="Vector Spaces">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Vector Spaces</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Ch5bb.html" class="pagination-link">
+      <a href="./Ch5bb.html" class="pagination-link" aria-label="Four Fundamental Spaces">
         <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Four Fundamental Spaces</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
+
 
 
 

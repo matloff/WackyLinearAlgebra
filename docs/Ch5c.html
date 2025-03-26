@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Powered by Linear Algebra - 10&nbsp; Shrinkage Estimators</title>
+<title>10&nbsp; Shrinkage Estimators – Powered by Linear Algebra</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -71,17 +71,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-5e2915e4d4df5928b2b0a61215b328b6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -90,14 +96,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -107,13 +141,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Ch5c.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Shrinkage Estimators</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Ch5c.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Shrinkage Estimators</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -122,7 +156,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Powered by Linear Algebra</a> 
@@ -234,7 +268,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -297,7 +331,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+
 </header>
+
 
 <div style="page-break-after: always;"></div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -317,7 +353,7 @@ Goals of this chapter:
 <h2 data-number="10.1" class="anchored" data-anchor-id="sec-nearly"><span class="header-section-number">10.1</span> Multicollinearity</h2>
 <p>The notion of <em>multicollinearity</em> was the original motivation for shrinkage estimators. It refers to settings in which the following concerns arise:</p>
 <ul>
-<li><p>One column of the matrix <span class="math inline">\(A\)</span> in <a href="Ch3.html#eq-linregformula">Equation&nbsp;<span>5.4</span></a> is nearly equal to some linear combination of the others.</p></li>
+<li><p>One column of the matrix <span class="math inline">\(A\)</span> in <a href="Ch3.html#eq-linregformula" class="quarto-xref">Equation&nbsp;<span>5.4</span></a> is nearly equal to some linear combination of the others.</p></li>
 <li><p>Thus <span class="math inline">\(A\)</span> is nearly not of full rank.</p></li>
 <li><p>Thus <span class="math inline">\(A'A\)</span> is nearly not of full rank.</p></li>
 <li><p>Thus <span class="math inline">\(\widehat{\beta}\)</span> is unstable, in the form of high variance.</p></li>
@@ -375,7 +411,7 @@ VIF_j = \frac{1}{1-R^2_j}
 <div class="page-columns page-full"><p>In seminal paper, Hoerl and Kennard presented a new approach to the problem of multicollinearity of predictor variables in a linear model.</p><div class="no-row-height column-margin column-container"><span class=""><em>Technometrids</em>, Februaru1970</span></div></div>
 <section id="the-ridge-solution" class="level3" data-number="10.3.1">
 <h3 data-number="10.3.1" class="anchored" data-anchor-id="the-ridge-solution"><span class="header-section-number">10.3.1</span> The ridge solution</h3>
-<p>Their solution is simple; Add some quantity to the diagonal of <span class="math inline">\(A'A\)</span>. Specifically, <a href="Ch3.html#eq-linregformula">Equation&nbsp;<span>5.4</span></a> now becomes</p>
+<p>Their solution is simple; Add some quantity to the diagonal of <span class="math inline">\(A'A\)</span>. Specifically, <a href="Ch3.html#eq-linregformula" class="quarto-xref">Equation&nbsp;<span>5.4</span></a> now becomes</p>
 <p><span id="eq-ridge"><span class="math display">\[
 \widehat{\beta} = (A'A + \lambda I)^{-1} A'S
 \tag{10.1}\]</span></span></p>
@@ -404,7 +440,7 @@ S \\
 \end{array}
 \right )
 \]</span></p>
-<p>where 0 means <span class="math inline">\(p\)</span> 0s. In essence, we are adding artificial data here, consisting of <span class="math inline">\(p\)</span> new rows to <span class="math inline">\(A\)</span>, and <span class="math inline">\(p\)</span> new elements to <span class="math inline">\(S\)</span>. So <a href="#eq-ridge">Equation&nbsp;<span>10.1</span></a> is just the result of applying <a href="Ch3.html#eq-linregformula">Equation&nbsp;<span>5.4</span></a> to <span class="math inline">\(A_{new}\)</span> and <span class="math inline">\(S_{new}\)</span>.</p>
+<p>where 0 means <span class="math inline">\(p\)</span> 0s. In essence, we are adding artificial data here, consisting of <span class="math inline">\(p\)</span> new rows to <span class="math inline">\(A\)</span>, and <span class="math inline">\(p\)</span> new elements to <span class="math inline">\(S\)</span>. So <a href="#eq-ridge" class="quarto-xref">Equation&nbsp;<span>10.1</span></a> is just the result of applying <a href="Ch3.html#eq-linregformula" class="quarto-xref">Equation&nbsp;<span>5.4</span></a> to <span class="math inline">\(A_{new}\)</span> and <span class="math inline">\(S_{new}\)</span>.</p>
 <p>Loosely speaking, we can think of the addition of <span class="math inline">\(\lambda I\)</span> to <span class="math inline">\(A'A\)</span> makes the latter “larger”, and thus its inverse smaller. In other words, we are “shrinking” <span class="math inline">\(\widehat{\beta}\)</span> towards 0. This effect is made even stronger by the fact that we added 0s data to <span class="math inline">\(S\)</span>. This will be made more precise below.</p>
 </section>
 <section id="example-million-song-dataset" class="level3" data-number="10.3.3">
@@ -593,7 +629,7 @@ Note
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+Note&nbsp;10.1
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -616,8 +652,8 @@ Note
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> glmOut</span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    Lambda Index Measure     SE Nonzero</span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>min <span class="fl">0.2474</span>   <span class="dv">100</span>   <span class="fl">89.44</span> <span class="fl">0.9201</span>      <span class="dv">90</span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>1se <span class="fl">0.9987</span>    <span class="dv">85</span>   <span class="fl">90.28</span> <span class="fl">0.9823</span>      <span class="dv">90</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The <span class="math inline">\(\lambda\)</span> value that gave the smallest Mean Squared Prediction Error (MSE) was 0.2474. (Coincidentally, it was also the smallest value that the function tried; see <strong>glmOut$lambda</strong>.) A more conservative value of <span class="math inline">\(\lambda\)</span> was 0.9987, the largest <span class="math inline">\(\lambda\)</span> giving MSE within one standard error of the minimum; it’s conservative in the sense of being less likely to overfit; its MSE value, 90.28, was only slightly larger than the best one. In each case, all 90 predictors had nonzero coefficient estimates.</p>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>se <span class="fl">0.9987</span>    <span class="dv">85</span>   <span class="fl">90.28</span> <span class="fl">0.9823</span>      <span class="dv">90</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The <span class="math inline">\(\lambda\)</span> value that gave the smallest Mean Squared Prediction Error (MSE) was 0.2474. (Coincidentally, it was also the smallest value that the function tried; see **glmOut<span class="math inline">\(lambda**.) A more conservative value of\)</span>$ was 0.9987, the largest <span class="math inline">\(\lambda\)</span> giving MSE within one standard error of the minimum; it’s conservative in the sense of being less likely to overfit; its MSE value, 90.28, was only slightly larger than the best one. In each case, all 90 predictors had nonzero coefficient estimates.</p>
 <p>We can then predict as usual. Say we have a song similar to that in <strong>s50[1,]</strong>, but with <strong>V2</strong> equal to 25.0.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> s50[<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>]  <span class="co"># exclude Y</span></span>
@@ -633,8 +669,8 @@ Note
 <section id="sec-pgtn" class="level2" data-number="10.6">
 <h2 data-number="10.6" class="anchored" data-anchor-id="sec-pgtn"><span class="header-section-number">10.6</span> Modern View</h2>
 <p>There are many ways to deal with multicollinearity other than shrinkage, and indeed, these days one seldom hears mention of multicollinearity in discussions of shrinkage. Instead, the goal is <em>dimension reduction</em>, meaning to reduce the complexity of a model in order to avoid overfitting; the LASSO, introduced below, does this explicitly, while ridge accomplishes it via pure size reduction.</p>
-<p>We will discuss this further in <a href="#sec-dimred"><span>Section&nbsp;10.9</span></a>, but one more point about the discussion no longer being motivated explicitly by multicollinearity: One can apply ridge to situations of <strong>exact</strong> dependence among the columns of X, as opposed to the original motivation of dealing with <em>approximate</em> linear dependence. in which there is <em>exact</em> linear dependence.</p>
-<p>We saw such a setting in <a href="Ch4.html#sec-censusrref"><span>Section&nbsp;6.1</span></a>. There we deliberately induced exact linear dependence by inclusion of both male and female dummy variables. Let’s apply ridge:</p>
+<p>We will discuss this further in <a href="#sec-dimred" class="quarto-xref"><span>Section 10.9</span></a>, but one more point about the discussion no longer being motivated explicitly by multicollinearity: One can apply ridge to situations of <strong>exact</strong> dependence among the columns of X, as opposed to the original motivation of dealing with <em>approximate</em> linear dependence. in which there is <em>exact</em> linear dependence.</p>
+<p>We saw such a setting in <a href="Ch4.html#sec-censusrref" class="quarto-xref"><span>Section 6.1</span></a>. There we deliberately induced exact linear dependence by inclusion of both male and female dummy variables. Let’s apply ridge:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qeML) </span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(svcensus) </span>
@@ -674,11 +710,11 @@ woman   -29378.3086</code></pre>
 <p>So, let’s view the issue of shrinkage more formally, first for ridge and later for the LASSO.</p>
 <section id="shrinkage-through-length-penalization" class="level3" data-number="10.7.1">
 <h3 data-number="10.7.1" class="anchored" data-anchor-id="shrinkage-through-length-penalization"><span class="header-section-number">10.7.1</span> Shrinkage through length penalization</h3>
-<p>Say instead of minimizing <a href="Ch3.html#eq-matrixss">Equation&nbsp;<span>5.1</span></a>, we minimize</p>
+<p>Say instead of minimizing <a href="Ch3.html#eq-matrixss" class="quarto-xref">Equation&nbsp;<span>5.1</span></a>, we minimize</p>
 <p><span id="eq-matrixssridge"><span class="math display">\[
 (S - Ab)'(S - Ab) + \lambda ||b||^2
 \tag{10.2}\]</span></span></p>
-<p>The larger <span class="math inline">\(b\)</span> is, the harder it is to minimize the overall quantity <a href="#eq-matrixssridge">Equation&nbsp;<span>10.2</span></a>. We say that we <em>penalize</em> large values of <span class="math inline">\(b\)</span>, an indirect way of pursuing shrinkage. Now take the derivative and set to 0:</p>
+<p>The larger <span class="math inline">\(b\)</span> is, the harder it is to minimize the overall quantity <a href="#eq-matrixssridge" class="quarto-xref">Equation&nbsp;<span>10.2</span></a>. We say that we <em>penalize</em> large values of <span class="math inline">\(b\)</span>, an indirect way of pursuing shrinkage. Now take the derivative and set to 0:</p>
 <p><span id="eq-ridgederiv"><span class="math display">\[
 0 = A'(S-Ab) + \lambda b
 \tag{10.3}\]</span></span></p>
@@ -739,14 +775,15 @@ woman   -29378.3086</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="LASSO_gray.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">LASSO sparsity</figcaption>
+<figcaption>LASSO sparsity</figcaption>
 </figure>
 </div>
 <p>Here <span class="math inline">\(p = 2\)</span>, with <span class="math inline">\(b = (b_1,b_2)'\)</span>. The horizontal and vertical axes represent <span class="math inline">\(b_1\)</span> and <span class="math inline">\(b_2\)</span>.</p>
 <ul>
 <li><p>The constraint <span class="math inline">\(||b||_1 \leq \gamma\)</span> then takes the form of a diamond, with corners at <span class="math inline">\((\gamma,0)\)</span>, <span class="math inline">\((0,\gamma)\)</span>, <span class="math inline">\((-\gamma,0)\)</span> and <span class="math inline">\((0,-\gamma)\)</span>. The constraint <span class="math inline">\(||b||_1 \leq \gamma\)</span> requires us to choose a point <span class="math inline">\(b\)</span> somewhere in the diamond, including the boundary.</p></li>
 <li><p>Note that each of the four corners of the diamond represents a sparse solution. For instance, the point <span class="math inline">\((0,\gamma)\)</span> has <span class="math inline">\(b_2 = 0\)</span></p></li>
-<li><p>The concentric ellipses depict the values of <span class="math inline">\(c(b) = (S - Ab)'(S - Ab)\)</span>, as follows.</p></li>
+<li><p>The concentric ellipses depict the values of <span class="math inline">\(c(b) = (S - Ab)'(S -
+Ab)\)</span>, as follows.</p></li>
 <li><p>Consider one particular value of <span class="math inline">\(c(b)\)</span>, say 1.68.</p></li>
 <li><p>Many different points <span class="math inline">\(b\)</span> in the graph will have <span class="math inline">\(c(b) = 1.68\)</span>; in fact, the locus of all such points is an ellipse.</p></li>
 <li><p>There is one ellipse for each possible value of <span class="math inline">\(c(b)\)</span>. So, there are infinitely many ellipses, though only two are shown here.</p></li>
@@ -812,15 +849,15 @@ Call:  cv.glmnet(x = nycwide, y = nyctaxi[, 1], alpha = 0)
 Measure: Mean-Squared Error 
 
     Lambda Index Measure     SE Nonzero
-min 0.3002   100   2.959 0.1889     356
-1se 1.0063    87   3.120 0.1834     356</code></pre>
+min 0.3002   100   2.912 0.1556     356
+1se 0.9169    88   3.050 0.1537     356</code></pre>
 </div>
 </div>
 <p>The best <span class="math inline">\(\lambda\)</span> value was found to be 0.3002.</p>
 </section>
 <section id="other-shrinkage-estimators" class="level2" data-number="10.11">
 <h2 data-number="10.11" class="anchored" data-anchor-id="other-shrinkage-estimators"><span class="header-section-number">10.11</span> Other Shrinkage Estimators</h2>
-<p>The huge popular success of the LASSO inspired applying shrinkage to lots of other estimators. We will give an example in <a href="Ch6c.html"><span>Chapter&nbsp;13</span></a>.</p>
+<p>The huge popular success of the LASSO inspired applying shrinkage to lots of other estimators. We will give an example in <a href="Ch6c.html" class="quarto-xref"><span>Chapter 13</span></a>.</p>
 </section>
 <section id="sec-iter" class="level2 page-columns page-full" data-number="10.12">
 <h2 data-number="10.12" class="anchored" data-anchor-id="sec-iter"><span class="header-section-number">10.12</span> Iterative Calculation</h2>
@@ -835,12 +872,12 @@ min 0.3002   100   2.959 0.1889     356
 <li><p>presence or lack of (calculus) derivatives</p></li>
 </ul>
 <p>The basic idea is to first (somehow) make some guess as to the value of the desired quantity, say <span class="math inline">\(\widehat{\beta}\)</span> in the LASSO. The algorithm crunches this to make a new, updated guess, hopefully one that is more accurate than the first. One then updates the new guess, continuing this process until, hopefully, it <em>converges</em>, meaning that it no longer changes much from one iteration to the next. The current guess is then deemed to be the correct value.</p>
-<p>The case of computation of the LASSO is further complicated by its being based on the <span class="math inline">\(l_1\)</span> norm, which in turn uses absolute values, i.e.&nbsp;<span class="math inline">\(|x|\)</span>. These have no derivative in the calculus sense, say as used in <a href="#eq-ridgederiv">Equation&nbsp;<span>10.3</span></a> for ridge. This is a problem because many iterative methods are based on derivatives, as follows.</p>
+<p>The case of computation of the LASSO is further complicated by its being based on the <span class="math inline">\(l_1\)</span> norm, which in turn uses absolute values, i.e.&nbsp;<span class="math inline">\(|x|\)</span>. These have no derivative in the calculus sense, say as used in <a href="#eq-ridgederiv" class="quarto-xref">Equation&nbsp;<span>10.3</span></a> for ridge. This is a problem because many iterative methods are based on derivatives, as follows.</p>
 <div class="page-columns page-full"><p>Say we have a function <span class="math inline">\(f\)</span> whose root <span class="math inline">\(r\)</span> is of interest to us. We might make a series of guesses for <span class="math inline">\(r\)</span> by considering the derivative <span class="math inline">\(f'\)</span>. This is illustrated in the figure. Unknown to us, <span class="math inline">\(r = 2\)</span>. Our current guess is <span class="math inline">\(x = 3\)</span>. We draw <span class="math inline">\(f'\)</span>, i.e.&nbsp;the tangent line to the curve at our current guess, and temporarily pretend that the line is the curve. We thus compute the root for the line, which is seen here to be near 2.0, and then take this tangent root as our updated guess for the root of the curve.</p><div class="no-row-height column-margin column-container"><span class="">Our quest for a root may arise for instance in a minimization problem, where we set a derivative to 0 and solve for that root.</span></div></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="NewtonRaph.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">root hunting</figcaption>
+<figcaption>root hunting</figcaption>
 </figure>
 </div>
 <p>Some machine learning algorithm have a parameter called the <em>learning rate</em>, which is motivated by a concern that the process may overshoot the root. A smaller learning rate value directs the algorithm to take smaller steps in generating new guesses. In this case, we might go only partway to the tangent root. On the one hand, this can slow the computation but on the other, we may be less likely to overshoot the true value.</p>
@@ -861,13 +898,13 @@ No Statistical Inference on Shrinkage Estimators
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Shrinkage produces a bias, of unknown size. Thus classical statistical inference (confidence intervals, hypothesis tests), e.g.&nbsp;those based on <a href="Ch3.html#eq-varcovar">Equation&nbsp;<span>5.7</span></a> for linear models, is not possible.</p>
+<p>Shrinkage produces a bias, of unknown size. Thus classical statistical inference (confidence intervals, hypothesis tests), e.g.&nbsp;those based on <a href="Ch3.html#eq-varcovar" class="quarto-xref">Equation&nbsp;<span>5.7</span></a> for linear models, is not possible.</p>
 </div>
 </div>
 </section>
 <section id="your-turn" class="level2" data-number="10.14">
 <h2 data-number="10.14" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">10.14</span> Your Turn</h2>
-<p>❄️ <strong>Your Turn:</strong> Show that <span class="math inline">\(A_{new}\)</span> in <a href="#sec-matform"><span>Section&nbsp;10.3.2</span></a> is of full rank, <span class="math inline">\(p\)</span>.</p>
+<p>❄️ <strong>Your Turn:</strong> Show that <span class="math inline">\(A_{new}\)</span> in <a href="#sec-matform" class="quarto-xref"><span>Section 10.3.2</span></a> is of full rank, <span class="math inline">\(p\)</span>.</p>
 <p>❄️ <strong>Your Turn:</strong> Consider a generalization of ridge regression, in which we find</p>
 <p><span class="math display">\[
 \textrm{argmin}_b ~
@@ -879,7 +916,7 @@ b =
 {[{A}' {A} + {D}^2]}^{-1}
 {A}' {S}
 \]</span></p>
-<p>❄️ <strong>Your Turn:</strong> In <a href="#sec-useall"><span>Section&nbsp;10.10</span></a>, it was pointed out that in some settings we may prefer to retain all of our predictor variables, rather than do dimension reduction, thus preferring ridge to LASSO. But we might pay a price for that preference, in that the LASSO may actually give us better predictive power. Write an R function to investigate this, with call form</p>
+<p>❄️ <strong>Your Turn:</strong> In <a href="#sec-useall" class="quarto-xref"><span>Section 10.10</span></a>, it was pointed out that in some settings we may prefer to retain all of our predictor variables, rather than do dimension reduction, thus preferring ridge to LASSO. But we might pay a price for that preference, in that the LASSO may actually give us better predictive power. Write an R function to investigate this, with call form</p>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">compareRidgeLASSO</span>(data,yName)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>where <strong>data</strong> and <strong>yName</strong> are in the format of the predictive <span class="math inline">\(qeML\)</span> functions, and the minimum Mean Squared Prediction Error is returned for both algorithms. Try your function on some of our datasets, or others.</p>
 <p>❄️ <strong>Your Turn:</strong> The LASSO will tend to produce solutions with lesser sparsity if the dataset is large. Write an R function to illustrate this, with call form</p>
@@ -925,18 +962,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -968,11 +994,48 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -982,8 +1045,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -995,7 +1067,129 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1039,6 +1233,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1064,6 +1259,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1125,17 +1346,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./Ch5bb.html" class="pagination-link">
+      <a href="./Ch5bb.html" class="pagination-link" aria-label="Four Fundamental Spaces">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Four Fundamental Spaces</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Ch6a.html" class="pagination-link">
+      <a href="./Ch6a.html" class="pagination-link" aria-label="Eigenanalysis">
         <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Eigenanalysis</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
+
 
 
 
