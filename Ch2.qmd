@@ -174,7 +174,7 @@ P =
 0 & 0 & 0 & 0.5 & 0.5 \\
 \end{array}
 \right )
-$$
+$${#eq-randwalkP}
 
 With $\nu = (\nu_1,\nu_2,\nu_3,\nu_4,\nu_5)'$, the equation to be
 solved, $(I-P') \nu = \nu$, is
@@ -271,7 +271,10 @@ $$
 G \nu = q
 $$
 
-If our matrix $G$ is invertible, we can premultiply both sides of our
+If our matrix $G$ is invertible,
+[$I-P'$ might not be invertible, as there may not be a long-run
+distribution.]{.column-margin}
+we can premultiply both sides of our
 equation above, yielding
 
 $$
@@ -308,12 +311,13 @@ Several properties to note:
 * If the inverses of $A$ and $B$ exist, and $A$ and $B$ are conformable,
   then $(AB)^{-1}$ exists and is equal to $B^{-1} A^{-1}$.
 
-  *Proof:* Consider the product $(AB) (B^{-1} A^{-1})$. The $B factors 
+  *Proof:* Consider the product $(AB) (B^{-1} A^{-1})$. The $B$ factors 
   give us $I$, leaving $A A^{-1}$, which too is $I$. 
 
 * $(A')^{-1}$ exists and is equal to $(A^{-1})'$.
 
-  *Proof:* Follows immediately from $A A^{-1} = I$.
+  *Proof:* Follows immediately from $A A^{-1} = I$ and the fact that
+$(UV)' = V'U'$.
 
 * If $A$ is invertible and symmetric, then $(A^{-1})'$ is also
   symmetric.
@@ -324,7 +328,7 @@ Several properties to note:
   AB = I
   $$
 
-  Recalling from @sec-transpose that the transpose of a product is the
+  Again using the fact that the transpose of a product is the
   reverse product of the transposes, we have
 
   $$
@@ -348,12 +352,18 @@ be computationally challenging. The run time is proportional to $n^3$,
 and roundoff error can be an issue. Sophisticated algorithms have been
 developed, such as QR and Choleski decompositions. So in R, we should
 use, say, **qr.solve** rather than **solve** if we are working with
-sizable matrices.
+sizable matrices, or even use methods that do not directly compute the
+inverse.
 
 The classic "pencil and paper" method for matrix inversion is
 instructive, and will be presented here.
 
 ### Pencil-and-paper computation{#sec-pencilpaper}
+
+Note: Some readers will notice some similarity here with elementary
+methods they learned in high school, but actually the treatment here is
+much more sophisticated. It will play an important practical and
+theoretical role in @sec-matrank.
 
 The basic idea follows the pattern the reader learned for solving
 systems of linear equations, but with the added twist of involving some
@@ -484,7 +494,7 @@ $$
 (E_4 E_3 E_2 E_1) A = I
 $$
 
-Aha! We have found the inverse of $A$--it's $E_4 E_3 E_2 E_1$.
+Aha! We have found the inverse of $A$ -- it's $E_4 E_3 E_2 E_1$.
 
 Note too that[Recall that the inverse of a product (if it exists is the reverse
 product of the inverses.]{.column-margin}
@@ -713,16 +723,70 @@ help our intuition here.
 We'll go into this further in @sec-covar.
 
 ## Your Turn
-
-❄️  **Your Turn:** Prove the assertions in @sec-matalg.  Note that for
-the identity matrix $I$, $I' = I$.
  
 ❄️  **Your Turn:** In @sec-elemmats, find the inverses of $E_3$
 and $E_4$ using similar reasoning, and thus find $A^{-1}$.
 
+❄️  **Your Turn:** In @eq-randwalkP, consider the variant
+
+$$
+P =
+\left (
+\begin{array}{rrrrr}
+0.5 & 0.5 & 0 & 0 & 0\\
+0.5 & 0 & 0.5 & 0 & 0\\
+0 & 0.5 & 0 & 0.5 & 0\\
+0 & 0 & 0.5 & 0 & 0.5\\
+0 & 0 & 0 & 1.0 & 0.0 \\
+\end{array}
+\right )
+$${#eq-randwalkP}
+
+Here, the walker at state 5 immediately "bounces back" to state 4,
+rather than remaining at state 5 for one or more epochs.
+
+In the original chain, we found that $\nu = (0.2,0.2,0.2,0.2,0.2)'$.
+Speculate as to the effect on $\nu_5$ of the above change in model.
+Then investigate to determine if our speculation was correct.
+
+
+❄️  **Your Turn:** Consider a Markov chain with transition probability
+matrix 
+
+$$
+P = 
+\left (
+\begin{array}{rr}
+0 & 1 \\
+1 & 0  \\
+\end{array}
+\right )
+$$
+
+This chain is termed *periodic*, with period 2. It alternates between
+states 1 and 2, and thus a long-run distribution $\nu$ does not exist.
+That would suggest the $I-P'$ noninvertible. Confrim this.
+
 ❄️  **Your Turn:** If you are familiar with recursive calls, write a
 function $\verb+dt(a)+$ to compute the determinant of a square matrix
 $A$.
+
+
+
+❄️  **Your Turn:** Show that in the scalar context,
+
+$$
+Cov(X,Y) = E(XY) - EX ~ EY
+$$
+
+❄️  **Your Turn:** Show that in the vector context,
+
+$$
+Cov(X) = E(X X') - (EX) (EX)'
+$$
+
+❄️  **Your Turn:** Prove the assertions in @sec-matalg.  Note that for
+the identity matrix $I$, $I' = I$.
 
 ❄️  **Your Turn:** The determinant of a 3 x 3 matrix
 
@@ -745,16 +809,3 @@ $$
 
 Suppose the elements of $M$ are independent random variables with uniform
 distributions on (0,1). Argue that P(M is invertible) = 1.
-
-❄️  **Your Turn:** Show that in the scalar context,
-
-$$
-Cov(X,Y) = E(XY) - EX ~ EY
-$$
-
-❄️  **Your Turn:** Show that in the vector context,
-
-$$
-Cov(X) = E(X X') - (EX) (EX)'
-$$
-
