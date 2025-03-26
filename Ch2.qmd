@@ -39,21 +39,8 @@ g_j = P(X_1 = j)
 = \sum_{i=1}^k f_i a_{ij}
 $$
 
-where $a_{ij}$ is the row i, column j element of the chain's transition
-matrix $P$.
-
-For example, consider $g_5$. How could we be at state 5 at time 1? We
-could start in state 1, probability $f_1$, then move to state 5,
-probability $a_{15}$, for a total probability of $f_1 a_{15}$. 
-Or, we could start in state 2, probability $f_2$, then move to state 5,
-probability $a_{25}$, for a total probability of $f_2 a_{25}$.
-And so on.
-
-So,
-
-$$
-g_j = \sum_{i=1}^k f_i a_{ij}
-$$
+where $a_{ij}$ is the row $i$, column $j$ element of the chain's
+transition matrix $P$.
 
 Putting this is more explicit matrix terms,
 
@@ -84,70 +71,61 @@ f'P
 $$
 
 so we have the nice compact relation for the distribution of $X_1$ in
-terms of the distribution of $X_0$.[By the way, it won't be used here, but
-just for practice, note that the right-hand side, Pf, here is
-a linear combination of the columns of P, from our above material on
-partitioning.]{.column-margin}
+terms of the distribution of $X_0$.
 
 $$
 g' = f'P
 $$
 
 
-And setting h to the distribution of $X_2$, the same reasoning gives us
+And setting $h$ to the distribution of $X_2$, the same reasoning gives us
 
 $$
 h' = g'P 
 $$
 
-Then since $g' = f'P$, we have
-[Note that we used the Markov property, 
-"memorylessness." Once we reach time 1, "time starts over," regradless
-of the previous history, i.e. regardless of where we were at time 0.]{.column-margin}
+::: {.column-margin}
 
-$$
-h' = f'P^2 
-$$
+Note that we used the Markov property, "memorylessness." Once we reach time 1, "time starts over," regradless of the previous history, i.e.  regardless of where we were at time 0.
 
-and so on. Iterating, we obtain
+:::
 
-$$
-d_j' = d_0' P^j 
-$$
-
-where $d_i$ is the distribution of $X_i$.
-
-Similarly, 
+Let $d_i$ denote the distribution of $X_i$. Generalizing
+the above reasoning gives us
 
 $$
 d_j' = d_{j-1}' P
 $$
 
-For convenience, let's take transposes:[Recall that $(AB)' =
-B'A'$.]
+For convenience, let's take transposes (recall that $(AB)' =
+B'A'$):
 
 $$
 d_j = P' d_{j-1}
+$${#eq-djInf}
+
+Now suppose our chain has a long-run distribution $\nu$, as in
+{@sec-introMCs}, so that
+
+$$
+\lim_{j \rightarrow \infty} d_j = \nu
 $$
 
-Now suppose our chain as a long-run distribution, as in {@sec-introMCs}.
-Let's call that distribution $\nu$. By lettting $j \rightarrow \infty$
-above, we have
+Applying this to @eq-djInf, we have
 
 $$
 \nu = P' \nu
-$$
+$${#eq-nuSolve}
 
-Since P is known, this provides us with a way to compute $\nu$. Yes,
-finding a high power of P would do this too, but that would involve a lot
-of computation, and even then it would not yield the exact answer. We
-will return to this in the next chapter. 
+Since P is known, this provides us with a way to compute $\nu$. All we
+need to do is solve @eq-nuSolve. Well, how do we do that? It turns out
+that use of matrix inverses will solve our problem.
 
 
 
 ## Definition
 
-> For any square matrix $A$, it's *inverse* $B$ (if it exists)
+> For any square matrix $A$, its *inverse* $B$ (if it exists)
 > is a square matrix of the same size such that
 > 
 > $$
@@ -167,21 +145,19 @@ invertible, its inverse is unique.
 
 ## Example: Computing Long-Run Markov Distribution{#sec-markovsolve}
 
-Recall @eq-stationMarkov, which expresses the vector of long-run state
-probabilities for a Markov chain with transition matrix P and stationary
-distribution $\nu$,
+Now let us return to @eq-stationMarkov, which expresses the vector of
+long-run state probabilities for a Markov chain with transition matrix P
+and stationary distribution $\nu$, How can we use matrix inverses to
+solve this equation?
 
 $$
-\nu = P \nu
+\nu = P' \nu
 $${#eq-MarkovPi}
-
-This suggests a method for computing $\nu$, by solving the above
-equation.
 
 Rewrite it using the identity matrix:
 
 $$
-(I - P) \nu = 0
+(I - P') \nu = 0
 $$
 
 For the random walk chain in Chapter 1, we had[In that particular model,
@@ -323,7 +299,7 @@ nu <- Ginv %*% c(0,0,0,0,1)  # recall that q = c(0,0,0,0,1)
 nu
 ```
 
-This confirms our earlier speculation based on powers of $P$.
+This confirms our earlier speculation in @sec-introMCs based on powers of $P$.
 
 ## Matrix Algebra{#sec-matalg}
 
