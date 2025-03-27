@@ -65,8 +65,8 @@ view recognizes that there are a lot more people out there than our
 data.
 
 We speak of estimating population quantities. For instance, we can
-estimate the population value $E(X1), i.e. mean of $X_1$ throughout the
-population, by the sammple analog,
+estimate the population value E(X1), i.e. mean of $X_1$ throughout the
+population, by the sample analog,
 
 $$
 \frac{1}{n} \sum_{i=1}^n X_{1j}
@@ -285,7 +285,7 @@ and covariance matrix $\Sigma$. The form is
 $$
 (2\pi)^{-k/2} \det(\Sigma)^{-k/2}
 e^{-0.5 (t-\mu)'(\Sigma)^{-1}(t-\mu)}
-$$
+$${#eq-mvndensity}
 
 Note the intuition:
 
@@ -345,9 +345,9 @@ Again, perform direct evaluation of the density.
 $\square$
 ::: 
 
-::: {#thm-cw}
+::: {#thm-mvuvnormal}
 
-## Cramer-Wold Theorem {#thm-mvuvnormal}
+## Cramer-Wold Theorem
 
 A random vector $X$ has a multivariate normal distribution if and only
 if $w'X$ has a univariate normal distribution for all conformable
@@ -387,7 +387,7 @@ that concept until our chapter on inner product spaces.]{.column-margin}
 covariance matrix $\Sigma$.
 
 :::
-`
+
 ::: {.proof}
 
 @thm-mvuvnormal reduces the problem to the univariate case, where we
@@ -843,6 +843,19 @@ For example, the R package **numDeriv** will compute numerical
 derivatives.
 
 ## Your Turn
+
+❄️  **Your Turn:** In the mother/daughter data, find the estimated
+covariance between the two heights.
+
+In @eq-mvndensity, write $t = (t_1,t_2)$, and consider the quantity
+in the exponent,
+
+$$
+(t-\mu)'(\Sigma)^{-1}(t-\mu)
+$$
+
+Say we set this quantity to some constant $c$, then graph the locus of
+points $t$ in the $t_1,t_2$ plane. What geometric figure would we get?
 
 ❄️  **Your Turn:** Show that in the scalar context,
 
