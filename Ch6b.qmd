@@ -7,7 +7,7 @@ library(qeML)
 
 {{< pagebreak >}}
 
-# Principal Components 
+# Principal Components {#sec-pca}
 
 ::: {.callout-note}
 
@@ -376,3 +376,7 @@ successivly to the first PC, then the first two, then the first three
 and so on assessing with cross-validation in each case. It will then
 return the number of PCs (and the PCs themselves) that predicts best.
 Try your function on various datasets.
+
+❄️  **Your Turn:** Say the symmetric $n \textrm{ n } n$ matrix $A$ has
+rank $r$. Show that $n-r$ of its eigenvalues are 0s.
+

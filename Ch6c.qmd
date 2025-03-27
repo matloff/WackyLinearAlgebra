@@ -97,20 +97,20 @@ $V$ does the same for words.
 
 Recall that in the matrix $\Sigma$, the eigenvalues are arranged in
 decreasing order, possibly followed by 0s. This suggests that we can
-achieve dimension reduction by replacing the smaller eigenvalues by 0s,
-with corresponding adjustments to the columns of $U$ and $V$. We will
-discuss this below in @sec-svddimred. 
+achieve dimension reduction by replacing even some of the smaller
+eigenvalues by 0s as well, with corresponding adjustments to the columns
+of $U$ and $V$. We will discuss this below in @sec-svddimred. 
 
 
 
 ## Solution to Our SVD Goal
 
-There are various derivations, e.g. along the lines of @sec-firstPC (one
-maximizes the quantity $U A V'$), but let's go directly to the answer:  
+There are various derivations, e.g. along the lines of @sec-firstPC, 
+but let's go directly to the answer:  
 
 1. Say $A$ is $p \textrm{ x } n$, so that $A'A$ will be of size $n
    \textrm{ x } n$. Let $r$ denote the rank of $A$, which will be the same
-   as the rank of $A'A$ from @thm-rankapa.
+   as the rank of $A$ from @thm-rankapa.
 
 2. Compute the eigenvalues $\sigma_1,...,\sigma_n$
    and eigenvectors $v_1,...,v_n$ of $A'A$. Normalize the $v_i$ by
@@ -121,8 +121,9 @@ maximizes the quantity $U A V'$), but let's go directly to the answer:
 3. Since $A'A$ is symmetric and positive-semidefinite, its eigenvalues
    will be nonnegative and its eigenvectors $v_1,...,v_r$ will be
    orthogonal as long as $\sigma_1,...,\sigma_r$ are distinct, as is the
-   case for numeric data (@sec-prob0). We will have $\sigma_{r+1} = ...
-   = \sigma_n = 0$.
+   case for numeric data (@sec-prob0). Since these eigenvectors
+   diagonalize i$A'A$ with the $\sigma_i$ on the diagonal (@sec-pca)
+   we will have $\sigma_{r+1} = ...  = \sigma_n = 0$.
 
 4. Set $\Sigma$ to $diag(\sigma_1,...,\sigma_n)$, the
    nonincreasing list of those eigenvalues. Set the first $r$ columns of
