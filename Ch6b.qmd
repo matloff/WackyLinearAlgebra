@@ -127,7 +127,7 @@ The same argument works in reverse. If $Au = 0$, we fine that $Var(u'X)
 = 0$, and since the eigenvalues of $Cov(X)$ are variances of linear
 combinations of $X$, we see that one of those variances is 0.
 
-## Back to the African Soils Example
+## Back to the African Soils Example{#sec-backtoafrica}
 
 So, we remove the ``Y'' variable, **pH**, number 3598 as seen above, and
 proceed. We will also remove the nonnumeric columns,

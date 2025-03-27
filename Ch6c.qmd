@@ -108,8 +108,8 @@ of $U$ and $V$. We will discuss this below in @sec-svddimred.
 There are various derivations, e.g. along the lines of @sec-firstPC, 
 but let's go directly to the answer:  
 
-1. Say $A$ is $p \textrm{ x } n$, so that $A'A$ will be of size $n
-   \textrm{ x } n$. Let $r$ denote the rank of $A$, which will be the same
+1. Say $A$ is $p \times n$, so that $A'A$ will be of size $n
+   \times n$. Let $r$ denote the rank of $A$, which will be the same
    as the rank of $A$ from @thm-rankapa.
 
 2. Compute the eigenvalues $\sigma_1,...,\sigma_n$
@@ -122,7 +122,7 @@ but let's go directly to the answer:
    will be nonnegative and its eigenvectors $v_1,...,v_r$ will be
    orthogonal as long as $\sigma_1,...,\sigma_r$ are distinct, as is the
    case for numeric data (@sec-prob0). Since these eigenvectors
-   diagonalize i$A'A$ with the $\sigma_i$ on the diagonal (@sec-pca)
+   diagonalize $A'A$ with the $\sigma_i$ on the diagonal (@sec-pca),
    we will have $\sigma_{r+1} = ...  = \sigma_n = 0$.
 
 4. Set $\Sigma$ to $diag(\sigma_1,...,\sigma_n)$, the
@@ -153,37 +153,6 @@ but let's go directly to the answer:
    
    $$ U = (u_1|...|u_n) $$
 
-## Checking the Formula
-
-Are $U$ and $V$ really orthogonal, and does $U \Sigma V'$ really work out
-to be $A$ in @eq-svd?
-
-* $U$ and $V$ are orthogonal, by construction.
-
-* The product evaluates to $A$, as claimed:
-
-    Using matrix partitioning, we have
-    
-    $$
-    U \Sigma = (\sigma_1 u_1 | ... | \sigma_n u_n)
-    $$
-    
-    So, again using partitioning,
-    
-    $$
-    U \Sigma V' = (\sigma_1 u_1 | ... | \sigma_n u_n) 
-     \left (
-     \begin{array}{r}
-     v_1' \\
-     ... \\
-     v_n'  \\
-     \end{array}
-     \right )
-    = \sum_{i=1}^n \sigma_i u_i v_i'  
-    $$
-    
-    That last expression is equal to $A$, by @eq-aissumuivi.
-
 ## SVD as a basis for matrix generalized inverse
 
 Recall the example in @sec-censusrref. We could not have dummy-variable
@@ -191,7 +160,7 @@ columns for both male and female, as their sum would be a column of all
 1s, in addition to a column of 1s the X data matrix already had. The
 three columns would then have a nonzero linear combination that
 evaluates to the 0 vector.  Then in @eq-linregformula, $A$ (i.e. X)
-would not be of full rank, nor would $A'A$, so that
+would not be of full rank, nor would $A'A$ (@thm-rankapa), so that
 $(A'A)^{-1}$ would not exist.
 
 And yet the equation from which that comes,
@@ -202,11 +171,11 @@ $${#eq-overdetermined}
 
 is still valid. We could, as in that example, remove one of the gender
 columns, thus solving the problem of less than full rank, but the use of
-*generalized inverses* solves the problem directly. If $A$ has hundreds
-or thousands of columns, say, the use of generalized inverses may be more
+*generalized inverses* solves the problem directly. If $A$ has many
+binary variables, the use of generalized inverses may be more
 convenient.
 
-We will omit the formal definition of inverses and their
+We will omit the formal definition of generalzed inverses and their
 properties, returning to the topic in @sec-chapDD.  For now, we note the
 following:
 
@@ -218,19 +187,19 @@ $$
 M = U_M \Sigma_M V_{M}'
 $$
 
-its Moore-Penrose inverse, denoted by $M^{+}$ is 
+its Moore-Penrose inverse, denoted by $M^{+}$, is 
 
 $$
 M^{+} = V_M \Sigma_M^{+} U_{M}'
 $$
 
-where $\Sigma_M^{+}$ is the diagonal matrix obtained form $\Sigma_M$
+where $\Sigma_M^{+}$ is the diagonal matrix obtained from $\Sigma_M$
 by replacing each nonzero element by its reciprocal.
 
 The Moore-Penrose solution of $Mz = w$ for vectors $z$ and $w$, is
 
 $$
-M^{+} w
+z = M^{+} w
 $${#eq-MoorePenrose}
 
 The R function **MASS::ginv** performs the necessary
@@ -292,6 +261,53 @@ $$
 $$
 
 ## Dimension Reduction: SVD as the Best Low-Rank Approximation{#sec-svddimred}
+
+The SVD of a rank $r$, $q \times n$ matrix $A$ can be partitioned as
+
+$$
+(U_1 | U_2) 
+\left (
+\begin{array}{rr}
+D_1 & 0 \\
+0 & 0  \\
+\end{array}
+\right )
+(V_1 | V2)'
+$$
+
+where $U_1$ is of size $q \times r$, $V_1$ is of size $n \times r$, and
+$D_1$ is $r \times r$. Simplifying, we have
+
+$$
+A = (U_1 D_1 | 0)
+\left (
+\begin{array}{r}
+V_1' \\
+V_2' \\
+\end{array}
+\right ) =
+U_1 D_1 V_1'
+$${#eq-u1d1v1}
+
+So, we've reduced the size of memory needed to store the SVD. But
+there's more:
+
+The eigenvalues of a matrix, arranged from largest to smallest, tend to
+degrade in a gradual manner, as seen for example in @sec-backtoafrica.
+So, in the context of SVD, with the last $n-r$ eigenvalues being 0s, 
+it will typically be the case that the last few eigenvalues among
+$\sigma_1,...,\sigma_r$ are *near* 0. 
+
+In other words, we probably can get a good approximation to the SVD by
+treating those near-0 eigenvalues as 0s, and removing the corresponding
+columns of $U_1$ and $V_1$. Why do this?
+
+* Achieve a further reduction in storage requirements. for instance in
+  settings in which we have many, many images or videos.
+
+* Reduce noise, again for example with images. Small blotches are
+  smoothed out.
+
 
 ## Matrix Factorization in Recommender Systems
 

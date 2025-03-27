@@ -376,9 +376,9 @@ by Eric Kolaczy and Gábor Csárdi. As the authors say,
 
 And of course, at the center of it all is a matrix! Here is why:
 
-Let's consider the famous Karate Club dataset:
+## Example: Karate Club
 
-[]{.column-margin} 
+Let's consider the famous Karate Club dataset:
 
 ```{r}
 # remotes::install_github("schochastics/networkdata") 
@@ -404,6 +404,7 @@ adjK[13,4]
 
 Accordingly, row 13, column 4 does have a 1 entry.
 
+## The Role of Matrix Multiplication in Network Graph Models
 As is the case with Markov transition matrices, powers of an adjacency
 matrix can yield valuable information. In the Markov case,
 multiplication gives us sums of paired products, computing
