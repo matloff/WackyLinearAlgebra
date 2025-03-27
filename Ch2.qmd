@@ -45,26 +45,14 @@ transition matrix $P$.
 Putting this is more explicit matrix terms,
 
 $$
-g = \left (
-\begin{array}{r}
-g_1 \\
-g_2 \\
-... \\
-g_k \\
-\end{array}
-\right )
+g' = (g_1,...,g_k)' 
 =
-\left (
-\begin{array}{r}
-f_1 a_{11} + f_2 a_{21} + ... + f_k a_{k1} \\
-f_1 a_{12} + f_2 a_{22} + ... + f_k a_{k2} \\
-... \\
-f_1 a_{1k} + f_2 a_{2k} + ... + f_k a_{kk} \\
-\end{array}
-\right )
+(f_1 a_{11} + ... + f_k a_{k1},
+...,
+f_1 a_{1k} + ... + f_k a_{kk})
 $$
 
-That last expression is
+Using partitioning, we see that that last expression is
 
 $$
 f'P
@@ -90,25 +78,25 @@ Note that we used the Markov property, "memorylessness." Once we reach time 1, "
 
 :::
 
-Let $d_i$ denote the distribution of $X_i$. Generalizing
+Let $d_r$ denote the distribution of $X_r$. Generalizing
 the above reasoning gives us
 
 $$
-d_j' = d_{j-1}' P
+d_r' = d_{r-1}' P
 $$
 
-For convenience, let's take transposes (recall that $(AB)' =
+For convenience, let's take transposes (recalling that $(AB)' =
 B'A'$):
 
 $$
-d_j = P' d_{j-1}
+d_r = P' d_{r-1}
 $${#eq-djInf}
 
 Now suppose our chain has a long-run distribution $\nu$, as in
 {@sec-introMCs}, so that
 
 $$
-\lim_{j \rightarrow \infty} d_j = \nu
+\lim_{r \rightarrow \infty} d_r = \nu
 $$
 
 Applying this to @eq-djInf, we have
@@ -350,7 +338,7 @@ Finding the inverse of a large matrix -- in data science applications,
 the number of rows and columns $n$ can easily be hundreds or more -- can
 be computationally challenging. The run time is proportional to $n^3$,
 and roundoff error can be an issue. Sophisticated algorithms have been
-developed, such as QR and Choleski decompositions. So in R, we should
+developed, such as the QR decompositions. So in R, we should
 use, say, **qr.solve** rather than **solve** if we are working with
 sizable matrices, or even use methods that do not directly compute the
 inverse.
@@ -558,7 +546,7 @@ $$
  \right )
  $$
 
-This cannot lead to $i$, indicating that $A^{-1}$ does not exist, and
+This cannot lead to $I$, indicating that $A^{-1}$ does not exist, and
 the matrix is said to be *singular*. And it's no coincidence that row 2
 of $A$ is double row 1. This has many implications, as will be seen in
 our chapter on vector spaces.
@@ -566,12 +554,12 @@ our chapter on vector spaces.
 ## Determinants
 
 This is a topic that is quite straightforward and traditional, even
-old-fashioned--in fact, *too* old-fashioned, according to mathematician
+old-fashioned -- in fact, *too* old-fashioned, according to mathematician
 Sheldon Axler. The theme of  his book, *Linear Algebra Done Right*, is
 that determinants are overemphasized. He relegates the topic to the very
 end of the book. Yet determinants do appear often in applied linear
-algebra settings. Moreover, they will be convenient to use in explaing
-very concepts in this book on linear algebra in *Data Science*.
+algebra settings. Moreover, they will be convenient to use in explaining
+concepts in this book on linear algebra in *Data Science*.
 
 But why place the topic in this particular chapter? The answer lies in
 the fact that earlier in this chapter we had the proviso "If
@@ -582,11 +570,11 @@ relevant:
 
 There are better ways to ascertain invertibility than this, but it is
 conceptually helpful. Determinants play a similar role in the topic of
-eigenvectors in Chapter 5.
+eigenvectors in @sec-eigenChap.
 
 ### Definition{#sec-detdef}
 
-The standard definition is one of the ugliest, in all of mathematics.
+The standard definition is one of the ugliest in all of mathematics.
 Instead we will define the term using one of the methods for calculating
 determinants.
 
@@ -605,7 +593,7 @@ determinants.
 > and define $\det(G)$ to be $ad -bc$. For $r > 2$, 
 > define submatrices as follows. 
 > 
-> $G_i$ is the $(r-1) \textrm{ x } (r-1)$ submatrix obtained by removing row
+> $G_j$ is the $(r-1) \textrm{ x } (r-1)$ submatrix obtained by removing row
 > 1 and column $j$ from $G$. Then $\det(G)$ is defined recursively as
 > 
 > $$
@@ -671,57 +659,6 @@ We state these without proof:
 
 * $\det(GH) = \det(G) \det(H)$
 
-## The Multivariate Normal Distribution Family{#sec-mvn}
-
-The familiar "bell-shaped curve" refers to the *normal* (or *Gaussian*)
-family, whose densities have the form
-
-$$
-\frac{1}{\sigma \sqrt{2 \pi}}
-e^{-0.5 (\frac{t-\mu}{\sigma})^2}
-$$
-
-The values of $\mu$ and $\sigma$ are the mean and standard deviation.
-But what if we have a random vector, say of length $k$? Is there a
-generalized normal family? 
-
-### Example: k = 2
-
-The answer is yes.  Here is an example for $k = 2$:
-
-![3D bell density](Bell.png)
-
-### General form
-
-Well, then, what is the form of the $k$-dimensional density function?
-Just as the univariate normal family is parameterized by mean and
-variance, the multivariate one is parameterized via its mean vector $\mu$
-and a *covariance matrix* $\Sigma$, a term we will define in a later
-chapter. The specific form is 
-
-$$
-(2\pi)^{-k/2} \det(\Sigma)^{-k/2}
-e^{-0.5 (t-\mu)'(\Sigma)^{-1}(t-\mu)}
-$$
-
-Note the intuition:
-
-* Instead of $1/\sigma^2$, i.e. instead of dividing by variance,
-we "divide by $\Sigma$," intuitively viewing matrix inverse as a
-"reciprocal" of a matrix.
-
-* In other words, covariance matrices operate roughly like
-generalized variances.
-
-* Instead of squaring the scalar $t - \mu$, we "square" it in the vector
-case by peforming a $w'w$ operation, albeit with $\Sigma^{-1}$ in the
-middle. 
-
-Clearly, we should not stretch these analogies very far, but they do
-help our intuition here.
-
-We'll go into this further in @sec-covar.
-
 ## Your Turn
  
 ❄️  **Your Turn:** In @sec-elemmats, find the inverses of $E_3$
@@ -770,20 +707,6 @@ That would suggest the $I-P'$ noninvertible. Confrim this.
 ❄️  **Your Turn:** If you are familiar with recursive calls, write a
 function $\verb+dt(a)+$ to compute the determinant of a square matrix
 $A$.
-
-
-
-❄️  **Your Turn:** Show that in the scalar context,
-
-$$
-Cov(X,Y) = E(XY) - EX ~ EY
-$$
-
-❄️  **Your Turn:** Show that in the vector context,
-
-$$
-Cov(X) = E(X X') - (EX) (EX)'
-$$
 
 ❄️  **Your Turn:** Prove the assertions in @sec-matalg.  Note that for
 the identity matrix $I$, $I' = I$.
