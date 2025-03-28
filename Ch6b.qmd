@@ -34,11 +34,11 @@ and so on components defined and computed?
 The key issue is that we want our PCs to be orthogonal, because as we
 have seen orthogonal random vectors are statistically uncorrelated, and
 independent in the multivariate normal case. So if we summarize our data
-with say, the first few PCs, the fact that they are (at least loosely
-speaking) uncorrelated makes for a neater summary.
+with say, the first few PCs, the fact that they are uncorrelated makes
+for a neater summary.
 
 So with $u$ and $v$ denoting the first and second PCs, we want $v$ 
-to maximize $v'Cov(X)v$ so we set the derivative of
+to maximize $v'Cov(X)v$, so we set the derivative of
 
 $$
 v'Cov(X)v + \omega (v'v - 1) + \tau (u'v - 0)
@@ -210,7 +210,7 @@ Such is the nature of continuous distributions. The problem is that the
 length of the line segment (0.324,0.324) is 0. In math, we say it has
 *measure* 0.
 
-If we throw our dart at the unit square, $(0,1) \textrm{ x } (0,1)$,
+If we throw our dart at the unit square, $(0,1) \times (0,1)$,
 then e.g. the probability that $D$ lies on a specified straight line or
 some other specified curve is also 0. Here the problem is that the area
 of that line or curve is 0.
@@ -350,7 +350,7 @@ where $A_i$ ($i=1,...,r)$
 
 * is symmetric 
 
-* is of size $k_i \textrm{ x } k_i$
+* is of size $k_i \times k_i$
 
 * has eigenvalues $\gamma_{1},...,\gamma_{k_i}$
 
@@ -377,6 +377,6 @@ and so on assessing with cross-validation in each case. It will then
 return the number of PCs (and the PCs themselves) that predicts best.
 Try your function on various datasets.
 
-❄️  **Your Turn:** Say the symmetric $n \textrm{ x } n$ matrix $A$ has
+❄️  **Your Turn:** Say the symmetric $n \times n$ matrix $A$ has
 rank $r$. Show that $n-r$ of its eigenvalues are 0s.
 

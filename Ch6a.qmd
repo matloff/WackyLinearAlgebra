@@ -52,11 +52,10 @@ that we will develop in the current chapter.
 ### The first PC{#sec-firstPC}
 
 Let **X** denote a set of variables of interest (not necessarily in a
-prediction context).
-In searching for good linear combinations, we want to aim for ones with
-high variance. We certainly don't want ones with low variance; after
-all, a random variable with 0 variance is a constant.  So we wish to
-find linear combinations 
+prediction context).  In searching for good linear combinations, we want
+to aim for ones with high variance. We certainly don't want ones with
+low variance; after all, a random variable with 0 variance is a
+constant.  So we wish to find linear combinations 
 
 $$
 Xu
@@ -113,7 +112,7 @@ chapter, after laying the groundwork in the current chapter.
 The concept itself is simple:
 
 
-> Consider an $m \textrm{ x } m$ matrix $M$. If there is a nonzero vector
+> Consider an $m \times  m$ matrix $M$. If there is a nonzero vector
 > $x$ and a number $\lambda$ such that
 > 
 > $$
@@ -141,7 +140,7 @@ Here are a few properties to start with:
   $$
 
 * The left-hand side of this equation is a polynomial in $\lambda$. So
-  for an $n \textrm{ x } n$ matrix $M$, there are $n$ roots of the
+  for an $n \times  n$ matrix $M$, there are $n$ roots of the
   equation and thus $n$ eigenvalues. Note that some roots may be
   repeated; if $M$ is the zero matrix, it will have an eigenvalue $0$
   with multiplicity $n$.
@@ -277,7 +276,7 @@ $\square$
 
 :::
 
-### Example: Census dataset
+## Example: Census Dataset
 
 Let's illustrate all this with the data in @sec-pgtn. We will form the
 matrix $A'A$ in @sec-linregformula, which as mentioned, is symmetric.
@@ -382,10 +381,27 @@ Instead, we exploit the fact that @eq-MarkovPi says that the transition
 matrix has an eigenvector $\nu$ with eigenvalue 1.  Due to the typical
 huge size of the matrix, the power method or a variant is often used.
 
+## A "Square Root" Matrix, and MV Normal Simulation
+
+::: {#thm-sqrt}
+Any covariance matrix $A$ has a "square root" matrix $Q$, i.e.
+$$
+Q^2 = A
+$$
+
+:::
+
+::: {.proof}
+
+We have $P' A P = D$ for some matrix $P$ and diagonal matrix $D$.
+
+$\square$
+
+
 ## Your Turn
 
-❄️  **Your Turn:** Show that the diagonalizing matrix $P$ above must
-have determinant $\pm 1$.
+❄️  **Your Turn:** Show that the diagonalizing matrix $P$ for
+a symmetric matrix must have determinant $\pm 1$.
 
 ❄️  **Your Turn:** Show that if $x$ is an eigenvector of $M$ with
 eigenvalue $\lambda \neq 0$, then for any nonzero number $c$, $cx$ will
