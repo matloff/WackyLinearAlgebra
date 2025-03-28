@@ -290,12 +290,7 @@ window.Quarto = {
   <li><a href="#sec-detdef" id="toc-sec-detdef" class="nav-link" data-scroll-target="#sec-detdef"><span class="header-section-number">3.7.1</span> Definition</a></li>
   <li><a href="#properties" id="toc-properties" class="nav-link" data-scroll-target="#properties"><span class="header-section-number">3.7.2</span> Properties</a></li>
   </ul></li>
-  <li><a href="#sec-mvn" id="toc-sec-mvn" class="nav-link" data-scroll-target="#sec-mvn"><span class="header-section-number">3.8</span> The Multivariate Normal Distribution Family</a>
-  <ul class="collapse">
-  <li><a href="#example-k-2" id="toc-example-k-2" class="nav-link" data-scroll-target="#example-k-2"><span class="header-section-number">3.8.1</span> Example: k = 2</a></li>
-  <li><a href="#general-form" id="toc-general-form" class="nav-link" data-scroll-target="#general-form"><span class="header-section-number">3.8.2</span> General form</a></li>
-  </ul></li>
-  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">3.9</span> Your Turn</a></li>
+  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">3.8</span> Your Turn</a></li>
   </ul>
 </nav>
     </div>
@@ -348,25 +343,13 @@ g_j = P(X_1 = j)
 <p>where <span class="math inline">\(a_{ij}\)</span> is the row <span class="math inline">\(i\)</span>, column <span class="math inline">\(j\)</span> element of the chain’s transition matrix <span class="math inline">\(P\)</span>.</p>
 <p>Putting this is more explicit matrix terms,</p>
 <p><span class="math display">\[
-g = \left (
-\begin{array}{r}
-g_1 \\
-g_2 \\
-... \\
-g_k \\
-\end{array}
-\right )
+g' = (g_1,...,g_k)'
 =
-\left (
-\begin{array}{r}
-f_1 a_{11} + f_2 a_{21} + ... + f_k a_{k1} \\
-f_1 a_{12} + f_2 a_{22} + ... + f_k a_{k2} \\
-... \\
-f_1 a_{1k} + f_2 a_{2k} + ... + f_k a_{kk} \\
-\end{array}
-\right )
+(f_1 a_{11} + ... + f_k a_{k1},
+...,
+f_1 a_{1k} + ... + f_k a_{kk})
 \]</span></p>
-<p>That last expression is</p>
+<p>Using partitioning, we see that that last expression is</p>
 <p><span class="math display">\[
 f'P
 \]</span></p>
@@ -381,18 +364,18 @@ h' = g'P
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>Note that we used the Markov property, “memorylessness.” Once we reach time 1, “time starts over,” regradless of the previous history, i.e.&nbsp;regardless of where we were at time 0.</p>
-</div></div><p>Let <span class="math inline">\(d_i\)</span> denote the distribution of <span class="math inline">\(X_i\)</span>. Generalizing the above reasoning gives us</p>
+</div></div><p>Let <span class="math inline">\(d_r\)</span> denote the distribution of <span class="math inline">\(X_r\)</span>. Generalizing the above reasoning gives us</p>
 <p><span class="math display">\[
-d_j' = d_{j-1}' P
+d_r' = d_{r-1}' P
 \]</span></p>
-<p>For convenience, let’s take transposes (recall that <span class="math inline">\((AB)' =
+<p>For convenience, let’s take transposes (recalling that <span class="math inline">\((AB)' =
 B'A'\)</span>):</p>
 <p><span id="eq-djInf"><span class="math display">\[
-d_j = P' d_{j-1}
+d_r = P' d_{r-1}
 \tag{3.1}\]</span></span></p>
 <p>Now suppose our chain has a long-run distribution <span class="math inline">\(\nu\)</span>, as in {<a href="Ch1.html#sec-introMCs" class="quarto-xref"><span>Section 2.6</span></a>}, so that</p>
 <p><span class="math display">\[
-\lim_{j \rightarrow \infty} d_j = \nu
+\lim_{r \rightarrow \infty} d_r = \nu
 \]</span></p>
 <p>Applying this to <a href="#eq-djInf" class="quarto-xref">Equation&nbsp;<span>3.1</span></a>, we have</p>
 <p><span id="eq-nuSolve"><span class="math display">\[
@@ -424,7 +407,7 @@ AB = BA = I
 (I - P') \nu = 0
 \]</span></p>
 <div class="page-columns page-full"><p>For the random walk chain in Chapter 1, we had</p><div class="no-row-height column-margin column-container"><span class="">In that particular model, P’ = P, but for most chains this is not the case.</span></div></div>
-<p><span class="math display">\[
+<p><span id="eq-randwalkP"><span class="math display">\[
 P =
 \left (
 \begin{array}{rrrrr}
@@ -435,7 +418,7 @@ P =
 0 &amp; 0 &amp; 0 &amp; 0.5 &amp; 0.5 \\
 \end{array}
 \right )
-\]</span></p>
+\tag{3.4}\]</span></span></p>
 <p>With <span class="math inline">\(\nu = (\nu_1,\nu_2,\nu_3,\nu_4,\nu_5)'\)</span>, the equation to be solved, <span class="math inline">\((I-P') \nu = \nu\)</span>, is</p>
 <p><span class="math display">\[
 \left (
@@ -475,7 +458,7 @@ P =
 -0.5 \nu_3 + \nu_4 - 0.5 \nu_5 = 0 \\
 -0.5 \nu_4 + 0.5 \nu_5 = 0 \\
 \end{array}
-\tag{3.4}\]</span></span></p>
+\tag{3.5}\]</span></span></p>
 <p>This is high school math, and we could solve the equations that way. But this is literally what linear algebra was invented for, solving systems of equations! We will use matrix inverse.</p>
 <p>But first, we have a problem to solve: The only solution to the above system is with all <span class="math inline">\(\nu_i = 0\)</span>. We need an equation involving a nonzero quantity.</p>
 <p>But we do have such an equation. The vector <span class="math inline">\(\nu\)</span> is a stationary distribution for a Markov chain, i.e.&nbsp;the set of long-run probabilities, and thus it must sum to 1.0. Let’s replace the last row by that relation:</p>
@@ -507,12 +490,12 @@ P =
 1 \\
 \end{array}
 \right )
-\tag{3.5}\]</span></span></p>
+\tag{3.6}\]</span></span></p>
 <p>More compactly,</p>
 <p><span class="math display">\[
 G \nu = q
 \]</span></p>
-<p>If our matrix <span class="math inline">\(G\)</span> is invertible, we can premultiply both sides of our equation above, yielding</p>
+<div class="page-columns page-full"><p>If our matrix <span class="math inline">\(G\)</span> is invertible,  we can premultiply both sides of our equation above, yielding</p><div class="no-row-height column-margin column-container"><span class=""><span class="math inline">\(I-P'\)</span> might not be invertible, as there may not be a long-run distribution.</span></div></div>
 <p><span class="math display">\[
 G^{-1} q = G^{-1} G \nu = \nu
 \]</span></p>
@@ -563,15 +546,15 @@ G^{-1} q = G^{-1} G \nu = \nu
 <p>Several properties to note:</p>
 <ul>
 <li><p>If the inverses of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> exist, and <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are conformable, then <span class="math inline">\((AB)^{-1}\)</span> exists and is equal to <span class="math inline">\(B^{-1} A^{-1}\)</span>.</p>
-<p><em>Proof:</em> Consider the product <span class="math inline">\((AB) (B^{-1} A^{-1})\)</span>. The $B factors give us <span class="math inline">\(I\)</span>, leaving <span class="math inline">\(A A^{-1}\)</span>, which too is <span class="math inline">\(I\)</span>.</p></li>
+<p><em>Proof:</em> Consider the product <span class="math inline">\((AB) (B^{-1} A^{-1})\)</span>. The <span class="math inline">\(B\)</span> factors give us <span class="math inline">\(I\)</span>, leaving <span class="math inline">\(A A^{-1}\)</span>, which too is <span class="math inline">\(I\)</span>.</p></li>
 <li><p><span class="math inline">\((A')^{-1}\)</span> exists and is equal to <span class="math inline">\((A^{-1})'\)</span>.</p>
-<p><em>Proof:</em> Follows immediately from <span class="math inline">\(A A^{-1} = I\)</span>.</p></li>
+<p><em>Proof:</em> Follows immediately from <span class="math inline">\(A A^{-1} = I\)</span> and the fact that <span class="math inline">\((UV)' = V'U'\)</span>.</p></li>
 <li><p>If <span class="math inline">\(A\)</span> is invertible and symmetric, then <span class="math inline">\((A^{-1})'\)</span> is also symmetric.</p>
 <p><em>Proof:</em> For convenience, let <span class="math inline">\(B\)</span> denote <span class="math inline">\(A^{-1}\)</span>. Then</p>
 <p><span class="math display">\[
 AB = I
 \]</span></p>
-<p>Recalling from <a href="Ch1.html#sec-transpose" class="quarto-xref"><span>Section 2.9.2</span></a> that the transpose of a product is the reverse product of the transposes, we have</p>
+<p>Again using the fact that the transpose of a product is the reverse product of the transposes, we have</p>
 <p><span class="math display">\[
 I = I' = (AB)' = B'A'
 \]</span></p>
@@ -584,10 +567,11 @@ I = B' A
 </section>
 <section id="computation-of-the-matrix-inverse" class="level2 page-columns page-full" data-number="3.5">
 <h2 data-number="3.5" class="anchored" data-anchor-id="computation-of-the-matrix-inverse"><span class="header-section-number">3.5</span> Computation of the Matrix Inverse</h2>
-<p>Finding the inverse of a large matrix – in data science applications, the number of rows and columns <span class="math inline">\(n\)</span> can easily be hundreds or more – can be computationally challenging. The run time is proportional to <span class="math inline">\(n^3\)</span>, and roundoff error can be an issue. Sophisticated algorithms have been developed, such as QR and Choleski decompositions. So in R, we should use, say, <strong>qr.solve</strong> rather than <strong>solve</strong> if we are working with sizable matrices.</p>
+<p>Finding the inverse of a large matrix – in data science applications, the number of rows and columns <span class="math inline">\(n\)</span> can easily be hundreds or more – can be computationally challenging. The run time is proportional to <span class="math inline">\(n^3\)</span>, and roundoff error can be an issue. Sophisticated algorithms have been developed, such as the QR decompositions. So in R, we should use, say, <strong>qr.solve</strong> rather than <strong>solve</strong> if we are working with sizable matrices, or even use methods that do not directly compute the inverse.</p>
 <p>The classic “pencil and paper” method for matrix inversion is instructive, and will be presented here.</p>
 <section id="sec-pencilpaper" class="level3" data-number="3.5.1">
 <h3 data-number="3.5.1" class="anchored" data-anchor-id="sec-pencilpaper"><span class="header-section-number">3.5.1</span> Pencil-and-paper computation</h3>
+<p>Note: Some readers will notice some similarity here with elementary methods they learned in high school, but actually the treatment here is much more sophisticated. It will play an important practical and theoretical role in <a href="Ch4.html" class="quarto-xref"><span>Chapter 6</span></a>.</p>
 <p>The basic idea follows the pattern the reader learned for solving systems of linear equations, but with the added twist of involving some matrix multiplication.</p>
 <p>Let’s take as our example</p>
 <p><span class="math display">\[
@@ -688,7 +672,7 @@ E_4 E_3 E_2 E_1 A
 <p><span class="math display">\[
 (E_4 E_3 E_2 E_1) A = I
 \]</span></p>
-<p>Aha! We have found the inverse of <span class="math inline">\(A\)</span>–it’s <span class="math inline">\(E_4 E_3 E_2 E_1\)</span>.</p>
+<p>Aha! We have found the inverse of <span class="math inline">\(A\)</span> – it’s <span class="math inline">\(E_4 E_3 E_2 E_1\)</span>.</p>
 <div class="page-columns page-full"><p>Note too that</p><div class="no-row-height column-margin column-container"><span class="">Recall that the inverse of a product (if it exists is the reverse product of the inverses.</span></div></div>
 <p><span class="math display">\[
 A = (E_4 E_3 E_2 E_1)^{-1} I = E_4^{-1} E_3^{-1} E_2^{-1} E_1^{-1}
@@ -737,19 +721,19 @@ A =
 \end{array}
 \right )
 \]</span></p>
-<p>This cannot lead to <span class="math inline">\(i\)</span>, indicating that <span class="math inline">\(A^{-1}\)</span> does not exist, and the matrix is said to be <em>singular</em>. And it’s no coincidence that row 2 of <span class="math inline">\(A\)</span> is double row 1. This has many implications, as will be seen in our chapter on vector spaces.</p>
+<p>This cannot lead to <span class="math inline">\(I\)</span>, indicating that <span class="math inline">\(A^{-1}\)</span> does not exist, and the matrix is said to be <em>singular</em>. And it’s no coincidence that row 2 of <span class="math inline">\(A\)</span> is double row 1. This has many implications, as will be seen in our chapter on vector spaces.</p>
 </section>
 <section id="determinants" class="level2" data-number="3.7">
 <h2 data-number="3.7" class="anchored" data-anchor-id="determinants"><span class="header-section-number">3.7</span> Determinants</h2>
-<p>This is a topic that is quite straightforward and traditional, even old-fashioned–in fact, <em>too</em> old-fashioned, according to mathematician Sheldon Axler. The theme of his book, <em>Linear Algebra Done Right</em>, is that determinants are overemphasized. He relegates the topic to the very end of the book. Yet determinants do appear often in applied linear algebra settings. Moreover, they will be convenient to use in explaing very concepts in this book on linear algebra in <em>Data Science</em>.</p>
+<p>This is a topic that is quite straightforward and traditional, even old-fashioned – in fact, <em>too</em> old-fashioned, according to mathematician Sheldon Axler. The theme of his book, <em>Linear Algebra Done Right</em>, is that determinants are overemphasized. He relegates the topic to the very end of the book. Yet determinants do appear often in applied linear algebra settings. Moreover, they will be convenient to use in explaining concepts in this book on linear algebra in <em>Data Science</em>.</p>
 <p>But why place the topic in this particular chapter? The answer lies in the fact that earlier in this chapter we had the proviso “If <span class="math inline">\((A'A)^{-1}\)</span> exists.” The following property of determinants is then relevant:</p>
 <blockquote class="blockquote">
 <p>A square matrix <span class="math inline">\(G\)</span> is invertible if and only if <span class="math inline">\(det(G) \neq 0\)</span>.</p>
 </blockquote>
-<p>There are better ways to ascertain invertibility than this, but it is conceptually helpful. Determinants play a similar role in the topic of eigenvectors in Chapter 5.</p>
+<p>There are better ways to ascertain invertibility than this, but it is conceptually helpful. Determinants play a similar role in the topic of eigenvectors in <a href="Ch6a.html" class="quarto-xref"><span>Chapter 11</span></a>.</p>
 <section id="sec-detdef" class="level3" data-number="3.7.1">
 <h3 data-number="3.7.1" class="anchored" data-anchor-id="sec-detdef"><span class="header-section-number">3.7.1</span> Definition</h3>
-<p>The standard definition is one of the ugliest, in all of mathematics. Instead we will define the term using one of the methods for calculating determinants.</p>
+<p>The standard definition is one of the ugliest in all of mathematics. Instead we will define the term using one of the methods for calculating determinants.</p>
 <blockquote class="blockquote">
 <p>Consider an <span class="math inline">\(r \textrm{ x } r\)</span> matrix <span class="math inline">\(G\)</span>. For <span class="math inline">\(r = 2\)</span>, write <span class="math inline">\(G\)</span> as</p>
 <p><span class="math display">\[
@@ -762,7 +746,7 @@ c &amp; d  \\
 \right )
 \]</span></p>
 <p>and define <span class="math inline">\(\det(G)\)</span> to be <span class="math inline">\(ad -bc\)</span>. For <span class="math inline">\(r &gt; 2\)</span>, define submatrices as follows.</p>
-<p><span class="math inline">\(G_i\)</span> is the <span class="math inline">\((r-1) \textrm{ x } (r-1)\)</span> submatrix obtained by removing row 1 and column <span class="math inline">\(j\)</span> from <span class="math inline">\(G\)</span>. Then <span class="math inline">\(\det(G)\)</span> is defined recursively as</p>
+<p><span class="math inline">\(G_j\)</span> is the <span class="math inline">\((r-1) \textrm{ x } (r-1)\)</span> submatrix obtained by removing row 1 and column <span class="math inline">\(j\)</span> from <span class="math inline">\(G\)</span>. Then <span class="math inline">\(\det(G)\)</span> is defined recursively as</p>
 <p><span class="math display">\[
 \sum_{i=1}^r (-1)^{i+1} \det(G_i)
 \]</span></p>
@@ -806,46 +790,37 @@ aei + bfg + cdh - afh - bdi - ceg
 </ul>
 </section>
 </section>
-<section id="sec-mvn" class="level2" data-number="3.8">
-<h2 data-number="3.8" class="anchored" data-anchor-id="sec-mvn"><span class="header-section-number">3.8</span> The Multivariate Normal Distribution Family</h2>
-<p>The familiar “bell-shaped curve” refers to the <em>normal</em> (or <em>Gaussian</em>) family, whose densities have the form</p>
-<p><span class="math display">\[
-\frac{1}{\sigma \sqrt{2 \pi}}
-e^{-0.5 (\frac{t-\mu}{\sigma})^2}
-\]</span></p>
-<p>The values of <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> are the mean and standard deviation. But what if we have a random vector, say of length <span class="math inline">\(k\)</span>? Is there a generalized normal family?</p>
-<section id="example-k-2" class="level3" data-number="3.8.1">
-<h3 data-number="3.8.1" class="anchored" data-anchor-id="example-k-2"><span class="header-section-number">3.8.1</span> Example: k = 2</h3>
-<p>The answer is yes. Here is an example for <span class="math inline">\(k = 2\)</span>:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="Bell.png" class="img-fluid figure-img"></p>
-<figcaption>3D bell density</figcaption>
-</figure>
-</div>
-</section>
-<section id="general-form" class="level3" data-number="3.8.2">
-<h3 data-number="3.8.2" class="anchored" data-anchor-id="general-form"><span class="header-section-number">3.8.2</span> General form</h3>
-<p>Well, then, what is the form of the <span class="math inline">\(k\)</span>-dimensional density function? Just as the univariate normal family is parameterized by mean and variance, the multivariate one is parameterized via its mean vector <span class="math inline">\(\mu\)</span> and a <em>covariance matrix</em> <span class="math inline">\(\Sigma\)</span>, a term we will define in a later chapter. The specific form is</p>
-<p><span class="math display">\[
-(2\pi)^{-k/2} \det(\Sigma)^{-k/2}
-e^{-0.5 (t-\mu)'(\Sigma)^{-1}(t-\mu)}
-\]</span></p>
-<p>Note the intuition:</p>
-<ul>
-<li><p>Instead of <span class="math inline">\(1/\sigma^2\)</span>, i.e.&nbsp;instead of dividing by variance, we “divide by <span class="math inline">\(\Sigma\)</span>,” intuitively viewing matrix inverse as a “reciprocal” of a matrix.</p></li>
-<li><p>In other words, covariance matrices operate roughly like generalized variances.</p></li>
-<li><p>Instead of squaring the scalar <span class="math inline">\(t - \mu\)</span>, we “square” it in the vector case by peforming a <span class="math inline">\(w'w\)</span> operation, albeit with <span class="math inline">\(\Sigma^{-1}\)</span> in the middle.</p></li>
-</ul>
-<p>Clearly, we should not stretch these analogies very far, but they do help our intuition here.</p>
-<p>We’ll go into this further in <a href="Ch2a.html" class="quarto-xref"><span>Chapter 4</span></a>.</p>
-</section>
-</section>
-<section id="your-turn" class="level2" data-number="3.9">
-<h2 data-number="3.9" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">3.9</span> Your Turn</h2>
-<p>❄️ <strong>Your Turn:</strong> Prove the assertions in <a href="#sec-matalg" class="quarto-xref"><span>Section 3.4</span></a>. Note that for the identity matrix <span class="math inline">\(I\)</span>, <span class="math inline">\(I' = I\)</span>.</p>
+<section id="your-turn" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">3.8</span> Your Turn</h2>
 <p>❄️ <strong>Your Turn:</strong> In <a href="#sec-elemmats" class="quarto-xref"><span>Section 3.5.2</span></a>, find the inverses of <span class="math inline">\(E_3\)</span> and <span class="math inline">\(E_4\)</span> using similar reasoning, and thus find <span class="math inline">\(A^{-1}\)</span>.</p>
+<p>❄️ <strong>Your Turn:</strong> In <a href="#eq-randwalkP" class="quarto-xref">Equation&nbsp;<span>3.7</span></a>, consider the variant</p>
+<p><span id="eq-randwalkP"><span class="math display">\[
+P =
+\left (
+\begin{array}{rrrrr}
+0.5 &amp; 0.5 &amp; 0 &amp; 0 &amp; 0\\
+0.5 &amp; 0 &amp; 0.5 &amp; 0 &amp; 0\\
+0 &amp; 0.5 &amp; 0 &amp; 0.5 &amp; 0\\
+0 &amp; 0 &amp; 0.5 &amp; 0 &amp; 0.5\\
+0 &amp; 0 &amp; 0 &amp; 1.0 &amp; 0.0 \\
+\end{array}
+\right )
+\tag{3.7}\]</span></span></p>
+<p>Here, the walker at state 5 immediately “bounces back” to state 4, rather than remaining at state 5 for one or more epochs.</p>
+<p>In the original chain, we found that <span class="math inline">\(\nu = (0.2,0.2,0.2,0.2,0.2)'\)</span>. Speculate as to the effect on <span class="math inline">\(\nu_5\)</span> of the above change in model. Then investigate to determine if our speculation was correct.</p>
+<p>❄️ <strong>Your Turn:</strong> Consider a Markov chain with transition probability matrix</p>
+<p><span class="math display">\[
+P =
+\left (
+\begin{array}{rr}
+0 &amp; 1 \\
+1 &amp; 0  \\
+\end{array}
+\right )
+\]</span></p>
+<p>This chain is termed <em>periodic</em>, with period 2. It alternates between states 1 and 2, and thus a long-run distribution <span class="math inline">\(\nu\)</span> does not exist. That would suggest the <span class="math inline">\(I-P'\)</span> noninvertible. Confrim this.</p>
 <p>❄️ <strong>Your Turn:</strong> If you are familiar with recursive calls, write a function <span class="math inline">\(\verb+dt(a)+\)</span> to compute the determinant of a square matrix <span class="math inline">\(A\)</span>.</p>
+<p>❄️ <strong>Your Turn:</strong> Prove the assertions in <a href="#sec-matalg" class="quarto-xref"><span>Section 3.4</span></a>. Note that for the identity matrix <span class="math inline">\(I\)</span>, <span class="math inline">\(I' = I\)</span>.</p>
 <p>❄️ <strong>Your Turn:</strong> The determinant of a 3 x 3 matrix</p>
 <p><span class="math display">\[
 M =
@@ -862,14 +837,6 @@ g &amp; h &amp; i \\
 aei+bfg+cdh-ceg-bdi-afh
 \]</span></p>
 <p>Suppose the elements of <span class="math inline">\(M\)</span> are independent random variables with uniform distributions on (0,1). Argue that P(M is invertible) = 1.</p>
-<p>❄️ <strong>Your Turn:</strong> Show that in the scalar context,</p>
-<p><span class="math display">\[
-Cov(X,Y) = E(XY) - EX ~ EY
-\]</span></p>
-<p>❄️ <strong>Your Turn:</strong> Show that in the vector context,</p>
-<p><span class="math display">\[
-Cov(X) = E(X X') - (EX) (EX)'
-\]</span></p>
 
 
 </section>

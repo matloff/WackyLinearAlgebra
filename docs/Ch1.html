@@ -282,12 +282,14 @@ window.Quarto = {
   <li><a href="#the-identity-matrix" id="toc-the-identity-matrix" class="nav-link" data-scroll-target="#the-identity-matrix"><span class="header-section-number">2.5</span> The Identity Matrix</a></li>
   <li><a href="#sec-introMCs" id="toc-sec-introMCs" class="nav-link" data-scroll-target="#sec-introMCs"><span class="header-section-number">2.6</span> Application to Markov Chain Transition Matrices</a></li>
   <li><a href="#network-graph-models" id="toc-network-graph-models" class="nav-link" data-scroll-target="#network-graph-models"><span class="header-section-number">2.7</span> Network Graph Models</a></li>
-  <li><a href="#sec-recsys" id="toc-sec-recsys" class="nav-link" data-scroll-target="#sec-recsys"><span class="header-section-number">2.8</span> Recommender Systems</a></li>
-  <li><a href="#matrix-algebra" id="toc-matrix-algebra" class="nav-link" data-scroll-target="#matrix-algebra"><span class="header-section-number">2.9</span> Matrix Algebra</a>
+  <li><a href="#example-karate-club" id="toc-example-karate-club" class="nav-link" data-scroll-target="#example-karate-club"><span class="header-section-number">2.8</span> Example: Karate Club</a></li>
+  <li><a href="#the-role-of-matrix-multiplication-in-network-graph-models" id="toc-the-role-of-matrix-multiplication-in-network-graph-models" class="nav-link" data-scroll-target="#the-role-of-matrix-multiplication-in-network-graph-models"><span class="header-section-number">2.9</span> The Role of Matrix Multiplication in Network Graph Models</a></li>
+  <li><a href="#sec-recsys" id="toc-sec-recsys" class="nav-link" data-scroll-target="#sec-recsys"><span class="header-section-number">2.10</span> Recommender Systems</a></li>
+  <li><a href="#matrix-algebra" id="toc-matrix-algebra" class="nav-link" data-scroll-target="#matrix-algebra"><span class="header-section-number">2.11</span> Matrix Algebra</a>
   <ul class="collapse">
-  <li><a href="#other-basic-operations" id="toc-other-basic-operations" class="nav-link" data-scroll-target="#other-basic-operations"><span class="header-section-number">2.9.1</span> Other basic operations</a></li>
-  <li><a href="#sec-transpose" id="toc-sec-transpose" class="nav-link" data-scroll-target="#sec-transpose"><span class="header-section-number">2.9.2</span> Matrix transpose</a></li>
-  <li><a href="#sec-trace" id="toc-sec-trace" class="nav-link" data-scroll-target="#sec-trace"><span class="header-section-number">2.9.3</span> Trace of a square matrix</a></li>
+  <li><a href="#other-basic-operations" id="toc-other-basic-operations" class="nav-link" data-scroll-target="#other-basic-operations"><span class="header-section-number">2.11.1</span> Other basic operations</a></li>
+  <li><a href="#sec-transpose" id="toc-sec-transpose" class="nav-link" data-scroll-target="#sec-transpose"><span class="header-section-number">2.11.2</span> Matrix transpose</a></li>
+  <li><a href="#sec-trace" id="toc-sec-trace" class="nav-link" data-scroll-target="#sec-trace"><span class="header-section-number">2.11.3</span> Trace of a square matrix</a></li>
   </ul></li>
   <li><a href="#partitioned-matrices-an-invaluable-visualization-tool" id="toc-partitioned-matrices-an-invaluable-visualization-tool" class="nav-link" data-scroll-target="#partitioned-matrices-an-invaluable-visualization-tool"><span class="header-section-number">3</span> Partitioned Matrices: an Invaluable Visualization Tool</a>
   <ul class="collapse">
@@ -580,15 +582,17 @@ P \nu = \nu
 \tag{2.1}\]</span></span></p>
 <p>where <span class="math inline">\(P\)</span> is the transition matrix for the Markov chain.</p>
 </section>
-<section id="network-graph-models" class="level2 page-columns page-full" data-number="2.7">
+<section id="network-graph-models" class="level2" data-number="2.7">
 <h2 data-number="2.7" class="anchored" data-anchor-id="network-graph-models"><span class="header-section-number">2.7</span> Network Graph Models</h2>
 <p>There has always been lots of analysis of “Who is connected to whom,” but activity soared after the advent of Facebook and the film, <em>A Social Network.</em> See for instance <em>Statistical Analysis of Network Data with R</em> by Eric Kolaczy and Gábor Csárdi. As the authors say,</p>
 <blockquote class="blockquote">
 <p>The oft-repeated statement that “we live in a connected world” perhaps best captures, in its simplicity why networks have come to hold such interest in recent years. From on-line social networks like Facebook to the World Wide Web and the Internet itself, we are surrounded by examples of ways in which we interact with each other. Similarly, we are connected as well at the level of various human institutions (e.g., governments), processes (e.g., economies), and infrastructures (e.g., the global airline network). And, of course, humans are surely not unique in being members of various complex, inter-connected systems. Looking at the natural world around us, we see a wealth of examples of such systems, from entire eco-systems, to biological food webs, to collections of inter-acting genes or communicating neurons.</p>
 </blockquote>
 <p>And of course, at the center of it all is a matrix! Here is why:</p>
+</section>
+<section id="example-karate-club" class="level2 page-columns page-full" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="example-karate-club"><span class="header-section-number">2.8</span> Example: Karate Club</h2>
 <p>Let’s consider the famous Karate Club dataset:</p>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class=""></span></div></div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remotes::install_github("schochastics/networkdata") </span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(networkdata)</span>
@@ -652,6 +656,9 @@ P \nu = \nu
 </div>
 </div>
 <p>Accordingly, row 13, column 4 does have a 1 entry.</p>
+</section>
+<section id="the-role-of-matrix-multiplication-in-network-graph-models" class="level2" data-number="2.9">
+<h2 data-number="2.9" class="anchored" data-anchor-id="the-role-of-matrix-multiplication-in-network-graph-models"><span class="header-section-number">2.9</span> The Role of Matrix Multiplication in Network Graph Models</h2>
 <p>As is the case with Markov transition matrices, powers of an adjacency matrix can yield valuable information. In the Markov case, multiplication gives us sums of paired products, computing probabilities. What about the network graph case?</p>
 <p>Here products are of the form 0x0, 0x1, 1x0 or 1x1. If there is a nonzero entry m in row i, column j of the square of the adjacency matrix, that means there were m 1x1 products in that sum, which would correspond to m paths. Let’s look into this.</p>
 <div class="cell">
@@ -671,8 +678,8 @@ P \nu = \nu
 <p>So, in that graph representing paths of 33 links, there are no 0s. In this graph, no pair of nodes has 0 paths between them. The graph is connected.</p>
 <p>Making this kind of analysis fully correct requires paying attention to things such as cycles. The details are beyond the scope of this book.</p>
 </section>
-<section id="sec-recsys" class="level2 page-columns page-full" data-number="2.8">
-<h2 data-number="2.8" class="anchored" data-anchor-id="sec-recsys"><span class="header-section-number">2.8</span> Recommender Systems</h2>
+<section id="sec-recsys" class="level2 page-columns page-full" data-number="2.10">
+<h2 data-number="2.10" class="anchored" data-anchor-id="sec-recsys"><span class="header-section-number">2.10</span> Recommender Systems</h2>
 <p>If you inquire about some item at an online store, the software will also present you with some related items that it thinks would be of interest to you. How does the software make this guess?</p>
 <p>Clearly, the full answer is quite complex. But we can begin to see the process by looking at some real data.</p>
 <div class="cell">
@@ -721,10 +728,10 @@ P \nu = \nu
 <p>In order to assess interuser similarity of the nature described above, we might form a matrix <span class="math inline">\(S\)</span>, as follows. There would be 943 rows, one for each user, and 1682 columns, one for each movie. The element in row <span class="math inline">\(i\)</span>, column <span class="math inline">\(j\)</span> would be the rating user <span class="math inline">\(i\)</span> gave to movie <span class="math inline">\(j\)</span>. Most of the matrix would be 0s.</p>
 <p>The point of constructing <span class="math inline">\(S\)</span> is that determining the similarity of users becomes a matter of measuring similarity of rows of <span class="math inline">\(S\)</span>. This paves the way to exploiting the wealth of matrix-centric methodology we will develop in this book.</p>
 </section>
-<section id="matrix-algebra" class="level2" data-number="2.9">
-<h2 data-number="2.9" class="anchored" data-anchor-id="matrix-algebra"><span class="header-section-number">2.9</span> Matrix Algebra</h2>
-<section id="other-basic-operations" class="level3" data-number="2.9.1">
-<h3 data-number="2.9.1" class="anchored" data-anchor-id="other-basic-operations"><span class="header-section-number">2.9.1</span> Other basic operations</h3>
+<section id="matrix-algebra" class="level2" data-number="2.11">
+<h2 data-number="2.11" class="anchored" data-anchor-id="matrix-algebra"><span class="header-section-number">2.11</span> Matrix Algebra</h2>
+<section id="other-basic-operations" class="level3" data-number="2.11.1">
+<h3 data-number="2.11.1" class="anchored" data-anchor-id="other-basic-operations"><span class="header-section-number">2.11.1</span> Other basic operations</h3>
 <p>Matrix multiplication may seem odd at first, but other operations are straightforward.</p>
 <p><strong>Addition:</strong> We just add corresponding elements. For instance,</p>
 <p><span class="math display">\[
@@ -765,8 +772,8 @@ A+B = \left (
 <p>For matrices A, B and C of suitable conformability (A and B match in numbers of rows and columns, and their common number of columns matches the number of rows in C), we have</p>
 <p>(A+B) C = AC + BC</p>
 </section>
-<section id="sec-transpose" class="level3" data-number="2.9.2">
-<h3 data-number="2.9.2" class="anchored" data-anchor-id="sec-transpose"><span class="header-section-number">2.9.2</span> Matrix transpose</h3>
+<section id="sec-transpose" class="level3" data-number="2.11.2">
+<h3 data-number="2.11.2" class="anchored" data-anchor-id="sec-transpose"><span class="header-section-number">2.11.2</span> Matrix transpose</h3>
 <p>This is a very simple but very important operation: We merely exchange rows and columns of the given matrix. For instance, with A as above, its transpose (signified with “’”), is</p>
 <p><span class="math display">\[
 A' = \left (
@@ -785,8 +792,8 @@ A' = \left (
 <p>For some matrices <span class="math inline">\(C\)</span>, we have <span class="math inline">\(C' = C\)</span>. <span class="math inline">\(C\)</span> is then termed <em>symmetric</em>.</p>
 <p>We will often write a row vector in the form (a,b,c,…). So (5,1,88) means the 1x3 matrix with those elements. If we wish this to be a column vector, we use transpose, so that for instance (5,1,88)’ means a 3x1 matrix.</p>
 </section>
-<section id="sec-trace" class="level3" data-number="2.9.3">
-<h3 data-number="2.9.3" class="anchored" data-anchor-id="sec-trace"><span class="header-section-number">2.9.3</span> Trace of a square matrix</h3>
+<section id="sec-trace" class="level3" data-number="2.11.3">
+<h3 data-number="2.11.3" class="anchored" data-anchor-id="sec-trace"><span class="header-section-number">2.11.3</span> Trace of a square matrix</h3>
 <p>The <em>trace</em> of a square matrix <span class="math inline">\(A\)</span> is the sum of its diagonal elements, <span class="math inline">\(tr(A) = \sum_{i=1}^n A_{ii}\)</span>. This measure has various properties, some obvious (trace of the sum is sum of the traces), and some less so, such as:</p>
 <div id="thm-trabba" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 2.1</strong></span> Suppose <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are square matrices of the same size. Then</p>

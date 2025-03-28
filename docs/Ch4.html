@@ -295,7 +295,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Matrix Rank</span></h1>
+<h1 class="title"><span id="sec-matrank" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Matrix Rank</span></span></h1>
 </div>
 
 
@@ -455,17 +455,17 @@ woman   0   0       0   0     0</code></pre>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">runif</span>(<span class="dv">12</span>),<span class="at">nrow=</span><span class="dv">3</span>)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>          [,1]      [,2]      [,3]      [,4]
-[1,] 0.4754534 0.9378369 0.7927951 0.6913547
-[2,] 0.2812541 0.1666264 0.3177892 0.3639120
-[3,] 0.7266709 0.3262761 0.7379232 0.2138649</code></pre>
+<pre><code>          [,1]      [,2]      [,3]       [,4]
+[1,] 0.3844185 0.1128639 0.7511356 0.37938145
+[2,] 0.6928958 0.7569128 0.5079866 0.01622097
+[3,] 0.7032335 0.7111930 0.2007781 0.31041177</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>e <span class="sc">%*%</span> a  <span class="co"># matrix mult. is NOT e * a!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>          [,1]      [,2]      [,3]      [,4]
-[1,] 0.4754534 0.9378369 0.7927951 0.6913547
-[2,] 0.7266709 0.3262761 0.7379232 0.2138649
-[3,] 0.2812541 0.1666264 0.3177892 0.3639120</code></pre>
+<pre><code>          [,1]      [,2]      [,3]       [,4]
+[1,] 0.3844185 0.1128639 0.7511356 0.37938145
+[2,] 0.7032335 0.7111930 0.2007781 0.31041177
+[3,] 0.6928958 0.7569128 0.5079866 0.01622097</code></pre>
 </div>
 </div>
 <p>Yes, rows 2 and 3 were swapped.</p>

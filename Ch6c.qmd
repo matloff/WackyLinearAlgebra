@@ -308,6 +308,7 @@ columns of $U_1$ and $V_1$. Why do this?
 * Reduce noise, again for example with images. Small blotches are
   smoothed out.
 
+## Example: Image Compression
 
 ## Matrix Factorization in Recommender Systems
 

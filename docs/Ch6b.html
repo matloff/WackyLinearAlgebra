@@ -278,7 +278,7 @@ window.Quarto = {
   <li><a href="#the-second-third-etc.-pcs" id="toc-the-second-third-etc.-pcs" class="nav-link active" data-scroll-target="#the-second-third-etc.-pcs"><span class="header-section-number">12.0.1</span> The second, third etc. PCs</a></li>
   <li><a href="#properties" id="toc-properties" class="nav-link" data-scroll-target="#properties"><span class="header-section-number">12.1</span> Properties</a></li>
   <li><a href="#sec-eiglm" id="toc-sec-eiglm" class="nav-link" data-scroll-target="#sec-eiglm"><span class="header-section-number">12.2</span> Eigenanalysis Relation between <span class="math inline">\(A\)</span> and <span class="math inline">\(Cov(X)\)</span> in Linear Regression</a></li>
-  <li><a href="#back-to-the-african-soils-example" id="toc-back-to-the-african-soils-example" class="nav-link" data-scroll-target="#back-to-the-african-soils-example"><span class="header-section-number">12.3</span> Back to the African Soils Example</a></li>
+  <li><a href="#sec-backtoafrica" id="toc-sec-backtoafrica" class="nav-link" data-scroll-target="#sec-backtoafrica"><span class="header-section-number">12.3</span> Back to the African Soils Example</a></li>
   <li><a href="#sec-detect" id="toc-sec-detect" class="nav-link" data-scroll-target="#sec-detect"><span class="header-section-number">12.4</span> PCA in Detection of Multicollinearity</a></li>
   <li><a href="#sec-prob0" id="toc-sec-prob0" class="nav-link" data-scroll-target="#sec-prob0"><span class="header-section-number">12.5</span> An Important Property of All-Numeric Predictor Data</a></li>
   <li><a href="#how-many-principal-components-should-we-use" id="toc-how-many-principal-components-should-we-use" class="nav-link" data-scroll-target="#how-many-principal-components-should-we-use"><span class="header-section-number">12.6</span> How Many Principal Components Should We Use?</a>
@@ -294,7 +294,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Principal Components</span></h1>
+<h1 class="title"><span id="sec-pca" class="quarto-section-identifier"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Principal Components</span></span></h1>
 </div>
 
 
@@ -383,8 +383,8 @@ Au = 0
 <p>The same argument works in reverse. If <span class="math inline">\(Au = 0\)</span>, we fine that <span class="math inline">\(Var(u'X)
 = 0\)</span>, and since the eigenvalues of <span class="math inline">\(Cov(X)\)</span> are variances of linear combinations of <span class="math inline">\(X\)</span>, we see that one of those variances is 0.</p>
 </section>
-<section id="back-to-the-african-soils-example" class="level2" data-number="12.3">
-<h2 data-number="12.3" class="anchored" data-anchor-id="back-to-the-african-soils-example"><span class="header-section-number">12.3</span> Back to the African Soils Example</h2>
+<section id="sec-backtoafrica" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="sec-backtoafrica"><span class="header-section-number">12.3</span> Back to the African Soils Example</h2>
 <p>So, we remove the ``Y’’ variable, <strong>pH</strong>, number 3598 as seen above, and proceed. We will also remove the nonnumeric columns, <strong>PIDN</strong> and <strong>Depth</strong>. We could use R’s <strong>prcomp</strong> function here, but to better illustrate the concepts, we do things from scratch.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(WackyData)</span>
@@ -592,6 +592,7 @@ A_1 &amp; 0 &amp; 0 ... \\
 <p>❄️ <strong>Your Turn:</strong> Write an R function with call form</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bestPCAPred</span>(data,yName)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>It will apply PCA to the X portion of <strong>data</strong>, then apply <strong>lm</strong> successivly to the first PC, then the first two, then the first three and so on assessing with cross-validation in each case. It will then return the number of PCs (and the PCs themselves) that predicts best. Try your function on various datasets.</p>
+<p>❄️ <strong>Your Turn:</strong> Say the symmetric <span class="math inline">\(n \textrm{ x } n\)</span> matrix <span class="math inline">\(A\)</span> has rank <span class="math inline">\(r\)</span>. Show that <span class="math inline">\(n-r\)</span> of its eigenvalues are 0s.</p>
 
 
 </section>

@@ -373,7 +373,7 @@ X_5 \\
 <section id="sample-vs.-population" class="level3" data-number="4.1.1">
 <h3 data-number="4.1.1" class="anchored" data-anchor-id="sample-vs.-population"><span class="header-section-number">4.1.1</span> Sample vs.&nbsp;population</h3>
 <p>We may observe <span class="math inline">\(n\)</span> realizations of <span class="math inline">\(X\)</span> in the form of sample data, say on <span class="math inline">\(n = 100\)</span> people. In the statistics world, we treat this data as a random sample from some population, say all Americans. Usually, we are just given the data rather then having actual random sampling, but this view recognizes that there are a lot more people out there than our data.</p>
-<p>We speak of estimating population quantities. For instance, we can estimate the population value $E(X1), i.e.&nbsp;mean of <span class="math inline">\(X_1\)</span> throughout the population, by the sammple analog,</p>
+<p>We speak of estimating population quantities. For instance, we can estimate the population value E(X1), i.e.&nbsp;mean of <span class="math inline">\(X_1\)</span> throughout the population, by the sample analog,</p>
 <p><span class="math display">\[
 \frac{1}{n} \sum_{i=1}^n X_{1j}
 \]</span></p>
@@ -541,10 +541,10 @@ e^{-0.5 (\frac{t-\mu}{\sigma})^2}
 <section id="general-form" class="level3" data-number="4.3.2">
 <h3 data-number="4.3.2" class="anchored" data-anchor-id="general-form"><span class="header-section-number">4.3.2</span> General form</h3>
 <p>Well, then, what is the form of the <span class="math inline">\(k\)</span>-dimensional density function? Just as the univariate normal family is parameterized by mean and variance, the multivariate one is parameterized via mean vector <span class="math inline">\(\mu\)</span> and covariance matrix <span class="math inline">\(\Sigma\)</span>. The form is</p>
-<p><span class="math display">\[
+<p><span id="eq-mvndensity"><span class="math display">\[
 (2\pi)^{-k/2} \det(\Sigma)^{-k/2}
 e^{-0.5 (t-\mu)'(\Sigma)^{-1}(t-\mu)}
-\]</span></p>
+\tag{4.6}\]</span></span></p>
 <p>Note the intuition:</p>
 <ul>
 <li><p>Instead of <span class="math inline">\(1/\sigma^2\)</span>, i.e.&nbsp;instead of dividing by variance, we “divide by <span class="math inline">\(\Sigma\)</span>,” intuitively viewing matrix inverse as a “reciprocal” of a matrix.</p></li>
@@ -575,7 +575,7 @@ e^{-0.5 (t-\mu)'(\Sigma)^{-1}(t-\mu)}
 <p><span class="proof-title"><em>Proof</em>. </span>Again, perform direct evaluation of the density.</p>
 <p><span class="math inline">\(\square\)</span></p>
 </div>
-<div id="thm-cw" class="theorem">
+<div id="thm-mvuvnormal" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 4.3 (Cramer-Wold Theorem)</strong></span> A random vector <span class="math inline">\(X\)</span> has a multivariate normal distribution if and only if <span class="math inline">\(w'X\)</span> has a univariate normal distribution for all conformable nonrandom vectors <span class="math inline">\(w\)</span>.</p>
 </div>
 <div class="proof">
@@ -593,10 +593,10 @@ W_n = \sqrt{n} (\bar{X} - \mu)
 \]</span></p>
 <div class="page-columns page-full"><p>goes to multivariate normal with the 0 vector as mean and covariance matrix <span class="math inline">\(\Sigma\)</span>.</p><div class="no-row-height column-margin column-container"><span class="">The usual form would involve the “square root” of a matrix, but we will not discuss that concept until our chapter on inner product spaces.</span></div></div>
 </div>
-<p>` ::: {.proof}</p>
-<p><span class="quarto-unresolved-ref">?thm-mvuvnormal</span> reduces the problem to the univariate case, where we know the Central Limit Theorem holds.</p>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span><a href="#thm-mvuvnormal" class="quarto-xref">Theorem&nbsp;<span>4.3</span></a> reduces the problem to the univariate case, where we know the Central Limit Theorem holds.</p>
 <p><span class="math inline">\(\square\)</span></p>
-<p>:::</p>
+</div>
 </section>
 </section>
 <section id="multinomial-random-vectors-have-approximate-multivariate-normal-distributions" class="level2" data-number="4.4">
@@ -634,7 +634,7 @@ I_{ik}  \\
 <p>The key is that</p>
 <p><span id="eq-sumindic"><span class="math display">\[
 X = \sum_{i=1}^n I_i
-\tag{4.6}\]</span></span></p>
+\tag{4.7}\]</span></span></p>
 <p>For instance, in the die-rolling example, the first component on the right-hand side is the number of rolls in which we got 1 dot, and that is by definition the same as <span class="math inline">\(N_1\)</span>, the first component of <span class="math inline">\(X\)</span>.</p>
 <p>So there we have it – <span class="math inline">\(X\)</span> is a sum of independent, identically distributed random vectors, so by the Multivariate Central Limit Theorem, <span class="math inline">\(X\)</span> has an approximate multivariate normal distribution. Now, what are the mean vector and covariance matrix in that distribution?</p>
 <p>From our discussion above, we know that</p>
@@ -648,7 +648,7 @@ np_k \\
 \end{array}
 \right )
 \]</span></p>
-<p>What about <span class="math inline">\(Cov(X)\)</span>? Again, recognizing that <a href="#eq-sumindic" class="quarto-xref">Equation&nbsp;<span>4.6</span></a> is a sum of independent terms, <a href="#eq-indepcov" class="quarto-xref">Equation&nbsp;<span>4.3</span></a> tells us that</p>
+<p>What about <span class="math inline">\(Cov(X)\)</span>? Again, recognizing that <a href="#eq-sumindic" class="quarto-xref">Equation&nbsp;<span>4.7</span></a> is a sum of independent terms, <a href="#eq-indepcov" class="quarto-xref">Equation&nbsp;<span>4.3</span></a> tells us that</p>
 <p><span class="math display">\[
 Cov(X) = Cov(\sum_{i=1}^n I_i) = \sum_{i=1}^n Cov(I_i) = n Cov(I_1),
 \]</span></p>
@@ -656,7 +656,7 @@ Cov(X) = Cov(\sum_{i=1}^n I_i) = \sum_{i=1}^n Cov(I_i) = n Cov(I_1),
 <p>Now to evaluate that covariance matrix, consider two specific elements <span class="math inline">\(I_{1j}\)</span> and <span class="math inline">\(I_{im}\)</span> of <span class="math inline">\(I_1\)</span>. Recall, those elements are equal to 1 or 0, depending on whether the first trial results in Categories j and m, respectively. Then what is <span class="math inline">\(Cov(I_{1j},I_{1m})\)</span>? From <a href="#eq-covuv" class="quarto-xref">Equation&nbsp;<span>4.1</span></a>, we have</p>
 <p><span id="eq-covjm"><span class="math display">\[
 Cov(I_{1j},I_{1m}) = E(I_{1j} I_{1m}) - (EI_{1j}) (EI_{1m})
-\tag{4.7}\]</span></span></p>
+\tag{4.8}\]</span></span></p>
 <p>Consider the two cases:</p>
 <ul>
 <li><span class="math inline">\(i=j\)</span>: Here <span class="math inline">\(E(I_{1j}^2) = E(I_{1j}) = p_j\)</span>. Thus</li>
@@ -724,7 +724,7 @@ W \approx log(\mu) + log'(\mu) (\bar{X}-\mu)
 <p>Now, what if the function <span class="math inline">\(f\)</span> has two arguments instead of one? The above linear approximation is now</p>
 <p><span id="eq-twotaylor"><span class="math display">\[
 f(v,w) \approx f(v_0,w_0) + f_1(v_0,w_0) (v-v_0) + f_2(v_0,w_0)(w-w_0)
-\tag{4.8}\]</span></span></p>
+\tag{4.9}\]</span></span></p>
 <div class="page-columns page-full"><p>where <span class="math inline">\(f_1\)</span> and <span class="math inline">\(f_2\)</span> are partial derivatives,</p><div class="no-row-height column-margin column-container"><span class="">A <em>partial derivative</em> of a function of more than one variable is the derivative with respect to one of those variables. E.g. <span class="math inline">\(\partial/\partial v ~ vw^2 =
 w^2\)</span> and <span class="math inline">\(\partial/\partial w ~ vw^2 =
 2vw\)</span>.</span></div></div>
@@ -752,7 +752,7 @@ f_2 (v_0,w_0) \\
 \end{array}
 \right )
 \]</span></p>
-<p>so that <a href="#eq-twotaylor" class="quarto-xref">Equation&nbsp;<span>4.8</span></a> can be written as</p>
+<p>so that <a href="#eq-twotaylor" class="quarto-xref">Equation&nbsp;<span>4.9</span></a> can be written as</p>
 <p><span class="math display">\[
 f(v,w) \approx f(v_0,w_0) + (\nabla f)'
 \left (
@@ -765,7 +765,7 @@ w-w_0 \\
 <p>Then from <a href="#eq-quadform" class="quarto-xref">Equation&nbsp;<span>4.5</span></a>,</p>
 <p><span id="eq-deltaquad"><span class="math display">\[
 AVar[f(Q,R)] = (\nabla f)' AV(Q,R) (\nabla f)
-\tag{4.9}\]</span></span></p>
+\tag{4.10}\]</span></span></p>
 </section>
 <section id="example-ratio-of-two-means" class="level3 page-columns page-full" data-number="4.5.5">
 <h3 data-number="4.5.5" class="anchored" data-anchor-id="example-ratio-of-two-means"><span class="header-section-number">4.5.5</span> Example: ratio of two means</h3>
@@ -789,7 +789,7 @@ D \\
 \right )
 \]</span></p>
 <p>We might be interested in the ratio <span class="math inline">\(\omega = \mu_D / \mu_M\)</span>. Our estimator will be <span class="math inline">\(\widehat{\omega} = \bar{D} / \bar{M}\)</span>, the ratio of the sample means.</p>
-<p>So take <span class="math inline">\(Q = \bar{D}\)</span> and <span class="math inline">\(R =  \bar{M}\)</span>. Then in <a href="#eq-deltaquad" class="quarto-xref">Equation&nbsp;<span>4.9</span></a>, with <span class="math inline">\(f(q,r) = q/r\)</span></p>
+<p>So take <span class="math inline">\(Q = \bar{D}\)</span> and <span class="math inline">\(R =  \bar{M}\)</span>. Then in <a href="#eq-deltaquad" class="quarto-xref">Equation&nbsp;<span>4.10</span></a>, with <span class="math inline">\(f(q,r) = q/r\)</span></p>
 <p><span class="math display">\[
 \nabla{f} =
 \left (
@@ -809,7 +809,7 @@ D \\
 \end{array}
 \right )
 \]</span></p>
-<p>As to <span class="math inline">\(AVar(v,w)\)</span> in <a href="#eq-deltaquad" class="quarto-xref">Equation&nbsp;<span>4.9</span></a>, we would use the multivariate analog of the usual <span class="math inline">\(S^2\)</span> in the univariate case, taking advantage of <a href="#eq-matrixdef" class="quarto-xref">Equation&nbsp;<span>4.2</span></a>. One must be careful, though, making sure we choose the appropriate quantity for <span class="math inline">\(AVar(v,w)\)</span>.</p>
+<p>As to <span class="math inline">\(AVar(v,w)\)</span> in <a href="#eq-deltaquad" class="quarto-xref">Equation&nbsp;<span>4.10</span></a>, we would use the multivariate analog of the usual <span class="math inline">\(S^2\)</span> in the univariate case, taking advantage of <a href="#eq-matrixdef" class="quarto-xref">Equation&nbsp;<span>4.2</span></a>. One must be careful, though, making sure we choose the appropriate quantity for <span class="math inline">\(AVar(v,w)\)</span>.</p>
 <p>For instance, in our ratio example here, <span class="math inline">\((Q,R)'\)</span> is <span class="math inline">\((\bar{M},\bar{D}\)</span>. To obtain <span class="math inline">\(AVar(v,w)\)</span>, let’s first look at the covariance matrix <span class="math inline">\(\Sigma\)</span>,</p>
 <p><span class="math display">\[
 \Sigma = E[(M - EM) (D - ED)']
@@ -943,6 +943,12 @@ f'(x) = \lim_{w \rightarrow 0}
 </section>
 <section id="your-turn" class="level2" data-number="4.9">
 <h2 data-number="4.9" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">4.9</span> Your Turn</h2>
+<p>❄️ <strong>Your Turn:</strong> In the mother/daughter data, find the estimated covariance between the two heights.</p>
+<p>❄️ <strong>Your Turn:</strong> In <a href="#eq-mvndensity" class="quarto-xref">Equation&nbsp;<span>4.6</span></a>, write <span class="math inline">\(t = (t_1,t_2)\)</span>, and consider the quantity in the exponent,</p>
+<p><span class="math display">\[
+(t-\mu)'(\Sigma)^{-1}(t-\mu)
+\]</span></p>
+<p>Say we set this quantity to some constant <span class="math inline">\(c\)</span>, then graph the locus of points <span class="math inline">\(t\)</span> in the <span class="math inline">\(t_1,t_2\)</span> plane. What geometric figure would we get?</p>
 <p>❄️ <strong>Your Turn:</strong> Show that in the scalar context,</p>
 <p><span class="math display">\[
 Cov(X,Y) = E(XY) - EX ~ EY

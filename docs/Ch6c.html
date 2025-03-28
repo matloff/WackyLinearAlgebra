@@ -283,11 +283,11 @@ window.Quarto = {
   <li><a href="#dimension-reduction" id="toc-dimension-reduction" class="nav-link" data-scroll-target="#dimension-reduction"><span class="header-section-number">13.2.3</span> Dimension Reduction</a></li>
   </ul></li>
   <li><a href="#solution-to-our-svd-goal" id="toc-solution-to-our-svd-goal" class="nav-link" data-scroll-target="#solution-to-our-svd-goal"><span class="header-section-number">13.3</span> Solution to Our SVD Goal</a></li>
-  <li><a href="#checking-the-formula" id="toc-checking-the-formula" class="nav-link" data-scroll-target="#checking-the-formula"><span class="header-section-number">13.4</span> Checking the Formula</a></li>
-  <li><a href="#svd-as-a-basis-for-matrix-generalized-inverse" id="toc-svd-as-a-basis-for-matrix-generalized-inverse" class="nav-link" data-scroll-target="#svd-as-a-basis-for-matrix-generalized-inverse"><span class="header-section-number">13.5</span> SVD as a basis for matrix generalized inverse</a></li>
-  <li><a href="#svd-in-linear-models" id="toc-svd-in-linear-models" class="nav-link" data-scroll-target="#svd-in-linear-models"><span class="header-section-number">13.6</span> SVD in linear models</a></li>
-  <li><a href="#example-census-data" id="toc-example-census-data" class="nav-link" data-scroll-target="#example-census-data"><span class="header-section-number">13.7</span> Example: Census Data</a></li>
-  <li><a href="#sec-svddimred" id="toc-sec-svddimred" class="nav-link" data-scroll-target="#sec-svddimred"><span class="header-section-number">13.8</span> Dimension Reduction: SVD as the Best Low-Rank Approximation</a></li>
+  <li><a href="#svd-as-a-basis-for-matrix-generalized-inverse" id="toc-svd-as-a-basis-for-matrix-generalized-inverse" class="nav-link" data-scroll-target="#svd-as-a-basis-for-matrix-generalized-inverse"><span class="header-section-number">13.4</span> SVD as a basis for matrix generalized inverse</a></li>
+  <li><a href="#svd-in-linear-models" id="toc-svd-in-linear-models" class="nav-link" data-scroll-target="#svd-in-linear-models"><span class="header-section-number">13.5</span> SVD in linear models</a></li>
+  <li><a href="#example-census-data" id="toc-example-census-data" class="nav-link" data-scroll-target="#example-census-data"><span class="header-section-number">13.6</span> Example: Census Data</a></li>
+  <li><a href="#sec-svddimred" id="toc-sec-svddimred" class="nav-link" data-scroll-target="#sec-svddimred"><span class="header-section-number">13.7</span> Dimension Reduction: SVD as the Best Low-Rank Approximation</a></li>
+  <li><a href="#example-image-compression" id="toc-example-image-compression" class="nav-link" data-scroll-target="#example-image-compression"><span class="header-section-number">13.8</span> Example: Image Compression</a></li>
   <li><a href="#matrix-factorization-in-recommender-systems" id="toc-matrix-factorization-in-recommender-systems" class="nav-link" data-scroll-target="#matrix-factorization-in-recommender-systems"><span class="header-section-number">13.9</span> Matrix Factorization in Recommender Systems</a></li>
   <li><a href="#svd-as-a-basis-for-the-four-fundamental-subspaces" id="toc-svd-as-a-basis-for-the-four-fundamental-subspaces" class="nav-link" data-scroll-target="#svd-as-a-basis-for-the-four-fundamental-subspaces"><span class="header-section-number">13.10</span> SVD As a Basis for the Four Fundamental Subspaces</a></li>
   <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">13.11</span> Your Turn</a></li>
@@ -367,7 +367,7 @@ A = \sum_{i=1}^n \sigma_i u_i v_i'
 <h2 data-number="13.2" class="anchored" data-anchor-id="example-applications"><span class="header-section-number">13.2</span> Example Applications</h2>
 <section id="recommender-systems" class="level3" data-number="13.2.1">
 <h3 data-number="13.2.1" class="anchored" data-anchor-id="recommender-systems"><span class="header-section-number">13.2.1</span> Recommender Systems</h3>
-<p>Recall <a href="Ch1.html#sec-recsys" class="quarto-xref"><span>Section 2.8</span></a>, which began with movie ratings data. We would like to predict the rating some particular user would give to some particular movie. It will turn out that we can set up SVD in such a way that <span class="math inline">\(U\)</span> contains movie data and <span class="math inline">\(V\)</span> contains user data.</p>
+<p>Recall <a href="Ch1.html#sec-recsys" class="quarto-xref"><span>Section 2.10</span></a>, which began with movie ratings data. We would like to predict the rating some particular user would give to some particular movie. It will turn out that we can set up SVD in such a way that <span class="math inline">\(U\)</span> contains movie data and <span class="math inline">\(V\)</span> contains user data.</p>
 </section>
 <section id="text-classification" class="level3" data-number="13.2.2">
 <h3 data-number="13.2.2" class="anchored" data-anchor-id="text-classification"><span class="header-section-number">13.2.2</span> Text Classification</h3>
@@ -376,18 +376,17 @@ A = \sum_{i=1}^n \sigma_i u_i v_i'
 </section>
 <section id="dimension-reduction" class="level3" data-number="13.2.3">
 <h3 data-number="13.2.3" class="anchored" data-anchor-id="dimension-reduction"><span class="header-section-number">13.2.3</span> Dimension Reduction</h3>
-<p>Recall that in the matrix <span class="math inline">\(\Sigma\)</span>, the eigenvalues are arranged in decreasing order, possibly followed by 0s. This suggests that we can achieve dimension reduction by replacing the smaller eigenvalues by 0s, with corresponding adjustments to the columns of <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span>. We will discuss this below in <a href="#sec-svddimred" class="quarto-xref"><span>Section 13.8</span></a>.</p>
+<p>Recall that in the matrix <span class="math inline">\(\Sigma\)</span>, the eigenvalues are arranged in decreasing order, possibly followed by 0s. This suggests that we can achieve dimension reduction by replacing even some of the smaller eigenvalues by 0s as well, with corresponding adjustments to the columns of <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span>. We will discuss this below in <a href="#sec-svddimred" class="quarto-xref"><span>Section 13.7</span></a>.</p>
 </section>
 </section>
 <section id="solution-to-our-svd-goal" class="level2" data-number="13.3">
 <h2 data-number="13.3" class="anchored" data-anchor-id="solution-to-our-svd-goal"><span class="header-section-number">13.3</span> Solution to Our SVD Goal</h2>
-<p>There are various derivations, e.g.&nbsp;along the lines of <a href="Ch6a.html#sec-firstPC" class="quarto-xref"><span>Section 11.2.1</span></a> (one maximizes the quantity <span class="math inline">\(U A V'\)</span>), but let’s go directly to the answer:</p>
+<p>There are various derivations, e.g.&nbsp;along the lines of <a href="Ch6a.html#sec-firstPC" class="quarto-xref"><span>Section 11.2.1</span></a>, but let’s go directly to the answer:</p>
 <ol type="1">
-<li><p>Say <span class="math inline">\(A\)</span> is <span class="math inline">\(p \textrm{ x } n\)</span>, so that <span class="math inline">\(A'A\)</span> will be of size <span class="math inline">\(n
-\textrm{ x } n\)</span>. Let <span class="math inline">\(r\)</span> denote the rank of <span class="math inline">\(A\)</span>, which will be the same as the rank of <span class="math inline">\(A'A\)</span> from <a href="Ch4.html#thm-rankapa" class="quarto-xref">Theorem&nbsp;<span>6.5</span></a>.</p></li>
+<li><p>Say <span class="math inline">\(A\)</span> is <span class="math inline">\(p \times n\)</span>, so that <span class="math inline">\(A'A\)</span> will be of size <span class="math inline">\(n
+\times n\)</span>. Let <span class="math inline">\(r\)</span> denote the rank of <span class="math inline">\(A\)</span>, which will be the same as the rank of <span class="math inline">\(A\)</span> from <a href="Ch4.html#thm-rankapa" class="quarto-xref">Theorem&nbsp;<span>6.5</span></a>.</p></li>
 <li><p>Compute the eigenvalues <span class="math inline">\(\sigma_1,...,\sigma_n\)</span> and eigenvectors <span class="math inline">\(v_1,...,v_n\)</span> of <span class="math inline">\(A'A\)</span>. Normalize the <span class="math inline">\(v_i\)</span> by dividing by their lengths. (The same eigenvalues will still hold.) Order the <span class="math inline">\(\sigma_i\)</span> from largest to smallest, and use the same ordering for the <span class="math inline">\(v_i\)</span>.</p></li>
-<li><p>Since <span class="math inline">\(A'A\)</span> is symmetric and positive-semidefinite, its eigenvalues will be nonnegative and its eigenvectors <span class="math inline">\(v_1,...,v_r\)</span> will be orthogonal as long as <span class="math inline">\(\sigma_1,...,\sigma_r\)</span> are distinct, as is the case for numeric data (<a href="Ch6b.html#sec-prob0" class="quarto-xref"><span>Section 12.5</span></a>). We will have <span class="math inline">\(\sigma_{r+1} = ...
-= \sigma_n = 0\)</span>.</p></li>
+<li><p>Since <span class="math inline">\(A'A\)</span> is symmetric and positive-semidefinite, its eigenvalues will be nonnegative and its eigenvectors <span class="math inline">\(v_1,...,v_r\)</span> will be orthogonal as long as <span class="math inline">\(\sigma_1,...,\sigma_r\)</span> are distinct, as is the case for numeric data (<a href="Ch6b.html#sec-prob0" class="quarto-xref"><span>Section 12.5</span></a>). Since these eigenvectors diagonalize <span class="math inline">\(A'A\)</span> with the <span class="math inline">\(\sigma_i\)</span> on the diagonal (<a href="Ch6b.html" class="quarto-xref"><span>Chapter 12</span></a>), we will have <span class="math inline">\(\sigma_{r+1} = ...  = \sigma_n = 0\)</span>.</p></li>
 <li><p>Set <span class="math inline">\(\Sigma\)</span> to <span class="math inline">\(diag(\sigma_1,...,\sigma_n)\)</span>, the nonincreasing list of those eigenvalues. Set the first <span class="math inline">\(r\)</span> columns of <span class="math inline">\(V\)</span> to the corresponding eigenvectors. Use the Gram-Schmidt Method (see <a href="Ch5b.html#sec-gramschmidt" class="quarto-xref"><span>Section 8.10</span></a>) to add <span class="math inline">\(n-r\)</span> more vectors. <span class="math inline">\(V\)</span> will then have orthonormal columns, and thus be an orthogonal matrix.</p></li>
 <li><p>Set</p>
 <p><span class="math display">\[ u_i = \frac{1}{\sigma_i} Av_i, ~ i=1,...,r \]</span></p>
@@ -401,57 +400,32 @@ u_i' u_j = \frac{1}{\sigma_i \sigma_j} v_i' A'A v_j =
 <p><span class="math display">\[ U = (u_1|...|u_n) \]</span></p></li>
 </ol>
 </section>
-<section id="checking-the-formula" class="level2" data-number="13.4">
-<h2 data-number="13.4" class="anchored" data-anchor-id="checking-the-formula"><span class="header-section-number">13.4</span> Checking the Formula</h2>
-<p>Are <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> really orthogonal, and does <span class="math inline">\(U \Sigma V'\)</span> really work out to be <span class="math inline">\(A\)</span> in <a href="#eq-svd" class="quarto-xref">Equation&nbsp;<span>13.1</span></a>?</p>
-<ul>
-<li><p><span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> are orthogonal, by construction.</p></li>
-<li><p>The product evaluates to <span class="math inline">\(A\)</span>, as claimed:</p>
-<p>Using matrix partitioning, we have</p>
-<p><span class="math display">\[
-  U \Sigma = (\sigma_1 u_1 | ... | \sigma_n u_n)
-  \]</span></p>
-<p>So, again using partitioning,</p>
-<p><span class="math display">\[
-  U \Sigma V' = (\sigma_1 u_1 | ... | \sigma_n u_n)
-   \left (
-   \begin{array}{r}
-   v_1' \\
-   ... \\
-   v_n'  \\
-   \end{array}
-   \right )
-  = \sum_{i=1}^n \sigma_i u_i v_i'  
-  \]</span></p>
-<p>That last expression is equal to <span class="math inline">\(A\)</span>, by <a href="#eq-aissumuivi" class="quarto-xref">Equation&nbsp;<span>13.2</span></a>.</p></li>
-</ul>
-</section>
-<section id="svd-as-a-basis-for-matrix-generalized-inverse" class="level2" data-number="13.5">
-<h2 data-number="13.5" class="anchored" data-anchor-id="svd-as-a-basis-for-matrix-generalized-inverse"><span class="header-section-number">13.5</span> SVD as a basis for matrix generalized inverse</h2>
-<p>Recall the example in <a href="Ch4.html#sec-censusrref" class="quarto-xref"><span>Section 6.1</span></a>. We could not have dummy-variable columns for both male and female, as their sum would be a column of all 1s, in addition to a column of 1s the X data matrix already had. The three columns would then have a nonzero linear combination that evaluates to the 0 vector. Then in <a href="Ch3.html#eq-linregformula" class="quarto-xref">Equation&nbsp;<span>5.4</span></a>, <span class="math inline">\(A\)</span> (i.e.&nbsp;X) would not be of full rank, nor would <span class="math inline">\(A'A\)</span>, so that <span class="math inline">\((A'A)^{-1}\)</span> would not exist.</p>
+<section id="svd-as-a-basis-for-matrix-generalized-inverse" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="svd-as-a-basis-for-matrix-generalized-inverse"><span class="header-section-number">13.4</span> SVD as a basis for matrix generalized inverse</h2>
+<p>Recall the example in <a href="Ch4.html#sec-censusrref" class="quarto-xref"><span>Section 6.1</span></a>. We could not have dummy-variable columns for both male and female, as their sum would be a column of all 1s, in addition to a column of 1s the X data matrix already had. The three columns would then have a nonzero linear combination that evaluates to the 0 vector. Then in <a href="Ch3.html#eq-linregformula" class="quarto-xref">Equation&nbsp;<span>5.4</span></a>, <span class="math inline">\(A\)</span> (i.e.&nbsp;X) would not be of full rank, nor would <span class="math inline">\(A'A\)</span> (<a href="Ch4.html#thm-rankapa" class="quarto-xref">Theorem&nbsp;<span>6.5</span></a>), so that <span class="math inline">\((A'A)^{-1}\)</span> would not exist.</p>
 <p>And yet the equation from which that comes,</p>
 <p><span id="eq-overdetermined"><span class="math display">\[
 A'A b = A'S
 \tag{13.3}\]</span></span></p>
-<p>is still valid. We could, as in that example, remove one of the gender columns, thus solving the problem of less than full rank, but the use of <em>generalized inverses</em> solves the problem directly. If <span class="math inline">\(A\)</span> has hundreds or thousands of columns, say, the use of generalized inverses may be more convenient.</p>
-<p>We will omit the formal definition of inverses and their properties, returning to the topic in <a href="Ch6d.html" class="quarto-xref"><span>Chapter 14</span></a>. For now, we note the following:</p>
+<p>is still valid. We could, as in that example, remove one of the gender columns, thus solving the problem of less than full rank, but the use of <em>generalized inverses</em> solves the problem directly. If <span class="math inline">\(A\)</span> has many binary variables, the use of generalized inverses may be more convenient.</p>
+<p>We will omit the formal definition of generalzed inverses and their properties, returning to the topic in <a href="Ch6d.html" class="quarto-xref"><span>Chapter 14</span></a>. For now, we note the following:</p>
 <p>One of the most famous forms of generalized inverse, is the Moore-Penrose <em>pseudoinverse</em>, based on SVD. Given the SVD of a matrix <span class="math inline">\(M\)</span>,</p>
 <p><span class="math display">\[
 M = U_M \Sigma_M V_{M}'
 \]</span></p>
-<p>its Moore-Penrose inverse, denoted by <span class="math inline">\(M^{+}\)</span> is</p>
+<p>its Moore-Penrose inverse, denoted by <span class="math inline">\(M^{+}\)</span>, is</p>
 <p><span class="math display">\[
 M^{+} = V_M \Sigma_M^{+} U_{M}'
 \]</span></p>
-<p>where <span class="math inline">\(\Sigma_M^{+}\)</span> is the diagonal matrix obtained form <span class="math inline">\(\Sigma_M\)</span> by replacing each nonzero element by its reciprocal.</p>
+<p>where <span class="math inline">\(\Sigma_M^{+}\)</span> is the diagonal matrix obtained from <span class="math inline">\(\Sigma_M\)</span> by replacing each nonzero element by its reciprocal.</p>
 <p>The Moore-Penrose solution of <span class="math inline">\(Mz = w\)</span> for vectors <span class="math inline">\(z\)</span> and <span class="math inline">\(w\)</span>, is</p>
 <p><span id="eq-MoorePenrose"><span class="math display">\[
-M^{+} w
+z = M^{+} w
 \tag{13.4}\]</span></span></p>
 <p>The R function <strong>MASS::ginv</strong> performs the necessary computation for us; we need not call <strong>svd()</strong>.</p>
 </section>
-<section id="svd-in-linear-models" class="level2" data-number="13.6">
-<h2 data-number="13.6" class="anchored" data-anchor-id="svd-in-linear-models"><span class="header-section-number">13.6</span> SVD in linear models</h2>
+<section id="svd-in-linear-models" class="level2" data-number="13.5">
+<h2 data-number="13.5" class="anchored" data-anchor-id="svd-in-linear-models"><span class="header-section-number">13.5</span> SVD in linear models</h2>
 <p>Now apply this to our linear model problem (<a href="#eq-overdetermined" class="quarto-xref">Equation&nbsp;<span>13.3</span></a>). We claim that</p>
 <p><span class="math display">\[
 b = A^{+} S = V \Sigma^{+} U' S
@@ -469,8 +443,8 @@ A'A b &amp;= (U \Sigma V')' (U \Sigma V') (U \Sigma V')^{+} S \\
 \]</span></p>
 <p><span class="math inline">\(\square\)</span></p>
 </section>
-<section id="example-census-data" class="level2" data-number="13.7">
-<h2 data-number="13.7" class="anchored" data-anchor-id="example-census-data"><span class="header-section-number">13.7</span> Example: Census Data</h2>
+<section id="example-census-data" class="level2" data-number="13.6">
+<h2 data-number="13.6" class="anchored" data-anchor-id="example-census-data"><span class="header-section-number">13.6</span> Example: Census Data</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qeML)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(svcensus)</span>
@@ -530,8 +504,40 @@ A'A b &amp;= (U \Sigma V')' (U \Sigma V') (U \Sigma V')^{+} S \\
 -13361.634-(-2660.821) = -10700.81
 \]</span></p>
 </section>
-<section id="sec-svddimred" class="level2" data-number="13.8">
-<h2 data-number="13.8" class="anchored" data-anchor-id="sec-svddimred"><span class="header-section-number">13.8</span> Dimension Reduction: SVD as the Best Low-Rank Approximation</h2>
+<section id="sec-svddimred" class="level2" data-number="13.7">
+<h2 data-number="13.7" class="anchored" data-anchor-id="sec-svddimred"><span class="header-section-number">13.7</span> Dimension Reduction: SVD as the Best Low-Rank Approximation</h2>
+<p>The SVD of a rank <span class="math inline">\(r\)</span>, <span class="math inline">\(q \times n\)</span> matrix <span class="math inline">\(A\)</span> can be partitioned as</p>
+<p><span class="math display">\[
+(U_1 | U_2)
+\left (
+\begin{array}{rr}
+D_1 &amp; 0 \\
+0 &amp; 0  \\
+\end{array}
+\right )
+(V_1 | V2)'
+\]</span></p>
+<p>where <span class="math inline">\(U_1\)</span> is of size <span class="math inline">\(q \times r\)</span>, <span class="math inline">\(V_1\)</span> is of size <span class="math inline">\(n \times r\)</span>, and <span class="math inline">\(D_1\)</span> is <span class="math inline">\(r \times r\)</span>. Simplifying, we have</p>
+<p><span id="eq-u1d1v1"><span class="math display">\[
+A = (U_1 D_1 | 0)
+\left (
+\begin{array}{r}
+V_1' \\
+V_2' \\
+\end{array}
+\right ) =
+U_1 D_1 V_1'
+\tag{13.5}\]</span></span></p>
+<p>So, we’ve reduced the size of memory needed to store the SVD. But there’s more:</p>
+<p>The eigenvalues of a matrix, arranged from largest to smallest, tend to degrade in a gradual manner, as seen for example in <a href="Ch6b.html#sec-backtoafrica" class="quarto-xref"><span>Section 12.3</span></a>. So, in the context of SVD, with the last <span class="math inline">\(n-r\)</span> eigenvalues being 0s, it will typically be the case that the last few eigenvalues among <span class="math inline">\(\sigma_1,...,\sigma_r\)</span> are <em>near</em> 0.</p>
+<p>In other words, we probably can get a good approximation to the SVD by treating those near-0 eigenvalues as 0s, and removing the corresponding columns of <span class="math inline">\(U_1\)</span> and <span class="math inline">\(V_1\)</span>. Why do this?</p>
+<ul>
+<li><p>Achieve a further reduction in storage requirements. for instance in settings in which we have many, many images or videos.</p></li>
+<li><p>Reduce noise, again for example with images. Small blotches are smoothed out.</p></li>
+</ul>
+</section>
+<section id="example-image-compression" class="level2" data-number="13.8">
+<h2 data-number="13.8" class="anchored" data-anchor-id="example-image-compression"><span class="header-section-number">13.8</span> Example: Image Compression</h2>
 </section>
 <section id="matrix-factorization-in-recommender-systems" class="level2" data-number="13.9">
 <h2 data-number="13.9" class="anchored" data-anchor-id="matrix-factorization-in-recommender-systems"><span class="header-section-number">13.9</span> Matrix Factorization in Recommender Systems</h2>
@@ -572,7 +578,7 @@ A = U \Sigma V' = (U \Sigma^{0.5}) (\Sigma^{0.5} V') = WH
 <p>❄️ <strong>Your Turn:</strong> Write an R function will call form</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getLowRank</span>(A,lowrank)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>that uses SVD to find the best approximation to the matrix <strong>A</strong> of rank <strong>lowrank</strong>.</p>
-<p>❄️ <strong>Your Turn:</strong> Our equation <a href="Ch2.html#eq-lastRow1s" class="quarto-xref">Equation&nbsp;<span>3.5</span></a> resulted from replacing one row (the last, but could have been any) by all 1s, with a corresponding change on the right-hand side. But now that we have pseudoinverses at our disposal, we could <em>add</em> a row rather than <em>replacing</em> a row:</p>
+<p>❄️ <strong>Your Turn:</strong> Our equation <a href="Ch2.html#eq-lastRow1s" class="quarto-xref">Equation&nbsp;<span>3.6</span></a> resulted from replacing one row (the last, but could have been any) by all 1s, with a corresponding change on the right-hand side. But now that we have pseudoinverses at our disposal, we could <em>add</em> a row rather than <em>replacing</em> a row:</p>
 <p><span class="math display">\[
 \left (
 \begin{array}{r}
