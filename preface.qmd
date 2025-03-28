@@ -108,26 +108,32 @@ lessons.]{.column-margin}
 
 ## The Role of Math (and R)
 
-This book is "mathematical but not very theoretical."
+Earlier in this Preface, we said, "If a Data Science or Statistics
+program requires linear algebra offered by a Math Department, the level
+and content of this book should be similar to that math course..."
+So, the mathematical content is definitely here, but one might also say,
+this book is "mathematical but not very theoretical."
 
 Theorems are mainly limited to results with practical importance, and
-proofs are sometimes rather informal. But the subject matter is indeed
-mathematical. The goal is to develop in the reader mathematical skill
-and intuition into this powerful tool, rather than coding of linear algebra
-methods.
+proofs are sometimes rather informal. Among the Your Turn exercises at
+the end of each chapter, the ones requiring proofs are usually simple,
+of the "one liner" type.  But the subject matter is indeed mathematical.
+The goal is to develop in the reader mathematical skill and intuition
+into this powerful tool, rather than coding of linear algebra methods.
 
 Thus the many R examples are meant to make the mathematical concepts
-concrete. But this is definitely not an "how to do linear algebra in R"
-book.  In the software context, the Feynman quote above might be, "There
-is a difference between knowing how to use code libraries for something
-and knowing the core nature of that thing." That said, the code examples
-do serve a vital role. 
+concrete, not as an "how to do linear algebra in R" book.  In the
+software context, the Feynman quote above might be, "There is a
+difference between knowing how to use code libraries for something and
+knowing the core nature of that thing." That said, the code examples do
+serve a vital role. 
 
 *The applied nature of the book is a double-edged sword.* Understanding
 applications is actually *more* challenging than a purely mathematical
 treatment, not less so. Math is more crisply-defined, while applications
-can be "fuzzy," hence more difficult to master. The need for (a)
-developing student intuition and (b) nonpassive learning are paramount.
+can be "fuzzy"; among the Your Turn exercises, many of the applied ones
+are somewhat open-ended.  Hence the need for (a) developing student
+intuition and (b) nonpassive learning are paramount.
 
 ## R Packages Used
 
