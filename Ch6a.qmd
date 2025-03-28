@@ -104,7 +104,15 @@ We see a situation in which a matrix ($Cov(X)$) times a vector ($u$)
 equals a constant ($-\gamma$) times that same vector.  We say that
 $-\gamma$ is an *eigenvalue* of the matrix $Cov(X)$, and that $u$ is a
 corresponding *eigenvector*.  Seems innocuous, but it opens a huge new
-world! We will return to the notion of principal components in the next
+world! 
+
+Note too that from @eq-quadform,
+
+$$
+\textrm{maximal variance} = u' Cov(X) u = u' (-\gamma u = -\gamma
+$${#eq-maxvar}
+
+We will return to the notion of principal components in the next
 chapter, after laying the groundwork in the current chapter.
 
 ## Definition

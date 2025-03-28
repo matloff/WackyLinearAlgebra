@@ -25,7 +25,7 @@ finding an eigenvector and eigenvalue.  It turns out that this is true
 for the second, third and all the components. In other words, PCA is
 basically an eigenvectors and eigenvalues application.
 
-### The second, third etc. PCs
+## The Second, Third Etc. PCs
 
 Say we have a dataset $X$ in matrix form.  There are as many principal
 components as there are columns in $X$. We derived the first PC in
@@ -71,6 +71,23 @@ Cov(X) v = -\omega v
 $${#eq-eig2c}
 
 showing that the second PC is again an eigenvector of $Cov(X)$.
+@eq-maxvar then says that $-\omega$ is the corresponding variance.
+
+The story is the same for the remaining PCs. We thus have:
+
+::: {#thm-thestory}
+
+The principle components have the following properties:
+
+* They are orthogonal to each other.
+
+* They are eigenvectors of $Cov(X)$.
+
+* The eigenvalue corresponding to a PC $z$ is $Var(z'X)$.
+
+* The eigenvalues form a nondecreasing sequence.
+
+:::
 
 ## Properties
 
