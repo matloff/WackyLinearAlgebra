@@ -28,8 +28,9 @@ basically an eigenvectors and eigenvalues application.
 ### The second, third etc. PCs
 
 Say we have a dataset $X$ in matrix form.  There are as many principal
-components as there are columns in $X$. So, how are the second, third
-and so on components defined and computed?
+components as there are columns in $X$. We derived the first PC in
+@secfirstPC.  So, how are the second, third and so on components defined
+and computed?
 
 The key issue is that we want our PCs to be orthogonal, because as we
 have seen orthogonal random vectors are statistically uncorrelated, and
@@ -56,7 +57,7 @@ $$
 0 = 2 u' Cov(X) v + 2 \omega u'v + \tau u'u = 2 u' Cov(X) v + \tau 1
 $${#eq-eig2b}
 
-Also, since $Cov(X)$ is symmetric,
+Also, since $Cov(X)$ is symmetric and $u$ is an eigenvector of $Cov(X)$,
 
 $$
 u' Cov(X) v = [Cov(X) u]' v = \gamma u' v = 0
