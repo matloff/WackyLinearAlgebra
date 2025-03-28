@@ -80,7 +80,7 @@ estimators.
 
 Of course the book should work very well as a classroom textbook. If a Data
 Science or Statistics program requires linear algebra offered by a Math
-Department, the level and content of this book should be similar to that
+Department, the mathematical content of this book should be similar to that
 math course, but with much better student motivation due to the Data
 Science emphasis of the book.  The "applications first" approach is key
 to that motivational power.
@@ -108,19 +108,20 @@ lessons.]{.column-margin}
 
 ## The Role of Math (and R)
 
-Earlier in this Preface, we said, "If a Data Science or Statistics
-program requires linear algebra offered by a Math Department, the level
-and content of this book should be similar to that math course..."
-So, the mathematical content is definitely here, but one might also say,
-this book is "mathematical but not very theoretical."
+Earlier in this Preface, I said, "If a Data Science or Statistics
+program requires linear algebra offered by a Math Department, the 
+mathematical content of this book should be similar to that math course..."
+So, the mathematics is definitely here, but one might also say,
+this book is "mathematical but not overly theoretical."
 
-Theorems are mainly limited to results with practical importance, and
-proofs are sometimes rather informal. Among the Your Turn exercises at
-the end of each chapter, the ones requiring proofs are usually simple,
-of the "one liner" type.  But the subject matter is indeed mathematical.
+Theorems are mainly limited to results with practical importance.  Among
+the Your Turn exercises at the end of each chapter, the ones requiring
+proofs are usually simple, of the "one liner" type.  But the subject
+matter is indeed mathematical.  Students are indeed expected to read and
+understand proofs, just as with the Mathematics Department course.
+
 The goal is to develop in the reader mathematical skill and intuition
 into this powerful tool, rather than coding of linear algebra methods.
-
 Thus the many R examples are meant to make the mathematical concepts
 concrete, not as an "how to do linear algebra in R" book.  In the
 software context, the Feynman quote above might be, "There is a
