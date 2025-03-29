@@ -235,6 +235,12 @@ $$
 a' Cov(X) a \geq 0
 $$
 
+* For any constant (i.e. nonrandom) $m \times k$ matrix $A$,
+
+$$
+Cov(AX) = A Cov(X) A'
+$${#eq-covax} 
+
 ### Cross-covariance
 
 The matrix $Cov(X)$ represents the covariance of a vector $X$

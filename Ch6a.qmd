@@ -389,23 +389,6 @@ Instead, we exploit the fact that @eq-MarkovPi says that the transition
 matrix has an eigenvector $\nu$ with eigenvalue 1.  Due to the typical
 huge size of the matrix, the power method or a variant is often used.
 
-## A "Square Root" Matrix, and MV Normal Simulation
-
-::: {#thm-sqrt}
-Any covariance matrix $A$ has a "square root" matrix $Q$, i.e.
-$$
-Q^2 = A
-$$
-
-:::
-
-::: {.proof}
-
-We have $P' A P = D$ for some matrix $P$ and diagonal matrix $D$.
-
-$\square$
-
-
 ## Your Turn
 
 ❄️  **Your Turn:** Show that the diagonalizing matrix $P$ for
