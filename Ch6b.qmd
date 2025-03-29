@@ -391,6 +391,24 @@ $\square$
 
 ## Your Turn
 
+❄️  **Your Turn:** The reader has likely seen the concept of a
+*cumulative distribution function* (CDF). For a scalar random variable
+$X$, this is $F_x(t) = P(X \leq t)$. If $X$ is an $m$-dimensional random
+vector, the definition is
+
+$$
+F_X(t_1,...,t_m) = P(X_1 \leq t_1,...,X_m \leq t_m)
+$$
+
+Write an R function with call form
+
+``` r
+multiCDF(mu,Sigma,t,n)
+```
+
+that uses simulation to evaluate the multivariate CDF, where $t =
+(t_1,...,t_m)$ and $n$ is the number of replications to simulate.
+
 ❄️  **Your Turn:** Modify the code for **qePCA** for the case of linear
 regression by adding a component **xCoeffs** to its return value. This
 will give the regression coefficients in terms of the original X
