@@ -1,9 +1,10 @@
 
 library(imager)
-# img <- load.image('prj.png')  
-# somehow grayscale() doesn't work on this imgage
-img <- load.image('prj1.png')  # already grayscale
-imgSVD <- svd(img)
+img <- load.image('prj.png')  
+# grayscale() doesn't work on this imgage, due to alpha (transparency)
+imgNoAlpha <- rm.alpha(img)
+### img <- load.image('prj1.png')  # already grayscale
+imgSVD <- svd(imgNoAlpha)
 u <- imgSVD$u
 v <- imgSVD$v
 retainedRank <- 15
