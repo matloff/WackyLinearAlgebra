@@ -129,12 +129,18 @@ difference between knowing how to use code libraries for something and
 knowing the core nature of that thing." That said, the code examples do
 serve a vital role. 
 
-*The applied nature of the book is a double-edged sword.* Understanding
-applications is actually *more* challenging than a purely mathematical
-treatment, not less so. Math is more crisply-defined, while applications
-can be "fuzzy"; among the Your Turn exercises, many of the applied ones
-are somewhat open-ended.  Hence the need for (a) developing student
-intuition and (b) nonpassive learning are paramount.
+*The applied nature of the book is a double-edged sword.* It is has high
+value as a motivator, but understanding applications is actually *more*
+challenging than a purely mathematical treatment, not less so.  Math is
+more crisply-defined, while applications can be "fuzzy." Among the Your
+Turn exercises, many of the applied ones are somewhat open-ended, and
+they tend to be wordier than the theory ones. 
+
+In other words, the book is intended to arm students with *usable
+practical insights*, rather than merely satisfying some curricular
+requirement that will be quickly forgotten.  Hence the needs for (a)
+developing student intuition and (b) nonpassive learning are paramount
+(as they should be in any Data Science course).
 
 ## R Packages Used
 
