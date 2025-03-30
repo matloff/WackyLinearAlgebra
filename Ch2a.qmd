@@ -327,7 +327,35 @@ following properties:
 These of course are the classical assumptions of linear regression
 models. They actually come from the MV normal model.
 
+Specifics: Denote the mean vector and covariance matrix a random vector $X$
+by $\mu$ and $\Sigma$.  Partition $X$ as
+
+$$
+\left (
+\begin{array}{r}
+X_1 \\
+X_2 \\
+\end{array}
+\right )
+$$
+
+and partition $\mu$ and $\Sigma$ similarly. The conditional distribution
+of $X_1$ given $X_2 = t$ is multivariate normal with these paramters:
+
+$$
+E(X_1 | X_2 = t) =
+\mu_1 + \Sigma_{12} \Sigma_{22}^{-1} (t - \mu_2)
+$${#eq-condmean}
+
+$$
+Cov(X_1 | X_2 = t) = \Sigma_{11} - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}
+$${#eq-condcov}
+
 :::
+
+Note the absence of $t$ in @eq-condcov. Note too that the uncoditional
+covariance matrix, $\Sigma_{11}$ becomes "smaller" when we know
+something about $X_2$.
 
 ::: {.proof}
 This comes out of writing down the conditional density (overall density
@@ -853,8 +881,8 @@ derivatives.
 ❄️  **Your Turn:** In the mother/daughter data, find the estimated
 covariance between the two heights.
 
-❄️  **Your Turn:** In @eq-mvndensity, write $t = (t_1,t_2)$, and consider
-the quantity in the exponent,
+❄️  **Your Turn:** In @eq-mvndensity with $k = 2$, write $t = (t_1,t_2)$,
+and consider the quantity in the exponent,
 
 $$
 (t-\mu)'(\Sigma)^{-1}(t-\mu)
@@ -862,6 +890,36 @@ $$
 
 Say we set this quantity to some constant $c$, then graph the locus of
 points $t$ in the $t_1,t_2$ plane. What geometric figure would we get?
+
+❄️  **Your Turn:** In @thm-conditMVnormal, suppose 
+
+$$
+\mu =
+\left (
+\begin{array}{r}
+1.5 \\
+8.0 \\
+\end{array}
+\right )
+$$
+
+and
+
+$$
+\Sigma =
+\left (
+\begin{array}{rr}
+5.2 & 6.2 \\
+6.2 & 20.1  \\
+\end{array}
+\right )
+$$
+
+Find the regression line 
+
+$$
+\textrm{ mean Y } = a + bX
+$$
 
 ❄️  **Your Turn:** Show that in the scalar context,
 
