@@ -409,6 +409,12 @@ multiCDF(mu,Sigma,t,n)
 that uses simulation to evaluate the multivariate CDF, where $t =
 (t_1,...,t_m)$ and $n$ is the number of replications to simulate.
 
+❄️  **Your Turn:** Say $X$ has mean vector $\mu$ and covariance matrix
+$\Sigma$. Show how we can use @thm-sqrt to find a square, constant
+matrix $A$ such that $Cov(AX) = I$. If in addition $X$ has a
+multivariate normal distribution, then $AX$ will then consist of
+independent random variables with variance 1. Explain why.
+
 ❄️  **Your Turn:** Modify the code for **qePCA** for the case of linear
 regression by adding a component **xCoeffs** to its return value. This
 will give the regression coefficients in terms of the original X
