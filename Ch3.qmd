@@ -337,9 +337,8 @@ functions of $v$, then
 $$
 \frac{d}{dv} u'u = 2M'u
 $$[We must keep in mind that we are working with vectors and
-matrices, so that $M'u$, say $r \textrm{x} s$ times $s \textrm{ x} 1$,
-is conformable matrix multiplication 
-while $uM'$ is mathematical nonsense.]{.column-margin}
+matrices, so that $M'u$, say $r \times s$ times $s \times 1$,
+is conformable matrix multiplication.]{.column-margin}
 
 In our case at hand, we have $M = -A$ and $w = S$, so that
 
@@ -607,16 +606,11 @@ $$
  \right )
 $$
 
-We pretend it is a $2 \textrm{x} 1$ "matrix," and $A'$ is then "$1
-\textrm{x} 2$":
+We pretend it is a $2 \times 1$ "matrix," and $A'$ is then "$1
+\times 2$":
 
 $$
-A' = 
- \left (
- \begin{array}{rr}
- A_{(-n)}' & a_n' \\
- \end{array}
- \right )
+A' = (A_{(-n)}' | a_n') 
 $$ 
 
 Thus
