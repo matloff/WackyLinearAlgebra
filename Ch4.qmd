@@ -164,7 +164,7 @@ an elementary matrix.
 It is much easier to gain insight from RREF by viewing it in
 partitioned-matrix form:
 
-> Say $A$ is of size $m \textrm{ x } n$. Then $A_{rref}$ has the form
+> Say $A$ is of size $m \times n$. Then $A_{rref}$ has the form
 > 
 > $$
 > \left (
@@ -175,7 +175,7 @@ partitioned-matrix form:
 > \right )
 > $${#eq-rref}
 > where $I_s$ is an identity matrix of some size $s$
-> and $U$ has dimension $s \textrm{ x } (n-s)$.
+> and $U$ has dimension $s \times (n-s)$.
 
 The Column-Reduced Echelon Form is similar:
 
@@ -190,7 +190,7 @@ V & 0  \\
 $${#eq-cref}
 
 where $I_t$ is an identity matrix of some size $t$
-and $V$ has dimension $(m-t) \textrm{ x } t$.
+and $V$ has dimension $(m-t) \times t$.
 
 Clearly, the row rank of $A_{rref}$ is $s$, and its column rank is $t$.
 We will prove shortly that the $s$ is the column rank of $A$ as well.
@@ -393,7 +393,7 @@ linearly independent. But no sets of 5 or more are linearly independent.
 
 ::: {#thm-narrowfat}
 
-The (common value of) row and column ranks of an $m \textrm{ x } n$
+The (common value of) row and column ranks of an $m \times n$
 matrix $B$ must be less than or equal to the minimum of the number of
 rows and columns of $B$ .
 
@@ -451,7 +451,7 @@ least that of $A$.
 
 On the other hand, again pply our knowlege of partitioning. 
 
-* Say $A$ is $m \textrm{ x } n$. Write
+* Say $A$ is $m \times n$. Write
 
   $$
   A'A = 
@@ -494,10 +494,18 @@ $\square$
 
 ## Your Turn
 
+❄️  **Your Turn:** If the matrix $A$ has a 0 row, then
+$det(A) =  0$. Explain why.
+
+❄️  **Your Turn:** Consider the three basic elementary matrices discussed
+here: Swap rows $i$ and $j$; multiply row $i$ by a constant $b$; adding
+$c$ times row $i$ to row $j$, for a constant $c$. Find general formulas
+for the determinants of the three matrices.
+
 ❄️  **Your Turn:** Show that a set of vectors is linearly dependent if
 and only if one of the vectors is a linear combination of the others.
 
-❄️  **Your Turn:** Consider an $m \textrm{ x } n$ matrix $A$ with $m \geq n$.
+❄️  **Your Turn:** Consider an $m \times n$ matrix $A$ with $m \geq n$.
 Then consider the partitioned matrix
 
 $$
@@ -510,14 +518,6 @@ $$
  \right )
 $$
 
-where $I is the $n \textrm{ x } n$ identity matrix. Prove that $B$ is of
+where $I$ is the $n \times n$ identity matrix. Prove that $B$ is of
 full rank.
-
-❄️  **Your Turn:** Consider the three basic elementary matrices discussed
-here: Swap rows $i$ and $j$; multiply row $i$ by a constant $b$; adding
-$c$ times row $i$ to row $j$, for a constant $c$. Find general formulas
-for the determinants of the three matrices.
-
-❄️  **Your Turn:** Prove that if the matrix $A$ has a 0 row, then
-$det(A) =  0$.
 
