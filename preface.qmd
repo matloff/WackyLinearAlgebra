@@ -111,12 +111,12 @@ lessons.]{.column-margin}
 Earlier in this Preface, I said, "If a Data Science or Statistics
 program requires linear algebra offered by a Math Department, the 
 mathematical content of this book should be similar to that math course..."
-So, the mathematics is definitely here, but one might also say,
+So, the mathematics is definitely here, but one might also say that
 this book is "mathematical but not overly theoretical."
 
 Theorems are mainly limited to results with practical importance.  Among
-the Your Turn exercises at the end of each chapter, the ones requiring
-proofs are usually simple, of the "one liner" type.  But the subject
+the Your Turn exercises at the end of each chapter, many of the ones requiring
+proofs are simple, of the "one liner" type.  But the subject
 matter is indeed mathematical.  Students are indeed expected to read and
 understand proofs, just as with the Mathematics Department course.
 
@@ -134,7 +134,8 @@ value as a motivator, but understanding applications is actually *more*
 challenging than a purely mathematical treatment, not less so.  Math is
 more crisply-defined, while applications can be "fuzzy." Among the Your
 Turn exercises, many of the applied ones are somewhat open-ended, and
-they tend to be wordier than the theory ones. 
+they tend to be wordier than the theory ones. But often these are the
+ones that develop genuine understanding of the subject.
 
 In other words, the book is intended to arm students with *usable
 practical insights*, rather than merely satisfying some curricular
