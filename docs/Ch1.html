@@ -448,7 +448,7 @@ u =
 <h2 data-number="2.4" class="anchored" data-anchor-id="matrix-matrix-multiplication"><span class="header-section-number">2.4</span> Matrix-Matrix Multiplication</h2>
 <p>This is the most fundamental operation in linear algebra. It is defined as follows:</p>
 <blockquote class="blockquote">
-<p>Given matrix <span class="math inline">\(A\)</span> of <span class="math inline">\(k\)</span> rows and <span class="math inline">\(m\)</span> columns and matrix <span class="math inline">\(B\)</span> of <span class="math inline">\(m\)</span> rows and <span class="math inline">\(r\)</span> columns, the product <span class="math inline">\(C = AB\)</span> is a <span class="math inline">\(k \textrm{ x } m\)</span> matrix, whose row <span class="math inline">\(i\)</span>, column <span class="math inline">\(j\)</span> element is</p>
+<p>Given matrix <span class="math inline">\(A\)</span> of <span class="math inline">\(k\)</span> rows and <span class="math inline">\(m\)</span> columns and matrix <span class="math inline">\(B\)</span> of <span class="math inline">\(m\)</span> rows and <span class="math inline">\(r\)</span> columns, the product <span class="math inline">\(C = AB\)</span> is a <span class="math inline">\(k \times m\)</span> matrix, whose row <span class="math inline">\(i\)</span>, column <span class="math inline">\(j\)</span> element is</p>
 <p><span class="math display">\[
 a_{i1} b_{1j} +
 a_{i2} b_{2j} + ... +
@@ -524,7 +524,7 @@ Tip&nbsp;2.1
 </section>
 <section id="the-identity-matrix" class="level2" data-number="2.5">
 <h2 data-number="2.5" class="anchored" data-anchor-id="the-identity-matrix"><span class="header-section-number">2.5</span> The Identity Matrix</h2>
-<p>The <em>identity matrix</em> <span class="math inline">\(I\)</span> of size <span class="math inline">\(n\)</span> is the <span class="math inline">\(n \textrm{ x } n\)</span> matrix with 1s on the diagonal and 0s elsewhere. <span class="math inline">\(IB = B\)</span> and <span class="math inline">\(AI = A\)</span> for any conformable <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>.</p>
+<p>The <em>identity matrix</em> <span class="math inline">\(I\)</span> of size <span class="math inline">\(n\)</span> is the <span class="math inline">\(n \times n\)</span> matrix with 1s on the diagonal and 0s elsewhere. <span class="math inline">\(IB = B\)</span> and <span class="math inline">\(AI = A\)</span> for any conformable <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>.</p>
 </section>
 <section id="sec-introMCs" class="level2" data-number="2.6">
 <h2 data-number="2.6" class="anchored" data-anchor-id="sec-introMCs"><span class="header-section-number">2.6</span> Application to Markov Chain Transition Matrices</h2>
@@ -840,14 +840,14 @@ Tip&nbsp;3.1: A Crucial Tool
 <li><p>Marvel at the fact that this bit of “alchemy” actually produces the correct matrix equation.</p></li>
 </ol>
 </blockquote>
-<p>It will be easier to see how this works by considering the special case of <span class="math inline">\(Q\)</span> being a vector <span class="math inline">\(v\)</span>. Of course, that means that <span class="math inline">\(v\)</span> is a column vector <span class="math inline">\((v_1,v_2,...,v_n)'\)</span>. If <span class="math inline">\(M\)</span> is of size <span class="math inline">\(m \textrm{ x } n\)</span>, then <span class="math inline">\(v\)</span> is <span class="math inline">\(n \textrm{ x } 1\)</span>.</p>
+<p>It will be easier to see how this works by considering the special case of <span class="math inline">\(Q\)</span> being a vector <span class="math inline">\(v\)</span>. Of course, that means that <span class="math inline">\(v\)</span> is a column vector <span class="math inline">\((v_1,v_2,...,v_n)'\)</span>. If <span class="math inline">\(M\)</span> is of size <span class="math inline">\(m \times n\)</span>, then <span class="math inline">\(v\)</span> is <span class="math inline">\(n \times 1\)</span>.</p>
 <p>Now, we ask for the reader’s patience here, as we will move back and forth between a symbolic “pretend world” and reality. We promise, it will be worth it.</p>
 <p>Let’s denote column <span class="math inline">\(j\)</span> of <span class="math inline">\(M\)</span> by <span class="math inline">\(c_{j}\)</span>. Write <span class="math inline">\(M\)</span> symbolically as</p>
 <p><span class="math display">\[
 M = (c_1,c_2,...,c_n)
 \]</span></p>
 <p>so the group size in this case is 1, with <span class="math inline">\(n\)</span> groups of columns. Treating the <span class="math inline">\(c_j\)</span> as “numbers,” again symbolically, <span class="math inline">\(M\)</span> looks like a <span class="math inline">\(1
-\textrm{ x } n\)</span> matrix. We temporarily pretend it’s <span class="math inline">\(1 \textrm{ x } n\)</span> even though it’s actually <span class="math inline">\(m \textrm{ x } n\)</span>, and that the <span class="math inline">\(c_j\)</span> are numbers, even though they are vectors. Then the “product”</p>
+\times n\)</span> matrix. We temporarily pretend it’s <span class="math inline">\(1 \times n\)</span> even though it’s actually <span class="math inline">\(m \times n\)</span>, and that the <span class="math inline">\(c_j\)</span> are numbers, even though they are vectors. Then the “product”</p>
 <p><span class="math display">\[
 Mv =
 (c_1,c_2,...,c_n) %*%
@@ -863,7 +863,7 @@ v_1 c_{1} +
 v_2 c_{2} + ... +
 v_s c_{n}  
 \]</span></p>
-<p>looks, once again symbolically like the product of <span class="math inline">\(1 \textrm{ x } n\)</span> and <span class="math inline">\(n \textrm{ x } 1\)</span> vectors, resulting in a <span class="math inline">\(1 \textrm{ x } 1\)</span>, i.e.&nbsp;a number.</p>
+<p>looks, once again symbolically like the product of <span class="math inline">\(1 \times n\)</span> and <span class="math inline">\(n \times 1\)</span> vectors, resulting in a <span class="math inline">\(1 \times 1\)</span>, i.e.&nbsp;a number.</p>
 <p>The wonderful thing about all this is that if we now stop pretending, we get the right answer! If we now treat the <span class="math inline">\(c_j\)</span> for what they really are, column vectors, then the relation</p>
 <p><span class="math display">\[
 Mv =
@@ -1046,11 +1046,11 @@ A_{11} v_{11} + A_{12} v_{21} =
 \right )
 \]</span></p>
 <p>which is the true value of <span class="math inline">\(Av\)</span>.</p>
-<p>We can extend that reasoning further. Say <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are matrices of sizes <span class="math inline">\(m \textrm{x} n\)</span> and <span class="math inline">\(n \textrm{x} k\)</span>, and consider the product <span class="math inline">\(AB\)</span>. Partition <span class="math inline">\(B\)</span> by its columns,</p>
+<p>We can extend that reasoning further. Say <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are matrices of sizes <span class="math inline">\(m \times n\)</span> and <span class="math inline">\(n \times k\)</span>, and consider the product <span class="math inline">\(AB\)</span>. Partition <span class="math inline">\(B\)</span> by its columns,</p>
 <p><span class="math display">\[
 B = (B^{(1)},B^{(2)},..., B^{(k)})
 \]</span></p>
-<p>Now pretending that <span class="math inline">\(A\)</span> is a <span class="math inline">\(1 \textrm{x} 1\)</span> “matrix” and <span class="math inline">\(B\)</span> is a<span class="math inline">\(1 \textrm{x} k\)</span> “matrix”, we have</p>
+<p>Now pretending that <span class="math inline">\(A\)</span> is a <span class="math inline">\(1 \times 1\)</span> “matrix” and <span class="math inline">\(B\)</span> is a <span class="math inline">\(1 \times k\)</span> “matrix”, we have</p>
 <p><span class="math display">\[
 AB = (AB^{(1)},AB^{(2)},..., AB^{(k)})
 \]</span></p>
@@ -1062,7 +1062,7 @@ AB = (AB^{(1)},AB^{(2)},..., AB^{(k)})
 </section>
 <section id="your-turn" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">3.2</span> Your Turn</h2>
-<p>❄️ <strong>Your Turn:</strong> Fill in the blank with a term from this chapter: The adjacency matrix of an undirected graph is nessarily ________.</p>
+<p>❄️ <strong>Your Turn:</strong> Fill in the blank with a term from this chapter: The adjacency matrix of an undirected graph is necessarily ________.</p>
 <p>❄️ <strong>Your Turn:</strong> Consider the Karate Club dataset.</p>
 <ul>
 <li><p>Which members is member 6 linked with?</p></li>
@@ -1096,7 +1096,7 @@ I \\
 \right )
 \]</span></p>
 <p>Now consider the product <span class="math inline">\(AA'\)</span>. Using partitioning, we would treat <span class="math inline">\(B\)</span> and <span class="math inline">\(I\)</span> numbers and the product as having factors of size <span class="math inline">\(2
-\textrm{ x } 1\)</span> and <span class="math inline">\(1 \textrm{ x } 2\)</span>. That would give us a <span class="math inline">\(2 \textrm{ x } 2\)</span> “matrix”</p>
+\times 1\)</span> and <span class="math inline">\(1 \times 2\)</span>. That would give us a <span class="math inline">\(2 \times 2\)</span> “matrix”</p>
 <p><span id="eq-yt1"><span class="math display">\[
 AA' =
 \left (

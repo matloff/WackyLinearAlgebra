@@ -469,7 +469,7 @@ Coefficients:
 <section id="nile-example" class="level3" data-number="5.3.1">
 <h3 data-number="5.3.1" class="anchored" data-anchor-id="nile-example"><span class="header-section-number">5.3.1</span> Nile example</h3>
 <p>As we have seen, systems of linear equations are natural applications of linear algebra. The equations setting the derivatives to 0 can be written in matrix terms as</p>
-<p><span class="math display">\[
+<p><span id="eq-nilebetahat"><span class="math display">\[
 \left (
 \begin{array}{r}
 \sum_{i=1}^n C_i \\
@@ -488,7 +488,7 @@ b_0 \\
 b_1 \\
 \end{array}
 \right )
-\]</span></p>
+\tag{5.1}\]</span></span></p>
 <p>Actually, that matrix equation can be derived more easily by using matrices to begin with:</p>
 <p>Define <span class="math inline">\(S\)</span> and <span class="math inline">\(T\)</span>:</p>
 <p><span class="math display">\[
@@ -543,7 +543,7 @@ u'u
 <p>our sum of squared prediction errors is</p>
 <p><span id="eq-matrixss"><span class="math display">\[
 (S - Ab)'(S - Ab)
-\tag{5.1}\]</span></span></p>
+\tag{5.2}\]</span></span></p>
 <p>Now how we will minimize that matrix expression with respect to the vector <span class="math inline">\(b\)</span>? That is the subject of the next section.</p>
 </section>
 <section id="sec-matrixderivs" class="level3" data-number="5.3.2">
@@ -564,19 +564,19 @@ u = 2x + 3y^2 + xy
 <p>With care, we can compute gradients entirely at the matrix level, using easily derivable properties, without ever resorting to returning to the scalar expressions. Let’s apply them to the case at hand in the last section,</p>
 <p><span id="eq-rss"><span class="math display">\[
 (S - Ab)'(S - Ab)
-\tag{5.2}\]</span></span></p>
+\tag{5.3}\]</span></span></p>
 </section>
 <section id="sec-linregformula" class="level3 page-columns page-full" data-number="5.3.3">
 <h3 data-number="5.3.3" class="anchored" data-anchor-id="sec-linregformula"><span class="header-section-number">5.3.3</span> Differentiation purely in matrix terms</h3>
 <p>It can be shown that for a column vector <span class="math inline">\(a\)</span>,</p>
 <p><span id="eq-dda"><span class="math display">\[
 \frac{d}{da} a'a = 2a
-\tag{5.3}\]</span></span></p>
-<p><a href="#eq-rss" class="quarto-xref">Equation&nbsp;<span>5.2</span></a> is indeed of the form <span class="math inline">\(a'a\)</span>, but the problem here is that <span class="math inline">\(a\)</span> in turn is a function of <span class="math inline">\(b\)</span>, This calls for the Chain Rule, which does exist at the matrix level:</p>
+\tag{5.4}\]</span></span></p>
+<p><a href="#eq-rss" class="quarto-xref">Equation&nbsp;<span>5.3</span></a> is indeed of the form <span class="math inline">\(a'a\)</span>, but the problem here is that <span class="math inline">\(a\)</span> in turn is a function of <span class="math inline">\(b\)</span>, This calls for the Chain Rule, which does exist at the matrix level:</p>
 <p>For example if <span class="math inline">\(u = Mv + w\)</span>, with <span class="math inline">\(M\)</span> and <span class="math inline">\(w\)</span> constants (i.e.&nbsp;not functions of <span class="math inline">\(v\)</span>, then</p>
 <div class="page-columns page-full"><p><span class="math display">\[
 \frac{d}{dv} u'u = 2M'u
-\]</span></p><div class="no-row-height column-margin column-container"><span class="">We must keep in mind that we are working with vectors and matrices, so that <span class="math inline">\(M'u\)</span>, say <span class="math inline">\(r \textrm{x} s\)</span> times <span class="math inline">\(s \textrm{ x} 1\)</span>, is conformable matrix multiplication while <span class="math inline">\(uM'\)</span> is mathematical nonsense.</span></div></div>
+\]</span></p><div class="no-row-height column-margin column-container"><span class="">We must keep in mind that we are working with vectors and matrices, so that <span class="math inline">\(M'u\)</span>, say <span class="math inline">\(r \times s\)</span> times <span class="math inline">\(s \times 1\)</span>, is conformable matrix multiplication.</span></div></div>
 <p>In our case at hand, we have <span class="math inline">\(M = -A\)</span> and <span class="math inline">\(w = S\)</span>, so that</p>
 <p><span class="math display">\[
 \frac{d}{db} [(S - Ab)'(S - Ab) = -2 A'(S - Ab)
@@ -588,7 +588,7 @@ u = 2x + 3y^2 + xy
 <p>yield our minimizing <span class="math inline">\(b\)</span>:</p>
 <p><span id="eq-linregformula"><span class="math display">\[
 \widehat{\beta} = (A'A)^{-1} A'S
-\tag{5.4}\]</span></span></p>
+\tag{5.5}\]</span></span></p>
 <p>providing the inverse exists (more on this in the next chapter).</p>
 <p>Let’s check this with the Nile example:</p>
 <div class="cell">
@@ -634,7 +634,7 @@ A =
 1 &amp; X_{n1} &amp; ... &amp; X_{np} \\
 \end{array}
 \right )
-\tag{5.5}\]</span></span></p>
+\tag{5.6}\]</span></span></p>
 <p>Continue to set <span class="math inline">\(S\)</span> to the length-<span class="math inline">\(n\)</span> column vector of our response variable. Our model is</p>
 <p><span class="math display">\[
 E(S | A) = A \beta
@@ -646,7 +646,7 @@ b = (b_0,b_1,...,b_p)'
 <p>Then, using the same reasoning as before, we have the minimizing value of <span class="math inline">\(b\)</span>:</p>
 <p><span id="eq-betahat"><span class="math display">\[
 \widehat{\beta} = (A'A)^{-1} A'S
-\tag{5.6}\]</span></span></p>
+\tag{5.7}\]</span></span></p>
 <p>again providing that the inverse exists.</p>
 </section>
 <section id="sec-mlb" class="level3 page-columns page-full" data-number="5.3.5">
@@ -718,7 +718,7 @@ Cov(S | A) = \sigma^2 I
 <p><span id="eq-varcovar"><span class="math display">\[
 Cov(\widehat{\beta}|A) = R Cov(S|A) R' = R \sigma^2 I R' = \sigma^2 R R' =
 \sigma^2 (A'A)^{-1}
-\tag{5.7}\]</span></span></p>
+\tag{5.8}\]</span></span></p>
 <p>Classical statistical formulas use this relation to find standard errors for <span class="math inline">\(\widehat{\beta}_i\)</span> etc.</p>
 </section>
 </section>
@@ -770,7 +770,7 @@ C = B + uv'
 B^{-1} - \frac{1}{1+v'B^{-1}u} B^{-1} (uv') B^{-1}
 \]</span></p>
 </blockquote>
-<p>Now, how can we apply this to the Leave One Out method? In the matrix <span class="math inline">\(A\)</span> in Equation <a href="#eq-designmat" class="quarto-xref">Equation&nbsp;<span>5.5</span></a>, we wish to remove row <span class="math inline">\(i\)</span>; call the result <span class="math inline">\(A_{-i}\)</span>. Our new version of <span class="math inline">\(A'A\)</span> is then</p>
+<p>Now, how can we apply this to the Leave One Out method? In the matrix <span class="math inline">\(A\)</span> in Equation <a href="#eq-designmat" class="quarto-xref">Equation&nbsp;<span>5.6</span></a>, we wish to remove row <span class="math inline">\(i\)</span>; call the result <span class="math inline">\(A_{-i}\)</span>. Our new version of <span class="math inline">\(A'A\)</span> is then</p>
 <p><span class="math display">\[
 A_{-i}' A_{-i}
 \]</span></p>
@@ -792,15 +792,10 @@ a_n \\
 \end{array}
 \right )
 \]</span></p>
-<p>We pretend it is a <span class="math inline">\(2 \textrm{x} 1\)</span> “matrix,” and <span class="math inline">\(A'\)</span> is then “<span class="math inline">\(1
-\textrm{x} 2\)</span>”:</p>
+<p>We pretend it is a <span class="math inline">\(2 \times 1\)</span> “matrix,” and <span class="math inline">\(A'\)</span> is then “<span class="math inline">\(1
+\times 2\)</span>”:</p>
 <p><span class="math display">\[
-A' =
-\left (
-\begin{array}{rr}
-A_{(-n)}' &amp; a_n' \\
-\end{array}
-\right )
+A' = (A_{(-n)}' | a_n')
 \]</span></p>
 <p>Thus</p>
 <p><span class="math display">\[
@@ -848,9 +843,13 @@ B^{-1} (a_i a_i') B^{-1}
 </div>
 </div>
 </section>
-<section id="your-turn" class="level2" data-number="5.5">
+<section id="your-turn" class="level2 page-columns page-full" data-number="5.5">
 <h2 data-number="5.5" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">5.5</span> Your Turn</h2>
-<p>❄️ <strong>Your Turn:</strong> Show <a href="#eq-dda" class="quarto-xref">Equation&nbsp;<span>5.3</span></a>. Write <span class="math inline">\(a = (a_1,...,a_k)'\)</span> and find the gradient “by hand.” Compare to <span class="math inline">\(2a\)</span>.</p>
+<div class="page-columns page-full"><p>❄️ <strong>Your Turn:</strong> Due to the Multivariate Central Limit Theorem, many common statistical estimators have approximately normal distributions. In R, functions such as <strong>lm</strong>, <strong>glm</strong>, <strong>lme</strong> and <strong>coxph</strong> come with an associated function <strong>vcov</strong>. This gives the approximate covariance  matrix of the computed estimator, e.g.&nbsp;for the estimated coefficients vector in a linear model. This enables formation of approximate confidence intervals for not only individual model parameters but also linear combinations of them.</p><div class="no-row-height column-margin column-container"><span class="">As seen in <a href="#eq-nilebetahat" class="quarto-xref">Equation&nbsp;<span>5.1</span></a>, least-squares estimators are composed of various sums, making them asymptotically normal by the Multivariate Central Limit Theorem. Thus we can form approximate confidence intervals even without assuming normal distributions for “Y.”</span></div></div>
+<p>Write an R function with call form</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">regFtnCI</span>(lmOut,t,alpha)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>that returns an approximate <span class="math inline">\((1-\alpha)\)</span> confidence interval for the conditional mean <span class="math inline">\(E(Y | X=t)\)</span>. Here <strong>lmOut</strong> is the object returned by a call to <strong>lm</strong>.</p>
+<p>❄️ <strong>Your Turn:</strong> Show <a href="#eq-dda" class="quarto-xref">Equation&nbsp;<span>5.4</span></a>. Write <span class="math inline">\(a = (a_1,...,a_k)'\)</span> and find the gradient “by hand.” Compare to <span class="math inline">\(2a\)</span>.</p>
 <p>❄️ <strong>Your Turn:</strong> Show that</p>
 <p><span class="math display">\[
 \frac{d}{du} u'Qu = 2Qu

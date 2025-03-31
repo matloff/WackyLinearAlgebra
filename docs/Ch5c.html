@@ -353,7 +353,7 @@ Goals of this chapter:
 <h2 data-number="10.1" class="anchored" data-anchor-id="sec-nearly"><span class="header-section-number">10.1</span> Multicollinearity</h2>
 <p>The notion of <em>multicollinearity</em> was the original motivation for shrinkage estimators. It refers to settings in which the following concerns arise:</p>
 <ul>
-<li><p>One column of the matrix <span class="math inline">\(A\)</span> in <a href="Ch3.html#eq-linregformula" class="quarto-xref">Equation&nbsp;<span>5.4</span></a> is nearly equal to some linear combination of the others.</p></li>
+<li><p>One column of the matrix <span class="math inline">\(A\)</span> in <a href="Ch3.html#eq-linregformula" class="quarto-xref">Equation&nbsp;<span>5.5</span></a> is nearly equal to some linear combination of the others.</p></li>
 <li><p>Thus <span class="math inline">\(A\)</span> is nearly not of full rank.</p></li>
 <li><p>Thus <span class="math inline">\(A'A\)</span> is nearly not of full rank.</p></li>
 <li><p>Thus <span class="math inline">\(\widehat{\beta}\)</span> is unstable, in the form of high variance.</p></li>
@@ -411,7 +411,7 @@ VIF_j = \frac{1}{1-R^2_j}
 <div class="page-columns page-full"><p>In seminal paper, Hoerl and Kennard presented a new approach to the problem of multicollinearity of predictor variables in a linear model.</p><div class="no-row-height column-margin column-container"><span class=""><em>Technometrids</em>, Februaru1970</span></div></div>
 <section id="the-ridge-solution" class="level3" data-number="10.3.1">
 <h3 data-number="10.3.1" class="anchored" data-anchor-id="the-ridge-solution"><span class="header-section-number">10.3.1</span> The ridge solution</h3>
-<p>Their solution is simple; Add some quantity to the diagonal of <span class="math inline">\(A'A\)</span>. Specifically, <a href="Ch3.html#eq-linregformula" class="quarto-xref">Equation&nbsp;<span>5.4</span></a> now becomes</p>
+<p>Their solution is simple; Add some quantity to the diagonal of <span class="math inline">\(A'A\)</span>. Specifically, <a href="Ch3.html#eq-linregformula" class="quarto-xref">Equation&nbsp;<span>5.5</span></a> now becomes</p>
 <p><span id="eq-ridge"><span class="math display">\[
 \widehat{\beta} = (A'A + \lambda I)^{-1} A'S
 \tag{10.1}\]</span></span></p>
@@ -440,7 +440,7 @@ S \\
 \end{array}
 \right )
 \]</span></p>
-<p>where 0 means <span class="math inline">\(p\)</span> 0s. In essence, we are adding artificial data here, consisting of <span class="math inline">\(p\)</span> new rows to <span class="math inline">\(A\)</span>, and <span class="math inline">\(p\)</span> new elements to <span class="math inline">\(S\)</span>. So <a href="#eq-ridge" class="quarto-xref">Equation&nbsp;<span>10.1</span></a> is just the result of applying <a href="Ch3.html#eq-linregformula" class="quarto-xref">Equation&nbsp;<span>5.4</span></a> to <span class="math inline">\(A_{new}\)</span> and <span class="math inline">\(S_{new}\)</span>.</p>
+<p>where 0 means <span class="math inline">\(p\)</span> 0s. In essence, we are adding artificial data here, consisting of <span class="math inline">\(p\)</span> new rows to <span class="math inline">\(A\)</span>, and <span class="math inline">\(p\)</span> new elements to <span class="math inline">\(S\)</span>. So <a href="#eq-ridge" class="quarto-xref">Equation&nbsp;<span>10.1</span></a> is just the result of applying <a href="Ch3.html#eq-linregformula" class="quarto-xref">Equation&nbsp;<span>5.5</span></a> to <span class="math inline">\(A_{new}\)</span> and <span class="math inline">\(S_{new}\)</span>.</p>
 <p>Loosely speaking, we can think of the addition of <span class="math inline">\(\lambda I\)</span> to <span class="math inline">\(A'A\)</span> makes the latter “larger”, and thus its inverse smaller. In other words, we are “shrinking” <span class="math inline">\(\widehat{\beta}\)</span> towards 0. This effect is made even stronger by the fact that we added 0s data to <span class="math inline">\(S\)</span>. This will be made more precise below.</p>
 </section>
 <section id="example-million-song-dataset" class="level3" data-number="10.3.3">
@@ -710,7 +710,7 @@ woman   -29378.3086</code></pre>
 <p>So, let’s view the issue of shrinkage more formally, first for ridge and later for the LASSO.</p>
 <section id="shrinkage-through-length-penalization" class="level3" data-number="10.7.1">
 <h3 data-number="10.7.1" class="anchored" data-anchor-id="shrinkage-through-length-penalization"><span class="header-section-number">10.7.1</span> Shrinkage through length penalization</h3>
-<p>Say instead of minimizing <a href="Ch3.html#eq-matrixss" class="quarto-xref">Equation&nbsp;<span>5.1</span></a>, we minimize</p>
+<p>Say instead of minimizing <a href="Ch3.html#eq-matrixss" class="quarto-xref">Equation&nbsp;<span>5.2</span></a>, we minimize</p>
 <p><span id="eq-matrixssridge"><span class="math display">\[
 (S - Ab)'(S - Ab) + \lambda ||b||^2
 \tag{10.2}\]</span></span></p>
@@ -849,8 +849,8 @@ Call:  cv.glmnet(x = nycwide, y = nyctaxi[, 1], alpha = 0)
 Measure: Mean-Squared Error 
 
     Lambda Index Measure     SE Nonzero
-min 0.3002   100    2.96 0.1846     356
-1se 1.0063    87    3.11 0.1753     356</code></pre>
+min 0.3002   100   2.962 0.1804     356
+1se 1.0063    87   3.126 0.1644     356</code></pre>
 </div>
 </div>
 <p>The best <span class="math inline">\(\lambda\)</span> value was found to be 0.3002.</p>
@@ -898,7 +898,7 @@ No Statistical Inference on Shrinkage Estimators
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Shrinkage produces a bias, of unknown size. Thus classical statistical inference (confidence intervals, hypothesis tests), e.g.&nbsp;those based on <a href="Ch3.html#eq-varcovar" class="quarto-xref">Equation&nbsp;<span>5.7</span></a> for linear models, is not possible.</p>
+<p>Shrinkage produces a bias, of unknown size. Thus classical statistical inference (confidence intervals, hypothesis tests), e.g.&nbsp;those based on <a href="Ch3.html#eq-varcovar" class="quarto-xref">Equation&nbsp;<span>5.8</span></a> for linear models, is not possible.</p>
 </div>
 </div>
 </section>

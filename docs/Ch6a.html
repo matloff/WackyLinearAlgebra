@@ -282,15 +282,13 @@ window.Quarto = {
   </ul></li>
   <li><a href="#definition" id="toc-definition" class="nav-link" data-scroll-target="#definition"><span class="header-section-number">11.3</span> Definition</a></li>
   <li><a href="#a-first-look" id="toc-a-first-look" class="nav-link" data-scroll-target="#a-first-look"><span class="header-section-number">11.4</span> A First Look</a></li>
-  <li><a href="#the-special-case-of-symmetric-matrices" id="toc-the-special-case-of-symmetric-matrices" class="nav-link" data-scroll-target="#the-special-case-of-symmetric-matrices"><span class="header-section-number">11.5</span> The Special Case of Symmetric Matrices</a>
-  <ul class="collapse">
-  <li><a href="#example-census-dataset" id="toc-example-census-dataset" class="nav-link" data-scroll-target="#example-census-dataset"><span class="header-section-number">11.5.1</span> Example: Census dataset</a></li>
-  </ul></li>
-  <li><a href="#application-detecting-multicollinearity" id="toc-application-detecting-multicollinearity" class="nav-link" data-scroll-target="#application-detecting-multicollinearity"><span class="header-section-number">11.6</span> Application: Detecting Multicollinearity</a></li>
-  <li><a href="#example-currency-data" id="toc-example-currency-data" class="nav-link" data-scroll-target="#example-currency-data"><span class="header-section-number">11.7</span> Example: Currency Data</a></li>
-  <li><a href="#computation-the-power-method" id="toc-computation-the-power-method" class="nav-link" data-scroll-target="#computation-the-power-method"><span class="header-section-number">11.8</span> Computation: the Power Method</a></li>
-  <li><a href="#application-computation-of-long-run-distribution-in-markov-chains" id="toc-application-computation-of-long-run-distribution-in-markov-chains" class="nav-link" data-scroll-target="#application-computation-of-long-run-distribution-in-markov-chains"><span class="header-section-number">11.9</span> Application: Computation of Long-Run Distribution in Markov Chains</a></li>
-  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">11.10</span> Your Turn</a></li>
+  <li><a href="#the-special-case-of-symmetric-matrices" id="toc-the-special-case-of-symmetric-matrices" class="nav-link" data-scroll-target="#the-special-case-of-symmetric-matrices"><span class="header-section-number">11.5</span> The Special Case of Symmetric Matrices</a></li>
+  <li><a href="#example-census-dataset" id="toc-example-census-dataset" class="nav-link" data-scroll-target="#example-census-dataset"><span class="header-section-number">11.6</span> Example: Census Dataset</a></li>
+  <li><a href="#application-detecting-multicollinearity" id="toc-application-detecting-multicollinearity" class="nav-link" data-scroll-target="#application-detecting-multicollinearity"><span class="header-section-number">11.7</span> Application: Detecting Multicollinearity</a></li>
+  <li><a href="#example-currency-data" id="toc-example-currency-data" class="nav-link" data-scroll-target="#example-currency-data"><span class="header-section-number">11.8</span> Example: Currency Data</a></li>
+  <li><a href="#computation-the-power-method" id="toc-computation-the-power-method" class="nav-link" data-scroll-target="#computation-the-power-method"><span class="header-section-number">11.9</span> Computation: the Power Method</a></li>
+  <li><a href="#application-computation-of-long-run-distribution-in-markov-chains" id="toc-application-computation-of-long-run-distribution-in-markov-chains" class="nav-link" data-scroll-target="#application-computation-of-long-run-distribution-in-markov-chains"><span class="header-section-number">11.10</span> Application: Computation of Long-Run Distribution in Markov Chains</a></li>
+  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">11.11</span> Your Turn</a></li>
   </ul>
 </nav>
     </div>
@@ -392,17 +390,22 @@ u'Cov(X)u + \gamma (u'u - 1)
 <p><span id="eq-aha"><span class="math display">\[
 Cov(X) ~ u = -\gamma u
 \tag{11.1}\]</span></span></p>
-<p>We see a situation in which a matrix (<span class="math inline">\(Cov(X)\)</span>) times a vector (<span class="math inline">\(u\)</span>) equals a constant (<span class="math inline">\(-\gamma\)</span>) times that same vector. We say that <span class="math inline">\(-\gamma\)</span> is an <em>eigenvalue</em> of the matrix <span class="math inline">\(Cov(X)\)</span>, and that <span class="math inline">\(u\)</span> is a corresponding <em>eigenvector</em>. Seems innocuous, but it opens a huge new world! We will return to the notion of principal components in the next chapter, after laying the groundwork in the current chapter.</p>
+<p>We see a situation in which a matrix (<span class="math inline">\(Cov(X)\)</span>) times a vector (<span class="math inline">\(u\)</span>) equals a constant (<span class="math inline">\(-\gamma\)</span>) times that same vector. We say that <span class="math inline">\(-\gamma\)</span> is an <em>eigenvalue</em> of the matrix <span class="math inline">\(Cov(X)\)</span>, and that <span class="math inline">\(u\)</span> is a corresponding <em>eigenvector</em>. Seems innocuous, but it opens a huge new world!</p>
+<p>Note too that from <a href="Ch2a.html#eq-quadform" class="quarto-xref">Equation&nbsp;<span>4.5</span></a>,</p>
+<p><span id="eq-maxvar"><span class="math display">\[
+\textrm{maximal variance} = u' Cov(X) u = u' (-\gamma u = -\gamma
+\tag{11.2}\]</span></span></p>
+<p>We will return to the notion of principal components in the next chapter, after laying the groundwork in the current chapter.</p>
 </section>
 </section>
 <section id="definition" class="level2" data-number="11.3">
 <h2 data-number="11.3" class="anchored" data-anchor-id="definition"><span class="header-section-number">11.3</span> Definition</h2>
 <p>The concept itself is simple:</p>
 <blockquote class="blockquote">
-<p>Consider an <span class="math inline">\(m \textrm{ x } m\)</span> matrix <span class="math inline">\(M\)</span>. If there is a nonzero vector <span class="math inline">\(x\)</span> and a number <span class="math inline">\(\lambda\)</span> such that</p>
+<p>Consider an <span class="math inline">\(m \times  m\)</span> matrix <span class="math inline">\(M\)</span>. If there is a nonzero vector <span class="math inline">\(x\)</span> and a number <span class="math inline">\(\lambda\)</span> such that</p>
 <p><span id="eq-simpledef"><span class="math display">\[
 Mx = \lambda x
-\tag{11.2}\]</span></span></p>
+\tag{11.3}\]</span></span></p>
 <p>we say that <span class="math inline">\(\lambda\)</span> is an <em>eigenvalue</em> of <span class="math inline">\(M\)</span>, with <em>eigenvector</em> <span class="math inline">\(x\)</span>.</p>
 </blockquote>
 </section>
@@ -418,13 +421,13 @@ Mx = \lambda x
 <p><span class="math display">\[
 det(M - \lambda I) = 0
 \]</span></p></li>
-<li><p>The left-hand side of this equation is a polynomial in <span class="math inline">\(\lambda\)</span>. So for an <span class="math inline">\(n \textrm{ x } n\)</span> matrix <span class="math inline">\(M\)</span>, there are <span class="math inline">\(n\)</span> roots of the equation and thus <span class="math inline">\(n\)</span> eigenvalues. Note that some roots may be repeated; if <span class="math inline">\(M\)</span> is the zero matrix, it will have an eigenvalue <span class="math inline">\(0\)</span> with multiplicity <span class="math inline">\(n\)</span>.</p></li>
+<li><p>The left-hand side of this equation is a polynomial in <span class="math inline">\(\lambda\)</span>. So for an <span class="math inline">\(n \times  n\)</span> matrix <span class="math inline">\(M\)</span>, there are <span class="math inline">\(n\)</span> roots of the equation and thus <span class="math inline">\(n\)</span> eigenvalues. Note that some roots may be repeated; if <span class="math inline">\(M\)</span> is the zero matrix, it will have an eigenvalue <span class="math inline">\(0\)</span> with multiplicity <span class="math inline">\(n\)</span>.</p></li>
 <li><p>In principle, that means we can solve the above determinant equation to find the eigenvalues of the matrix, though There are much better ways to calculate the eigenvalues than this, but a useful piece information arising from that analysis is that <span class="math inline">\(M\)</span> as <span class="math inline">\(m\)</span> eigenvalues (not necessarily distinct).</p></li>
 </ul>
 </section>
 <section id="the-special-case-of-symmetric-matrices" class="level2" data-number="11.5">
 <h2 data-number="11.5" class="anchored" data-anchor-id="the-special-case-of-symmetric-matrices"><span class="header-section-number">11.5</span> The Special Case of Symmetric Matrices</h2>
-<p>Many matrices in data science are symmetric, such as covariance matrices and <span class="math inline">\(A'A\)</span> in <a href="Ch3.html#eq-linregformula" class="quarto-xref">Equation&nbsp;<span>5.4</span></a>.</p>
+<p>Many matrices in data science are symmetric, such as covariance matrices and <span class="math inline">\(A'A\)</span> in <a href="Ch3.html#eq-linregformula" class="quarto-xref">Equation&nbsp;<span>5.5</span></a>.</p>
 <p>Some eigenvalues may be complex numbers, i.e.&nbsp;of the form <span class="math inline">\(a+bi\)</span>, but it can be shown that if <span class="math inline">\(M\)</span> is symmetric, its eigenvalues are guaranteed to be real. This is good news for data science, as many matrices in that field are symmetric, such covariance matrices.</p>
 <div id="thm-eigreal" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 11.1</strong></span> Eigenvalues of a symmetric matrix are real, not complex numbers, i.e.&nbsp;not of the form <span class="math inline">\(a+bi\)</span>.</p>
@@ -458,7 +461,7 @@ R^k = (P^{-1}RP) ~ (P^{-1}RP) ~ ... ~ (P^{-1}RP) = P^{-1}D^kP
 <li><p>In fact, the matrix <span class="math inline">\(P\)</span> is equal to the matrix whose columns are the eigenvectors <span class="math inline">\(u_i\)</span> of <span class="math inline">\(M\)</span>, chosen to have norm 1. Thus the same holds for the rows of <span class="math inline">\(P'\)</span>, so that</p>
 <p><span id="eq-pcols"><span class="math display">\[
 P'u_i = \lambda_i u_i
-\tag{11.3}\]</span></span></p></li>
+\tag{11.4}\]</span></span></p></li>
 <li><p>The associated diagonal matrix has as its diagonal elements the eigenvalues of <span class="math inline">\(M\)</span>.</p></li>
 <li><p>The matrix <span class="math inline">\(P\)</span> has the property that <span class="math inline">\(P^{-1} = P'\)</span>.</p></li>
 <li><p>Moreover, the rank of <span class="math inline">\(M\)</span> is equal to the number of nonzero eigenvalues of <span class="math inline">\(M\)</span>.</p></li>
@@ -485,8 +488,9 @@ P'MP = P'P D = D
 <p>Regarding rank, <a href="Ch4.html#thm-ranknotchange" class="quarto-xref">Theorem&nbsp;<span>6.1</span></a> tells us that pre- or postmultiplying by an invertible matrix does not change rank, and clearly the rank of a diagonal matrix is the number of nonzero elements.</p>
 <p><span class="math inline">\(\square\)</span></p>
 </div>
-<section id="example-census-dataset" class="level3" data-number="11.5.1">
-<h3 data-number="11.5.1" class="anchored" data-anchor-id="example-census-dataset"><span class="header-section-number">11.5.1</span> Example: Census dataset</h3>
+</section>
+<section id="example-census-dataset" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="example-census-dataset"><span class="header-section-number">11.6</span> Example: Census Dataset</h2>
 <p>Let’s illustrate all this with the data in <a href="Ch5c.html#sec-pgtn" class="quarto-xref"><span>Section 10.6</span></a>. We will form the matrix <span class="math inline">\(A'A\)</span> in <a href="Ch3.html#sec-linregformula" class="quarto-xref"><span>Section 5.3.3</span></a>, which as mentioned, is symmetric.</p>
 <p>Recall that in that example, <span class="math inline">\(A\)</span> is not of full rank. Thus we should expect to see a 0 eigenvalue.</p>
 <div class="cell">
@@ -532,9 +536,8 @@ woman     -289463.4</code></pre>
 <p>Yes, that first column is indeed an eigenvector, with the claimed eigenvalue.</p>
 <p>Note that the expected 0 eigenvalue shows up as 2.801489e-12, quite small but nonzero, due to roundoff error.</p>
 </section>
-</section>
-<section id="application-detecting-multicollinearity" class="level2" data-number="11.6">
-<h2 data-number="11.6" class="anchored" data-anchor-id="application-detecting-multicollinearity"><span class="header-section-number">11.6</span> Application: Detecting Multicollinearity</h2>
+<section id="application-detecting-multicollinearity" class="level2" data-number="11.7">
+<h2 data-number="11.7" class="anchored" data-anchor-id="application-detecting-multicollinearity"><span class="header-section-number">11.7</span> Application: Detecting Multicollinearity</h2>
 <p>Consider the basic eigenanalysis equation,</p>
 <p><span class="math display">\[
 Ax = \lambda x
@@ -546,8 +549,8 @@ Ax \approx 0
 <p>and since <span class="math inline">\(Ax\)</span> is a linear combination of the columns of <span class="math inline">\(A\)</span>, we thus we have found multicollinearity in <span class="math inline">\(A\)</span>.</p>
 <p>One often sees use of the <em>condition number</em> of a matrix, which is the ratio of the largest eigenvalue to the smallest one. This too might be used as a suggestion of multicollinearity, though the main usage is as a signal that matrix operations such finding inverses may have significant problems with roundoff error.</p>
 </section>
-<section id="example-currency-data" class="level2" data-number="11.7">
-<h2 data-number="11.7" class="anchored" data-anchor-id="example-currency-data"><span class="header-section-number">11.7</span> Example: Currency Data</h2>
+<section id="example-currency-data" class="level2" data-number="11.8">
+<h2 data-number="11.8" class="anchored" data-anchor-id="example-currency-data"><span class="header-section-number">11.8</span> Example: Currency Data</h2>
 <p>This dataset tracks five pre-euro European currencies.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qeML)</span>
@@ -611,9 +614,9 @@ J..yen         66967756 109220119 1433430.43  85746625 103243878</code></pre>
 </div>
 <p>So yes, this dataset has some multicollinearity.</p>
 </section>
-<section id="computation-the-power-method" class="level2" data-number="11.8">
-<h2 data-number="11.8" class="anchored" data-anchor-id="computation-the-power-method"><span class="header-section-number">11.8</span> Computation: the Power Method</h2>
-<p>One way to compute eigenvalues and eigenvectors is the <em>power method</em>, a simple iteration. We begin with an initial guess, <span class="math inline">\(x_0\)</span> for an eigenvector. Substituting in <a href="#eq-simpledef" class="quarto-xref">Equation&nbsp;<span>11.2</span></a>, we have the next guess:</p>
+<section id="computation-the-power-method" class="level2" data-number="11.9">
+<h2 data-number="11.9" class="anchored" data-anchor-id="computation-the-power-method"><span class="header-section-number">11.9</span> Computation: the Power Method</h2>
+<p>One way to compute eigenvalues and eigenvectors is the <em>power method</em>, a simple iteration. We begin with an initial guess, <span class="math inline">\(x_0\)</span> for an eigenvector. Substituting in <a href="#eq-simpledef" class="quarto-xref">Equation&nbsp;<span>11.3</span></a>, we have the next guess:</p>
 <p><span class="math display">\[
 x_1 = M x_0
 \]</span></p>
@@ -622,14 +625,14 @@ x_1 = M x_0
 x_i \leftarrow \frac{x_i}{||x_i||}
 \]</span></p>
 </section>
-<section id="application-computation-of-long-run-distribution-in-markov-chains" class="level2" data-number="11.9">
-<h2 data-number="11.9" class="anchored" data-anchor-id="application-computation-of-long-run-distribution-in-markov-chains"><span class="header-section-number">11.9</span> Application: Computation of Long-Run Distribution in Markov Chains</h2>
+<section id="application-computation-of-long-run-distribution-in-markov-chains" class="level2" data-number="11.10">
+<h2 data-number="11.10" class="anchored" data-anchor-id="application-computation-of-long-run-distribution-in-markov-chains"><span class="header-section-number">11.10</span> Application: Computation of Long-Run Distribution in Markov Chains</h2>
 <p>We showed in <a href="Ch2.html#sec-markovsolve" class="quarto-xref"><span>Section 3.3</span></a> how matrix inverse can be used to compute the long-run distribution <span class="math inline">\(\nu\)</span> in a Markov chain. However, this is inefficient for very large transition matrices. For instance, in Google PageRank, there is a Markov state for every page on the Web!</p>
 <p>Instead, we exploit the fact that <a href="Ch2.html#eq-MarkovPi" class="quarto-xref">Equation&nbsp;<span>3.3</span></a> says that the transition matrix has an eigenvector <span class="math inline">\(\nu\)</span> with eigenvalue 1. Due to the typical huge size of the matrix, the power method or a variant is often used.</p>
 </section>
-<section id="your-turn" class="level2" data-number="11.10">
-<h2 data-number="11.10" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">11.10</span> Your Turn</h2>
-<p>❄️ <strong>Your Turn:</strong> Show that the diagonalizing matrix <span class="math inline">\(P\)</span> above must have determinant <span class="math inline">\(\pm 1\)</span>.</p>
+<section id="your-turn" class="level2" data-number="11.11">
+<h2 data-number="11.11" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">11.11</span> Your Turn</h2>
+<p>❄️ <strong>Your Turn:</strong> Show that the diagonalizing matrix <span class="math inline">\(P\)</span> for a symmetric matrix must have determinant <span class="math inline">\(\pm 1\)</span>.</p>
 <p>❄️ <strong>Your Turn:</strong> Show that if <span class="math inline">\(x\)</span> is an eigenvector of <span class="math inline">\(M\)</span> with eigenvalue <span class="math inline">\(\lambda \neq 0\)</span>, then for any nonzero number <span class="math inline">\(c\)</span>, <span class="math inline">\(cx\)</span> will also be an eigenvector with eigenvalue <span class="math inline">\(\lambda\)</span>.</p>
 <p>❄️ <strong>Your Turn:</strong> Show that if a matrix <span class="math inline">\(M\)</span> has a 0 eigenvalue, <span class="math inline">\(M\)</span> must be singular. Also prove the converse. (Hint: Consider the column rank.)</p>
 <p>❄️ <strong>Your Turn:</strong> Consider a projection matrix <span class="math inline">\(P_W\)</span>. Show that the only possible eigenvalues are 0 and 1. Hint: Recall that projection matrices are idempotent.</p>

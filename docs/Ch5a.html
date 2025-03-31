@@ -300,7 +300,7 @@ Goals of this chapter:
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>As noted earlier, the two main structures in linear algebra are matrices and vector spaces. We now introduce the latter, a bit more abstract than matrices but even more powerful. We lay the crucial foundation in this chapter, then reap the benefits in the applications in the remaining chapters.</p>
+<p>As noted earlier, the two main structures in linear algebra are matrices and vector spaces. We now introduce the latter, a bit more abstract than matrices but even more powerful. We lay the crucial foundation in this chapter. There won’t be any direct practical applications in this chapter, but we will then reap the huge benefits of this material in the applications in the remaining chapters.</p>
 </div>
 </div>
 <section id="review-of-a-matrix-rank-property" class="level2" data-number="7.1">
@@ -350,7 +350,7 @@ V_{rref}\)</span> similarly. Then</p>
 <h3 data-number="7.2.2" class="anchored" data-anchor-id="cal-rn"><span class="header-section-number">7.2.2</span> <span class="math inline">\(\cal R^{n}\)</span></h3>
 <p>In the vast majority of examples in this book, our vector space will be <span class="math inline">\(\cal R^{n}\)</span>.</p>
 <p>Here <span class="math inline">\(\cal R\)</span> represents the set of all real numbers, and <span class="math inline">\(\cal R^{n}\)</span> is simply the set of all vectors consisiting of <span class="math inline">\(n\)</span> real numbers. In an <span class="math inline">\(m
-\textrm{ x } k\)</span> matrix the rows are members of <span class="math inline">\(\cal R^{m}\)</span> and the columns are in <span class="math inline">\(\cal R^{k}\)</span>.</p>
+\times k\)</span> matrix the rows are members of <span class="math inline">\(\cal R^{m}\)</span> and the columns are in <span class="math inline">\(\cal R^{k}\)</span>.</p>
 </section>
 <section id="the-set-c01-of-all-continuous-functions-on-the-interval-01" class="level3" data-number="7.2.3">
 <h3 data-number="7.2.3" class="anchored" data-anchor-id="the-set-c01-of-all-continuous-functions-on-the-interval-01"><span class="header-section-number">7.2.3</span> The set C(0,1) of all continuous functions on the interval [0,1]</h3>
@@ -384,7 +384,7 @@ W_{1}\)</span> is closed under addition and scalar multiplication. <span class="
 <p><span class="math inline">\(R^3\)</span> and <span class="math inline">\(R^n\)</span>:</p>
 <p>For instance, take <span class="math inline">\(\cal W_{1}\)</span> to be all vectors of the form (a,b,0). Clearly, <span class="math inline">\(\cal W_{1}\)</span> is closed under addition and scalar multiplication, so it is subspace of <span class="math inline">\(R^3\)</span>.</p>
 <p>Another subspace of <span class="math inline">\(R^3\)</span> is the set of vectors (a,a,b), i.e.&nbsp;those vectors whose first two element are equal. What about vectors of the form (a,b,a+b)? Yes.</p>
-<p>We saw earlier that the <em>row space</em> of an <span class="math inline">\(m \textrm{ x } n\)</span> matrix <span class="math inline">\(A\)</span>, consisting of all linear combinations of the rows of <span class="math inline">\(A\)</span>, is a subspace of <span class="math inline">\(R^m\)</span>. Similarly, the <em>column space</em>, consisting of all linear combinations of columns of <span class="math inline">\(A\)</span>, is a subspace of <span class="math inline">\(R^n\)</span>.</p>
+<p>We saw earlier that the <em>row space</em> of an <span class="math inline">\(m \times n\)</span> matrix <span class="math inline">\(A\)</span>, consisting of all linear combinations of the rows of <span class="math inline">\(A\)</span>, is a subspace of <span class="math inline">\(R^m\)</span>. Similarly, the <em>column space</em>, consisting of all linear combinations of columns of <span class="math inline">\(A\)</span>, is a subspace of <span class="math inline">\(R^n\)</span>.</p>
 <p>Another important subspace is the <em>null space</em>, the set of all <span class="math inline">\(x\)</span> such that <span class="math inline">\(Ax = 0\)</span>. The reader should verify that this is indeed a subspace of <span class="math inline">\(R^n\)</span>.</p>
 <p><span class="math inline">\(C(0,1)\)</span>:</p>
 <p>One subspace is the set of all polynomial functions. Again, the sum of two polynomials is a polynomial, and the same holds for scalar multiplication, so the set of polynomials is closed under those operations, and is a subspace.</p>
@@ -432,7 +432,7 @@ W_{1}\)</span> is closed under addition and scalar multiplication. <span class="
 f(av + bw) = a f(v) = b f(w)
 \]</span></p>
 <p>for all scalars <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>, and all vectors <span class="math inline">\(v\)</span> and <span class="math inline">\(w\)</span> in $_1 $.</p>
-<p>A further important special case is that in which <span class="math inline">\(\cal{V}_1\)</span> and <span class="math inline">\(\cal{V}_2\)</span> are <span class="math inline">\(R^n\)</span> and <span class="math inline">\(R^m\)</span>, respectively. Then it can be shown that there a some <span class="math inline">\(m \textrm{ x } n\)</span> matrix <span class="math inline">\(A\)</span> that does its work, i.e.</p>
+<p>A further important special case is that in which <span class="math inline">\(\cal{V}_1\)</span> and <span class="math inline">\(\cal{V}_2\)</span> are <span class="math inline">\(R^n\)</span> and <span class="math inline">\(R^m\)</span>, respectively. Then it can be shown that there a some <span class="math inline">\(m \times n\)</span> matrix <span class="math inline">\(A\)</span> that does its work, i.e.</p>
 <p><span class="math display">\[
 f(x) = Ax
 \]</span></p>
@@ -442,10 +442,11 @@ f(x) = Ax
 </section>
 <section id="your-turn" class="level2" data-number="7.7">
 <h2 data-number="7.7" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">7.7</span> Your Turn</h2>
-<p>❄️ <strong>Your Turn:</strong> Say <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> are subspaces of <span class="math inline">\(W\)</span>. Show that <span class="math inline">\(U
+<p>❄️ <strong>Your Turn:</strong> In the vector space <span class="math inline">\(C(0,1)\)</span>, consider the subset of all polynomial functions of degree <span class="math inline">\(k\)</span> or less. Explain why this is a subspace of <span class="math inline">\(C(0,1)\)</span>. What is its dimension? Give an example of a basis for this subspace, for <span class="math inline">\(k = 3\)</span>.</p>
+<p>❄️ <strong>Your Turn:</strong> Say <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> are subspaces of <span class="math inline">\(W\)</span>. Explain why <span class="math inline">\(U
 \cap V\)</span> is also a subspace, and that its dimension is at most the minimum of the dimensions of <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span>. Show by counterexample that the result does not hold for union.</p>
 <p>❄️ <strong>Your Turn:</strong> Citing the properties of expected value, E(), show that the set of all random variable with mean 0 is a subspace of <span class="math inline">\(\cal RV(\Omega)\)</span>.</p>
-<p>❄️ <strong>Your Turn:</strong> Prove that the coefficients in a basis representation are unique. In other words, in a representation of the vector <span class="math inline">\(x\)</span> in terms of a basis <span class="math inline">\(u_1,...,u_n\)</span>,</p>
+<p>❄️ <strong>Your Turn:</strong> Prove that the coefficients in a basis representation are unique. In other words, in a representation of the vector <span class="math inline">\(x\)</span> in terms of a basis <span class="math inline">\(u_1,...,u_n\)</span>, there cannot be two different sets of coefficients <span class="math inline">\(c_1,...,c_n\)</span> such that <span class="math inline">\(c_1 u_1 + ... + c_n u_n = x\)</span>.</p>
 
 
 </section>

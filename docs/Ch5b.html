@@ -515,7 +515,7 @@ z = P_W x
 <p>The case of the linear model will deepen our understanding, and will lead to a method for outlier detection that is commonly used in practice.</p>
 <section id="the-least-squares-solution-is-a-projection" class="level3 page-columns page-full" data-number="8.8.1">
 <h3 data-number="8.8.1" class="anchored" data-anchor-id="the-least-squares-solution-is-a-projection"><span class="header-section-number">8.8.1</span> The least-squares solution is a projection</h3>
-<p>Armed with our new expertise on inner product spaces, we see that <a href="Ch3.html#eq-matrixss" class="quarto-xref">Equation&nbsp;<span>5.1</span></a> is</p>
+<p>Armed with our new expertise on inner product spaces, we see that <a href="Ch3.html#eq-matrixss" class="quarto-xref">Equation&nbsp;<span>5.2</span></a> is</p>
 <p><span class="math display">\[
 &lt;S-Ab,S-Ab&gt;
 \]</span></p>
@@ -528,7 +528,7 @@ z = P_W x
 </section>
 <section id="the-hat-matrix" class="level3" data-number="8.8.2">
 <h3 data-number="8.8.2" class="anchored" data-anchor-id="the-hat-matrix"><span class="header-section-number">8.8.2</span> The “hat” matrix</h3>
-<p>Recall <a href="Ch3.html#eq-linregformula" class="quarto-xref">Equation&nbsp;<span>5.4</span></a>, which showed that the general solution to our linear regression model:</p>
+<p>Recall <a href="Ch3.html#eq-linregformula" class="quarto-xref">Equation&nbsp;<span>5.5</span></a>, which showed that the general solution to our linear regression model:</p>
 <p><span class="math display">\[
 \widehat{\beta} = (A'A)^{-1} A'S
 \]</span></p>
@@ -557,7 +557,7 @@ tr(H) =
 tr[\underbrace{A(A'A)^{-1}} A'] =
 tr[A'\underbrace{A(A'A)^{-1}}] = tr(I) = p
 \]</span></p>
-<p>for <span class="math inline">\(A\)</span> of size <span class="math inline">\(n \textrm{ x } p\)</span>.</p>
+<p>for <span class="math inline">\(A\)</span> of size <span class="math inline">\(n \times p\)</span>.</p>
 <p>Thus the average value of <span class="math inline">\(h_{ii}\)</span> is <span class="math inline">\(p/n\)</span>. Accordingly, we might suspect an outlier if <span class="math inline">\(h_{ii}\)</span> is considerably larger than <span class="math inline">\(p/n\)</span>.</p>
 <p>For example, let’s look at the Major League Baseball player data we’ve seen earlier (<a href="Ch3.html#sec-mlb" class="quarto-xref"><span>Section 5.3.5</span></a>):</p>
 <div class="cell">
@@ -786,13 +786,19 @@ U = X - S \gamma
 </section>
 <section id="your-turn" class="level2" data-number="8.14">
 <h2 data-number="8.14" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">8.14</span> Your Turn</h2>
-<p>❄️ <strong>Your Turn:</strong> Show that for any random variable <span class="math inline">\(Q\)</span> of finite variance, the minimum value of <span class="math inline">\(E[(Q-d)^2]\)</span> over all constants <span class="math inline">\(d\)</span> is attained by taking <span class="math inline">\(d\)</span> to be the mean of <span class="math inline">\(Q\)</span>, i.e.&nbsp;<span class="math inline">\(d = E(Q)\)</span>.</p>
-<p>❄️ <strong>Your Turn:</strong> Consider the space <span class="math inline">\(\cal RV(\Omega)\)</span>. In order for the claimed inner product to be valid, we must have that if <span class="math inline">\(&lt;X,X&gt; = 0\)</span>, then <span class="math inline">\(X\)</span> must be the 0 vector. Prove this.</p>
+<p>❄️ <strong>Your Turn:</strong> Consider the space <span class="math inline">\(C(0,1)\)</span>. For function <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> of your own choosing, verify that the Cauchy-Schwarz and Triangle Inequalities hold in that case.</p>
+<p>❄️ <strong>Your Turn:</strong> Show that for any random variable <span class="math inline">\(Q\)</span> of finite variance, the minimum value of <span class="math inline">\(E[(Q-d)^2]\)</span> over all constants <span class="math inline">\(d\)</span> is attained by taking <span class="math inline">\(d\)</span> to be the mean of <span class="math inline">\(Q\)</span>, i.e.&nbsp;<span class="math inline">\(d = E(Q)\)</span>. Hint: First expand <span class="math inline">\((Q-d)^2\)</span> as <span class="math inline">\(Q^2 - dQ + d^2\)</span>.</p>
+<p>❄️ <strong>Your Turn:</strong> In the die rolling example, verify that</p>
+<p><span class="math display">\[
+E[E(Y|B)] = E(Y)
+\]</span></p>
+<p>by calculating both sides.</p>
+<p>❄️ <strong>Your Turn:</strong> Say we roll a die once, producing <span class="math inline">\(X\)</span> dots. If <span class="math inline">\(X = 6\)</span>, we get a bonus roll, yielding <span class="math inline">\(B\)</span> additional dots; otherwise, <span class="math inline">\(B = 0\)</span>. Let <span class="math inline">\(Y = X+B\)</span>. Verify that <span class="math inline">\(X\)</span> and <span class="math inline">\(B\)</span> satisfy the Cauchy-Schwarz and Triangle Inequalities, and also find <span class="math inline">\(\rho(X,B)\)</span>.</p>
 <p>❄️ <strong>Your Turn:</strong> Derive the Cauchy-Schwarz Inequality, using the following algebraic outline:</p>
 <ul>
 <li><p>The inequality</p>
 <p><span class="math display">\[
-0 \leq &lt;(au+v),(au+v)&gt;
+0 ~ \leq ~ &lt;(au+v),(au+v)&gt; ~
 \]</span></p>
 <p>holds for any scalar <span class="math inline">\(a\)</span>.</p></li>
 <li><p>Expand the right-hand side (RHS), using the bilinear property of inner products.</p></li>
@@ -802,18 +808,6 @@ U = X - S \gamma
 &lt;u,v&gt;^2 \leq ||u||^2 ||v||^2
 \]</span></p></li>
 </ul>
-<p>❄️ <strong>Your Turn:</strong> Consider a set of vectors <span class="math inline">\(W = {v_1,...,v_k}\)</span> in an inner product space <span class="math inline">\(V\)</span>. Let <span class="math inline">\(U\)</span> be another vector in <span class="math inline">\(V\)</span>. Show that there exist scalars <span class="math inline">\(a_1,...,a_k\)</span> and a vector <span class="math inline">\(v\)</span> such that</p>
-<p><span class="math display">\[
-u = a_1 v_1 + ... + a_k v_k +v
-\]</span></p>
-<p>with</p>
-<p><span class="math display">\[
-&lt;v,v_i&gt; = 0 \textrm{ for all i}
-\]</span></p>
-<p>❄️ <strong>Your Turn:</strong> Say in <span class="math inline">\(C(0,1)\)</span> we want to approximate functions by polynomials. Specifically, for any <span class="math inline">\(f\)</span> in <span class="math inline">\(C(0,1)\)</span>, we want to find the closest polynomial of degree <span class="math inline">\(m\)</span>. Write functions to do this, with the following call forms:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gsc01</span>(f,m)  <span class="co"># performs Gram-Schmidt and returns the result</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bestpoly</span>(f,gsout)  <span class="co"># approx. f by output from gsc01</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Hint: Since the vectors here are functions, you’ll need a data structure capable of storing functions. An R <strong>list</strong> will work well here.</p>
 <p>❄️ <strong>Your Turn:</strong> Use the Cauchy-Schwarz Inequality to prove the Triangle Inequality, using the following algebraic outline.</p>
 <ul>
 <li><p>Start with</p>
@@ -824,16 +818,16 @@ u = a_1 v_1 + ... + a_k v_k +v
 <li><p>Using Cauchy-Schwarz to make the equation an inequality.</p></li>
 <li><p>Collect terms to yield the Triangle Inequality.</p></li>
 </ul>
-<p>❄️ <strong>Your Turn:</strong> Consider the space <span class="math inline">\(C(0,1)\)</span>. For function <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> of your own choosing, verify that the Cauchy-Schwarz and Triangle Inequalities hold in that case.</p>
-<p>❄️ <strong>Your Turn:</strong> Say we roll a die once, producing <span class="math inline">\(X\)</span> dots. If <span class="math inline">\(X = 6\)</span>, we get a bonus roll, yielding <span class="math inline">\(B\)</span> additional dots; otherwise, <span class="math inline">\(B = 0\)</span>. Let <span class="math inline">\(Y = X+B\)</span>.</p>
-<p>❄️ <strong>Your Turn:</strong> In the die rolling example, verify that</p>
+<p>❄️ <strong>Your Turn:</strong> Consider a set of vectors <span class="math inline">\(W = {v_1,...,v_k}\)</span> in an inner product space <span class="math inline">\(V\)</span>. Let <span class="math inline">\(u\)</span> be another vector in <span class="math inline">\(V\)</span>. Show that there exist scalars <span class="math inline">\(a_1,...,a_k\)</span> and a vector <span class="math inline">\(v\)</span> such that</p>
 <p><span class="math display">\[
-E[E(Y|B)] = E(Y)
+u = a_1 v_1 + ... + a_k v_k +v
 \]</span></p>
-<p>❄️ <strong>Your Turn:</strong> Say we roll a die once, producing <span class="math inline">\(X\)</span> dots. If <span class="math inline">\(X = 6\)</span>, we get a bonus roll, yielding <span class="math inline">\(B\)</span> additional dots; otherwise, <span class="math inline">\(B = 0\)</span>. Let <span class="math inline">\(Y = X+B\)</span>. Verify that <span class="math inline">\(X\)</span> and <span class="math inline">\(B\)</span> satisfy the Cauchy-Schwarz and Triangle Inequalities, and also find <span class="math inline">\(\rho(X,B)\)</span>.</p>
-<p>❄️ <strong>Your Turn:</strong> Show that any set of orthogonal vectors is linearly independent.</p>
-<p>❄️ <strong>Your Turn:</strong> Prove <a href="#eq-pythag" class="quarto-xref">Equation&nbsp;<span>8.1</span></a> by expanding the inner product and simplifying algebraically.</p>
-<p>❄️ <strong>Your Turn:</strong> Prove <a href="#thm-triangle" class="quarto-xref">Theorem&nbsp;<span>8.2</span></a>.</p>
+<p>with</p>
+<p><span class="math display">\[
+&lt;v,v_i&gt; = 0 \textrm{ for all i}
+\]</span></p>
+<p>❄️ <strong>Your Turn:</strong> Consider the quadratic form <span class="math inline">\(x'Px\)</span>. Explain why, if <span class="math inline">\(P\)</span> is a projection matrix, the form equals <span class="math inline">\(||Px||^2\)</span>.</p>
+<p>❄️ <strong>Your Turn:</strong> Explain why any set of orthogonal vectors is linearly independent.</p>
 <p>❄️ <strong>Your Turn:</strong> Prove that the vector <span class="math inline">\(Y - E(Y|X)\)</span> is uncorrelated with <span class="math inline">\(E(Y|X)\)</span></p>
 <p>❄️ <strong>Your Turn:</strong> For <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> in <span class="math inline">\(\cal RV(\Omega\)</span>, prove that</p>
 <p><span class="math display">\[
@@ -841,15 +835,19 @@ Var(Y) = E[Var(Y|X)] + Var[E(Y|X)],
 \]</span></p>
 <p>first algebraically using <a href="#eq-iterexpect" class="quarto-xref">Equation&nbsp;<span>8.5</span></a> and the relation <span class="math inline">\(Var(R) =
 E(R^2) - (E(R))^2\)</span>, and then using the Pythagorean Theorem for a much quicker proof. As before, assume <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are centered.</p>
-<p>❄️ <strong>Your turn:</strong> show that <a href="#eq-hii" class="quarto-xref">Equation&nbsp;<span>8.2</span></a> holds.</p>
+<p>❄️ <strong>Your turn:</strong> Show that <a href="#eq-hii" class="quarto-xref">Equation&nbsp;<span>8.2</span></a> holds.</p>
+<p>❄️ <strong>Your Turn:</strong> Consider the space <span class="math inline">\(\cal RV(\Omega)\)</span>. In order for the claimed inner product to be valid, we must have that if <span class="math inline">\(&lt;X,X&gt; = 0\)</span>, then <span class="math inline">\(X\)</span> must be the 0 vector. Prove this.</p>
 <p>❄️ <strong>Your Turn:</strong> Say <span class="math inline">\(\cal V\)</span> is <span class="math inline">\(R^n\)</span>. Form the matrix <span class="math inline">\(A\)</span> whose columns are the <span class="math inline">\(u_i\)</span>, and let <span class="math inline">\(P = AA'\)</span>. Show that</p>
 <p><span class="math display">\[
 Px = &lt;x,u_1&gt; u_1+...+&lt;x,u_k&gt; u_k
 \]</span></p>
 <p>so that <span class="math inline">\(P\)</span> thereby implements the projection.</p>
-<p>❄️ <strong>Your Turn:</strong> Consider the quadratic form <span class="math inline">\(x'Px\)</span>. Show that if <span class="math inline">\(P\)</span> is a projection matrix, the form equals <span class="math inline">\(||Px||^2\)</span>.</p>
 <p>❄️ <strong>Your Turn:</strong> Let <span class="math inline">\(A\)</span> be an <span class="math inline">\(m \textrm{ x } n\)</span> matrix. Consider the possible inner product on <span class="math inline">\(\cal{R}^n\)</span> defined by <span class="math inline">\(&lt;x,y&gt; = x'A'A y\)</span>. State a condition on <span class="math inline">\(A\)</span> that is necessary and sufficient for the claimed inner product to be value, and prove this.</p>
 <p>❄️ <strong>Your Turn:</strong> Show that for any vector <span class="math inline">\(w\)</span> and symmetric matrix <span class="math inline">\(M\)</span>, the quadratic form <span class="math inline">\(w'Mw \geq 0\)</span>.</p>
+<p>❄️ <strong>Your Turn:</strong> Say in <span class="math inline">\(C(0,1)\)</span> we want to approximate functions by polynomials. Specifically, for any <span class="math inline">\(f\)</span> in <span class="math inline">\(C(0,1)\)</span>, we want to find the closest polynomial of degree <span class="math inline">\(m\)</span> or less. Write functions to do this, with the following call forms:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gsc01</span>(f,m)  <span class="co"># performs Gram-Schmidt and returns the result</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bestpoly</span>(f,gsout)  <span class="co"># approx. f by output from gsc01</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Hint: Note that the set of polynomials of a given degree or less is a subspace of <span class="math inline">\(C(0,1)\)</span>. Also since the vectors here are functions, you’ll need a data structure capable of storing functions. An R <strong>list</strong> will work well here.</p>
 
 
 </section>

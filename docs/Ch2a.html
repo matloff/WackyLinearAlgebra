@@ -429,7 +429,7 @@ Cov(U,V) = E(UV) - (EU) (EV)
 </section>
 <section id="covariance-matrices" class="level3 page-columns page-full" data-number="4.2.2">
 <h3 data-number="4.2.2" class="anchored" data-anchor-id="covariance-matrices"><span class="header-section-number">4.2.2</span> Covariance matrices</h3>
-<div class="page-columns page-full"><p>The relations between the various components of <span class="math inline">\(X\)</span> are often characterized by the <em>covariance matrix</em> of <span class="math inline">\(X\)</span>, whose entries consist of scalar covariances between pairs of components of a random vector.  It is defined as follows for a <span class="math inline">\(k\)</span>-component random vector <span class="math inline">\(X\)</span> . The covariance matrix, denoted by <span class="math inline">\(Cov(X)\)</span>, is a <span class="math inline">\(k \textrm{ x } k\)</span> matrix, and for <span class="math inline">\(1 \leq i,j \leq k\)</span>, its row <span class="math inline">\(i\)</span>, column <span class="math inline">\(j\)</span> element is</p><div class="no-row-height column-margin column-container"><span class="">The notation is somewhat overloaded. “Cov” refers both to the covariance between two random variables, say height and weight, and to the covariance matrix of a random vector. But it will always be clear from context which one is being discussed.</span></div></div>
+<div class="page-columns page-full"><p>The relations between the various components of <span class="math inline">\(X\)</span> are often characterized by the <em>covariance matrix</em> of <span class="math inline">\(X\)</span>, whose entries consist of scalar covariances between pairs of components of a random vector.  It is defined as follows for a <span class="math inline">\(k\)</span>-component random vector <span class="math inline">\(X\)</span> . The covariance matrix, denoted by <span class="math inline">\(Cov(X)\)</span>, is a <span class="math inline">\(k \times k\)</span> matrix, and for <span class="math inline">\(1 \leq i,j \leq k\)</span>, its row <span class="math inline">\(i\)</span>, column <span class="math inline">\(j\)</span> element is</p><div class="no-row-height column-margin column-container"><span class="">The notation is somewhat overloaded. “Cov” refers both to the covariance between two random variables, say height and weight, and to the covariance matrix of a random vector. But it will always be clear from context which one is being discussed.</span></div></div>
 <p><span class="math display">\[
 Cov(X)_{ij} = Cov(X_i,X_j)
 \]</span></p>
@@ -469,7 +469,7 @@ Age    -0.08252974 0.1437111  1.00000000</code></pre>
 <li><p>Matrix form of definition:</p>
 <p><span id="eq-matrixdef"><span class="math display">\[ Cov(X) = E[(X - X) (X - EX)']
 \tag{4.2}\]</span></span></p>
-<p>(Note the dimensions: <span class="math inline">\(X\)</span> is a column vector, say <span class="math inline">\(k \textrm{ x } 1\)</span>, so <span class="math inline">\((X - X) (X - EX)'\)</span> is <span class="math inline">\(k \textrm{ x } k\)</span>. The expected value is then of that size as well.)</p></li>
+<p>(Note the dimensions: <span class="math inline">\(X\)</span> is a column vector, say <span class="math inline">\(k \times 1\)</span>, so <span class="math inline">\((X - X) (X - EX)'\)</span> is <span class="math inline">\(k \times k\)</span>. The expected value is then of that size as well.)</p></li>
 <li><p>For statistically independent random vectors <span class="math inline">\(Q\)</span> and <span class="math inline">\(W\)</span> of the same length,</p></li>
 </ul>
 <p><span id="eq-indepcov"><span class="math display">\[
@@ -482,7 +482,7 @@ Cov(Q+W) = Cov(Q) + Cov(W)
 Cov(cQ) = c^2 Cov(Q)
 \]</span></p>
 <ul>
-<li><p>Say we have a random vector <span class="math inline">\(X\)</span>, of length <span class="math inline">\(k\)</span>, and a nonrandom matrix <span class="math inline">\(A\)</span> of size <span class="math inline">\(m \textrm{ x } k\)</span>. Then <span class="math inline">\(A X\)</span> is a new random vector <span class="math inline">\(Y\)</span> of <span class="math inline">\(m\)</span> components. It turns out that</p>
+<li><p>Say we have a random vector <span class="math inline">\(X\)</span>, of length <span class="math inline">\(k\)</span>, and a nonrandom matrix <span class="math inline">\(A\)</span> of size <span class="math inline">\(m \times k\)</span>. Then <span class="math inline">\(A X\)</span> is a new random vector <span class="math inline">\(Y\)</span> of <span class="math inline">\(m\)</span> components. It turns out that</p>
 <p><span id="eq-acova"><span class="math display">\[
 Cov(Y) = A Cov(X) A'
 \tag{4.4}\]</span></span></p>
@@ -506,6 +506,12 @@ Var(a'X) = a' ~ Cov(X) ~ a
 <p><span class="math display">\[
 a' Cov(X) a \geq 0
 \]</span></p>
+<ul>
+<li>For any constant (i.e.&nbsp;nonrandom) <span class="math inline">\(m \times k\)</span> matrix <span class="math inline">\(A\)</span>,</li>
+</ul>
+<p><span id="eq-covax"><span class="math display">\[
+Cov(AX) = A Cov(X) A'
+\tag{4.6}\]</span></span></p>
 </section>
 <section id="cross-covariance" class="level3" data-number="4.2.3">
 <h3 data-number="4.2.3" class="anchored" data-anchor-id="cross-covariance"><span class="header-section-number">4.2.3</span> Cross-covariance</h3>
@@ -513,7 +519,7 @@ a' Cov(X) a \geq 0
 <p><span class="math display">\[
 Cov(X,Y) = E[(X - EX) (Y- EY)]
 \]</span></p>
-<p>Say <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are of lengths <span class="math inline">\(m\)</span> and <span class="math inline">\(n\)</span>. Then <span class="math inline">\(Cov(X,Y)\)</span> will be of size <span class="math inline">\(m \textrm{ x } n\)</span>, with</p>
+<p>Say <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are of lengths <span class="math inline">\(m\)</span> and <span class="math inline">\(n\)</span>. Then <span class="math inline">\(Cov(X,Y)\)</span> will be of size <span class="math inline">\(m \times n\)</span>, with</p>
 <p><span class="math display">\[
 Cov(X,Y)_{ij} = Cov(X_i,Y_j)
 \]</span></p>
@@ -544,7 +550,7 @@ e^{-0.5 (\frac{t-\mu}{\sigma})^2}
 <p><span id="eq-mvndensity"><span class="math display">\[
 (2\pi)^{-k/2} \det(\Sigma)^{-k/2}
 e^{-0.5 (t-\mu)'(\Sigma)^{-1}(t-\mu)}
-\tag{4.6}\]</span></span></p>
+\tag{4.7}\]</span></span></p>
 <p>Note the intuition:</p>
 <ul>
 <li><p>Instead of <span class="math inline">\(1/\sigma^2\)</span>, i.e.&nbsp;instead of dividing by variance, we “divide by <span class="math inline">\(\Sigma\)</span>,” intuitively viewing matrix inverse as a “reciprocal” of a matrix.</p></li>
@@ -563,7 +569,25 @@ e^{-0.5 (t-\mu)'(\Sigma)^{-1}(t-\mu)}
 <li><p>Its variance <span class="math inline">\(Var(Y | X_{others} = t)\)</span> does not involve <span class="math inline">\(t\)</span>.</p></li>
 </ul>
 <p>These of course are the classical assumptions of linear regression models. They actually come from the MV normal model.</p>
+<p>Specifics: Denote the mean vector and covariance matrix a random vector <span class="math inline">\(X\)</span> by <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\Sigma\)</span>. Partition <span class="math inline">\(X\)</span> as</p>
+<p><span class="math display">\[
+\left (
+\begin{array}{r}
+X_1 \\
+X_2 \\
+\end{array}
+\right )
+\]</span></p>
+<p>and partition <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\Sigma\)</span> similarly. The conditional distribution of <span class="math inline">\(X_1\)</span> given <span class="math inline">\(X_2 = t\)</span> is multivariate normal with these paramters:</p>
+<p><span id="eq-condmean"><span class="math display">\[
+E(X_1 | X_2 = t) =
+\mu_1 + \Sigma_{12} \Sigma_{22}^{-1} (t - \mu_2)
+\tag{4.8}\]</span></span></p>
+<p><span id="eq-condcov"><span class="math display">\[
+Cov(X_1 | X_2 = t) = \Sigma_{11} - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}
+\tag{4.9}\]</span></span></p>
 </div>
+<p>Note the absence of <span class="math inline">\(t\)</span> in <a href="#eq-condcov" class="quarto-xref">Equation&nbsp;<span>4.9</span></a>. Note too that the uncoditional covariance matrix, <span class="math inline">\(\Sigma_{11}\)</span> becomes “smaller” when we know something about <span class="math inline">\(X_2\)</span>.</p>
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>This comes out of writing down the conditional density (overall density divided by marginal), and then doing some algebra.</p>
 <p><span class="math inline">\(\square\)</span></p>
@@ -634,7 +658,7 @@ I_{ik}  \\
 <p>The key is that</p>
 <p><span id="eq-sumindic"><span class="math display">\[
 X = \sum_{i=1}^n I_i
-\tag{4.7}\]</span></span></p>
+\tag{4.10}\]</span></span></p>
 <p>For instance, in the die-rolling example, the first component on the right-hand side is the number of rolls in which we got 1 dot, and that is by definition the same as <span class="math inline">\(N_1\)</span>, the first component of <span class="math inline">\(X\)</span>.</p>
 <p>So there we have it – <span class="math inline">\(X\)</span> is a sum of independent, identically distributed random vectors, so by the Multivariate Central Limit Theorem, <span class="math inline">\(X\)</span> has an approximate multivariate normal distribution. Now, what are the mean vector and covariance matrix in that distribution?</p>
 <p>From our discussion above, we know that</p>
@@ -648,7 +672,7 @@ np_k \\
 \end{array}
 \right )
 \]</span></p>
-<p>What about <span class="math inline">\(Cov(X)\)</span>? Again, recognizing that <a href="#eq-sumindic" class="quarto-xref">Equation&nbsp;<span>4.7</span></a> is a sum of independent terms, <a href="#eq-indepcov" class="quarto-xref">Equation&nbsp;<span>4.3</span></a> tells us that</p>
+<p>What about <span class="math inline">\(Cov(X)\)</span>? Again, recognizing that <a href="#eq-sumindic" class="quarto-xref">Equation&nbsp;<span>4.10</span></a> is a sum of independent terms, <a href="#eq-indepcov" class="quarto-xref">Equation&nbsp;<span>4.3</span></a> tells us that</p>
 <p><span class="math display">\[
 Cov(X) = Cov(\sum_{i=1}^n I_i) = \sum_{i=1}^n Cov(I_i) = n Cov(I_1),
 \]</span></p>
@@ -656,7 +680,7 @@ Cov(X) = Cov(\sum_{i=1}^n I_i) = \sum_{i=1}^n Cov(I_i) = n Cov(I_1),
 <p>Now to evaluate that covariance matrix, consider two specific elements <span class="math inline">\(I_{1j}\)</span> and <span class="math inline">\(I_{im}\)</span> of <span class="math inline">\(I_1\)</span>. Recall, those elements are equal to 1 or 0, depending on whether the first trial results in Categories j and m, respectively. Then what is <span class="math inline">\(Cov(I_{1j},I_{1m})\)</span>? From <a href="#eq-covuv" class="quarto-xref">Equation&nbsp;<span>4.1</span></a>, we have</p>
 <p><span id="eq-covjm"><span class="math display">\[
 Cov(I_{1j},I_{1m}) = E(I_{1j} I_{1m}) - (EI_{1j}) (EI_{1m})
-\tag{4.8}\]</span></span></p>
+\tag{4.11}\]</span></span></p>
 <p>Consider the two cases:</p>
 <ul>
 <li><span class="math inline">\(i=j\)</span>: Here <span class="math inline">\(E(I_{1j}^2) = E(I_{1j}) = p_j\)</span>. Thus</li>
@@ -683,7 +707,7 @@ Cov(I_{1j},I_{1m}) = -p_j p_m
 <li><p>A, say 95%, confidence interval for <span class="math inline">\(\mu\)</span> is then</p></li>
 </ul>
 <p><span class="math display">\[
-\widehat{\theta} \pm 1.96 \textrm{ s.e.}(\widehat{\theta})
+\widehat{\theta} \pm 1.96 \widehat{\theta})
 \]</span></p>
 <p>The 95% figure means that of all possible samples of the given size from the population, 95% of the resulting confidence intervals will contain <span class="math inline">\(\theta\)</span>.</p>
 </section>
@@ -724,7 +748,7 @@ W \approx log(\mu) + log'(\mu) (\bar{X}-\mu)
 <p>Now, what if the function <span class="math inline">\(f\)</span> has two arguments instead of one? The above linear approximation is now</p>
 <p><span id="eq-twotaylor"><span class="math display">\[
 f(v,w) \approx f(v_0,w_0) + f_1(v_0,w_0) (v-v_0) + f_2(v_0,w_0)(w-w_0)
-\tag{4.9}\]</span></span></p>
+\tag{4.12}\]</span></span></p>
 <div class="page-columns page-full"><p>where <span class="math inline">\(f_1\)</span> and <span class="math inline">\(f_2\)</span> are partial derivatives,</p><div class="no-row-height column-margin column-container"><span class="">A <em>partial derivative</em> of a function of more than one variable is the derivative with respect to one of those variables. E.g. <span class="math inline">\(\partial/\partial v ~ vw^2 =
 w^2\)</span> and <span class="math inline">\(\partial/\partial w ~ vw^2 =
 2vw\)</span>.</span></div></div>
@@ -752,7 +776,7 @@ f_2 (v_0,w_0) \\
 \end{array}
 \right )
 \]</span></p>
-<p>so that <a href="#eq-twotaylor" class="quarto-xref">Equation&nbsp;<span>4.9</span></a> can be written as</p>
+<p>so that <a href="#eq-twotaylor" class="quarto-xref">Equation&nbsp;<span>4.12</span></a> can be written as</p>
 <p><span class="math display">\[
 f(v,w) \approx f(v_0,w_0) + (\nabla f)'
 \left (
@@ -765,7 +789,7 @@ w-w_0 \\
 <p>Then from <a href="#eq-quadform" class="quarto-xref">Equation&nbsp;<span>4.5</span></a>,</p>
 <p><span id="eq-deltaquad"><span class="math display">\[
 AVar[f(Q,R)] = (\nabla f)' AV(Q,R) (\nabla f)
-\tag{4.10}\]</span></span></p>
+\tag{4.13}\]</span></span></p>
 </section>
 <section id="example-ratio-of-two-means" class="level3 page-columns page-full" data-number="4.5.5">
 <h3 data-number="4.5.5" class="anchored" data-anchor-id="example-ratio-of-two-means"><span class="header-section-number">4.5.5</span> Example: ratio of two means</h3>
@@ -789,7 +813,7 @@ D \\
 \right )
 \]</span></p>
 <p>We might be interested in the ratio <span class="math inline">\(\omega = \mu_D / \mu_M\)</span>. Our estimator will be <span class="math inline">\(\widehat{\omega} = \bar{D} / \bar{M}\)</span>, the ratio of the sample means.</p>
-<p>So take <span class="math inline">\(Q = \bar{D}\)</span> and <span class="math inline">\(R =  \bar{M}\)</span>. Then in <a href="#eq-deltaquad" class="quarto-xref">Equation&nbsp;<span>4.10</span></a>, with <span class="math inline">\(f(q,r) = q/r\)</span></p>
+<p>So take <span class="math inline">\(Q = \bar{D}\)</span> and <span class="math inline">\(R =  \bar{M}\)</span>. Then in <a href="#eq-deltaquad" class="quarto-xref">Equation&nbsp;<span>4.13</span></a>, with <span class="math inline">\(f(q,r) = q/r\)</span></p>
 <p><span class="math display">\[
 \nabla{f} =
 \left (
@@ -809,7 +833,7 @@ D \\
 \end{array}
 \right )
 \]</span></p>
-<p>As to <span class="math inline">\(AVar(v,w)\)</span> in <a href="#eq-deltaquad" class="quarto-xref">Equation&nbsp;<span>4.10</span></a>, we would use the multivariate analog of the usual <span class="math inline">\(S^2\)</span> in the univariate case, taking advantage of <a href="#eq-matrixdef" class="quarto-xref">Equation&nbsp;<span>4.2</span></a>. One must be careful, though, making sure we choose the appropriate quantity for <span class="math inline">\(AVar(v,w)\)</span>.</p>
+<p>As to <span class="math inline">\(AVar(v,w)\)</span> in <a href="#eq-deltaquad" class="quarto-xref">Equation&nbsp;<span>4.13</span></a>, we would use the multivariate analog of the usual <span class="math inline">\(S^2\)</span> in the univariate case, taking advantage of <a href="#eq-matrixdef" class="quarto-xref">Equation&nbsp;<span>4.2</span></a>. One must be careful, though, making sure we choose the appropriate quantity for <span class="math inline">\(AVar(v,w)\)</span>.</p>
 <p>For instance, in our ratio example here, <span class="math inline">\((Q,R)'\)</span> is <span class="math inline">\((\bar{M},\bar{D}\)</span>. To obtain <span class="math inline">\(AVar(v,w)\)</span>, let’s first look at the covariance matrix <span class="math inline">\(\Sigma\)</span>,</p>
 <p><span class="math display">\[
 \Sigma = E[(M - EM) (D - ED)']
@@ -885,7 +909,7 @@ IsActiveMember1  -3.685755e-05  6.930480e-05    3.327629e-03    2.676211e-10
 EstimatedSalary  -4.030670e-10  3.401694e-11    2.676211e-10    2.243567e-13</code></pre>
 </div>
 </div>
-<p>There are several categorical variables here, so after expansion to dummies, <span class="math inline">\(AVar(v,w)\)</span> is <span class="math inline">\(12 \textrm{ x } 12\)</span>. This is the covariance matrix for the vector of estimated logistic regression coefficients <span class="math inline">\(\widehat{\beta}\)</span>. There are many different functions <span class="math inline">\(f(\beta)\)</span> that might be of interest.</p>
+<p>There are several categorical variables here, so after expansion to dummies, <span class="math inline">\(AVar(v,w)\)</span> is <span class="math inline">\(12 \times 12\)</span>. This is the covariance matrix for the vector of estimated logistic regression coefficients <span class="math inline">\(\widehat{\beta}\)</span>. There are many different functions <span class="math inline">\(f(\beta)\)</span> that might be of interest.</p>
 </section>
 <section id="example-motherdaughter-height-data" class="level2" data-number="4.7">
 <h2 data-number="4.7" class="anchored" data-anchor-id="example-motherdaughter-height-data"><span class="header-section-number">4.7</span> Example: Mother/Daughter Height Data</h2>
@@ -944,11 +968,35 @@ f'(x) = \lim_{w \rightarrow 0}
 <section id="your-turn" class="level2" data-number="4.9">
 <h2 data-number="4.9" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">4.9</span> Your Turn</h2>
 <p>❄️ <strong>Your Turn:</strong> In the mother/daughter data, find the estimated covariance between the two heights.</p>
-<p>❄️ <strong>Your Turn:</strong> In <a href="#eq-mvndensity" class="quarto-xref">Equation&nbsp;<span>4.6</span></a>, write <span class="math inline">\(t = (t_1,t_2)\)</span>, and consider the quantity in the exponent,</p>
+<p>❄️ <strong>Your Turn:</strong> In <a href="#eq-mvndensity" class="quarto-xref">Equation&nbsp;<span>4.7</span></a> with <span class="math inline">\(k = 2\)</span>, write <span class="math inline">\(t = (t_1,t_2)\)</span>, and consider the quantity in the exponent,</p>
 <p><span class="math display">\[
 (t-\mu)'(\Sigma)^{-1}(t-\mu)
 \]</span></p>
 <p>Say we set this quantity to some constant <span class="math inline">\(c\)</span>, then graph the locus of points <span class="math inline">\(t\)</span> in the <span class="math inline">\(t_1,t_2\)</span> plane. What geometric figure would we get?</p>
+<p>❄️ <strong>Your Turn:</strong> In <a href="#thm-conditMVnormal" class="quarto-xref">Theorem&nbsp;<span>4.1</span></a>, suppose</p>
+<p><span class="math display">\[
+\mu =
+\left (
+\begin{array}{r}
+1.5 \\
+8.0 \\
+\end{array}
+\right )
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\Sigma =
+\left (
+\begin{array}{rr}
+5.2 &amp; 6.2 \\
+6.2 &amp; 20.1  \\
+\end{array}
+\right )
+\]</span></p>
+<p>Find the regression line</p>
+<p><span class="math display">\[
+\textrm{ mean Y } = a + bX
+\]</span></p>
 <p>❄️ <strong>Your Turn:</strong> Show that in the scalar context,</p>
 <p><span class="math display">\[
 Cov(X,Y) = E(XY) - EX ~ EY

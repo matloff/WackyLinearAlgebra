@@ -467,7 +467,7 @@ x_1 = V_1 \Sigma_1^{-1} U_1'q
 <section id="overfitting-and-beyond" class="level3" data-number="14.2.2">
 <h3 data-number="14.2.2" class="anchored" data-anchor-id="overfitting-and-beyond"><span class="header-section-number">14.2.2</span> Overfitting and BEYOND</h3>
 <p>Recall that a well-known rule of thumb is that the number <span class="math inline">\(p\)</span> of predictors should be less than <span class="math inline">\(\sqrt{n}\)</span>, where <span class="math inline">\(n\)</span> is the number of data points. We will abandon this and see what happens.</p>
-<p>We will add predictors one at a time, to form models of increasing complexity. As usual, let <span class="math inline">\(p\)</span> denote the number of predictors in a given model. We will also use only a small number of rows, say <span class="math inline">\(n = 30\)</span>. We start with <span class="math inline">\(p=1\)</span>, then <span class="math inline">\(p=2\)</span>, eventually reaching <span class="math inline">\(p = n-1\)</span> (accounting for the 1s column in the <span class="math inline">\(A\)</span> matrix in <a href="Ch3.html#eq-betahat" class="quarto-xref">Equation&nbsp;<span>5.6</span></a>), and not stopping even there. We go to <span class="math inline">\(p=n\)</span>, <span class="math inline">\(p=n+1\)</span> and so on.</p>
+<p>We will add predictors one at a time, to form models of increasing complexity. As usual, let <span class="math inline">\(p\)</span> denote the number of predictors in a given model. We will also use only a small number of rows, say <span class="math inline">\(n = 30\)</span>. We start with <span class="math inline">\(p=1\)</span>, then <span class="math inline">\(p=2\)</span>, eventually reaching <span class="math inline">\(p = n-1\)</span> (accounting for the 1s column in the <span class="math inline">\(A\)</span> matrix in <a href="Ch3.html#eq-betahat" class="quarto-xref">Equation&nbsp;<span>5.7</span></a>), and not stopping even there. We go to <span class="math inline">\(p=n\)</span>, <span class="math inline">\(p=n+1\)</span> and so on.</p>
 <p>When we reach <span class="math inline">\(p=n+2\)</span>, the matrix <span class="math inline">\(A\)</span> will have more columns than rows, and <span class="math inline">\((A'A)^{-1}\)</span> will not exist. (See Your Turn problem below.) We can still use SVD to solve for <span class="math inline">\(b\)</span>, but intuitively some kind of major change may happen at that point.</p>
 <p>Here is the code and output</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ovrf <span class="ot">&lt;-</span> <span class="cf">function</span>(nreps,n,maxP)</span>
@@ -631,7 +631,7 @@ x_1 = V_1 \Sigma_1^{-1} U_1'q
 <p><span class="math display">\[
 b = A^{-1} S
 \]</span></p>
-<p>will minimize <a href="Ch3.html#eq-matrixss" class="quarto-xref">Equation&nbsp;<span>5.1</span></a>–with the value of that expression being 0–a perfect fit to the data!</p>
+<p>will minimize <a href="Ch3.html#eq-matrixss" class="quarto-xref">Equation&nbsp;<span>5.2</span></a>–with the value of that expression being 0–a perfect fit to the data!</p>
 <p>Now again consider <span class="math inline">\(p=n\)</span>. Let <span class="math inline">\(A_{new}\)</span> denote our new <span class="math inline">\(A\)</span> (it will be equal to the old one with a new column added on the right), and <span class="math inline">\(b_{new}\)</span> denote a new version of <span class="math inline">\(b\)</span>. We say “<em>a</em> new version” here, because there are now infinitely many versions; recall that the SVD version has minimum norm among them, a point we will return to shortly. Let’s use <span class="math inline">\(A_{old}\)</span> and <span class="math inline">\(b_{ol}\)</span> to denote the quantities we got for <span class="math inline">\(p=n-1\)</span>.</p>
 <p>We can write</p>
 <p><span class="math display">\[
@@ -668,7 +668,7 @@ Var(w'b) = w' Cov(b) w
 <section id="your-turn" class="level2" data-number="14.3">
 <h2 data-number="14.3" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">14.3</span> Your Turn</h2>
 <p>❄️ <strong>Your Turn:</strong> Show that for an orthogonal matrix <span class="math inline">\(M\)</span> and a vector <span class="math inline">\(w\)</span>, <span class="math inline">\(||Mw|| = ||w||\)</span>.</p>
-<p>❄️ <strong>Your Turn:</strong> Using properties of matrix rank, show that if <span class="math inline">\(p+1 &gt; n\)</span> in <a href="Ch3.html#eq-betahat" class="quarto-xref">Equation&nbsp;<span>5.6</span></a>, the inverse will not exist.</p>
+<p>❄️ <strong>Your Turn:</strong> Using properties of matrix rank, show that if <span class="math inline">\(p+1 &gt; n\)</span> in <a href="Ch3.html#eq-betahat" class="quarto-xref">Equation&nbsp;<span>5.7</span></a>, the inverse will not exist.</p>
 </section>
 <section id="your-turn-1" class="level2" data-number="14.4">
 <h2 data-number="14.4" class="anchored" data-anchor-id="your-turn-1"><span class="header-section-number">14.4</span> Your Turn</h2>

@@ -275,8 +275,7 @@ window.Quarto = {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#the-second-third-etc.-pcs" id="toc-the-second-third-etc.-pcs" class="nav-link active" data-scroll-target="#the-second-third-etc.-pcs"><span class="header-section-number">12.0.1</span> The second, third etc. PCs</a></li>
-  <li><a href="#properties" id="toc-properties" class="nav-link" data-scroll-target="#properties"><span class="header-section-number">12.1</span> Properties</a></li>
+  <li><a href="#the-second-third-etc.-pcs" id="toc-the-second-third-etc.-pcs" class="nav-link active" data-scroll-target="#the-second-third-etc.-pcs"><span class="header-section-number">12.1</span> The Second, Third Etc. PCs</a></li>
   <li><a href="#sec-eiglm" id="toc-sec-eiglm" class="nav-link" data-scroll-target="#sec-eiglm"><span class="header-section-number">12.2</span> Eigenanalysis Relation between <span class="math inline">\(A\)</span> and <span class="math inline">\(Cov(X)\)</span> in Linear Regression</a></li>
   <li><a href="#sec-backtoafrica" id="toc-sec-backtoafrica" class="nav-link" data-scroll-target="#sec-backtoafrica"><span class="header-section-number">12.3</span> Back to the African Soils Example</a></li>
   <li><a href="#sec-detect" id="toc-sec-detect" class="nav-link" data-scroll-target="#sec-detect"><span class="header-section-number">12.4</span> PCA in Detection of Multicollinearity</a></li>
@@ -285,7 +284,8 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#sec-nyc" id="toc-sec-nyc" class="nav-link" data-scroll-target="#sec-nyc"><span class="header-section-number">12.6.1</span> Example: New York City taxi trips</a></li>
   </ul></li>
-  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">12.7</span> Your Turn</a></li>
+  <li><a href="#a-square-root-matrix-and-mv-normal-simulation" id="toc-a-square-root-matrix-and-mv-normal-simulation" class="nav-link" data-scroll-target="#a-square-root-matrix-and-mv-normal-simulation"><span class="header-section-number">12.7</span> A “Square Root” Matrix, and MV Normal Simulation</a></li>
+  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">12.8</span> Your Turn</a></li>
   </ul>
 </nav>
     </div>
@@ -326,11 +326,11 @@ Goals of this chapter:
 </div>
 </div>
 <p>So in the last chapter we had a very brief introduction to Principal Components Analysis (PCA), and that finding the first component entails finding an eigenvector and eigenvalue. It turns out that this is true for the second, third and all the components. In other words, PCA is basically an eigenvectors and eigenvalues application.</p>
-<section id="the-second-third-etc.-pcs" class="level3" data-number="12.0.1">
-<h3 data-number="12.0.1" class="anchored" data-anchor-id="the-second-third-etc.-pcs"><span class="header-section-number">12.0.1</span> The second, third etc. PCs</h3>
-<p>Say we have a dataset <span class="math inline">\(X\)</span> in matrix form. There are as many principal components as there are columns in <span class="math inline">\(X\)</span>. So, how are the second, third and so on components defined and computed?</p>
-<p>The key issue is that we want our PCs to be orthogonal, because as we have seen orthogonal random vectors are statistically uncorrelated, and independent in the multivariate normal case. So if we summarize our data with say, the first few PCs, the fact that they are (at least loosely speaking) uncorrelated makes for a neater summary.</p>
-<p>So with <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> denoting the first and second PCs, we want <span class="math inline">\(v\)</span> to maximize <span class="math inline">\(v'Cov(X)v\)</span> so we set the derivative of</p>
+<section id="the-second-third-etc.-pcs" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="the-second-third-etc.-pcs"><span class="header-section-number">12.1</span> The Second, Third Etc. PCs</h2>
+<p>Say we have a dataset <span class="math inline">\(X\)</span> in matrix form. There are as many principal components as there are columns in <span class="math inline">\(X\)</span>. We derived the first PC in <span class="citation" data-cites="secfirstPC">@secfirstPC</span>. So, how are the second, third and so on components defined and computed?</p>
+<p>The key issue is that we want our PCs to be orthogonal, because as we have seen orthogonal random vectors are statistically uncorrelated, and independent in the multivariate normal case. So if we summarize our data with say, the first few PCs, the fact that they are uncorrelated makes for a neater summary.</p>
+<p>So with <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> denoting the first and second PCs, we want <span class="math inline">\(v\)</span> to maximize <span class="math inline">\(v'Cov(X)v\)</span>, so we set the derivative of</p>
 <p><span class="math display">\[
 v'Cov(X)v + \omega (v'v - 1) + \tau (u'v - 0)
 \]</span></p>
@@ -342,7 +342,7 @@ v'Cov(X)v + \omega (v'v - 1) + \tau (u'v - 0)
 <p><span id="eq-eig2b"><span class="math display">\[
 0 = 2 u' Cov(X) v + 2 \omega u'v + \tau u'u = 2 u' Cov(X) v + \tau 1
 \tag{12.2}\]</span></span></p>
-<p>Also, since <span class="math inline">\(Cov(X)\)</span> is symmetric,</p>
+<p>Also, since <span class="math inline">\(Cov(X)\)</span> is symmetric and <span class="math inline">\(u\)</span> is an eigenvector of <span class="math inline">\(Cov(X)\)</span>,</p>
 <p><span class="math display">\[
 u' Cov(X) v = [Cov(X) u]' v = \gamma u' v = 0
 \]</span></p>
@@ -350,20 +350,23 @@ u' Cov(X) v = [Cov(X) u]' v = \gamma u' v = 0
 <p><span id="eq-eig2c"><span class="math display">\[
 Cov(X) v = -\omega v
 \tag{12.3}\]</span></span></p>
-<p>showing that the second PC is again an eigenvector of <span class="math inline">\(Cov(X)\)</span>.</p>
-</section>
-<section id="properties" class="level2" data-number="12.1">
-<h2 data-number="12.1" class="anchored" data-anchor-id="properties"><span class="header-section-number">12.1</span> Properties</h2>
-<p>The full set of eigenvectors is then known as the <em>principal components</em> (PCs). They have some further important properties:</p>
-<blockquote class="blockquote">
+<p>showing that the second PC is again an eigenvector of <span class="math inline">\(Cov(X)\)</span>. <a href="Ch6a.html#eq-maxvar" class="quarto-xref">Equation&nbsp;<span>11.2</span></a> then says that <span class="math inline">\(-\omega\)</span> is the corresponding variance.</p>
+<p>The story is the same for the remaining PCs. We thus have:</p>
+<div id="thm-thestory" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 12.1</strong></span> The principle components have the following properties:</p>
 <ul>
-<li><p>The PCs are orthogonal to each other.</p>
-<p>This follows from our earlier finding that eigenvectors of a symmetric matrix, in this case <span class="math inline">\(Cov(X)\)</span>, are orthogonal. We say that a symmetric is <em>orthogonal</em> if its columns are orthogonal as vectors.</p></li>
-<li><p>This in turn implies that the PCs are uncorrelated, and in the multivariate normal case, statistically independent.</p></li>
-<li><p>The eigenvalues are the variances of the PCs. The PCs are in order of decreasing (or at least nonincreasing) variance.</p>
-<p>This first statement follows from pre-mutiplying <a href="Ch6a.html#eq-aha" class="quarto-xref">Equation&nbsp;<span>11.1</span></a> by <span class="math inline">\(u'\)</span>, giving us <span class="math inline">\(Var(u)\)</span> on the left and <span class="math inline">\(-\lambda u'u = -\lambda\)</span> on the right. The second statement follows from the fact that as we go from the first PC to the second, third and so on, we are maximizing under more and more constraints, hence smaller maxima.</p></li>
+<li><p>They are orthogonal to each other.</p></li>
+<li><p>They are eigenvectors of <span class="math inline">\(Cov(X)\)</span>.</p></li>
+<li><p>The eigenvalue corresponding to a PC <span class="math inline">\(z\)</span> is <span class="math inline">\(Var(z'X)\)</span>.</p></li>
+<li><p>The eigenvalues form a nondecreasing sequence.</p></li>
+<li><p>Say <span class="math inline">\(X\)</span> is of length <span class="math inline">\(m\)</span>. Normalize the PCs <span class="math inline">\(u_i\)</span> (i.e.&nbsp;divide a PC by its length, so that we have a vector of length 1) and form the <span class="math inline">\(m
+\times m\)</span> (partitioned) matrix</p>
+<p><span class="math display">\[
+P = (u_1 | u_2 | ... | u_m)
+\]</span></p>
+<p>Then <span class="math inline">\(P' Cov(X) P = D\)</span>, where <span class="math inline">\(D\)</span> is a diagonal matrix whose entries are <span class="math inline">\(Var(u_i'X)\)</span>, and <span class="math inline">\(P'P = I\)</span>.</p></li>
 </ul>
-</blockquote>
+</div>
 </section>
 <section id="sec-eiglm" class="level2" data-number="12.2">
 <h2 data-number="12.2" class="anchored" data-anchor-id="sec-eiglm"><span class="header-section-number">12.2</span> Eigenanalysis Relation between <span class="math inline">\(A\)</span> and <span class="math inline">\(Cov(X)\)</span> in Linear Regression</h2>
@@ -465,7 +468,7 @@ If an eigenvalue is 0, the rank is exactly less than full. If it is approximatel
 <section id="sec-prob0" class="level2" data-number="12.5">
 <h2 data-number="12.5" class="anchored" data-anchor-id="sec-prob0"><span class="header-section-number">12.5</span> An Important Property of All-Numeric Predictor Data</h2>
 <p>Say we throw a dart at the interval (0,1). If the distribution of the hitting location <span class="math inline">\(D\)</span> is U(0,1) or any other continuous distribution, the probability of hitting a specific point is 0, e.g.&nbsp;<span class="math inline">\(P(D = 0.324) = 0\)</span>. Such is the nature of continuous distributions. The problem is that the length of the line segment (0.324,0.324) is 0. In math, we say it has <em>measure</em> 0.</p>
-<p>If we throw our dart at the unit square, <span class="math inline">\((0,1) \textrm{ x } (0,1)\)</span>, then e.g.&nbsp;the probability that <span class="math inline">\(D\)</span> lies on a specified straight line or some other specified curve is also 0. Here the problem is that the area of that line or curve is 0.</p>
+<p>If we throw our dart at the unit square, <span class="math inline">\((0,1) \times (0,1)\)</span>, then e.g.&nbsp;the probability that <span class="math inline">\(D\)</span> lies on a specified straight line or some other specified curve is also 0. Here the problem is that the area of that line or curve is 0.</p>
 <p>This has implications for material in this book. For instance, consider linear regression models. If our <span class="math inline">\(A\)</span> matrix consists of all numeric data, then (in the absence of perfect correlation among the columns), we will have</p>
 <p><span class="math display">\[
 P(determinant(A'A) = 0) = 0
@@ -565,8 +568,51 @@ NULL</code></pre>
 <p>Among other things, this shows the dangers of overfitting, in this case using too many PCs in our linear regression model. It seems best here to use only the first 10 or 20% of the PCs.</p>
 </section>
 </section>
-<section id="your-turn" class="level2" data-number="12.7">
-<h2 data-number="12.7" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">12.7</span> Your Turn</h2>
+<section id="a-square-root-matrix-and-mv-normal-simulation" class="level2" data-number="12.7">
+<h2 data-number="12.7" class="anchored" data-anchor-id="a-square-root-matrix-and-mv-normal-simulation"><span class="header-section-number">12.7</span> A “Square Root” Matrix, and MV Normal Simulation</h2>
+<div id="thm-sqrt" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 12.2</strong></span> Any covariance matrix <span class="math inline">\(A\)</span> has a “square root” matrix <span class="math inline">\(Q\)</span>, i.e. <span class="math display">\[
+Q^2 = A
+\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>From <a href="#thm-thestory" class="quarto-xref">Theorem&nbsp;<span>12.1</span></a>, we have <span class="math inline">\(P' A P = D\)</span> for some matrix <span class="math inline">\(P\)</span> and diagonal matrix <span class="math inline">\(D\)</span>, with the entries of the latter being the variances of the PCs <span class="math inline">\(\sigma_i^2\)</span>. That latter point implies that</p>
+<p><span class="math display">\[
+D_1^2 = D
+\]</span></p>
+<p>where <span class="math inline">\(D_1 = diag(\sigma_1,\sigma_2,...,\sigma_n)\)</span>. Then setting <span class="math inline">\(Q = P D_1 P'\)</span>, we have</p>
+<p><span class="math display">\[
+Q^2 = (P D_1 P') (P D_1 P') = P D_1^2 P' = P D P' = A
+\]</span></p>
+<section id="implications-for-simulation-of-multivariate-normal-x" class="level3" data-number="12.7.1">
+<h3 data-number="12.7.1" class="anchored" data-anchor-id="implications-for-simulation-of-multivariate-normal-x"><span class="header-section-number">12.7.1</span> Implications for simulation of multivariate normal X</h3>
+<p>Say we wish to write code to simulate a random vector <span class="math inline">\(Q\)</span> having an m-variate normal distribution with mean vector <span class="math inline">\(\mu\)</span> and covariance matrix <span class="math inline">\(\Sigma\)</span>. Here is how it works:</p>
+<ul>
+<li><p>We start with generating <span class="math inline">\(Z\)</span>, a vector o <span class="math inline">\(m\)</span> independent N(0,1) variables. That means <span class="math inline">\(Z\)</span> is m-variate normally distributed, with mean vector consisting of <span class="math inline">\(m\)</span> 0s, and covariance matrix <span class="math inline">\(I\)</span>, the <span class="math inline">\(m \times m\)</span> identity matrix.</p></li>
+<li><p>We compute <span class="math inline">\(W = \Sigma^{0.5} Z\)</span>. By <a href="Ch2a.html#eq-covax" class="quarto-xref">Equation&nbsp;<span>4.6</span></a>, <span class="math inline">\(W\)</span> will again be multivariate normally distributed, with mean vector consisting of <span class="math inline">\(m\)</span> 0s, and covariance matrix equal to</p>
+<p><span class="math display">\[
+\Sigma^{0.5} I \Sigma^{0.5} = \Sigma
+\]</span></p>
+<p>Our solution is then</p>
+<p><span class="math display">\[
+Q = \mu + \Sigma^{0.5} Z
+\]</span></p></li>
+</ul>
+<p><span class="math inline">\(\square\)</span></p>
+</section>
+</div>
+</section>
+<section id="your-turn" class="level2" data-number="12.8">
+<h2 data-number="12.8" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">12.8</span> Your Turn</h2>
+<p>❄️ <strong>Your Turn:</strong> The reader has likely seen the concept of a <em>cumulative distribution function</em> (CDF). For a scalar random variable <span class="math inline">\(X\)</span>, this is <span class="math inline">\(F_x(t) = P(X \leq t)\)</span>. If <span class="math inline">\(X\)</span> is an <span class="math inline">\(m\)</span>-dimensional random vector, the definition is</p>
+<p><span class="math display">\[
+F_X(t_1,...,t_m) = P(X_1 \leq t_1,...,X_m \leq t_m)
+\]</span></p>
+<p>Write an R function with call form</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">multiCDF</span>(mu,Sigma,t,n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>that uses simulation to evaluate the multivariate CDF, where <span class="math inline">\(t =
+(t_1,...,t_m)\)</span> and <span class="math inline">\(n\)</span> is the number of replications to simulate.</p>
+<p>❄️ <strong>Your Turn:</strong> Say <span class="math inline">\(X\)</span> has mean vector <span class="math inline">\(\mu\)</span> and covariance matrix <span class="math inline">\(\Sigma\)</span>. Show how we can use <a href="#thm-sqrt" class="quarto-xref">Theorem&nbsp;<span>12.2</span></a> to find a square, constant matrix <span class="math inline">\(A\)</span> such that <span class="math inline">\(Cov(AX) = I\)</span>. If in addition <span class="math inline">\(X\)</span> has a multivariate normal distribution, then <span class="math inline">\(AX\)</span> will then consist of independent random variables with variance 1. Explain why.</p>
 <p>❄️ <strong>Your Turn:</strong> Modify the code for <strong>qePCA</strong> for the case of linear regression by adding a component <strong>xCoeffs</strong> to its return value. This will give the regression coefficients in terms of the original X predictors.</p>
 <p>❄️ <strong>Your Turn:</strong> Say the symmetric matrix <span class="math inline">\(A\)</span> has <em>block diagonal</em> form</p>
 <p><span class="math display">\[
@@ -582,7 +628,7 @@ A_1 &amp; 0 &amp; 0 ... \\
 <p>where <span class="math inline">\(A_i\)</span> (<span class="math inline">\(i=1,...,r)\)</span></p>
 <ul>
 <li><p>is symmetric</p></li>
-<li><p>is of size <span class="math inline">\(k_i \textrm{ x } k_i\)</span></p></li>
+<li><p>is of size <span class="math inline">\(k_i \times k_i\)</span></p></li>
 <li><p>has eigenvalues <span class="math inline">\(\gamma_{1},...,\gamma_{k_i}\)</span></p></li>
 <li><p>has eigenvectors <span class="math inline">\(u_{1,j},...,u_{k,j}\)</span>, where <span class="math inline">\(j=1,...,k_i\)</span></p></li>
 </ul>
@@ -590,9 +636,9 @@ A_1 &amp; 0 &amp; 0 ... \\
 <p>❄️ <strong>Your Turn:</strong> In <a href="#sec-detect" class="quarto-xref"><span>Section 12.4</span></a>, there was a statement “<span class="math inline">\(c\)</span> is nonzero with high probability.” Why was that important?</p>
 <p>❄️ <strong>Your Turn:</strong> Use PCA to do dimension reduction on the <strong>s50</strong> dataset.</p>
 <p>❄️ <strong>Your Turn:</strong> Write an R function with call form</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bestPCAPred</span>(data,yName)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bestPCAPred</span>(data,yName)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>It will apply PCA to the X portion of <strong>data</strong>, then apply <strong>lm</strong> successivly to the first PC, then the first two, then the first three and so on assessing with cross-validation in each case. It will then return the number of PCs (and the PCs themselves) that predicts best. Try your function on various datasets.</p>
-<p>❄️ <strong>Your Turn:</strong> Say the symmetric <span class="math inline">\(n \textrm{ x } n\)</span> matrix <span class="math inline">\(A\)</span> has rank <span class="math inline">\(r\)</span>. Show that <span class="math inline">\(n-r\)</span> of its eigenvalues are 0s.</p>
+<p>❄️ <strong>Your Turn:</strong> Say the symmetric <span class="math inline">\(n \times n\)</span> matrix <span class="math inline">\(A\)</span> has rank <span class="math inline">\(r\)</span>. Show that <span class="math inline">\(n-r\)</span> of its eigenvalues are 0s.</p>
 
 
 </section>
