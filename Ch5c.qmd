@@ -101,7 +101,7 @@ $${#eq-ridge}
 
 where $\lambda$ is a positive number chosen by the analyst.
 
-Here $A$ has dimensions $n \textrm{ x } p$, and $I$ is the $p \textrm{ x } p$
+Here $A$ has dimensions $n \times p$, and $I$ is the $p \times p$
 identity matrix.
 
 ### Matrix formulation{#sec-matform}
@@ -671,23 +671,6 @@ inference (confidence intervals, hypothesis tests), e.g. those based on
 
 ❄️  **Your Turn:** Show that $A_{new}$ in @sec-matform is of full rank, $p$.
 
-❄️  **Your Turn:** Consider a generalization of ridge regression, in
-which we find
-
-$$
-\textrm{argmin}_b ~ 
-||{S} - {A} b||^2 + ||{D} b||^2
-$$
-
-for a diagonal matrix $D$. The idea is to allow different shrinkage
-parameters for different predictor variables. Show that 
-
-$$
-b = 
- {[{A}' {A} + {D}^2]}^{-1}
- {A}' {S}
-$$
-
 ❄️  **Your Turn:** In @sec-useall, it was pointed out that in some
 settings we may prefer to retain all of our predictor variables, rather
 than do dimension reduction, thus preferring ridge to LASSO. But we
@@ -717,4 +700,21 @@ $qeML$ functions; the LASSO is applied to **n** randomly chosen rows of
 of **n**. The function will compute the number of nonzero elements in
 the $\widehat{\beta}$ chosen by cross-validation in **cv.glmnet**.
 Try your code on a few datasets.
+
+❄️  **Your Turn:** Consider a generalization of ridge regression, in
+which we find
+
+$$
+\textrm{argmin}_b ~ 
+||{S} - {A} b||^2 + ||{D} b||^2
+$$
+
+for a diagonal matrix $D$. The idea is to allow different shrinkage
+parameters for different predictor variables. Show that 
+
+$$
+b = 
+ {[{A}' {A} + {D}^2]}^{-1}
+ {A}' {S}
+$$
 
