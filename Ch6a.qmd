@@ -391,6 +391,15 @@ huge size of the matrix, the power method or a variant is often used.
 
 ## Your Turn
 
+❄️  **Your Turn:** Take a symmetric matrix $A$ of your choice, use R to find
+its eigenvalues and eigenvectors. Verify that the latter are orthogonal,
+and that the matrix $P$ formed as in @thm-symmeig does indeed have its
+transpose as its inverse. (If you choose a noninvertible $A$, try
+another.)
+
+❄️  **Your Turn:** Show that any Markov transition matrix has an
+eigenvalue 1, with eigenvector consisting of all 1s.
+
 ❄️  **Your Turn:** Show that the diagonalizing matrix $P$ for
 a symmetric matrix must have determinant $\pm 1$.
 
@@ -427,7 +436,4 @@ where $\lambda_{max}$ is the largest eigenvalue. Hint: First show that
 $$
 x'Mx = (Px)' D (Px)
 $$
-
-❄️  **Your Turn:** Show that any Markov transition matrix has an
-eigenvalue 1, with eigenvector consisting of all 1s.
 
