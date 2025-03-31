@@ -155,7 +155,7 @@ covariance between two random variables, say height and weight, and to
 the covariance matrix of a random vector. But it will always
 be clear from context which one is being discussed.  ]{.column-margin}
 It is defined as follows for a $k$-component random vector $X$ . The
-covariance matrix, denoted by $Cov(X)$, is a $k \textrm{ x } k$ matrix,
+covariance matrix, denoted by $Cov(X)$, is a $k \times k$ matrix,
 and for $1 \leq i,j \leq k$, its row $i$, column $j$ element is
 
 $$
@@ -184,8 +184,8 @@ Properties of the matrix version of covariance:
   $$ Cov(X) = E[(X - X) (X - EX)'] 
   $${#eq-matrixdef}
  
-  (Note the dimensions: $X$ is a column vector, say $k \textrm{ x } 1$,
-  so $(X - X) (X - EX)'$ is $k \textrm{ x } k$.  The expected value is
+  (Note the dimensions: $X$ is a column vector, say $k \times 1$,
+  so $(X - X) (X - EX)'$ is $k \times k$.  The expected value is
   then of that size as well.)
 
 * For statistically independent random vectors $Q$ and $W$ of the same length,
@@ -201,7 +201,7 @@ Cov(cQ) = c^2 Cov(Q)
 $$
 
 * Say we have a random vector $X$, of length $k$, and a nonrandom matrix
-  $A$ of size $m \textrm{ x } k$. Then $A X$ is a new random vector $Y$ of $m$
+  $A$ of size $m \times k$. Then $A X$ is a new random vector $Y$ of $m$
   components. It turns out that 
 
   $$
@@ -253,7 +253,7 @@ Cov(X,Y) = E[(X - EX) (Y- EY)]
 $$
 
 Say $X$ and $Y$ are of lengths $m$ and $n$. Then $Cov(X,Y)$ will be of
-size $m \textrm{ x } n$, with
+size $m \times n$, with
 
 $$
 Cov(X,Y)_{ij} = Cov(X_i,Y_j)
@@ -570,7 +570,7 @@ e.g.\ $\bar{X}$ for a population mean $\mu$.
 * A, say 95%, confidence interval for $\mu$ is then
 
 $$
-\widehat{\theta} \pm 1.96 \textrm{ s.e.}(\widehat{\theta})
+\widehat{\theta} \pm 1.96 \widehat{\theta})
 $$
 
   The 95% figure means that of all possible samples of the given size
@@ -820,7 +820,7 @@ vcov(glmOut)
 ```
 
 There are several categorical variables here, so after expansion to
-dummies, $AVar(v,w)$ is $12 \textrm{ x } 12$. This is the covariance
+dummies, $AVar(v,w)$ is $12 \times 12$. This is the covariance
 matrix for the vector of estimated logistic regression coefficients
 $\widehat{\beta}$. There are many different functions $f(\beta)$ that
 might be of interest.

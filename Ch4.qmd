@@ -195,7 +195,7 @@ and $V$ has dimension $(m-t) \times t$.
 Clearly, the row rank of $A_{rref}$ is $s$, and its column rank is $t$.
 We will prove shortly that the $s$ is the column rank of $A$ as well.
 
-## Formal Definitions
+## Formal Definitions {#sec-formaldefs}
 
 > *Definition:* A *linear combination* of vectors $v_1,v_2,...v_k$ is a
 > sum of scalar multiples of the vectors, i.e.
@@ -494,16 +494,15 @@ $\square$
 
 ## Your Turn
 
-❄️  **Your Turn:** If the matrix $A$ has a 0 row, then
-$det(A) =  0$. Explain why.
+❄️  **Your Turn:** Consider the matrix **A** in @sec-formaldefs. Using R,
+show that @thm-rankapa does indeed hold for this matrix. 
 
-❄️  **Your Turn:** Consider the three basic elementary matrices discussed
-here: Swap rows $i$ and $j$; multiply row $i$ by a constant $b$; adding
-$c$ times row $i$ to row $j$, for a constant $c$. Find general formulas
-for the determinants of the three matrices.
-
-❄️  **Your Turn:** Show that a set of vectors is linearly dependent if
-and only if one of the vectors is a linear combination of the others.
+❄️  **Your Turn:** Consider the full Census dataset **svcensus** , with
+several categorical variables. Use **factorsToDummies** (via the
+**qeML** package) so that there is a different column for each level of
+a categorical variable.  E.g. there should be six columns coming from
+the original **occ**.  Reason out what the rank should be of the
+resulting data matrix, and use R to verify.
 
 ❄️  **Your Turn:** Consider an $m \times n$ matrix $A$ with $m \geq n$.
 Then consider the partitioned matrix
@@ -518,6 +517,14 @@ $$
  \right )
 $$
 
-where $I$ is the $n \times n$ identity matrix. Prove that $B$ is of
+where $I$ is the $n \times n$ identity matrix. Explain why $B$ is of
 full rank.
+
+❄️  **Your Turn:** Show that a set of vectors is linearly dependent if
+and only if one of the vectors is a linear combination of the others.
+
+❄️  **Your Turn:** Consider the three basic elementary matrices discussed
+here: Swap rows $i$ and $j$; multiply row $i$ by a constant $b$; adding
+$c$ times row $i$ to row $j$, for a constant $c$. Find general formulas
+for the determinants of the three matrices.
 

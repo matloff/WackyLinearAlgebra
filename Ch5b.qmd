@@ -389,7 +389,7 @@ tr[\underbrace{A(A'A)^{-1}} A'] =
 tr[A'\underbrace{A(A'A)^{-1}}] = tr(I) = p
 $$
 
-for $A$ of size $n \textrm{ x } p$.
+for $A$ of size $n \times p$.
 
 Thus the average value of $h_{ii}$ is $p/n$. Accordingly, we might
 suspect an outlier if $h_{ii}$ is considerably larger than $p/n$. 
@@ -790,13 +790,27 @@ Goal achieved.
 
 ## Your Turn
 
+❄️  **Your Turn:** Consider the space $C(0,1)$. For function $f$ and $g$ 
+of your own choosing, verify that the Cauchy-Schwarz and Triangle
+Inequalities hold in that case.
+
 ❄️  **Your Turn:** Show that for any random variable $Q$ of finite
 variance, the minimum value of $E[(Q-d)^2]$ over all constants $d$ is
 attained by taking $d$ to be the mean of $Q$, i.e.  $d = E(Q)$.
+Hint: First expand $(Q-d)^2$ as $Q^2 - dQ + d^2$.
 
-❄️  **Your Turn:** Consider the space $\cal RV(\Omega)$. In order for the
-claimed inner product to be valid, we must have that if $<X,X> = 0$,
-then $X$ must be the 0 vector. Prove this. 
+❄️  **Your Turn:** In the die rolling example, verify that
+
+$$
+E[E(Y|B)] = E(Y)
+$$
+
+by calculating both sides.
+
+❄️  **Your Turn:** Say we roll a die once, producing $X$ dots. If $X = 6$,
+we get a bonus roll, yielding $B$ additional dots; otherwise, $B = 0$.
+Let $Y = X+B$. Verify that $X$ and $B$ satisfy the Cauchy-Schwarz and
+Triangle Inequalities, and also find $\rho(X,B)$.
 
 ❄️  **Your Turn:** Derive the Cauchy-Schwarz Inequality, using the
 following algebraic outline:
@@ -804,7 +818,7 @@ following algebraic outline:
 * The inequality
 
   $$
-  0 \leq <(au+v),(au+v)>
+  0 ~ \leq ~ <(au+v),(au+v)> ~
   $$
 
   holds for any scalar $a$.
@@ -819,34 +833,6 @@ following algebraic outline:
    $$
    <u,v>^2 \leq ||u||^2 ||v||^2
    $$
-
-❄️  **Your Turn:** Consider a set of vectors $W = {v_1,...,v_k}$ in an
-inner product space $V$. Let $U$ be another vector in $V$. Show that
-there exist scalars $a_1,...,a_k$ and a vector $v$ such that
-
-$$
-u = a_1 v_1 + ... + a_k v_k +v 
-$$
-
-with
-
-$$
-<v,v_i> = 0 \textrm{ for all i}
-$$
-
-❄️  **Your Turn:** Say in $C(0,1)$ we want to approximate functions by 
-polynomials. Specifically, for any $f$ in $C(0,1)$, we want to find the
-closest polynomial of degree $m$. Write functions to do this, with the
-following call forms:
-
-``` r
-gsc01(f,m)  # performs Gram-Schmidt and returns the result
-bestpoly(f,gsout)  # approx. f by output from gsc01
-
-```
-
-Hint: Since the vectors here are functions, you'll need a data structure
-capable of storing functions. An R **list** will work well here.
 
 ❄️  **Your Turn:** Use the Cauchy-Schwarz Inequality to prove the
 Triangle Inequality, using the following algebraic outline.
@@ -863,33 +849,25 @@ Triangle Inequality, using the following algebraic outline.
 
 * Collect terms to yield the Triangle Inequality.
 
-
-❄️  **Your Turn:** Consider the space $C(0,1)$. For function $f$ and $g$ 
-of your own choosing, verify that the Cauchy-Schwarz and Triangle
-Inequalities hold in that case.
-
-❄️  **Your Turn:** Say we roll a die once, producing $X$ dots. If $X = 6$,
-we get a bonus roll, yielding $B$ additional dots; otherwise, $B = 0$.
-Let $Y = X+B$.
-
-❄️  **Your Turn:** In the die rolling example, verify that
+❄️  **Your Turn:** Consider a set of vectors $W = {v_1,...,v_k}$ in an
+inner product space $V$. Let $u$ be another vector in $V$. Show that
+there exist scalars $a_1,...,a_k$ and a vector $v$ such that
 
 $$
-E[E(Y|B)] = E(Y)
+u = a_1 v_1 + ... + a_k v_k +v 
 $$
 
-❄️  **Your Turn:** Say we roll a die once, producing $X$ dots. If $X = 6$,
-we get a bonus roll, yielding $B$ additional dots; otherwise, $B = 0$.
-Let $Y = X+B$. Verify that $X$ and $B$ satisfy the Cauchy-Schwarz and
-Triangle Inequalities, and also find $\rho(X,B)$.
+with
 
-❄️  **Your Turn:** Show that any set of orthogonal vectors is linearly
+$$
+<v,v_i> = 0 \textrm{ for all i}
+$$
+
+❄️  **Your Turn:** Consider the quadratic form $x'Px$. Explain why, if $P$ 
+is a projection matrix, the form equals $||Px||^2$.
+
+❄️  **Your Turn:** Explain why any set of orthogonal vectors is linearly
 independent.
-
-❄️  **Your Turn:** Prove @eq-pythag by expanding the inner product and
-simplifying algebraically.
-
-❄️  **Your Turn:** Prove @thm-triangle. 
 
 ❄️  **Your Turn:** Prove that the vector $Y - E(Y|X)$ is uncorrelated
 with $E(Y|X)$
@@ -904,7 +882,11 @@ first algebraically using @eq-iterexpect and the relation $Var(R) =
 E(R^2) - (E(R))^2$, and then using the Pythagorean Theorem for a much
 quicker proof.  As before, assume $X$ and $Y$ are centered.
 
-❄️  **Your turn:** show that @eq-hii holds. 
+❄️  **Your turn:** Show that @eq-hii holds. 
+
+❄️  **Your Turn:** Consider the space $\cal RV(\Omega)$. In order for the
+claimed inner product to be valid, we must have that if $<X,X> = 0$,
+then $X$ must be the 0 vector. Prove this. 
 
 ❄️  **Your Turn:** Say $\cal V$ is $R^n$. Form the matrix $A$ whose
 columns are the $u_i$, and let $P = AA'$. Show that
@@ -915,9 +897,6 @@ $$
 
 so that $P$ thereby implements the projection.
 
-❄️  **Your Turn:** Consider the quadratic form $x'Px$. Show that if $P$ 
-is a projection matrix, the form equals $||Px||^2$.
-
 ❄️  **Your Turn:** Let $A$ be an $m \textrm{ x } n$ matrix. Consider the
 possible inner product on $\cal{R}^n$ defined by $<x,y> = x'A'A y$.
 State a condition on $A$ that is necessary and sufficient for the
@@ -925,4 +904,20 @@ claimed inner product to be value, and prove this.
 
 ❄️  **Your Turn:** Show that for any vector $w$ and symmetric matrix $M$,
 the quadratic form $w'Mw \geq 0$.
+
+❄️  **Your Turn:** Say in $C(0,1)$ we want to approximate functions by 
+polynomials. Specifically, for any $f$ in $C(0,1)$, we want to find the
+closest polynomial of degree $m$ or less. Write functions to do this, with the
+following call forms:
+
+``` r
+gsc01(f,m)  # performs Gram-Schmidt and returns the result
+bestpoly(f,gsout)  # approx. f by output from gsc01
+
+```
+
+Hint: Note that the set of polynomials of a given degree or less is a
+subspace of $C(0,1)$.  Also since the vectors here are functions, you'll
+need a data structure capable of storing functions. An R **list** will
+work well here.
 

@@ -578,7 +578,7 @@ The standard definition is one of the ugliest in all of mathematics.
 Instead we will define the term using one of the methods for calculating
 determinants.
 
-> Consider an $r \textrm{ x } r$ matrix $G$.  For $r = 2$, write $G$ as
+> Consider an $r \times r$ matrix $G$.  For $r = 2$, write $G$ as
 > 
 > $$
 >  G = 
@@ -593,7 +593,7 @@ determinants.
 > and define $\det(G)$ to be $ad -bc$. For $r > 2$, 
 > define submatrices as follows. 
 > 
-> $G_j$ is the $(r-1) \textrm{ x } (r-1)$ submatrix obtained by removing row
+> $G_j$ is the $(r-1) \times (r-1)$ submatrix obtained by removing row
 > 1 and column $j$ from $G$. Then $\det(G)$ is defined recursively as
 > 
 > $$
@@ -623,7 +623,7 @@ The $\det(M) = 5(-1 - 7) - 1(3 - 0) + 0 = -43$.
 *A glimpse at the classical definition:*
 
 Using the same approach as in the last computation, we would find that
-the determinant of a general $3 \textrm{ x } 3$ matrix
+the determinant of a general $3 \times 3$ matrix
 
 $$
  \left (
@@ -663,6 +663,9 @@ We state these without proof:
  
 ❄️  **Your Turn:** In @sec-elemmats, find the inverses of $E_3$
 and $E_4$ using similar reasoning, and thus find $A^{-1}$.
+
+❄️  **Your Turn:** If the matrix $A$ has a 0 row, then
+$det(A) =  0$. Explain why.
 
 ❄️  **Your Turn:** In @eq-randwalkP, consider the variant
 

@@ -21,8 +21,9 @@ $$
 As noted earlier, the two main structures in linear algebra are matrices
 and vector spaces. We now introduce the latter, a bit more abstract than
 matrices but even more powerful. We lay the crucial foundation in this
-chapter, then reap the benefits in the applications in the remaining
-chapters.
+chapter. There won't be any direct practical applications in this
+chapter, but we will then reap the huge benefits of this material in the
+applications in the remaining chapters.
 
 :::
 
@@ -110,7 +111,7 @@ $\cal R^{n}$.
 
 Here $\cal R$ represents the set of all real numbers, and $\cal R^{n}$ is
 simply the set of all vectors consisiting of $n$ real numbers. In an $m
-\textrm{ x } k$ matrix the rows are members of $\cal R^{m}$ and the
+\times k$ matrix the rows are members of $\cal R^{m}$ and the
 columns are in $\cal R^{k}$.
 
 ### The set C(0,1) of all continuous functions on the interval [0,1]
@@ -175,7 +176,7 @@ Another subspace of $R^3$ is the set of vectors (a,a,b), i.e. those
 vectors whose first two element are equal. What about vectors of the
 form (a,b,a+b)? Yes.
 
-We saw earlier that the *row space* of an $m \textrm{ x } n$ matrix $A$,
+We saw earlier that the *row space* of an $m \times n$ matrix $A$,
 consisting of all linear combinations of the rows of $A$, is a subspace
 of $R^m$. Similarly, the *column space*, consisting of all linear
 combinations of columns of $A$, is a subspace of $R^n$.
@@ -286,7 +287,7 @@ for all scalars $a$ and $b$, and all vectors $v$ and $w$ in $\cal{V}_1 $.
 
 A further important special case is that in which $\cal{V}_1$ and
 $\cal{V}_2$ are $R^n$ and $R^m$, respectively.  Then it can be shown
-that there a some $m \textrm{ x } n$ matrix $A$ that does its work, i.e.
+that there a some $m \times n$ matrix $A$ that does its work, i.e.
 
 $$
 f(x) = Ax
@@ -305,7 +306,12 @@ second property also does not necessarily hold either.
 
 ## Your Turn
 
-❄️  **Your Turn:** Say $U$ and $V$ are subspaces of $W$. Show that $U
+❄️  **Your Turn:** In the vector space $C(0,1)$, consider the subset of
+all polynomial functions of degree $k$ or less. Explain why this is a
+subspace of $C(0,1)$. What is its dimension? Give an example of a basis
+for this subspace, for $k = 3$.
+
+❄️  **Your Turn:** Say $U$ and $V$ are subspaces of $W$. Explain why $U
 \cap V$ is also a subspace, and that its dimension is at most the
 minimum of the dimensions of $U$ and $V$. Show by counterexample that
 the result does not hold for union.
@@ -316,4 +322,5 @@ subspace of $\cal RV(\Omega)$.
 
 ❄️  **Your Turn:** Prove that the coefficients in a basis representation
 are unique. In other words, in a representation of the vector $x$ in
-terms of a basis $u_1,...,u_n$,
+terms of a basis $u_1,...,u_n$, there cannot be two different sets of
+coefficients $c_1,...,c_n$ such that $c_1 u_1 + ... + c_n u_n = x$.
