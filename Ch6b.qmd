@@ -391,6 +391,9 @@ $\square$
 
 ## Your Turn
 
+❄️  **Your Turn:** Use PCA to do dimension reduction on the **s50**
+dataset.
+
 ❄️  **Your Turn:** The reader has likely seen the concept of a
 *cumulative distribution function* (CDF). For a scalar random variable
 $X$, this is $F_x(t) = P(X \leq t)$. If $X$ is an $m$-dimensional random
@@ -448,9 +451,6 @@ State the form of the eigenvalues and eigenvectors of $A$.
 ❄️  **Your Turn:** In @sec-detect,
 there was a statement "$c$ is nonzero with high probability." Why was
 that important?
-
-❄️  **Your Turn:** Use PCA to do dimension reduction on the **s50**
-dataset.
 
 ❄️  **Your Turn:** Write an R function with call form
 

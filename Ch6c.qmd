@@ -262,6 +262,10 @@ $$
 
 ## Dimension Reduction: SVD as the Best Low-Rank Approximation{#sec-svddimred}
 
+This is a very common application of SVD
+
+### "Thin" SVD
+
 The SVD of a rank $r$, $q \times n$ matrix $A$ can be partitioned as
 
 $$
@@ -289,8 +293,13 @@ V_2' \\
 U_1 D_1 V_1'
 $${#eq-u1d1v1}
 
-So, we've reduced the size of memory needed to store the SVD. But
-there's more:
+So, we've reduced the size of memory needed to store the SVD, by using
+$U_1$, $D_1$ and $V_1$ instead of the larger $U$, $D$ and $V$. This is
+called the *thin* SVD
+
+But there's more:
+
+### Low-rank approximation
 
 The eigenvalues of a matrix, arranged from largest to smallest, tend to
 degrade in a gradual manner, as seen for example in @sec-backtoafrica.
@@ -303,12 +312,46 @@ treating those near-0 eigenvalues as 0s, and removing the corresponding
 columns of $U_1$ and $V_1$. Why do this?
 
 * Achieve a further reduction in storage requirements. for instance in
-  settings in which we have many, many images or videos.
+  settings in which we have many, many images or even better,
+  many, many videos.
 
 * Reduce noise, again for example with images. Small blotches are
   smoothed out.
 
-## Example: Image Compression
+### Example: Image Compression
+
+Let's try that idea with the picture on the cover of this book. We will
+
+* convert from color to grayscale for simplicity (a color image consists
+  of three matrices, one for each primary color)
+
+* calculate the SVD of the resulting matrix
+
+* retain only the first $k$ eigenvectors and eigenvalues; the smaller $k$
+  is, the greater the storage savings but the poorer the approximation
+
+Here is the code:
+
+```{r}
+library(imager)
+img <- load.image('prj.png')  
+# grayscale() doesn't work directly on this, 
+# image, due to alpha (transparency) channel
+imgNoAlpha <- rm.alpha(img)
+imgGrayNoAlpha <- grayscale(imgNoAlpha)
+imgSVD <- svd(imgGrayNoAlpha)
+u <- imgSVD$u
+v <- imgSVD$v
+origImgMat <- u %*% diag(imgSVD$d) %*% t(v)
+plot(as.cimg(origImgMat))
+retainedRank <- 50  # keep only the first 50 columns in U and V
+newImgMat <- u[,1:retainedRank] %*% diag((imgSVD$d)[1:retainedRank]) %*%
+   t(v[,1:retainedRank])
+plot(as.cimg(newImgMat))
+```
+
+The rank-50 version is almost as sharp as the full image -- and achieves
+a huge reduction in storage space.
 
 ## Matrix Factorization in Recommender Systems
 
@@ -374,12 +417,6 @@ Let $u_i$ and $v_i$ denote the colums of $U$ and $V$. Then:
 
 ## Your Turn
 
-❄️  **Your Turn:** Show that in the SVD factorization, $U$ consists of
-the eigenvectors of $AA'$.
-
-❄️  **Your Turn:** Find a characterization of the left null space of a
-matrix $A$.
-
 ❄️  **Your Turn:** Write an R function will call form
 
 ``` r
@@ -421,3 +458,7 @@ findNuPseudoInv(p)
 
 to implement this approach. Here **p** is a Markov transition matrix.
 Try your code on a couple of examples.
+
+❄️  **Your Turn:** Show that in the SVD factorization, The columns
+of $U$ are the eigenvectors of $AA'$. Hint: First show that any column
+of $U$ is an eigenvector of $AA'$.
