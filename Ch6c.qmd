@@ -355,6 +355,9 @@ a huge reduction in storage space.
 
 ## Matrix Factorization in Recommender Systems
 
+In the last section, our goal was to "thin out" a matrix In this
+section, we hope to fill in a sparse matrix.
+
 Let $R$ denote the ratings matrix, so that the element in row $i$,
 column $j$ is the rating user $i$ gives to item $j$. Note that most
 elements of $A$ are unknown, and we hope to predict them with some
@@ -398,7 +401,7 @@ And though SVD provided the motivation for the model $A = WH$,
 we can use the model more generally, i.e. without assuming
 $W = U \Sigma^{0.5}$ and $H = \Sigma^{0.5} V'$.
 
-lme4, ALS with ridge (and mention the 2-way regul standard)
+## Using SVD to Gain Insight into Ridge Regression
 
 ## SVD As a Basis for the Four Fundamental Subspaces
 
