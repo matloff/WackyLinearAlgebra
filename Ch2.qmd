@@ -566,7 +566,7 @@ the fact that earlier in this chapter we had the proviso "If
 $(A'A)^{-1}$ exists." The following property of determinants is then
 relevant:
 
-> A square matrix $G$ is invertible if and only if $det(G) \neq 0$.
+> A square matrix $G$ is invertible if and only if $\det(G) \neq 0$.
 
 There are better ways to ascertain invertibility than this, but it is
 conceptually helpful. Determinants play a similar role in the topic of
@@ -599,11 +599,13 @@ determinants.
 > $$
 > \sum_{i=1}^r (-1)^{i+1} \det(G_i)
 > $$
-
-Actually, we can alternatively remove row $i$ instead of row 1. If $i$ 
-is an odd number, the same recursive formula holds, but for even $i$,
-replace $(-1)^{i+1}$ by $(-1)^i$.
-
+> 
+> Actually, we can alternatively remove row $i$ instead of row 1. If $i$ 
+> is an odd number, the same recursive formula holds, but for even $i$,
+> replace $(-1)^{i+1}$ by $(-1)^i$.
+>
+> The same rules apply if 'row' is replaced by 'column' above.
+> 
 
 For instance, consider 
 
@@ -618,7 +620,7 @@ $$
  \right )
 $$
 
-The $\det(M) = 5(-1 - 7) - 1(3 - 0) + 0 = -43$.
+Then $\det(M) = 5(-1 - 7) - 1(3 - 0) + 0 = -43$.
 
 *A glimpse at the classical definition:*
 
@@ -665,7 +667,7 @@ We state these without proof:
 and $E_4$ using similar reasoning, and thus find $A^{-1}$.
 
 ❄️  **Your Turn:** If the matrix $A$ has a 0 row, then
-$det(A) =  0$. Explain why.
+$\det(A) =  0$. Explain why.
 
 ❄️  **Your Turn:** In @eq-randwalkP, consider the variant
 
