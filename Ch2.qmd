@@ -667,7 +667,11 @@ We state these without proof:
 and $E_4$ using similar reasoning, and thus find $A^{-1}$.
 
 ❄️  **Your Turn:** If the matrix $A$ has a 0 row, then
-$\det(A) =  0$. Explain why.
+$\det(A)$ must be 0. Explain why.
+
+❄️  **Your Turn:** We say a square matrix $A = (a_{ij})$ is
+*upper-triangular* if its below-diagonal elements are all 0s.
+Give a closed-form formula for $\det(A)$ in terms of the $a_{ij}$.
 
 ❄️  **Your Turn:** In @eq-randwalkP, consider the variant
 

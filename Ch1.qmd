@@ -634,7 +634,7 @@ shifts*, e.g. $UVW$, $VWU$ and $WUV$ all have the same trace.
 
 :::
 
-# Partitioned Matrices: an Invaluable Visualization Tool
+## Partitioned Matrices: an Invaluable Visualization Tool
 
 Here, "visualization" is not a reference to graphics but rather to
 highlighting certain submatrices.
@@ -652,6 +652,8 @@ throughout the book. Readers should spend extra time here, devising some
 of their own examples.
 
 :::
+
+Specifics now follow:
 
 ### How partitioning works
 
@@ -797,7 +799,7 @@ Note that *we choose the partitioning*; there is no inherent partition
 structure. In some settings, there is a structure that fits our needs,
 and we use that.
 
-## Linear Combinations of Rows and Columns of a Matrix
+# Linear Combinations of Rows and Columns of a Matrix
 
 Note that the above expression @eq-lincomb1,
 
@@ -981,7 +983,7 @@ A similar result holds for the rows of the product.
 
 :::
 
-## Your Turn
+# Your Turn
 
 ❄️  **Your Turn:** Fill in the blank with a term from this chapter: 
 The adjacency matrix of an undirected graph is necessarily ________.
@@ -995,6 +997,11 @@ The adjacency matrix of an undirected graph is necessarily ________.
 
 * Find an example of a *triad*, i.e. a set of 3 members who are all
   linked to each other?
+
+❄️  **Your Turn:** We say a square matrix is *upper-triangular* if its
+below-diagonal elements are all 0s. (There is a similar concept of
+*lower-triangular*.) Explain why, given two upper-triangular matrices
+$A$ and $B$ of the same size, the product $AB$ is also upper-triangular.
 
 ❄️  **Your Turn:** Write an R function with call form
 
