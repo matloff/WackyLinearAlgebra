@@ -193,7 +193,7 @@ that are nearly 0, as follows.
 
 * Thus with high probability, the linear combination is near to $c$
   for some number $c$. If we are working with numerical data, that number
-  $c$ is nonzero with high probability (see @imp-prob0).
+  $c$ is nonzero with high probability (see @sec-prob0).
 
 * If our design matrix $A$ includes a 1s column, then the above linear
   combination, together with this 1s column, gives us a linear
