@@ -728,14 +728,14 @@ A =
 <p>This is a topic that is quite straightforward and traditional, even old-fashioned – in fact, <em>too</em> old-fashioned, according to mathematician Sheldon Axler. The theme of his book, <em>Linear Algebra Done Right</em>, is that determinants are overemphasized. He relegates the topic to the very end of the book. Yet determinants do appear often in applied linear algebra settings. Moreover, they will be convenient to use in explaining concepts in this book on linear algebra in <em>Data Science</em>.</p>
 <p>But why place the topic in this particular chapter? The answer lies in the fact that earlier in this chapter we had the proviso “If <span class="math inline">\((A'A)^{-1}\)</span> exists.” The following property of determinants is then relevant:</p>
 <blockquote class="blockquote">
-<p>A square matrix <span class="math inline">\(G\)</span> is invertible if and only if <span class="math inline">\(det(G) \neq 0\)</span>.</p>
+<p>A square matrix <span class="math inline">\(G\)</span> is invertible if and only if <span class="math inline">\(\det(G) \neq 0\)</span>.</p>
 </blockquote>
 <p>There are better ways to ascertain invertibility than this, but it is conceptually helpful. Determinants play a similar role in the topic of eigenvectors in <a href="Ch6a.html" class="quarto-xref"><span>Chapter 11</span></a>.</p>
 <section id="sec-detdef" class="level3" data-number="3.7.1">
 <h3 data-number="3.7.1" class="anchored" data-anchor-id="sec-detdef"><span class="header-section-number">3.7.1</span> Definition</h3>
 <p>The standard definition is one of the ugliest in all of mathematics. Instead we will define the term using one of the methods for calculating determinants.</p>
 <blockquote class="blockquote">
-<p>Consider an <span class="math inline">\(r \textrm{ x } r\)</span> matrix <span class="math inline">\(G\)</span>. For <span class="math inline">\(r = 2\)</span>, write <span class="math inline">\(G\)</span> as</p>
+<p>Consider an <span class="math inline">\(r \times r\)</span> matrix <span class="math inline">\(G\)</span>. For <span class="math inline">\(r = 2\)</span>, write <span class="math inline">\(G\)</span> as</p>
 <p><span class="math display">\[
 G =
 \left (
@@ -746,12 +746,13 @@ c &amp; d  \\
 \right )
 \]</span></p>
 <p>and define <span class="math inline">\(\det(G)\)</span> to be <span class="math inline">\(ad -bc\)</span>. For <span class="math inline">\(r &gt; 2\)</span>, define submatrices as follows.</p>
-<p><span class="math inline">\(G_j\)</span> is the <span class="math inline">\((r-1) \textrm{ x } (r-1)\)</span> submatrix obtained by removing row 1 and column <span class="math inline">\(j\)</span> from <span class="math inline">\(G\)</span>. Then <span class="math inline">\(\det(G)\)</span> is defined recursively as</p>
+<p><span class="math inline">\(G_j\)</span> is the <span class="math inline">\((r-1) \times (r-1)\)</span> submatrix obtained by removing row 1 and column <span class="math inline">\(j\)</span> from <span class="math inline">\(G\)</span>. Then <span class="math inline">\(\det(G)\)</span> is defined recursively as</p>
 <p><span class="math display">\[
 \sum_{i=1}^r (-1)^{i+1} \det(G_i)
 \]</span></p>
-</blockquote>
 <p>Actually, we can alternatively remove row <span class="math inline">\(i\)</span> instead of row 1. If <span class="math inline">\(i\)</span> is an odd number, the same recursive formula holds, but for even <span class="math inline">\(i\)</span>, replace <span class="math inline">\((-1)^{i+1}\)</span> by <span class="math inline">\((-1)^i\)</span>.</p>
+<p>The same rules apply if ‘row’ is replaced by ‘column’ above.</p>
+</blockquote>
 <p>For instance, consider</p>
 <p><span class="math display">\[
 M =
@@ -763,9 +764,9 @@ M =
   \end{array}
 \right )
 \]</span></p>
-<p>The <span class="math inline">\(\det(M) = 5(-1 - 7) - 1(3 - 0) + 0 = -43\)</span>.</p>
+<p>Then <span class="math inline">\(\det(M) = 5(-1 - 7) - 1(3 - 0) + 0 = -43\)</span>.</p>
 <p><em>A glimpse at the classical definition:</em></p>
-<p>Using the same approach as in the last computation, we would find that the determinant of a general <span class="math inline">\(3 \textrm{ x } 3\)</span> matrix</p>
+<p>Using the same approach as in the last computation, we would find that the determinant of a general <span class="math inline">\(3 \times 3\)</span> matrix</p>
 <p><span class="math display">\[
 \left (
 \begin{array}{rrr}
@@ -793,6 +794,8 @@ aei + bfg + cdh - afh - bdi - ceg
 <section id="your-turn" class="level2" data-number="3.8">
 <h2 data-number="3.8" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">3.8</span> Your Turn</h2>
 <p>❄️ <strong>Your Turn:</strong> In <a href="#sec-elemmats" class="quarto-xref"><span>Section 3.5.2</span></a>, find the inverses of <span class="math inline">\(E_3\)</span> and <span class="math inline">\(E_4\)</span> using similar reasoning, and thus find <span class="math inline">\(A^{-1}\)</span>.</p>
+<p>❄️ <strong>Your Turn:</strong> If the matrix <span class="math inline">\(A\)</span> has a 0 row, then <span class="math inline">\(\det(A)\)</span> must be 0. Explain why.</p>
+<p>❄️ <strong>Your Turn:</strong> We say a square matrix <span class="math inline">\(A = (a_{ij})\)</span> is <em>upper-triangular</em> if its below-diagonal elements are all 0s. Give a closed-form formula for <span class="math inline">\(\det(A)\)</span> in terms of the <span class="math inline">\(a_{ij}\)</span>.</p>
 <p>❄️ <strong>Your Turn:</strong> In <a href="#eq-randwalkP" class="quarto-xref">Equation&nbsp;<span>3.7</span></a>, consider the variant</p>
 <p><span id="eq-randwalkP"><span class="math display">\[
 P =

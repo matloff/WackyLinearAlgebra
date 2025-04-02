@@ -283,7 +283,7 @@ window.Quarto = {
   <li><a href="#sec-review" id="toc-sec-review" class="nav-link" data-scroll-target="#sec-review"><span class="header-section-number">6.2.3</span> Recap of <span>Section 3.5.1</span></a></li>
   <li><a href="#partitioned-matrix-view-of-reduced-echelon-forms" id="toc-partitioned-matrix-view-of-reduced-echelon-forms" class="nav-link" data-scroll-target="#partitioned-matrix-view-of-reduced-echelon-forms"><span class="header-section-number">6.2.4</span> Partitioned-matrix view of Reduced Echelon Forms</a></li>
   </ul></li>
-  <li><a href="#formal-definitions" id="toc-formal-definitions" class="nav-link" data-scroll-target="#formal-definitions"><span class="header-section-number">6.3</span> Formal Definitions</a></li>
+  <li><a href="#sec-formaldefs" id="toc-sec-formaldefs" class="nav-link" data-scroll-target="#sec-formaldefs"><span class="header-section-number">6.3</span> Formal Definitions</a></li>
   <li><a href="#row-and-column-rank" id="toc-row-and-column-rank" class="nav-link" data-scroll-target="#row-and-column-rank"><span class="header-section-number">6.4</span> Row and Column Rank</a></li>
   <li><a href="#sec-rankprops" id="toc-sec-rankprops" class="nav-link" data-scroll-target="#sec-rankprops"><span class="header-section-number">6.5</span> Some Properties of Ranks</a></li>
   <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">6.6</span> Your Turn</a></li>
@@ -455,17 +455,17 @@ woman   0   0       0   0     0</code></pre>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">runif</span>(<span class="dv">12</span>),<span class="at">nrow=</span><span class="dv">3</span>)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>          [,1]        [,2]      [,3]       [,4]
-[1,] 0.3311482 0.476398621 0.6677385 0.06998726
-[2,] 0.5441880 0.544119692 0.5891712 0.02173528
-[3,] 0.5404404 0.009794929 0.9054202 0.62113846</code></pre>
+<pre><code>           [,1]       [,2]      [,3]      [,4]
+[1,] 0.35528005 0.77888664 0.6929573 0.8637351
+[2,] 0.08485957 0.87035869 0.8403678 0.6024971
+[3,] 0.22466946 0.04276812 0.1617882 0.5134355</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>e <span class="sc">%*%</span> a  <span class="co"># matrix mult. is NOT e * a!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>          [,1]        [,2]      [,3]       [,4]
-[1,] 0.3311482 0.476398621 0.6677385 0.06998726
-[2,] 0.5404404 0.009794929 0.9054202 0.62113846
-[3,] 0.5441880 0.544119692 0.5891712 0.02173528</code></pre>
+<pre><code>           [,1]       [,2]      [,3]      [,4]
+[1,] 0.35528005 0.77888664 0.6929573 0.8637351
+[2,] 0.22466946 0.04276812 0.1617882 0.5134355
+[3,] 0.08485957 0.87035869 0.8403678 0.6024971</code></pre>
 </div>
 </div>
 <p>Yes, rows 2 and 3 were swapped.</p>
@@ -523,8 +523,8 @@ V &amp; 0  \\
 <p>Clearly, the row rank of <span class="math inline">\(A_{rref}\)</span> is <span class="math inline">\(s\)</span>, and its column rank is <span class="math inline">\(t\)</span>. We will prove shortly that the <span class="math inline">\(s\)</span> is the column rank of <span class="math inline">\(A\)</span> as well.</p>
 </section>
 </section>
-<section id="formal-definitions" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="formal-definitions"><span class="header-section-number">6.3</span> Formal Definitions</h2>
+<section id="sec-formaldefs" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="sec-formaldefs"><span class="header-section-number">6.3</span> Formal Definitions</h2>
 <blockquote class="blockquote">
 <p><em>Definition:</em> A <em>linear combination</em> of vectors <span class="math inline">\(v_1,v_2,...v_k\)</span> is a sum of scalar multiples of the vectors, i.e.</p>
 <p><span class="math display">\[
@@ -702,9 +702,8 @@ c_n A \\
 </section>
 <section id="your-turn" class="level2" data-number="6.6">
 <h2 data-number="6.6" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">6.6</span> Your Turn</h2>
-<p>❄️ <strong>Your Turn:</strong> If the matrix <span class="math inline">\(A\)</span> has a 0 row, then <span class="math inline">\(det(A) =  0\)</span>. Explain why.</p>
-<p>❄️ <strong>Your Turn:</strong> Consider the three basic elementary matrices discussed here: Swap rows <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span>; multiply row <span class="math inline">\(i\)</span> by a constant <span class="math inline">\(b\)</span>; adding <span class="math inline">\(c\)</span> times row <span class="math inline">\(i\)</span> to row <span class="math inline">\(j\)</span>, for a constant <span class="math inline">\(c\)</span>. Find general formulas for the determinants of the three matrices.</p>
-<p>❄️ <strong>Your Turn:</strong> Show that a set of vectors is linearly dependent if and only if one of the vectors is a linear combination of the others.</p>
+<p>❄️ <strong>Your Turn:</strong> Consider the matrix <strong>A</strong> in <a href="#sec-formaldefs" class="quarto-xref"><span>Section 6.3</span></a>. Using R, show that <a href="#thm-rankapa" class="quarto-xref">Theorem&nbsp;<span>6.5</span></a> does indeed hold for this matrix.</p>
+<p>❄️ <strong>Your Turn:</strong> Consider the full Census dataset <strong>svcensus</strong> , with several categorical variables. Use <strong>factorsToDummies</strong> (via the <strong>qeML</strong> package) so that there is a different column for each level of a categorical variable. E.g. there should be six columns coming from the original <strong>occ</strong>. Reason out what the rank should be of the resulting data matrix, and use R to verify.</p>
 <p>❄️ <strong>Your Turn:</strong> Consider an <span class="math inline">\(m \times n\)</span> matrix <span class="math inline">\(A\)</span> with <span class="math inline">\(m \geq n\)</span>. Then consider the partitioned matrix</p>
 <p><span class="math display">\[
 B =
@@ -715,7 +714,9 @@ I \\
 \end{array}
 \right )
 \]</span></p>
-<p>where <span class="math inline">\(I\)</span> is the <span class="math inline">\(n \times n\)</span> identity matrix. Prove that <span class="math inline">\(B\)</span> is of full rank.</p>
+<p>where <span class="math inline">\(I\)</span> is the <span class="math inline">\(n \times n\)</span> identity matrix. Explain why <span class="math inline">\(B\)</span> is of full rank.</p>
+<p>❄️ <strong>Your Turn:</strong> Show that a set of vectors is linearly dependent if and only if one of the vectors is a linear combination of the others.</p>
+<p>❄️ <strong>Your Turn:</strong> Consider the three basic elementary matrices discussed here: Swap rows <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span>; multiply row <span class="math inline">\(i\)</span> by a constant <span class="math inline">\(b\)</span>; adding <span class="math inline">\(c\)</span> times row <span class="math inline">\(i\)</span> to row <span class="math inline">\(j\)</span>, for a constant <span class="math inline">\(c\)</span>. Find general formulas for the determinants of the three matrices.</p>
 
 
 </section>

@@ -604,6 +604,7 @@ Q = \mu + \Sigma^{0.5} Z
 </section>
 <section id="your-turn" class="level2" data-number="12.8">
 <h2 data-number="12.8" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">12.8</span> Your Turn</h2>
+<p>❄️ <strong>Your Turn:</strong> Use PCA to do dimension reduction on the <strong>s50</strong> dataset.</p>
 <p>❄️ <strong>Your Turn:</strong> The reader has likely seen the concept of a <em>cumulative distribution function</em> (CDF). For a scalar random variable <span class="math inline">\(X\)</span>, this is <span class="math inline">\(F_x(t) = P(X \leq t)\)</span>. If <span class="math inline">\(X\)</span> is an <span class="math inline">\(m\)</span>-dimensional random vector, the definition is</p>
 <p><span class="math display">\[
 F_X(t_1,...,t_m) = P(X_1 \leq t_1,...,X_m \leq t_m)
@@ -634,7 +635,6 @@ A_1 &amp; 0 &amp; 0 ... \\
 </ul>
 <p>State the form of the eigenvalues and eigenvectors of <span class="math inline">\(A\)</span>.</p>
 <p>❄️ <strong>Your Turn:</strong> In <a href="#sec-detect" class="quarto-xref"><span>Section 12.4</span></a>, there was a statement “<span class="math inline">\(c\)</span> is nonzero with high probability.” Why was that important?</p>
-<p>❄️ <strong>Your Turn:</strong> Use PCA to do dimension reduction on the <strong>s50</strong> dataset.</p>
 <p>❄️ <strong>Your Turn:</strong> Write an R function with call form</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bestPCAPred</span>(data,yName)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>It will apply PCA to the X portion of <strong>data</strong>, then apply <strong>lm</strong> successivly to the first PC, then the first two, then the first three and so on assessing with cross-validation in each case. It will then return the number of PCs (and the PCs themselves) that predicts best. Try your function on various datasets.</p>

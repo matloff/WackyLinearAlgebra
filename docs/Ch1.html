@@ -291,12 +291,12 @@ window.Quarto = {
   <li><a href="#sec-transpose" id="toc-sec-transpose" class="nav-link" data-scroll-target="#sec-transpose"><span class="header-section-number">2.11.2</span> Matrix transpose</a></li>
   <li><a href="#sec-trace" id="toc-sec-trace" class="nav-link" data-scroll-target="#sec-trace"><span class="header-section-number">2.11.3</span> Trace of a square matrix</a></li>
   </ul></li>
-  <li><a href="#partitioned-matrices-an-invaluable-visualization-tool" id="toc-partitioned-matrices-an-invaluable-visualization-tool" class="nav-link" data-scroll-target="#partitioned-matrices-an-invaluable-visualization-tool"><span class="header-section-number">3</span> Partitioned Matrices: an Invaluable Visualization Tool</a>
+  <li><a href="#partitioned-matrices-an-invaluable-visualization-tool" id="toc-partitioned-matrices-an-invaluable-visualization-tool" class="nav-link" data-scroll-target="#partitioned-matrices-an-invaluable-visualization-tool"><span class="header-section-number">2.12</span> Partitioned Matrices: an Invaluable Visualization Tool</a>
   <ul class="collapse">
-  <li><a href="#how-partitioning-works" id="toc-how-partitioning-works" class="nav-link" data-scroll-target="#how-partitioning-works"><span class="header-section-number">3.0.1</span> How partitioning works</a></li>
-  <li><a href="#linear-combinations-of-rows-and-columns-of-a-matrix" id="toc-linear-combinations-of-rows-and-columns-of-a-matrix" class="nav-link" data-scroll-target="#linear-combinations-of-rows-and-columns-of-a-matrix"><span class="header-section-number">3.1</span> Linear Combinations of Rows and Columns of a Matrix</a></li>
-  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">3.2</span> Your Turn</a></li>
+  <li><a href="#how-partitioning-works" id="toc-how-partitioning-works" class="nav-link" data-scroll-target="#how-partitioning-works"><span class="header-section-number">2.12.1</span> How partitioning works</a></li>
   </ul></li>
+  <li><a href="#linear-combinations-of-rows-and-columns-of-a-matrix" id="toc-linear-combinations-of-rows-and-columns-of-a-matrix" class="nav-link" data-scroll-target="#linear-combinations-of-rows-and-columns-of-a-matrix"><span class="header-section-number">3</span> Linear Combinations of Rows and Columns of a Matrix</a></li>
+  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">4</span> Your Turn</a></li>
   </ul>
 </nav>
     </div>
@@ -810,8 +810,8 @@ tr(AB) = tr(BA)
 </div>
 </section>
 </section>
-<section id="partitioned-matrices-an-invaluable-visualization-tool" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Partitioned Matrices: an Invaluable Visualization Tool</h1>
+<section id="partitioned-matrices-an-invaluable-visualization-tool" class="level2" data-number="2.12">
+<h2 data-number="2.12" class="anchored" data-anchor-id="partitioned-matrices-an-invaluable-visualization-tool"><span class="header-section-number">2.12</span> Partitioned Matrices: an Invaluable Visualization Tool</h2>
 <p>Here, “visualization” is not a reference to graphics but rather to highlighting certain submatrices.</p>
 <div id="tip-partitioned" class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -819,7 +819,7 @@ tr(AB) = tr(BA)
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tip&nbsp;3.1: A Crucial Tool
+Tip&nbsp;2.2: A Crucial Tool
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -827,8 +827,9 @@ Tip&nbsp;3.1: A Crucial Tool
 <p>The techniques introduced in this section will be used repeatedly throughout the book. Readers should spend extra time here, devising some of their own examples.</p>
 </div>
 </div>
-<section id="how-partitioning-works" class="level3" data-number="3.0.1">
-<h3 data-number="3.0.1" class="anchored" data-anchor-id="how-partitioning-works"><span class="header-section-number">3.0.1</span> How partitioning works</h3>
+<p>Specifics now follow:</p>
+<section id="how-partitioning-works" class="level3" data-number="2.12.1">
+<h3 data-number="2.12.1" class="anchored" data-anchor-id="how-partitioning-works"><span class="header-section-number">2.12.1</span> How partitioning works</h3>
 <p>Consider a matrix-matrix product <span class="math inline">\(MQ\)</span>. The use of partitioning works on “pretending”:</p>
 <blockquote class="blockquote">
 <p>Matrix Partioning</p>
@@ -880,7 +881,7 @@ A = \left (
 1 &amp; 2.6 &amp; -1.2 \\
 \end{array}
 \right )
-\tag{3.1}\]</span></span></p>
+\tag{2.3}\]</span></span></p>
 <p>and</p>
 <p><span id="eq-vInAv"><span class="math display">\[
 v = \left (
@@ -890,7 +891,7 @@ v = \left (
 1 \\
 \end{array}
 \right )
-\tag{3.2}\]</span></span></p>
+\tag{2.4}\]</span></span></p>
 <p>The reader should check that</p>
 <p><span id="eq-lincomb1"><span class="math display">\[
 10 \left (
@@ -913,7 +914,7 @@ v = \left (
 -1.2 \\
 \end{array}
 \right )
-\tag{3.3}\]</span></span></p>
+\tag{2.5}\]</span></span></p>
 <p>does indeed work out to</p>
 <p><span class="math display">\[
 \left (
@@ -926,9 +927,10 @@ v = \left (
 <p>i.e.&nbsp;to <span class="math inline">\(Av\)</span>. It works!</p>
 <p>Note that <em>we choose the partitioning</em>; there is no inherent partition structure. In some settings, there is a structure that fits our needs, and we use that.</p>
 </section>
-<section id="linear-combinations-of-rows-and-columns-of-a-matrix" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="linear-combinations-of-rows-and-columns-of-a-matrix"><span class="header-section-number">3.1</span> Linear Combinations of Rows and Columns of a Matrix</h2>
-<p>Note that the above expression <a href="#eq-lincomb1" class="quarto-xref">Equation&nbsp;<span>3.3</span></a>,</p>
+</section>
+<section id="linear-combinations-of-rows-and-columns-of-a-matrix" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Linear Combinations of Rows and Columns of a Matrix</h1>
+<p>Note that the above expression <a href="#eq-lincomb1" class="quarto-xref">Equation&nbsp;<span>2.5</span></a>,</p>
 <p><span class="math display">\[
 10 \left (
 \begin{array}{r}
@@ -960,7 +962,7 @@ v = \left (
 <div id="thm-lincombCols" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 3.2</strong></span> The product <span class="math inline">\(wA\)</span> of a row vector and a matrix is equal to a linear combination of the rows of the matrix, with the coefficients coming from the row vector.</p>
 </div>
-<p>To further illustrate all this, write the above matrix <a href="#eq-matrixA" class="quarto-xref">Equation&nbsp;<span>3.1</span></a> as</p>
+<p>To further illustrate all this, write the above matrix <a href="#eq-matrixA" class="quarto-xref">Equation&nbsp;<span>2.3</span></a> as</p>
 <p><span id="eq-matrixApart"><span class="math display">\[
 A =
 \left (
@@ -968,7 +970,7 @@ A =
 A_{11} &amp; A_{21} \\
 \end{array}
 \right )
-\tag{3.4}\]</span></span></p>
+\tag{3.1}\]</span></span></p>
 <p>where</p>
 <p><span class="math display">\[
 A_{11} =
@@ -989,7 +991,7 @@ A_{12} =
 \end{array}
 \right )
 \]</span></p>
-<p>Symbolically, in <a href="#eq-matrixApart" class="quarto-xref">Equation&nbsp;<span>3.4</span></a>, <span class="math inline">\(A\)</span> now looks like a 1x2 “matrix.” Similarly, rewriting <a href="#eq-vInAv" class="quarto-xref">Equation&nbsp;<span>3.2</span></a>}, we have</p>
+<p>Symbolically, in <a href="#eq-matrixApart" class="quarto-xref">Equation&nbsp;<span>3.1</span></a>, <span class="math inline">\(A\)</span> now looks like a 1x2 “matrix.” Similarly, rewriting <a href="#eq-vInAv" class="quarto-xref">Equation&nbsp;<span>2.4</span></a>}, we have</p>
 <p><span class="math display">\[
 v =
 \left (
@@ -1060,8 +1062,8 @@ AB = (AB^{(1)},AB^{(2)},..., AB^{(k)})
 <p>A similar result holds for the rows of the product.</p>
 </div>
 </section>
-<section id="your-turn" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">3.2</span> Your Turn</h2>
+<section id="your-turn" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Your Turn</h1>
 <p>❄️ <strong>Your Turn:</strong> Fill in the blank with a term from this chapter: The adjacency matrix of an undirected graph is necessarily ________.</p>
 <p>❄️ <strong>Your Turn:</strong> Consider the Karate Club dataset.</p>
 <ul>
@@ -1069,6 +1071,7 @@ AB = (AB^{(1)},AB^{(2)},..., AB^{(k)})
 <li><p>Which member is linked to the most number of members? How about the least number?</p></li>
 <li><p>Find an example of a <em>triad</em>, i.e.&nbsp;a set of 3 members who are all linked to each other?</p></li>
 </ul>
+<p>❄️ <strong>Your Turn:</strong> We say a square matrix is <em>upper-triangular</em> if its below-diagonal elements are all 0s. (There is a similar concept of <em>lower-triangular</em>.) Explain why, given two upper-triangular matrices <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> of the same size, the product <span class="math inline">\(AB\)</span> is also upper-triangular.</p>
 <p>❄️ <strong>Your Turn:</strong> Write an R function with call form</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">outLinks</span>(adj)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>where <strong>adj</strong> is the adjacency matrix of some network graph, possibly directed. The function will return an R list, whose <span class="math inline">\(i^{th}\)</span> element is a vector of all the nodes that have exactly <span class="math inline">\(i\)</span> outgoing links.</p>
@@ -1112,8 +1115,8 @@ BB' &amp; B \\
 B' &amp; I  \\
 \end{array}
 \right )
-\tag{3.5}\]</span></span></p>
-<p>Evaluate <span class="math inline">\(AA'\)</span> and the far-right side of <a href="#eq-yt1" class="quarto-xref">Equation&nbsp;<span>3.5</span></a> to verify that the partitioning did indeed give us the right answer.</p>
+\tag{4.1}\]</span></span></p>
+<p>Evaluate <span class="math inline">\(AA'\)</span> and the far-right side of <a href="#eq-yt1" class="quarto-xref">Equation&nbsp;<span>4.1</span></a> to verify that the partitioning did indeed give us the right answer.</p>
 <p>❄️ <strong>Your Turn:</strong> The long-run probabilities in <a href="#sec-introMCs" class="quarto-xref"><span>Section 2.6</span></a> turned out to be uniform, with value 0.20 for all five states. In fact, that is usually not the case. Make a small change to <span class="math inline">\(P_1\)</span> – remember to keep the row sums to 1 – and compute a high power to check whether the long-run distribution seems nonuniform.</p>
 <p>❄️ <strong>Your Turn:</strong> Not every Markov chain, even ones with finitely many states, have long-run distributions. Some chains have <em>periodic</em> states. It may be, for instance, that after leaving state <span class="math inline">\(i\)</span>, once can return only after an even number of hops. Modify our example chain here so that states 1 and 5 (and all the others) have that property. Then compute <span class="math inline">\(P^n\)</span> for various large values of <span class="math inline">\(n\)</span> and observe oscillatory behavior, rather than long-run convergence.</p>
 <p>❄️ <strong>Your Turn:</strong> Consider the following Markov model of a discrete-time, single-server queue:</p>
@@ -1136,7 +1139,6 @@ B' &amp; I  \\
 <p>❄️ <strong>Your Turn:</strong> Write out the details of the “similar result” in the statement of <a href="#thm-abPart" class="quarto-xref">Theorem&nbsp;<span>3.3</span></a>.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

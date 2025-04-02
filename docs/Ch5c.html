@@ -416,7 +416,7 @@ VIF_j = \frac{1}{1-R^2_j}
 \widehat{\beta} = (A'A + \lambda I)^{-1} A'S
 \tag{10.1}\]</span></span></p>
 <p>where <span class="math inline">\(\lambda\)</span> is a positive number chosen by the analyst.</p>
-<p>Here <span class="math inline">\(A\)</span> has dimensions <span class="math inline">\(n \textrm{ x } p\)</span>, and <span class="math inline">\(I\)</span> is the <span class="math inline">\(p \textrm{ x } p\)</span> identity matrix.</p>
+<p>Here <span class="math inline">\(A\)</span> has dimensions <span class="math inline">\(n \times p\)</span>, and <span class="math inline">\(I\)</span> is the <span class="math inline">\(p \times p\)</span> identity matrix.</p>
 </section>
 <section id="sec-matform" class="level3" data-number="10.3.2">
 <h3 data-number="10.3.2" class="anchored" data-anchor-id="sec-matform"><span class="header-section-number">10.3.2</span> Matrix formulation</h3>
@@ -849,8 +849,8 @@ Call:  cv.glmnet(x = nycwide, y = nyctaxi[, 1], alpha = 0)
 Measure: Mean-Squared Error 
 
     Lambda Index Measure     SE Nonzero
-min 0.3002   100   2.962 0.1804     356
-1se 1.0063    87   3.126 0.1644     356</code></pre>
+min 0.3002   100   2.899 0.2038     356
+1se 1.0063    87   3.081 0.2181     356</code></pre>
 </div>
 </div>
 <p>The best <span class="math inline">\(\lambda\)</span> value was found to be 0.3002.</p>
@@ -905,6 +905,12 @@ No Statistical Inference on Shrinkage Estimators
 <section id="your-turn" class="level2" data-number="10.14">
 <h2 data-number="10.14" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">10.14</span> Your Turn</h2>
 <p>❄️ <strong>Your Turn:</strong> Show that <span class="math inline">\(A_{new}\)</span> in <a href="#sec-matform" class="quarto-xref"><span>Section 10.3.2</span></a> is of full rank, <span class="math inline">\(p\)</span>.</p>
+<p>❄️ <strong>Your Turn:</strong> In <a href="#sec-useall" class="quarto-xref"><span>Section 10.10</span></a>, it was pointed out that in some settings we may prefer to retain all of our predictor variables, rather than do dimension reduction, thus preferring ridge to LASSO. But we might pay a price for that preference, in that the LASSO may actually give us better predictive power. Write an R function to investigate this, with call form</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">compareRidgeLASSO</span>(data,yName)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>where <strong>data</strong> and <strong>yName</strong> are in the format of the predictive <span class="math inline">\(qeML\)</span> functions, and the minimum Mean Squared Prediction Error is returned for both algorithms. Try your function on some of our datasets, or others.</p>
+<p>❄️ <strong>Your Turn:</strong> The LASSO will tend to produce solutions with lesser sparsity if the dataset is large. Write an R function to illustrate this, with call form</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dependN</span>(data,yName,<span class="at">n=</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="fu">nrow</span>(data),<span class="dv">100</span>,<span class="at">nReps=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>where: where <strong>data</strong> and <strong>yName</strong> are in the format of the predictive <span class="math inline">\(qeML\)</span> functions; the LASSO is applied to <strong>n</strong> randomly chosen rows of <strong>data</strong>; and <strong>nReps</strong> is the number of replicates to run at each value of <strong>n</strong>. The function will compute the number of nonzero elements in the <span class="math inline">\(\widehat{\beta}\)</span> chosen by cross-validation in <strong>cv.glmnet</strong>. Try your code on a few datasets.</p>
 <p>❄️ <strong>Your Turn:</strong> Consider a generalization of ridge regression, in which we find</p>
 <p><span class="math display">\[
 \textrm{argmin}_b ~
@@ -916,12 +922,6 @@ b =
 {[{A}' {A} + {D}^2]}^{-1}
 {A}' {S}
 \]</span></p>
-<p>❄️ <strong>Your Turn:</strong> In <a href="#sec-useall" class="quarto-xref"><span>Section 10.10</span></a>, it was pointed out that in some settings we may prefer to retain all of our predictor variables, rather than do dimension reduction, thus preferring ridge to LASSO. But we might pay a price for that preference, in that the LASSO may actually give us better predictive power. Write an R function to investigate this, with call form</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">compareRidgeLASSO</span>(data,yName)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>where <strong>data</strong> and <strong>yName</strong> are in the format of the predictive <span class="math inline">\(qeML\)</span> functions, and the minimum Mean Squared Prediction Error is returned for both algorithms. Try your function on some of our datasets, or others.</p>
-<p>❄️ <strong>Your Turn:</strong> The LASSO will tend to produce solutions with lesser sparsity if the dataset is large. Write an R function to illustrate this, with call form</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dependN</span>(data,yName,<span class="at">n=</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="fu">nrow</span>(data),<span class="dv">100</span>,<span class="at">nReps=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>where: where <strong>data</strong> and <strong>yName</strong> are in the format of the predictive <span class="math inline">\(qeML\)</span> functions; the LASSO is applied to <strong>n</strong> randomly chosen rows of <strong>data</strong>; and <strong>nReps</strong> is the number of replicates to run at each value of <strong>n</strong>. The function will compute the number of nonzero elements in the <span class="math inline">\(\widehat{\beta}\)</span> chosen by cross-validation in <strong>cv.glmnet</strong>. Try your code on a few datasets.</p>
 
 
 </section>
