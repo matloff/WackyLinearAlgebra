@@ -133,7 +133,9 @@ but let's go directly to the answer:
 
 5. Set 
 
-   $$ u_i = \frac{1}{\sigma_i} Av_i, ~ i=1,...,r $$
+   $$ 
+   u_i = \frac{1}{\sigma_i} Av_i, ~ i=1,...,r 
+   $${#eq-uifromvi}
 
    The $u_i$ will be orthogonal: For $i \neq j$,
 
@@ -144,14 +146,30 @@ but let's go directly to the answer:
 
    where we have used the facts that $v_j$ is an eigenvector of $A'A$
    and the $v_k$ are orthogonal.
-
    
    Using Gram-Schmidt, we can compute (if $r < n$ necessitates it)
    vectors $u_{r+1},...u_n$ so that $u_1,...,u_n$ is an orthonormal
-   basis for $\mathcal{R}^m$.  Set $U$, decribed in partitioning terms:
+   basis for $\mathcal{R}^m$.  Set $U$, described in partitioning terms:
    to 
    
    $$ U = (u_1|...|u_n) $$
+
+## Interpretation of $U$ and $V$
+
+Again, say $A$ is of size $m \times n$.  Recall that $V$ consists
+of the eigenvectors of the $n \times n$ matrix $A'A$. $U$ is constructed
+from vectors as in @eq-uifromvi, but actually those are eigenvectors
+of $AA'$:
+
+$$
+(AA') ( \frac{1}{\sigma_i} Av_i) = 
+A[A'A ~ \frac{1}{\sigma_i} v_i] =
+A[\frac{1}{\sigma_i} v_i] =
+u_i
+$$
+
+
+from eigenvectors $v$
 
 ## SVD as a basis for matrix generalized inverse
 
@@ -374,7 +392,10 @@ $\sqrt{\sigma_i}$.
 
 Again, since we do not know all of $A$, we do not know any of the
 matrices on the right either. We will return to this problem shortly,
-but for now pretend the matrices are known.
+but for now pretend $A$ and the matrices are known. 
+
+For concreteness, say the context is users rating movies.  Say $A$ is $u
+\times m$, for $u$ users and $m$ movies. Recalling that $V$ is made up 
 
 The point is that we have factored $A$ into the product of a matrix $W$
 containing information about the users' ratings and a matrix $H$
