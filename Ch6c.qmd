@@ -109,7 +109,7 @@ There are various derivations, e.g. along the lines of @sec-firstPC,
 but let's go directly to the answer:  
 
 1. Say $A$ is $p \times n$, so that $A'A$ will be of size $n
-   \times n$. Let $r$ denote the rank of $A$, which will be the same
+   \times n$. Let $r$ denote the rank of $A'A$, which will be the same
    as the rank of $A$ from @thm-rankapa.
 
 2. Compute the eigenvalues $\sigma_1,...,\sigma_n$
@@ -161,15 +161,15 @@ of the eigenvectors of the $n \times n$ matrix $A'A$. $U$ is constructed
 from vectors as in @eq-uifromvi, but actually those are eigenvectors
 of $AA'$:
 
-$$
-(AA') ( \frac{1}{\sigma_i} Av_i) = 
-A[A'A ~ \frac{1}{\sigma_i} v_i] =
-A[\frac{1}{\sigma_i} v_i] =
-u_i
-$$
+\begin{align}
+(AA') u_{i} &= (AA') ( \frac{1}{\sigma_i} Av_i) \\
+&= \frac{1}{\sigma_i} A[(A'A) ~ v_i] \\
+&= \frac{1}{\sigma_i} A [\sigma_i v_i] \\
+&= \frac{1}{\sigma_i} v_i \\
+&= \sigma_i u_i
+\end{align}
 
 
-from eigenvectors $v$
 
 ## SVD as a basis for matrix generalized inverse
 
