@@ -169,7 +169,19 @@ of $AA'$:
 &= \sigma_i u_i
 \end{align}
 
+So, $u_i$ is an eigenvector of $AA'$, with eigenvalue $\sigma_i$. 
 
+In other words, taking for concreteness the application in which
+moviegoers rate movies:
+
+* The columns of $U$ are basically eigenvectors of the matrix $AA'$,
+  which in turn has one row and one column for each moviegoer.
+
+* The columns of $V$ are basically eigenvectors of the matrix $A'A$,
+  which in turn has one row and one column for each movie.
+
+* Thus the SVD $A = U \Sigma V'$ expresses the ratings matrix $A$ in
+  terms of a moviegoers data factor $U$ and a movies data factor $V$.
 
 ## SVD as a basis for matrix generalized inverse
 
