@@ -390,7 +390,7 @@ A = \sum_{i=1}^n \sigma_i u_i v_i'
 <p>There are various derivations, e.g.&nbsp;along the lines of <a href="Ch6a.html#sec-firstPC" class="quarto-xref"><span>Section 11.2.1</span></a>, but let’s go directly to the answer:</p>
 <ol type="1">
 <li><p>Say <span class="math inline">\(A\)</span> is <span class="math inline">\(p \times n\)</span>, so that <span class="math inline">\(A'A\)</span> will be of size <span class="math inline">\(n
-\times n\)</span>. Let <span class="math inline">\(r\)</span> denote the rank of <span class="math inline">\(A\)</span>, which will be the same as the rank of <span class="math inline">\(A\)</span> from <a href="Ch4.html#thm-rankapa" class="quarto-xref">Theorem&nbsp;<span>6.5</span></a>.</p></li>
+\times n\)</span>. Let <span class="math inline">\(r\)</span> denote the rank of <span class="math inline">\(A'A\)</span>, which will be the same as the rank of <span class="math inline">\(A\)</span> from <a href="Ch4.html#thm-rankapa" class="quarto-xref">Theorem&nbsp;<span>6.5</span></a>.</p></li>
 <li><p>Compute the eigenvalues <span class="math inline">\(\sigma_1,...,\sigma_n\)</span> and eigenvectors <span class="math inline">\(v_1,...,v_n\)</span> of <span class="math inline">\(A'A\)</span>. Normalize the <span class="math inline">\(v_i\)</span> by dividing by their lengths. (The same eigenvalues will still hold.) Order the <span class="math inline">\(\sigma_i\)</span> from largest to smallest, and use the same ordering for the <span class="math inline">\(v_i\)</span>.</p></li>
 <li><p>Since <span class="math inline">\(A'A\)</span> is symmetric and positive-semidefinite, its eigenvalues will be nonnegative and its eigenvectors <span class="math inline">\(v_1,...,v_r\)</span> will be orthogonal as long as <span class="math inline">\(\sigma_1,...,\sigma_r\)</span> are distinct, as is the case for numeric data (<a href="Ch6b.html#sec-prob0" class="quarto-xref"><span>Section 12.5</span></a>). Since these eigenvectors diagonalize <span class="math inline">\(A'A\)</span> with the <span class="math inline">\(\sigma_i\)</span> on the diagonal (<a href="Ch6b.html" class="quarto-xref"><span>Chapter 12</span></a>), we will have <span class="math inline">\(\sigma_{r+1} = ...  = \sigma_n = 0\)</span>.</p></li>
 <li><p>Set <span class="math inline">\(\Sigma\)</span> to <span class="math inline">\(diag(\sigma_1,...,\sigma_n)\)</span>, the nonincreasing list of those eigenvalues. Set the first <span class="math inline">\(r\)</span> columns of <span class="math inline">\(V\)</span> to the corresponding eigenvectors. Use the Gram-Schmidt Method (see <a href="Ch5b.html#sec-gramschmidt" class="quarto-xref"><span>Section 8.10</span></a>) to add <span class="math inline">\(n-r\)</span> more vectors. <span class="math inline">\(V\)</span> will then have orthonormal columns, and thus be an orthogonal matrix.</p></li>
@@ -411,13 +411,20 @@ u_i' u_j = \frac{1}{\sigma_i \sigma_j} v_i' A'A v_j =
 <section id="interpretation-of-u-and-v" class="level2" data-number="13.4">
 <h2 data-number="13.4" class="anchored" data-anchor-id="interpretation-of-u-and-v"><span class="header-section-number">13.4</span> Interpretation of <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span></h2>
 <p>Again, say <span class="math inline">\(A\)</span> is of size <span class="math inline">\(m \times n\)</span>. Recall that <span class="math inline">\(V\)</span> consists of the eigenvectors of the <span class="math inline">\(n \times n\)</span> matrix <span class="math inline">\(A'A\)</span>. <span class="math inline">\(U\)</span> is constructed from vectors as in <a href="#eq-uifromvi" class="quarto-xref">Equation&nbsp;<span>13.3</span></a>, but actually those are eigenvectors of <span class="math inline">\(AA'\)</span>:</p>
-<p><span class="math display">\[
-(AA') ( \frac{1}{\sigma_i} Av_i) =
-A[A'A ~ \frac{1}{\sigma_i} v_i] =
-A[\frac{1}{\sigma_i} v_i] =
-u_i
-\]</span></p>
-<p>from eigenvectors <span class="math inline">\(v\)</span></p>
+<p><span class="math display">\[\begin{align}
+(AA') u_{i} &amp;= (AA') ( \frac{1}{\sigma_i} Av_i) \\
+&amp;= \frac{1}{\sigma_i} A[(A'A) ~ v_i] \\
+&amp;= \frac{1}{\sigma_i} A [\sigma_i v_i] \\
+&amp;= \frac{1}{\sigma_i} v_i \\
+&amp;= \sigma_i u_i
+\end{align}\]</span></p>
+<p>So, <span class="math inline">\(u_i\)</span> is an eigenvector of <span class="math inline">\(AA'\)</span>, with eigenvalue <span class="math inline">\(\sigma_i\)</span>.</p>
+<p>In other words, taking for concreteness the application in which moviegoers rate movies:</p>
+<ul>
+<li><p>The columns of <span class="math inline">\(U\)</span> are basically eigenvectors of the matrix <span class="math inline">\(AA'\)</span>, which in turn has one row and one column for each moviegoer.</p></li>
+<li><p>The columns of <span class="math inline">\(V\)</span> are basically eigenvectors of the matrix <span class="math inline">\(A'A\)</span>, which in turn has one row and one column for each movie.</p></li>
+<li><p>Thus the SVD <span class="math inline">\(A = U \Sigma V'\)</span> expresses the ratings matrix <span class="math inline">\(A\)</span> in terms of a moviegoers data factor <span class="math inline">\(U\)</span> and a movies data factor <span class="math inline">\(V\)</span>.</p></li>
+</ul>
 </section>
 <section id="svd-as-a-basis-for-matrix-generalized-inverse" class="level2" data-number="13.5">
 <h2 data-number="13.5" class="anchored" data-anchor-id="svd-as-a-basis-for-matrix-generalized-inverse"><span class="header-section-number">13.5</span> SVD as a basis for matrix generalized inverse</h2>
