@@ -165,14 +165,13 @@ of $AA'$:
 (AA') u_{i} &= (AA') ( \frac{1}{\sigma_i} Av_i) \\
 &= \frac{1}{\sigma_i} A[(A'A) ~ v_i] \\
 &= \frac{1}{\sigma_i} A [\sigma_i v_i] \\
-&= \frac{1}{\sigma_i} v_i \\
 &= \sigma_i u_i
 \end{align}
 
 So, $u_i$ is an eigenvector of $AA'$, with eigenvalue $\sigma_i$. 
 
 In other words, taking for concreteness the application in which
-moviegoers rate movies:
+moviegoers rate movies (we take $A$ to be fully known for now):
 
 * The columns of $U$ are basically eigenvectors of the matrix $AA'$,
   which in turn has one row and one column for each moviegoer.
@@ -182,6 +181,14 @@ moviegoers rate movies:
 
 * Thus the SVD $A = U \Sigma V'$ expresses the ratings matrix $A$ in
   terms of a moviegoers data factor $U$ and a movies data factor $V$.
+  To write it as a genuine product of two factors, write
+
+  $$
+  A = U \Sigma V' = (U \Sigma^{0.5}) (\Sigma^{0.5} V') = WH
+  $${#eq-wh}
+
+  where $\Sigma^{0.5}$ is the diagonal matrix with elements
+  $\sqrt{\sigma_i}$.
 
 ## SVD as a basis for matrix generalized inverse
 
@@ -292,7 +299,7 @@ $$
 
 ## Dimension Reduction: SVD as the Best Low-Rank Approximation{#sec-svddimred}
 
-This is a very common application of SVD
+This is a very common application of SVD.
 
 ### "Thin" SVD
 
@@ -325,7 +332,7 @@ $${#eq-u1d1v1}
 
 So, we've reduced the size of memory needed to store the SVD, by using
 $U_1$, $D_1$ and $V_1$ instead of the larger $U$, $D$ and $V$. This is
-called the *thin* SVD
+called the *thin* SVD.
 
 But there's more:
 
@@ -342,11 +349,17 @@ treating those near-0 eigenvalues as 0s, and removing the corresponding
 columns of $U_1$ and $V_1$. Why do this?
 
 * Achieve a further reduction in storage requirements. for instance in
-  settings in which we have many, many images or even better,
-  many, many videos.
+  settings in which we have many, many images or even better, many, many
+  videos. [It can be shown that the above recipe produces the "best"
+  low-rank approximation, in terms of *Frobenius* norm. The lattern
+  treats an $m \times n$ matrix as a vector of length $mn$ and applies
+  the ordinary $l_2$ norm.]{.column-margin}
 
 * Reduce noise, again for example with images. Small blotches are
   smoothed out.
+
+* In the spirit of @sec-shrinkage, the low-rank approximation may be
+  viewed as a "shrunken" SVD, a remedy to possible overfitting.
 
 ### Example: Image Compression
 
@@ -369,6 +382,7 @@ img <- load.image('prj.png')
 # image, due to alpha (transparency) channel
 imgNoAlpha <- rm.alpha(img)
 imgGrayNoAlpha <- grayscale(imgNoAlpha)
+dim(imgGrayNoAlpha)
 imgSVD <- svd(imgGrayNoAlpha)
 u <- imgSVD$u
 v <- imgSVD$v
@@ -388,47 +402,48 @@ a huge reduction in storage space.
 In the last section, our goal was to "thin out" a matrix In this
 section, we hope to fill in a sparse matrix.
 
-Let $R$ denote the ratings matrix, so that the element in row $i$,
+Let $A$ denote the ratings matrix, so that the element in row $i$,
 column $j$ is the rating user $i$ gives to item $j$. Note that most
 elements of $A$ are unknown, and we hope to predict them with some
 reasonable amount of accuracy.
-
-Write the SVD:
-
-$$
-A = U \Sigma V' = (U \Sigma^{0.5}) (\Sigma^{0.5} V') = WH
-$$
-
-where $\Sigma^{0.5}$ is the diagonal matrix with elements
-$\sqrt{\sigma_i}$.
 
 Again, since we do not know all of $A$, we do not know any of the
 matrices on the right either. We will return to this problem shortly,
 but for now pretend $A$ and the matrices are known. 
 
-For concreteness, say the context is users rating movies.  Say $A$ is $u
-\times m$, for $u$ users and $m$ movies. Recalling that $V$ is made up 
+Write the SVD, as in @eq-wh:
 
-The point is that we have factored $A$ into the product of a matrix $W$
+$$
+A = U \Sigma V' = (U \Sigma^{0.5}) (\Sigma^{0.5} V') = WH
+$$
+
+For concreteness, say the context is users rating movies.  Say $A$ is $u
+\times m$, for $u$ users and $m$ movies. Again, the
+the point is that we have factored $A$ into the product of a matrix $W$
 containing information about the users' ratings and a matrix $H$
-that does the same for items. Note that the row $i$, column $j$
-element of $A$ is equal to $w_i h_j$, where $w_i$ is row $i$ of $W$ and
-$v_j$ is column $j$ of $H$.
+that does the same for items. 
+
+Note that the row $i$, column $j$ element of $A$ is equal to $w_i h_j$,
+where $w_i$ is row $i$ of $W$ and $v_j$ is column $j$ of $H$.
 
 This suggests that the following iterative process may work:
 
-1. Replace the unknown elements of $A$ by some temporaru values. This
+1. Replace the unknown elements of $A$ by some temporary values. This
    could be all 0s, say, or maybe replacing all unknown values in column
    $j$ by the mean of the intact values in that column.
 
 2. Find $W$ and $H$ for that temporary version of $A$, our guess.
 
-3. Use the formula $w_i h_j$ to find the unknown elements, updating
-   accordingly to a new guess for $A$.
+3. Use the formula $w_i h_j$ to calculate (new guesses for) the unknown
+   elements, and even the known elements, updating accordingly to a 
+   new guess for $A$.
 
 4. Go to Step 2.
 
 We iterate until convergence.
+
+Optionally in Step 2, we can first convert the SVD to a low-rank 
+approximation before computing $W$ and $H$.
 
 And though SVD provided the motivation for the model $A = WH$,
 we can use the model more generally, i.e. without assuming
