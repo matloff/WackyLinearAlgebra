@@ -184,7 +184,7 @@ moviegoers rate movies (we take $A$ to be fully known for now):
   To write it as a genuine product of two factors, write
 
   $$
-  A = U \Sigma V' = (U \Sigma^{0.5}) (\Sigma^{0.5} V') = WH
+  A = U \Sigma V' = (U \Sigma^{0.5}) (\Sigma^{0.5} V') = WH'
   $${#eq-wh}
 
   where $\Sigma^{0.5}$ is the diagonal matrix with elements
@@ -414,17 +414,17 @@ but for now pretend $A$ and the matrices are known.
 Write the SVD, as in @eq-wh:
 
 $$
-A = U \Sigma V' = (U \Sigma^{0.5}) (\Sigma^{0.5} V') = WH
+A = U \Sigma V' = (U \Sigma^{0.5}) (\Sigma^{0.5} V') = WH'
 $$
 
 For concreteness, say the context is users rating movies.  Say $A$ is $u
 \times m$, for $u$ users and $m$ movies. Again, the
 the point is that we have factored $A$ into the product of a matrix $W$
-containing information about the users' ratings and a matrix $H$
+containing information about the users' ratings and a matrix $H'$
 that does the same for items. 
 
 Note that the row $i$, column $j$ element of $A$ is equal to $w_i h_j$,
-where $w_i$ is row $i$ of $W$ and $v_j$ is column $j$ of $H$.
+where $w_i$ is row $i$ of $W$ and $v_j$ is column $j$ of $H'$.
 
 This suggests that the following iterative process may work:
 
@@ -432,22 +432,40 @@ This suggests that the following iterative process may work:
    could be all 0s, say, or maybe replacing all unknown values in column
    $j$ by the mean of the intact values in that column.
 
-2. Find $W$ and $H$ for that temporary version of $A$, our guess.
+2. Find $W$ and $H'$ for that temporary version of $A$, our guess.
 
 3. Use the formula $w_i h_j$ to calculate (new guesses for) the unknown
    elements, and even the known elements, updating accordingly to a 
    new guess for $A$.
 
-4. Go to Step 2.
-
-We iterate until convergence.
+4. If convergence not yet reached, go to Step 2.
 
 Optionally in Step 2, we can first convert the SVD to a low-rank 
 approximation before computing $W$ and $H$.
 
-And though SVD provided the motivation for the model $A = WH$,
+And though SVD provided the motivation for the model $A = WH'$,
 we can use the model more generally, i.e. without assuming
-$W = U \Sigma^{0.5}$ and $H = \Sigma^{0.5} V'$.
+$W = U \Sigma^{0.5}$ and $H' = \Sigma^{0.5} V'$.
+
+For example, one approach is to minimize
+
+$$
+||A - WH'||^2 + \lambda ||W||^2 + \mu ||H||^2
+$${#eq-altls}
+
+again in the spirit of @sec-shrinkage, with shrinkage parameters
+[Note that the "Y" variable here, i.e. the quantity being predicted
+in the least-squares analysis, is $A$, a matrix rather than the usual
+vector. The conditional mean is then given by @eq-condmean if one
+assumes a multivariate normal settings. That assumption is not an issue,
+though, as recommender systems methods tend to be *ad hoc* rather that
+formal.]{.column-margin}
+$\lambda$ and $\mu$. The computation is made much easier via an
+*alternating least squares* scheme. One first holds $H'$ fixed,
+minimizing @eq=altls with respect to $W$. In effect, this is ridge
+regresssion, with $W$ playing the role of the unknown coefficients
+vector. Then in the seccond iterations, the roles are reversed, with
+$H'$ now taken as the unknown coefficients vector, and so on.
 
 ## Using SVD to Gain Insight into Ridge Regression
 
