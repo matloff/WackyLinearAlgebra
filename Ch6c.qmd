@@ -448,26 +448,49 @@ we can use the model more generally, i.e. without assuming
 $W = U \Sigma^{0.5}$ and $H' = \Sigma^{0.5} V'$.
 
 For example, one approach is to minimize
-
-$$
-||A - WH'||^2 + \lambda ||W||^2 + \mu ||H||^2
-$${#eq-altls}
-
-again in the spirit of @sec-shrinkage, with shrinkage parameters
 [Note that the "Y" variable here, i.e. the quantity being predicted
 in the least-squares analysis, is $A$, a matrix rather than the usual
 vector. The conditional mean is then given by @eq-condmean if one
 assumes a multivariate normal settings. That assumption is not an issue,
 though, as recommender systems methods tend to be *ad hoc* rather that
 formal.]{.column-margin}
+
+$$
+||A - WH'||^2 + \lambda ||W||^2 + \mu ||H||^2
+$${#eq-altls}
+
+again in the spirit of @sec-shrinkage, with shrinkage parameters
 $\lambda$ and $\mu$. The computation is made much easier via an
 *alternating least squares* scheme. One first holds $H'$ fixed,
-minimizing @eq=altls with respect to $W$. In effect, this is ridge
+minimizing @eq-altls with respect to $W$. In effect, this is ridge
 regresssion, with $W$ playing the role of the unknown coefficients
 vector. Then in the seccond iterations, the roles are reversed, with
 $H'$ now taken as the unknown coefficients vector, and so on.
 
 ## Using SVD to Gain Insight into Ridge Regression
+
+[See Ryan Tibshirani, *High-Dimensional Regression: Ridge* and
+T. Hastie, *Ridge Regularization: an Essential Concept in Data Science*.
+]{.column-margin}
+Consider once again @eq-overdetermined, or better, @eq-ridge. It turns
+out that SVD gives us more detailed information of how ridge regression
+shrinks estimated regression coefficients.
+
+Writing as usual $A = U \Sigma V'$, with $A$ of size $n \times p$ and 
+with $\Sigma = diag(\sigma_1,..., \sigma_p$, some algebraic manipulation 
+yields the following equation for the estimated coefficients vector:
+
+$$
+b_{\lambda} = \Sigma_{\sigma_j > 0}
+v_j \frac{\sigma_j^2}{\sigma_j^2 + \lambda^2}
+$$
+
+
+fitted "Y" values:
+
+$$
+
+$$
 
 ## SVD As a Basis for the Four Fundamental Subspaces
 
