@@ -145,7 +145,7 @@ Here are a few properties to start with:
 
   $$
   det(M - \lambda I) = 0
-  $$
+  $${#eq-chareqn}
 
 * The left-hand side of this equation is a polynomial in $\lambda$. So
   for an $n \times  n$ matrix $M$, there are $n$ roots of the
@@ -283,6 +283,32 @@ diagonal matrix is the number of nonzero elements.
 $\square$
 
 :::
+
+::: {#thm-aatsameeigs}
+
+Any square matrix $A$ and its transpose have the same eigenvalues.
+
+:::
+
+::: {.proof}
+
+
+If $\lambda$ is an eigenvalue of $A$, then it satisfies @eq-chareqn. But
+recall that the determinant of a matrix is equal to the determinant of
+its transpose. (For example, we can expand either across the top row or
+the leftmost row.) Then $\lambda$ also satisfies
+
+$$
+0 = \det[(A - \lambda I)'] = \det[(A' - \lambda I)']
+$$
+
+Thus $\lambda$ is also an eigenvalue of $A'$. This argument works in
+reverse, or just interchange the roles of $A$ and $A'$.
+
+$\square$
+
+:::
+
 
 ## Example: Census Dataset
 

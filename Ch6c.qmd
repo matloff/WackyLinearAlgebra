@@ -477,7 +477,7 @@ out that SVD gives us more detailed information of how ridge regression
 shrinks estimated regression coefficients.
 
 Writing as usual $A = U \Sigma V'$, with $A$ of size $n \times p$ and 
-with $\Sigma = diag(\sigma_1,..., \sigma_p$, some algebraic manipulation 
+with $\Sigma = diag(\sigma_1,..., \sigma_p)$, some algebraic manipulation 
 yields the following equation for the estimated coefficients vector:
 
 $$
@@ -600,6 +600,8 @@ findNuPseudoInv(p)
 to implement this approach. Here **p** is a Markov transition matrix.
 Try your code on a couple of examples.
 
-❄️  **Your Turn:** Show that in the SVD factorization, The columns
-of $U$ are the eigenvectors of $AA'$. Hint: First show that any column
-of $U$ is an eigenvector of $AA'$.
+❄️  **Your Turn:** Fill in the missing algebraic steps in
+@eq-ridgefitted. Hints: Use the fact that $U$ and $V$ are orthogonal
+matrices, and the fact that $(CD)^{-1} = D^{-1} C^{-1}$ for invertible
+matrices $C$ and $D$.
+
