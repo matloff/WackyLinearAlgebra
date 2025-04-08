@@ -154,7 +154,7 @@ but let's go directly to the answer:
    
    $$ U = (u_1|...|u_n) $$
 
-## Interpretation of $U$ and $V$
+## Interpretation of $U$ and $V${#sec-interpuv}
 
 Again, say $A$ is of size $m \times n$.  Recall that $V$ consists
 of the eigenvectors of the $n \times n$ matrix $A'A$. $U$ is constructed
@@ -482,15 +482,64 @@ yields the following equation for the estimated coefficients vector:
 
 $$
 b_{\lambda} = \Sigma_{\sigma_j > 0}
-v_j \frac{\sigma_j^2}{\sigma_j^2 + \lambda^2}
+v_j \frac{\sigma_j^2}{\sigma_j^2 + \lambda^2} u_j'S
+$${#eq-ridgeb}
+
+where $u_j$ and $v_j$ are column $j$ of $U$ and $S$.
+
+And the vector of fitted "Y" values is
+
+$$
+Ab = \Sigma_{\sigma_j > 0}
+ \frac{\sigma_j^2}{\sigma_j^2 + \lambda^2} u_j u_j' S
+$${#eq-ridgefitted}
+
+These two equations form great examples of the power of SVD:
+
+* @eq-ridgeb gives an explicit formula for the vector of estimated
+  coefficients $b$ as a function of $\lambda$. Without it, we would need
+  to do the matrix inversion in @eq-ridge once for each value of
+  $\lambda$, potentially a very slow process.
+
+* Ridge does not shrink the coefficients uniformly. @eq-ridgefitted tells us
+  how it works. The quantity
+  
+  $$
+\frac{\sigma_j^2}{\sigma_j^2 + \lambda^2} \leq 1
 $$
 
-
-fitted "Y" values:
-
-$$
-
-$$
+  gives us a proportional shrinkage factor. Of course, non-ridge
+  corresponds to $\lambda = 0$, so the shrinkage factor is in comparison
+  to non-ridge. Smaller values of $\sigma_j$ give more shrinkage.
+  
+  But @eq-ridgefitted not only gives us insight as to the *amount* of
+  shrinkage but also its *direction*. Essentially, the $u_i$ are the
+  Principal Components of our data, as follows.
+  
+  A Your Turn problem in @sec-covar has the reader derive the relation
+  
+  $$
+  Cov(X) = E(X X') - (EX) (EX)'
+  $$
+  
+  If we center and scale our variables, this becomes
+  
+  $$
+  Cov(X) = E(X X') 
+  $$
+  
+  The sample-data based estimate is 
+  
+  $$
+  \frac{1}{n} AA'
+  $$
+  
+  But we found earlier that the eigenvectors of $AA'$ are the $u_j$!
+  
+  So, we have:
+  
+  > Ridge shrinks the vector of fitted "Y" values more in the directions of
+  > the Principal Components of our data.
 
 ## SVD As a Basis for the Four Fundamental Subspaces
 

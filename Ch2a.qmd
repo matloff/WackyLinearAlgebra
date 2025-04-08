@@ -353,7 +353,7 @@ $${#eq-condcov}
 
 :::
 
-Note the absence of $t$ in @eq-condcov. Note too that the uncoditional
+Note the absence of $t$ in @eq-condcov. Note too that the unconditional
 covariance matrix, $\Sigma_{11}$ becomes "smaller" when we know
 something about $X_2$.
 
@@ -570,7 +570,7 @@ e.g.\ $\bar{X}$ for a population mean $\mu$.
 * A, say 95%, confidence interval for $\mu$ is then
 
 $$
-\widehat{\theta} \pm 1.96 \widehat{\theta})
+\widehat{\theta} \pm 1.96 \widehat{\theta}
 $$
 
   The 95% figure means that of all possible samples of the given size
