@@ -289,6 +289,11 @@ $${#eq-matrixss}
 Now how we will minimize that matrix expression with respect to the
 vector $b$? That is the subject of the next section.
 
+> Note: Our use of the letters 'A' and 'S' here is nonstandard; 'X' and
+> 'Y' are the typical choices. However, a major problem is that 'X' and
+> 'Y' are then used for other separate quantities, causing confusion,
+> hence our use of 'A' and 'S'. We will sometimes use 'X' and 'Y' with
+> quotation marks, e.g. '"X"' and '"Y"' in informal comments.
 
 ### Matrix derivatives{#sec-matrixderivs}
 
