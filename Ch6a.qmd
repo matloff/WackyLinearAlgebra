@@ -404,6 +404,20 @@ $$
 x_i \leftarrow \frac{x_i}{||x_i||}
 $$
 
+Now, after obtaining an eigenvector in this manner, how do we get the
+associated eigenvalue? We can do this by calculating the *Rayleigh
+Quotient*: Denote the eigenvalue associated with $x$ by $\lambda$. Then
+
+$$
+\lambda = \frac{(Ax)' x}{x'x} 
+$$
+
+To see this, simply substitute $Ax$ in the numerator by $\lambda x$.
+
+It can be shown that the above iterative process yields the maximal eigenvalue
+of $A$.
+
+
 ## Application: Computation of Long-Run Distribution in Markov Chains
 
 We showed in @sec-markovsolve how matrix inverse can be used to compute
