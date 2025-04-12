@@ -235,6 +235,12 @@ $$
 a' Cov(X) a \geq 0
 $$
 
+* More generally, for any compatible constant vectors $a$ and $b$,
+
+$$
+Cov(a'X,b'X) = a' Cov(X) b
+$$
+
 * For any constant (i.e. nonrandom) $m \times k$ matrix $A$,
 
 $$
