@@ -7,7 +7,7 @@ library(qeML)
 
 {{< pagebreak >}}
 
-# Neural Networks
+# Selected Issues in Machine Learning
 
 ::: {.callout-note}
 
@@ -23,15 +23,21 @@ library(dsld)
 library(qeML)
 ```
 
-## Tensors
+## Neural Networks
 
-## SGD
+### Tensors
 
-## SGD and Double Descent
+### SGD
 
-## Low Rank Approximation of Weight Matrices
+### SGD and Double Descent
 
-## Role of Matrix Condition Number
+### Low Rank Approximation of Weight Matrices
+
+### Role of Matrix Condition Number
 
 *https://math.stackexchange.com/questions/4362666/relationship-between-condition-number-of-a-matrix-and-eigenvalues*
+
+## SVM
+
+### Reproducing Kernel Hilbert Spaces
 
