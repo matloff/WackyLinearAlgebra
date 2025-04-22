@@ -39,7 +39,7 @@ We will need this:
 
 ::: {#thm-samenorm}
 
-## Multiplication by an Orthogonal Matrix Preserves Norm
+## Multiplication by an Orthogonal Matrix Preserves Norm 
 
 For an orthogonal matrix $M$ and a vector $w$, $||Mw|| = ||w||$. 
 
@@ -55,7 +55,8 @@ See the Your Turn problem below.
 
 ## The Moore-Penrose Solution Is Min-Norm
 
-Consider a matrix $B$ and vector $q$.  Of all solutions $x$ to
+Consider an $m \times n$ matrix $B$ and vector $q$ of length $m$.  Of
+all solutions $x$ (of length $n$) to
 
 $$
 Bx = q
@@ -67,13 +68,14 @@ the Moore-Penrose solution minimizes $||x||$.
 
 ::: {.proof}
 
-Again, write[Adapted from a derivation by Carlo Tomasi]{.column-margin}  
+Again, write[Adapted from a derivation by Carlo Tomasi.]{.column-margin}  
 
 $$
 B = U \Sigma V',
 $$
 
-and consider the residual sum of squares 
+where $U$ is $m \times n$ and $\Sigma$ and $V$ are $n \times n$.
+Consider the residual sum of squares 
 
 $$
 ||Bx - q||^2 = ||U (\Sigma V' x - U'q)||^2
@@ -81,31 +83,26 @@ $${#eq-RSS}
 
 since $UU'=I$.
 
-Thus we can remove the factor $U$ in @eq-RSS, yielding
+Thus from @thm-samenorm we can remove the factor $U$ in @eq-RSS, yielding
 
 $$
 ||Bx - q||^2 = ||\Sigma V' x - U'q||^2
 $${#eq-RSS1}
 
-Rename $$V'x$$ to $y$:
+Rename $$V'x$$ to $w$:
 
 $$
-||Bx - q||^2 = ||\Sigma y - U'q||^2
+||Bx - q||^2 = ||\Sigma w - U'q||^2
 $${#eq-RSS2}
 
 Now bring in the fact that $\sigma_i = 0$ for $i > r$, by writing
 everything in partitioned fashion.  Break $U$ into $r$ and $n-r$
-rows,
+columns,
 
 $$
-U = 
-\left (
-\begin{array}{r}
-U_1 \\
-U_2 \\
-\end{array}
-\right )
+(U_1 | U_2) 
 $$
+
 
 and partition other objects similarly:
 
@@ -115,24 +112,24 @@ $$
 
 $$
 \Sigma =
- \left (
- \begin{array}{rr}
- \Sigma_1 & 0 \\
- 0 & 0  \\
- \end{array}
- \right ),
+\left (
+\begin{array}{rr}
+\Sigma_1 & 0 \\
+0 & 0  \\
+\end{array}
+\right ),
 $$
 
 and 
 
 $$
-y =
- \left (
- \begin{array}{r}
- y_1 \\
- y_2 \\
- \end{array}
- \right )
+w =
+\left (
+\begin{array}{r}
+w_1 \\
+w_2 \\
+\end{array}
+\right )
 $$
 
 Substituting into @eq-RSS2, we have
@@ -142,43 +139,44 @@ $$
 = ||
 \left (
 \begin{array}{r}
-\Sigma_1 y_1 \\
+\Sigma_1 w_1 \\
 0 \\
 \end{array}
 \right ) -
 \left (
 \begin{array}{r}
-U_1q \\
-U_2q \\
+U_1'q \\
+U_2'q \\
 \end{array}
 \right )
 ||^2
 $${#eq-RSS3}
 
-This means that $y_2$ can be anything at all, without changing the
-residual sum of squares, confirming that there are infinitely many
-equally-effective solutions!
+This means that $w_2$ -- the last $n-r$ elements of our solution to $Bx
+=q$ -- can be anything at all, without changing the residual sum of
+squares, confirming that there are infinitely many equally-effective
+solutions!
 
-But if we want $x$ to be of minimum length, we need $y$ to be of minimum
-length (the shortest $y$ gives us the shortest $x = Vy$, again by the
-Your Turn problem).  And,
+But if we want $x$ to be of minimum length, we need $w$ to be of minimum
+length (the shortest $w$ gives us the shortest $x = Vw$, again by 
+@thm-samenorm).  And,
 
 $$
-||y||^2 = ||y_2||^2 + ||y_2||^2
+||w||^2 = ||w_2||^2 + ||w_2||^2
 $$
 
-Thus we take $y_2 = 0$.  
+Thus we take $w_2 = 0$.  
 
 Now, reviewing @eq-RSS3, note that the equation
 
 $$
-\Sigma_1 y_1 = U_1 q
+\Sigma_1 w_1 = U_1 q
 $$
 
 has the solution
 
 $$
-y_1 = \Sigma_1^{-1} U_1 q
+w_1 = \Sigma_1^{-1} U_1 q
 $$
 
 An interesting sidelight of this is that it means that
@@ -197,7 +195,7 @@ $${#eq-RSS3}
 
 i.e. the residual sum of squares depends only on $U_2$, not $U_1$. But
 returning to our quest for the minimum-norm solution, 
-we map back to $x = Vy$, and have
+we map back to $x = Vw$, and have
 
 $$
 x_1 = V_1 \Sigma_1^{-1} U_1'q
@@ -583,10 +581,5 @@ $w$, $||Mw|| = ||w||$.
 
 ❄️  **Your Turn:** Using properties of matrix rank, show that if $p+1 > n$
 in @eq-betahat, the inverse will not exist.
-
-
-
-## Your Turn
-
 
 
