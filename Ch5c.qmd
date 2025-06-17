@@ -8,7 +8,7 @@ library(qeML)
 {{< pagebreak >}}
 
  
-# Shrinkage Estimators 
+# Shrinkage Estimators {#sec-shrinkage}
 
 ::: {.callout-note}
 
@@ -19,7 +19,7 @@ data science applications, solutions with smaller norms may be more
 accurate. This point is explored here.
 
 :::
-## Multicollinearity{#sec-nearly}
+## Classic View of Shrinkage Estimators: Multicollinearity{#sec-nearly}
 
 The notion of *multicollinearity* was the original motivation for
 shrinkage estimators. It refers to settings in which the following
@@ -44,8 +44,8 @@ $$
 VIF_j = \frac{1}{1-R^2_j}
 $$
 
-then measures the negative impact due to multicollinearity on estimating 
-$\widehat{\beta}_j$. The intuition is that, say, column 3 of $A$ can be
+then measures negative impact due to multicollinearity on estimating 
+$\widehat{\beta}$. The intuition is that if, say, column 3 of $A$ can be
 predicted well using a linear model, then that column is approximately
 equal to a linear combination of the other "X" columns. This is worrisome in
 light of the problems described above.
@@ -85,7 +85,7 @@ from the dataset. This is indeed is a common solution, but another is
 
 ## Ridge Regression
 
-In seminal paper, Hoerl and Kennard[*Technometrids*,
+In seminal paper, Hoerl and Kennard[*Technometrics*,
 Februaru1970]{.column-margin} presented a new approach to the problem of
 multicollinearity of predictor variables in a linear model.  
 
@@ -137,10 +137,10 @@ So @eq-ridge is just the result of applying @eq-linregformula to
 $A_{new}$ and $S_{new}$.
 
 Loosely speaking, we can think of the addition of $\lambda I$ to $A'A$
-makes the latter "larger", and thus its inverse smaller. In other words,
-we are "shrinking" $\widehat{\beta}$ towards 0. This effect is made even
-stronger by the fact that we added 0s data to $S$. This will be made
-more precise below.
+as making the latter "larger", and thus making its inverse smaller. In
+other words, we are "shrinking" $\widehat{\beta}$ towards 0. This effect
+is made even stronger by the fact that we added 0s data to $S$. This
+will be made more precise below.
 
 ### Example: Million Song dataset
 
@@ -167,7 +167,7 @@ So, did the estimated coefficient vector shrink?
 l2norm <- function(x) sqrt(sum(x^2))
 bh01<- coef(glmnet(x,y,alpha=0,lambda=0.1))
 l2norm(bh01)
-bhOLS <- coef(lm(V1 ~ .,s50))
+bhOLS <- coef(lm(V1 ~ .,s50)) # OLS means Ordinary Least Squares
 l2norm(bhOLS)
 ```
 
@@ -215,27 +215,29 @@ mean-0 entity. In the linear regression context, centering both "X" and
 
 ::: {#nte-monkeys .callout-note}
 
-In a set of 10,000 randomly typing monkeys, one of them will
-accidentally type a Shakespearian sonnet. 
+"In a set of 10,000 randomly typing monkeys, one of them will
+accidentally type a Shakespearian sonnet." 
 
 Some readers have heard this before in the context of *p-hacking*,
 in which an analyst poses a large collection of research questions, and
 runs a statistical hypothesis on each of them. Even if the null
 hypothesis is true for all of them, each will have a 5% chance of being
-[One should not be doing hypothesis tests in the first place. See [these notes](https://cran.rstudio.com/web/packages/qeML/vignettes/NoPValues.html).]{.column-margin}
+[One should not be doing hypothesis tests in the first place. See [these notes](https://matloff.github.io/No-P-Values/NPV.html).]{.column-margin}
 rejected, and since there are many, the chance that at least one will be
 rejected and declared "significant."
 
 
 This problem arises in many, many Data Science contexts, and a good
-analyst must be vigilant to recognize the potential to mislead.
+analyst must be vigilant to recognize the potential to mislead. In our
+context here, if we look at many values of $\lambda$, of them may by
+accident look very promising, e.g. result in very good prediction
+accuracy yet actually overfit.
 
 :::
 
 ### Cross-validation{#sec-xval}
 
 A common way to choose among models is *cross-validation*: We set aside
-[Some analysts break the data into three sets, including a *validation set*, considered even "fresher."]{.column-margin}
 a subset of the data, known as the *holdout* or *test* set, for use in
 testing predictive accuracy.  The remaining data is the *training set*.
 For each of our competing models -- in this case, competing values of
@@ -261,12 +263,13 @@ min 0.2474   100   89.44 0.9201      90
 
 The $\lambda$ value that gave the smallest Mean Squared Prediction Error
 (MSE) was 0.2474. (Coincidentally, it was also the smallest value that
-the function tried; see **glmOut$lambda**.) A more conservative value of
-$\lambda$ was 0.9987, the largest $\lambda$ giving MSE within one
-standard error of the minimum; it's conservative in the sense of being
-less likely to overfit; its MSE value, 90.28, was only slightly larger
-than the best one. In each case, all 90 predictors had nonzero
-coefficient estimates.
+the function tried; see $\textbf{glmOut\$lambda}$.) 
+
+A more conservative value of $\lambda$ was 0.9987, the largest $\lambda$
+giving MSE within one standard error of the minimum; it's conservative
+in the sense of being less likely to overfit (p-hacking); its MSE value,
+90.28, was only slightly larger than the best one. In each case, all 90
+predictors had nonzero coefficient estimates.
 
 We can then predict as usual. Say we have a song similar to that in
 **s50[1,]**, but with **V2** equal to 25.0.
@@ -279,7 +282,7 @@ predict(glmOut,z)
 
 The year of release is predicted to be 2003.
 
-## Modern View{#sec-pgtn}
+## Modern View of Shrinkage Estimators{#sec-pgtn}
 
 There are many ways to deal with multicollinearity other than shrinkage,
 and indeed, these days one seldom hears mention of multicollinearity in
@@ -324,7 +327,7 @@ hundreds or even more, some analysts prefer the convenience of ridge.
 How in the world did statisticians develop an interest in shrinking
 estimators? A watershed event occurred in the early 1980s, when the
 statistical world was shocked by research by James and Stein that found,
-in short that:
+in short, that:
 
 <blockquote>
 
@@ -361,10 +364,8 @@ $$
 (S - Ab)'(S - Ab) + \lambda ||b||^2 
 $${#eq-matrixssridge}
 
-The larger $b$ is, the harder it is to minimize the overall quantity
-@eq-matrixssridge. We say that we *penalize* large values of $b$,
-an indirect way of pursuing shrinkage. Now take the derivative and set
-to 0:
+We say that we *penalize* large values of $b$, an indirect way of
+pursuing shrinkage. Now take the derivative and set to 0:
 
 $$
 0 = A'(S-Ab) + \lambda b
@@ -426,7 +427,7 @@ so-called "parsimonious" prediction models are desirable.
 
 ### Properties
 
-To that end, first note that it can be shown that, under some technical
+To that end, as noted above, it can be shown that, under some technical
 conditions, that the ridge solution minimizes 
 
 $$
@@ -453,7 +454,7 @@ number chosen by the analyst.
 Today's large datasets being so common, we need a way to "cut things
 down to size," i.e. *dimension reduction*, aimed at reducing the number
 of predictor variables. This is done both for the sake of simplicity and
-to over *overfitting*, in which fitting an overly complex model can
+to avoid *overfitting*, in which fitting an overly complex model can
 reduce predictive power.
 
 ### Geometric view
@@ -464,7 +465,8 @@ graph depicting the LASSO setting:
 ![LASSO sparsity](LASSO_gray.png)
 
 Here $p = 2$, with $b = (b_1,b_2)'$. The horizontal and vertical axes
-represent $b_1$ and $b_2$.  
+represent $b_1$ and $b_2$. Which point in the graph will be the LASSO
+solution? Reason as follows.
 
 * The constraint $||b||_1 \leq \gamma$ then takes the form of a diamond,
   with corners at 
@@ -475,21 +477,22 @@ represent $b_1$ and $b_2$.
   requires us to choose a point $b$ somewhere in the
   diamond, including the boundary.
 
-* Note that each of the four corners of the diamond represents a sparse
-  solution. For instance, the point $(0,\gamma)$ has $b_2 = 0$
-
 * The concentric ellipses depict the values of $c(b) = (S - Ab)'(S -
   Ab)$, as follows.  
 
-* Consider one particular value of $c(b)$, say 1.68. 
+  * Consider one particular value of $c(b)$, say 1.68. 
 
-* Many different points $b$ in the graph will have $c(b) = 1.68$; in
-  fact, the locus of all such points is an ellipse.  
+  * Many different points $b$ in the graph will have $c(b) = 1.68$; in
+    fact, the locus of all such points is an ellipse.  
 
-* There is one ellipse for each possible value of $c(b)$. So, there are
-  infinitely many ellipses, though only two are shown here.
+  * There is one ellipse for each possible value of $c(b)$. So, there are
+    infinitely many ellipses, though only two are shown here. 
 
-* Larger values of $c(b)$ yield larger ellipses.
+  * Larger values of $c(b)$ yield larger ellipses.
+
+  * By the way, the common center of these ellipses is the OLS solution
+    $b_{OLS}$, and the smallest ellipse has c(b) equal to the
+    OLS sum of squares.
 
 * On the one hand, we want to choose a $b$ for which $c(b)$ -- our total
   squared prediction error -- is small, thus a smaller ellipse. 
@@ -504,6 +507,9 @@ represent $b_1$ and $b_2$.
   growing larger and larger, while retaining the same center and
   orientation, until it hits the diamond. That is the outer ellipse,
   which indeed hits the diamond at one of the corners.
+
+* Note that each of the four corners of the diamond represents a sparse
+  solution. For instance, the point $(0,\gamma)$ has $b_2 = 0$.
 
 * Then picture other ellipses, at other centers with other orientations,
   and go through the same process in your mind's eye. You will see that
