@@ -263,7 +263,7 @@ A =
  1 & V_{100} \\
  \end{array}
  \right )
-$$
+$$ {#eq-Aex}
 
 and $\beta = (\beta_0,\beta_1)'.$
 

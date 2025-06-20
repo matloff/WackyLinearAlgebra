@@ -664,6 +664,36 @@ fitting neural network models, there are actually many different methods
 to choose from.) But in the end, there are no magic solutions. It may
 well be that one's basic model is flawed.
 
+## The Kernel Trick and Kernel Ridge Regression
+
+How about do you see a named trick in a math book? Well, there is indeed
+one here, one that is of great practical value.
+
+### Polynomial Regression
+
+The world is not linear, not even approximately so. Thus early in the
+development of statistics, analysts started using polynomial models. To
+predict human weight from height, for instance, one might fit the model
+
+$$
+E(\textrm{weight} | \textrm{height}) =
+\beta_0 + \beta_1 \textrm{height} + \beta_2 \textrm{height}^2
+$$
+
+The key point is that *this is still a linear model*. Though it is
+a nonlinear function of height, it is linear in the $\beta_i$. 
+If say, we multiple all the $\beta_i$ by 2, the value of the above
+expression is doubled. In @eq-Aex, we now would tack on a column
+consisting of the $V_i^2$, but $E(C|V)$ would still be a linear
+expression in $\beta$:
+
+$$
+E(C | V) = A \beta =
+\beta_0 + \beta_1 \textrm{V} + \beta_2 \textrm{V}^2
+$$
+
+
+
 ## A Warning
 
 Many statistical quantities now have *regularized*, i.e. shrunken
