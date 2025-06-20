@@ -202,53 +202,49 @@ l2norm(bhOLS)
 
 ## Choosing the Value of $\lambda$
 
-So, how do we choose $\lambda$? We need to note a couple of very
-important principles first.
+So, how do we choose $\lambda$? We need to note a very
+important principle first.
 
-### Two key general statistical properties
-
-::: {.callout-note}
-Subtracting the mean of a variable from that variable results in a
-mean-0 entity. In the linear regression context, centering both "X" and
-"Y" will result in the model having 0 as its intercept term.
-:::
-
-::: {#nte-monkeys .callout-note}
+## P-hacking, Both in Hypothesis Testing and Generally#*sec-nte-monkeys}
 
 "In a set of 10,000 randomly typing monkeys, one of them will
 accidentally type a Shakespearian sonnet." 
 
 Some readers have heard this before in the context of *p-hacking*,
 in which an analyst poses a large collection of research questions, and
-runs a statistical hypothesis on each of them. Even if the null
+runs a statistical hypothesis test on each of them. Even if the null
 hypothesis is true for all of them, each will have a 5% chance of being
 [One should not be doing hypothesis tests in the first place. See [these notes](https://matloff.github.io/No-P-Values/NPV.html).]{.column-margin}
 rejected, and since there are many, the chance that at least one will be
-rejected and declared "significant."
+rejected and declared "significant," even if $H_0$ is true.
 
 
 This problem arises in many, many Data Science contexts, and a good
 analyst must be vigilant to recognize the potential to mislead. In our
-context here, if we look at many values of $\lambda$, of them may by
+context here, if we look at many values of $\lambda$, one of them may by
 accident look very promising, e.g. result in very good prediction
-accuracy yet actually overfit.
+accuracy on our training set yet actually overfit.
 
-:::
 
-### Cross-validation{#sec-xval}
+## Cross-validation{#sec-xval}
 
 A common way to choose among models is *cross-validation*: We set aside
 a subset of the data, known as the *holdout* or *test* set, for use in
 testing predictive accuracy.  The remaining data is the *training set*.
 For each of our competing models -- in this case, competing values of
 $\lambda$ -- we fit the model on the training set, then use the result
-to predict the test set. We then use whichever model does best in the
+to predict the test set. We then use whichever model -- again, in this
+case whichever value of $\lambda$ -- does best in the
 test set.
 
 The test set serves as "fresh data," simulating how our fitted model
 might do in the real world (assuming our data is representative of the
 real world). Predicting on the training set is not as good, since our
 fit was by design tailored to that data.
+
+We still run the risk of p-hacking, but cross-validation works well as
+long as we keep the problem in mind. This topic will come up in future
+chapters as well.
 
 ## Example: Million Song Data
 
@@ -336,13 +332,14 @@ and independent components having variance $\sigma^2$, each. We have a
 random sample of size $n$, i.e. $n$ independent observations on $W$.
 Then if $q \geq 3$, in terms of Mean Squared Estimation Error, the best
 estimator of $\mu$ is NOT the sample mean $\bar{W}$. Instead, it's
+a shrunken version of $\bar{W}$,
 
 $$
 \left (
 1 - \frac{(q-2) \sigma^2/n}{||\bar{W}||^2} 
 \right )
 \bar{W}
-$$
+$$ {#eq-jamesstein}
 
 </blockquote>
 
@@ -350,8 +347,8 @@ The quantity within the parentheses is typically smaller than 1, giving
 us the shrinkage property. Note, though, that with larger $n$, the
 amount of shrinkage is minor.
 
-In the case of linear regression, shrinkage works there too, with $q$
-being the number of columns in the $A$ matrix. 
+In the case of linear regression, a version of shrinkage works there 
+too, with $q$ being the number of columns in the $A$ matrix. 
 
 So, let's view the issue of shrinkage more formally, first  for ridge
 and later for the LASSO.
@@ -383,8 +380,9 @@ $$
 \widehat{\beta} = (A'A+\lambda I)^{-1} A'S
 $$
 
-It's ridge! So ridge, originally motivated by "almost singular"
-settings, actually turns out to justify ridge as a shrinkage estimator..
+It's ridge! Exactly what we had in @eq-ridge.
+So ridge, originally motivated by "almost singular"
+settings, also turns out to be justified as a shrinkage estimator..
 
 ### Shrinkage through length limitation
 
@@ -490,9 +488,9 @@ solution? Reason as follows.
 
   * Larger values of $c(b)$ yield larger ellipses.
 
-  * By the way, the common center of these ellipses is the OLS solution
-    $b_{OLS}$, and the smallest ellipse has c(b) equal to the
-    OLS sum of squares.
+  * By the way, the common center of these ellipses is the ordinary
+    (i.e. non-shrunken) least squares (OLS) solution $b_{OLS}$, and the
+    smallest ellipse has c(b) equal to the OLS sum of squares.
 
 * On the one hand, we want to choose a $b$ for which $c(b)$ -- our total
   squared prediction error -- is small, thus a smaller ellipse. 
@@ -513,9 +511,12 @@ solution? Reason as follows.
 
 * Then picture other ellipses, at other centers with other orientations,
   and go through the same process in your mind's eye. You will see that
-  [Of course, we are in just two dimensions here. With $p = 10$ predictor variables, the graph would be in 10 dimensions, beyond our human ability to picture. But we still would have a diamong in that space, with $2p$ corners etc.]{.column-margin}
-  typically the solution turns out to be one of the corners. Again, this
-  is important because it gives us a sparse solution.
+  [Of course, we are in just two dimensions here. With $p = 10$
+  predictor variables, the graph would be in 10 dimensions, beyond our
+  human ability to picture. But we still would have a diamond in that
+  space, with $2p$ corners etc.]{.column-margin} typically the solution
+  turns out to be one of the corners. Again, this is important because
+  it gives us a sparse solution.
 
 ### Implication for dimension reduction.
 

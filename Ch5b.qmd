@@ -643,7 +643,7 @@ space $\cal RV(\Omega)$. @thm-projection talks of a closest vector $C$ in
 $W$ to $Y$. Let's see what form $C$ might take in this vector space. For
 convenience, let's assume that our variables have mean
 0.[Recall that we can convert a random variable to mean-0 by subtracting
-its mean.]{.column-margin}
+its mean. In the linear regression context, centering both “X” and “Y” will result in the model having 0 as its intercept term.]{.column-margin}
 
 Remember, the (squared) distance from $Y$ to $C$ is
 
