@@ -536,16 +536,16 @@ sparsity.
 As we've seen, both ridge and LASSO reduce the size of the
 $\widehat{\beta}$ vector of estimated coefficients. Smaller quantities
 have smaller statistical variances, hence a guard against overfitting.
-So, even ridge can be employed as an approach to the overfitting
+So, ridge can be employed as an approach to the overfitting
 problem, even though it does not provide a sparse solution.
 
-On the other hand, in some settings, it may be desirable to keep all
+Moreover, in some settings, it may be desirable to keep all
 predictors, as seen in the next section.
 
 ## Example: NYC Taxi Data{#sec-useall}
 
 The purpose of this data is to predict trip time in the New York City
-taxi system. The $qeML$ package includes a 10,000-row subset.
+taxi system. The $\textbf{qeML}$ package includes a 10,000-row subset.
 
 ```{r}
 library(qeML)
@@ -556,12 +556,15 @@ length(unique(nyctaxi$PULocationID))
 length(unique(nyctaxi$DOLocationID))
 ```
 
-If we fit, say, a linear model, $lm$ will form a dummy variable for each
-of the pickup and dropoff locations. Thus we will have $p = 1+143+205+1 = 350$. 
-An old rule of thumb says that if we have $p$ predictors and $n$ data
-points, we should keep $p < \sqrt{n}$ to avoid overfitting. As we will
-see in a later chapter, these days that rule is being questioned, so
-[The problem would be even worse if we add  pickup/dropoff location interaction variables, basically products of the pickup and dropoff dummy variables.]{.column-margin} since here we have $\sqrt{n} = 100$, there is a strong suggestion that
+If we fit, say, a linear model, $\textbf{lm}$ will form a dummy variable
+for each of the pickup and dropoff locations. Thus we will have $p =
+1+143+205+1 = 350$.  An old rule of thumb says that if we have $p$
+predictors and $n$ data points, we should keep $p < \sqrt{n}$ to avoid
+overfitting. As we will see in a later chapter, these days that rule is
+being questioned, but [The problem would be even worse if we add
+pickup/dropoff location interaction variables, basically products of the
+pickup and dropoff dummy variables.]{.column-margin} it is still useful.
+Since here we have $\sqrt{n} = 100$, there is a strong suggestion that
 we do some dimension reduction.
 
 Thus we either should delete some of the pickup and dropoff variables,
@@ -576,12 +579,9 @@ glmOut <- cv.glmnet(x=nycwide,y=nyctaxi[,1],alpha=0)
 glmOut
 ```
 
-The best $\lambda$ value was found to be 0.3002.
-
-## Other Shrinkage Estimators
-
-The huge popular success of the LASSO inspired applying shrinkage to
-lots of other estimators. We will give an example in @sec-svd.
+The best $\lambda$ value was found to be 0.3002. But as noted above, we
+might use the more conservative value, 1.0063, to try to avoid
+p-hacking.
 
 ## Iterative Calculation{#sec-iter}
 
@@ -606,7 +606,7 @@ issues/perils:
 
 * convergence
 
-* presence or lack of (calculus) derivatives
+* presence or lack of calculus derivatives
 
 The basic idea is to first (somehow) make some guess as to the value of
 the desired quantity, say $\widehat{\beta}$ in the LASSO. The algorithm
@@ -626,7 +626,7 @@ Say we have a function $f$ whose root $r$ is of interest to us.[Our
 quest for a root may arise for instance in a minimization problem, where
 we set a derivative to 0 and solve for that root.]{.column-margin} We
 might make a series of guesses for $r$ by considering the derivative
-$f'$.  This is illustrated in the figure. Unknown to us, $r = 2$. Our
+$f'$.  This is illustrated in the figure below. Unknown to us, $r = 2$. Our
 current guess is $x = 3$. We draw $f'$, i.e. the tangent line to the
 curve at our current guess, and temporarily pretend that the line is the
 curve.  We thus compute the root for the line, which is seen here to be
@@ -637,25 +637,31 @@ root of the curve.
 
 Some machine learning algorithm have a parameter called the *learning
 rate*, which is motivated by a concern that the process may overshoot
-the root.  A smaller learning rate value directs the algorithm to take
+the root, or converge to the wrong root.[Again, the desired root may
+arise in a minimum/maximum problem. There could be many local
+mimima/maxima, which we use to avoid.]{.column-margin}
+.  A smaller learning rate value directs the algorithm to take
 smaller steps in generating new guesses.  In this case, we might go only
 partway to the tangent root.  On the one hand, this can slow the
 computation but on the other, we may be less likely to overshoot the
-true value.
+true value. On the other hand, if we are concerned about settling on the
+wrong root, we might set a large value for the learning rate.
 
 At any rate, if the quantity $f$ that we are working with does not have
 a derivative, our work is extra difficult.
 
 At first one may think that such internal details of computation need
 not concern the end user of the software. But the fact is that often an
-algorithm will fail to converge, and the user may need to get more
-directly involved, say in suggesting the value of the initial guess.
+algorithm will fail to converge, and the user will need to get more
+directly involved, say in trying a different value for the initial guess.
 
 So, if say **glmnet** fails to converge, what can be done?  For example,
-in **glmnet**, the argument **thresh** defines what we mean by "no
-longer changes much"; we can decrease or even increase that value.  One
-can make sure to center and scale the X data. Tweaking other parameters
-may help as well, but in the end, there are no magic solutions. It may
+in **glmnet**, the argument **thresh** defines what we meant by our
+phrasing "no longer changes much"; we can decrease or even increase that
+value.  One can make sure to center and scale the X data. Tweaking other
+parameters may help as well, such as changing the updating method. (In
+fitting neural network models, there are actually many different methods
+to choose from.) But in the end, there are no magic solutions. It may
 well be that one's basic model is flawed.
 
 ## A Warning
