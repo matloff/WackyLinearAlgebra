@@ -712,7 +712,7 @@ Using some algebraic manipulation, @eq-ridge can be shown to be
 equivalent to 
 
 $$
-\widehat{\beta} = A' (AA' + \lambda I)^{-1}
+\widehat{\beta} = A' (AA' + \lambda I)^{-1} S
 $$
 
 Note that the product $AA'$ will be $n \times n$, as opposed to our
@@ -815,6 +815,9 @@ $$
 
 not only do we avoid computing $\phi(t)$, we don't even need to
 know its form. 
+
+Note again that all this worked only because our quantities of interest
+here consist of dot products.
 
 
 ## A Warning
