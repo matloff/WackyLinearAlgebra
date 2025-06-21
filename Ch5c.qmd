@@ -85,8 +85,8 @@ from the dataset. This is indeed is a common solution, but another is
 
 ## Ridge Regression
 
-In seminal paper, Hoerl and Kennard[*Technometrics*,
-Februaru1970]{.column-margin} presented a new approach to the problem of
+In seminal paper, Hoerl and Kennard[*Technometrics*, February
+1970]{.column-margin} presented a new approach to the problem of
 multicollinearity of predictor variables in a linear model.  
 
 
@@ -202,10 +202,10 @@ l2norm(bhOLS)
 
 ## Choosing the Value of $\lambda$
 
-So, how do we choose $\lambda$? We need to note a very
-important principle first.
+So, how do we choose $\lambda$? We need to note a very important
+principle first.
 
-## P-hacking, Both in Hypothesis Testing and Generally#*sec-nte-monkeys}
+## P-hacking, Both in Hypothesis Testing and Generally{#sec-nte-monkeys}
 
 "In a set of 10,000 randomly typing monkeys, one of them will
 accidentally type a Shakespearian sonnet." 
@@ -217,7 +217,6 @@ hypothesis is true for all of them, each will have a 5% chance of being
 [One should not be doing hypothesis tests in the first place. See [these notes](https://matloff.github.io/No-P-Values/NPV.html).]{.column-margin}
 rejected, and since there are many, the chance that at least one will be
 rejected and declared "significant," even if $H_0$ is true.
-
 
 This problem arises in many, many Data Science contexts, and a good
 analyst must be vigilant to recognize the potential to mislead. In our
@@ -692,6 +691,130 @@ E(C | V) = A \beta =
 \beta_0 + \beta_1 \textrm{V} + \beta_2 \textrm{V}^2
 $$
 
+Nice, but the size of our model grows rapidly. Say we predict weight
+from not only height but also age. Then our matrix $A$ will have columns
+not only for height and height-squared, but also age and age-squared,
+as well as height times age. In my machine learning book
+[N. Matloff, $\textit{The Art of Machine Learning}$, NSP, 2023]{.column-margin},
+there is an example in which $A$ originally had 54
+columns, but with a polynomial model of degree 2, the number of columns
+grew to 1,564!
+
+This is especially problematic in the case $p > n$, which is
+increasingly common these days, and motivates the following material.
+
+### The Kernel Trick
+
+We will first introduce a computational shortcut, and then the Kernel
+Trick itself. Our context will be ridge regression.
+
+Using some algebraic manipulation, @eq-ridge can be shown to be
+equivalent to 
+
+$$
+\widehat{\beta} = A' (AA' + \lambda I)^{-1}
+$$
+
+Note that the product $AA'$ will be $n \times n$, as opposed to our
+original $p \times p$ product $A'A$. With $p > n$, this change means a
+large saving in memory storage space and computation time.
+
+But we reap even larger benefit by looking at fitted or predicted
+values. Let $x_{new}$ be a matrix of "X" values at which we wish to
+predict "Y," in the same format as $X$.  Then the fitted/predicted
+values are
+
+$$
+x_{new} \widehat{\beta} 
+= x_{new} A' (AA' + \lambda I)^{-1}
+= [x_{new} A'] [(AA' + \lambda I)^{-1}]
+$$
+
+What is so special about this expression, or more specifically, the two
+bracketed expressions? The answer is that every major computation here
+is a "dot product: 
+
+* In $x_{new} A'$, we are taking dot products of rows of $x_{new}$
+  and columns of $A'$.
+
+* In $AA'$, we are taking dot products of rows of $A$
+  and columns of $A'$.
+
+The idea of the Kernel Trick is to replace dot products by kernel
+computations. In computing $AA'$, for example, denote row $i$ of $A$
+by $a_i$. Then we replace the expression for the row $i$, column $j$ 
+element of $AA'$,
+
+$$
+a_i' a_j
+$$ {#eq-aiaj}
+
+by
+
+$$
+k(a_i,a_j)
+$$
+
+Here $k$ is a \textit{kernel function} satisfying
+
+* $k$ is a symmetric function in its arguments, and 
+
+* $k$ is $\textit{nonnegative definite}$.
+
+  The latter is a generalization of nonnegative definite matrices. If we
+  have a set of vectors $u_1,...,u_r$ and form the matrix having its row
+  $i$, column $j$ value equal to $k(u_i,u_j)$, then the matrix is
+  required to nonnegative positive definite.
+
+What does that give us? Suppose we wish to do polynomial regression of
+degree 2. As noted above, we could add the appropriate columns to the $A$
+matrix, thus applying the transformation (e.g. for the case $p = 2$),
+
+$$
+x \rightarrow \phi(x) = (x_1,x_1^2,x_2,x_2^2,x_1 x_2)
+$$ {#eq-origquadphi}
+
+We say that $\phi$ *lifts* us from our *ambient* (i.e. original space,
+dimension $p$) to a desired higher-dimensional space.
+
+But again, this would increase the dimensionality, going from 2 to 5 in
+this $p = 2$ case, but the main point for now is that we still would be
+computing dot products. For instance, the new value of @eq-aiaj would
+now be
+
+$$
+\phi(a_i)' \phi(a_j)
+$$
+
+The Kernel Trick involves finding a kernel $k$ for which
+
+$$
+k(u,v) = \phi(u)' \phi(v)
+$$
+
+It turns out that such a kernel is
+
+$$
+k(u,v) = (c + u'v)^d
+$$ {#eq-polykern}
+
+for polynomials of degree $d$.
+
+In other words:
+
+> The Kernel Trick enables us to stay in the ambient space yet still
+> achieve the nonlinearity of the lifted space.
+
+In fact, although it turns out that @eq-polykern corresponds to 
+
+$$
+\phi(t) = (t_1^2,  t_2^2, \sqrt{2} ~ t_1 t_2, 
+\sqrt{2c} ~ t_1, 
+\sqrt{2c} ~ t_2, c)
+$$
+
+not only do we avoid computing $\phi(t)$, we don't even need to
+know its form. 
 
 
 ## A Warning
