@@ -695,7 +695,7 @@ Nice, but the size of our model grows rapidly. Say we predict weight
 from not only height but also age. Then our matrix $A$ will have columns
 not only for height and height-squared, but also age and age-squared,
 as well as height times age. In my machine learning book
-[N. Matloff, $\textit{The Art of Machine Learning}$, NSP, 2023]{.column-margin},
+[N. Matloff, *The Art of Machine Learning*, NSP, 2023]{.column-margin},
 there is an example in which $A$ originally had 54
 columns, but with a polynomial model of degree 2, the number of columns
 grew to 1,564!
@@ -755,11 +755,11 @@ $$
 k(a_i,a_j)
 $$
 
-Here $k$ is a \textit{kernel function} satisfying
+Here $k$ is a *kernel function* satisfying
 
 * $k$ is a symmetric function in its arguments, and 
 
-* $k$ is $\textit{nonnegative definite}$.
+* $k$ is *nonnegative definite*.
 
   The latter is a generalization of nonnegative definite matrices. If we
   have a set of vectors $u_1,...,u_r$ and form the matrix having its row
@@ -774,8 +774,9 @@ $$
 x \rightarrow \phi(x) = (x_1,x_1^2,x_2,x_2^2,x_1 x_2)
 $$ {#eq-origquadphi}
 
-We say that $\phi$ *lifts* us from our *ambient* (i.e. original space,
-dimension $p$) to a desired higher-dimensional space.
+We say that $\phi$ *lifts* us from our *ambient* space (i.e. original
+space, dimension $p$) to a desired higher-dimensional space, the
+*latent* space.
 
 But again, this would increase the dimensionality, going from 2 to 5 in
 this $p = 2$ case, but the main point for now is that we still would be
@@ -818,6 +819,56 @@ know its form.
 
 Note again that all this worked only because our quantities of interest
 here consist of dot products.
+
+### Kernel Ridge Regression: the Code
+
+``` r
+
+# kernel ridge regression
+
+# fits 'data' with KRR, ridge parameter 'lamb' and kernel 'kern', and
+# then predicts "Y" from 'newX'
+
+krr <- function(data,yName,lamb,kern,newX)
+{
+   if (!allNumeric(data)) stop("'data' must be all numeric")
+
+   ycol <- which(names(data) == yName)
+   data <- as.matrix(data)
+
+   x <- data[,-ycol,drop=FALSE]
+   x <- cbind(1,x)
+   n <- nrow(x)
+   p <- ncol(x)
+
+   newX <- as.matrix(newX)
+   if (ncol(newX) == 1) newX <- t(newX)
+   newX <- cbind(1,newX)
+
+   part1 <- kernAB(newX,t(x),kern)
+   part2 <- kernAB(x,t(x),kern)
+   part2 <- solve(part2 + lamb * diag(n)) %*% y
+   
+   predsKRR <- part1 %*% part2
+   return(cbind(predsKRR))
+}
+
+# finds the matrix product ab, but with the kernel k evaluated at each
+# entry
+
+kernAB <- function(a,b,k)
+{
+   ab <- matrix(nrow=nrow(a),ncol=ncol(b))
+   for (i in 1:nrow(a)) {
+      arow <- a[i,]
+      for (j in 1:ncol(b)) {
+         ab[i,j] <- k(arow,b[,j])
+      }
+   }
+   ab
+}
+
+```
 
 
 ## A Warning
