@@ -296,8 +296,35 @@ $$
 $${#eq-matrixss}
 
 Now how we will minimize that matrix expression with respect to the
-vector $b$? That is the subject of the next section.
+vector $b$? That is the subject of the next sections.
 
+### General setting
+
+We consider the general linear regression setting in which we have
+$p$ predictor variables $V^{(1)},...,V^{(p)}$ with
+
+$$
+E(Y | V^{(1)} = t_1 ,..., V^{(p)} = t_p) =
+\beta_0 +
+\beta_1 t_1 + ... +
+\beta_p t_p
+$$
+
+Say we have $n$ data points. Denote the value of $V^{(j)}$ in the $i^{th}$
+data point by $a_{i,j}$, and write
+
+$$
+A =
+\left (
+\begin{array}{rrrr}
+1 & a_{11} & ... & a_{1p} \\
+... & ... & ... & ... \\
+1 & a_{n1} & ... & a_{np} \\
+\end{array}
+\right )
+$$
+
+As before $S$ is the vector of associated "Y" values.
 
 ### Matrix derivatives{#sec-matrixderivs}
 

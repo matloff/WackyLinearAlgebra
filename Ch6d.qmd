@@ -7,26 +7,36 @@ library(qeML)
 
 {{< pagebreak >}}
 
-# Revisitng the Issue of Overfitting: Double Descent {#sec-chapDD}
+# A Deeper Look at Overfitting {#sec-chapDD}
 
 ::: {.callout-note}
 
 ## Goals of this chapter:
 
-We learned earlier that in a linear regression model, a certain matrix
-inverse needs to exist in order to calculate the standard least-squares
-solution. But solutions do exist more generally, and that fact will turn
-out to be useful, even exposing some very surprising numerical behavior.
+We have mentioned the concept of "overfitting" occasionally in previous
+chapters. It has always been an issue in statistics, but in recent years
+it has become an acute problem as datasets with very large number of
+predictors $p$, and old assumptions are now being questioned. This
+chapter presents an up-to-date view of the topic, and as usual, linear
+algebra plays a key role.
 
 ::: 
-
-
 
 ```{r} 
 #| include: false
 library(dsld)
 library(qeML)
 ```
+
+## A Simple Example
+
+Consider the model 
+
+$$
+E(Y | X = t) = \beta t
+$$
+
+with $p = 1$. Our matrix $A$
 
 ## SVD as the Minimum-Norm Solution
 
