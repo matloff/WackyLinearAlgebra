@@ -9,7 +9,7 @@ consider this one to be the most important.
 Let's start with the title of this book, *Powered by Linear Algebra: The
 central role of matrices and vector spaces in Data Science*. It's
 important to understand why the title is NOT "Linear Algebra for Data
-Scientists." That latter would wrongly /connote that people in Data Science
+Scientists." That latter would wrongly connote that people in Data Science
 (DS)will first learn linear algebra purely as a branch of math in this
 book, with no hint of connections to DS, then apply that knowledge in
 subsequent DS courses. Instead, the goal in the title is to emphasize
@@ -85,7 +85,7 @@ math course, but with much better student motivation due to the Data
 Science emphasis of the book.  The "applications first" approach is key
 to that motivational power.
 
-Actually, the applications-centered nature of the book should make
+The applications-centered nature of the book should make
 teaching the course more rewarding for instructors as well, and the use
 of Quarto enables easy conversion to Powerpoint by instructors.
 
@@ -119,6 +119,15 @@ the Your Turn exercises at the end of each chapter, many of the ones requiring
 proofs are simple, of the "one liner" type.  But the subject
 matter is indeed mathematical.  Students are indeed expected to read and
 understand proofs, just as with the Mathematics Department course.
+
+No sections are designated as "starred," i.e. reserved for tha more
+mathematically adept readers. I believe all material in the book is
+within reach of any reader who did reasonably solid work in their
+calculus courses. For example, @sec-conditexpect is a bit abstract and
+involves switching back and forth between random variables and vectors,
+but it is presented with intuitive motivation and simple, concrete
+examples. Moreover, the material is motivated by culminating in an
+applied topic of major societal relevance.
 
 The goal is to develop in the reader mathematical skill and intuition
 into this powerful tool, rather than coding of linear algebra methods.

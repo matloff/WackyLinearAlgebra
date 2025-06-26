@@ -307,7 +307,7 @@ properties of inner product.
 :::
 
 
-## Projections in the Linear Model
+## Projections in the Linear Model{#sec-conditexpect}
 
 The case of the linear model will deepen our understanding, and will
 lead to a method for outlier detection that is commonly used in
