@@ -30,7 +30,36 @@ library(qeML)
 
 ## Motivating Example
 
-Recall the Million Song dataset in @sec-millonsong.
+Classically, statistics and ML books have stated that, for fixed number
+of data points $n$, the graph of predictive accuracy against number of
+predictor variables $p$ roughly has a U-shape, concave up. Starting at
+$p = 1$ and then increasing $p$, we achieve better and better predictive
+power until we reach the minimum point of the U; adding further
+predictors degrades performance.
+
+We wish to explore this notion on the Million Song dataset from
+@sec-millonsong. Here "Y" is the year of release of a song, stored in
+the first column with label **V1**. "X" is a set of 90 audio
+measurements. In the version of the dataset used here, we have 5000
+rows.
+
+We ran code like this:
+
+``` r
+sapply(seq(10,90,10),function(p)
+   mean(replicate(500,
+   qeML::qeLin(yr5000[1:150,1:p],'V1')$testAcc
+   )))
+```
+
+Here we are running a linear model on the first 150 rows of the dataset
+(i.e. $n=150$), and the first $p$ columns, so that $p = 10,20,...,90$.
+Since the $qeML$ functions automatically form holdout sets, we obtain
+the accuracy value, Mean Absolute Prediction Error. And since the
+holdout set is randomly chosen, we do this 500 times. We graph the
+result using **qePlotCurves** (which does smoothing).
+
+![U shapes](Ushapes.png)
 
 ## Tolerance of Wiggliness
 
@@ -275,7 +304,27 @@ been related to SVD.
 
 ### Motivating example
 
-Let's consider the Million Song Dataset from @sec-millionsong.
+Let's consider the Million Song Dataset from @sec-millionsong.  There
+are 90 possible predictor variables "X", consisting of various audio
+characterics, with "Y" being the year of release of the song. In this
+dataset, "Y" is labeled **V1**, and is in the first column. In this
+version, there are 5,000 songs.
+
+We are interested in the effects of the number of rows $n$ and the
+number of predictors $p$ on predictive accuracy. We vary both of these
+quantities by subsetting, as follows. A typical statement in our
+data-generation as
+
+``` r
+s500 <- sapply(seq(10,90,10),function(p)
+mean(replicate(500,qeLin(yr5000[1:500,1:(p+1)],'V1')$testAcc))) `
+```
+
+Here we call the linear model function **qeLin** from the **qeML**
+package to the first $p+1$ columns (including "Y"), on the first 500
+rows. 
+
+![U shapes](Ushapes.png)
 
 ### Overfitting and BEYOND
 
