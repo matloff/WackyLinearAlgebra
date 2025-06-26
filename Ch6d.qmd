@@ -28,15 +28,14 @@ library(dsld)
 library(qeML)
 ```
 
-## A Simple Example
+## Motivating Example
 
-Consider the model 
+Recall the Million Song dataset in @sec-millonsong.
 
-$$
-E(Y | X = t) = \beta t
-$$
+## Tolerance of Wiggliness
 
-with $p = 1$. Our matrix $A$
+FIT A LINEAR MODEL FOR Y = 0,1, USING MISCLASS ERROR
+
 
 ## SVD as the Minimum-Norm Solution
 
