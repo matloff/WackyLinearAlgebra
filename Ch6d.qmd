@@ -61,6 +61,21 @@ result using **qePlotCurves** (which does smoothing).
 
 ![U shapes](Ushapes.png)
 
+What do we see here?
+
+* The graphs are indeed U-shaped, albeit shallower than the typical
+  pictures shown in books.
+
+* The larger the value of $n$, 
+
+  * the lower the curve (better prediction accuracy), and
+
+  * the larger the value of the best $p$ (optimal to use
+    more predctors)
+
+* Some are half-U's, indicating it's best to use all variables (large $n$)
+  or one or two (small $n$).
+
 ## Tolerance of Wiggliness
 
 FIT A LINEAR MODEL FOR Y = 0,1, USING MISCLASS ERROR
