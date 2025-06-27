@@ -76,6 +76,27 @@ What do we see here?
 * Some are half-U's, indicating it's best to use all variables (large $n$)
   or one or two (small $n$).
 
+## Interpolation Point
+
+Consider a linear regression model, for convenience say with no
+$\beta_0$ term.  As $p$ increases, eventually it becomes equal to $n$,
+the number of rows. When that happens, we get a "perfect" 
+fit: Our line, plane or hyperplane will pass through every data point,
+and @eq-matrixss will be 0. Just think of the case $p=1$, now with a
+$\beta_0$ term: Two points in $\cal{R}^2$, through which we can draw a
+line passing through them.
+
+This value of $p$ is thus called the *interpolation point*.  Of dourse,
+that will be a terrible fit, unable to predict new data well; we are at
+the right-hand end of the U. And since we already have reached a
+"perfect" fit, there would be no point in increasing $p$ any further
+(using a pseudoinverse). 
+
+So, pictures of overfititng in books had $p$ stop at $n$$. But wow,
+where they wrong!
+
+## Double Descent
+
 ## Tolerance of Wiggliness
 
 FIT A LINEAR MODEL FOR Y = 0,1, USING MISCLASS ERROR
