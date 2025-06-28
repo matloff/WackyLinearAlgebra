@@ -97,17 +97,78 @@ where they wrong!
 
 ## Double Descent
 
-## Tolerance of Wiggliness
+Though the prevailing wisdom used to be that, as noted above, there is
+no point in trying values of $p$ even near $n$, let along beyond $n$. It
+turns out that in some cases, the best value of $p$ is in fact larger
+than $n$
 
-FIT A LINEAR MODEL FOR Y = 0,1, USING MISCLASS ERROR
+As a first step to seeing this, consider the following code:
 
+``` r
+overfit <- function(nreps,n,maxP)
+{
+    load('YearData.save')  # 500K Million Song data
+    nas <- rep(NA,nreps*(maxP-1))
+    # record p, Mean Absolute Prediction Error
+    outdf <- data.frame(p=nas,mape=nas)
+    rownum <- 0
+    for (i in 1:nreps) {
+       idxs <- sample(1:nrow(yr),n)
+       trn <- yr[idxs,] 
+       tst <- yr[-idxs,]           
+       for (p in 2:maxP) {
+          rownum <- rownum + 1
+          out<-qePolyLin(trn[,1:(p+1)],
+             'V1',2,holdout=NULL) 
+          preds <- predict(out,tst[,-1]) 
+          mape <- mean(abs(preds - tst[,1])) 
+          outdf[rownum,1] <- p
+          outdf[rownum,2] <- mape
+          print(outdf[rownum,])
+       }
+    }
+    outdf  
+}
+
+z <- overfit(10,250,30)
+w <- tapply(z$mape,z$p,mean)
+plot(w)
+
+```
+
+This code tries values of **p** up to **maxP** but one must note that 
+we are fitting quadratic models. For any given value of **p**, the number
+of columns after polynomial expansion will be much larger. Consider this
+code:
+
+``` r
+> u22 <- qePolyLin(yr[1:100,1:23],'V1',deg=2)
+P > N. With polynomial terms and interactions, P is 265.
+> u22 <- qePolyLin(yr[1:100,1:22],'V1',deg=2)
+P > N. With polynomial terms and interactions, P is 246.
+```
+So $p = 21$ will upon polynomial expansion produce 246 columns, while
+$p=22$ will produce 265. We won't hit 250 exactly, but the interpolation
+point will be in this range.
+
+![U shapes](PolyDoubleDesc.png)
+
+After the interpolation point, we see another U! Hence the name *double
+descent*. This introduces the concept, but the big news is:
+
+> The minimum of the second U is sometimes lower than that of the first.
+> In other words, it can pay to overfit!
+
+We'll see examples shortly, but first let's see linear algebra plays a
+role.
 
 ## SVD as the Minimum-Norm Solution
 
 In an overdetermined linear system such as @eq-overdetermined, there are
-many solutions. However, an advantage of Moore-Penrose is that it gives
-us the *minimum norm* solution. We'll discuss the significance of this
-shortly, but let's prove it first.
+many solutions. Our **qePolyLin** function calls
+**regtools::penrosePoly**.  An advantage of Moore-Penrose is that it
+gives us the *minimum norm* solution. We'll discuss the significance of
+this for Double Descent shortly, but let's prove it first.
 
 We will need this:
 
@@ -142,7 +203,8 @@ the Moore-Penrose solution minimizes $||x||$.
 
 ::: {.proof}
 
-Again, write[Adapted from a derivation by Carlo Tomasi.]{.column-margin}  
+Again, write[Adapted from a derivation by Carlo Tomasi,
+in a set of lecture notes, *Linear Systems*.]{.column-margin}  
 
 $$
 B = U \Sigma V',
@@ -210,7 +272,22 @@ Substituting into @eq-RSS2, we have
 
 $$
 ||Bx - q||^2 
-= ||
+= 
+||
+\left (
+\begin{array}{r}
+\Sigma_1 w_1 \\
+\Sigma_2 w_2 \\
+\end{array}
+\right ) -
+\left (
+\begin{array}{r}
+U_1'q \\
+U_2'q \\
+\end{array}
+\right )
+||^2 =
+||
 \left (
 \begin{array}{r}
 \Sigma_1 w_1 \\
@@ -233,18 +310,18 @@ solutions!
 
 But if we want $x$ to be of minimum length, we need $w$ to be of minimum
 length (the shortest $w$ gives us the shortest $x = Vw$, again by 
-@thm-samenorm).  And,
+@thm-samenorm).  And, from the Pythagorean Theorem we have
 
 $$
 ||w||^2 = ||w_2||^2 + ||w_2||^2
 $$
 
-Thus we take $w_2 = 0$.  
+Thus we take $w_2 = 0$ to minimize $||w||$.
 
-Now, reviewing @eq-RSS3, note that the equation
+Now note that the equation
 
 $$
-\Sigma_1 w_1 = U_1 q
+\Sigma_1 w_1 = U_1' q
 $$
 
 has the solution
@@ -666,6 +743,11 @@ impact of the minimum-norm nature of SVD kicks in. On the other hand, as
 $p$ grows further, $b$ has more and more components, and likely that
 minmum-norm $b$ will grow in length at some point, hence the typical
 later turn back upward of the second U.
+
+## Tolerance of Wiggliness
+
+FIT A LINEAR MODEL FOR Y = 0,1, USING MISCLASS ERROR
+
 
 
 ## Your Turn
