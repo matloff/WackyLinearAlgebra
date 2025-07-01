@@ -203,19 +203,27 @@ the Moore-Penrose solution minimizes $||x||$.
 
 ::: {.proof}
 
-Again, write[Adapted from a derivation by Carlo Tomasi,
-in a set of lecture notes, *Linear Systems*.]{.column-margin}  
+Again, write[Adapted in part from a derivation by Jose' C. Feriero.]{.column-margin}
 
 $$
 B = U \Sigma V',
 $$
 
 where $U$ is $m \times n$ and $\Sigma$ and $V$ are $n \times n$.
+(For our discussion of overfitting, we will primarily be interested in the case
+$n > m$.)$
+
 Consider the residual sum of squares 
 
 $$
-||Bx - q||^2 = ||U (\Sigma V' x - U'q)||^2
+||Bx - q||^2 = ||U \Sigma V' x -q||^2
 $${#eq-RSS}
+
+so
+
+$$
+||Bx - q||^2 = ||U (\Sigma V' x - U'q)||^2
+$$
 
 since $UU'=I$.
 
@@ -225,134 +233,59 @@ $$
 ||Bx - q||^2 = ||\Sigma V' x - U'q||^2
 $${#eq-RSS1}
 
-Rename $$V'x$$ to $w$:
+Rename $V'x$ to $w$ and $U'q$ to $s$ (a constant vector):
 
 $$
-||Bx - q||^2 = ||\Sigma w - U'q||^2
+||Bx - q||^2 = ||\Sigma w - s||^2
 $${#eq-RSS2}
 
-Now bring in the fact that $\sigma_i = 0$ for $i > r$, by writing
-everything in partitioned fashion.  Break $U$ into $r$ and $n-r$
-columns,
+So, instead of finding $x$ to minimize the residual sum of squares
+$||Bx - q||^2$, we've (temporarily) changed the problem to that of
+finding $w$ to minimmize
 
 $$
-(U_1 | U_2) 
-$$
+||\Sigma w - s||^2
+$$ {#eq-newResids}
 
+Now bring in the fact that $\sigma_i = 0$ for $i > r$, with $r$ being
+the rank of $B$. That has the interesting implication that
+$w_{r+1},....,w_n$ can be anything whatsoever, in @eq-newResids -- the
+value of that expression is completely independent of
+$w_{r+1},....,w_n$.  So that shows that if $r < n$, there are infinitely
+many solutions $w$, and thus infinitely many solutions to $Bx = q$,
+since $x = Vw$.  [Note that we are also making use of the fact that $V$
+is invertible ($VV'=I$).  ]{.column-margin}
 
-and partition other objects similarly:
+Recall that our goal is to find the minimum-norm value of $x$, and since
+$||x|| = ||w||$ (@thm-samenorm), our problem is thus reduced to finding
+the minimum-norm $w$.
 
-$$
-V = (V_1 | V_2),
-$$
-
-$$
-\Sigma =
-\left (
-\begin{array}{rr}
-\Sigma_1 & 0 \\
-0 & 0  \\
-\end{array}
-\right ),
-$$
-
-and 
+Now since
 
 $$
-w =
-\left (
-\begin{array}{r}
-w_1 \\
-w_2 \\
-\end{array}
-\right )
+||w||^2 = w_1^2+...+w_r^2+w_{r+1}^2+...+w_n^2
 $$
 
-Substituting into @eq-RSS2, we have
+and since we have a free hand in choosing $w_{r+1},...,w_n$, we minimize
+$||w||$ by setting those $n-r$ values to 0.
+
+Thus we can make @eq-newresids equal to 0, i.e. exact fit, by setting
 
 $$
-||Bx - q||^2 
-= 
-||
-\left (
-\begin{array}{r}
-\Sigma_1 w_1 \\
-\Sigma_2 w_2 \\
-\end{array}
-\right ) -
-\left (
-\begin{array}{r}
-U_1'q \\
-U_2'q \\
-\end{array}
-\right )
-||^2 =
-||
-\left (
-\begin{array}{r}
-\Sigma_1 w_1 \\
-0 \\
-\end{array}
-\right ) -
-\left (
-\begin{array}{r}
-U_1'q \\
-U_2'q \\
-\end{array}
-\right )
-||^2
-$${#eq-RSS3}
-
-This means that $w_2$ -- the last $n-r$ elements of our solution to $Bx
-=q$ -- can be anything at all, without changing the residual sum of
-squares, confirming that there are infinitely many equally-effective
-solutions!
-
-But if we want $x$ to be of minimum length, we need $w$ to be of minimum
-length (the shortest $w$ gives us the shortest $x = Vw$, again by 
-@thm-samenorm).  And, from the Pythagorean Theorem we have
-
-$$
-||w||^2 = ||w_2||^2 + ||w_2||^2
+w = \Sigma^{+} s
 $$
 
-Thus we take $w_2 = 0$ to minimize $||w||$.
+where $\Sigma^{+}$ is the diagonal matrix with elements
+$\sigma_1^{-1},...,\sigma_r^{-1},0,....,0$. 
 
-Now note that the equation
-
-$$
-\Sigma_1 w_1 = U_1' q
-$$
-
-has the solution
+Wrapping up, we have
 
 $$
-w_1 = \Sigma_1^{-1} U_1 q
+x = Vw = V \Sigma^{+} U' q
 $$
 
-An interesting sidelight of this is that it means that
+Exactly the Moore-Penrose inverse!
 
-$$
-||Bx - q||^2 
-= ||
-\left (
-\begin{array}{r}
-0  \\
-U_2q \\
-\end{array}
-\right )
-||^2,
-$${#eq-RSS3}
-
-i.e. the residual sum of squares depends only on $U_2$, not $U_1$. But
-returning to our quest for the minimum-norm solution, 
-we map back to $x = Vw$, and have
-
-$$
-x_1 = V_1 \Sigma_1^{-1} U_1'q
-$$
-
-which is the SVD solution! Thus the SVD solution does have minimum norm.
 
 $\square$
 
