@@ -168,13 +168,15 @@ descent*. This introduces the concept, but the big news is:
 We'll see examples shortly, but first let's see how linear algebra plays a
 role.
 
-## SVD as the Minimum-Norm Solution
+## Plausibility of Double Descent: the Minimum Norm Solutions
 
 In an overdetermined linear system such as @eq-overdetermined, there are
 many solutions. Our **qePolyLin** function calls
 **regtools::penrosePoly**.  An advantage of Moore-Penrose is that it
 gives us the *minimum norm* solution. We'll discuss the significance of
 this for Double Descent shortly, but let's prove it first.
+
+### Proof of the minimum-norm property
 
 We will need this:
 
@@ -297,16 +299,7 @@ $\square$
 
 :::
 
-## Plausible Explanations of the Mystery of ``Double Descent"
-
-Around 2018-2019, one of the statistics field's most deeply-held notions
-was thrown off its pedestal, largely by some researchers in machine
-learning. (This is arguably when the idea first became widespread, but
-for earlier instances, see Marco Loog *et al*, *A brief prehistory of
-double descent*, *PNAS*, 2020.) And many of the explanations given have
-been related to SVD. How can this bizarre effect occur?
-
-*Connection to minimum-norm solution:*
+### Connection to Double Descent
 
 First, consider the minimum norm solution $x_{min}$ in our last section,
 with $p > n$, i.e. post-interpolation.$ Intuitively, shorter solutions
@@ -321,8 +314,10 @@ length at some point, hence the typical U-shope -- as our *second* U.
 In addition, if *gradient descent* is used to minimize the least-squares
 problem, the tendency is that the result will be of minimum norm.
 
-*Connection to the condition number of $A$:*
+## Plausibility of Double Descent: the Condition Number 
 
+We briefly mentioned the *condition number* of a square matrix $A$ back
+in @sec-detecting.
 
 
 ## The Curse of Dimensionality
