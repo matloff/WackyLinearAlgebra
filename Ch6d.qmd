@@ -317,10 +317,41 @@ problem, the tendency is that the result will be of minimum norm.
 ## Plausibility of Double Descent: the Condition Number 
 
 We briefly mentioned the *condition number* of a square matrix $A$ back
-in @sec-detecting.
+in @sec-detecting, the ratio of the maximal and minimal eigenvalues. High values suggest problems of multicollinarity
 
+If $A$ is nonsquare, as in our setting in this chapter, one can
+apply[As before, once $p$ passes the interpolation point, we need to use
+the pseudoinverse or equivalent. Also, now the denominator will be the
+smallest *nonzero* eigenvalue]{.column-margin}
+the same criterion to $AA'$. Then we can go through the same exercise as
+above, starting with $p=1$, i.e. using only the first column of $A$,
+then adding more and more columns. It turns out that if we graph 
+condition number agains $p$, we again see Double Descent behavior!
+And again, the peak will occur at the interpolation point.
 
-## The Curse of Dimensionality
+Here is the code, run on the Million Song data:
+
+``` r
+cn <-
+function(a) 
+{
+   aap <- a %*% t(a)
+   evs <- eigen(aap)$values
+   max(evs) / min(evs[evs > 1.0e-02])
+}
+
+u <- seq(55,85,1) 
+z <- sapply(u,function(p) cn(yr[1:75,1:p]))
+plot(u,z,cex=0.5)
+```
+
+![Condition number](CondNumDoubleDescent.png)
+
+There it is, a peak at $n=p$.
+
+Now, how might this relate to the original (accuracy vs. $p$
+Double Descent problemm? Recall that a large condition number indicates
+multicollinarity, which in turn causes high variance in $\widehat{\beta}$, thus impaired predictive ability.
 
 
 ## Your Turn
