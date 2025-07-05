@@ -284,11 +284,12 @@ window.Quarto = {
   <li><a href="#a-first-look" id="toc-a-first-look" class="nav-link" data-scroll-target="#a-first-look"><span class="header-section-number">11.4</span> A First Look</a></li>
   <li><a href="#the-special-case-of-symmetric-matrices" id="toc-the-special-case-of-symmetric-matrices" class="nav-link" data-scroll-target="#the-special-case-of-symmetric-matrices"><span class="header-section-number">11.5</span> The Special Case of Symmetric Matrices</a></li>
   <li><a href="#example-census-dataset" id="toc-example-census-dataset" class="nav-link" data-scroll-target="#example-census-dataset"><span class="header-section-number">11.6</span> Example: Census Dataset</a></li>
-  <li><a href="#application-detecting-multicollinearity" id="toc-application-detecting-multicollinearity" class="nav-link" data-scroll-target="#application-detecting-multicollinearity"><span class="header-section-number">11.7</span> Application: Detecting Multicollinearity</a></li>
+  <li><a href="#sec-detecting" id="toc-sec-detecting" class="nav-link" data-scroll-target="#sec-detecting"><span class="header-section-number">11.7</span> Application: Detecting Multicollinearity</a></li>
   <li><a href="#example-currency-data" id="toc-example-currency-data" class="nav-link" data-scroll-target="#example-currency-data"><span class="header-section-number">11.8</span> Example: Currency Data</a></li>
   <li><a href="#computation-the-power-method" id="toc-computation-the-power-method" class="nav-link" data-scroll-target="#computation-the-power-method"><span class="header-section-number">11.9</span> Computation: the Power Method</a></li>
   <li><a href="#application-computation-of-long-run-distribution-in-markov-chains" id="toc-application-computation-of-long-run-distribution-in-markov-chains" class="nav-link" data-scroll-target="#application-computation-of-long-run-distribution-in-markov-chains"><span class="header-section-number">11.10</span> Application: Computation of Long-Run Distribution in Markov Chains</a></li>
-  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">11.11</span> Your Turn</a></li>
+  <li><a href="#eigenanalysis-of-nonsquare-matrices" id="toc-eigenanalysis-of-nonsquare-matrices" class="nav-link" data-scroll-target="#eigenanalysis-of-nonsquare-matrices"><span class="header-section-number">11.11</span> Eigenanalysis of Nonsquare Matrices</a></li>
+  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">11.12</span> Your Turn</a></li>
   </ul>
 </nav>
     </div>
@@ -547,8 +548,8 @@ woman     -289463.4</code></pre>
 <p>Yes, that first column is indeed an eigenvector, with the claimed eigenvalue.</p>
 <p>Note that the expected 0 eigenvalue shows up as 2.801489e-12, quite small but nonzero, due to roundoff error.</p>
 </section>
-<section id="application-detecting-multicollinearity" class="level2" data-number="11.7">
-<h2 data-number="11.7" class="anchored" data-anchor-id="application-detecting-multicollinearity"><span class="header-section-number">11.7</span> Application: Detecting Multicollinearity</h2>
+<section id="sec-detecting" class="level2" data-number="11.7">
+<h2 data-number="11.7" class="anchored" data-anchor-id="sec-detecting"><span class="header-section-number">11.7</span> Application: Detecting Multicollinearity</h2>
 <p>Consider the basic eigenanalysis equation,</p>
 <p><span class="math display">\[
 Ax = \lambda x
@@ -647,8 +648,12 @@ x_i \leftarrow \frac{x_i}{||x_i||}
 <p>We showed in <a href="Ch2.html#sec-markovsolve" class="quarto-xref"><span>Section 3.3</span></a> how matrix inverse can be used to compute the long-run distribution <span class="math inline">\(\nu\)</span> in a Markov chain. However, this is inefficient for very large transition matrices. For instance, in Google PageRank, there is a Markov state for every page on the Web!</p>
 <p>Instead, we exploit the fact that <a href="Ch2.html#eq-MarkovPi" class="quarto-xref">Equation&nbsp;<span>3.3</span></a> says that the transition matrix has an eigenvector <span class="math inline">\(\nu\)</span> with eigenvalue 1. Due to the typical huge size of the matrix, the power method or a variant is often used.</p>
 </section>
-<section id="your-turn" class="level2" data-number="11.11">
-<h2 data-number="11.11" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">11.11</span> Your Turn</h2>
+<section id="eigenanalysis-of-nonsquare-matrices" class="level2" data-number="11.11">
+<h2 data-number="11.11" class="anchored" data-anchor-id="eigenanalysis-of-nonsquare-matrices"><span class="header-section-number">11.11</span> Eigenanalysis of Nonsquare Matrices</h2>
+<p>What if the matrix <span class="math inline">\(M\)</span> is not square, as we have assumed above? It turns out that it is still useful to define eigenvalues</p>
+</section>
+<section id="your-turn" class="level2" data-number="11.12">
+<h2 data-number="11.12" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">11.12</span> Your Turn</h2>
 <p>❄️ <strong>Your Turn:</strong> Take a symmetric matrix <span class="math inline">\(A\)</span> of your choice, use R to find its eigenvalues and eigenvectors. Verify that the latter are orthogonal, and that the matrix <span class="math inline">\(P\)</span> formed as in <a href="#thm-symmeig" class="quarto-xref">Theorem&nbsp;<span>11.3</span></a> does indeed have its transpose as its inverse. (If you choose a noninvertible <span class="math inline">\(A\)</span>, try another.)</p>
 <p>❄️ <strong>Your Turn:</strong> Show that any Markov transition matrix has an eigenvalue 1, with eigenvector consisting of all 1s.</p>
 <p>❄️ <strong>Your Turn:</strong> Show that the diagonalizing matrix <span class="math inline">\(P\)</span> for a symmetric matrix must have determinant <span class="math inline">\(\pm 1\)</span>.</p>

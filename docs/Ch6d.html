@@ -276,16 +276,15 @@ window.Quarto = {
    
   <ul>
   <li><a href="#motivating-example" id="toc-motivating-example" class="nav-link active" data-scroll-target="#motivating-example"><span class="header-section-number">14.1</span> Motivating Example</a></li>
-  <li><a href="#tolerance-of-wiggliness" id="toc-tolerance-of-wiggliness" class="nav-link" data-scroll-target="#tolerance-of-wiggliness"><span class="header-section-number">14.2</span> Tolerance of Wiggliness</a></li>
-  <li><a href="#svd-as-the-minimum-norm-solution" id="toc-svd-as-the-minimum-norm-solution" class="nav-link" data-scroll-target="#svd-as-the-minimum-norm-solution"><span class="header-section-number">14.3</span> SVD as the Minimum-Norm Solution</a></li>
-  <li><a href="#application-explaining-the-mystery-of-double-descent" id="toc-application-explaining-the-mystery-of-double-descent" class="nav-link" data-scroll-target="#application-explaining-the-mystery-of-double-descent"><span class="header-section-number">14.4</span> Application: Explaining the Mystery of ``Double Descent”</a>
+  <li><a href="#interpolation-point" id="toc-interpolation-point" class="nav-link" data-scroll-target="#interpolation-point"><span class="header-section-number">14.2</span> Interpolation Point</a></li>
+  <li><a href="#double-descent" id="toc-double-descent" class="nav-link" data-scroll-target="#double-descent"><span class="header-section-number">14.3</span> Double Descent</a></li>
+  <li><a href="#plausibility-of-double-descent-the-minimum-norm-solutions" id="toc-plausibility-of-double-descent-the-minimum-norm-solutions" class="nav-link" data-scroll-target="#plausibility-of-double-descent-the-minimum-norm-solutions"><span class="header-section-number">14.4</span> Plausibility of Double Descent: the Minimum Norm Solutions</a>
   <ul class="collapse">
-  <li><a href="#motivating-example-1" id="toc-motivating-example-1" class="nav-link" data-scroll-target="#motivating-example-1"><span class="header-section-number">14.4.1</span> Motivating example</a></li>
-  <li><a href="#overfitting-and-beyond" id="toc-overfitting-and-beyond" class="nav-link" data-scroll-target="#overfitting-and-beyond"><span class="header-section-number">14.4.2</span> Overfitting and BEYOND</a></li>
-  <li><a href="#the-classic-and-modern-views" id="toc-the-classic-and-modern-views" class="nav-link" data-scroll-target="#the-classic-and-modern-views"><span class="header-section-number">14.4.3</span> The classic and modern views</a></li>
-  <li><a href="#how-can-this-bizarre-effect-occur" id="toc-how-can-this-bizarre-effect-occur" class="nav-link" data-scroll-target="#how-can-this-bizarre-effect-occur"><span class="header-section-number">14.4.4</span> How can this bizarre effect occur?</a></li>
+  <li><a href="#proof-of-the-minimum-norm-property" id="toc-proof-of-the-minimum-norm-property" class="nav-link" data-scroll-target="#proof-of-the-minimum-norm-property"><span class="header-section-number">14.4.1</span> Proof of the minimum-norm property</a></li>
+  <li><a href="#connection-to-double-descent" id="toc-connection-to-double-descent" class="nav-link" data-scroll-target="#connection-to-double-descent"><span class="header-section-number">14.4.2</span> Connection to Double Descent</a></li>
   </ul></li>
-  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">14.5</span> Your Turn</a></li>
+  <li><a href="#plausibility-of-double-descent-the-condition-number" id="toc-plausibility-of-double-descent-the-condition-number" class="nav-link" data-scroll-target="#plausibility-of-double-descent-the-condition-number"><span class="header-section-number">14.5</span> Plausibility of Double Descent: the Condition Number</a></li>
+  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">14.6</span> Your Turn</a></li>
   </ul>
 </nav>
     </div>
@@ -327,15 +326,98 @@ Goals of this chapter:
 </div>
 <section id="motivating-example" class="level2" data-number="14.1">
 <h2 data-number="14.1" class="anchored" data-anchor-id="motivating-example"><span class="header-section-number">14.1</span> Motivating Example</h2>
-<p>Recall the Million Song dataset in <span class="quarto-unresolved-ref">?sec-millonsong</span>.</p>
+<p>Classically, statistics and ML books have stated that, for fixed number of data points <span class="math inline">\(n\)</span>, the graph of predictive accuracy against number of predictor variables <span class="math inline">\(p\)</span> roughly has a U-shape, concave up. Starting at <span class="math inline">\(p = 1\)</span> and then increasing <span class="math inline">\(p\)</span>, we achieve better and better predictive power until we reach the minimum point of the U; adding further predictors degrades performance.</p>
+<p>We wish to explore this notion on the Million Song dataset from <span class="quarto-unresolved-ref">?sec-millonsong</span>. Here “Y” is the year of release of a song, stored in the first column with label <strong>V1</strong>. “X” is a set of 90 audio measurements. In the version of the dataset used here, we have 5000 rows.</p>
+<p>We ran code like this:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="fu">seq</span>(<span class="dv">10</span>,<span class="dv">90</span>,<span class="dv">10</span>),<span class="cf">function</span>(p)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">mean</span>(<span class="fu">replicate</span>(<span class="dv">500</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>   qeML<span class="sc">::</span><span class="fu">qeLin</span>(yr5000[<span class="dv">1</span><span class="sc">:</span><span class="dv">150</span>,<span class="dv">1</span><span class="sc">:</span>p],<span class="st">'V1'</span>)<span class="sc">$</span>testAcc</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>   )))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Here we are running a linear model on the first 150 rows of the dataset (i.e.&nbsp;<span class="math inline">\(n=150\)</span>), and the first <span class="math inline">\(p\)</span> columns, so that <span class="math inline">\(p = 10,20,...,90\)</span>. Since the <span class="math inline">\(qeML\)</span> functions automatically form holdout sets, we obtain the accuracy value, Mean Absolute Prediction Error. And since the holdout set is randomly chosen, we do this 500 times. We graph the result using <strong>qePlotCurves</strong> (which does smoothing).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Ushapes.png" class="img-fluid figure-img"></p>
+<figcaption>U shapes</figcaption>
+</figure>
+</div>
+<p>What do we see here?</p>
+<ul>
+<li><p>The graphs are indeed U-shaped, albeit often shallower than the typical pictures shown in books.</p></li>
+<li><p>The larger the value of <span class="math inline">\(n\)</span>,</p>
+<ul>
+<li><p>the lower the curve (better prediction accuracy), and</p></li>
+<li><p>the larger the value of the best <span class="math inline">\(p\)</span> (optimal to use more predictors)</p></li>
+</ul></li>
+<li><p>Some are half-U’s, indicating it’s best to use all variables (large <span class="math inline">\(n\)</span>) or one or two (small <span class="math inline">\(n\)</span>).</p></li>
+</ul>
 </section>
-<section id="tolerance-of-wiggliness" class="level2" data-number="14.2">
-<h2 data-number="14.2" class="anchored" data-anchor-id="tolerance-of-wiggliness"><span class="header-section-number">14.2</span> Tolerance of Wiggliness</h2>
-<p>FIT A LINEAR MODEL FOR Y = 0,1, USING MISCLASS ERROR</p>
+<section id="interpolation-point" class="level2" data-number="14.2">
+<h2 data-number="14.2" class="anchored" data-anchor-id="interpolation-point"><span class="header-section-number">14.2</span> Interpolation Point</h2>
+<p>Consider a linear regression model, for convenience say with no <span class="math inline">\(\beta_0\)</span> term. As <span class="math inline">\(p\)</span> increases, eventually it becomes equal to <span class="math inline">\(n\)</span>, the number of rows. When that happens, we get a “perfect” fit: Our line, plane or hyperplane will pass through every data point, and <a href="Ch3.html#eq-matrixss" class="quarto-xref">Equation&nbsp;<span>5.3</span></a> will be 0. Just think of the case <span class="math inline">\(p=1\)</span>, now with a <span class="math inline">\(\beta_0\)</span> term: Two points in <span class="math inline">\(\cal{R}^2\)</span>, through which we can draw a line passing through them.</p>
+<p>This value of <span class="math inline">\(p\)</span> is thus called the <em>interpolation point</em>, viewed classically as follows.</p>
+<ul>
+<li><p>Of course, setting <span class="math inline">\(p\)</span> to be the interpolation point would will be a terrible fit, unable to predict new data well; we are at the right-hand end of the U.</p></li>
+<li><p>And since we already have reached a “perfect” fit, there would be no point in increasing <span class="math inline">\(p\)</span> any further (using a pseudoinverse).</p></li>
+</ul>
+<p>So, pictures of overfititng in books had <span class="math inline">\(p\)</span> stop at <span class="math inline">\(n\)</span>. But wow, were they wrong!</p>
 </section>
-<section id="svd-as-the-minimum-norm-solution" class="level2 page-columns page-full" data-number="14.3">
-<h2 data-number="14.3" class="anchored" data-anchor-id="svd-as-the-minimum-norm-solution"><span class="header-section-number">14.3</span> SVD as the Minimum-Norm Solution</h2>
-<p>In an overdetermined linear system such as <a href="Ch6c.html#eq-overdetermined" class="quarto-xref">Equation&nbsp;<span>13.5</span></a>, there are many solutions. However, an advantage of Moore-Penrose is that it gives us the <em>minimum norm</em> solution. We’ll discuss the significance of this shortly, but let’s prove it first.</p>
+<section id="double-descent" class="level2" data-number="14.3">
+<h2 data-number="14.3" class="anchored" data-anchor-id="double-descent"><span class="header-section-number">14.3</span> Double Descent</h2>
+<p>Though the prevailing wisdom used to be that, as noted above, there is no point in trying values of <span class="math inline">\(p\)</span> even near <span class="math inline">\(n\)</span>, let alone beyond <span class="math inline">\(n\)</span>. It turns out that in some cases, the best value of <span class="math inline">\(p\)</span> is in fact larger than <span class="math inline">\(n\)</span></p>
+<p>As a first step to seeing this, consider the following code:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>overfit <span class="ot">&lt;-</span> <span class="cf">function</span>(nreps,n,maxP)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>{  </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">require</span>(qeML)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">load</span>(<span class="st">'YearData.save'</span>)  <span class="co"># 500K Million Song data</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>   nas <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>,nreps<span class="sc">*</span>(maxP<span class="dv">-1</span>))</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>   <span class="co"># record p, Mean Absolute Prediction Error</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>   outdf <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">p=</span>nas,<span class="at">mape=</span>nas)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>   rownum <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>   <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nreps) {</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>      idxs <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(yr),n)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>      trn <span class="ot">&lt;-</span> yr[idxs,] </span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>      tst <span class="ot">&lt;-</span> yr[<span class="sc">-</span>idxs,]           </span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>      <span class="cf">for</span> (p <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>maxP) {</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>         rownum <span class="ot">&lt;-</span> rownum <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>         out<span class="ot">&lt;-</span><span class="fu">qePolyLin</span>(trn[,<span class="dv">1</span><span class="sc">:</span>(p<span class="sc">+</span><span class="dv">1</span>)],</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>            <span class="st">'V1'</span>,<span class="dv">2</span>,<span class="at">holdout=</span><span class="cn">NULL</span>) </span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>         preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(out,tst[,<span class="sc">-</span><span class="dv">1</span>]) </span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>         mape <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">abs</span>(preds <span class="sc">-</span> tst[,<span class="dv">1</span>])) </span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>         outdf[rownum,<span class="dv">1</span>] <span class="ot">&lt;-</span> p</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>         outdf[rownum,<span class="dv">2</span>] <span class="ot">&lt;-</span> mape</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>         <span class="fu">print</span>(outdf[rownum,])</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>   }</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>   outdf  </span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">overfit</span>(<span class="dv">10</span>,<span class="dv">250</span>,<span class="dv">30</span>)</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="fu">tapply</span>(z<span class="sc">$</span>mape,z<span class="sc">$</span>p,mean)</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(w)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This code tries values of <strong>p</strong> up to <strong>maxP</strong> but one must note that we are fitting quadratic models. For any given value of <strong>p</strong>, the number of columns after polynomial expansion will be much larger. Consider this code:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> u22 <span class="ot">&lt;-</span> <span class="fu">qePolyLin</span>(yr[<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">23</span>],<span class="st">'V1'</span>,<span class="at">deg=</span><span class="dv">2</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>P <span class="sc">&gt;</span> N. With polynomial terms and interactions, P is <span class="fl">265.</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> u22 <span class="ot">&lt;-</span> <span class="fu">qePolyLin</span>(yr[<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">22</span>],<span class="st">'V1'</span>,<span class="at">deg=</span><span class="dv">2</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>P <span class="sc">&gt;</span> N. With polynomial terms and interactions, P is <span class="fl">246.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>So <span class="math inline">\(p = 21\)</span> will upon polynomial expansion produce 246 columns, while <span class="math inline">\(p=22\)</span> will produce 265. We won’t hit 250 exactly, but the interpolation point will be in this range.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="PolyDoubleDesc.png" class="img-fluid figure-img"></p>
+<figcaption>U shapes</figcaption>
+</figure>
+</div>
+<p>After the interpolation point, we see another U! Hence the name <em>double descent</em>. This introduces the concept, but the big news is:</p>
+<blockquote class="blockquote">
+<p>The minimum of the second U is sometimes lower than that of the first. In other words, it can pay to overfit!</p>
+</blockquote>
+<p>We’ll see examples shortly, but first let’s see how linear algebra plays a role.</p>
+</section>
+<section id="plausibility-of-double-descent-the-minimum-norm-solutions" class="level2 page-columns page-full" data-number="14.4">
+<h2 data-number="14.4" class="anchored" data-anchor-id="plausibility-of-double-descent-the-minimum-norm-solutions"><span class="header-section-number">14.4</span> Plausibility of Double Descent: the Minimum Norm Solutions</h2>
+<p>In an overdetermined linear system such as <a href="Ch6c.html#eq-overdetermined" class="quarto-xref">Equation&nbsp;<span>13.5</span></a>, there are many solutions. Our <strong>qePolyLin</strong> function calls <strong>regtools::penrosePoly</strong>. An advantage of Moore-Penrose is that it gives us the <em>minimum norm</em> solution. We’ll discuss the significance of this for Double Descent shortly, but let’s prove it first.</p>
+<section id="proof-of-the-minimum-norm-property" class="level3 page-columns page-full" data-number="14.4.1">
+<h3 data-number="14.4.1" class="anchored" data-anchor-id="proof-of-the-minimum-norm-property"><span class="header-section-number">14.4.1</span> Proof of the minimum-norm property</h3>
 <p>We will need this:</p>
 <div id="thm-samenorm" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 14.1 (Multiplication by an Orthogonal Matrix Preserves Norm)</strong></span> For an orthogonal matrix <span class="math inline">\(M\)</span> and a vector <span class="math inline">\(w\)</span>, <span class="math inline">\(||Mw|| = ||w||\)</span>.</p>
@@ -351,326 +433,85 @@ Bx = q
 <p>the Moore-Penrose solution minimizes <span class="math inline">\(||x||\)</span>.</p>
 </div>
 <div class="proof page-columns page-full">
-<div class="page-columns page-full"><p><span class="proof-title"><em>Proof</em>. </span>Again, write</p><div class="no-row-height column-margin column-container"><span class="">Adapted from a derivation by Carlo Tomasi.</span></div></div>
+<div class="page-columns page-full"><p><span class="proof-title"><em>Proof</em>. </span>Again, write</p><div class="no-row-height column-margin column-container"><span class="">Adapted in part from a derivation by Jose’ C. Feriero.</span></div></div>
 <p><span class="math display">\[
 B = U \Sigma V',
 \]</span></p>
-<p>where <span class="math inline">\(U\)</span> is <span class="math inline">\(m \times n\)</span> and <span class="math inline">\(\Sigma\)</span> and <span class="math inline">\(V\)</span> are <span class="math inline">\(n \times n\)</span>. Consider the residual sum of squares</p>
+<p>where <span class="math inline">\(U\)</span> is <span class="math inline">\(m \times n\)</span> and <span class="math inline">\(\Sigma\)</span> and <span class="math inline">\(V\)</span> are <span class="math inline">\(n \times n\)</span>. (For our discussion of overfitting, we will primarily be interested in the case <span class="math inline">\(n &gt; m\)</span>.)</p>
+<p>Consider the residual sum of squares</p>
 <p><span id="eq-RSS"><span class="math display">\[
-||Bx - q||^2 = ||U (\Sigma V' x - U'q)||^2
+||Bx - q||^2 = ||U \Sigma V' x -q||^2
 \tag{14.2}\]</span></span></p>
-<p>since <span class="math inline">\(UU'=I\)</span>.</p>
-<p>Thus from <a href="#thm-samenorm" class="quarto-xref">Theorem&nbsp;<span>14.1</span></a> we can remove the factor <span class="math inline">\(U\)</span> in <a href="#eq-RSS" class="quarto-xref">Equation&nbsp;<span>14.2</span></a>, yielding</p>
+<p>so</p>
 <p><span id="eq-RSS1"><span class="math display">\[
-||Bx - q||^2 = ||\Sigma V' x - U'q||^2
+||Bx - q||^2 = ||U (\Sigma V' x - U'q)||^2
 \tag{14.3}\]</span></span></p>
-<p>Rename <span class="math display">\[V'x\]</span> to <span class="math inline">\(w\)</span>:</p>
+<p>since <span class="math inline">\(UU'=I\)</span>.</p>
+<p>From <a href="#thm-samenorm" class="quarto-xref">Theorem&nbsp;<span>14.1</span></a> we can remove the factor <span class="math inline">\(U\)</span> in <a href="#eq-RSS1" class="quarto-xref">Equation&nbsp;<span>14.3</span></a>, yielding</p>
 <p><span id="eq-RSS2"><span class="math display">\[
-||Bx - q||^2 = ||\Sigma w - U'q||^2
+||Bx - q||^2 = ||\Sigma V' x - U'q||^2
 \tag{14.4}\]</span></span></p>
-<p>Now bring in the fact that <span class="math inline">\(\sigma_i = 0\)</span> for <span class="math inline">\(i &gt; r\)</span>, by writing everything in partitioned fashion. Break <span class="math inline">\(U\)</span> into <span class="math inline">\(r\)</span> and <span class="math inline">\(n-r\)</span> columns,</p>
-<p><span class="math display">\[
-(U_1 | U_2)
-\]</span></p>
-<p>and partition other objects similarly:</p>
-<p><span class="math display">\[
-V = (V_1 | V_2),
-\]</span></p>
-<p><span class="math display">\[
-\Sigma =
-\left (
-\begin{array}{rr}
-\Sigma_1 &amp; 0 \\
-0 &amp; 0  \\
-\end{array}
-\right ),
-\]</span></p>
-<p>and</p>
-<p><span class="math display">\[
-w =
-\left (
-\begin{array}{r}
-w_1 \\
-w_2 \\
-\end{array}
-\right )
-\]</span></p>
-<p>Substituting into <a href="#eq-RSS2" class="quarto-xref">Equation&nbsp;<span>14.4</span></a>, we have</p>
+<p>Rename <span class="math inline">\(V'x\)</span> to <span class="math inline">\(w\)</span> and <span class="math inline">\(U'q\)</span> to <span class="math inline">\(s\)</span> (a constant vector):</p>
 <p><span id="eq-RSS3"><span class="math display">\[
-||Bx - q||^2
-= ||
-\left (
-\begin{array}{r}
-\Sigma_1 w_1 \\
-0 \\
-\end{array}
-\right ) -
-\left (
-\begin{array}{r}
-U_1'q \\
-U_2'q \\
-\end{array}
-\right )
-||^2
+||Bx - q||^2 = ||\Sigma w - s||^2
 \tag{14.5}\]</span></span></p>
-<p>This means that <span class="math inline">\(w_2\)</span> – the last <span class="math inline">\(n-r\)</span> elements of our solution to <span class="math inline">\(Bx
-=q\)</span> – can be anything at all, without changing the residual sum of squares, confirming that there are infinitely many equally-effective solutions!</p>
-<p>But if we want <span class="math inline">\(x\)</span> to be of minimum length, we need <span class="math inline">\(w\)</span> to be of minimum length (the shortest <span class="math inline">\(w\)</span> gives us the shortest <span class="math inline">\(x = Vw\)</span>, again by <a href="#thm-samenorm" class="quarto-xref">Theorem&nbsp;<span>14.1</span></a>). And,</p>
-<p><span class="math display">\[
-||w||^2 = ||w_2||^2 + ||w_2||^2
-\]</span></p>
-<p>Thus we take <span class="math inline">\(w_2 = 0\)</span>.</p>
-<p>Now, reviewing <a href="#eq-RSS3" class="quarto-xref">Equation&nbsp;<span>14.6</span></a>, note that the equation</p>
-<p><span class="math display">\[
-\Sigma_1 w_1 = U_1 q
-\]</span></p>
-<p>has the solution</p>
-<p><span class="math display">\[
-w_1 = \Sigma_1^{-1} U_1 q
-\]</span></p>
-<p>An interesting sidelight of this is that it means that</p>
-<p><span id="eq-RSS3"><span class="math display">\[
-||Bx - q||^2
-= ||
-\left (
-\begin{array}{r}
-0  \\
-U_2q \\
-\end{array}
-\right )
-||^2,
+<p>So, instead of finding <span class="math inline">\(x\)</span> to minimize the residual sum of squares <span class="math inline">\(||Bx - q||^2\)</span>, we’ve (temporarily) changed the problem to that of finding <span class="math inline">\(w\)</span> to minimmize</p>
+<p><span id="eq-newResids"><span class="math display">\[
+||\Sigma w - s||^2
 \tag{14.6}\]</span></span></p>
-<p>i.e.&nbsp;the residual sum of squares depends only on <span class="math inline">\(U_2\)</span>, not <span class="math inline">\(U_1\)</span>. But returning to our quest for the minimum-norm solution, we map back to <span class="math inline">\(x = Vw\)</span>, and have</p>
+<div class="page-columns page-full"><p>Now bring in the fact that <span class="math inline">\(\sigma_i = 0\)</span> for <span class="math inline">\(i &gt; r\)</span>, with <span class="math inline">\(r\)</span> being the rank of <span class="math inline">\(B\)</span>. That has the interesting implication that <span class="math inline">\(w_{r+1},....,w_n\)</span> can be anything whatsoever, in <a href="#eq-newResids" class="quarto-xref">Equation&nbsp;<span>14.6</span></a> – the value of that expression is completely independent of <span class="math inline">\(w_{r+1},....,w_n\)</span>. So that shows that if <span class="math inline">\(r &lt; n\)</span>, there are infinitely many solutions <span class="math inline">\(w\)</span>, and thus infinitely many solutions to <span class="math inline">\(Bx = q\)</span>, since <span class="math inline">\(x = Vw\)</span>. </p><div class="no-row-height column-margin column-container"><span class="">Note that we are also making use of the fact that <span class="math inline">\(V\)</span> is invertible (<span class="math inline">\(VV'=I\)</span>).</span></div></div>
+<p>Recall that our goal is to find the minimum-norm value of <span class="math inline">\(x\)</span>, and since <span class="math inline">\(||x|| = ||w||\)</span> (<a href="#thm-samenorm" class="quarto-xref">Theorem&nbsp;<span>14.1</span></a>), our problem is thus reduced to finding the minimum-norm <span class="math inline">\(w\)</span>.</p>
+<p>Now since</p>
 <p><span class="math display">\[
-x_1 = V_1 \Sigma_1^{-1} U_1'q
+||w||^2 = w_1^2+...+w_r^2+w_{r+1}^2+...+w_n^2
 \]</span></p>
-<p>which is the SVD solution! Thus the SVD solution does have minimum norm.</p>
+<p>and since we have a free hand in choosing <span class="math inline">\(w_{r+1},...,w_n\)</span>, we minimize <span class="math inline">\(||w||\)</span> by setting those <span class="math inline">\(n-r\)</span> values to 0.</p>
+<p>Thus we can make <a href="#eq-newResids" class="quarto-xref">Equation&nbsp;<span>14.6</span></a> equal to 0, i.e.&nbsp;exact fit, by setting</p>
+<p><span class="math display">\[
+w = \Sigma^{+} s
+\]</span></p>
+<p>where <span class="math inline">\(\Sigma^{+}\)</span> is the diagonal matrix with elements <span class="math inline">\(\sigma_1^{-1},...,\sigma_r^{-1},0,....,0\)</span>.</p>
+<p>Wrapping up, we have</p>
+<p><span class="math display">\[
+x = Vw = V \Sigma^{+} U' q
+\]</span></p>
+<p>Exactly the Moore-Penrose inverse!</p>
 <p><span class="math inline">\(\square\)</span></p>
 </div>
-<p>to add:</p>
-<p>possible reasons:</p>
-<p>at interp, min norm suddenly gives more than 1 choice; min norm is like min Var; maybe show unbiased by arguing A’A b = A’S for all A, thus A’E(estreg) = A’beta’Y for all A etc.; this of course holds only for estimable x’beta, meaning x is in row space of A (or equiv, A’A)</p>
-<p>condition number is max at interpolation</p>
-<p>(size of?) second U depends on min nonzero eigenvalue</p>
-<p>my empirical example</p>
-<p>ovrf &lt;- function(nreps,n,maxP) { load(‘YearData.save’) # yr &lt;- yr[,1:2] nas &lt;- rep(NA,nreps*(maxP-1)) outdf &lt;- data.frame(p=nas,mape=nas) rownum &lt;- 0 for (i in 1:nreps) { idxs &lt;- sample(1:nrow(yr),n) trn &lt;- yr[idxs,] tst &lt;- yr[-idxs,] for (p in 2:maxP) { rownum &lt;- rownum + 1 # out&lt;-qePolyLin(trn[,1:(p+1)], # ‘V1’,2,holdout=NULL) out &lt;- qeLin(trn[,1:(p+1)],‘V1’,2,holdout=NULL) preds &lt;- predict(out,tst[,2:(p+1)]) mape &lt;- mean(abs(preds - tst[,1])) outdf[rownum,1] &lt;- p outdf[rownum,2] &lt;- mape print(outdf[rownum,]) } } outdf #run through tapply() for the graph }</p>
-<!--
- MAKE IT GENERAL, PUT IN code/
-
- > set.seed(999)
- > o1 <- ovrf(1,30,30)  USE THIS
-<-->
 </section>
-<section id="application-explaining-the-mystery-of-double-descent" class="level2" data-number="14.4">
-<h2 data-number="14.4" class="anchored" data-anchor-id="application-explaining-the-mystery-of-double-descent"><span class="header-section-number">14.4</span> Application: Explaining the Mystery of ``Double Descent”</h2>
-<p>Around 2018-2019, one of the statistics field’s most deeply-held notions was thrown off its pedestal, largely by some researchers in machine learning. (This is arguably when the idea first became widespread, but for earlier instances, see Marco Loog <em>et al</em>, <em>A brief prehistory of double descent</em>, PNAS, 2020.) And many of the explanations given have been related to SVD.</p>
-<section id="motivating-example-1" class="level3" data-number="14.4.1">
-<h3 data-number="14.4.1" class="anchored" data-anchor-id="motivating-example-1"><span class="header-section-number">14.4.1</span> Motivating example</h3>
-<p>Let’s consider the Million Song Dataset from <a href="Ch5c.html#sec-millionsong" class="quarto-xref"><span>Section 10.2</span></a>.</p>
-</section>
-<section id="overfitting-and-beyond" class="level3" data-number="14.4.2">
-<h3 data-number="14.4.2" class="anchored" data-anchor-id="overfitting-and-beyond"><span class="header-section-number">14.4.2</span> Overfitting and BEYOND</h3>
-<p>Recall that a well-known rule of thumb is that the number <span class="math inline">\(p\)</span> of predictors should be less than <span class="math inline">\(\sqrt{n}\)</span>, where <span class="math inline">\(n\)</span> is the number of data points. We will abandon this and see what happens.</p>
-<p>We will add predictors one at a time, to form models of increasing complexity. As usual, let <span class="math inline">\(p\)</span> denote the number of predictors in a given model. We will also use only a small number of rows, say <span class="math inline">\(n = 30\)</span>. We start with <span class="math inline">\(p=1\)</span>, then <span class="math inline">\(p=2\)</span>, eventually reaching <span class="math inline">\(p = n-1\)</span> (accounting for the 1s column in the <span class="math inline">\(A\)</span> matrix in <a href="Ch3.html#eq-betahat" class="quarto-xref">Equation&nbsp;<span>5.8</span></a>), and not stopping even there. We go to <span class="math inline">\(p=n\)</span>, <span class="math inline">\(p=n+1\)</span> and so on.</p>
-<p>When we reach <span class="math inline">\(p=n+2\)</span>, the matrix <span class="math inline">\(A\)</span> will have more columns than rows, and <span class="math inline">\((A'A)^{-1}\)</span> will not exist. (See Your Turn problem below.) We can still use SVD to solve for <span class="math inline">\(b\)</span>, but intuitively some kind of major change may happen at that point.</p>
-<p>Here is the code and output</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ovrf <span class="ot">&lt;-</span> <span class="cf">function</span>(nreps,n,maxP)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> {</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">load</span>(<span class="st">'YearData.save'</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># yr &lt;- yr[,1:2]</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    nas <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>,nreps<span class="sc">*</span>(maxP<span class="dv">-1</span>))</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    outdf <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">p=</span>nas,<span class="at">mape=</span>nas)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    rownum <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nreps) {</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>       idxs <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(yr),n)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>       trn <span class="ot">&lt;-</span> yr[idxs,]</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>       tst <span class="ot">&lt;-</span> yr[<span class="sc">-</span>idxs,]</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>       <span class="cf">for</span> (p <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>maxP) {</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>          rownum <span class="ot">&lt;-</span> rownum <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>          <span class="co"># don't use lm or qeLin, since no SVD; instead, fit polynomial</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>          <span class="co"># of degree 1, i.e. linear model</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>          out <span class="ot">&lt;-</span> <span class="fu">qePolyLin</span>(trn[,<span class="dv">1</span><span class="sc">:</span>(p<span class="sc">+</span><span class="dv">1</span>)],<span class="st">'V1'</span>,<span class="dv">1</span>,<span class="at">holdout=</span><span class="cn">NULL</span>)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>          preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(out,tst[,<span class="dv">2</span><span class="sc">:</span>(p<span class="sc">+</span><span class="dv">1</span>)])</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>          mape <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">abs</span>(preds <span class="sc">-</span> tst[,<span class="dv">1</span>]))</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>          outdf[rownum,<span class="dv">1</span>] <span class="ot">&lt;-</span> p</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>          outdf[rownum,<span class="dv">2</span>] <span class="ot">&lt;-</span> mape</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>          <span class="fu">print</span>(outdf[rownum,])</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>       }</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    outdf  <span class="co">#run through tapply() for the graph</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a> }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">set.seed</span>(<span class="dv">111111</span>); o1 <span class="ot">&lt;-</span> <span class="fu">ovrf</span>(<span class="dv">1</span>,<span class="dv">30</span>,<span class="dv">40</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  p     mape</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="dv">2</span> <span class="fl">7.865117</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  p     mape</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="dv">3</span> <span class="fl">7.876853</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  p     mape</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="dv">4</span> <span class="fl">7.984233</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  p     mape</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> <span class="dv">5</span> <span class="fl">8.631492</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  p     mape</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="dv">6</span> <span class="fl">8.608561</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  p     mape</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="dv">6</span> <span class="dv">7</span> <span class="fl">8.734537</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  p    mape</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span> <span class="dv">8</span> <span class="fl">8.74647</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  p     mape</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="dv">8</span> <span class="dv">9</span> <span class="fl">8.746996</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>   p     mape</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="dv">9</span> <span class="dv">10</span> <span class="fl">9.042233</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="dv">11</span> <span class="fl">8.795864</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    p    mape</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="dv">11</span> <span class="dv">12</span> <span class="fl">8.88431</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="dv">12</span> <span class="dv">13</span> <span class="fl">10.06747</span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="dv">13</span> <span class="dv">14</span> <span class="fl">10.17324</span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="dv">14</span> <span class="dv">15</span> <span class="fl">10.68381</span></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="dv">15</span> <span class="dv">16</span> <span class="fl">10.41553</span></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="dv">16</span> <span class="dv">17</span> <span class="fl">9.892437</span></span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    p    mape</span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="dv">17</span> <span class="dv">18</span> <span class="fl">9.71409</span></span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="dv">18</span> <span class="dv">19</span> <span class="fl">11.25314</span></span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="dv">19</span> <span class="dv">20</span> <span class="fl">11.88647</span></span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="dv">20</span> <span class="dv">21</span> <span class="fl">17.94607</span></span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="dv">21</span> <span class="dv">22</span> <span class="fl">18.63847</span></span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="dv">22</span> <span class="dv">23</span> <span class="fl">15.26327</span></span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="dv">23</span> <span class="dv">24</span> <span class="fl">19.50255</span></span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="dv">24</span> <span class="dv">25</span> <span class="fl">24.53056</span></span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a><span class="dv">25</span> <span class="dv">26</span> <span class="fl">23.60238</span></span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="dv">26</span> <span class="dv">27</span> <span class="fl">25.35561</span></span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>    p    mape</span>
-<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="dv">27</span> <span class="dv">28</span> <span class="fl">36.1927</span></span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="dv">28</span> <span class="dv">29</span> <span class="fl">57.97567</span></span>
-<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="dv">29</span> <span class="dv">30</span> <span class="fl">754.9635</span></span>
-<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>P <span class="sc">&gt;</span> N. With polynomial terms and interactions, P is <span class="fl">31.</span></span>
-<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>    p    mape</span>
-<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a><span class="dv">30</span> <span class="dv">31</span> <span class="fl">741.573</span></span>
-<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>P <span class="sc">&gt;</span> N. With polynomial terms and interactions, P is <span class="fl">32.</span></span>
-<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>    p  mape</span>
-<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a><span class="dv">31</span> <span class="dv">32</span> <span class="fl">477.3</span></span>
-<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>P <span class="sc">&gt;</span> N. With polynomial terms and interactions, P is <span class="fl">33.</span></span>
-<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a><span class="dv">32</span> <span class="dv">33</span> <span class="fl">525.8362</span></span>
-<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>P <span class="sc">&gt;</span> N. With polynomial terms and interactions, P is <span class="fl">34.</span></span>
-<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a><span class="dv">33</span> <span class="dv">34</span> <span class="fl">465.0518</span></span>
-<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>P <span class="sc">&gt;</span> N. With polynomial terms and interactions, P is <span class="fl">35.</span></span>
-<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a><span class="dv">34</span> <span class="dv">35</span> <span class="fl">761.3692</span></span>
-<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>P <span class="sc">&gt;</span> N. With polynomial terms and interactions, P is <span class="fl">36.</span></span>
-<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a>    p    mape</span>
-<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a><span class="dv">35</span> <span class="dv">36</span> <span class="fl">689.829</span></span>
-<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>P <span class="sc">&gt;</span> N. With polynomial terms and interactions, P is <span class="fl">37.</span></span>
-<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a><span class="dv">36</span> <span class="dv">37</span> <span class="fl">673.8049</span></span>
-<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>P <span class="sc">&gt;</span> N. With polynomial terms and interactions, P is <span class="fl">38.</span></span>
-<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a><span class="dv">37</span> <span class="dv">38</span> <span class="fl">728.8918</span></span>
-<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a>P <span class="sc">&gt;</span> N. With polynomial terms and interactions, P is <span class="fl">39.</span></span>
-<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a><span class="dv">38</span> <span class="dv">39</span> <span class="fl">666.2301</span></span>
-<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a>P <span class="sc">&gt;</span> N. With polynomial terms and interactions, P is <span class="fl">40.</span></span>
-<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a>    p     mape</span>
-<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a><span class="dv">39</span> <span class="dv">40</span> <span class="fl">621.9375</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>MAPE here is mean absolute prediction error (calculated on the holdout set).</p>
-<p>Here <span class="math inline">\(n = 30\)</span>, so <span class="math inline">\(p = 30, 31,...\)</span> uses SVD, and is overfitting. Indeed, much smaller values of <span class="math inline">\(p\)</span> seem to have overfit as well. But the point is that once we got to the point at which there is no unique solution, MAPE actually improved, a huge shock to the field. It was always assumed that there is no point going beyond the values of <span class="math inline">\(p\)</span> that gives us 0 for the sum of squares.</p>
-<p>The graph of MAPE is typically a U-shape. In this case, we seem to have only the right half of a U, but still a U. What was shocking was that sometimes there is a <em>second</em> U-shape after we reach 0 sum of squares. Even more shocking, in some case the low point of the second U is lower than that of the first–it pays to radically ovefit.</p>
-</section>
-<section id="the-classic-and-modern-views" class="level3" data-number="14.4.3">
-<h3 data-number="14.4.3" class="anchored" data-anchor-id="the-classic-and-modern-views"><span class="header-section-number">14.4.3</span> The classic and modern views</h3>
-<p>In other words, here is the sea change that occurred in the field around 2018-2019.</p>
-<p>Let <span class="math inline">\(\kappa\)</span> denote the complexity of a model. In the case of a linear model, <span class="math inline">\(\kappa\)</span> would be the number of predictor columns in our dataset, and there are ways of defining it for other methods.</p>
-<p>We might try several values of <span class="math inline">\(\kappa\)</span>, and then choose the one with smallest MAPE or other accuracy measure.</p>
-<p>Before 2018-2019, the view was:</p>
-<blockquote class="blockquote">
-<p>In plotting MAPE against <span class="math inline">\(\kappa\)</span>, the curve will generally be roughly U-shaped, up to the point at which <span class="math inline">\(\kappa\)</span> gives us a 0 value of RSS in the training set. That value of <span class="math inline">\(\kappa\)</span>, called the <em>interpolation</em> point, will give us “perfect” prediction in the training set, but very poor prediction in the test set, which is what counts.</p>
-<p>We choose the value of <span class="math inline">\(\kappa\)</span> at which the curve is lowest. There is no point in trying values of <span class="math inline">\(\kappa\)</span> past the interpolation point.</p>
-</blockquote>
-<p>This was taken for granted throughout the statistics and machine learning fields. But around 2018-2019, machine learning engineers were routinely analyzing dataset of extraordinarily large sizes, using unprecedently large values of <span class="math inline">\(\kappa\)</span>. And they discovered that, bizarrely, as <span class="math inline">\(\kappa\)</span> moved past the interpolation point, the curve often went <em>down</em>–the second “descent”–often tracing its own second U-shape. And most significantly, the low point of the second U was sometimes below that of the first U! Overfitting–grossly so–may pay off!</p>
-<p>So the modern view is:</p>
-<blockquote class="blockquote">
-<p>The first U-shaped curve is as in the classic view. But the curve should be plotted past <span class="math inline">\(\kappa\)</span>, and the overall minimum may be in that second U.</p>
-</blockquote>
-<p>This is a rare sea change in classic quantitative analysis.</p>
-</section>
-<section id="how-can-this-bizarre-effect-occur" class="level3" data-number="14.4.4">
-<h3 data-number="14.4.4" class="anchored" data-anchor-id="how-can-this-bizarre-effect-occur"><span class="header-section-number">14.4.4</span> How can this bizarre effect occur?</h3>
-<p>Let’s look further. If at least some our predictors are numeric (with Million Song, they all are), then for <span class="math inline">\(p = n-1\)</span>, the (square) matrix <span class="math inline">\(A\)</span> itself will very likely be invertible, and setting</p>
-<p><span class="math display">\[
-b = A^{-1} S
-\]</span></p>
-<p>will minimize <a href="Ch3.html#eq-matrixss" class="quarto-xref">Equation&nbsp;<span>5.3</span></a>–with the value of that expression being 0–a perfect fit to the data!</p>
-<p>Now again consider <span class="math inline">\(p=n\)</span>. Let <span class="math inline">\(A_{new}\)</span> denote our new <span class="math inline">\(A\)</span> (it will be equal to the old one with a new column added on the right), and <span class="math inline">\(b_{new}\)</span> denote a new version of <span class="math inline">\(b\)</span>. We say “<em>a</em> new version” here, because there are now infinitely many versions; recall that the SVD version has minimum norm among them, a point we will return to shortly. Let’s use <span class="math inline">\(A_{old}\)</span> and <span class="math inline">\(b_{ol}\)</span> to denote the quantities we got for <span class="math inline">\(p=n-1\)</span>.</p>
-<p>We can write</p>
-<p><span class="math display">\[
-A_{new} =
-(A_{old} | c_{n+1})
-\]</span></p>
-<p>and</p>
-<p><span class="math display">\[
-b_{new} = (b_{old} | b_{n+1})'
-\]</span></p>
-<p>Thus</p>
-<p><span class="math display">\[
-A_{new}' A_{new} b_{new} =
-(A_{old}' A_{old} + c_{n+1} c_{n+1}')
-\left (
-\begin{array}{r}
-b_{old} \\
-b_{n+1} \\
-\end{array}
-\right )
-\]</span></p>
-<p>As noted, we now must use SVD. We will still get a perfect fit. To see this, set <span class="math inline">\(b_{n+1} = 0\)</span> above, which gives us the same fit we got for <span class="math inline">\(n
-= p-1\)</span>. In fact, there will be infinitely many values of <span class="math inline">\(b\)</span> that achieve that perfect fit. But remember, the SVD solution has minimum norm among them all, a point we will return to shortly.</p>
-<p>In considering the effectiveness of an estimator in statistics, we often look at bias and variance. Let’s consider bias first.</p>
-<p>In our setting here, the quantities of interest are of the form <span class="math inline">\(w'\beta\)</span> the predicted value for an individual who has the characterics <span class="math inline">\(w\)</span>. We don’t know <span class="math inline">\(\beta\)</span>, so we use <span class="math inline">\(w'b\)</span> instead. , estimated by <span class="math inline">\(w'b\)</span>. In the non-full rank setting, not all such quantities are physically estimable, but the theory says that any <span class="math inline">\(w\)</span> in the row space of <span class="math inline">\(A\)</span> will be fine. Moreover, it says the least squares estimate of <span class="math inline">\(w'\beta\)</span> will have 0 bias.</p>
-<p>Now concerning variance, we have</p>
-<p><span class="math display">\[
-Var(w'b) = w' Cov(b) w
-\]</span></p>
-<p>In general, shorter random vectors will have less variability, which though not the same as variance/covariance at least gives us the feeling that such an estimator has low variance. Recall that this is the rationale for shrinkage estimators – accept a small amount of bias in return for a reduction in variance.</p>
-<p>Thus it is at least plausible that we might get a second U-shape, as the impact of the minimum-norm nature of SVD kicks in. On the other hand, as <span class="math inline">\(p\)</span> grows further, <span class="math inline">\(b\)</span> has more and more components, and likely that minmum-norm <span class="math inline">\(b\)</span> will grow in length at some point, hence the typical later turn back upward of the second U.</p>
+<section id="connection-to-double-descent" class="level3" data-number="14.4.2">
+<h3 data-number="14.4.2" class="anchored" data-anchor-id="connection-to-double-descent"><span class="header-section-number">14.4.2</span> Connection to Double Descent</h3>
+<p>First, consider the minimum norm solution <span class="math inline">\(x_{min}\)</span> in our last section, with <span class="math inline">\(p &gt; n\)</span>, i.e.&nbsp;post-interpolation.$ Intuitively, shorter solutions have less variability, i.e.&nbsp;smaller variance. Moreover, all the solutions have a 0 residual sum of squares. It is thus plausible that <span class="math inline">\(x_{min}\)</span> might do better than the value of <span class="math inline">\(x\)</span> we obtain at interpolation, hence a downward trend in the curve of predictive accuracy against <span class="math inline">\(p\)</span>. On the other hand, as <span class="math inline">\(p\)</span> grows further, <span class="math inline">\(x\)</span> has more and more components, and likely that minmum-norm <span class="math inline">\(x\)</span> will grow in length at some point, hence the typical U-shope – as our <em>second</em> U.</p>
+<p>In addition, if <em>gradient descent</em> is used to minimize the least-squares problem, the tendency is that the result will be of minimum norm.</p>
 </section>
 </section>
-<section id="your-turn" class="level2" data-number="14.5">
-<h2 data-number="14.5" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">14.5</span> Your Turn</h2>
+<section id="plausibility-of-double-descent-the-condition-number" class="level2 page-columns page-full" data-number="14.5">
+<h2 data-number="14.5" class="anchored" data-anchor-id="plausibility-of-double-descent-the-condition-number"><span class="header-section-number">14.5</span> Plausibility of Double Descent: the Condition Number</h2>
+<p>We briefly mentioned the <em>condition number</em> of a square matrix <span class="math inline">\(A\)</span> back in <a href="Ch6a.html#sec-detecting" class="quarto-xref"><span>Section 11.7</span></a>, the ratio of the maximal and minimal eigenvalues. High values suggest problems of multicollinarity</p>
+<div class="page-columns page-full"><p>If <span class="math inline">\(A\)</span> is nonsquare, as in our setting in this chapter, one can apply the same criterion to <span class="math inline">\(AA'\)</span>. Then we can go through the same exercise as above, starting with <span class="math inline">\(p=1\)</span>, i.e.&nbsp;using only the first column of <span class="math inline">\(A\)</span>, then adding more and more columns. It turns out that if we graph condition number agains <span class="math inline">\(p\)</span>, we again see Double Descent behavior! And again, the peak will occur at the interpolation point.</p><div class="no-row-height column-margin column-container"><span class="">As before, once <span class="math inline">\(p\)</span> passes the interpolation point, we need to use the pseudoinverse or equivalent. Also, now the denominator will be the smallest <em>nonzero</em> eigenvalue</span></div></div>
+<p>Here is the code, run on the Million Song data:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>cn <span class="ot">&lt;-</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span>(a) </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>   aap <span class="ot">&lt;-</span> a <span class="sc">%*%</span> <span class="fu">t</span>(a)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>   evs <span class="ot">&lt;-</span> <span class="fu">eigen</span>(aap)<span class="sc">$</span>values</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>   <span class="fu">max</span>(evs) <span class="sc">/</span> <span class="fu">min</span>(evs[evs <span class="sc">&gt;</span> <span class="fl">1.0e-02</span>])</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">55</span>,<span class="dv">85</span>,<span class="dv">1</span>) </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">sapply</span>(u,<span class="cf">function</span>(p) <span class="fu">cn</span>(yr[<span class="dv">1</span><span class="sc">:</span><span class="dv">75</span>,<span class="dv">1</span><span class="sc">:</span>p]))</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(u,z,<span class="at">cex=</span><span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="CondNumDoubleDescent.png" class="img-fluid figure-img"></p>
+<figcaption>Condition number</figcaption>
+</figure>
+</div>
+<p>There it is, a peak at <span class="math inline">\(n=p\)</span>.</p>
+<p>Now, how might this relate to the original (accuracy vs.&nbsp;<span class="math inline">\(p\)</span> Double Descent problemm? Recall that a large condition number indicates multicollinarity, which in turn causes high variance in <span class="math inline">\(\widehat{\beta}\)</span>, thus impaired predictive ability.</p>
+</section>
+<section id="your-turn" class="level2" data-number="14.6">
+<h2 data-number="14.6" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">14.6</span> Your Turn</h2>
 <p>❄️ <strong>Your Turn:</strong> Show that for an orthogonal matrix <span class="math inline">\(M\)</span> and a vector <span class="math inline">\(w\)</span>, <span class="math inline">\(||Mw|| = ||w||\)</span>.</p>
 <p>❄️ <strong>Your Turn:</strong> Using properties of matrix rank, show that if <span class="math inline">\(p+1 &gt; n\)</span> in <a href="Ch3.html#eq-betahat" class="quarto-xref">Equation&nbsp;<span>5.8</span></a>, the inverse will not exist.</p>
 
