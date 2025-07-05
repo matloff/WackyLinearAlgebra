@@ -302,14 +302,15 @@ $\square$
 ### Connection to Double Descent
 
 First, consider the minimum norm solution $x_{min}$ in our last section,
-with $p > n$, i.e. post-interpolation.$ Intuitively, shorter solutions
+with $p > n$, i.e. post-interpolation. Intuitively, shorter solutions
 have less variability, i.e. smaller variance. Moreover, all the
 solutions have a 0 residual sum of squares. It is thus plausible that
 $x_{min}$ might do better than the value of $x$ we obtain at
 interpolation, hence a downward trend in the curve of predictive
 accuracy against $p$.  On the other hand, as $p$ grows further, $x$ has
 more and more components, and likely that minmum-norm $x$ will grow in
-length at some point, hence the typical U-shope -- as our *second* U.
+length at some point, causing an increase in variance, hence the typical
+U-shape -- as our *second* U.
 
 In addition, if *gradient descent* is used to minimize the least-squares
 problem, the tendency is that the result will be of minimum norm.
