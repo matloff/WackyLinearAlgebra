@@ -317,7 +317,8 @@ problem, the tendency is that the result will be of minimum norm.
 ## Plausibility of Double Descent: the Condition Number 
 
 We briefly mentioned the *condition number* of a square matrix $A$ back
-in @sec-detecting, the ratio of the maximal and minimal eigenvalues. High values suggest problems of multicollinarity
+in @sec-detecting, the ratio of the maximal and minimal eigenvalues.
+High values suggest problems of multicollinearity.
 
 If $A$ is nonsquare, as in our setting in this chapter, one can
 apply[As before, once $p$ passes the interpolation point, we need to use
