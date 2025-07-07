@@ -663,7 +663,7 @@ fitting neural network models, there are actually many different methods
 to choose from.) But in the end, there are no magic solutions. It may
 well be that one's basic model is flawed.
 
-## The Kernel Trick and Kernel Ridge Regression
+## The Kernel Trick and Kernel Ridge Regression{#sec-kerneltrick}
 
 How about do you see a named trick in a math book? Well, there is indeed
 one here, one that is of great practical value.
@@ -732,7 +732,7 @@ $$
 
 What is so special about this expression, or more specifically, the two
 bracketed expressions? The answer is that every major computation here
-is a "dot product: 
+is a dot product: 
 
 * In $x_{new} A'$, we are taking dot products of rows of $x_{new}$
   and columns of $A'$.
