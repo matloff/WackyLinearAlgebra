@@ -34,7 +34,7 @@ concerns arise:
 
 * Thus $\widehat{\beta}$ is unstable, in the form of high variance.
 
-### The Cause of multicollinearity{#sec-multcolcause
+### The Cause of multicollinearity{#sec-multcolcause}
 
 The matrix $A'A$ has a very important interpretation, both in the
 present context and others that will arise in later chapters:

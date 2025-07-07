@@ -16,11 +16,13 @@ library(qeML)
 ::: 
 
 The emergence of Large Language Models (LLMs) really brought machine
-learning/artificial intelligence startled the general public. Actually,
-the technology is rather simple in its foundation, centered around a
-mathematical operation called *attention*. This approach is in turn
-related to material that has arisen here in earlier chapters. Here
-we explore the basics of this idea.
+learning/artificial intelligence startled the general public.  In turn,
+the pivotal research paper behind the succdess of LLMs was *Attention Is
+All You Need*, by Ashish Vaswani *et al*, 2017.  Actually, the
+mathematical operation called *attention* is rather simple in its
+foundation.  This approach is in turn related to material that has
+arisen here in earlier chapters. Here we explore the basics of this
+idea.
 
 :::
 
@@ -32,19 +34,61 @@ library(qeML)
 
 ## Dot Product as a Measure of Similarity
 
+As discussed in @sec-multcolcause, the row $i$, column $j$
+element of the matrix $A'A$ in @linreg-formula is a measure of the
+strength of relation between predictor variables $i$ and $j$. And since
+that matrix element is the dot product between rows $i$ and $j$, we see
+that dot products serve as measures of similarity.
+
 Recall the key role of dot products in @sec-kerneltrick, with kernels
 acting like generalized dot products. One of the reasons dot products
 are so important is that they serve as measures of similarity.
 
-### Correlation
+This point also arises in recommender systems. Recall @sec-recsys:
 
-Consider for example the matrix $A'A$ in @eq-linregformula. Its row $i$,
-column $j$ element is the dot product of rows $i$ and $j$ of $A$.  But
-if our variables are scaled to mean 0, variance 1, this quantity is the
-correlation between those rows, revealing the similarity interpretation
-of a dot product.
+> In order to assess interuser similarity of the nature described above,
+> we might form a matrix , as follows. There would be 943 rows, one for
+> each user, and 1682 columns, one for each movie. The element in row ,
+> column would be the rating user gave to movie . Most of the matrix would
+> be 0s.
+> 
+> The point of constructing is that determining the similarity of users
+> becomes a matter of measuring similarity of rows of . This paves the way
+> to exploiting the wealth of matrix-centric methodology we will develop
+> in this book.
 
-### Recommender systems
+And *how* might this similarity between users be measured? By dot
+product, of course! 
 
-### Revisiting the linear model
+## Revisiting the Linear Model
+
+Before going to the LLM usage of attention, it will be instructive to
+view the familiar linear regression model in terms of attention (aside
+from the point regarding $A'A$ above). Here we follow *Ordinary Least
+Squares as an Attention Mechanism*, by Philippe Goulet Coulombe, 2025.
+
+One again, consider the model 
+
+$$
+E(S|A) = A \beta
+$$
+
+whose least-squares solution is
+
+$$
+\widehat{\beta} = (A'A)^{-1} A'S
+$$
+
+where
+
+* $A$, $n \times p$, is our predictor variable data, column $i$
+  containing predictor $i$,
+
+* $S$, $n \times 1$, is our response variable data, "Y", andn
+
+* $\beta$, $p \times 1$, is a population vector, with sample estimate as above.
+
+After computing $\widehat{\beta}$, we are readying to predict new cases!
+Say we have $m$ of them, stored in the $m \times p$ matrix $A_{new}$.
+
 
