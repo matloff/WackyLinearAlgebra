@@ -331,7 +331,7 @@ using too many PCs in our linear regression model. It seems best here to
 use only the first 10 or 20% of the PCs.
 
 
-## A "Square Root" Matrix, and MV Normal Simulation
+## A "Square Root" Matrix, and MV Normal Simulation{#sec-squareroot}
 
 ::: {#thm-sqrt}
 Any covariance matrix $A$ has a "square root" matrix $Q$, i.e.

@@ -91,4 +91,5 @@ where
 After computing $\widehat{\beta}$, we are readying to predict new cases!
 Say we have $m$ of them, stored in the $m \times p$ matrix $A_{new}$.
 
-
+At this point, we turn to the notion of the "square root" of a symmetric
+matrix, introduced in @sec-squareroot.

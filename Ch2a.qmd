@@ -423,7 +423,7 @@ $$
 
 goes to multivariate normal with the 0 vector as mean and[The usual form
 would involve the "square root" of a matrix, but we will not discuss
-that concept until our chapter on inner product spaces.]{.column-margin}
+that concept until a later chapter.]{.column-margin}
 covariance matrix $\Sigma$.
 
 :::
