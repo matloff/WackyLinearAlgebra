@@ -34,11 +34,57 @@ concerns arise:
 
 * Thus $\widehat{\beta}$ is unstable, in the form of high variance.
 
-That latter point is often quantified by the *Variance Inflation
-Factor*. To motivate it, consider the "R-squared" value
-from linear regression analyis, which is the squared correlation between
-true "Y" and predicted "Y". Let $R^2_j$ denote that measure in the case of
-predicting column $j$ of $A$ from the other columns. The quantity
+### The Cause of multicollinearity{#sec-multcolcause
+
+The matrix $A'A$ has a very important interpretation, both in the
+present context and others that will arise in later chapters:
+
+::: {.callout-note}
+
+## $A'A$ as a Measure of Relations between the Predictor Variables
+
+Roughly speaking, the row $i$, column $j$ element of $A'A$ is an
+indicator of the strength of the relation between predictor variables
+$i$ and $j$. If we center and scale our data, that that element is
+exactly $n$ times the (sample) correlation between these two predictors.
+
+::: 
+
+To see this, recall the definition of (population) correlation,
+@eq-rhodef. Substituting sample analogs for population quantities, we
+have the sample estimate,
+
+$$
+\widehat{\rho} =
+\frac
+{\frac{1}{n}
+\sum_{i=1}^n (X_{i} - \overline{X}) (Y_{i} - \overline{Y}) }
+{s_X s_Y}
+$$
+
+If we center and scle the data, the sample means become 0 and the sample
+standard deviations become 1, yielding
+
+$$
+\widehat{\rho} =
+\frac{1}{n}
+\sum_{i=1}^n (X_{i} Y_{i})
+$$
+
+as claimed.
+
+In other words, multicollinearity arises in settings in which at least
+some of the predictor variables are highly correlated.
+
+### The Variance Inflation Factor
+
+Earlier, we noted that due to multicollinearity, "$\widehat{\beta}$ is
+unstable, in the form of high variance." That point is often quantified
+by the *Variance Inflation Factor*. To motivate it, consider the
+"R-squared" value from linear regression analyis, which is the squared
+correlation between true "Y" and predicted "Y". Let $R^2_j$ denote that
+measure in the case of predicting column $j$ of $A$ from the other
+columns. The quantity
 
 $$
 VIF_j = \frac{1}{1-R^2_j}

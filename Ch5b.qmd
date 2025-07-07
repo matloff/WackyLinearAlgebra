@@ -178,7 +178,7 @@ that latter is a scaled form. Formally,
 $$
 \rho(X,Y) =
 \frac{E[(X-EX)(Y-EY)]}{\sqrt{Var(X)} \sqrt{Var(Y)}}
-$$
+$$ {#eq-rhodef}
 
 By dividing the covariance by the product of the standard deviations, we
 obtain a unitless quantity, i.e. free of units such as centimeters and
