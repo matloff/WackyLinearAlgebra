@@ -63,7 +63,7 @@ some are useful." All data scientists should keep this at the forefronts
 of their minds.
 :::
 
-### Least squares approach
+### Least squares approach{#sec-leastsquaresintro}
 
 We wish to estimate $\beta$ from our data, which we regard as a sample
 from the data generating process.  Denote our data by $(C_i,V_i), i =

@@ -163,3 +163,16 @@ Major differences from the last section:
   our data belong to. (Often the number of classes is huge.) As such,
   the elements of $V$ will the conditional probabilities of the various
   classes, given the contents of $Q$.
+
+The fundamental cmputations consist of dot products of rows of $Q$ and
+$K$.
+
+### Iterative computation
+
+The word "attention" alludes to the weighting. Heavier weights are given
+to more important parts of the input sequence.
+
+Recall that in motivating the least-squares approach to estimation for
+the linear regression model in @sec-leastsquaresintro,
+
+### Next-item prediction
