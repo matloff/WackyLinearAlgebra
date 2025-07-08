@@ -70,12 +70,6 @@ Examples:
   chapter, but with this motivation we develop the properties of
   eigenvalues and eigenvectors in the current chapter.
 
-Furthermore, our presentation of the linear algebra connections to Data
-Science goes far beyond the "obvious" ones of linear models, PCA and
-SVD. We discussion recommender systems, for instance, not only in
-connection to SVD and the like, but also as an application of shrinkage
-estimators.
-
 ## Who Is This Book For?
 
 Of course the book should work very well as a classroom textbook. If a Data
@@ -120,7 +114,7 @@ proofs are simple, of the "one liner" type.  But the subject
 matter is indeed mathematical.  Students are indeed expected to read and
 understand proofs, just as with the Mathematics Department course.
 
-No sections are designated as "starred," i.e. reserved for tha more
+No sections are designated as "starred," i.e. reserved for the more
 mathematically adept readers. I believe all material in the book is
 within reach of any reader who did reasonably solid work in their
 calculus courses. For example, @sec-conditexpect is a bit abstract and
@@ -155,12 +149,13 @@ developing student intuition and (b) nonpassive learning are paramount
 ## R Packages Used
 
 ``` r
-qeML
+dsld
 glmnet
 igraph
-dsld
+imager
 networkdata
 pracma
+qeML
 regclass
 WackyData
 ```
