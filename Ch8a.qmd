@@ -84,12 +84,82 @@ where
 * $A$, $n \times p$, is our predictor variable data, column $i$
   containing predictor $i$,
 
-* $S$, $n \times 1$, is our response variable data, "Y", andn
+* $S$, $n \times 1$, is our response variable data, "Y", and
 
 * $\beta$, $p \times 1$, is a population vector, with sample estimate as above.
 
+Alluding to the fact that fitting a model is often referred to as
+"training" the model, below we will use the notation $A_{train}$ and
+$Y_{train}$ for $A$ and $S$.
+
 After computing $\widehat{\beta}$, we are readying to predict new cases!
 Say we have $m$ of them, stored in the $m \times p$ matrix $A_{new}$.
+Our predictions are
+
+$$
+Y_{preds} = A_{new} \widehat{\beta} = A_{new} (A'A)^{-1} A'_{train} Y_{train}
+$$
+
+As in @eq-diagonlize, write 
+
+$$
+A'A = P D P'
+$$ 
+
 
 At this point, we turn to the notion of the "square root" of a symmetric
-matrix, introduced in @sec-squareroot.
+matrix, introduced in @sec-squareroot. Write
+
+$$
+Y_{preds} = (A_{new} P D^{-0.5}) ~ (D^{-0.5} P'A'_{train}) ~ Y_{train} 
+$$
+
+so
+
+$$
+Y_{preds} = (F_{new} F'_{train}) ~ Y_{train}
+$$ {#eq-ffy}
+
+where $F_{new}$ and $F_{train}$ are $m \times p$ and $p \times n$.
+
+Things to note about @eq-ffy:
+
+* The matrix $F_{new} F'_{train}$ transforms our training "Y"
+  values into predicted "Y" values.
+
+* Each predicted "Y" value is a linear combination of the 
+  training "Y" values.
+
+* Thus the predicted values are *weighted* sums of the training values.
+
+* The weights matirx $F_{new} F'_{train}$ factors neatly into a product
+  of a matrix involving the new data and a matrix involving the
+  training data.
+
+These last two bullet points share the foundation of the attention
+concept.
+
+## Attention
+
+Though the concept of attention is simple, the application can be quite
+complex. Our presentation here will merely provide an overview.
+
+### Basic structures
+
+* There is a *query* matrix $Q$, analogous to $F_{new}$.
+
+* There is a *keys* matrix $K$ analogous to $F_{train}$. 
+
+* There is a *values* matrix $V$ analogous to $Y_{train}$.
+
+Major differences from the last section: 
+
+* The data in $Q$ and $K$ are *ordered sequences*, such as words within
+  a sentence, genes within a chromosome or daily stock market prices in
+  a time series.
+
+* Rather than predicting a numerical quantity, these applications are
+  usually of the *classification* type, in which we guess which class
+  our data belong to. (Often the number of classes is huge.) As such,
+  the elements of $V$ will the conditional probabilities of the various
+  classes, given the contents of $Q$.

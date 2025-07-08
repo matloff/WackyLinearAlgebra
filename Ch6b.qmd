@@ -95,7 +95,13 @@ The principle components have the following properties:
   P = (u_1 | u_2 | ... | u_m)
   $$
 
-  Then $P' Cov(X) P = D$, where $D$ is a diagonal matrix whose entries 
+  Then 
+
+  $$
+  P' Cov(X) P = D
+  $$ {#eq-diagonalize}
+
+  where $D$ is a diagonal matrix whose entries 
   are $Var(u_i'X)$, and $P'P = I$.
 
 :::
