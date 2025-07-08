@@ -159,12 +159,9 @@ Major differences from the last section:
   a time series.
 
 * Rather than predicting a numerical quantity, these applications are
-  usually of the *classification* type, in which we guess which class
-  our data belong to. (Often the number of classes is huge.) As such,
-  the elements of $V$ will the conditional probabilities of the various
-  classes, given the contents of $Q$.
+  driven by probabilities of sentences or other sequences.
 
-The fundamental cmputations consist of dot products of rows of $Q$ and
+The fundamental computations consist of dot products of rows of $Q$ and
 $K$.
 
 ### Iterative computation
@@ -173,6 +170,34 @@ The word "attention" alludes to the weighting. Heavier weights are given
 to more important parts of the input sequence.
 
 Recall that in motivating the least-squares approach to estimation for
-the linear regression model in @sec-leastsquaresintro,
+the linear regression model in @sec-leastsquaresintro, we said, "Pretend
+for a moment that we don’t know, say, $C_{28}$," the latter being one of
+the "Y" values in our training set. We predict that value with our
+model, and evaluate our error.
 
-### Next-item prediction
+The idea is the same with LLMs, though as with most machine learning
+algorithms, the computation is iterative. We take a query from our
+training set, and predict "Y" value using our current weights. At each
+iteration, the current guesses for probabilities in $V$ are updated.
+
+(As noted, this involves clever updating algorithms, using tremendous
+amounts of computation, whose details are beyond the scope of this
+book.) 
+
+### Next-token prediction
+
+The items in a sequence, say words in a sentence or genes in a
+chromosome, are called *tokens*. During training, we step through a
+query sequence, one token at a time. At each step, we predict the next
+token according to which would make the sentence most probable, given
+our current guess for $V$. After building up sequences in this manner,
+we build up a candidate full sequence. After doing this step for all
+sequences in $Q$, we check to see how well we predicted. We then use
+this to update all in our next iteration.
+
+The idea of next-token prediction is easiest to understand in
+an application like translating English test to, say, French. Here we
+input a sentence in English, and output a sentence in French; our output
+is the one determined to have the highest probability.
+
+
