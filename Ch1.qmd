@@ -20,10 +20,10 @@ motivating matrix multiplication and presenting several applications.
 
 :::
 
-In this chapter, we will take as our main application *Markov chains*,
-a statistical model having wide applications in medicine, economics and
-so on. It is very simple to explain, thus making it a good choice for
-introducing matrices.
+In this chapter, we will take as our main application *Markov chains*, a
+statistical model having wide applications in medicine, economics and so
+on. The notion is very simple to explain, thus making it a good choice
+for introducing matrices.
 
 ## A Random Walk Model
 
@@ -65,12 +65,13 @@ Note that each row in a transition matrix must sum to 1.  After all,
 from state i we must go *somewhere*.
 
 What about the two-step transition matrix $P_2$? For instance, what
-should be in the row 3, column 1 position in that matrix?  From state 3,
-we could go to state 1 in two steps, by two tails flips of the coin.
-The probability of that is $0.5^2 = 0.25$. So the row 3, column 1
-element in $P_2$ is 0.25. On the other hand, if from state 3 we flip
-tails then heads, or heads then tails, we are back to state 3. So, the
-row 3, column 3 element in  $P_2$ is 0.25 + 0.25 = 0.5.
+should be in the row 3, column 1 position in that matrix?  In other
+words, if we start at position 3, what is the probability that we go to
+position 1 in two steps? This would happen via two tails
+flips of the coin.  The probability of that is $0.5^2 = 0.25$. So the
+row 3, column 1 element in $P_2$ is 0.25. On the other hand, if from
+state 3 we flip tails then heads, or heads then tails, we are back to
+state 3. So, the row 3, column 3 element in  $P_2$ is 0.25 + 0.25 = 0.5.
 
 The reader should verify the correctness here:
 
@@ -231,7 +232,7 @@ B = \left (
 $$
 
 Let's find the row 2, column 2 element of $C = AB$.  Again, that means
-taking the dot product of row 2 of $A$ and $column$ 2 of $B$, which we've
+taking the dot product of row 2 of $A$ and column 2 of $B$, which we've
 highlighted below.
 
 $$
@@ -282,7 +283,19 @@ then said to be *conformable*.
 ## The Identity Matrix
 
 The *identity matrix* $I$ of size $n$ is the $n \times n$ matrix
-with 1s on the diagonal and 0s elsewhere.  $IB = B$ and $AI = A$ for any
+with 1s on the diagonal and 0s elsewhere. Here is the one for $n = 2$:
+
+$$
+\left (
+\begin{array}{rr}
+1 & 0 \\
+0 & 1  \\
+\end{array}
+\right )
+$$
+
+Identity matrices are *multiplicative* identities, i.e. they simply copy
+the companion factor when multiplied: $IB = B$ and $AI = A$ for any
 conformable $A$ and $B$.
 
 ## Application to Markov Chain Transition Matrices {#sec-introMCs}
@@ -393,7 +406,7 @@ and 4 are friends.[This graph is *undirected*, as friendship is mutual.
 Many graphs are *directed*, but we will assume undirected
 here.]{.column-margin}
 
-Specifically, the *adjacency matrix* has row i, column j element as 1 or
+The *adjacency matrix* has row i, column j element as 1 or
 0, according to whether a link exists between nodes i and j.
 
 ```{r}
@@ -402,18 +415,20 @@ adjK
 adjK[13,4]
 ```
 
-Accordingly, row 13, column 4 does have a 1 entry.
+Accordingly, row 13, column 4 does have a 1 entry, consistent with what
+we saw in the picture.
 
 ## The Role of Matrix Multiplication in Network Graph Models
+
 As is the case with Markov transition matrices, powers of an adjacency
 matrix can yield valuable information. In the Markov case,
 multiplication gives us sums of paired products, computing
 probabilities. What about the network graph case? 
 
-Here products are of the form 0x0, 0x1, 1x0 or 1x1.  If there is a
-nonzero entry m in row i, column j of the square of the adjacency
-matrix, that means there were m 1x1 products in that sum, which would
-correspond to m paths. Let's look into this.
+Here products are of the form $0 \times 0$, $0 \times 1$, $1 \times 1$,
+If there is a nonzero entry $m$ in row $i$, column $j$ of the square of
+the adjacency matrix, that means there were $m$ $1 \times 1$ products in
+that sum, which would correspond to $m$ paths. Let's look into this.
 
 ```{r}
 adjK2 <- adjK %*% adjK
@@ -434,7 +449,10 @@ number of paths. For any given pair of nodes, is there a multihop path
 between them?  Or does the graph break down to several "islands" of
 connected nodes?
 
-Again consider the Karate Club data.
+Again consider the Karate Club data. Since there are 34 nodes in this
+graph, if the graph is connected, there should be a path that hits all
+of them with at most 33 hops.  Let's see what paths of this length give
+us.
 
 ```{r}
 u <- matpow(adjK,33)
@@ -442,11 +460,12 @@ sum(u == 0)
 ```
 
 So, in that graph representing paths of 33 links, there are no 0s.
-In this graph, no pair of nodes has 0 paths between them. The graph
+In this graph, every pair of nodes has a path between them. The graph
 is connected.
 
-Making this kind of analysis fully correct requires paying attention to
-things such as cycles.  The details are beyond the scope of this book.
+In general, determining whether a graph is connected requires paying
+attention to things such as cycles.  The details are beyond the scope of
+this book.
 
 ## Recommender Systems{#sec-recsys}
 
@@ -464,7 +483,7 @@ names(q) <- c('user','movie','rating','userinfo')
 head(q)
 ```
 
-We see for instance that user 22 gave movie 242 a rating of 1. If we
+We see for instance that user 22 gave movie 377 a rating of 1. If we
 want to know some characteristics of this user, his/her ID is 878887116,
 which we can find in the file **u.user** at the above URL. Other files
 tell us more about this movie, e.g. its genre, and so on.
@@ -492,11 +511,12 @@ which(q$user == 22 & q$movie == 234)
 
 Now we can begin to see a solution to the recommender problem. Say we
 wish to guess whether user 22 would like movie 234. We could look for
-other users who have rated many of the same movies as user 22, then
-focus on the ones who rated movie 234.  We could average those ratings
-to obtain a predicted rating for movie 234 by user 22.[We could also
-incorporate the characteristics of user 22 and the others, which may
-improve our prediction accuracy, but we will not pursue that
+other users who have rated many of the same movies as user 22, and whose
+ratings of those movies were generally similar to those of user 22. We
+would then focus on the ones who rated movie 234.  We could average
+those ratings to obtain a predicted rating for movie 234 by user 22.[We
+could also incorporate the characteristics of user 22 and the others,
+which may improve our prediction accuracy, but we will not pursue that
 here.]{.column-margin}
 
 In order to assess interuser similarity of the nature described above,
@@ -553,7 +573,7 @@ and columns, 2 and 3 in the example here.
 A as above,
 
 $$
-1.5 A = \left (
+1.5 ~ A = \left (
 \begin{array}{rrr}
 7.5 & 3 & 9 \\
 1.5 & 3.9 & -1.8 \\
@@ -594,19 +614,19 @@ $$
 (AB)' = B'A'
 $$
 
-For some matrices $C$, we have $C' = C$. $C$ is then termed *symmetric*.
+For some matrices $C$, we have $C' = C$. We then say that $C$ is *symmetric*.
 
-We will often write a row vector in the form (a,b,c,...). So
-(5,1,88) means the 1x3 matrix with those elements. If we wish this to
-be a column vector, we use transpose, so that for instance (5,1,88)'
-means a 3x1 matrix.
+We will often write a row vector in the form (a,b,c,...). So (5,1,88)
+means the 1x3 matrix with those elements. If we wish to write a column
+vector within some text, we use transpose, so that for instance
+(5,1,88)' means a 3x1 matrix.
 
 ### Trace of a square matrix{#sec-trace}
 
 The *trace* of a square matrix $A$ is the sum of its diagonal elements,
 $tr(A) = \sum_{i=1}^n A_{ii}$. This measure has various properties, some
-obvious (trace of the sum is sum of the traces), and some less so, such
-as:
+obvious (the trace of the sum of two matrices is the sum of their
+traces), and some less so, such as:
 
 ::: {#thm-trabba}
 
@@ -648,8 +668,8 @@ It compactifies matrix algebra, making complex expressions easier to
 visualize and discuss.
 
 The techniques introduced in this section will be used repeatedly
-throughout the book. Readers should spend extra time here, devising some
-of their own examples.
+throughout the book. **Readers should spend extra time here,** making
+sure the compact representations make sense.
 
 :::
 
@@ -660,7 +680,7 @@ Specifics now follow:
 Consider a matrix-matrix product $MQ$. The use of partitioning works on
 "pretending":
 
-> Matrix Partioning
+> Matrix Partitioning
 > 
 > 1. Partition $M$ and $Q$ into groups of contiguous rows or columns,
 >    respectively. Let $g_m$ and $g_q$ denote the number of groups.
@@ -672,7 +692,7 @@ Consider a matrix-matrix product $MQ$. The use of partitioning works on
 > 3. Go ahead and "multiply" the two "vectors."
 > 
 > 4. Re-enter Reality Mode. Replace the elements of the "product" in step
->    3 by the groups' rows and columns.
+>    3 by the groups' actual rows and columns.
 > 
 > 4. Marvel at the fact that this bit of "alchemy" actually produces the
 >    correct matrix equation.
@@ -681,8 +701,7 @@ Consider a matrix-matrix product $MQ$. The use of partitioning works on
 
 It will be easier to see how this works by considering the special case
 of $Q$ being a vector $v$.  Of course, that means that $v$ is a column
-vector $(v_1,v_2,...,v_n)'$.  If $M$ is of size $m \times n$, then
-$v$ is $n \times 1$.
+vector $(v_1,v_2,...,v_n)'$.  Say $M$ is of size $m \times n$.
 
 Now, we ask for the reader's patience here, as we will move back and
 forth between a symbolic "pretend world" and reality. We promise, it
@@ -713,11 +732,11 @@ v_n \\
 \right ) =
 v_1 c_{1} +
 v_2 c_{2} + ... +
-v_s c_{n}  
+v_n c_{n}  
 $$
 
-looks, once again symbolically like the product of $1 \times n$
-and $n \times 1$ vectors, resulting in a $1 \times 1$, i.e. a
+looks, once again symbolically like the product of $1 \times n$ and $n
+\times 1$ vectors, a dot product, resulting in a $1 \times 1$, i.e. a
 number.
 
 The wonderful thing about all this is that if we now stop pretending, we
@@ -728,7 +747,7 @@ $$
 Mv =
 v_1 c_{1} +
 v_2 c_{2} + ... +
-v_s c_{n}  
+v_n c_{n}  
 $$
 
 $M$ is indeed equal to this sum of scalars times its columns. Let's
@@ -782,6 +801,7 @@ $$
 \right )
 $${#eq-lincomb1}
 
+so that e.g. $v_1 = 10$ and $c_1 = (5,1)'$,
 does indeed work out to 
 
 $$
@@ -851,13 +871,13 @@ the row vector.
 
 :::
 
-To further illustrate all this, write the above matrix @eq-matrixA as 
+To further illustrate all this, write the above matrix in @eq-matrixA as 
 
 $$
 A = 
 \left (
 \begin{array}{rr}
-A_{11} & A_{21} \\
+A_{11} & A_{12} \\
 \end{array}
 \right )
 $${#eq-matrixApart}
@@ -888,7 +908,7 @@ A_{12} =
 $$
 
 Symbolically, in @eq-matrixApart, $A$ now looks like a 1x2 "matrix."
-Similarly, rewriting @eq-vInAv}, we have
+Similarly, rewriting @eq-vInAv, we have
 
 $$
 v = 
@@ -912,10 +932,12 @@ $$
  \right )
  $$
 
-and $v_{21} = 1$ (a 1x1 matrix), $v$ looks to be 2x1.
+and $v_{21} = 1$ (a 1x1 matrix); $v$ looks to be 2x1, though it is
+actually $3 \times 1$.
 
 So, again pretending, treat the product $Av$ as the multiplication of a
-1 x 2 "matrix" and a 2 x 1 "vector", yielding a 1 x 1 result,
+1 x 2 "matrix" and a 2 x 1 "vector", yielding a 1 x 1 result, another
+"dot product,"
 
 $$
 A_{11} v_{11} + A_{12} v_{21}
@@ -971,7 +993,7 @@ $$
 AB = (AB^{(1)},AB^{(2)},..., AB^{(k)})
 $$
 
-In other words,
+In other words, making use of @thm-lincombRows,
 
 ::: {#thm-abPart}
 
@@ -996,7 +1018,7 @@ The adjacency matrix of an undirected graph is necessarily ________.
   least number?
 
 * Find an example of a *triad*, i.e. a set of 3 members who are all
-  linked to each other?
+  linked to each other.
 
 ❄️  **Your Turn:** We say a square matrix is *upper-triangular* if its
 below-diagonal elements are all 0s. (There is a similar concept of
@@ -1084,9 +1106,9 @@ behavior, rather than long-run convergence.
 ❄️  **Your Turn:** Consider the following Markov model of a discrete-time,
 single-server queue:
 
-* Model parameters are $p$ (probability of job completion), $q$ 
-  (probability of new job arriving) and $m$ (size of the customer
-  waiting area).
+* Model parameters are $p$ (probability of job completion in a
+  particular time epoch), $q$ (probability of new job arriving) and $m$
+  (size of the customer waiting area).
 
 * Jobs arrive, are served (possibly after queuing) and leave.
 
