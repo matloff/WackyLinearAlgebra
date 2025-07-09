@@ -28,10 +28,10 @@ of Markov chains.
 ## A Further Look at Markov Chains
 
 Suppose $X_0$, our state at time 0, is random. Let $f$ denote its
-distribution, i.e. its list of probabilities:
-$f_i = P(X_0 = i)$, i = 1,...,k, where k is the number
-of states in the chain. What about $X_1$, the state at time 1?
-Let's find an expression for $g$, the distribution of $X_1$.
+distribution, i.e. its list of probabilities: $f_i = P(X_0 = i)$, i =
+1,...,k, where k is the number of states in the chain. What about the
+distribution of $X_1$, the state at time 1?  Let's find an expression
+for $g$, the distribution of $X_1$, in terms of $f$.
 
 $$
 g_j = P(X_1 = j)
@@ -52,13 +52,15 @@ g' = (g_1,...,g_k)'
 f_1 a_{1k} + ... + f_k a_{kk})
 $$
 
-Using partitioning, we see that that last expression is
+Setting $b_j$ to column $j$ of $P$ and using matrix partitioning,
+we see that that last expression is
 
 $$
-f'P
+(f' b_1,..., f' b_k) = f' (b_1,...,b_k) = f'P
 $$
 
-so we have the nice compact relation for the distribution of $X_1$ in
+
+So we have a nice compact relation for the distribution of $X_1$ in
 terms of the distribution of $X_0$.
 
 $$
@@ -123,7 +125,7 @@ that use of matrix inverses will solve our problem.
 > where $I$ is the identity matrix of that size.
 
 As hinted, many matrices do not have inverses. For instance, if $A$
-consists of all 0s, there is no way to get $I$ for $AB$.
+consists of all 0s, there is no way to get $I$ from $AB$.
 
 In very rough terms, it sometimes helps the intuition to think of an
 inverse as the "reciprocal" of the matrix.
@@ -133,16 +135,18 @@ invertible, its inverse is unique.
 
 ## Example: Computing Long-Run Markov Distribution{#sec-markovsolve}
 
-Now let us return to @eq-stationMarkov, which expresses the vector of
+Now let us return to @eq-nuSolve, which expresses the vector of
 long-run state probabilities for a Markov chain with transition matrix P
 and stationary distribution $\nu$, How can we use matrix inverses to
 solve this equation?
+
+Starting with 
 
 $$
 \nu = P' \nu
 $${#eq-MarkovPi}
 
-Rewrite it using the identity matrix:
+rewrite using the identity matrix:
 
 $$
 (I - P') \nu = 0
