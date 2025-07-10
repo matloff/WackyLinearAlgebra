@@ -458,7 +458,10 @@ $\square$
 
 ## Multinomial Random Vectors Have Approximate Multivariate Normal Distributions
 
-Recall that a *multinomial* random vector is the mathematial
+Recall that a *multinomial* random vector is the mathematial [To be
+consistent, view the binomial case as tabulating both successes and
+failures, e.g. both heads and tails in coin flips. Then from that
+viewpoint, the binomial case is multinomial with $k=2$.]{.column-margin}
 analog of an R factor variable -- a categorical variable with $k$
 levels/categories. Just as a binomial random variable represents the
 number of "successes" in $n$ "trials," a multinomial random vector
@@ -477,7 +480,7 @@ N_k \\
 \right )
 $$
 
-Let $p_i$ be the probability of a trial having outcome $i-1,...,k$. Note
+Let $p_i$ be the probability of a trial having outcome $i=1,...,k$. Note
 the following:
 
 * $N_1+...+N_k = n$
@@ -535,7 +538,7 @@ np_k \\
 $$
 
 What about $Cov(X)$? Again, recognizing that @eq-sumindic is a sum of
-independent terms, @eq-indepcov tells us that 
+independent, identically distributed terms, @eq-indepcov tells us that 
 
 $$
 Cov(X) = Cov(\sum_{i=1}^n I_i) = \sum_{i=1}^n Cov(I_i) = n Cov(I_1),
@@ -545,7 +548,7 @@ that last equality reflecting that the $I_i$ are identically
 distributed (the trials all have the same probabilistic behavior).
 
 Now to evaluate that covariance matrix, consider two specific elements
-$I_{1j}$ and $I_{im}$ of $I_1$. Recall, those elements are equal to 1 or 0,
+$I_{1j}$ and $I_{1m}$ of $I_1$. Recall, those elements are equal to 1 or 0,
 depending on whether the first trial results in Categories j and m,
 respectively. Then what is $Cov(I_{1j},I_{1m})$? From @eq-covuv, we have 
 
@@ -561,7 +564,7 @@ $$
 Cov(I_{1j},I_{1m}) = p_j (1-p_j)
 $$
 
-* $i \neq j$: Each $I_s$ consists of one 1 and $k-1$ 0s. Thus
+* $i \neq j$: Each $I_r$ consists of one 1 and $k-1$ 0s. Thus
 $E(I_{1j} I_{1m}) = 0$ and 
 
 $$
