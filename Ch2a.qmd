@@ -65,7 +65,7 @@ view recognizes that there are a lot more people out there than our
 data.
 
 We speak of estimating population quantities. For instance, we can
-estimate the population value E(X1), i.e. mean of $X_1$ throughout the
+estimate the population value $E(X_1)$, i.e. mean of $X_1$ throughout the
 population, by the sample analog,
 
 $$
@@ -78,7 +78,9 @@ sample.
 By contrast, this view is rarely taken in the machine learning
 community. The data is the data, and the fact that it is a small subset
 of a much larger group is irrelevant. They will often allude to the
-randomness of the data by mentioning the "data generating mechanism."
+randomness of the data by mentioning the "data generating mechanism,"
+but go no further.
+
 
 
 
@@ -124,7 +126,7 @@ $$
 * $Cov$ is bilinear: 
 
 $$
-Cov(aU,bV) = ab Cov(U,V)
+Cov(aU,bV) = ab ~ Cov(U,V)
 $$
 
 * Variance as a special case:
@@ -147,16 +149,20 @@ $${#eq-covuv}
 
 ### Covariance matrices
 
-The relations between the various components of $X$ are often
-characterized by the *covariance matrix* of $X$, whose entries consist
-of scalar covariances between pairs of components of a random vector.
-[The notation is somewhat overloaded.  "Cov" refers both to the
+The above was a review of the notion of covariance between two scalar
+random variables. We now turn to defining covariance for a random
+vector, which will turn out to be a matrix.
+
+The relations between the various components of a random vector $X$ are
+often characterized by the *covariance matrix* of $X$, whose entries
+consist of scalar covariances between pairs of components of a random
+vector.  [The notation is somewhat overloaded.  "Cov" refers both to the
 covariance between two random variables, say height and weight, and to
-the covariance matrix of a random vector. But it will always
-be clear from context which one is being discussed.  ]{.column-margin}
-It is defined as follows for a $k$-component random vector $X$ . The
-covariance matrix, denoted by $Cov(X)$, is a $k \times k$ matrix,
-and for $1 \leq i,j \leq k$, its row $i$, column $j$ element is
+the covariance matrix of a random vector. But it will always be clear
+from context which one is being discussed.  ]{.column-margin} It is
+defined as follows for a $k$-component random vector $X$. The
+covariance matrix, denoted by $Cov(X)$, is a $k \times k$ matrix, and
+for $1 \leq i,j \leq k$, its row $i$, column $j$ element is
 
 $$
 Cov(X)_{ij} = Cov(X_i,X_j)
@@ -172,7 +178,11 @@ hwa <- mlb1[,-1]
 cov(hwa) 
 cor(hwa)
 ```
-Again, we'll be discussing more of this later, but what about that
+
+Again, this is sample data. We find that the *sample estimate*
+of the covariance between height and weight is 25.61130.
+
+We'll be discussing more of this later, but what about that
 negative correlation between height and age? It's near 0, and this could
 be a sampling artifact, but another possibility is that in this sport,
 shorter players do not survive as well.
@@ -228,8 +238,8 @@ $$
 Var(a'X) = a' ~ Cov(X) ~ a
 $${#eq-quadform}
 
-* Thus $Cov(X)$ is *nonnegative definite*, meaning that for any length-$k$
-column vector $a$
+* Since variance is nonnegative, we thus see that  $Cov(X)$ is *nonnegative
+  definite*, meaning that for any length-$k$ column vector $a$
 
 $$
 a' Cov(X) a \geq 0
