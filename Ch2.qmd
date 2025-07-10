@@ -373,8 +373,8 @@ $$
  \right )
  $$
 
-We aim to transform this to the 2x2 identity matrix, via a sequence of
-row operations.
+We aim to transform this to the $2 \times 2$ identity matrix, via a
+sequence of row operations.
 
 ### Use of elementary matrices{#sec-elemmats}
 
@@ -400,6 +400,8 @@ E_1=
 \end{array}
 \right )
 $$
+
+(Reader: Make SURE to verify this!)
 
 We then add 8 times row 1 to row 2, yielding
 
@@ -435,7 +437,7 @@ $$
  \right )
  $$
 
-corresponding to 
+corresponding to premultiplication by
 
 $$
 E_3=
@@ -447,7 +449,7 @@ E_3=
 \right )
 $$
 
-And finally, add -7/4 row 2 to row 1.
+And finally, add -7/4 row 2 to row 1:
 
 $$
  \left (
@@ -470,7 +472,7 @@ E_4 =
  \right )
  $$
 
-Now, how does that give use $A^{-1}$? The method your were taught
+Now, how does that give us $A^{-1}$? The method your were taught
 probably set up the partioned matrix $(A,I)$. The row operations that
 transformed $A$ to $I$ also transformed $I$ to $A^{-1}$. Here's why:
 
@@ -597,12 +599,18 @@ determinants.
 > and define $\det(G)$ to be $ad -bc$. For $r > 2$, 
 > define submatrices as follows. 
 > 
-> $G_j$ is the $(r-1) \times (r-1)$ submatrix obtained by removing row
+> Define $G_j$ to be the $(r-1) \times (r-1)$ submatrix obtained by removing row
 > 1 and column $j$ from $G$. Then $\det(G)$ is defined recursively as
 > 
 > $$
 > \sum_{i=1}^r (-1)^{i+1} \det(G_i)
 > $$
+>
+> Say $r = 4$. Applying this formula, we find our original determinant in
+> terms of the determinants of some $3 \times 3$ matrices, and then we
+> apply the formula to *those* matrices. That gives us a sum of
+> determinants of $2 \times 2$ matrices, for which we have an explicit 
+> formula.
 > 
 > Actually, we can alternatively remove row $i$ instead of row 1. If $i$ 
 > is an odd number, the same recursive formula holds, but for even $i$,
@@ -677,7 +685,7 @@ $\det(A)$ must be 0. Explain why.
 *upper-triangular* if its below-diagonal elements are all 0s.
 Give a closed-form formula for $\det(A)$ in terms of the $a_{ij}$.
 
-❄️  **Your Turn:** In @eq-randwalkP, consider the variant
+❄️  **Your Turn:** In @eq-myfirstmatrix, consider the variant
 
 $$
 P =
@@ -690,7 +698,7 @@ P =
 0 & 0 & 0 & 1.0 & 0.0 \\
 \end{array}
 \right )
-$${#eq-randwalkP}
+$$
 
 Here, the walker at state 5 immediately "bounces back" to state 4,
 rather than remaining at state 5 for one or more epochs.
@@ -715,7 +723,7 @@ $$
 
 This chain is termed *periodic*, with period 2. It alternates between
 states 1 and 2, and thus a long-run distribution $\nu$ does not exist.
-That would suggest the $I-P'$ noninvertible. Confrim this.
+That would suggest that $I-P'$ is noninvertible. Confirm this.
 
 ❄️  **Your Turn:** If you are familiar with recursive calls, write a
 function $\verb+dt(a)+$ to compute the determinant of a square matrix

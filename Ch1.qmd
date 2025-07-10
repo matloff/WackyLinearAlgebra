@@ -50,7 +50,7 @@ P_1 =
 0 & 0 & 0 & 0.5 & 0.5 \\
 \end{array}
 \right )
-$$
+$${#eq-myfirstmatrix}
 
 For instance, look at row 2. There are 0.5 values in columns 1 and 3,
 meaning there is a 0.5 chance of a move 2 $\rightarrow$ 1, and a 0.5
