@@ -108,20 +108,41 @@ mathematical content of this book should be similar to that math course..."
 So, the mathematics is definitely here, but one might also say that
 this book is "mathematical but not overly theoretical."
 
+*Theory:*
+
 Theorems are mainly limited to results with practical importance.  Among
 the Your Turn exercises at the end of each chapter, many of the ones requiring
 proofs are simple, of the "one liner" type.  But the subject
 matter is indeed mathematical.  Students are indeed expected to read and
 understand proofs, just as with the Mathematics Department course.
 
+*Active reading:*
+
 No sections are designated as "starred," i.e. reserved for the more
 mathematically adept readers. I believe all material in the book is
 within reach of any reader who did reasonably solid work in their
-calculus courses. For example, @sec-conditexpect is a bit abstract and
-involves switching back and forth between random variables and vectors,
-but it is presented with intuitive motivation and simple, concrete
-examples. Moreover, the material is motivated by culminating in an
-applied topic of major societal relevance.
+calculus courses. But active participation on the part of the reader
+is key.
+
+For instance, Chapter @sec-covar is on very concrete topics and the
+reader hopefully will find the "3-dimensional bell shape" of the
+multivariate distribution family intriguing. Yet, due to an overloading
+for the term *covariance* in statistics, the reader must always actively
+keep in mind whether it is scalar or vector covariance being discussed.
+
+As another example, Section @sec-conditexpect is a bit abstract and
+involves switching back and forth between random variables and members
+of a certain vector space, but it is presented with intuitive motivation
+and simple, concrete examples. Moreover, the material is motivated by
+culminating in an applied topic of major societal relevance. The
+patient, active reader who keeps in mind that certain entities here have
+dual roles will be rewarded with a plethora of insights into inner
+product spaces, and again, any successful "calculus graduate" should
+find this attainable, even eliciting an empowered feeling. For this
+reason, this section is *not* "starred," nor are the other parts of the
+book so designated.
+
+*Not a "how to do linear algebra in R" book:*
 
 The goal is to develop in the reader mathematical skill and intuition
 into this powerful tool, rather than coding of linear algebra methods.
@@ -131,6 +152,8 @@ software context, the Feynman quote above might be, "There is a
 difference between knowing how to use code libraries for something and
 knowing the core nature of that thing." That said, the code examples do
 serve a vital role. 
+
+*Not intended as an "easier" version of your Math Dept. course:*
 
 *The applied nature of the book is a double-edged sword.* It is has high
 value as a motivator, but understanding applications is actually *more*
