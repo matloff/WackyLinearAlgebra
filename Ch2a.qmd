@@ -139,7 +139,7 @@ $$
 
 $$
 Var(U+V) = Var(U) + Var(V) + 2 Cov(U,V)
-$$
+$${#eq-crossprod}
 
 * "Short cut" formula: 
 
@@ -595,15 +595,16 @@ e.g.\ $\bar{X}$ for a population mean $\mu$.
   also stands on its own as an indication of the accuracy of 
   $\widehat{\theta}$.
 
-* A, say 95%, confidence interval for $\mu$ is then
+* A, say 95%, confidence interval (CI) for $\mu$ is then
 
-$$
-\widehat{\theta} \pm 1.96 \widehat{\theta}
-$$
+  $$
+  \widehat{\theta} \pm 1.96 \widehat{\theta}
+  $$
 
   The 95% figure means that of all possible samples of the given size
   from the population, 95% of the resulting confidence intervals will
-  contain $\theta$.
+  contain $\theta$. In many cases, the 95% figure is only approximate,
+  stemming from a derivation that uses the Central Limit Theorem.
 
 ### Delta method: motivating example
 
@@ -630,7 +631,7 @@ $$
 f(x) = f(x_0) + f'(x_0) (x-x_0) + f''(x_0) (x-x_0)^2 /2 + ...
 $$
 
-where here "'" denotes derivative rather than matrix transpose.
+where "'" denotes derivative rather than matrix transpose.
 
 In our case here, setting $f(t) = \log{t}$, $x_0 = \mu$ and $x =
 \bar{X}$, we have
@@ -648,6 +649,11 @@ theory, one can show that, in the sense of distribution,
 $$
 W \approx log(\mu) + log'(\mu) (\bar{X}-\mu)
 $$
+
+The right-hand side is a linear function of $\overline{X}$. The latter
+is asymptotically normal by the Central Limit Theorem, and thus the
+linear function $W$ is also asymptotically normal.
+
 
 In other words, $W$ has an approximate normal distribution that
 has mean $log(\mu)$ and variance
@@ -697,6 +703,8 @@ f_2^2 (Q,R) AVar(R) +
 }
 $$
 
+where we have made use of @eq-crossprod.
+
 As usual, use of matrix notation can help clean up messy expressions
 like this. The *gradient* of $f$, say in the two-argument case as above,
 is the vector
@@ -722,6 +730,8 @@ f(v,w) \approx f(v_0,w_0) + (\nabla f)'
  \end{array}
  \right )
 $$
+
+(Here ' is matrix transpose, not a derivative.)
 
 Then from @eq-quadform, 
 
@@ -789,12 +799,14 @@ of the usual $S^2$ in the univariate case, taking advantage of
 @eq-matrixdef. One must be careful, though, making sure we choose the
 appropriate quantity for $AVar(v,w)$.
 
-For instance, in our ratio example here, $(Q,R)'$ is $(\bar{M},\bar{D}$.
+For instance, in our ratio example here, $(Q,R)'$ is $(\bar{M},\bar{D})'$.
 To obtain $AVar(v,w)$, let's first look at the covariance matrix $\Sigma$,
 
 $$
 \Sigma = E[(M - EM) (D - ED)']
 $$
+
+from @eq-matrixdef.
 
 This is the average of $(M - EM) (D - ED)$ in the population. The sample
 analog average is[The reader may recall that in estmating a variance,
@@ -838,8 +850,12 @@ return value.
 
 ## Example: Iranian Churn Data
 
+[The **vcov** function is an R *generic* function, playing a similar
+role to **print** and **plot**. Many R statistical functions have
+this for their output, including **lm**.]{.column-margin}
 Here we predict whether a telecom customer will move to another
-provider. Here we illustrate how to obtain $AVar(v,w)$.
+provider. We obtain $AVar(v,w)$ using the **vcov** function:
+
 
 ```{r}
 data(IranianChurn)
