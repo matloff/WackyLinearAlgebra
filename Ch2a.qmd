@@ -980,7 +980,7 @@ $$
 ❄️  **Your Turn:** Suppose
 
 $$
-W = X \beta + \alpha S
+W = X' \beta + \alpha S
 $$
 
 for a random vector $X$, a scalar random variable $S$, a nonrandom
