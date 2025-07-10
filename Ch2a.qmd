@@ -243,7 +243,7 @@ $${#eq-quadform}
 
 $$
 a' Cov(X) a \geq 0
-$$
+$${#eq-covnndef}
 
 * More generally, for any compatible constant vectors $a$ and $b$,
 
@@ -262,12 +262,6 @@ $${#eq-covax}
 The matrix $Cov(X)$ represents the covariance of a vector $X$
 *with itself*. But we can also speak of the covariance of one vector $X$
 with another vector $Y$, termed the *cross-covariance* between them.
-Its definition is a natural extension of covariance matrices:
-
-$$
-Cov(X,Y) = E[(X - EX) (Y- EY)]
-$$
-
 Say $X$ and $Y$ are of lengths $m$ and $n$. Then $Cov(X,Y)$ will be of
 size $m \times n$, with
 
@@ -301,8 +295,8 @@ The answer is yes.  Here is an example for $k = 2$:
 
 Well, then, what is the form of the $k$-dimensional density function?
 Just as the univariate normal family is parameterized by mean and
-variance, the multivariate one is parameterized via mean vector $\mu$
-and covariance matrix $\Sigma$. The form is 
+variance, the multivariate one is parameterized via mean *vector* $\mu$
+and covariance *matrix* $\Sigma$. The form is 
 
 $$
 (2\pi)^{-k/2} \det(\Sigma)^{-k/2}
@@ -329,21 +323,22 @@ help our intuition here.
 
 ::: {#thm-conditMVnormal}
 
-If a random vector is MV normally distributed, then the conditional
-distribution of any one of its components $Y$, given the others
-$X_{others} = t$ (note that $t$ is a vector if $k > 2$) has the
+If a random vector is multivariate (MV) normally distributed, then the
+conditional distribution of any one of its components $Y$, given the
+others $X_{others} = t$ (note that $t$ is a vector if $k > 2$) has the
 following properties:  
 
 * It has a (univariate) normal distribution.
 
-* Its mean $E(Y | X_{others}) = t$ is linear in $t$.
+* Its mean $E(Y | X_{others} = t)$ is linear in $t$.
 
 * Its variance $Var(Y | X_{others} = t)$ does not involve $t$.
 
 These of course are the classical assumptions of linear regression
-models. They actually come from the MV normal model.
+models: normality, linearity and homoskedasticity. They actually come
+from the MV normal model.
 
-Specifics: Denote the mean vector and covariance matrix a random vector $X$
+More generally: Denote the mean vector and covariance matrix a random vector $X$
 by $\mu$ and $\Sigma$.  Partition $X$ as
 
 $$
@@ -369,10 +364,6 @@ $${#eq-condcov}
 
 :::
 
-Note the absence of $t$ in @eq-condcov. Note too that the unconditional
-covariance matrix, $\Sigma_{11}$ becomes "smaller" when we know
-something about $X_2$.
-
 ::: {.proof}
 This comes out of writing down the conditional density (overall density
 divided by marginal), and then doing some algebra.
@@ -380,6 +371,25 @@ divided by marginal), and then doing some algebra.
 $\square$
 
 ::: 
+
+Again, note the absence of $t$ in @eq-condcov. 
+
+Note too that the conditional covariance matrix, $\Sigma_{11}$ of $X_1$
+given $X_2$,
+
+$$
+\Sigma_{11} - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}
+$$
+
+[Of course, this is just a rough intuitive view. One matrix is not
+"smaller" than another. One way to make this mathematically rigorous
+is to say that the matrix $B$ is smaller than (or equal to) the 
+matrix $A$ if $A-B$ is nonnegative definite, i.e. $u'(A-B)u \geq 0$
+for all vectors $u$. Since in this case $A-B$ is a covariance matrix,
+thus nonnegative definite (see @eq-covnndef), our intuitive statement
+would become rigorous under this definition.]{.column-margin}
+is "smaller" than the unconditional one, $\Sigma_{11}$.  $X_1$ varies
+less when we know something about $X_2$.
 
 ::: {#thm-xnormalthenaxnormal}
 
@@ -409,7 +419,6 @@ nonrandom vectors $w$.
 
 "Only if" follows from above. "If" part too complex to present here.
 
-% NM
 $\square$
 ::: 
 
@@ -418,8 +427,8 @@ $\square$
 ## The Multivariate Central Limit Theorem
 
 Let $X_1, X_2,...$ be a sequence on statistically independent random
-vectors, with common distribution multivariate normal with mean vector
-$\mu$ and covariance matrix $\Sigma$. Write
+vectors, with common distribution having mean vector $\mu$ and
+covariance matrix $\Sigma$, but not necessarily MV normal. Write
 
 $$
 \bar{X} = \frac{X_1+...+X_n}{n}
