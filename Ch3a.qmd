@@ -1,0 +1,381 @@
+
+
+```{r}
+#| include: false
+library(dsld)
+library(qeML)
+```
+
+{{< pagebreak >}}
+
+# Confidence Sets
+
+::: {.callout-note}
+
+## Goals of this chapter:  
+
+The reader is probably already familiar with the concept of a *confidence
+interval* (CI). But that is just in one dimension. Confidence intervals are
+even more useful in the multidimensional setting. In this chapter, we
+introduce a fairly general method of forming a CI from multivariate
+data, and then extend the notion to *confidence sets* for unknown
+multivariate quantities themselves.
+
+:::
+
+## The Delta Method
+
+This is one of the most useful simple tools in statistics.  
+
+### Review: confidence intervals, standard errors
+
+To set the stage, let's review the statistical concepts of 
+*confidence interval* and *standard error*. Say we have
+an estimator $\widehat{\theta}$ of some population parameter $\theta$,
+e.g.\ $\bar{X}$ for a population mean $\mu$.
+
+* Loosely speaking, the term *standard error* of is our estimate of
+  $\sqrt{Var(\widehat{\theta})}$.  More precisely, suppose that
+  $\widehat{\theta}$ is asymptotically normal.  The standard error is an
+  estimate of the standard deviation of that normal distribution. For
+  this reason, It is customary to write $AVar(\widehat{\theta})$ 
+  rather than $Var(\widehat{\theta})$.
+
+  This can be used to form a confidence interval (see below), but 
+  also stands on its own as an indication of the accuracy of 
+  $\widehat{\theta}$.
+
+* A, say 95%, confidence interval (CI) for $\mu$ is then
+
+  $$
+  \widehat{\theta} \pm 1.96 \widehat{\theta}
+  $$
+
+  The 95% figure means that of all possible samples of the given size
+  from the population, 95% of the resulting confidence intervals will
+  contain $\theta$. In many cases, the 95% figure is only approximate,
+  stemming from a derivation that uses the Central Limit Theorem.
+
+### Delta method: motivating example
+
+Now, for the delta method, as a first example, say we are estimating a
+population mean $\mu$ and are also interested in estimating $\log(\mu)$. 
+
+We will probably use the sample mean $\bar{X}$ to estimate $\mu$, and
+thus use $W = \log{\bar{X}}$ to estimate $\log(\mu)$. 
+[If we just need to form a confidence
+interval for $\log(\mu)$, we can form a CI for $\mu$ and then take the
+log of both endpoints. But again, standard errors are of interest in
+their own right.]{.column-margin}
+But how do we obtain a standard error for $W$?
+
+### Use of the Central Limit Theorem
+
+The Central Limit Theorem tells as that $\bar{X}$ is asymptotically
+normally distributed. But what about $\log{\bar{X}}$?
+
+From calculus, we know that a smooth function $f$ can be written as a
+Taylor series,
+
+$$
+f(x) = f(x_0) + f'(x_0) (x-x_0) + f''(x_0) (x-x_0)^2 /2 + ...
+$$
+
+where "'" denotes derivative rather than matrix transpose.
+
+In our case here, setting $f(t) = \log{t}$, $x_0 = \mu$ and $x =
+\bar{X}$, we have
+
+$$
+W = \log{\mu} + \log'({\mu}) (\bar{X}-\mu) + \log''({\mu}) (\bar{X}-\mu)^2 /2 + ...
+$$
+
+and $\log'(t) = 1/t$ and so on.
+
+The key point is that as n grows, $\bar{X}-\mu$ goes to 0, and
+$(\bar{X}-\mu)^2$ goes to 0 even faster. Using theorems from probability
+theory, one can show that, in the sense of distribution, 
+
+$$
+W \approx log(\mu) + log'(\mu) (\bar{X}-\mu)
+$$
+
+The right-hand side is a linear function of $\overline{X}$. The latter
+is asymptotically normal by the Central Limit Theorem, and thus the
+linear function $W$ is also asymptotically normal.
+
+
+In other words, $W$ has an approximate normal distribution that
+has mean $log(\mu)$ and variance
+
+$$
+\frac{1}{\mu^2} \sigma^2/n
+$$
+
+where $\sigma^2$ is the population variance $Var(X)$ . We estimate the
+latter by the usual $S^2$ quantity, and thus have our standard error,
+
+$$
+\textrm{s.e.}(W) = \frac{S}{\bar{X} \sqrt{n}}
+$$
+
+### Use of the Multivariate Central Limit Theorem 
+
+Now, what if the function $f$ has two arguments instead of one? The
+above linear approximation is now
+
+$$
+f(v,w) \approx f(v_0,w_0) + f_1(v_0,w_0) (v-v_0) + f_2(v_0,w_0)(w-w_0)
+$${#eq-twotaylor}
+
+where $f_1$ and $f_2$ are partial derivatives,[A *partial derivative* of
+a function of more than one variable is the derivative with respect to
+one of those variables. E.g. $\partial/\partial v ~ vw^2 =
+w^2$ and $\partial/\partial w ~ vw^2 =
+2vw$.]{.column-margin}
+
+$$
+f_1(v,w) = \frac{\partial}{\partial v} f(v,w)
+$$
+
+$$
+f_2(v,w) = \frac{\partial}{\partial w} f(v,w)
+$$
+
+So if we are estimating, for instance, a population quantity
+$(\alpha,\beta)'$ by $(Q,R)'$, standard error of the latter is
+
+$$
+\sqrt{
+f_1^2 (Q,R) AVar(Q) +
+f_2^2 (Q,R) AVar(R) +
+2 f_1(Q,R) f_2(Q,R) ACov(Q,R)
+}
+$$
+
+where we have made use of @eq-crossprod.
+
+As usual, use of matrix notation can help clean up messy expressions
+like this. The *gradient* of $f$, say in the two-argument case as above,
+is the vector
+
+$$
+\nabla f =
+\left (
+\begin{array}{r}
+f_1 (v_0,w_0) \\
+f_2 (v_0,w_0) \\
+\end{array}
+\right )
+$$
+
+so that @eq-twotaylor can be written as
+
+$$
+f(v,w) \approx f(v_0,w_0) + (\nabla f)' 
+ \left (
+ \begin{array}{r}
+ v-v_0 \\
+ w-w_0 \\
+ \end{array}
+ \right )
+$$
+
+(Here ' is matrix transpose, not a derivative.)
+
+Then from @eq-quadform, 
+
+$$
+AVar[f(Q,R)] = (\nabla f)' AV(Q,R) (\nabla f)
+$${#eq-deltaquad}
+
+### Example: ratio of two means
+
+Say our sample data consists of mother-daughter pairs,
+
+$$
+\left (
+\begin{array}{r}
+M \\
+D \\
+\end{array}
+\right )
+$$
+
+representing the heights of mother and daughter. Denote the population mean
+vector by
+
+$$
+\nu =
+\left (
+\begin{array}{r}
+\mu_M \\
+\mu_D \\
+\end{array}
+\right )
+$$
+
+We might be interested in the ratio $\omega = \mu_D / \mu_M$.  Our
+estimator will be $\widehat{\omega} = \bar{D} / \bar{M}$, the ratio of
+the sample means.
+
+So take $Q = \bar{D}$ and $R =  \bar{M}$. Then in @eq-deltaquad, with
+$f(q,r) = q/r$
+
+$$
+\nabla{f} =
+ \left (
+ \begin{array}{r}
+ 1/r \\
+ -q/r^2  \\
+ \end{array}
+ \right )
+$$
+
+which in our application here we would approximate by
+
+$$
+\nabla{f} =
+ \left (
+ \begin{array}{r}
+ 1/\bar{M} \\
+ -\bar{D}/\bar{M}^2  \\
+ \end{array}
+ \right )
+$$
+
+As to $AVar(v,w)$ in @eq-deltaquad, we would use the multivariate analog
+of the usual $S^2$ in the univariate case, taking advantage of
+@eq-matrixdef. One must be careful, though, making sure we choose the
+appropriate quantity for $AVar(v,w)$.
+
+For instance, in our ratio example here, $(Q,R)'$ is $(\bar{M},\bar{D})'$.
+To obtain $AVar(v,w)$, let's first look at the covariance matrix $\Sigma$,
+
+$$
+\Sigma = E[(M - EM) (D - ED)']
+$$
+
+from @eq-matrixdef.
+
+This is the average of $(M - EM) (D - ED)$ in the population. The sample
+analog average is[The reader may recall that in estmating a variance,
+it is customary to divide by $n-1$ instead of $n$, due to unbiasedness.
+The same is true for the multivariate analog of variance, i.e.
+covariance matrices, but we will use $n$ to retain the sample analog
+theme.]{.column-margin}
+
+$$
+\widehat{\Sigma} = 
+\frac{1}{n}
+\sum_{i=1}^n (M_i - \bar{M}) (D_i - \bar{D})'
+$$
+
+where $(M_i,D_i)$ represents the $i^{th}$ mother-daughter pair in our
+dataset.
+
+But $\widehat{{\Sigma}}$ is not our $AVar(v,w)$ here, because we need,
+for instance, the variance of $\bar{M}$ rather than the variance of $M$.
+Recall that the former is $1/n$ times the latter. So in this case we
+have
+
+$$
+AVar(v,w) = \frac{1}{n} \widehat{\Sigma}
+$$
+
+So now we can obtain a standard error for $\widehat{\omega}$: 
+
+$$
+\sqrt{
+\frac{1}{n}
+\nabla f' \widehat{\Sigma} \nabla f
+}
+$$
+
+from which we can form a confidence interval.
+
+In R functions to do parametric regression modeling, Maximum Likelihood
+Estimation and so on, $AVar(v,w)$ is available from the function's
+return value.
+
+## Example: Iranian Churn Data
+
+[The **vcov** function is an R *generic* function, playing a similar
+role to **print** and **plot**. Many R statistical functions have
+this for their output, including **lm**.]{.column-margin}
+Here we predict whether a telecom customer will move to another
+provider. We obtain $AVar(v,w)$ using the **vcov** function:
+
+
+```{r}
+data(IranianChurn)
+glmOut <- glm(Exited ~ ., data = iranChurn, family = binomial)
+vcov(glmOut)
+```
+
+There are several categorical variables here, so after expansion to
+dummies, $AVar(v,w)$ is $12 \times 12$. This is the covariance
+matrix for the vector of estimated logistic regression coefficients
+$\widehat{\beta}$. There are many different functions $f(\beta)$ that
+might be of interest.
+
+
+## Example: Mother/Daughter Height Data
+
+```{r}
+library(WackyData)
+data(Heights)
+head(heights)
+m <- heights[,1]
+d <- heights[,2]
+meanm <- mean(m)
+meand <- mean(d)
+fDel <- matrix(c(1/meanm,-meand/meanm^2),ncol=1)
+n <- length(m)
+sigma <- (1/n) * cov(cbind(m,d))
+se <- sqrt(t(fDel) %*% sigma %*% fDel)
+se
+meanmd <-meanm / meand
+meanmd
+c(meanmd - 1.96*se, meanmd + 1.96*se)
+```
+
+## Regarding Those Pesky Derivatives
+
+Though finding expressions for the derivatives in the above example was
+not onerous, the function $f$ can be rather complex, with the
+expressions for its derivatives even more complicated. Typically such
+tedious and error-prone operations can be avoided, by having the
+software calculate approximate derivatives.
+
+Recall the definition of derivative:
+
+$$
+f'(x) = \lim_{w \rightarrow 0}
+\frac{f(x+w) - f(x)}{w}
+$$
+
+So an aproximate value of $f'(x)$ is obtained by choosing some small
+value of $w$ and evaluating 
+
+$$
+\frac{f(x+w) - f(x)}{w}
+$$
+
+Though of course there is an issue with one's choice of $w$, the point
+is that one can code the software to find approximate derivatives
+automatically using this device. *This is very common in Data Science
+libraries.* 
+
+For example, the R package **numDeriv** will compute numerical
+derivatives.
+
+## Your Turn
+
+❄️  **Your Turn:** In the mother/daughter data, find the estimated
+covariance between the two heights.
+
+
+
+
+
