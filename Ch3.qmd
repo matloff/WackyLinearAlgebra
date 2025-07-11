@@ -714,6 +714,97 @@ apai + w1 * w2
 apa2i
 ```
 
+## Generalized Linear Models
+
+These are nonlinear models that have a "linear" component to them. The
+best known is the *logistic* (or *logit*) model. Here our "Y" is a
+binary variable, $Y = 0,1$.
+
+Note first that now
+
+$$
+E(Y|X=t) = 
+1 \cdot P(Y=1 | X=t) +
+0 \cdot P(Y=0 | X=t) =
+P(Y=1 | X=t)
+$$
+
+So the conditional mean now reduces to a conditional probability. This
+is very useful, e.g. finding the probability that a patient has a
+certain disease, given test results and symptoms.
+
+So, what about the "linear component"? Here is the model:
+
+$$
+P(Y=1 | x=t) =
+\frac{1}{1+\exp{[-\beta' \tilde{t}}]}
+$$
+
+where as usual, $\beta = (\beta_0,\beta_1,...,\beta_p)'$. The quantity
+$\tilde{t}$ is
+
+$$
+\left (
+\begin{array}{r}
+1 \\
+t \\
+\end{array}
+\right )
+$$
+
+and the 1 is there to pick up the $\beta_0$ term. So there is the linear
+component, $\beta' \tilde{t}$.
+
+Least-squares computation doesn't work here, though some modifications
+do, e.g. *Iteratively Reweighted Least Squares*. This topic is beyond
+the scope of this book.
+
+### Example: census data
+
+This is data for Silicon Valley programmers and engineers in the 2000
+Census.
+
+Let predict female gender:
+
+```{r}
+data(svcensus)
+head(svcensus)
+svcensus$gender <- as.numeric(svcensus$gender == 'female')  # Y=0,1
+head(svcensus)
+# for simplicity, omit a couple of the columns
+glmOut <- glm(gender ~ .,data=svcensus[,-c(2,5)],family=binomial)
+coef(glmOut)
+```
+
+The 'binomial' value here specifies the logistic model. Others are
+available, e.g. *Poisson regression*.
+
+The direction of influence on "Y" is the same as in the linear case: A
+positive coefficient means, holding other predictor variables fixed,
+larger values of this variable produce larger probabilities for $Y = 1$.
+The most impactful predictors seem to be occupations 140 and 141, each
+[We of course must form confidence intervals for a careful analysis, the
+topic of @sec-confsets.]{.column-margin} of which reduces the
+probability of female. 
+
+It should be noted, though, that the amount of impact depends on the
+values of the other pedictors, unlike the linear case. A popular
+interpretation of the logit model is the *log-odds* view, which forces
+focus on the linear component:
+
+$$
+\log{
+\left [
+\frac{P(Y=1|X=t)}{P(Y=0|X=t)}
+\right ]
+= \beta' \tilde{t}
+}
+$$
+
+However, I have never felt this is helpful. Why on Earth should we be
+interested in the log-odds value? And it detracts from the focus of
+logit modeling a probability, of central importance.
+
 ## Your Turn
 
 ❄️  **Your Turn:** Show @eq-dda. Write $a = (a_1,...,a_k)'$ and find the

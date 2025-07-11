@@ -26,12 +26,8 @@ and in the next chapter, the basics of vector spaces.
 
 ## Example: Census Data{#sec-censusrref}
 
-This dataset is also from **qeML**. It is data for Silicon Valley
-engineers in the 2000 Census. Let's focus on just a few columns.
-
 ```{r}
 data(svcensus) 
-head(svcensus) 
 svc <- svcensus[,c(1,4:6)] 
 head(svc) 
 lm(wageinc ~ .,data=svc) 
