@@ -54,7 +54,7 @@ $$
  \right )
 $$
 
-### Sample vs. population
+### Sample vs. population {#sec-samplevspop}
 
 We may observe $n$ realizations of $X$ in the form of sample data, say
 on $n = 100$ people. In the statistics world, we treat this data as a

@@ -16,7 +16,8 @@ library(qeML)
 
 Here we bring together the concepts of previous chapters by presenting
 the *linear model*, one of the most fundamental techniques in 
-statistics. It relies heavily on linear algebra, notably matrix inverse.
+statistics. It relies heavily on linear algebra, notably matrix inverse,
+but the use of linear algebra extends far beyond that.
 
 :::
 
@@ -27,14 +28,15 @@ the statistical applications of linear algebra are equally important.
 
 ## Linear Regression through the Origin
 
-Let's consider the **Nile**  dataset built-in to R. It is a time series,
-one measurement per year.
+Let's consider the **Nile**  dataset built-in to R on the height of the
+Nile River. It is a time series, one measurement per year. We will
+predict each year's value from the previous one.
 
 ```{r}
 head(Nile)
-# predict current year from previous year?
 n1 <- Nile[-(length(Nile))]
 head(n1)
+# we will need a lag-1 version of the data
 n2 <- Nile[-1]
 head(n2)
 plot(n1,n2,cex=0.4,xlim=c(0,1400),yli=c(0,1400))
@@ -46,15 +48,15 @@ might have two motivations for doing this:
 * The line might serve as nice summary of the data.
 
 * More formally, let $C$ and $V$ denote the current and previous year's
-measurements..Then the model 
+  measurements. Then the model 
 
-$$E(C | V) = \beta V$$ 
+  $$E(C | V) = \beta V$$ 
 
-may be useful. Here the slope $\beta$ is an unknown value to be
-estimated from the data.  [Readers with some background in linear
-regression models should note that this assumption of a linear trend
-through the origin is the only assumption we are making here. Nothing on
-normal distributions etc.]{.column-margin}
+  may be useful. Here the slope $\beta$ is an unknown value to be
+  estimated from the data.  [Readers with some background in linear
+  regression models should note that this assumption of a linear trend
+  through the origin is the only assumption we are making here. Nothing
+  on normal distributions etc.]{.column-margin}
 
 ::: {.callout-important}
 ## Model Validity
@@ -66,14 +68,16 @@ of their minds.
 ### Least squares approach{#sec-leastsquaresintro}
 
 We wish to estimate $\beta$ from our data, which we regard as a sample
-from the data generating process.  Denote our data by $(C_i,V_i), i =
-1,...,100$.[This too is something all data scientists should keep at the
-forefronts of their minds. We are always working with sample data,
-subject to intersample variations. The quantity $\widehat{\beta}$ is a
-random variable.]{.column-margin} Let $\widehat{\beta}$ denote our
+from the population/data generating process.  Denote our data by
+$(C_i,V_i), i = 1,...,100$.[As noted in @sec-samplevspop, this too is
+something all data scientists should keep at the forefronts of their
+minds. We are always working with sample data, subject to intersample
+variations. The quantity $\widehat{\beta}$ is a random
+variable.]{.column-margin} Let $\widehat{\beta}$ denote our
 estimate.[The "hat" notation '^' is statistical convention for "estimate
-of"; $\widehat{\beta}$ is our estimate of the unknown parameter
-$\beta$.]{.column-margin} How should we obtain it?
+of"; $\widehat{\beta}$ is our estimate of the unknown parameter $\beta$.
+Make sure to distinguish between the two!]{.column-margin} How should we
+obtain it?
 
 Pretend for a moment that we don't know, say, $C_{28}$. Using our
 estimated $\beta$, our predicted value would be $\widehat{\beta}
@@ -94,7 +98,7 @@ $$
 \sum_{i=1}^{100} [C_{i} - \widehat{\beta} V_{i} )^2
 $$
 
-A natural choice for $b$ would be the value that minimizes this
+A natural choice for $\widehat{\beta}$ would be the value that minimizes this
 quantity.
 [Why not look at the absolute value instead of
 the square? The latter makes the math flow well, as will be seen
@@ -104,7 +108,7 @@ shortly.]{.column-margin}
 
 ### Calculation
 
-As noted, our choice for $b$ will be the minimizer of
+As noted, our choice for $\widehat{\beta}$ will be the minimizer of
 
 $$
 \sum_{i=1}^{100} (C_{i} - b V_{i})^2
@@ -138,14 +142,18 @@ This says, "Fit the model $E(C | V) = \beta V$ to the data, with the
 line constrained to pass through the origin." The constraint is
 specified by the -1 term. 
 
-We see that the estimate regression line is
+We see that the estimated regression line is
 
-$$E(C | V) = 0.98 V$$
+$$
+\widehat{E}(C | V) = 0.98 V
+$$
 
 ## Linear Regression Model with Intercept Term
 
-Say  we do not want to constrain the model to pass the line through the
-origin. Our model is then
+[In most applications, we do not assume such a constraint, and thus do
+include a $\beta_0$ term in our model.]{.column-margin} Say  we do not
+want to constrain the model to pass the line through the origin. Our
+model is then
 
 $$E(C | V) = \beta_0 + \beta_1 V$$
 
@@ -156,7 +164,7 @@ where we now have two unknown parameters to be estimated.
 Our sum of squared prediction errors is now
 
 $$
-\sum_{i=1}^{100} [O_{i} - (b_0 + b_1 V_{i}) ]^2
+\sum_{i=1}^{100} [C_{i} - (b_0 + b_1 V_{i}) ]^2
 $$
 
 This means setting two derivatives to 0 and solving. Since the
@@ -201,7 +209,7 @@ $$
  \left (
  \begin{array}{rr}
  100 & \sum_{i=1}^n V_i \\
- \sum_{i=1}^n V_i & b_1 \sum_{i=1}^n V_i^2 \\
+ \sum_{i=1}^n V_i & \sum_{i=1}^n V_i^2 \\
  \end{array}
  \right ) 
  \left (
@@ -283,11 +291,11 @@ $$
 [Note: Our use of the letters 'A' and 'S' here is nonstandard; 'X' and
 'Y' are the typical choices. However, a major problem is that 'X' and
 'Y' are then used for other separate quantities, causing confusion,
-hence our use of 'A' and 'S'. We will sometimes use 'X' and 'Y' with
-quotation marks, e.g. '"X"' and '"Y"' in informal comments, to indicate
+hence our use of 'A' and 'S'. We will sometimes use X and Y with
+quotation marks, e.g. "X" and "Y" in informal comments, to indicate
 our predictor variables and the quantity to be predicted. For instance,
-"Say we have 'X' and 'Y' as human height and weight" means "Say we wish
-to predict human weight from height.".]{.column-margin}
+'Say we have "X" and "Y" as human height and weight' means 'Say we wish
+to predict human weight from height.']{.column-margin}
 
 our sum of squared prediction errors is
 
@@ -304,7 +312,7 @@ We consider the general linear regression setting in which we have
 $p$ predictor variables $V^{(1)},...,V^{(p)}$ with
 
 $$
-E(Y | V^{(1)} = t_1 ,..., V^{(p)} = t_p) =
+E(C | V^{(1)} = t_1 ,..., V^{(p)} = t_p) =
 \beta_0 +
 \beta_1 t_1 + ... +
 \beta_p t_p
@@ -323,6 +331,16 @@ A =
 \end{array}
 \right )
 $$
+
+and 
+
+$$
+E(S|A) = A \beta
+$$
+
+[Actually, the -1 term in our R code above is meant to allude to "minus,
+i.e. removing, the $\beta_0$ term."]{.column-margin} Note the column of
+1s, needed to pick up the $\beta_0$ term.
 
 As before $S$ is the vector of associated "Y" values.
 
@@ -363,9 +381,9 @@ $$
 \frac{d}{da} a'a = 2a
 $${#eq-dda}
 
-@eq-rss is indeed of the form $a'a$, but the problem here is
-that $a$ in turn is a function of $b$, This calls for the Chain Rule,
-which does exist at the matrix level:
+@eq-rss is indeed of the form $a'a$, with $a = S - Ab$, but the problem
+here is that $a$ in turn is a function of $b$, This calls for the Chain
+Rule, which does exist at the matrix level:
 
 For example if $u = Mv + w$, with $M$ and $w$ constants (i.e. not
 functions of $v$, then
@@ -379,7 +397,7 @@ is conformable matrix multiplication.]{.column-margin}
 In our case at hand, we have $M = -A$ and $w = S$, so that
 
 $$
-\frac{d}{db} [(S - Ab)'(S - Ab) = -2 A'(S - Ab)
+\frac{d}{db} [(S - Ab)'(S - Ab)] = -2 A'(S - Ab)
 $$
 
 So, set
@@ -394,7 +412,7 @@ $$
 \widehat{\beta} = (A'A)^{-1} A'S
 $${#eq-linregformula}
 
-providing the inverse exists (more on this in the next chapter).
+providing the inverse exists (more on this in later chapters).
 
 Let's check this with the Nile example:
 
@@ -406,6 +424,8 @@ solve(Ap %*% A) %*% Ap %*% S  # R matrix inverse
 # check via R
 lm(n2 ~ n1)
 ```
+
+Also,
 
 ```{r}
 det(Ap %*% A) 
@@ -490,31 +510,32 @@ $$
 E(S | A) = A \beta 
 $$
 
-it is often assumed that[In some applications, $A$ is actually chosen by
-an experimenter, so that it is not random. But even in the random case,
-it is standard to condition on $A$. By @eq-iterexpect, a conditional
-confidence interval, say, at the 95% level also has the level
-unconditionally.]{.column-margin} 
-
 $$
 Cov(S | A) = \sigma^2 I
 $$
 
 where $\sigma$ is an unknown constant to be estimated from the data.
+This is called the *homoskedasticity* assumption.
 
 So $Var(S_i) = \sigma^2$ for all $i$.  It is usually not a realistic
 assumption. Say for instance we are predicting human weight from height.
 There should be more variation in weight among taller people than above
-shorter people. But it's a simplifying assumption without really good
-alternatives, so it is commonly used.
+shorter people. But it's a simplifying assumption, so it is commonly used.
 
 And in that setting, our formulas from @sec-covar come in
 handy, as follows.
 
 Recall that $\widehat{\beta}$ is our estimate of the unknown population
 parameter $\beta$, based on our random sample data. But that means that
-$\widehat{\beta}$ is a random vector, and thus has a covariance matrix. Using
-@eq-acova and setting $R = (A'A)^{-1} A'$$, we have
+[In some applications, $A$ is actually chosen by an experimenter, so
+that it is not random, the so-called *fixed-X* setting. But even in the
+random case (*random-X* setting), it is standard to condition on $A$.
+When we derive confidence intervals in @sec-confsets, the distinction
+won't matter.  By @eq-iterexpect, a conditional confidence interval,
+say, at the 95% level also has that level
+unconditionally.]{.column-margin} $\widehat{\beta}$ is a random vector,
+and thus has a covariance matrix. Using @eq-acova and setting $R =
+(A'A)^{-1} A'$, we have
 
 $$
 Cov(\widehat{\beta}|A) = R Cov(S|A) R' = R \sigma^2 I R' = \sigma^2 R R' =
@@ -522,7 +543,7 @@ Cov(\widehat{\beta}|A) = R Cov(S|A) R' = R \sigma^2 I R' = \sigma^2 R R' =
 $${#eq-varcovar}
 
 Classical statistical formulas use this relation to find standard errors
-for $\widehat{\beta}_i$ etc.
+for $\widehat{\beta}_i$ etc., to be presented in @sec-confsets.
 
 ## Update Formulas
 
@@ -532,8 +553,9 @@ fit an overly elaborate model to our data. We simply are estimating too
 many things for the amount of data we have, "spreading our data too
 thin."
 
-A common example is using too many predictor variables, so that we are
-estimating a large number of coefficients $\beta_i$.
+A common example is using too many predictor variables, so that, e.g.
+in the linear model case, we are estimating a large number of
+coefficients $\beta_i$.
 
 Or we may draw a histogram with too many bins:
 
@@ -549,7 +571,7 @@ we obtained a smooth graph, but with 100 bins it became choppy. So
 again, we are estimating too many things, given the capacity of the
 data.[A histogram is an estimate of the probability density function of
 the observed random variable. Having more, thus narrower, bins reduces
-bias but increases variance.]{.column-margin} 
+estimation bias but increases estimation variance.]{.column-margin} 
 
 With larger datasets, we can use more predictor variables, more
 histogram bins, and so on. The question then arises is, for instance,
@@ -565,7 +587,7 @@ We thus rely on partitioning our data, into a *training set* to which we
 fit our model, and a *test set*, on which we predict using the fitted
 model. We may wish to do this several times.
 
-A special case is the Leaving One Out method, in which the holdout set
+A special case is the Leaving One Out method, in which the test set
 size is 1. It might go like this, for a dataset d:
 
 ```
@@ -579,11 +601,11 @@ return sumErrs
 
 This can become computationally challenging, as we would need to refit
 the model each time. Each call to **lm** involves a matrix inversion
-(equivalent), and we must do this $n$ times.
+(or equivalent), and we must do this $n$ times.
 
 It would be nice if we could have an "update"
 formula that would quickly recalculate the model found on the full
-dataset. Then e would need to perform matrix inversion just once.
+dataset. Then we would need to perform matrix inversion just once.
 In the case of linear models, such a formula exists, in the
 Sherman-Morrison-Woodbury relation:
 
@@ -693,29 +715,6 @@ apa2i
 ```
 
 ## Your Turn
-
-❄️  **Your Turn:** Due to the Multivariate Central Limit Theorem, many
-common statistical estimators have approximately normal distributions.
-In R, functions such as **lm**, **glm**, **lme** and **coxph** come with
-an associated function **vcov**. This gives the approximate covariance
-[As seen in @eq-nilebetahat, least-squares estimators are composed of
-various sums, making them asymptotically normal by the Multivariate
-Central Limit Theorem. Thus we can form approximate confidence intervals
-even without assuming normal distributions for "Y."]{.column-margin}
-matrix of the computed estimator, e.g. for the estimated coefficients
-vector in a linear model. This enables formation of approximate
-confidence intervals for not only individual model parameters but also
-linear combinations of them.
-
-Write an R function with call form
-
-``` r 
-regFtnCI(lmOut,t,alpha)
-```
-
-that returns an approximate $(1-\alpha)$ confidence interval for
-the conditional mean $E(Y | X=t)$. Here **lmOut** is the object returned
-by a call to **lm**.
 
 ❄️  **Your Turn:** Show @eq-dda. Write $a = (a_1,...,a_k)'$ and find the
 gradient "by hand." Compare to $2a$.

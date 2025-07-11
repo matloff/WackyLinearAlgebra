@@ -8,7 +8,7 @@ library(qeML)
 
 {{< pagebreak >}}
 
-# Confidence Sets
+# Confidence Sets {#sec-confsets}
 
 ::: {.callout-note}
 
@@ -23,40 +23,108 @@ multivariate quantities themselves.
 
 :::
 
-## The Delta Method
-
-This is one of the most useful simple tools in statistics.  
-
-### Review: confidence intervals, standard errors
+## Review: Confidence Intervals, Standard Errors
 
 To set the stage, let's review the statistical concepts of 
 *confidence interval* and *standard error*. Say we have
 an estimator $\widehat{\theta}$ of some population parameter $\theta$,
 e.g.\ $\bar{X}$ for a population mean $\mu$.
 
-* Loosely speaking, the term *standard error* of is our estimate of
-  $\sqrt{Var(\widehat{\theta})}$.  More precisely, suppose that
-  $\widehat{\theta}$ is asymptotically normal.  The standard error is an
-  estimate of the standard deviation of that normal distribution. For
-  this reason, It is customary to write $AVar(\widehat{\theta})$ 
-  rather than $Var(\widehat{\theta})$.
+Loosely speaking, the term *standard error* of is our estimate of
+$\sqrt{Var(\widehat{\theta})}$.  More precisely, suppose that
+$\widehat{\theta}$ is asymptotically normal.  The standard error is an
+estimate of the standard deviation of that normal distribution. For
+this reason, It is customary to write $AVar(\widehat{\theta})$ 
+rather than $Var(\widehat{\theta})$.
 
-  This can be used to form a confidence interval (see below), but 
-  also stands on its own as an indication of the accuracy of 
-  $\widehat{\theta}$.
+This can be used to form a confidence interval (see below), but 
+also stands on its own as an indication of the accuracy of 
+$\widehat{\theta}$.
 
-* A, say 95%, confidence interval (CI) for $\mu$ is then
+A, say 95%, confidence interval (CI) for $\mu$ is then
 
-  $$
-  \widehat{\theta} \pm 1.96 \widehat{\theta}
-  $$
+$$
+\widehat{\theta} \pm 1.96 \widehat{\theta}
+$$
 
-  The 95% figure means that of all possible samples of the given size
-  from the population, 95% of the resulting confidence intervals will
-  contain $\theta$. In many cases, the 95% figure is only approximate,
-  stemming from a derivation that uses the Central Limit Theorem.
+The 95% figure means that of all possible samples of the given size
+[There is a bit of drama in this word "contain." Instead of saying the
+intervals *contain* $\theta$, why not simply say $\theta$ is *in* the
+intervals? Aren't these two descriptions equivalent in terms of English?
+Of course they are. But many instructors of statistics classes worry
+that students will take the second description to mean that $\theta$ is
+the random quantity, when in fact the CI is random (random center,
+random radius) and $\theta$ is fixed (though unknown). The instructors
+thus insist on the more awkward phrasing.]{.column-margin} from the
+population, 95% of the resulting confidence intervals will contain
+$\theta$. In many cases, the 95% figure is only approximate, stemming
+from a derivation that uses the Central Limit Theorem.
 
-### Delta method: motivating example
+## The R vcov Function
+
+Due to the Multivariate Central Limit Theorem, many
+common statistical estimators have approximately normal distributions.
+In R, functions such as **lm**, **glm**, **lme** and **coxph** come with
+an associated function **vcov**. This gives the approximate covariance
+matrix of the computed estimator, e.g. for the estimated coefficients
+vector in a linear model. This enables formation of approximate
+confidence intervals for not only individual model parameters but also
+linear combinations of them, as well as computing other quantities
+related to confidence sets.
+
+### Example: Iranian churn data
+
+[The **vcov** function is an R *generic* function, playing a similar
+role to **print** and **plot**. Many R statistical functions have
+this for their output, including **lm**. When we make the call **vcov(glmOut)**,
+rhe R interpreter sees that **glmOut** is of class "glm" and thus
+transfer to call to the class-specific function, **vcov.glm(glmOut)**.
+The function **coef**, also used here, is also generic.]{.column-margin}
+Here we predict whether a telecom customer will move to another
+provider. We obtain $AVar(\widehat{\beta})$ using the **vcov** function:
+
+
+```{r}
+data(IranianChurn)
+glmOut <- glm(Exited ~ ., data = iranChurn, family = binomial)
+acov <- vcov(glmOut)
+acov
+```
+
+There are several categorical variables here, so after expansion to
+dummies, $AVar(\widehat{\beta})$ is $12 \times 12$. This is the covariance
+matrix for the vector of estimated logistic regression coefficients
+$\widehat{\beta}$. 
+
+Say we wish to compare Germany and Spain. The difference will be of the
+form $a'\beta$. What should we take for $a$?
+
+``` r
+> row.names(acov)
+ [1] "(Intercept)"      "CreditScore"      "GeographyGermany" "GeographySpain"  
+ [5] "GenderMale"       "Age"              "Tenure"           "Balance"         
+ [9] "NumOfProducts"    "HasCrCard1"       "IsActiveMember1"  "EstimatedSalary"
+```
+
+Ah, we set $a$ to (0,0,1,-1,0,0,0,0,0,0,0,0)'. Using @eq-quadform,
+we compute the standard error and the CI:
+
+```{r}
+a <- c(0,0,1,-1,0,0,0,0,0,0,0,0)
+avar <- t(a) %*% acov %*% a
+se <- sqrt(avar)
+estdiff <- t(a) %*% coef(glmOut)
+c(estdiff-1.96*se,estdiff+1.96*se)
+```
+
+
+
+
+## The Delta Method
+
+This is one of the most useful simple tools in statistics.  
+
+### Motivating example
 
 Now, for the delta method, as a first example, say we are estimating a
 population mean $\mu$ and are also interested in estimating $\log(\mu)$. 
@@ -298,27 +366,6 @@ In R functions to do parametric regression modeling, Maximum Likelihood
 Estimation and so on, $AVar(v,w)$ is available from the function's
 return value.
 
-## Example: Iranian Churn Data
-
-[The **vcov** function is an R *generic* function, playing a similar
-role to **print** and **plot**. Many R statistical functions have
-this for their output, including **lm**.]{.column-margin}
-Here we predict whether a telecom customer will move to another
-provider. We obtain $AVar(v,w)$ using the **vcov** function:
-
-
-```{r}
-data(IranianChurn)
-glmOut <- glm(Exited ~ ., data = iranChurn, family = binomial)
-vcov(glmOut)
-```
-
-There are several categorical variables here, so after expansion to
-dummies, $AVar(v,w)$ is $12 \times 12$. This is the covariance
-matrix for the vector of estimated logistic regression coefficients
-$\widehat{\beta}$. There are many different functions $f(\beta)$ that
-might be of interest.
-
 
 ## Example: Mother/Daughter Height Data
 
@@ -370,10 +417,26 @@ libraries.*
 For example, the R package **numDeriv** will compute numerical
 derivatives.
 
+## Confidence Ellipsoids
+
 ## Your Turn
 
 ❄️  **Your Turn:** In the mother/daughter data, find the estimated
 covariance between the two heights.
+
+❄️  **Your Turn:** 
+
+
+
+Write an R function with call form
+
+``` r 
+regFtnCI(lmOut,t,alpha)
+```
+
+that returns an approximate $(1-\alpha)$ confidence interval for
+the conditional mean $E(Y | X=t)$. Here **lmOut** is the object returned
+by a call to **lm**.
 
 
 
