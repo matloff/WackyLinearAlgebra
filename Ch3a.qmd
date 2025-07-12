@@ -417,7 +417,7 @@ libraries.*
 For example, the R package **numDeriv** will compute numerical
 derivatives.
 
-## Confidence Ellipsoids
+## Scheffe's Method
 
 In analyzing the Iranian Churn data above, we might form many CIs, each
 at the 0.95 level. However, we may wish to set an *overall* level to at
@@ -435,6 +435,78 @@ In @sec-linmods, we saw the power of matrix derivatives, in our case
 to minimize a sum of squares.  Here we go one step further, again doing
 optimization, but in this case under a constraint. To this end,
 we first need to introduce the concept of *Lagrange multipliers*.
+
+Say we wish to minimize 
+
+$$
+f(x,y) = x^2 + 2y^2
+$$
+
+subject to the constraint.
+
+$$
+3x + y = 8
+$$ {#eq-constraint}
+
+We form the expression
+
+$$
+x^2 + 2y^2 + \lambda (3x + y - 8)
+$$
+
+and take partial derivatives with respect to $x$, $y$ and $\lambda$:
+
+$$
+0 = 2x + 3 \lambda
+$$
+
+$$
+0 = 4y + \lambda
+$$
+
+$$
+0 = 3x+y
+$$
+
+From the first two equations, we have
+
+$$
+0 = 2x - 12y
+$$
+
+Substituting into @eq-constraint, we find that 
+
+$$
+y = \frac{8}{19}
+$$
+
+and so on.
+
+### A confidence set for $\widehat{\beta}$ in the linear model
+
+It can be shown that if $W$ is a $k$-dimensional normally distributed
+random vector with mean vector $\mu$ and covariance matrix $\Sigma$, then
+
+$$
+Q = (W-\mu)' \Sigma^{-1} (W-\mu)
+$$
+
+has a *chi-square* distribution with $k$ *degrees of freedom*. Say $d$ 
+is the upper-$\alpha$ quantile of that distribution, i.e.
+
+$$
+P(W-\mu)' \Sigma^{-1} (W-\mu) \leq d] = \alpha
+$$
+
+
+
+```{r}
+library(ellipse)
+data(mtcars)
+fit <- lm(mpg ~ disp + cyl , mtcars)
+plot(ellipse(fit, which = c('disp', 'cyl'), level = 0.90), type = 'l')
+```
+
 
 ## Your Turn
 
