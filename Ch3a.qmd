@@ -491,14 +491,56 @@ $$
 Q = (W-\mu)' \Sigma^{-1} (W-\mu)
 $$
 
-has a *chi-square* distribution with $k$ *degrees of freedom*. Say $d$ 
+has a *chi-square* distribution with $k$ *degrees of freedom*. Say $d_{\alpha}$ 
 is the upper-$\alpha$ quantile of that distribution, i.e.
 
 $$
-P(W-\mu)' \Sigma^{-1} (W-\mu) \leq d] = \alpha
+P[(W-\mu)' \Sigma^{-1} (W-\mu) \leq d_{\alpha}] = 1-\alpha
 $$
 
+In the case $k=2$, the set of all $t$ such that
 
+$$
+(t-\mu)' \Sigma^{-1} (t-\mu) = r
+$$
+
+is an ellipse. (If $\Sigma = I$, we have a circle.) For $k=3$ we have an
+ellipsoid, a "football," and so on in higher dimensions..
+
+[We will use the linear model here for concretenss, but the same
+analysis holds for any asymptotically normal statistical estimator, e.g.
+Maximum Likelihood estimates. By the way, here we must assume the
+classical linear model assumptions, i.e. normality, linearity and
+homoskedasticy.]{.column-margin} Now, in the context of the linear
+model, take $W$ to be $\widehat{\beta}$, $\mu = \beta$ etc.  Here
+$\Sigma$ must be estimated by $\widehat{\beta}$ (given to us via
+**vcov**), and the chi-square distribution is replaced by something
+called the *F-distribution*, using $f_{mlo}$ rather than $d_{\alpha}$,
+but the basic ideas are the same.
+
+So, the event
+
+$$
+(\widehat{\beta}-\beta)' \widehat{\Sigma}^{-1} (\widehat{\beta}-\beta) 
+\leq f_{\alpha}
+$$
+
+has probability $1-\alpha$. Equivalently,
+
+$$
+(\beta - \widehat{\beta})' \widehat{\Sigma}^{-1} (\beta-\widehat{\beta}) 
+\leq f_{\alpha}
+$${#eq-Falpha}
+
+has that probability as well.
+
+> Therefore, the set of all $\beta$ satisfying @eq-Falpha is a
+> $100(1-\alpha)$ confidence set for the true population $\beta$.
+
+This gives us a confidence ellipse for $\beta$ in two dimensions, a
+confidence ellipsoid in three dimensions and so on.
+
+The **ellipse** library can draw this for us:
 
 ```{r}
 library(ellipse)
@@ -506,6 +548,8 @@ data(mtcars)
 fit <- lm(mpg ~ disp + cyl , mtcars)
 plot(ellipse(fit, which = c('disp', 'cyl'), level = 0.90), type = 'l')
 ```
+
+Here the axes are $\beta_{disp}$ and $\beta_{cyl}$.
 
 
 ## Your Turn
