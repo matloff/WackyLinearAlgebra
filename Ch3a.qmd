@@ -60,7 +60,7 @@ population, 95% of the resulting confidence intervals will contain
 $\theta$. In many cases, the 95% figure is only approximate, stemming
 from a derivation that uses the Central Limit Theorem.
 
-## The R vcov Function
+## The R vcov Function {#sec-rcov}
 
 Due to the Multivariate Central Limit Theorem, many
 common statistical estimators have approximately normal distributions.
@@ -426,14 +426,20 @@ fails to contain the desired population value is at most 0.05. This
 concept is known as *multiple inference* or *simultaneous inference*.
 
 Whether to do this is a philosphical question, and the answer will
-depend on one's goals and personal preferences. If we do wish to pursue
+depend on one's goals and personal preferences, or possibly due to
+requirements of a research journal or employer. If we do wish to pursue
 the matter, then how? One of the most well-known approaches makes good
 use of linear algebra.
 
 ### A confidence set for $\widehat{\beta}$ in the linear model
 
-It can be shown that if $W$ is a $k$-dimensional normally distributed
-random vector with mean vector $\mu$ and covariance matrix $\Sigma$, then
+[The chi-square distribution with $k$ degrees of freedom is defined to
+be the distribution of the sum of the squares of $k$ independent N(0,1)
+random variables. After applying properties such as @eq-acova, one can
+show that the quadratic form here also has that
+distribution.]{.column-margin} It can be shown that if $W$ is a
+$k$-dimensional normally distributed random vector with mean vector
+$\mu$ and covariance matrix $\Sigma$, then
 
 $$
 Q = (W-\mu)' \Sigma^{-1} (W-\mu)
@@ -453,31 +459,31 @@ $$
 $$
 
 is an ellipse. (If $\Sigma = I$, we have a circle.) For $k=3$ we have an
-ellipsoid, a "football," and so on in higher dimensions..
+ellipsoid, a "football," and so on in higher dimensions..  [We will use
+the linear model here for concretenss, but the same analysis holds for
+any asymptotically normal statistical estimator, e.g.  Maximum
+Likelihood estimates.]{.column-margin} Now, in the context of the linear
+model, take $W$ to be $\widehat{\beta}$, $\mu = \beta$ etc.  
 
-[We will use the linear model here for concretenss, but the same
-analysis holds for any asymptotically normal statistical estimator, e.g.
-Maximum Likelihood estimates. By the way, here we must assume the
-classical linear model assumptions, i.e. normality, linearity and
-homoskedasticy.]{.column-margin} Now, in the context of the linear
-model, take $W$ to be $\widehat{\beta}$, $\mu = \beta$ etc.  Here
-$\Sigma$ must be estimated by $\widehat{\beta}$ (given to us via
-**vcov**), and the chi-square distribution is replaced by something
-called the *F-distribution*, using $f_{mlo}$ rather than $d_{\alpha}$,
-but the basic ideas are the same.
+[The F-distribution is defined to be the distribution of the ratio of
+two independent chi-square random variables, each divided by their
+degrees of freedom.]{.column-margin} Here $\Sigma$ must be estimated by
+$\widehat{\beta}$ (given to us via **vcov**), and the chi-square
+distribution is replaced by a quantity involving the *F-distribution*.
+using a new cutoff value of $r_{\alpha}$ rather than $d_{\alpha}$. 
 
 So, the event
 
 $$
 (\widehat{\beta}-\beta)' \widehat{\Sigma}^{-1} (\widehat{\beta}-\beta) 
-\leq f_{\alpha}
+\leq r_{\alpha}
 $$
 
 has probability $1-\alpha$. Equivalently,
 
 $$
 (\beta - \widehat{\beta})' \widehat{\Sigma}^{-1} (\beta-\widehat{\beta}) 
-\leq f_{\alpha}
+\leq r_{\alpha}
 $${#eq-Falpha}
 
 has that probability as well.
@@ -497,7 +503,11 @@ fit <- lm(mpg ~ disp + cyl , mtcars)
 plot(ellipse(fit, which = c('disp', 'cyl'), level = 0.90), type = 'l')
 ```
 
-Here the axes are $\beta_{disp}$ and $\beta_{cyl}$.
+Here the axes are $\beta_{disp}$ and $\beta_{cyl}$. 
+
+By the way, note that the larger $\alpha$ is, the larger will be the
+value of $r_{\alpha}$, thus the larger the ellipse. The reader should
+pause to confirm that this makes sense.
 
 However, this is but an itermediate step toward our goal of a multiple
 inference method.
@@ -509,7 +519,11 @@ to minimize a sum of squares.  Here we go one step further, again doing
 optimization, but in this case under a constraint. To this end,
 we first need to introduce the concept of *Lagrange multipliers*.
 
-Say we wish to minimize 
+The context is that we wish to minimize/maximize a quantity $f(w)$,
+subject to $g(w) = 0$, where $w$ is a vector argument. We set up the
+expression $f(w) + \lambda g(w)$, and find its extreme values.
+
+For instance, say we wish to minimize 
 
 $$
 f(x,y) = x^2 + 2y^2
@@ -538,7 +552,7 @@ $$
 $$
 
 $$
-0 = 3x+y
+0 = 3x+y-8
 $$
 
 From the first two equations, we have
@@ -554,6 +568,69 @@ y = \frac{8}{19}
 $$
 
 and so on.
+
+The Lagrange multiplier here is $\lambda$. If we have several
+constraints, we have several multipliers.
+
+### Simultaneous confidence intervals for quantities $a'\beta$
+
+In @sec-rcov, we saw how to form confidence intervals for a quantity
+$a'\beta$. We may wish to form several, or even many, such intervals.
+Here is how the Scheffe' method can make the intervals simultaneous.
+
+[There is an easily-missed subtlety here. Our phrasing "subject to
+$\beta$ being *in* the ellipse" (i.e. either in the interior or on the
+boundary) is at odds with the Langrange formulation, which stipulated
+that the min or max values are on the boundary. But the latter property
+is implied by the lineariryt of $a'\beta$: Consider any point $q$ that
+is strictly interior to the ellipse, so our objective function has value
+$a'q$.  Then there is room for us to move away from $q$ yet still be
+inside the ellipse, say to the point $u$, yet with $a'u$ either larger
+or smaller that $a'q$, depending on the direction we move in. So the min
+or max cannot be in the interior.]{.column-margin} To find a CI for
+$a'\beta$, find its maximum and minimum values subject to $\beta$ being
+in the ellipse. In other words, we solve the Lagrange multiplier problem
+
+$$
+min, max_{\beta, \lambda} ~~
+a'\beta + \lambda [(\beta - \widehat{\beta})' 
+\widehat{\Sigma}^{-1} (\beta-\widehat{\beta}) - r_{\alpha}] 
+$${#eq-scheffeobjftn}
+
+Let $C$ be a symmetric matrix. The derivative of a quadratic form $u'Cu$
+with respect to $u$ can be shown to be $2Cu$. Differentiating with
+respect to $\beta$, we thus have 
+
+$$
+0 = a 
+- 2 \lambda 
+[\widehat{\Sigma}^{-1} (\beta - \widehat{\beta})]
+$$
+
+so that 
+
+$$
+\beta - \widehat{\beta} =
+\frac{1}{2 \lambda}
+\widehat{\Sigma} a
+$$
+
+Now substitute for $\beta - \widehat{\beta}$ in the constraint:
+
+$$
+r_{\alpha} = 
+(\frac{1}{2\lambda} \widehat{\Sigma} a)' \widehat{\Sigma}^{-1} 
+(\frac{1}{2 \lambda} \widehat{\Sigma} a) =
+\frac{1}{4 \lambda^2} (a' \widehat{\Sigma} a)
+$$
+
+Solve for $\lambda$:
+
+$$
+2 \lambda = \pm \sqrt{\frac{1}{r_{\alpha}} a'\widehat{\Sigma} a}
+$$
+
+
 
 
 ## Your Turn
