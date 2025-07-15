@@ -579,17 +579,17 @@ $a'\beta$. We may wish to form several, or even many, such intervals.
 Here is how the Scheffe' method can make the intervals simultaneous.
 
 [There is an easily-missed subtlety here. Our phrasing "subject to
-$\beta$ being *in* the ellipse" (i.e. either in the interior or on the
+$\beta$ being *in* the ellipsoid" (i.e. either in the interior or on the
 boundary) is at odds with the Langrange formulation, which stipulated
 that the min or max values are on the boundary. But the latter property
 is implied by the lineariryt of $a'\beta$: Consider any point $q$ that
-is strictly interior to the ellipse, so our objective function has value
+is strictly interior to the ellipsoid, so our objective function has value
 $a'q$.  Then there is room for us to move away from $q$ yet still be
-inside the ellipse, say to the point $u$, yet with $a'u$ either larger
+inside the ellipsoid, say to the point $u$, yet with $a'u$ either larger
 or smaller that $a'q$, depending on the direction we move in. So the min
 or max cannot be in the interior.]{.column-margin} To find a CI for
 $a'\beta$, find its maximum and minimum values subject to $\beta$ being
-in the ellipse. In other words, we solve the Lagrange multiplier problem
+in the ellipsoid In other words, we solve the Lagrange multiplier problem
 
 $$
 min, max_{\beta, \lambda} ~~
@@ -603,7 +603,7 @@ respect to $\beta$, we thus have
 
 $$
 0 = a 
-- 2 \lambda 
++ 2 \lambda 
 [\widehat{\Sigma}^{-1} (\beta - \widehat{\beta})]
 $$
 
@@ -611,16 +611,16 @@ so that
 
 $$
 \beta - \widehat{\beta} =
-\frac{1}{2 \lambda}
+-\frac{1}{2 \lambda}
 \widehat{\Sigma} a
-$$
+$${#eq-sothat}
 
 Now substitute for $\beta - \widehat{\beta}$ in the constraint:
 
 $$
 r_{\alpha} = 
-(\frac{1}{2\lambda} \widehat{\Sigma} a)' \widehat{\Sigma}^{-1} 
-(\frac{1}{2 \lambda} \widehat{\Sigma} a) =
+(-\frac{1}{2\lambda} \widehat{\Sigma} a)' \widehat{\Sigma}^{-1} 
+(-\frac{1}{2 \lambda} \widehat{\Sigma} a) =
 \frac{1}{4 \lambda^2} (a' \widehat{\Sigma} a)
 $$
 
@@ -630,7 +630,20 @@ $$
 2 \lambda = \pm \sqrt{\frac{1}{r_{\alpha}} a'\widehat{\Sigma} a}
 $$
 
+Finally, recall that the quantity whose min and max interest us is
+$a'\beta$. Using @eq-sothat, we have our CI for $a'\beta$,
 
+$$
+a'\beta = a'\widehat{\beta} \pm
+\sqrt{r_{\alpha} a'\widehat{\Sigma} a}
+$${#eq-scheffeci}
+
+Now, why does this interval hold *simultaneously* over *all* $a$?
+The point is that if \beta is in the ellipsoid, then @eq-scheffeci
+will hold for all $a$. 
+
+This analysis also shows that @eq-scheffeci is *conservative*,
+with an individual probability of more than $100(1-\alpha)$
 
 
 ## Your Turn
