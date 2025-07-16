@@ -219,9 +219,11 @@ $(\alpha,\beta)'$ by $(Q,R)'$, standard error of the latter is
 the square root of
 
 $$
-f_1^2 (Q,R) AVar(Q) +
-f_2^2 (Q,R) AVar(R) +
-2 f_1(Q,R) f_2(Q,R) ACov(Q,R)
+\begin{align}
+f_1^2 (Q,R) AVar(Q) &+ \\
+f_2^2 (Q,R) AVar(R) 
+&+ 2 f_1(Q,R) f_2(Q,R) ACov(Q,R)
+\end{align}
 $$
 
 where we have made use of @eq-crossprod.

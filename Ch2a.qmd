@@ -256,6 +256,7 @@ $$
 Cov(AX) = A Cov(X) A'
 $${#eq-covax} 
 
+<!--
 ### Cross-covariance
 
 The matrix $Cov(X)$ represents the covariance of a vector $X$
@@ -269,6 +270,7 @@ Cov(X,Y)_{ij} = Cov(X_i,Y_j)
 $$
 
 where the latter covariance is scalar.
+-->
 
 ## The Multivariate Normal Distribution Family{#sec-mvn}
 
