@@ -19,7 +19,9 @@ interval* (CI). But that is just in one dimension. Confidence intervals are
 even more useful in the multidimensional setting. In this chapter, we
 introduce a fairly general method of forming a CI from multivariate
 data, and then extend the notion to *confidence sets* for unknown
-multivariate quantities themselves.
+multivariate quantities themselves. As the reader may have guessed, the
+word "multivariate" here is a sign that linear algebra is involved,
+which will indeed be the case.
 
 :::
 
@@ -41,10 +43,12 @@ This can be used to form a confidence interval (see below), but
 also stands on its own as an indication of the accuracy of 
 $\widehat{\theta}$.
 
-A, say 95%, confidence interval (CI) for $\mu$ is then
+[In general, for confidence level $1-\alpha$ replace 1.96 by the upper
+$1-\alpha/2$ quantile of the N(0,1) distribution]{.column-margin} A,
+say 95%, confidence interval (CI) for $\mu$ is then
 
 $$
-\widehat{\theta} \pm 1.96 \widehat{\theta}
+\widehat{\theta} \pm 1.96 ~ \widehat{\theta}
 $$
 
 The 95% figure means that of all possible samples of the given size
@@ -62,24 +66,24 @@ from a derivation that uses the Central Limit Theorem.
 
 ## The R vcov Function {#sec-rcov}
 
-Due to the Multivariate Central Limit Theorem, many
-common statistical estimators have approximately normal distributions.
-In R, functions such as **lm**, **glm**, **lme** and **coxph** come with
-an associated function **vcov**. This gives the approximate covariance
-matrix of the computed estimator, e.g. for the estimated coefficients
-vector in a linear model. This enables formation of approximate
-confidence intervals for not only individual model parameters but also
-linear combinations of them, as well as computing other quantities
-related to confidence sets.
+Due to the Multivariate Central Limit Theorem, many common statistical
+estimators have approximately normal distributions.  In R, functions
+such as **lm**, **glm**, **lme** and **coxph** come with an associated
+function **vcov**. This gives the approximate covariance matrix of the
+computed estimator, e.g. for the estimated coefficients vector in a
+linear model. This enables formation of approximate confidence intervals
+for not only individual model parameters but also linear combinations of
+them, as well as computing other quantities related to confidence sets.
+[The **vcov** function is an R *generic* function, playing a similar
+role to **print**, **plot**, **summary** and so on. Many R statistical
+functions have this for their output, including **lm**. When we make the
+call **vcov(glmOut)**, the R interpreter sees that **glmOut** is of
+class "glm" and thus transfers the call to the class-specific function,
+**vcov.glm(glmOut)**.  The function **coef**, also used here, is also
+generic.]{.column-margin}
 
 ### Example: Iranian churn data
 
-[The **vcov** function is an R *generic* function, playing a similar
-role to **print** and **plot**. Many R statistical functions have
-this for their output, including **lm**. When we make the call **vcov(glmOut)**,
-rhe R interpreter sees that **glmOut** is of class "glm" and thus
-transfer to call to the class-specific function, **vcov.glm(glmOut)**.
-The function **coef**, also used here, is also generic.]{.column-margin}
 Here we predict whether a telecom customer will move to another
 provider. We obtain $AVar(\widehat{\beta})$ using the **vcov** function:
 
@@ -139,7 +143,7 @@ But how do we obtain a standard error for $W$?
 
 ### Use of the Central Limit Theorem
 
-The Central Limit Theorem tells as that $\bar{X}$ is asymptotically
+The Central Limit Theorem tells us that $\bar{X}$ is asymptotically
 normally distributed. But what about $\log{\bar{X}}$?
 
 From calculus, we know that a smooth function $f$ can be written as a
@@ -149,7 +153,7 @@ $$
 f(x) = f(x_0) + f'(x_0) (x-x_0) + f''(x_0) (x-x_0)^2 /2 + ...
 $$
 
-where "'" denotes derivative rather than matrix transpose.
+where ' denotes derivative rather than matrix transpose.
 
 In our case here, setting $f(t) = \log{t}$, $x_0 = \mu$ and $x =
 \bar{X}$, we have
@@ -212,13 +216,12 @@ $$
 
 So if we are estimating, for instance, a population quantity
 $(\alpha,\beta)'$ by $(Q,R)'$, standard error of the latter is
+the square root of
 
 $$
-\sqrt{
 f_1^2 (Q,R) AVar(Q) +
 f_2^2 (Q,R) AVar(R) +
 2 f_1(Q,R) f_2(Q,R) ACov(Q,R)
-}
 $$
 
 where we have made use of @eq-crossprod.
@@ -254,8 +257,10 @@ $$
 Then from @eq-quadform, 
 
 $$
-AVar[f(Q,R)] = (\nabla f)' AV(Q,R) (\nabla f)
+AVar[f(Q,R)] = (\nabla f)' ACov(Q,R) (\nabla f)
 $${#eq-deltaquad}
+
+where 'ACov' means the asymptotic covariance matrix of $(Q,R)$.
 
 ### Example: ratio of two means
 
@@ -312,13 +317,13 @@ $$
  \right )
 $$
 
-As to $AVar(v,w)$ in @eq-deltaquad, we would use the multivariate analog
-of the usual $S^2$ in the univariate case, taking advantage of
+As to $ACov(v,w)$ in @eq-deltaquad, we would use the multivariate analog
+of the usual univariate $S^2$, taking advantage of
 @eq-matrixdef. One must be careful, though, making sure we choose the
-appropriate quantity for $AVar(v,w)$.
+appropriate quantity for $ACov(v,w)$.
 
 For instance, in our ratio example here, $(Q,R)'$ is $(\bar{M},\bar{D})'$.
-To obtain $AVar(v,w)$, let's first look at the covariance matrix $\Sigma$,
+To obtain $ACov(v,w)$, let's first look at the covariance matrix $\Sigma$,
 
 $$
 \Sigma = E[(M - EM) (D - ED)']
@@ -467,6 +472,8 @@ model, take $W$ to be $\widehat{\beta}$, $\mu = \beta$ etc.
 
 [The F-distribution is defined to be the distribution of the ratio of
 two independent chi-square random variables, each divided by their
+degrees of freedom. Here $r_{\alpha} = p f_{alpha}$, where $f_{\alpha}$
+is the upper-$\alpha$ quantile for the F-distribution with $p$ and $n-p$
 degrees of freedom.]{.column-margin} Here $\Sigma$ must be estimated by
 $\widehat{\beta}$ (given to us via **vcov**), and the chi-square
 distribution is replaced by a quantity involving the *F-distribution*.
