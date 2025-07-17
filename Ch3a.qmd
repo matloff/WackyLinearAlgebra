@@ -262,7 +262,19 @@ $$
 AVar[f(Q,R)] = (\nabla f)' ACov(Q,R) (\nabla f)
 $${#eq-deltaquad}
 
-where 'ACov' means the asymptotic covariance matrix of $(Q,R)$.
+where 'ACov' means the asymptotic covariance matrix of the vector
+
+$$
+W =
+\left (
+\begin{array}{r}
+Q \\
+R  \\
+\end{array}
+\right )
+$${#eq-covar}
+
+Let's call that asymptotic covariance matrix $\widehat{\Sigma}$.
 
 ### Example: ratio of two means
 
@@ -319,12 +331,62 @@ $$
  \right )
 $$
 
-As to $ACov(v,w)$ in @eq-deltaquad, we would use the multivariate analog
-of the usual univariate $S^2$, taking advantage of
-@eq-matrixdef. One must be careful, though, making sure we choose the
-appropriate quantity for $ACov(v,w)$.
+[Often $ACov(v,w)$ will be provided by our application software, such as
+with R's **vcov** function to be presented later in this
+chapter.]{.column-margin} One must be careful, making sure we choose the
+appropriate quantity in $\widehat{\Sigma}$. For instance, in our ratio
+example here, 
 
-For instance, in our ratio example here, $(Q,R)'$ is $(\bar{M},\bar{D})'$.
+$$
+\left (
+\begin{array}{r}
+Q \\
+R  \\
+\end{array}
+\right ) =
+\left (
+\begin{array}{r}
+\bar{D} \\
+\bar{M}  \\
+\end{array}
+\right ) 
+$$
+
+Thus we will need $AVar(\bar{D})$, $AVar(\bar{M})$ and $ACov(\bar{D},\bar{M})$.
+These quantities are exact, not asymptotic, so we can simplify our
+notation, e.g. changing  $AVar(\bar{M})$ to $Var(\bar{M})$.
+
+Be sure to distinguish between similar quantities. For example:
+
+* $Var(M)$ measures how $M$ varies across all individuals in the
+  population,
+
+  $$
+  E[(M - EM)^2]
+  $$
+
+  We can estimate it via its sample analog:
+
+  $$
+  \widehat{Var}(M) =
+  \frac{1}{n}
+  \sum_{i=1}^n (M_i - \bar{M})^2 
+  $$
+
+* $Var(\bar{M})$ measures how $\bar{M}$ varies across all size-$n$ 
+  samples in the population.
+
+* We know from statistics that
+
+  $$
+  Var(\bar{M}) = \frac{1}{n} Var(M)
+  $$ 
+
+  
+
+
+
+
 To obtain $ACov(v,w)$, let's first look at the covariance matrix $\Sigma$,
 
 $$
@@ -674,7 +736,21 @@ that returns an approximate $(1-\alpha)$ confidence interval for
 the conditional mean $E(Y | X=t)$. Here **lmOut** is the object returned
 by a call to **lm**.
 
+❄️  **Your Turn:** 
 
+The *geometric mean* of a set of $n$ numbers is the $n^{th}$ root of
+their product. Write an R function with call form
 
+``` r 
+geoGMxbarybar(x,y,alpha)
+```
+
+that returns an approximate $100(1-\alpha)$ percent CI for the
+population geometric mean of the two numbers $E(X)$ and $E(Y)$,
+using the sample analog
+
+$$
+\sqrt{\bar{x} ~ \bar{y}}
+$$
 
 
