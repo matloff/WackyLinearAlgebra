@@ -278,6 +278,11 @@ Let's call that asymptotic covariance matrix $\widehat{\Sigma}$.
 
 ### Example: ratio of two means
 
+Often $\widehat{\Sigma}$ will be provided by our application software, such as
+with R's **vcov** function to be presented later in this
+chapter, but we will need to derive it in this case, using
+properties of sample means.
+
 Say our sample data consists of mother-daughter pairs,
 
 $$
@@ -306,36 +311,7 @@ We might be interested in the ratio $\omega = \mu_D / \mu_M$.  Our
 estimator will be $\widehat{\omega} = \bar{D} / \bar{M}$, the ratio of
 the sample means.
 
-So take $Q = \bar{D}$ and $R =  \bar{M}$. Then in @eq-deltaquad, with
-$f(q,r) = q/r$
-
-$$
-\nabla{f} =
- \left (
- \begin{array}{r}
- 1/r \\
- -q/r^2  \\
- \end{array}
- \right )
-$$
-
-which in our application here we would approximate by
-
-$$
-\nabla{f} =
- \left (
- \begin{array}{r}
- 1/\bar{M} \\
- -\bar{D}/\bar{M}^2  \\
- \end{array}
- \right )
-$$
-
-[Often $ACov(v,w)$ will be provided by our application software, such as
-with R's **vcov** function to be presented later in this
-chapter.]{.column-margin} One must be careful, making sure we choose the
-appropriate quantity in $\widehat{\Sigma}$. For instance, in our ratio
-example here, 
+So take $Q = \bar{D}$ and $R =  \bar{M}$: 
 
 $$
 \left (
@@ -350,6 +326,32 @@ R  \\
 \bar{M}  \\
 \end{array}
 \right ) 
+$${#eq-covdm}
+
+
+Then in @eq-deltaquad, with
+$f(q,r) = q/r$
+
+$$
+\nabla{f} =
+ \left (
+ \begin{array}{r}
+ 1/r \\
+ -q/r^2  \\
+ \end{array}
+ \right )
+$$
+
+which in our application here is
+
+$$
+\nabla{f} =
+ \left (
+ \begin{array}{r}
+ 1/\bar{M} \\
+ -\bar{D}/\bar{M}^2  \\
+ \end{array}
+ \right )
 $$
 
 Thus we will need $AVar(\bar{D})$, $AVar(\bar{M})$ and $ACov(\bar{D},\bar{M})$.
@@ -382,59 +384,29 @@ Be sure to distinguish between similar quantities. For example:
   Var(\bar{M}) = \frac{1}{n} Var(M)
   $$ 
 
-  
+  Similar properties hold for Var(\bar{D}) and 
+  $Cov(\bar{D},\bar{M})$.
 
-
-
-
-To obtain $ACov(v,w)$, let's first look at the covariance matrix $\Sigma$,
-
-$$
-\Sigma = E[(M - EM) (D - ED)']
-$$
-
-from @eq-matrixdef.
-
-This is the average of $(M - EM) (D - ED)$ in the population. The sample
-analog average is[The reader may recall that in estmating a variance,
-it is customary to divide by $n-1$ instead of $n$, due to unbiasedness.
-The same is true for the multivariate analog of variance, i.e.
-covariance matrices, but we will use $n$ to retain the sample analog
-theme.]{.column-margin}
+In other words, we obtain the needed covariance matrix of
+@eq-covdm as
 
 $$
-\widehat{\Sigma} = 
-\frac{1}{n}
-\sum_{i=1}^n (M_i - \bar{M}) (D_i - \bar{D})'
+\frac{1}{n^2} \sum_{i=1}^n (W_i -\bar{W})  (W_i -\bar{W})'
 $$
 
-where $(M_i,D_i)$ represents the $i^{th}$ mother-daughter pair in our
-dataset.
-
-But $\widehat{{\Sigma}}$ is not our $AVar(v,w)$ here, because we need,
-for instance, the variance of $\bar{M}$ rather than the variance of $M$.
-Recall that the former is $1/n$ times the latter. So in this case we
-have
+where 
 
 $$
-AVar(v,w) = \frac{1}{n} \widehat{\Sigma}
+W_i =
+\left (
+\begin{array}{r}
+D_i \\
+M_i  \\
+\end{array}
+\right )
 $$
 
-So now we can obtain a standard error for $\widehat{\omega}$: 
-
-$$
-\sqrt{
-\frac{1}{n}
-\nabla f' \widehat{\Sigma} \nabla f
-}
-$$
-
-from which we can form a confidence interval.
-
-In R functions to do parametric regression modeling, Maximum Likelihood
-Estimation and so on, $AVar(v,w)$ is available from the function's
-return value.
-
+is the value of $W$ for the $i^{th}$ daughter-mother pair in our data.
 
 ## Example: Mother/Daughter Height Data
 
@@ -506,16 +478,16 @@ use of linear algebra.
 be the distribution of the sum of the squares of $k$ independent N(0,1)
 random variables. After applying properties such as @eq-acova, one can
 show that the quadratic form here also has that
-distribution.]{.column-margin} It can be shown that if $W$ is a
-$k$-dimensional normally distributed random vector with mean vector
-$\mu$ and covariance matrix $\Sigma$, then
+distribution.]{.column-margin} It can be shown that if a random vector
+$W$ has a $k$-dimensional normal distribution random vector with mean
+vector $\mu$ and covariance matrix $\Sigma$, then
 
 $$
 Q = (W-\mu)' \Sigma^{-1} (W-\mu)
 $$
 
-has a *chi-square* distribution with $k$ *degrees of freedom*. Say $d_{\alpha}$ 
-is the upper-$\alpha$ quantile of that distribution, i.e.
+has a *chi-square* distribution with $k$ *degrees of freedom*. Say
+$d_{\alpha}$ is the upper-$\alpha$ quantile of that distribution, i.e.
 
 $$
 P[(W-\mu)' \Sigma^{-1} (W-\mu) \leq d_{\alpha}] = 1-\alpha
@@ -536,8 +508,8 @@ model, take $W$ to be $\widehat{\beta}$, $\mu = \beta$ etc.
 
 [The F-distribution is defined to be the distribution of the ratio of
 two independent chi-square random variables, each divided by their
-degrees of freedom. Here $r_{\alpha} = p f_{alpha}$, where $f_{\alpha}$
-is the upper-$\alpha$ quantile for the F-distribution with $p$ and $n-p$
+degrees of freedom. Here $r_{\alpha} = k f_{\alpha}$, where $f_{\alpha}$
+is the upper-$\alpha$ quantile for the F-distribution with $k$ and $n-k$
 degrees of freedom.]{.column-margin} Here $\Sigma$ must be estimated by
 $\widehat{\beta}$ (given to us via **vcov**), and the chi-square
 distribution is replaced by a quantity involving the *F-distribution*.
@@ -550,7 +522,7 @@ $$
 \leq r_{\alpha}
 $$
 
-has probability $1-\alpha$. Equivalently,
+has probability $1-\alpha$. Equivalently, the event
 
 $$
 (\beta - \widehat{\beta})' \widehat{\Sigma}^{-1} (\beta-\widehat{\beta}) 
