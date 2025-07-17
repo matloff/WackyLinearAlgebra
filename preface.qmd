@@ -173,6 +173,7 @@ developing student intuition and (b) nonpassive learning are paramount
 
 ``` r
 dsld
+ellipse
 glmnet
 igraph
 imager
