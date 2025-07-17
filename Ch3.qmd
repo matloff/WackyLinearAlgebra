@@ -764,7 +764,7 @@ the scope of this book.
 This is data for Silicon Valley programmers and engineers in the 2000
 Census.
 
-Let predict female gender:
+Let's predict female gender:
 
 ```{r}
 data(svcensus)
