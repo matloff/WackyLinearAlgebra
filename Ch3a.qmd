@@ -46,19 +46,20 @@ $\widehat{\theta}$.
 A, say 95%, confidence interval (CI) for $\mu$ is then
 
 $$
-\widehat{\theta} \pm 1.96 ~ \widehat{\theta}
+\widehat{\theta} \pm 1.96 ~ \textrm{SE}(\widehat{\theta})
 $$
 
-The 95% figure means that of all possible samples of the given size
- from the
-population, 95% of the resulting confidence intervals will contain
+where we denote the standard error of $\widehat{\theta}$ by
+$\textrm{SE}(\widehat{\theta})$. 
+
+The 95% figure means that of all possible samples of the given size from
+the population, 95% of the resulting confidence intervals will contain
 $\theta$. In many cases, the 95% figure is only approximate, stemming
 from a derivation that uses the Central Limit Theorem.
 
-In general, for confidence level $1-\alpha$ replace 1.96 by the upper
-$z_{\alpha}$, the $1-\alpha/2$ quantile of the N(0,1) distribution,
-and denote the standard error of $\widehat{\theta}$ by
-$\textrm{SE}(\widehat{\theta})$. Then our CI is
+In general, for confidence level $1-\alpha$ replace 1.96 by
+$z_{\alpha}$, the $1-\alpha/2$ quantile of the N(0,1) distribution, Then
+our CI is
 
 $$
 \widehat{\theta} \pm z_{\alpha} \textrm{SE}(\widehat{\theta})
@@ -67,19 +68,19 @@ $${#eq-pmse}
 ::: {.callout-important}
 ## Note Regarding Sensitivity of Phrasing
 
-There is a bit of drama in this word "contain." Instead of saying the
-intervals *contain* $\theta$, why not simply say $\theta$ is *in* the
-intervals? Aren't these two descriptions equivalent in terms of English?
-Of course they are. But many instructors of statistics classes worry
-that students will take the second description to mean that $\theta$ is
-the random quantity, when in fact the CI is random (random center,
-random radius) and $\theta$ is fixed (though unknown). The instructors
-thus insist on the more awkward phrasing, so as to avoid students
-misunderstanding. Indeed some instructors would contend that use of the
-word *in* is itself just plain incorrect. My own view is that in some
-cases the word *in* is clearer (and certainly correct in any case), and
-that it is better to add a warning about what is random/nonrandom than
-engage in awkward phrasing.
+There is a bit of drama in this word "contain" in the phrase "will
+contain $\theta$." Instead of saying the intervals *contain* $\theta$,
+why not simply say $\theta$ is *in* the intervals? Aren't these two
+descriptions equivalent in terms of English?  Of course they are. But
+many instructors of statistics classes worry that students will take the
+description based on "in" to mean that $\theta$ is the random quantity, when in
+fact the CI is random (random center, random radius) and $\theta$ is
+fixed (though unknown). The instructors thus insist on the more awkward
+phrasing "contain," so as to avoid students misunderstanding. Indeed some
+instructors would contend that use of the word *in* is itself just plain
+incorrect. My own view is that in some cases the word *in* is clearer
+(and certainly correct in any case), and that it is better to add a
+warning about what is random/nonrandom than engage in awkward phrasing.
 
 :::
 
@@ -153,7 +154,7 @@ This is one of the most useful simple tools in statistics.
 
 ### Motivating example
 
-Now, for the delta method, as a first example, say we are estimating a
+Now as a first example, say we are estimating a
 population mean $\mu$ and are also interested in estimating $\log(\mu)$. 
 
 We will probably use the sample mean $\bar{X}$ to estimate $\mu$, and
@@ -484,7 +485,9 @@ In analyzing the Iranian Churn data above, we might form many CIs, each
 at the 0.95 level. However, we may wish to set an *overall* level to at
 least 0.95, meaning that the probability that at least one of the CIs
 fails to contain the desired population value is at most 0.05. This
-concept is known as *multiple inference* or *simultaneous inference*.
+concept is known as *multiple inference*,  *simultaneous inference*
+or *multiple comparisons*.
+
 
 Whether to do this is a philosphical question, and the answer will
 depend on one's goals and personal preferences, or possibly due to
