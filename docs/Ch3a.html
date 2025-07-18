@@ -348,10 +348,11 @@ Goals of this chapter:
 <p>This can be used to form a confidence interval (see below), but also stands on its own as an indication of the accuracy of <span class="math inline">\(\widehat{\theta}\)</span>.</p>
 <p>A, say 95%, confidence interval (CI) for <span class="math inline">\(\mu\)</span> is then</p>
 <p><span class="math display">\[
-\widehat{\theta} \pm 1.96 ~ \widehat{\theta}
+\widehat{\theta} \pm 1.96 ~ \textrm{SE}(\widehat{\theta})
 \]</span></p>
+<p>where we denote the standard error of <span class="math inline">\(\widehat{\theta}\)</span> by <span class="math inline">\(\textrm{SE}(\widehat{\theta})\)</span>.</p>
 <p>The 95% figure means that of all possible samples of the given size from the population, 95% of the resulting confidence intervals will contain <span class="math inline">\(\theta\)</span>. In many cases, the 95% figure is only approximate, stemming from a derivation that uses the Central Limit Theorem.</p>
-<p>In general, for confidence level <span class="math inline">\(1-\alpha\)</span> replace 1.96 by the upper <span class="math inline">\(z_{\alpha}\)</span>, the <span class="math inline">\(1-\alpha/2\)</span> quantile of the N(0,1) distribution, and denote the standard error of <span class="math inline">\(\widehat{\theta}\)</span> by <span class="math inline">\(\textrm{SE}(\widehat{\theta})\)</span>. Then our CI is</p>
+<p>In general, for confidence level <span class="math inline">\(1-\alpha\)</span> replace 1.96 by <span class="math inline">\(z_{\alpha}\)</span>, the <span class="math inline">\(1-\alpha/2\)</span> quantile of the N(0,1) distribution, Then our CI is</p>
 <p><span id="eq-pmse"><span class="math display">\[
 \widehat{\theta} \pm z_{\alpha} \textrm{SE}(\widehat{\theta})
 \tag{6.1}\]</span></span></p>
@@ -365,7 +366,7 @@ Note Regarding Sensitivity of Phrasing
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>There is a bit of drama in this word “contain.” Instead of saying the intervals <em>contain</em> <span class="math inline">\(\theta\)</span>, why not simply say <span class="math inline">\(\theta\)</span> is <em>in</em> the intervals? Aren’t these two descriptions equivalent in terms of English? Of course they are. But many instructors of statistics classes worry that students will take the second description to mean that <span class="math inline">\(\theta\)</span> is the random quantity, when in fact the CI is random (random center, random radius) and <span class="math inline">\(\theta\)</span> is fixed (though unknown). The instructors thus insist on the more awkward phrasing, so as to avoid students misunderstanding. Indeed some instructors would contend that use of the word <em>in</em> is itself just plain incorrect. My own view is that in some cases the word <em>in</em> is clearer (and certainly correct in any case), and that it is better to add a warning about what is random/nonrandom than engage in awkward phrasing.</p>
+<p>There is a bit of drama in this word “contain” in the phrase “will contain <span class="math inline">\(\theta\)</span>.” Instead of saying the intervals <em>contain</em> <span class="math inline">\(\theta\)</span>, why not simply say <span class="math inline">\(\theta\)</span> is <em>in</em> the intervals? Aren’t these two descriptions equivalent in terms of English? Of course they are. But many instructors of statistics classes worry that students will take the description based on “in” to mean that <span class="math inline">\(\theta\)</span> is the random quantity, when in fact the CI is random (random center, random radius) and <span class="math inline">\(\theta\)</span> is fixed (though unknown). The instructors thus insist on the more awkward phrasing “contain,” so as to avoid students misunderstanding. Indeed some instructors would contend that use of the word <em>in</em> is itself just plain incorrect. My own view is that in some cases the word <em>in</em> is clearer (and certainly correct in any case), and that it is better to add a warning about what is random/nonrandom than engage in awkward phrasing.</p>
 </div>
 </div>
 </section>
@@ -447,7 +448,7 @@ EstimatedSalary  -4.030670e-10  3.401694e-11    2.676211e-10    2.243567e-13</co
 <p>This is one of the most useful simple tools in statistics.</p>
 <section id="motivating-example" class="level3 page-columns page-full" data-number="6.3.1">
 <h3 data-number="6.3.1" class="anchored" data-anchor-id="motivating-example"><span class="header-section-number">6.3.1</span> Motivating example</h3>
-<p>Now, for the delta method, as a first example, say we are estimating a population mean <span class="math inline">\(\mu\)</span> and are also interested in estimating <span class="math inline">\(\log(\mu)\)</span>.</p>
+<p>Now as a first example, say we are estimating a population mean <span class="math inline">\(\mu\)</span> and are also interested in estimating <span class="math inline">\(\log(\mu)\)</span>.</p>
 <div class="page-columns page-full"><p>We will probably use the sample mean <span class="math inline">\(\bar{X}\)</span> to estimate <span class="math inline">\(\mu\)</span>, and thus use <span class="math inline">\(W = \log{\bar{X}}\)</span> to estimate <span class="math inline">\(\log(\mu)\)</span>.  But how do we obtain a standard error for <span class="math inline">\(W\)</span>?</p><div class="no-row-height column-margin column-container"><span class="">If we just need to form a confidence interval for <span class="math inline">\(\log(\mu)\)</span>, we can form a CI for <span class="math inline">\(\mu\)</span> and then take the log of both endpoints. But again, standard errors are of interest in their own right.</span></div></div>
 </section>
 <section id="use-of-the-central-limit-theorem" class="level3" data-number="6.3.2">
@@ -688,7 +689,7 @@ f'(x) = \lim_{w \rightarrow 0}
 </section>
 <section id="scheffes-method" class="level2 page-columns page-full" data-number="6.6">
 <h2 data-number="6.6" class="anchored" data-anchor-id="scheffes-method"><span class="header-section-number">6.6</span> Scheffe’s Method</h2>
-<p>In analyzing the Iranian Churn data above, we might form many CIs, each at the 0.95 level. However, we may wish to set an <em>overall</em> level to at least 0.95, meaning that the probability that at least one of the CIs fails to contain the desired population value is at most 0.05. This concept is known as <em>multiple inference</em> or <em>simultaneous inference</em>.</p>
+<p>In analyzing the Iranian Churn data above, we might form many CIs, each at the 0.95 level. However, we may wish to set an <em>overall</em> level to at least 0.95, meaning that the probability that at least one of the CIs fails to contain the desired population value is at most 0.05. This concept is known as <em>multiple inference</em>, <em>simultaneous inference</em> or <em>multiple comparisons</em>.</p>
 <p>Whether to do this is a philosphical question, and the answer will depend on one’s goals and personal preferences, or possibly due to requirements of a research journal or employer. If we do wish to pursue the matter, then how? One of the most well-known approaches makes good use of linear algebra.</p>
 <section id="a-confidence-set-for-widehatbeta-in-the-linear-model" class="level3 page-columns page-full" data-number="6.6.1">
 <h3 data-number="6.6.1" class="anchored" data-anchor-id="a-confidence-set-for-widehatbeta-in-the-linear-model"><span class="header-section-number">6.6.1</span> A confidence set for <span class="math inline">\(\widehat{\beta}\)</span> in the linear model</h3>
