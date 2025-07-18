@@ -196,7 +196,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch2a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Covariance Matrices, MV Normal Distribution, Delta Method</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Covariance Matrices, MV Normal Distribution</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -207,62 +207,68 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./Ch3a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Confidence Sets</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./Ch4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Matrix Rank</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Matrix Rank</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch5a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Vector Spaces</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Vector Spaces</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch5b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Inner Product Spaces</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Inner Product Spaces</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch5bb.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Four Fundamental Spaces</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Four Fundamental Spaces</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch5c.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Shrinkage Estimators</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Shrinkage Estimators</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch6a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Eigenanalysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Eigenanalysis</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch6b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Principal Components</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Principal Components</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch6c.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Singular Value Decomposition</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Singular Value Decomposition</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch6d.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">A Deeper Look at Overfitting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">A Deeper Look at Overfitting</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch8a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Selected Issues in Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Attention</span></span></a>
   </div>
 </li>
     </ul>
@@ -332,7 +338,6 @@ window.Quarto = {
 <li><p>The chapter on matrix rank starts with a dataset right off the bat, and shows that R’s linear model function <strong>lm</strong> fails if categorical variables are fully specified. This motivates the notion of rank, and the dataset dovetails with the theory throughout the chapter, which culminates in a proof that row rank equals column rank.</p></li>
 <li><p>The chapter on eigenanalysis begins with explaining the goals of PCA (with a real dataset). We derive the first PC as a constrained maximization of variance, and behold! – the solution turns out to have the form <span class="math inline">\(Ax = \lambda x\)</span>! So eigenanalysis comes from solving a Data Science problem. PCA is later covered in detail in the following chapter, but with this motivation we develop the properties of eigenvalues and eigenvectors in the current chapter.</p></li>
 </ul>
-<p>Furthermore, our presentation of the linear algebra connections to Data Science goes far beyond the “obvious” ones of linear models, PCA and SVD. We discussion recommender systems, for instance, not only in connection to SVD and the like, but also as an application of shrinkage estimators.</p>
 </section>
 <section id="who-is-this-book-for" class="level2">
 <h2 class="anchored" data-anchor-id="who-is-this-book-for">Who Is This Book For?</h2>
@@ -352,22 +357,30 @@ window.Quarto = {
 <section id="the-role-of-math-and-r" class="level2">
 <h2 class="anchored" data-anchor-id="the-role-of-math-and-r">The Role of Math (and R)</h2>
 <p>Earlier in this Preface, I said, “If a Data Science or Statistics program requires linear algebra offered by a Math Department, the mathematical content of this book should be similar to that math course…” So, the mathematics is definitely here, but one might also say that this book is “mathematical but not overly theoretical.”</p>
+<p><em>Theory:</em></p>
 <p>Theorems are mainly limited to results with practical importance. Among the Your Turn exercises at the end of each chapter, many of the ones requiring proofs are simple, of the “one liner” type. But the subject matter is indeed mathematical. Students are indeed expected to read and understand proofs, just as with the Mathematics Department course.</p>
-<p>No sections are designated as “starred,” i.e.&nbsp;reserved for tha more mathematically adept readers. I believe all material in the book is within reach of any reader who did reasonably solid work in their calculus courses. For example, <a href="Ch5b.html#sec-conditexpect" class="quarto-xref"><span>8.8 Projections in the Linear Model</span></a> is a bit abstract and involves switching back and forth between random variables and vectors, but it is presented with intuitive motivation and simple, concrete examples. Moreover, the material is motivated by culminating in an applied topic of major societal relevance.</p>
+<p><em>Active reading:</em></p>
+<p>No sections are designated as “starred,” i.e.&nbsp;reserved for the more mathematically adept readers. I believe all material in the book is within reach of any reader who did reasonably solid work in their calculus courses. But active participation on the part of the reader is key.</p>
+<p>For instance, Chapter <a href="Ch2a.html" class="quarto-xref"><span>4&nbsp; Covariance Matrices, MV Normal Distribution</span></a> is on very concrete topics and the reader hopefully will find the “3-dimensional bell shape” of the multivariate distribution family intriguing. Yet, due to an overloading for the term <em>covariance</em> in statistics, the reader must always actively keep in mind whether it is scalar or vector covariance being discussed.</p>
+<p>As another example, Section <a href="Ch5b.html#sec-conditexpect" class="quarto-xref"><span>9.8 Projections in the Linear Model</span></a> is a bit abstract and involves switching back and forth between random variables and members of a certain vector space, but it is presented with intuitive motivation and simple, concrete examples. Moreover, the material is motivated by culminating in an applied topic of major societal relevance. The patient, active reader who keeps in mind that certain entities here have dual roles will be rewarded with a plethora of insights into inner product spaces, and again, any successful “calculus graduate” should find this attainable, even eliciting an empowered feeling. For this reason, this section is <em>not</em> “starred,” nor are the other parts of the book so designated.</p>
+<p><em>Not a “how to do linear algebra in R” book:</em></p>
 <p>The goal is to develop in the reader mathematical skill and intuition into this powerful tool, rather than coding of linear algebra methods. Thus the many R examples are meant to make the mathematical concepts concrete, not as an “how to do linear algebra in R” book. In the software context, the Feynman quote above might be, “There is a difference between knowing how to use code libraries for something and knowing the core nature of that thing.” That said, the code examples do serve a vital role.</p>
+<p><em>Not intended as an “easier” version of your Math Dept. course:</em></p>
 <p><em>The applied nature of the book is a double-edged sword.</em> It is has high value as a motivator, but understanding applications is actually <em>more</em> challenging than a purely mathematical treatment, not less so. Math is more crisply-defined, while applications can be “fuzzy.” Among the Your Turn exercises, many of the applied ones are somewhat open-ended, and they tend to be wordier than the theory ones. But often these are the ones that develop genuine understanding of the subject.</p>
 <p>In other words, the book is intended to arm students with <em>usable practical insights</em>, rather than merely satisfying some curricular requirement that will be quickly forgotten. Hence the needs for (a) developing student intuition and (b) nonpassive learning are paramount (as they should be in any Data Science course).</p>
 </section>
 <section id="r-packages-used" class="level2">
 <h2 class="anchored" data-anchor-id="r-packages-used">R Packages Used</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>qeML</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>glmnet</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>igraph</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>dsld</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>networkdata</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>pracma</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>regclass</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>WackyData</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dsld</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>ellipse</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>glmnet</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>igraph</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>imager</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>networkdata</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>pracma</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>qeML</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>regclass</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>WackyData</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="data-availabilty" class="level2">
 <h2 class="anchored" data-anchor-id="data-availabilty">Data Availabilty</h2>

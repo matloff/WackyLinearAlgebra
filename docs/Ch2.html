@@ -196,7 +196,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch2a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Covariance Matrices, MV Normal Distribution, Delta Method</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Covariance Matrices, MV Normal Distribution</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -207,62 +207,68 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./Ch3a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Confidence Sets</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./Ch4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Matrix Rank</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Matrix Rank</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch5a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Vector Spaces</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Vector Spaces</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch5b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Inner Product Spaces</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Inner Product Spaces</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch5bb.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Four Fundamental Spaces</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Four Fundamental Spaces</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch5c.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Shrinkage Estimators</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Shrinkage Estimators</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch6a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Eigenanalysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Eigenanalysis</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch6b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Principal Components</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Principal Components</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch6c.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Singular Value Decomposition</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Singular Value Decomposition</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch6d.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">A Deeper Look at Overfitting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">A Deeper Look at Overfitting</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch8a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Selected Issues in Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Attention</span></span></a>
   </div>
 </li>
     </ul>
@@ -334,7 +340,7 @@ Goals of this chapter:
 <p>To motivate our discussion of matrix inverse, we first revisit the topic of Markov chains.</p>
 <section id="a-further-look-at-markov-chains" class="level2 page-columns page-full" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="a-further-look-at-markov-chains"><span class="header-section-number">3.1</span> A Further Look at Markov Chains</h2>
-<p>Suppose <span class="math inline">\(X_0\)</span>, our state at time 0, is random. Let <span class="math inline">\(f\)</span> denote its distribution, i.e.&nbsp;its list of probabilities: <span class="math inline">\(f_i = P(X_0 = i)\)</span>, i = 1,…,k, where k is the number of states in the chain. What about <span class="math inline">\(X_1\)</span>, the state at time 1? Let’s find an expression for <span class="math inline">\(g\)</span>, the distribution of <span class="math inline">\(X_1\)</span>.</p>
+<p>Suppose <span class="math inline">\(X_0\)</span>, our state at time 0, is random. Let <span class="math inline">\(f\)</span> denote its distribution, i.e.&nbsp;its list of probabilities: <span class="math inline">\(f_i = P(X_0 = i)\)</span>, i = 1,…,k, where k is the number of states in the chain. What about the distribution of <span class="math inline">\(X_1\)</span>, the state at time 1? Let’s find an expression for <span class="math inline">\(g\)</span>, the distribution of <span class="math inline">\(X_1\)</span>, in terms of <span class="math inline">\(f\)</span>.</p>
 <p><span class="math display">\[
 g_j = P(X_1 = j)
 = \sum_{i=1}^k P(X_0 = i) P(X_1 = j | X_0 = i)
@@ -349,11 +355,11 @@ g' = (g_1,...,g_k)'
 ...,
 f_1 a_{1k} + ... + f_k a_{kk})
 \]</span></p>
-<p>Using partitioning, we see that that last expression is</p>
+<p>Setting <span class="math inline">\(b_j\)</span> to column <span class="math inline">\(j\)</span> of <span class="math inline">\(P\)</span> and using matrix partitioning, we see that that last expression is</p>
 <p><span class="math display">\[
-f'P
+(f' b_1,..., f' b_k) = f' (b_1,...,b_k) = f'P
 \]</span></p>
-<p>so we have the nice compact relation for the distribution of <span class="math inline">\(X_1\)</span> in terms of the distribution of <span class="math inline">\(X_0\)</span>.</p>
+<p>So we have a nice compact relation for the distribution of <span class="math inline">\(X_1\)</span> in terms of the distribution of <span class="math inline">\(X_0\)</span>.</p>
 <p><span class="math display">\[
 g' = f'P
 \]</span></p>
@@ -392,17 +398,18 @@ AB = BA = I
 \]</span></p>
 <p>where <span class="math inline">\(I\)</span> is the identity matrix of that size.</p>
 </blockquote>
-<p>As hinted, many matrices do not have inverses. For instance, if <span class="math inline">\(A\)</span> consists of all 0s, there is no way to get <span class="math inline">\(I\)</span> for <span class="math inline">\(AB\)</span>.</p>
+<p>As hinted, many matrices do not have inverses. For instance, if <span class="math inline">\(A\)</span> consists of all 0s, there is no way to get <span class="math inline">\(I\)</span> from <span class="math inline">\(AB\)</span>.</p>
 <p>In very rough terms, it sometimes helps the intuition to think of an inverse as the “reciprocal” of the matrix.</p>
 <p>We will often speak of <em>the</em> inverse of <span class="math inline">\(A\)</span>. In fact, if <span class="math inline">\(A\)</span> is invertible, its inverse is unique.</p>
 </section>
 <section id="sec-markovsolve" class="level2 page-columns page-full" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="sec-markovsolve"><span class="header-section-number">3.3</span> Example: Computing Long-Run Markov Distribution</h2>
-<p>Now let us return to <a href="Ch1.html#eq-stationMarkov" class="quarto-xref">Equation&nbsp;<span>2.1</span></a>, which expresses the vector of long-run state probabilities for a Markov chain with transition matrix P and stationary distribution <span class="math inline">\(\nu\)</span>, How can we use matrix inverses to solve this equation?</p>
+<p>Now let us return to <a href="#eq-nuSolve" class="quarto-xref">Equation&nbsp;<span>3.2</span></a>, which expresses the vector of long-run state probabilities for a Markov chain with transition matrix P and stationary distribution <span class="math inline">\(\nu\)</span>, How can we use matrix inverses to solve this equation?</p>
+<p>Starting with</p>
 <p><span id="eq-MarkovPi"><span class="math display">\[
 \nu = P' \nu
 \tag{3.3}\]</span></span></p>
-<p>Rewrite it using the identity matrix:</p>
+<p>rewrite using the identity matrix:</p>
 <p><span class="math display">\[
 (I - P') \nu = 0
 \]</span></p>
@@ -571,7 +578,7 @@ I = B' A
 <p>The classic “pencil and paper” method for matrix inversion is instructive, and will be presented here.</p>
 <section id="sec-pencilpaper" class="level3" data-number="3.5.1">
 <h3 data-number="3.5.1" class="anchored" data-anchor-id="sec-pencilpaper"><span class="header-section-number">3.5.1</span> Pencil-and-paper computation</h3>
-<p>Note: Some readers will notice some similarity here with elementary methods they learned in high school, but actually the treatment here is much more sophisticated. It will play an important practical and theoretical role in <a href="Ch4.html" class="quarto-xref"><span>Chapter 6</span></a>.</p>
+<p>Note: Some readers will notice some similarity here with elementary methods they learned in high school, but actually the treatment here is much more sophisticated. It will play an important practical and theoretical role in <a href="Ch4.html" class="quarto-xref"><span>Chapter 7</span></a>.</p>
 <p>The basic idea follows the pattern the reader learned for solving systems of linear equations, but with the added twist of involving some matrix multiplication.</p>
 <p>Let’s take as our example</p>
 <p><span class="math display">\[
@@ -583,7 +590,7 @@ A =
 \end{array}
 \right )
 \]</span></p>
-<p>We aim to transform this to the 2x2 identity matrix, via a sequence of row operations.</p>
+<p>We aim to transform this to the <span class="math inline">\(2 \times 2\)</span> identity matrix, via a sequence of row operations.</p>
 </section>
 <section id="sec-elemmats" class="level3 page-columns page-full" data-number="3.5.2">
 <h3 data-number="3.5.2" class="anchored" data-anchor-id="sec-elemmats"><span class="header-section-number">3.5.2</span> Use of elementary matrices</h3>
@@ -606,6 +613,7 @@ E_1=
 \end{array}
 \right )
 \]</span></p>
+<p>(Reader: Make SURE to verify this!)</p>
 <p>We then add 8 times row 1 to row 2, yielding</p>
 <p><span class="math display">\[
 \left (
@@ -634,7 +642,7 @@ E_2=
 \end{array}
 \right )
 \]</span></p>
-<p>corresponding to</p>
+<p>corresponding to premultiplication by</p>
 <p><span class="math display">\[
 E_3=
 \left (
@@ -644,7 +652,7 @@ E_3=
 \end{array}
 \right )
 \]</span></p>
-<p>And finally, add -7/4 row 2 to row 1.</p>
+<p>And finally, add -7/4 row 2 to row 1:</p>
 <p><span class="math display">\[
 \left (
 \begin{array}{rr}
@@ -663,7 +671,7 @@ E_4 =
 \end{array}
 \right )
 \]</span></p>
-<p>Now, how does that give use <span class="math inline">\(A^{-1}\)</span>? The method your were taught probably set up the partioned matrix <span class="math inline">\((A,I)\)</span>. The row operations that transformed <span class="math inline">\(A\)</span> to <span class="math inline">\(I\)</span> also transformed <span class="math inline">\(I\)</span> to <span class="math inline">\(A^{-1}\)</span>. Here’s why:</p>
+<p>Now, how does that give us <span class="math inline">\(A^{-1}\)</span>? The method your were taught probably set up the partioned matrix <span class="math inline">\((A,I)\)</span>. The row operations that transformed <span class="math inline">\(A\)</span> to <span class="math inline">\(I\)</span> also transformed <span class="math inline">\(I\)</span> to <span class="math inline">\(A^{-1}\)</span>. Here’s why:</p>
 <p>As noted, the row operations are such that</p>
 <p><span class="math display">\[
 E_4 E_3 E_2 E_1 A
@@ -730,7 +738,7 @@ A =
 <blockquote class="blockquote">
 <p>A square matrix <span class="math inline">\(G\)</span> is invertible if and only if <span class="math inline">\(\det(G) \neq 0\)</span>.</p>
 </blockquote>
-<p>There are better ways to ascertain invertibility than this, but it is conceptually helpful. Determinants play a similar role in the topic of eigenvectors in <a href="Ch6a.html" class="quarto-xref"><span>Chapter 11</span></a>.</p>
+<p>There are better ways to ascertain invertibility than this, but it is conceptually helpful. Determinants play a similar role in the topic of eigenvectors in <a href="Ch6a.html" class="quarto-xref"><span>Chapter 12</span></a>.</p>
 <section id="sec-detdef" class="level3" data-number="3.7.1">
 <h3 data-number="3.7.1" class="anchored" data-anchor-id="sec-detdef"><span class="header-section-number">3.7.1</span> Definition</h3>
 <p>The standard definition is one of the ugliest in all of mathematics. Instead we will define the term using one of the methods for calculating determinants.</p>
@@ -746,10 +754,11 @@ c &amp; d  \\
 \right )
 \]</span></p>
 <p>and define <span class="math inline">\(\det(G)\)</span> to be <span class="math inline">\(ad -bc\)</span>. For <span class="math inline">\(r &gt; 2\)</span>, define submatrices as follows.</p>
-<p><span class="math inline">\(G_j\)</span> is the <span class="math inline">\((r-1) \times (r-1)\)</span> submatrix obtained by removing row 1 and column <span class="math inline">\(j\)</span> from <span class="math inline">\(G\)</span>. Then <span class="math inline">\(\det(G)\)</span> is defined recursively as</p>
+<p>Define <span class="math inline">\(G_j\)</span> to be the <span class="math inline">\((r-1) \times (r-1)\)</span> submatrix obtained by removing row 1 and column <span class="math inline">\(j\)</span> from <span class="math inline">\(G\)</span>. Then <span class="math inline">\(\det(G)\)</span> is defined recursively as</p>
 <p><span class="math display">\[
 \sum_{i=1}^r (-1)^{i+1} \det(G_i)
 \]</span></p>
+<p>Say <span class="math inline">\(r = 4\)</span>. Applying this formula, we find our original determinant in terms of the determinants of some <span class="math inline">\(3 \times 3\)</span> matrices, and then we apply the formula to <em>those</em> matrices. That gives us a sum of determinants of <span class="math inline">\(2 \times 2\)</span> matrices, for which we have an explicit formula.</p>
 <p>Actually, we can alternatively remove row <span class="math inline">\(i\)</span> instead of row 1. If <span class="math inline">\(i\)</span> is an odd number, the same recursive formula holds, but for even <span class="math inline">\(i\)</span>, replace <span class="math inline">\((-1)^{i+1}\)</span> by <span class="math inline">\((-1)^i\)</span>.</p>
 <p>The same rules apply if ‘row’ is replaced by ‘column’ above.</p>
 </blockquote>
@@ -796,8 +805,8 @@ aei + bfg + cdh - afh - bdi - ceg
 <p>❄️ <strong>Your Turn:</strong> In <a href="#sec-elemmats" class="quarto-xref"><span>Section 3.5.2</span></a>, find the inverses of <span class="math inline">\(E_3\)</span> and <span class="math inline">\(E_4\)</span> using similar reasoning, and thus find <span class="math inline">\(A^{-1}\)</span>.</p>
 <p>❄️ <strong>Your Turn:</strong> If the matrix <span class="math inline">\(A\)</span> has a 0 row, then <span class="math inline">\(\det(A)\)</span> must be 0. Explain why.</p>
 <p>❄️ <strong>Your Turn:</strong> We say a square matrix <span class="math inline">\(A = (a_{ij})\)</span> is <em>upper-triangular</em> if its below-diagonal elements are all 0s. Give a closed-form formula for <span class="math inline">\(\det(A)\)</span> in terms of the <span class="math inline">\(a_{ij}\)</span>.</p>
-<p>❄️ <strong>Your Turn:</strong> In <a href="#eq-randwalkP" class="quarto-xref">Equation&nbsp;<span>3.7</span></a>, consider the variant</p>
-<p><span id="eq-randwalkP"><span class="math display">\[
+<p>❄️ <strong>Your Turn:</strong> In <a href="Ch1.html#eq-myfirstmatrix" class="quarto-xref">Equation&nbsp;<span>2.1</span></a>, consider the variant</p>
+<p><span class="math display">\[
 P =
 \left (
 \begin{array}{rrrrr}
@@ -808,7 +817,7 @@ P =
 0 &amp; 0 &amp; 0 &amp; 1.0 &amp; 0.0 \\
 \end{array}
 \right )
-\tag{3.7}\]</span></span></p>
+\]</span></p>
 <p>Here, the walker at state 5 immediately “bounces back” to state 4, rather than remaining at state 5 for one or more epochs.</p>
 <p>In the original chain, we found that <span class="math inline">\(\nu = (0.2,0.2,0.2,0.2,0.2)'\)</span>. Speculate as to the effect on <span class="math inline">\(\nu_5\)</span> of the above change in model. Then investigate to determine if our speculation was correct.</p>
 <p>❄️ <strong>Your Turn:</strong> Consider a Markov chain with transition probability matrix</p>
@@ -821,7 +830,7 @@ P =
 \end{array}
 \right )
 \]</span></p>
-<p>This chain is termed <em>periodic</em>, with period 2. It alternates between states 1 and 2, and thus a long-run distribution <span class="math inline">\(\nu\)</span> does not exist. That would suggest the <span class="math inline">\(I-P'\)</span> noninvertible. Confrim this.</p>
+<p>This chain is termed <em>periodic</em>, with period 2. It alternates between states 1 and 2, and thus a long-run distribution <span class="math inline">\(\nu\)</span> does not exist. That would suggest that <span class="math inline">\(I-P'\)</span> is noninvertible. Confirm this.</p>
 <p>❄️ <strong>Your Turn:</strong> If you are familiar with recursive calls, write a function <span class="math inline">\(\verb+dt(a)+\)</span> to compute the determinant of a square matrix <span class="math inline">\(A\)</span>.</p>
 <p>❄️ <strong>Your Turn:</strong> Prove the assertions in <a href="#sec-matalg" class="quarto-xref"><span>Section 3.4</span></a>. Note that for the identity matrix <span class="math inline">\(I\)</span>, <span class="math inline">\(I' = I\)</span>.</p>
 <p>❄️ <strong>Your Turn:</strong> The determinant of a 3 x 3 matrix</p>
@@ -1269,8 +1278,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Ch2a.html" class="pagination-link" aria-label="Covariance Matrices, MV Normal Distribution, Delta Method">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Covariance Matrices, MV Normal Distribution, Delta Method</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./Ch2a.html" class="pagination-link" aria-label="Covariance Matrices, MV Normal Distribution">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Covariance Matrices, MV Normal Distribution</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

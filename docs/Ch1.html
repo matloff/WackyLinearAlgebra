@@ -196,7 +196,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch2a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Covariance Matrices, MV Normal Distribution, Delta Method</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Covariance Matrices, MV Normal Distribution</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -207,62 +207,68 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./Ch3a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Confidence Sets</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./Ch4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Matrix Rank</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Matrix Rank</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch5a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Vector Spaces</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Vector Spaces</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch5b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Inner Product Spaces</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Inner Product Spaces</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch5bb.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Four Fundamental Spaces</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Four Fundamental Spaces</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch5c.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Shrinkage Estimators</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Shrinkage Estimators</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch6a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Eigenanalysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Eigenanalysis</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch6b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Principal Components</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Principal Components</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch6c.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Singular Value Decomposition</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Singular Value Decomposition</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch6d.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">A Deeper Look at Overfitting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">A Deeper Look at Overfitting</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ch8a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Selected Issues in Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Attention</span></span></a>
   </div>
 </li>
     </ul>
@@ -336,13 +342,13 @@ Goals of this chapter:
 <p>The two main structures in linear algebra are <em>matrices</em> and <em>vector spaces</em>. We begin the book with the former, introduced in this chapter, motivating matrix multiplication and presenting several applications.</p>
 </div>
 </div>
-<p>In this chapter, we will take as our main application <em>Markov chains</em>, a statistical model having wide applications in medicine, economics and so on. It is very simple to explain, thus making it a good choice for introducing matrices.</p>
+<p>In this chapter, we will take as our main application <em>Markov chains</em>, a statistical model having wide applications in medicine, economics and so on. The notion is very simple to explain, thus making it a good choice for introducing matrices.</p>
 <section id="a-random-walk-model" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="a-random-walk-model"><span class="header-section-number">2.1</span> A Random Walk Model</h2>
 <p>Let’s consider a <em>random walk</em> on {1,2,3,4,5} in the number line. Time is numbered 1,2,3,… Our current position is termed our <em>state</em>. The notation X<sub>k</sub> = i means that at time k we are in state/position i.</p>
 <p>Our rule will be that at any time k, we flip a coin. If we are currently at position i, we move to either i+1 or i-1, depending on whether the coin landed heads or tails. The exceptions are k = 1 and k = 5, in which case we stay put if tails or move to the adjacent position if heads.</p>
 <p>We can summarize the probabilities with a <em>matrix</em>, a two-dimensional array:</p>
-<p><span class="math display">\[
+<p><span id="eq-myfirstmatrix"><span class="math display">\[
 P_1 =
 \left (
 \begin{array}{rrrrr}
@@ -353,11 +359,11 @@ P_1 =
 0 &amp; 0 &amp; 0 &amp; 0.5 &amp; 0.5 \\
 \end{array}
 \right )
-\]</span></p>
+\tag{2.1}\]</span></span></p>
 <p>For instance, look at row 2. There are 0.5 values in columns 1 and 3, meaning there is a 0.5 chance of a move 2 <span class="math inline">\(\rightarrow\)</span> 1, and a 0.5 chance of a move 2 <span class="math inline">\(\rightarrow\)</span> 3.</p>
 <p>We use a subscript 1 here in <span class="math inline">\(P_1\)</span>, meaning “one step.” We go from, say, state 2 to state 1 in one step with probability 0.5. <span class="math inline">\(P_1\)</span> is called the <em>one-step transition matrix</em> (or simply the <em>transition matrix</em>) for this process.</p>
 <p>Note that each row in a transition matrix must sum to 1. After all, from state i we must go <em>somewhere</em>.</p>
-<p>What about the two-step transition matrix <span class="math inline">\(P_2\)</span>? For instance, what should be in the row 3, column 1 position in that matrix? From state 3, we could go to state 1 in two steps, by two tails flips of the coin. The probability of that is <span class="math inline">\(0.5^2 = 0.25\)</span>. So the row 3, column 1 element in <span class="math inline">\(P_2\)</span> is 0.25. On the other hand, if from state 3 we flip tails then heads, or heads then tails, we are back to state 3. So, the row 3, column 3 element in <span class="math inline">\(P_2\)</span> is 0.25 + 0.25 = 0.5.</p>
+<p>What about the two-step transition matrix <span class="math inline">\(P_2\)</span>? For instance, what should be in the row 3, column 1 position in that matrix? In other words, if we start at position 3, what is the probability that we go to position 1 in two steps? This would happen via two tails flips of the coin. The probability of that is <span class="math inline">\(0.5^2 = 0.25\)</span>. So the row 3, column 1 element in <span class="math inline">\(P_2\)</span> is 0.25. On the other hand, if from state 3 we flip tails then heads, or heads then tails, we are back to state 3. So, the row 3, column 3 element in <span class="math inline">\(P_2\)</span> is 0.25 + 0.25 = 0.5.</p>
 <p>The reader should verify the correctness here:</p>
 <p><span class="math display">\[
 P_2 =
@@ -475,7 +481,7 @@ B = \left (
 \end{array}
 \right )
 \]</span></p>
-<p>Let’s find the row 2, column 2 element of <span class="math inline">\(C = AB\)</span>. Again, that means taking the dot product of row 2 of <span class="math inline">\(A\)</span> and <span class="math inline">\(column\)</span> 2 of <span class="math inline">\(B\)</span>, which we’ve highlighted below.</p>
+<p>Let’s find the row 2, column 2 element of <span class="math inline">\(C = AB\)</span>. Again, that means taking the dot product of row 2 of <span class="math inline">\(A\)</span> and column 2 of <span class="math inline">\(B\)</span>, which we’ve highlighted below.</p>
 <p><span class="math display">\[
 A = \left (
 \begin{array}{rrr}
@@ -524,7 +530,16 @@ Tip&nbsp;2.1
 </section>
 <section id="the-identity-matrix" class="level2" data-number="2.5">
 <h2 data-number="2.5" class="anchored" data-anchor-id="the-identity-matrix"><span class="header-section-number">2.5</span> The Identity Matrix</h2>
-<p>The <em>identity matrix</em> <span class="math inline">\(I\)</span> of size <span class="math inline">\(n\)</span> is the <span class="math inline">\(n \times n\)</span> matrix with 1s on the diagonal and 0s elsewhere. <span class="math inline">\(IB = B\)</span> and <span class="math inline">\(AI = A\)</span> for any conformable <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>.</p>
+<p>The <em>identity matrix</em> <span class="math inline">\(I\)</span> of size <span class="math inline">\(n\)</span> is the <span class="math inline">\(n \times n\)</span> matrix with 1s on the diagonal and 0s elsewhere. Here is the one for <span class="math inline">\(n = 2\)</span>:</p>
+<p><span class="math display">\[
+\left (
+\begin{array}{rr}
+1 &amp; 0 \\
+0 &amp; 1  \\
+\end{array}
+\right )
+\]</span></p>
+<p>Identity matrices are <em>multiplicative</em> identities, i.e.&nbsp;they simply copy the companion factor when multiplied: <span class="math inline">\(IB = B\)</span> and <span class="math inline">\(AI = A\)</span> for any conformable <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>.</p>
 </section>
 <section id="sec-introMCs" class="level2" data-number="2.6">
 <h2 data-number="2.6" class="anchored" data-anchor-id="sec-introMCs"><span class="header-section-number">2.6</span> Application to Markov Chain Transition Matrices</h2>
@@ -579,7 +594,7 @@ a_{m1} b_{m1}
 <p>So, no matter which state we start in, at time 25 we are about 20% likely to be at any of the states. In fact, as time <span class="math inline">\(n\)</span> goes to infinity, this probability vector becomes exactly (0.20,0.20,0.20,0.20,0.20). It will be shown below that the vector of long-run state probabilities <span class="math inline">\(\nu\)</span> is the solution of</p>
 <p><span id="eq-stationMarkov"><span class="math display">\[
 P \nu = \nu
-\tag{2.1}\]</span></span></p>
+\tag{2.2}\]</span></span></p>
 <p>where <span class="math inline">\(P\)</span> is the transition matrix for the Markov chain.</p>
 </section>
 <section id="network-graph-models" class="level2" data-number="2.7">
@@ -608,7 +623,7 @@ P \nu = \nu
 </div>
 </div>
 <div class="page-columns page-full"><p>There is a link between node 13 and node 4, meaning that club members 13 and 4 are friends.</p><div class="no-row-height column-margin column-container"><span class="">This graph is <em>undirected</em>, as friendship is mutual. Many graphs are <em>directed</em>, but we will assume undirected here.</span></div></div>
-<p>Specifically, the <em>adjacency matrix</em> has row i, column j element as 1 or 0, according to whether a link exists between nodes i and j.</p>
+<p>The <em>adjacency matrix</em> has row i, column j element as 1 or 0, according to whether a link exists between nodes i and j.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>adjK <span class="ot">&lt;-</span> <span class="fu">as_adjacency_matrix</span>(karate)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>adjK</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -655,19 +670,19 @@ P \nu = \nu
 <pre><code>[1] 1</code></pre>
 </div>
 </div>
-<p>Accordingly, row 13, column 4 does have a 1 entry.</p>
+<p>Accordingly, row 13, column 4 does have a 1 entry, consistent with what we saw in the picture.</p>
 </section>
 <section id="the-role-of-matrix-multiplication-in-network-graph-models" class="level2" data-number="2.9">
 <h2 data-number="2.9" class="anchored" data-anchor-id="the-role-of-matrix-multiplication-in-network-graph-models"><span class="header-section-number">2.9</span> The Role of Matrix Multiplication in Network Graph Models</h2>
 <p>As is the case with Markov transition matrices, powers of an adjacency matrix can yield valuable information. In the Markov case, multiplication gives us sums of paired products, computing probabilities. What about the network graph case?</p>
-<p>Here products are of the form 0x0, 0x1, 1x0 or 1x1. If there is a nonzero entry m in row i, column j of the square of the adjacency matrix, that means there were m 1x1 products in that sum, which would correspond to m paths. Let’s look into this.</p>
+<p>Here products are of the form <span class="math inline">\(0 \times 0\)</span>, <span class="math inline">\(0 \times 1\)</span>, <span class="math inline">\(1 \times 1\)</span>, If there is a nonzero entry <span class="math inline">\(m\)</span> in row <span class="math inline">\(i\)</span>, column <span class="math inline">\(j\)</span> of the square of the adjacency matrix, that means there were <span class="math inline">\(m\)</span> <span class="math inline">\(1 \times 1\)</span> products in that sum, which would correspond to <span class="math inline">\(m\)</span> paths. Let’s look into this.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>adjK2 <span class="ot">&lt;-</span> adjK <span class="sc">%*%</span> adjK</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We see that <strong>adjK2[11,1]</strong> is 2. Inspection of <strong>adjK</strong> shows that its row 11, columns 6 and 7 are 1s, and that rows 6 and 7, column 1 are 1s as well. So there are indeed two two-hop paths from node 11 to node 1, specifically <span class="math inline">\(11 \rightarrow 6 \rightarrow 1\)</span> and <span class="math inline">\(11 \rightarrow 7 \rightarrow 1\)</span>. Thus the 2 we see in <strong>adjK2[11,1]</strong> was correct.</p>
 <p>In other words, <span class="math inline">\(A^k\)</span> for a network adjacency matrix <span class="math inline">\(A\)</span> shows the number of paths from each node to each of the others.</p>
 <p>Actually, what is typically of interest is <em>connectivity</em> rather than number of paths. For any given pair of nodes, is there a multihop path between them? Or does the graph break down to several “islands” of connected nodes?</p>
-<p>Again consider the Karate Club data.</p>
+<p>Again consider the Karate Club data. Since there are 34 nodes in this graph, if the graph is connected, there should be a path that hits all of them with at most 33 hops. Let’s see what paths of this length give us.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">matpow</span>(adjK,<span class="dv">33</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(u <span class="sc">==</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -675,8 +690,8 @@ P \nu = \nu
 <pre><code>[1] 0</code></pre>
 </div>
 </div>
-<p>So, in that graph representing paths of 33 links, there are no 0s. In this graph, no pair of nodes has 0 paths between them. The graph is connected.</p>
-<p>Making this kind of analysis fully correct requires paying attention to things such as cycles. The details are beyond the scope of this book.</p>
+<p>So, in that graph representing paths of 33 links, there are no 0s. In this graph, every pair of nodes has a path between them. The graph is connected.</p>
+<p>In general, determining whether a graph is connected requires paying attention to things such as cycles. The details are beyond the scope of this book.</p>
 </section>
 <section id="sec-recsys" class="level2 page-columns page-full" data-number="2.10">
 <h2 data-number="2.10" class="anchored" data-anchor-id="sec-recsys"><span class="header-section-number">2.10</span> Recommender Systems</h2>
@@ -697,7 +712,7 @@ P \nu = \nu
 6  298   474      4 884182806</code></pre>
 </div>
 </div>
-<p>We see for instance that user 22 gave movie 242 a rating of 1. If we want to know some characteristics of this user, his/her ID is 878887116, which we can find in the file <strong>u.user</strong> at the above URL. Other files tell us more about this movie, e.g.&nbsp;its genre, and so on.</p>
+<p>We see for instance that user 22 gave movie 377 a rating of 1. If we want to know some characteristics of this user, his/her ID is 878887116, which we can find in the file <strong>u.user</strong> at the above URL. Other files tell us more about this movie, e.g.&nbsp;its genre, and so on.</p>
 <p>Let’s explore the data a bit:</p>
 <p>How many users and movies are in this dataset?</p>
 <div class="cell">
@@ -724,7 +739,7 @@ P \nu = \nu
 <pre><code>integer(0)</code></pre>
 </div>
 </div>
-<div class="page-columns page-full"><p>Now we can begin to see a solution to the recommender problem. Say we wish to guess whether user 22 would like movie 234. We could look for other users who have rated many of the same movies as user 22, then focus on the ones who rated movie 234. We could average those ratings to obtain a predicted rating for movie 234 by user 22.</p><div class="no-row-height column-margin column-container"><span class="">We could also incorporate the characteristics of user 22 and the others, which may improve our prediction accuracy, but we will not pursue that here.</span></div></div>
+<div class="page-columns page-full"><p>Now we can begin to see a solution to the recommender problem. Say we wish to guess whether user 22 would like movie 234. We could look for other users who have rated many of the same movies as user 22, and whose ratings of those movies were generally similar to those of user 22. We would then focus on the ones who rated movie 234. We could average those ratings to obtain a predicted rating for movie 234 by user 22.</p><div class="no-row-height column-margin column-container"><span class="">We could also incorporate the characteristics of user 22 and the others, which may improve our prediction accuracy, but we will not pursue that here.</span></div></div>
 <p>In order to assess interuser similarity of the nature described above, we might form a matrix <span class="math inline">\(S\)</span>, as follows. There would be 943 rows, one for each user, and 1682 columns, one for each movie. The element in row <span class="math inline">\(i\)</span>, column <span class="math inline">\(j\)</span> would be the rating user <span class="math inline">\(i\)</span> gave to movie <span class="math inline">\(j\)</span>. Most of the matrix would be 0s.</p>
 <p>The point of constructing <span class="math inline">\(S\)</span> is that determining the similarity of users becomes a matter of measuring similarity of rows of <span class="math inline">\(S\)</span>. This paves the way to exploiting the wealth of matrix-centric methodology we will develop in this book.</p>
 </section>
@@ -761,7 +776,7 @@ A+B = \left (
 <p>We do have to make sure the addends match in terms of numbers of rows and columns, 2 and 3 in the example here.</p>
 <p><strong>Scalar multiplication:</strong> Again, this is simply elementwise. E.g. with A as above,</p>
 <p><span class="math display">\[
-1.5 A = \left (
+1.5 ~ A = \left (
 \begin{array}{rrr}
 7.5 &amp; 3 &amp; 9 \\
 1.5 &amp; 3.9 &amp; -1.8 \\
@@ -789,17 +804,17 @@ A' = \left (
 <p><span class="math display">\[
 (AB)' = B'A'
 \]</span></p>
-<p>For some matrices <span class="math inline">\(C\)</span>, we have <span class="math inline">\(C' = C\)</span>. <span class="math inline">\(C\)</span> is then termed <em>symmetric</em>.</p>
-<p>We will often write a row vector in the form (a,b,c,…). So (5,1,88) means the 1x3 matrix with those elements. If we wish this to be a column vector, we use transpose, so that for instance (5,1,88)’ means a 3x1 matrix.</p>
+<p>For some matrices <span class="math inline">\(C\)</span>, we have <span class="math inline">\(C' = C\)</span>. We then say that <span class="math inline">\(C\)</span> is <em>symmetric</em>.</p>
+<p>We will often write a row vector in the form (a,b,c,…). So (5,1,88) means the 1x3 matrix with those elements. If we wish to write a column vector within some text, we use transpose, so that for instance (5,1,88)’ means a 3x1 matrix.</p>
 </section>
 <section id="sec-trace" class="level3" data-number="2.11.3">
 <h3 data-number="2.11.3" class="anchored" data-anchor-id="sec-trace"><span class="header-section-number">2.11.3</span> Trace of a square matrix</h3>
-<p>The <em>trace</em> of a square matrix <span class="math inline">\(A\)</span> is the sum of its diagonal elements, <span class="math inline">\(tr(A) = \sum_{i=1}^n A_{ii}\)</span>. This measure has various properties, some obvious (trace of the sum is sum of the traces), and some less so, such as:</p>
+<p>The <em>trace</em> of a square matrix <span class="math inline">\(A\)</span> is the sum of its diagonal elements, <span class="math inline">\(tr(A) = \sum_{i=1}^n A_{ii}\)</span>. This measure has various properties, some obvious (the trace of the sum of two matrices is the sum of their traces), and some less so, such as:</p>
 <div id="thm-trabba" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 2.1</strong></span> Suppose <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are square matrices of the same size. Then</p>
 <p><span id="eq-traceab"><span class="math display">\[
 tr(AB) = tr(BA)
-\tag{2.2}\]</span></span></p>
+\tag{2.3}\]</span></span></p>
 </div>
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>See Your Turn problem below.</p>
@@ -824,7 +839,7 @@ Tip&nbsp;2.2: A Crucial Tool
 </div>
 <div class="callout-body-container callout-body">
 <p>Matrix partitioning is amazingly powerful, given its utter simplicity. It compactifies matrix algebra, making complex expressions easier to visualize and discuss.</p>
-<p>The techniques introduced in this section will be used repeatedly throughout the book. Readers should spend extra time here, devising some of their own examples.</p>
+<p>The techniques introduced in this section will be used repeatedly throughout the book. <strong>Readers should spend extra time here,</strong> making sure the compact representations make sense.</p>
 </div>
 </div>
 <p>Specifics now follow:</p>
@@ -832,16 +847,16 @@ Tip&nbsp;2.2: A Crucial Tool
 <h3 data-number="2.12.1" class="anchored" data-anchor-id="how-partitioning-works"><span class="header-section-number">2.12.1</span> How partitioning works</h3>
 <p>Consider a matrix-matrix product <span class="math inline">\(MQ\)</span>. The use of partitioning works on “pretending”:</p>
 <blockquote class="blockquote">
-<p>Matrix Partioning</p>
+<p>Matrix Partitioning</p>
 <ol type="1">
 <li><p>Partition <span class="math inline">\(M\)</span> and <span class="math inline">\(Q\)</span> into groups of contiguous rows or columns, respectively. Let <span class="math inline">\(g_m\)</span> and <span class="math inline">\(g_q\)</span> denote the number of groups. (A group size of 1 is permissible.)</p></li>
 <li><p>Enter Pretend Mode: Pretend that each group is a number. Now <span class="math inline">\(M\)</span> and <span class="math inline">\(Q\)</span> look like vectors, of lengths <span class="math inline">\(g_m\)</span> and <span class="math inline">\(g_q\)</span>.</p></li>
 <li><p>Go ahead and “multiply” the two “vectors.”</p></li>
-<li><p>Re-enter Reality Mode. Replace the elements of the “product” in step 3 by the groups’ rows and columns.</p></li>
+<li><p>Re-enter Reality Mode. Replace the elements of the “product” in step 3 by the groups’ actual rows and columns.</p></li>
 <li><p>Marvel at the fact that this bit of “alchemy” actually produces the correct matrix equation.</p></li>
 </ol>
 </blockquote>
-<p>It will be easier to see how this works by considering the special case of <span class="math inline">\(Q\)</span> being a vector <span class="math inline">\(v\)</span>. Of course, that means that <span class="math inline">\(v\)</span> is a column vector <span class="math inline">\((v_1,v_2,...,v_n)'\)</span>. If <span class="math inline">\(M\)</span> is of size <span class="math inline">\(m \times n\)</span>, then <span class="math inline">\(v\)</span> is <span class="math inline">\(n \times 1\)</span>.</p>
+<p>It will be easier to see how this works by considering the special case of <span class="math inline">\(Q\)</span> being a vector <span class="math inline">\(v\)</span>. Of course, that means that <span class="math inline">\(v\)</span> is a column vector <span class="math inline">\((v_1,v_2,...,v_n)'\)</span>. Say <span class="math inline">\(M\)</span> is of size <span class="math inline">\(m \times n\)</span>.</p>
 <p>Now, we ask for the reader’s patience here, as we will move back and forth between a symbolic “pretend world” and reality. We promise, it will be worth it.</p>
 <p>Let’s denote column <span class="math inline">\(j\)</span> of <span class="math inline">\(M\)</span> by <span class="math inline">\(c_{j}\)</span>. Write <span class="math inline">\(M\)</span> symbolically as</p>
 <p><span class="math display">\[
@@ -862,15 +877,16 @@ v_n \\
 \right ) =
 v_1 c_{1} +
 v_2 c_{2} + ... +
-v_s c_{n}  
+v_n c_{n}  
 \]</span></p>
-<p>looks, once again symbolically like the product of <span class="math inline">\(1 \times n\)</span> and <span class="math inline">\(n \times 1\)</span> vectors, resulting in a <span class="math inline">\(1 \times 1\)</span>, i.e.&nbsp;a number.</p>
+<p>looks, once again symbolically like the product of <span class="math inline">\(1 \times n\)</span> and <span class="math inline">\(n
+\times 1\)</span> vectors, a dot product, resulting in a <span class="math inline">\(1 \times 1\)</span>, i.e.&nbsp;a number.</p>
 <p>The wonderful thing about all this is that if we now stop pretending, we get the right answer! If we now treat the <span class="math inline">\(c_j\)</span> for what they really are, column vectors, then the relation</p>
 <p><span class="math display">\[
 Mv =
 v_1 c_{1} +
 v_2 c_{2} + ... +
-v_s c_{n}  
+v_n c_{n}  
 \]</span></p>
 <p><span class="math inline">\(M\)</span> is indeed equal to this sum of scalars times its columns. Let’s check with a specific example.</p>
 <p>For instance, take</p>
@@ -881,7 +897,7 @@ A = \left (
 1 &amp; 2.6 &amp; -1.2 \\
 \end{array}
 \right )
-\tag{2.3}\]</span></span></p>
+\tag{2.4}\]</span></span></p>
 <p>and</p>
 <p><span id="eq-vInAv"><span class="math display">\[
 v = \left (
@@ -891,7 +907,7 @@ v = \left (
 1 \\
 \end{array}
 \right )
-\tag{2.4}\]</span></span></p>
+\tag{2.5}\]</span></span></p>
 <p>The reader should check that</p>
 <p><span id="eq-lincomb1"><span class="math display">\[
 10 \left (
@@ -914,8 +930,8 @@ v = \left (
 -1.2 \\
 \end{array}
 \right )
-\tag{2.5}\]</span></span></p>
-<p>does indeed work out to</p>
+\tag{2.6}\]</span></span></p>
+<p>so that e.g.&nbsp;<span class="math inline">\(v_1 = 10\)</span> and <span class="math inline">\(c_1 = (5,1)'\)</span>, does indeed work out to</p>
 <p><span class="math display">\[
 \left (
 \begin{array}{r}
@@ -930,7 +946,7 @@ v = \left (
 </section>
 <section id="linear-combinations-of-rows-and-columns-of-a-matrix" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Linear Combinations of Rows and Columns of a Matrix</h1>
-<p>Note that the above expression <a href="#eq-lincomb1" class="quarto-xref">Equation&nbsp;<span>2.5</span></a>,</p>
+<p>Note that the above expression <a href="#eq-lincomb1" class="quarto-xref">Equation&nbsp;<span>2.6</span></a>,</p>
 <p><span class="math display">\[
 10 \left (
 \begin{array}{r}
@@ -962,12 +978,12 @@ v = \left (
 <div id="thm-lincombCols" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 3.2</strong></span> The product <span class="math inline">\(wA\)</span> of a row vector and a matrix is equal to a linear combination of the rows of the matrix, with the coefficients coming from the row vector.</p>
 </div>
-<p>To further illustrate all this, write the above matrix <a href="#eq-matrixA" class="quarto-xref">Equation&nbsp;<span>2.3</span></a> as</p>
+<p>To further illustrate all this, write the above matrix in <a href="#eq-matrixA" class="quarto-xref">Equation&nbsp;<span>2.4</span></a> as</p>
 <p><span id="eq-matrixApart"><span class="math display">\[
 A =
 \left (
 \begin{array}{rr}
-A_{11} &amp; A_{21} \\
+A_{11} &amp; A_{12} \\
 \end{array}
 \right )
 \tag{3.1}\]</span></span></p>
@@ -991,7 +1007,7 @@ A_{12} =
 \end{array}
 \right )
 \]</span></p>
-<p>Symbolically, in <a href="#eq-matrixApart" class="quarto-xref">Equation&nbsp;<span>3.1</span></a>, <span class="math inline">\(A\)</span> now looks like a 1x2 “matrix.” Similarly, rewriting <a href="#eq-vInAv" class="quarto-xref">Equation&nbsp;<span>2.4</span></a>}, we have</p>
+<p>Symbolically, in <a href="#eq-matrixApart" class="quarto-xref">Equation&nbsp;<span>3.1</span></a>, <span class="math inline">\(A\)</span> now looks like a 1x2 “matrix.” Similarly, rewriting <a href="#eq-vInAv" class="quarto-xref">Equation&nbsp;<span>2.5</span></a>, we have</p>
 <p><span class="math display">\[
 v =
 \left (
@@ -1011,8 +1027,8 @@ v_{11} =
 \end{array}
 \right )
 \]</span></p>
-<p>and <span class="math inline">\(v_{21} = 1\)</span> (a 1x1 matrix), <span class="math inline">\(v\)</span> looks to be 2x1.</p>
-<p>So, again pretending, treat the product <span class="math inline">\(Av\)</span> as the multiplication of a 1 x 2 “matrix” and a 2 x 1 “vector”, yielding a 1 x 1 result,</p>
+<p>and <span class="math inline">\(v_{21} = 1\)</span> (a 1x1 matrix); <span class="math inline">\(v\)</span> looks to be 2x1, though it is actually <span class="math inline">\(3 \times 1\)</span>.</p>
+<p>So, again pretending, treat the product <span class="math inline">\(Av\)</span> as the multiplication of a 1 x 2 “matrix” and a 2 x 1 “vector”, yielding a 1 x 1 result, another “dot product,”</p>
 <p><span class="math display">\[
 A_{11} v_{11} + A_{12} v_{21}
 \]</span></p>
@@ -1056,7 +1072,7 @@ B = (B^{(1)},B^{(2)},..., B^{(k)})
 <p><span class="math display">\[
 AB = (AB^{(1)},AB^{(2)},..., AB^{(k)})
 \]</span></p>
-<p>In other words,</p>
+<p>In other words, making use of <a href="#thm-lincombRows" class="quarto-xref">Theorem&nbsp;<span>3.1</span></a>,</p>
 <div id="thm-abPart" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 3.3</strong></span> In the product <span class="math inline">\(AB\)</span>, column <span class="math inline">\(j\)</span> is a linear combination of the columns of <span class="math inline">\(A\)</span>, and the coefficients in that linear combination are the elements of column <span class="math inline">\(j\)</span> of <span class="math inline">\(B\)</span>.</p>
 <p>A similar result holds for the rows of the product.</p>
@@ -1069,7 +1085,7 @@ AB = (AB^{(1)},AB^{(2)},..., AB^{(k)})
 <ul>
 <li><p>Which members is member 6 linked with?</p></li>
 <li><p>Which member is linked to the most number of members? How about the least number?</p></li>
-<li><p>Find an example of a <em>triad</em>, i.e.&nbsp;a set of 3 members who are all linked to each other?</p></li>
+<li><p>Find an example of a <em>triad</em>, i.e.&nbsp;a set of 3 members who are all linked to each other.</p></li>
 </ul>
 <p>❄️ <strong>Your Turn:</strong> We say a square matrix is <em>upper-triangular</em> if its below-diagonal elements are all 0s. (There is a similar concept of <em>lower-triangular</em>.) Explain why, given two upper-triangular matrices <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> of the same size, the product <span class="math inline">\(AB\)</span> is also upper-triangular.</p>
 <p>❄️ <strong>Your Turn:</strong> Write an R function with call form</p>
@@ -1121,7 +1137,7 @@ B' &amp; I  \\
 <p>❄️ <strong>Your Turn:</strong> Not every Markov chain, even ones with finitely many states, have long-run distributions. Some chains have <em>periodic</em> states. It may be, for instance, that after leaving state <span class="math inline">\(i\)</span>, once can return only after an even number of hops. Modify our example chain here so that states 1 and 5 (and all the others) have that property. Then compute <span class="math inline">\(P^n\)</span> for various large values of <span class="math inline">\(n\)</span> and observe oscillatory behavior, rather than long-run convergence.</p>
 <p>❄️ <strong>Your Turn:</strong> Consider the following Markov model of a discrete-time, single-server queue:</p>
 <ul>
-<li><p>Model parameters are <span class="math inline">\(p\)</span> (probability of job completion), <span class="math inline">\(q\)</span> (probability of new job arriving) and <span class="math inline">\(m\)</span> (size of the customer waiting area).</p></li>
+<li><p>Model parameters are <span class="math inline">\(p\)</span> (probability of job completion in a particular time epoch), <span class="math inline">\(q\)</span> (probability of new job arriving) and <span class="math inline">\(m\)</span> (size of the customer waiting area).</p></li>
 <li><p>Jobs arrive, are served (possibly after queuing) and leave.</p></li>
 <li><p>Only one job can be in service at a time.</p></li>
 <li><p>At each time epoch:</p>
@@ -1135,7 +1151,7 @@ B' &amp; I  \\
 </ul>
 <p>For instance, say p = 0.4, q = 0.2, m = 5, Suppose the current state is 3, so there is a job in service and two jobs in the queue. Our next state will be 2 with probability (0.4) (0.8); it will be 3 with probability (0.4) (0.2), and so on.</p>
 <p>Analyze this system for the case given above. Find the approximate long-run distribution, and also the proportion of jobs that get discarded.</p>
-<p>❄️ <strong>Your Turn:</strong> Prove <a href="#eq-traceab" class="quarto-xref">Equation&nbsp;<span>2.2</span></a>. Hint: Write out the left-hand side as a double sum. Reverse the order of summation, and work toward the right-hand side.</p>
+<p>❄️ <strong>Your Turn:</strong> Prove <a href="#eq-traceab" class="quarto-xref">Equation&nbsp;<span>2.3</span></a>. Hint: Write out the left-hand side as a double sum. Reverse the order of summation, and work toward the right-hand side.</p>
 <p>❄️ <strong>Your Turn:</strong> Write out the details of the “similar result” in the statement of <a href="#thm-abPart" class="quarto-xref">Theorem&nbsp;<span>3.3</span></a>.</p>
 
 
