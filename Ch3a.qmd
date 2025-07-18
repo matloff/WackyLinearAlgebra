@@ -404,7 +404,7 @@ Be sure to distinguish between similar quantities. For example:
   Var(\bar{M}) = \frac{1}{n} Var(M)
   $$ 
 
-  Similar properties hold for Var(\bar{D}) and 
+  Similar properties hold for $Var(\bar{D})$ and 
   $Cov(\bar{D},\bar{M})$.
 
 In other words, we obtain the needed covariance matrix of

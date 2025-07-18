@@ -258,13 +258,13 @@ are infinitely many solutions, a point discussed in detail in
 Let's check. Before beginning, recall that the orthogonal nature of $U$
 and $V$ implies that $U'U = I$ and $V'V = I$.
 
-\begin{aligned}
+\begin{align}
 A'A b &= (U \Sigma V')' (U \Sigma V') (U \Sigma V')^{+} S \\
 &= (V \Sigma U') (U \Sigma V') (V \Sigma^{+} U' S) \\
 &= V \Sigma^2 V'(V \Sigma^{+} U' S) \\
 &= V \Sigma U' S \\
 &= A'S
-\end{aligned}
+\end{align}
 
 $\square$
 
