@@ -43,28 +43,51 @@ This can be used to form a confidence interval (see below), but
 also stands on its own as an indication of the accuracy of 
 $\widehat{\theta}$.
 
-[In general, for confidence level $1-\alpha$ replace 1.96 by the upper
-$1-\alpha/2$ quantile of the N(0,1) distribution]{.column-margin} A,
-say 95%, confidence interval (CI) for $\mu$ is then
+A, say 95%, confidence interval (CI) for $\mu$ is then
 
 $$
 \widehat{\theta} \pm 1.96 ~ \widehat{\theta}
 $$
 
 The 95% figure means that of all possible samples of the given size
-[There is a bit of drama in this word "contain." Instead of saying the
+ from the
+population, 95% of the resulting confidence intervals will contain
+$\theta$. In many cases, the 95% figure is only approximate, stemming
+from a derivation that uses the Central Limit Theorem.
+
+In general, for confidence level $1-\alpha$ replace 1.96 by the upper
+$z_{\alpha}$, the $1-\alpha/2$ quantile of the N(0,1) distribution,
+and denote the standard error of $\widehat{\theta}$ by
+$\textrm{SE}(\widehat{\theta})$. Then our CI is
+
+$$
+\widehat{\theta} \pm z_{\alpha} \textrm{SE}(\widehat{\theta})
+$${#eq-pmse}
+
+::: {.callout-important}
+## Note Regarding Sensitivity of Phrasing
+
+There is a bit of drama in this word "contain." Instead of saying the
 intervals *contain* $\theta$, why not simply say $\theta$ is *in* the
 intervals? Aren't these two descriptions equivalent in terms of English?
 Of course they are. But many instructors of statistics classes worry
 that students will take the second description to mean that $\theta$ is
 the random quantity, when in fact the CI is random (random center,
 random radius) and $\theta$ is fixed (though unknown). The instructors
-thus insist on the more awkward phrasing.]{.column-margin} from the
-population, 95% of the resulting confidence intervals will contain
-$\theta$. In many cases, the 95% figure is only approximate, stemming
-from a derivation that uses the Central Limit Theorem.
+thus insist on the more awkward phrasing, so as to avoid students
+misunderstanding. Indeed some instructors would contend that use of the
+word *in* is itself just plain incorrect. My own view is that in some
+cases the word *in* is clearer (and certainly correct in any case), and
+that it is better to add a warning about what is random/nonrandom than
+engage in awkward phrasing.
+
+:::
 
 ## The R vcov Function {#sec-rcov}
+
+So, how does one obtain standard errors? In R, in many cases, they
+will be provided by the **summary** function, but we may need an entire
+estimated covariance matrix rather than just a standard error.
 
 Due to the Multivariate Central Limit Theorem, many common statistical
 estimators have approximately normal distributions.  In R, functions
@@ -278,10 +301,9 @@ Let's call that asymptotic covariance matrix $\widehat{\Sigma}$.
 
 ### Example: ratio of two means
 
-Often $\widehat{\Sigma}$ will be provided by our application software, such as
-with R's **vcov** function to be presented later in this
-chapter, but we will need to derive it in this case, using
-properties of sample means.
+Often $\widehat{\Sigma}$ will be provided by our application software,
+such as with R's **vcov** function, but we will need to derive it in
+this case, using properties of sample means.
 
 Say our sample data consists of mother-daughter pairs,
 
@@ -493,40 +515,36 @@ $$
 P[(W-\mu)' \Sigma^{-1} (W-\mu) \leq d_{\alpha}] = 1-\alpha
 $$
 
-In the case $k=2$, the set of all $t$ such that
+In the case $k=2$, the set of all $t = (t_1,...,t_k)'$ such that
 
 $$
-(t-\mu)' \Sigma^{-1} (t-\mu) = r
+(t-\mu)' \Sigma^{-1} (t-\mu) = d_{\alpha}
 $$
 
 is an ellipse. (If $\Sigma = I$, we have a circle.) For $k=3$ we have an
-ellipsoid, a "football," and so on in higher dimensions..  [We will use
-the linear model here for concretenss, but the same analysis holds for
-any asymptotically normal statistical estimator, e.g.  Maximum
-Likelihood estimates.]{.column-margin} Now, in the context of the linear
-model, take $W$ to be $\widehat{\beta}$, $\mu = \beta$ etc.  
+ellipsoid, a "football," and so on in higher dimensions..  
 
-[The F-distribution is defined to be the distribution of the ratio of
-two independent chi-square random variables, each divided by their
-degrees of freedom. Here $r_{\alpha} = k f_{\alpha}$, where $f_{\alpha}$
-is the upper-$\alpha$ quantile for the F-distribution with $k$ and $n-k$
-degrees of freedom.]{.column-margin} Here $\Sigma$ must be estimated by
-$\widehat{\beta}$ (given to us via **vcov**), and the chi-square
-distribution is replaced by a quantity involving the *F-distribution*.
-using a new cutoff value of $r_{\alpha}$ rather than $d_{\alpha}$. 
+[We will use the linear model here for concretenss, but the same
+analysis holds for any asymptotically normal statistical estimator, e.g.
+Maximum Likelihood estimates.]{.column-margin} Now, in the context of
+the linear model, take $W$ to be $\widehat{\beta}$, $\mu = \beta$ etc.
+Here $\Sigma$ must be estimated by $\widehat{\Sigma}$ (given to us via
+**vcov**), so we should replace the chi-square distribution by the
+*F-distribution*. But for simplicity, let's stick with chi-square, which
+is a good approximation for large $n$ anyway.
 
 So, the event
 
 $$
 (\widehat{\beta}-\beta)' \widehat{\Sigma}^{-1} (\widehat{\beta}-\beta) 
-\leq r_{\alpha}
+\leq d_{\alpha}
 $$
 
 has probability $1-\alpha$. Equivalently, the event
 
 $$
 (\beta - \widehat{\beta})' \widehat{\Sigma}^{-1} (\beta-\widehat{\beta}) 
-\leq r_{\alpha}
+\leq d_{\alpha}
 $${#eq-Falpha}
 
 has that probability as well.
@@ -548,12 +566,12 @@ plot(ellipse(fit, which = c('disp', 'cyl'), level = 0.90), type = 'l')
 
 Here the axes are $\beta_{disp}$ and $\beta_{cyl}$. 
 
-By the way, note that the larger $\alpha$ is, the larger will be the
-value of $r_{\alpha}$, thus the larger the ellipse. The reader should
+By the way, note that the smaller $\alpha$ is, the larger will be the
+value of $d_{\alpha}$, thus the larger the ellipse. The reader should
 pause to confirm that this makes sense.
 
 However, this is but an itermediate step toward our goal of a multiple
-inference method.
+inference method. Our next step will be to set up a math tool.
 
 ### Lagrange multipliers {#sec-lagrange}
 
@@ -583,6 +601,8 @@ We form the expression
 $$
 x^2 + 2y^2 + \lambda (3x + y - 8)
 $$
+
+xxx
 
 and take partial derivatives with respect to $x$, $y$ and $\lambda$:
 
@@ -623,22 +643,24 @@ Here is how the Scheffe' method can make the intervals simultaneous.
 
 [There is an easily-missed subtlety here. Our phrasing "subject to
 $\beta$ being *in* the ellipsoid" (i.e. either in the interior or on the
-boundary) is at odds with the Langrange formulation, which stipulated
-that the min or max values are on the boundary. But the latter property
-is implied by the lineariryt of $a'\beta$: Consider any point $q$ that
+boundary) is at odds with the Langrange formulation, which stipulates
+that the min or max values occur on the boundary. But the latter property
+is implied by the linearity of $a'\beta$: Consider any point $q$ that
 is strictly interior to the ellipsoid, so our objective function has value
 $a'q$.  Then there is room for us to move away from $q$ yet still be
 inside the ellipsoid, say to the point $u$, yet with $a'u$ either larger
 or smaller that $a'q$, depending on the direction we move in. So the min
 or max cannot be in the interior.]{.column-margin} To find a CI for
-$a'\beta$, find its maximum and minimum values subject to $\beta$ being
-in the ellipsoid In other words, we solve the Lagrange multiplier problem
+$a'\beta$, we find its maximum and minimum values subject to $\beta$ being
+in the ellipsoid. In other words, we solve the Lagrange multiplier problem
 
 $$
 min, max_{\beta, \lambda} ~~
 a'\beta + \lambda [(\beta - \widehat{\beta})' 
-\widehat{\Sigma}^{-1} (\beta-\widehat{\beta}) - r_{\alpha}] 
+\widehat{\Sigma}^{-1} (\beta-\widehat{\beta}) - d_{\alpha}] 
 $${#eq-scheffeobjftn}
+
+Those max and min values then define our CI.
 
 Let $C$ be a symmetric matrix. The derivative of a quadratic form $u'Cu$
 with respect to $u$ can be shown to be $2Cu$. Differentiating with
@@ -661,7 +683,7 @@ $${#eq-sothat}
 Now substitute for $\beta - \widehat{\beta}$ in the constraint:
 
 $$
-r_{\alpha} = 
+d_{\alpha} = 
 (-\frac{1}{2\lambda} \widehat{\Sigma} a)' \widehat{\Sigma}^{-1} 
 (-\frac{1}{2 \lambda} \widehat{\Sigma} a) =
 \frac{1}{4 \lambda^2} (a' \widehat{\Sigma} a)
@@ -670,24 +692,44 @@ $$
 Solve for $\lambda$:
 
 $$
-2 \lambda = \pm \sqrt{\frac{1}{r_{\alpha}} a'\widehat{\Sigma} a}
+2 \lambda = \pm \sqrt{\frac{1}{d_{\alpha}} a'\widehat{\Sigma} a}
 $$
 
 Finally, recall that the quantity whose min and max interest us is
 $a'\beta$. Using @eq-sothat, we have our CI for $a'\beta$,
 
 $$
-a'\beta = a'\widehat{\beta} \pm
-\sqrt{r_{\alpha} a'\widehat{\Sigma} a}
+a'\widehat{\beta} \pm
+\sqrt{d_{\alpha} a'\widehat{\Sigma} a}
 $${#eq-scheffeci}
 
-Now, why does this interval hold *simultaneously* over *all* $a$?
-The point is that if \beta is in the ellipsoid, then @eq-scheffeci
-will hold for all $a$. 
+Now, why does this interval hold *simultaneously* over *all* $a$?  The
+point is that once we know $\beta$ is in the ellipsoid, then the above
+algebraic computations show that for *any* $a$, the quantity $a'\beta$
+will be between $a'\widehat{\beta} - \sqrt{d_{\alpha} a'\widehat{\Sigma}
+a}$ and $a'\widehat{\beta} + \sqrt{d_{\alpha} a'\widehat{\Sigma} a}$.
+Again, this is solely an algebraic property, not a probabilistic one; the only
+probabilistic action occurred in $\beta$ being in the ellipsoid.  Thus
+@eq-scheffeci will hold for all $a$ simultaneously. 
 
-This analysis also shows that @eq-scheffeci is *conservative*,
-with an individual probability of more than $100(1-\alpha)$
+However, note that we pay a price for the simultaneity, in that
+@eq-scheffeci will be wider than the ordinary CI for $a'\beta$, using
+@eq-pmse,
 
+$$
+a'\widehat{\beta} \pm
+z_{\alpha} \sqrt{a'\widehat{\Sigma} a}
+$$
+
+Consider our Iranian Churn data analysis above, with $k = 12$. Let's
+find $\sqrt{d_{\alpha}}$, for $\alpha = 0.05$:
+
+```{r}
+sqrt(qchisq(0.95,12))
+```
+
+By contrast, $z_{\alpha} = 1.96$. The Scheffe' interval is more than
+twice as wide. As the saying goes, there is no "free lunch."
 
 ## Your Turn
 
