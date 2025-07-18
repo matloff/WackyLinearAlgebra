@@ -258,7 +258,6 @@ are infinitely many solutions, a point discussed in detail in
 Let's check. Before beginning, recall that the orthogonal nature of $U$
 and $V$ implies that $U'U = I$ and $V'V = I$.
 
-$$
 \begin{aligned}
 A'A b &= (U \Sigma V')' (U \Sigma V') (U \Sigma V')^{+} S \\
 &= (V \Sigma U') (U \Sigma V') (V \Sigma^{+} U' S) \\
@@ -266,7 +265,6 @@ A'A b &= (U \Sigma V')' (U \Sigma V') (U \Sigma V')^{+} S \\
 &= V \Sigma U' S \\
 &= A'S
 \end{aligned}
-$$
 
 $\square$
 
