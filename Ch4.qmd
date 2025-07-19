@@ -15,11 +15,12 @@ library(qeML)
 
 Many matrices are noninvertible. The subject of this chapter. matrix
 *rank* is closely tied to the invertibility issue, and is central to
-understanding matrix applications. 
+understanding matrix applications. We will see in later chapters that
+the notion of rank is particularly useful in modern Data Science. 
 
 :::
 
-In our computations in the latter part of the last chapter, we added a
+In our computations in the latter part of @sec-linmods, we added a
 proviso that $(A'A)^{-1}$ exists. In this chapter, we'll present a
 counterexample, which will naturally lead into our covering matrix rank,
 and in the next chapter, the basics of vector spaces.
@@ -171,7 +172,11 @@ partitioned-matrix form:
 > \right )
 > $${#eq-rref}
 > where $I_s$ is an identity matrix of some size $s$
-> and $U$ has dimension $s \times (n-s)$.
+> and $U$ has dimension $s \times (n-s)$. 
+> 
+> Note that the second
+> partitioned row here, (0,0) may consist of several actual 0 rows, or
+> none at all.
 
 The Column-Reduced Echelon Form is similar:
 
@@ -189,7 +194,7 @@ where $I_t$ is an identity matrix of some size $t$
 and $V$ has dimension $(m-t) \times t$.
 
 Clearly, the row rank of $A_{rref}$ is $s$, and its column rank is $t$.
-We will prove shortly that the $s$ is the column rank of $A$ as well.
+We will prove shortly that $s = t$.
 
 ## Formal Definitions {#sec-formaldefs}
 
@@ -206,8 +211,9 @@ We will prove shortly that the $s$ is the column rank of $A$ as well.
 
 > *Definition:* We say a set of vectors is *linearly dependent* if some
 > linear combination of them (excluding the trivial case in which all
-> the coefficients are 0) equals 0. If no nontrival linear combination
-> of the vectors is 0, we say the vectors are *linearly independent*.
+> the coefficients are 0) equals the 0 vector. If no nontrival linear
+> combination of the vectors is 0, we say the vectors are *linearly
+> independent*.
 
 For instance, consider the matrix
 
@@ -239,8 +245,8 @@ So, here is the formal definition of rank:
 > *Definition* The *rank* of a matrix $B$ is its maximal number of
 > linearly independent rows.
 
-As an example involving real data, recall that in the nonfull rank
-let's look again at the census example,
+As an example involving real data, let's look again at the census
+example,
 
 ```{r}
 head(A)
@@ -255,7 +261,7 @@ this matrix:
 
 1 column1 + 0 column2 + 0 column3 + (-1) column4 + (-1) column5 = 0
 
-So we have found a linear combination of the columsn of this matrix,
+So we have found a linear combination of the columns of this matrix,
 with coefficients (1,0,0,-1,-1), that evaluates to 0. Though we have
 defined rank in terms of rows, one can do so in terms of columns as
 well:
@@ -292,7 +298,28 @@ $AW$ is equal to that of $A$.
 Say $A$ has column rank $r$. Then there exist $r$ (and no more than $r$)
 linearly independent columns of $A$. For convenience of notation, say 
 these are the first $r$ columns, and call them $c_1,...,c_r$. Then 
-the first $r$ columns of $VA$ are $Vc_1,...,Vc_r$, by matrix partitioning. 
+the first $r$ columns of $VA$ are $Vc_1,...,Vc_r$, by matrix partitioning;
+call these columns $\tilde{c}_1,...,\tilde{c}_r$. 
+
+Are these vectors linearly independent? Suppose not. Then there would
+exist nontrivial $\lambda_i$ such that 
+
+$$
+\lambda_1 \tilde{c}_1 +...+ \lambda_r \tilde{c}_r = 0
+$$
+
+Multiplying both sides by $V^{-1}$ then gives us
+
+$$
+\lambda_1 c_1 +...+ \lambda_r c_r = 0
+$$
+
+contradicting the linear independence of the $c_i$.
+
+Thus $VA$ has at least $r$ independent columns, and thus has column rank
+at least $r$. But a similar argument shows that if $VA$ were to have $s
+r$ independent columns, the same would have to be true for $A$, again
+a contradiction. The $VA$ has the same column rank as $A$.
 
 Note that for a vector $x$, $Vx = 0$ if and only if $x = 0$. (Just
 multiply $Vx = 0$ on the left by $V^{-1}$.) So a linear combination
