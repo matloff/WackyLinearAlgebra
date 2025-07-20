@@ -344,7 +344,7 @@ of its RREF, $B_{rref}$, which in turn is $s$ in @eq-rref.
 
 ::: {.proof}
 
-The above @thm-ranknotchange says that pre-postmultiplying $B$ will not
+@thm-ranknotchange says that pre-postmultiplying $B$ will not
 change its column rank. Then invoke @eq-eeeb.
 
 It is clear that any column in $U$ in @eq-rref can be written as a
@@ -453,8 +453,9 @@ $$
 $$
 
 @thm-ranknotchange tells us that the rank of $F'A'A$ has the same rank
-as $A'A$, and $F'A'AF$ has the same rank as $F'A'A$, in turn the same
-rank as $A'A$. So we can concentrate on $(A_{rref})' A_{rref})$
+as $A'A$, and that $F'A'AF$ has the same rank as $F'A'A$. The latter in
+turn has the same rank as $A'A$. So we can concentrate on $(A_{rref})'
+A_{rref})$.
 
 Using @eq-rref, we have
 
@@ -472,7 +473,7 @@ The presence of $I_s$ tells us there are at least $s$ linearly
 independent rows, thus rank at least $s$. So the rank of $A'A$ is at
 least that of $A$. 
 
-On the other hand, again pply our knowlege of partitioning. 
+On the other hand, again apply our knowlege of partitioning. 
 
 * Say $A$ is $m \times n$. Write
 
