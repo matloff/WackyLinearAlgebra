@@ -425,9 +425,11 @@ It turns out that a basis for a vector space is especially useful if its
 members are orthogonal to each other.  We'll now see why, and see how to
 generate such a basis from a nonorthogonal one.
 
-An orthogonal basis in which every vector has length 1 is called
-*orthonormal*. Recall that $x \neq 0$ then $x/||x||$ has length 1,
-so that any orthogonal basis can easily be converted to orthonormal.
+[Converting a vector to length 1 in this manner is known as
+*normalizing* the vector.]{.column-margin} An orthogonal basis in which
+every vector has length 1 is called *orthonormal*. Recall that if $x
+\neq 0$ then $x/||x||$ has length 1, so that any orthogonal basis can
+easily be converted to orthonormal.
 
 ### Motivation
 
@@ -491,11 +493,10 @@ have a nonorthogonal one? That's next...
 
 As seen in the last section, it is desirable to have an orthogonal
 basis, and it's even more convenient if its vectors have length 1 (an
-*orthonormal* basis). Converting to length 1 is trivial -- just divide
-the vector by its length.  
-
-But if we start with a basis $b_1,b_2,...,b_m$, how can we generate an
-orthonormal basis from this? 
+*orthonormal* basis). As noted, converting to length 1 is trivial --
+just divide the vector by its length, but how do we obtain an orthogonal
+basis? In other words, if we start with a basis $b_1,b_2,...,b_m$, how
+can we generate an orthonormal basis from this? 
 
 > *The Gram-Schmidt Method*
 > 
@@ -581,7 +582,9 @@ $$
 P(Y = i | B = 0) = P(X = i | X \neq 6) = \frac{1}{5}, ~ i=1,2,3,4,5
 $$
 
-More generally, 
+We then have $E(Y|B=0) = 3 = 3$
+
+So our answer is
 
 $$
 E(Y | B = i) =
