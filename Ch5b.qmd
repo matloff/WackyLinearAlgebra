@@ -20,6 +20,9 @@ here, and present applications.
 Among other things, we will analyze a method for removing racial, gender
 etc. bias in machine learning algorithms.
 
+The material in this chapter will be crucial to the remaining chapters.
+Extra attention on the part of the reader will yield major dividends.
+
 :::
 
 

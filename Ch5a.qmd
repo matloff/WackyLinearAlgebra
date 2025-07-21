@@ -279,26 +279,26 @@ the bases do consist of the same number of vectors. This is true, but
 must be proven. We will not do so here, and refer the interested reader
 to the [elegant
 proof](https://www.google.com/books/edition/Algebra_and_Geometry/tVTd78vYzPkC?hl=en&gbpv=1&pg=PA106&printsec=frontcover)
-AF Beardon (*Algebra and Geometry*, 2005, Cambridge).
+by AF Beardon (*Algebra and Geometry*, 2005, Cambridge).
 
 
 ## Linear Transformations
 
 Consider vector spaces $\cal{V}_1$ and $\cal{V}_2$. A function $f$ whose
 input is in $\cal{V}_1$ and output is in  $\cal{V}_2$ is called a
-*transformation* (or *map*) $\cal{V}_1$ to $\cal{V}_2$. 
+*transformation* (or *map*) from $\cal{V}_1$ to $\cal{V}_2$. 
 
 An important special case is that in which  $f$ is linear, i.e.
 
 $$
-f(av + bw) = a f(v) = b f(w)
+f(av + bw) = a f(v) + b f(w)
 $$
 
-for all scalars $a$ and $b$, and all vectors $v$ and $w$ in $\cal{V}_1 $. 
+for all scalars $a$ and $b$, and all vectors $v$ and $w$ in $\cal{V}_1$. 
 
 A further important special case is that in which $\cal{V}_1$ and
 $\cal{V}_2$ are $R^n$ and $R^m$, respectively.  Then it can be shown
-that there a some $m \times n$ matrix $A$ that does its work, i.e.
+that there a some $m \times n$ matrix $A$ that does the work of $f$, i.e.
 
 $$
 f(x) = Ax
@@ -308,11 +308,14 @@ for all $x$ in $R^n$.
 
 Note that it is not necessarily true that a linear transformation will
 be *one-to-one* (*injective*), meaning that $x \neq y$ implies 
-$f(x) \neq f(y)$. Nor is it necessarily *onto* (*surjective*).
+$f(x) \neq f(y)$. Nor is it necessarily *onto* (*surjective*), i.e.
+thst for any $w$ in $R^m$, there exists some $v$ such that
+$f(v) = w$.
 
 To see that the first is false, consider the matrix $A$ above. If say
 $f(v) = w$ then we will also have $f(v+s) = f(v) + f(s) = w$ for any $s$
-in the null space of $A$. The reader is encouraged to verify that the
+in the null space of $A$, a contradiction if $A$'s null space consists
+of more than the 0 vector.  The reader is encouraged to verify that the
 second property also does not necessarily hold either.
 
 ## Your Turn
