@@ -25,8 +25,6 @@ Extra attention on the part of the reader will yield major dividends.
 
 :::
 
-
-
 ## Geometric Aspirations
 
 You may recall from your high school geometry course the key concept of
@@ -120,10 +118,7 @@ $\cal RV(\Omega)$:
 the requirement that $<U,U> = 0$ if and only if $U = 0$. Otherwise, any
 constant random variable would violate that condition. To avoid bringing
 in yet another symbol for the subspace, let's redefine $\cal RV(\Omega)$
-to consist only of mean-0 random variables. 
-Note by the way that any random variable $X$ has a mean-0 "partner," in
-the form of $\tilde{X} = X - E(X)$. This fact will come in handy at
-various points in the succeeding chapters.]{.column-margin}
+to consist only of mean-0 random variables.]{.column-margin}
 We will focus on the subspace of random variables that have mean 0, and
 take covariance as our inner project:
 
@@ -651,7 +646,7 @@ Note, though that that outer $E()$ (the first 'E') is a weighted
 average, since some departments are larger than others. The weights are
 the distribution of $D$.
 
-### Projections in $\cal RV(\Omega)$: how they work
+### Projections in $\cal RV(\Omega)$: how they work{#sec-howtheywork}
 
 Consider random variables $X$ and $Y$ in $\cal RV(\Omega)$, and consider
 the subspace $W$ consisting of all functions of $X$. (By definition,
@@ -687,6 +682,7 @@ $$
 In other words:
 
 > Projections in $\cal RV(\Omega)$ take the form of conditional means.
+> Here, the projection of $Y$ onto $W$ is $E(Y | X)$.
 > 
 > Moreover:
 > 
@@ -727,31 +723,33 @@ We consider prediction of a variable $Y$ from a feature vector $X$ and a
 vector of sensitive variables $S$. The target $Y$ may be either numeric
 (in a regression setting) or dichotomous (in a two-class classification
 setting where $Y$ = 1 or $Y$ = 0).  We will consider only the numeric
-case here.  Our goal is to eliminate the influence of $S$.
+case here. 
+
+*Our goal is to eliminate the influence of $S$.*
 
 ### The method of Scutari *et al*
 
 The basic assumption (BA) amounts to $(Y,X,S)$ having a multivariate
 Gaussian distribution, with $Y$ scalar and $X$ being a vector of length
 $p$.  For convenience, assume here that $S$ is scalar.  As discussed
-earlier, all variables are assumed centered, by subtracting their means,
-so that they now have mean 0.
+earlier in a sidebar in @sec-genset, all variables are assumed centered,
+by subtracting their means, so that they now have mean 0.
 
 Let's review the material in @sec-mvn: Say we have $W$ with a
 multivariate normal distribution, and wish to predict one of its
 components, $Y$, from a vector $X$ consisting of one or more of the
-other components, or linear combinations of them. Then
+other components, or linear combinations of them. Then:
 
-* the distribution of $Y|X$ is univariate normal
+* The distribution of $Y|X$ is univariate normal.
 
-* E(Y|X=t) is a linear function of $t$
+* E(Y|X=t) is a linear function of $t$.
 
-* Var(Y|X=t) is independent of $t$
+* Var(Y|X=t) is independent of $t$.
 
-And most importantly:
+One can also show that,
 
-* though having 0 correlation does not in general imply independence, it
-  does so in the multivariate normal case
+* Though having 0 correlation does not in general imply statistical
+  independence, it does so in the multivariate normal case.
 
 One first applies a linear model in regressing $X$ on $S$,
 
@@ -763,27 +761,30 @@ where $\gamma$ is a length-$p$ coefficient vector. Here we are
 predicting the predictors (of $Y$), seemingly odd, but a first step in
 ridding ourselves from the influence of $S$.
 
-Now consider the prediction errors (*residuals)*,
+Now consider the resulting prediction errors (*residuals)*,
 
 $$
 U = X - S \gamma 
 $$
 
 $U$ can be viewed as the part of $X$ that is unrelated to $S$; think of
-$U$ as "having no $S$ content." Note that $U$ is a vector of length $p$.
+$U$ as "having no $S$ content." $U$ is a vector of length $p$.
 
 Note the following:
 
-* $E(X|S)$ is the projection of $X$ onto the subspace of all functions
-  of $S$.
+* From @sec-howtheywork, $E(X|S)$ is the projection of $X$ onto the
+  subspace of all functions of $S$.
 
 * $X - E(X|S)$ (original vector minus the projection) is orthogonal to $S$.
 
 * That is, 
 
-  $$
-  0 = <S,X - E(X|S)> = E[S (X - E(X|S))] = E(SU) = Cov(S,U)
-  $$
+  \begin{align}
+  0 &= <S,X - E(X|S)> \\
+    &= E[S (X - E(X|S))]\\ 
+    &= E(SU) \\
+    &= Cov(S,U)
+  \end{align}
 
 * Thus $S$ and $U$ are uncorrelated.
 
