@@ -647,7 +647,7 @@ See Your Turn problem below.
 
 And furthermore:
 
-::: {#thm-trinvar}
+::: {#cor-trinvar}
 
 Trace is invariant under *circular
 shifts*, e.g. $UVW$, $VWU$ and $WUV$ all have the same trace.

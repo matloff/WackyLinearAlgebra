@@ -74,7 +74,7 @@ and a numerical output, with the following properties:
   <u,av+bw> = a <u,v> + b <u,w>
   $$
 
-* $<u,u> \geq 0$, with equality if and only if $u = 0$.
+* $<u,u> ~ \geq ~ 0$, with equality if and only if $u = 0$.
 
 </blockquote>
 
@@ -116,10 +116,16 @@ a nonzero contribution to the integral and thus to the inner product.
 
 $\cal RV(\Omega)$:
 
-We will take covariance as our inner project:
+[We need to restrict attention to this subspace, in order to meet
+the requirement that $<U,U> = 0$ if and only if $U = 0$. Otherwise, any
+constant random variable would violate that condition. To avoid bringing
+in yet another symbol for the subspace, let's redefine $\cal RV(\Omega)$
+to consist only of mean-0 random variables.]{.column-margin}
+We will focus on the subspace of random variables that have mean 0, and
+take covariance as our inner project:
 
 $$
-<U,V> = cov(U,V) = E[(U - EU) (V - EV)]
+<U,V> = Cov(U,V) = E[(U - EU) (V - EV)] = E(UV)
 $$
 
 The properties of expected value, e.g. linearity, show that the
@@ -173,10 +179,9 @@ See the Your Turn problem below.
 *Correlation coefficients* are ubiquitous in data science. It is well
 known that their values fall into the interval [-1,1]. Let's prove that.
 
-Recall from @sec-covar the notion of the covariance between two random
-variables (from which the covariance matrix of a random vector is
-formed). We remarked that covariance is intuitively like correlation,but
-that latter is a scaled form. Formally,
+In @sec-covar, in introducing the notion of the covariance between two
+random variables, we remarked that covariance is intuitively like
+correlation, but that the latter is a scaled form. Formally,
 
 $$
 \rho(X,Y) =
@@ -187,14 +192,8 @@ By dividing the covariance by the product of the standard deviations, we
 obtain a unitless quantity, i.e. free of units such as centimeters and
 degrees.
 
-Now, $X$ and $Y$ are in $\cal RV(\Omega)$. To simplify the algebra,
-consider the case $EX = EY = 0$.[Actually, we should say, 
-``Make the transformation $X \rightarrow X - EX$,
-and note that it leaves both sides of the above correlation formula
-unchanged. We can thus assume $EX = EY = 0$.'' This is a common strategy,
-and should be kept in mind.]{.column-margin}
-
-Recalling our inner product for this space, we have
+Now, say $X$ and $Y$ are in $\cal RV(\Omega)$.  Recalling our inner
+product for this space, we have
 
 $$
 <X,Y> = E(XY)
@@ -208,7 +207,7 @@ $$
 
 with the analogous relations for $Y$.
 
-Cauchy=Schwarz then says
+Cauchy-Schwarz then says
 
 $$
 |E(XY)| \leq \sqrt{Var(X)} \sqrt{Var(Y)}
@@ -266,6 +265,8 @@ Furthermore, $x-z$ is orthogonal to any vector $r$ in $\cal W$.
 
 :::
 
+::: {.proof}
+
 The full proof is beyond the scope of this book, as it requires
 background in real analysis. Indeed, even the statement of the theorem
 is not mathematically tight.[For readers who do have such background,
@@ -273,7 +274,11 @@ this is the Hilbert Projection Theorem. "Closest" is defined in terms of
 infimum, and $\cal W$ needs to be a topologically closed
 set. See for example [the Wikipedia entry.l](https://en.wikipedia.org/wiki/Hilbert_projection_theorem)]{.column-margin}
 
-For example, in the case of $R^n$, It will be seen shortly that for each
+$\square$
+
+:::
+
+In the case of $R^n$, It will be seen shortly that for each
 $\cal W$ in the theorem, there is a matrix $P_{W}$ that implements the
 projection, i.e.
 
@@ -382,7 +387,7 @@ $${#eq-hii}
 
 The quantity $h_{ii}$ is called the *leverage* for datapoint $i$, with
 the metaphor alluding to the impact of datapoint $i$ on
-$\widehat{\beta}$ 
+$\widehat{\beta}$.
 
 Using the material on circular shifts in @sec-trace, we have
 
