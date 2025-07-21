@@ -552,3 +552,8 @@ here: Swap rows $i$ and $j$; multiply row $i$ by a constant $b$; adding
 $c$ times row $i$ to row $j$, for a constant $c$. Find general formulas
 for the determinants of the three matrices.
 
+❄️  **Your Turn:** Consider a unidirectional graph $G$ of $n$ people,
+with an edge from $x$ to $y$ meaning that $x$ has worked for $y$ 
+at some time.  Suppose there are $r$ people whose only work experience
+is to work for person 3. What can we then say about the rank of $G$WW?
+
