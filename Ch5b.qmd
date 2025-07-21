@@ -120,7 +120,10 @@ $\cal RV(\Omega)$:
 the requirement that $<U,U> = 0$ if and only if $U = 0$. Otherwise, any
 constant random variable would violate that condition. To avoid bringing
 in yet another symbol for the subspace, let's redefine $\cal RV(\Omega)$
-to consist only of mean-0 random variables.]{.column-margin}
+to consist only of mean-0 random variables. 
+Note by the way that any random variable $X$ has a mean-0 "partner," in
+the form of $\tilde{X} = X - E(X)$. This fact will come in handy at
+various points in the succeeding chapters.]{.column-margin}
 We will focus on the subspace of random variables that have mean 0, and
 take covariance as our inner project:
 
@@ -597,8 +600,7 @@ $$
 *The random variable form:*
 
 The quantity $E(Y | B = i)$, a number, can be converted to a random
-variable, in the form of a function of $B$, which we will call $q(B)$, and 
-denoted $E(Y | B)$ -- without "= i" -- where
+variable, in the form of a function of $B$, which we will call $q(B)$: 
 
 $$
 q(B) = 
@@ -608,7 +610,10 @@ q(B) =
 \end{cases}
 $$
 
-$B$ is random, so $q(B)$ is also random. 
+We will denote $q(B)$ by $ $E(Y | B)$ -- without '= i'. 
+
+$B$ is random, so $q(B)$ is also random. In other words, $(EY|B)$ is a
+random variable.
 
 We need one more thing:
 
@@ -648,13 +653,14 @@ the distribution of $D$.
 
 ### Projections in $\cal RV(\Omega)$: how they work
 
-Consider random variables $X$ and $Y$. Let $W$ be the set of all
-functions of $X$ with finite variance, which is a subspace of the vector
-space $\cal RV(\Omega)$. @thm-projection talks of a closest vector $C$ in
-$W$ to $Y$. Let's see what form $C$ might take in this vector space. For
-convenience, let's assume that our variables have mean
-0.[Recall that we can convert a random variable to mean-0 by subtracting
-its mean. In the linear regression context, centering both “X” and “Y” will result in the model having 0 as its intercept term.]{.column-margin}
+Consider random variables $X$ and $Y$ in $\cal RV(\Omega)$, and consider
+the subspace $W$ consisting of all functions of $X$. (By definition,
+this means that each such function, say $g(X)$, has finite variance and
+mean 0.)
+
+@thm-projection talks of a closest vector
+$C$ in $W$ to $Y$. Let's see what form $C$ would take in this vector
+space. 
 
 Remember, the (squared) distance from $Y$ to $C$ is
 
@@ -662,19 +668,17 @@ $$
 ||Y - C||^2 = <Y-C,Y-C> = E[(Y-C)^2]
 $$
 
-That last term is 
+By @eq-iterexpect, that last term is 
 
 $$
 E[ E((Y-C)^2 | X) ]
 $$
 
-For any random variable $Q$ of finite variance, the minimum value of
-$E[(Q-d)^2]$ over all constants $d$ is attained by taking $d$ to be the
-mean of $Q$, i.e.  $d = E(Q)$. (See Your Turn problem below.) So, the
-minimum of $E((Y-C)^2 | C)$, for all random variables $C$, is attained
-by the *conditional* mean,[Note that since we are conditioning on the
-random variable $C$, it becomes a constant, like $d$
-above.]{.column-margin}
+For any random variable $T$ of finite variance, the minimum value of
+$E[(T-d)^2]$ over all constants $d$ is attained by taking $d$ to be the
+mean of $T$, i.e.  $d = E(T)$. (See Your Turn problem below.) So, the
+minimum of $E((Y-C)^2 | X)$, for all random variables $C$, is attained
+by the *conditional* mean,
 
 $$
 C = E(Y | X)
@@ -689,13 +693,9 @@ In other words:
 > Since the difference between a vector and its projection onto a subspace
 > is orthogonal to that subspace we have:
 
-<blockquote>
-
-The vector $Y - E(Y|X)$ is uncorrelated with $E(Y|X)$.  In other words,
-the prediction error (also called the *residual*) has 0 correlation with
-the prediction itself.
-
-</blockquote>
+> The vector $Y - E(Y|X)$ is uncorrelated with $E(Y|X)$.  In other words,
+> the prediction error (also called the *residual*) has 0 correlation with
+> the prediction itself.
 
 ## Application: Fairness in Algorithms{#sec-fairness}
 
@@ -719,25 +719,23 @@ use in prediction. The point here is that, due to proxies, we cannot
 solve the problem by simply removing $S$ from our analysis; we would
 still be using correlates of $S$.
 
-While this book does not take a position on the specific dispute, this
-case highlights the critical importance of addressing fairness in
-machine learning.
+This book of course does not take a position on the specific dispute. 
 
 ### Setting
 
 We consider prediction of a variable $Y$ from a feature vector $X$ and a
 vector of sensitive variables $S$. The target $Y$ may be either numeric
 (in a regression setting) or dichotomous (in a two-class classification
-setting where $Y$ = 1 or $Y$ = 0). The $m$-class case can be handled
-using $m$ dichotomous variables. We will consider only the numeric case here.
-Our goal is to eliminate the influence of $S$.
+setting where $Y$ = 1 or $Y$ = 0).  We will consider only the numeric
+case here.  Our goal is to eliminate the influence of $S$.
 
 ### The method of Scutari *et al*
 
 The basic assumption (BA) amounts to $(Y,X,S)$ having a multivariate
 Gaussian distribution, with $Y$ scalar and $X$ being a vector of length
-$p$.  For convenience, assume here that $S$ is scalar.  As in @sec-corr,
-all variables are assumed centered, i.e. mean 0.
+$p$.  For convenience, assume here that $S$ is scalar.  As discussed
+earlier, all variables are assumed centered, by subtracting their means,
+so that they now have mean 0.
 
 Let's review the material in @sec-mvn: Say we have $W$ with a
 multivariate normal distribution, and wish to predict one of its

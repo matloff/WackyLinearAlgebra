@@ -306,7 +306,7 @@ $${#eq-matrixss}
 Now how we will minimize that matrix expression with respect to the
 vector $b$? That is the subject of the next sections.
 
-### General setting
+### General setting{#sec-genset}
 
 We consider the general linear regression setting in which we have
 $p$ predictor variables $V^{(1)},...,V^{(p)}$ with
@@ -338,9 +338,13 @@ $$
 E(S|A) = A \beta
 $$
 
-[Actually, the -1 term in our R code above is meant to allude to "minus,
-i.e. removing, the $\beta_0$ term."]{.column-margin} Note the column of
-1s, needed to pick up the $\beta_0$ term.
+[Suppose we *center* the "Y" variable and each "X" variable, i.e.  we
+subtract the variable's mean. It can be shown that this is equivalent to
+setting $\beta_0$ to 0; the rest of $\beta$ does not change. We then
+remove the column of 1s. By the way, the symbolism of the -1 term in our
+R code above is meant to allude to "minus," i.e. removing, the $\beta_0$
+term.]{.column-margin} Note the column of 1s, needed to pick up the
+$\beta_0$ term.
 
 As before $S$ is the vector of associated "Y" values.
 
