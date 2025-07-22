@@ -371,8 +371,9 @@ reduction*, meaning to reduce the complexity of a model in order to
 avoid overfitting. The LASSO, introduced below, does this explicitly,
 while ridge accomplishes it via pure size reduction.
 
-We will discuss this further in @sec-dimred, but one more point about
-multicollinearity: 
+We will discuss this further in @sec-dimred. Let's start by addressing
+the point of what we really mean by "shrinkage."
+
 
 ## Formalizing the Notion of Shrinkage
 
