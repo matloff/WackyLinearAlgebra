@@ -46,8 +46,9 @@ present context and others that will arise in later chapters:
 
 Roughly speaking, the row $i$, column $j$ element of $A'A$ is an
 indicator of the strength of the relation between predictor variables
-$i$ and $j$. If we center and scale our data, that that element is
-exactly $n$ times the (sample) correlation between these two predictors.
+$i$ and $j$. If we center and scale our data (@sec-ctrscl), that that
+element is exactly $n$ times the (sample) correlation between these two
+predictors.
 
 ::: 
 
@@ -63,7 +64,7 @@ $$
 {s_X s_Y}
 $$
 
-If we center and scle the data, the sample means become 0 and the sample
+If we center and scale the data, the sample means become 0 and the sample
 standard deviations become 1, yielding
 
 $$
@@ -132,24 +133,27 @@ from the dataset. This is indeed is a common solution, but another is
 
 ## Ridge Regression
 
-In seminal paper, Hoerl and Kennard[*Technometrics*, February
+In a seminal paper, Hoerl and Kennard[*Technometrics*, February
 1970]{.column-margin} presented a new approach to the problem of
 multicollinearity of predictor variables in a linear model.  
 
 
 ### The ridge solution
 
-Their solution is simple; Add some quantity to the diagonal of $A'A$.
+Their solution is simple: Add some quantity to the diagonal of $A'A$.
 Specifically, @eq-linregformula now becomes
 
 $$
 \widehat{\beta} = (A'A + \lambda I)^{-1} A'S
 $${#eq-ridge}
 
-where $\lambda$ is a positive number chosen by the analyst.
+where $\lambda$ is a positive number chosen by the analyst.  Here $A$
+has dimensions $n \times p$, and $I$ is the $p \times p$ identity
+matrix.
 
-Here $A$ has dimensions $n \times p$, and $I$ is the $p \times p$
-identity matrix.
+Why do this? Say some linear combination of the rows of $A'A$ is nearly
+0. The same linear combination of the rows of $I$ will be nonzero, so we
+avoid near-singularity.
 
 ### Matrix formulation{#sec-matform}
 
@@ -179,13 +183,14 @@ S_{new} =
 $$
 
 where 0 means $p$ 0s. In essence, we are adding artificial data here,
-consisting of $p$ new rows to $A$, and $p$ new elements to $S$.
-So @eq-ridge is just the result of applying @eq-linregformula to
+consisting of $p$ new rows to $A$, and $p$ new elements to the vector
+$S$.  So @eq-ridge is just the result of applying @eq-linregformula to
 $A_{new}$ and $S_{new}$.
 
 Loosely speaking, we can think of the addition of $\lambda I$ to $A'A$
 as making the latter "larger", and thus making its inverse smaller. In
-other words, we are "shrinking" $\widehat{\beta}$ towards 0. This effect
+other words, we are "shrinking" $\widehat{\beta}$ towards 0, hence the
+title of this chapter, Shrinkage Estimators. This effect
 is made even stronger by the fact that we added 0s data to $S$. This
 will be made more precise below.
 
@@ -206,13 +211,13 @@ coef(glmOut)
 We had earlier flagged variable $V5$ as causing multicollinearity. As
 noted then, we could simply exclude it, but here under ridge, we see
 that it has been assigned a very small regression coefficient compared
-to most others. 
+to many of the  others. 
 
 So, did the estimated coefficient vector shrink?
 
 ```{r}
 l2norm <- function(x) sqrt(sum(x^2))
-bh01<- coef(glmnet(x,y,alpha=0,lambda=0.1))
+bh01<- coef(glmOut)
 l2norm(bh01)
 bhOLS <- coef(lm(V1 ~ .,s50)) # OLS means Ordinary Least Squares
 l2norm(bhOLS)
@@ -257,13 +262,14 @@ principle first.
 "In a set of 10,000 randomly typing monkeys, one of them will
 accidentally type a Shakespearian sonnet." 
 
-Some readers have heard this before in the context of *p-hacking*,
-in which an analyst poses a large collection of research questions, and
+Some readers have heard this before in the context of *p-hacking*, in
+which an analyst poses a large collection of research questions, and
 runs a statistical hypothesis test on each of them. Even if the null
 hypothesis is true for all of them, each will have a 5% chance of being
-[One should not be doing hypothesis tests in the first place. See [these notes](https://matloff.github.io/No-P-Values/NPV.html).]{.column-margin}
-rejected, and since there are many, the chance that at least one will be
-rejected and declared "significant," even if $H_0$ is true.
+[One should not be doing hypothesis tests in the first place. See [these
+notes](https://matloff.github.io/No-P-Values/NPV.html).]{.column-margin}
+rejected, and since there are many, the chance is high that at least one
+will be rejected and declared "significant," even if $H_0$ is true.
 
 This problem arises in many, many Data Science contexts, and a good
 analyst must be vigilant to recognize the potential to mislead. In our
@@ -324,21 +330,11 @@ predict(glmOut,z)
 
 The year of release is predicted to be 2003.
 
-## Modern View of Shrinkage Estimators{#sec-pgtn}
+### Example: Census data
 
-There are many ways to deal with multicollinearity other than shrinkage,
-and indeed, these days one seldom hears mention of multicollinearity in
-discussions of shrinkage. Instead, the goal is *dimension reduction*,
-meaning to reduce the complexity of a model in order to avoid
-overfitting; the LASSO, introduced below, does this explicitly, while
-ridge accomplishes it via pure size reduction.
-
-We will discuss this further in @sec-dimred, but one more point about
-the discussion no longer being motivated explicitly by
-multicollinearity: One can apply ridge to situations of **exact**
+One can even apply ridge to situations of **exact**
 dependence among the columns of X, as opposed to the original motivation
-of dealing with *approximate* linear dependence.  in which there is
-*exact* linear dependence.
+of dealing with *approximate* linear dependence.  
 
 We saw such a setting in @sec-censusrref. There we deliberately induced
 exact linear dependence by inclusion of both male and female dummy
@@ -348,14 +344,16 @@ variables. Let's apply ridge:
 library(qeML) 
 data(svcensus) 
 svc <- svcensus[,c(1,4:6)]  
+# force having both male and female columns
 svc$man <- as.numeric(svc$gender == 'male') 
 svc$woman <- as.numeric(svc$gender == 'female') 
 svc$gender <- NULL 
-a <- svc[,-2] 
-lambda <- 0.1 
+a <- svc[,-2]  # the A matrix
 a <- as.matrix(a) 
-tmp1 <- solve(t(a) %*% a + lambda * diag(4)) 
-tmp1 %*% t(a) %*% as.matrix(svc$wageinc) 
+lambda <- 0.1 
+# apply ridge procedure
+betahat <- solve(t(a) %*% a + lambda * diag(4)) 
+betahat %*% t(a) %*% as.matrix(svc$wageinc) 
 ```
 
 The results essentially are the same as what we obtained by having only
@@ -363,6 +361,18 @@ one dummy, thus no linear dependence: Men still enjoy about an \$11,000
 advantage. But ridge allowed us to avoid deleting one of our dummies.
 Such deletion is easy in this case, but for large $p$, say in the
 hundreds or even more, some analysts prefer the convenience of ridge.
+
+## Modern View of Shrinkage Estimators{#sec-pgtn}
+
+There are many ways to deal with multicollinearity other than shrinkage,
+and indeed, these days discussions of shrinkage seldom mention
+multicollinearity.  Instead, the goal of shrinkage is *dimension
+reduction*, meaning to reduce the complexity of a model in order to
+avoid overfitting. The LASSO, introduced below, does this explicitly,
+while ridge accomplishes it via pure size reduction.
+
+We will discuss this further in @sec-dimred, but one more point about
+multicollinearity: 
 
 ## Formalizing the Notion of Shrinkage
 
