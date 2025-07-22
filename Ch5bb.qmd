@@ -21,7 +21,7 @@ algebra.
 
 ## The Four Fundamental Subspaces of a Matrix
 
-Before going to SVD, let us first define four fundamental subspaces for
+Let us first define four fundamental subspaces for
 any $m \textrm{ x } n$ matrix $A$: 
 
 * $\textrm{row space}(A), \mathcal{R}(A)$: $\{x'A\}~~$ (all linear
@@ -38,7 +38,7 @@ The null space is also called the *kernel* of $A$, viewing the matrix as
 a function from $\mathcal{R}^n$ to $\mathcal{R}^m$; what vectors are
 mapped to 0?
 
-Use 'dim()' to indicate vector space dimension, and 'rank()' for matrix
+We will use 'dim()' to indicate vector space dimension, and 'rank()' for matrix
 rank. Following are a few important facts about these spaces.
 
 ::: {#thm-ranka}
@@ -50,7 +50,7 @@ $$
 :::
 
 ::: {.proof}
-
+Parallel to the column space proof below.
 :::
 
 ::: {#thm-colspacerank}
@@ -83,11 +83,13 @@ $\square$
 The $\mathcal{C}(A) \textrm{ and } \mathcal{N}(A)$ subspaces
 are closely related:
 
+(a)
+
 $$
 \mathcal{C}(A')^{\perp} = \mathcal{N}(A)
 $$
 
-and
+(b)
 
 $$
 dim(\mathcal{C}(A')) + dim(\mathcal{N}(A)) = n
@@ -122,11 +124,12 @@ $$
 where $a_i$ is row $i$ of $A$. Thus $w$ is orthogonal to the rows of
 $A$, thus to the row space of $A$. The latter is the column space of $A'$.
 Thus $\mathcal{N}(A)$ is a subset of $\mathcal{C}(A')^{\perp}$. This
-argument works exactly in reverse, so the first claim is established.
+argument works exactly in reverse, so claim (a) is established.
 
-The second claim follows from first forming an orthonormal basis
+Claim (b) follows from (a) by forming an orthonormal basis
 $q_1,...,q_r$ for $\mathcal{C}(A')$, then extending it to one for all of
-$\mathcal{R}^m$, $q_1,...,q_r,q_{r+1},...,m$.
+$\mathcal{R}^m$, $q_1,...,q_r,q_{r+1},...,q_m$. Claim (a) then implies
+that $q_{r+1},...,q_m$ is a basis for $\mathcal{N}(A)$.
 
 
 
