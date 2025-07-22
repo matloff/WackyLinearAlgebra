@@ -338,13 +338,7 @@ $$
 E(S|A) = A \beta
 $$
 
-[Suppose we *center* the "Y" variable and each "X" variable, i.e.  we
-subtract the variable's mean. It can be shown that this is equivalent to
-setting $\beta_0$ to 0; the rest of $\beta$ does not change. We then
-remove the column of 1s. By the way, the symbolism of the -1 term in our
-R code above is meant to allude to "minus," i.e. removing, the $\beta_0$
-term.]{.column-margin} Note the column of 1s, needed to pick up the
-$\beta_0$ term.
+Note the column of 1s, needed to pick up the $\beta_0$ term.
 
 As before $S$ is the vector of associated "Y" values.
 
@@ -726,12 +720,11 @@ binary variable, $Y = 0,1$.
 
 Note first that now
 
-$$
-E(Y|X=t) = 
-1 \cdot P(Y=1 | X=t) +
-0 \cdot P(Y=0 | X=t) =
-P(Y=1 | X=t)
-$$
+\begin{align}
+E(Y|X=t) &= 1 \cdot P(Y=1 | X=t) +
+0 \cdot P(Y=0 | X=t) \\
+&= P(Y=1 | X=t) \\
+\end{align}
 
 So the conditional mean now reduces to a conditional probability. This
 is very useful, e.g. finding the probability that a patient has a
@@ -808,6 +801,31 @@ $$
 However, I have never felt this is helpful. Why on Earth should we be
 interested in the log-odds value? And it detracts from the focus of
 logit modeling a probability, of central importance.
+
+## Centering and Scaling One's Data{#sec-ctrscl}
+
+You often hear data analysts speak of *centering and scaling* their
+data. What does mean, and why is useful?
+
+* Centering a variable means to subtract its mean. The new version now
+  has mean 0.
+
+* Scaling a variable means to divide by its standard deviation. The new
+  version now has standard deviation 1.0.
+
+Both operations make the variables more comparable, especially scaling.
+If say two predictor variables are of different sizes, say Height and
+Age in our baseball data above, it's hard to compare their
+$\widehat{\beta}_i$ values. Scaling them makes things more comparable.
+
+As to centering, this can reduce roundoff error in computations, and
+anyway it seems questionable to scale but not center.
+
+Note that if we center and scale not only the "X" variables but also
+"Y," it can be shown this is equivalent to setting a model without an
+intercept term $\beta_0$. This often simplifies matters in various ways.
+Note that in this setting, we do not include a 1s column in the $A$
+matrix.
 
 ## Your Turn
 

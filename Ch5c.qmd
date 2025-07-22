@@ -16,7 +16,8 @@ library(qeML)
 
 In the previous chapter, we introduced the norm of a vector. In many
 data science applications, solutions with smaller norms may be more
-accurate. This point is explored here.
+accurate. This led to the devlopment of two widely-used data analytic
+tools, as we will see here.
 
 :::
 ## Classic View of Shrinkage Estimators: Multicollinearity{#sec-nearly}
