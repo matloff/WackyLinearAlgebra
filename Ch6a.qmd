@@ -14,7 +14,7 @@ library(qeML)
 ## Goals of this chapter:
 
 The concept of eigenvalues and eigenvectors is one of the most important
-of all appplications of linear algebra to data science. We introduce the
+of all applications of linear algebra to data science. We introduce the
 basic ideas and properties in this chapter. 
 
 :::
@@ -70,16 +70,15 @@ $$
 where we have invoked @eq-acova.
 
 But that goal is ill-defined, since we could take larger and larger
-vectors $u$, thus larger and larger vectors $Xu$, no maximum.  So, let's
-constrain it to vectors $u$ of length 1:
+vectors $u$, thus larger and larger vectors $Xu$, no maximum variance.
+So, let's constrain it to vectors $u$ of length 1:
 
 $$
 u'u = 1
 $$
 
-The method of *Lagrange multipliers* is used to solve maximum/minimum
-problems that have constraints, by adding a new variable corresponding
-to the constraint. In our case, we maximize
+Let's use the method of Lagrange multipliers (@sec-lagrange).
+In our case, we maximize
 
 $$
 u'Cov(X)u + \gamma (u'u - 1)
@@ -109,7 +108,7 @@ world!
 Note too that from @eq-quadform,
 
 $$
-\textrm{maximal variance} = u' Cov(X) u = u' (-\gamma u = -\gamma
+\textrm{maximal variance} = u' Cov(X) u = u' (-\gamma u) = -\gamma
 $${#eq-maxvar}
 
 We will return to the notion of principal components in the next
