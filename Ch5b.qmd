@@ -732,7 +732,7 @@ case here.
 The basic assumption (BA) amounts to $(Y,X,S)$ having a multivariate
 Gaussian distribution, with $Y$ scalar and $X$ being a vector of length
 $p$.  For convenience, assume here that $S$ is scalar.  As discussed
-earlier in a sidebar in @sec-genset, all variables are assumed centered,
+earlier in @sec-ctrscl, all variables are assumed centered,
 by subtracting their means, so that they now have mean 0.
 
 Let's review the material in @sec-mvn: Say we have $W$ with a

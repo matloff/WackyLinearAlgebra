@@ -521,10 +521,14 @@ graph depicting the LASSO setting:
 
 Here $p = 2$, with $b = (b_1,b_2)'$. The horizontal and vertical axes
 represent $b_1$ and $b_2$. Which point in the graph will be the LASSO
-solution? Reason as follows.
+solution $(b_1,b_2)'=
+(\widehat{\beta}_{1,LASSO},
+ \widehat{\beta}_{2,LASSO})'$?
 
-* The constraint $||b||_1 \leq \gamma$ then takes the form of a diamond,
-  with corners at 
+Reason as follows.
+
+* The constraint $||b||_1 \leq \gamma$ then 
+takes the form of a diamond, with corners at 
   $(\gamma,0)$, 
   $(0,\gamma)$, 
   $(-\gamma,0)$ and
@@ -546,8 +550,9 @@ solution? Reason as follows.
   * Larger values of $c(b)$ yield larger ellipses.
 
   * By the way, the common center of these ellipses is the ordinary
-    (i.e. non-shrunken) least squares (OLS) solution $b_{OLS}$, and the
-    smallest ellipse has c(b) equal to the OLS sum of squares.
+    (i.e. non-shrunken) least squares (OLS) solution
+    $\widehat{\beta}_{OLS}$, and the smallest ellipse has c(b) equal to
+    the OLS sum of squares.
 
 * On the one hand, we want to choose a $b$ for which $c(b)$ -- our total
   squared prediction error -- is small, thus a smaller ellipse. 
@@ -564,7 +569,7 @@ solution? Reason as follows.
   which indeed hits the diamond at one of the corners.
 
 * Note that each of the four corners of the diamond represents a sparse
-  solution. For instance, the point $(0,\gamma)$ has $b_2 = 0$.
+  solution. For instance, the point $(0,\gamma)$ has $b_1 = 0$.
 
 * Then picture other ellipses, at other centers with other orientations,
   and go through the same process in your mind's eye. You will see that
@@ -577,7 +582,7 @@ solution? Reason as follows.
 
 ### Implication for dimension reduction.
 
-The key point is that that "barely touching" point 
+Again, the key point is that that "barely touching" point 
 will be one of the four corners of the diamond, points at which either
 $b_1 = 0$ or $b_2 = 0$ -- *hence a sparse solution*, meaning one in
 which many/most of the coefficients in the fitted model will be 0. This
@@ -692,7 +697,7 @@ root of the curve.
 
 ![root hunting](NewtonRaph.png)
 
-Some machine learning algorithm have a parameter called the *learning
+Some machine learning algorithms have a parameter called the *learning
 rate*, which is motivated by a concern that the process may overshoot
 the root, or converge to the wrong root.[Again, the desired root may
 arise in a minimum/maximum problem. There could be many local
@@ -723,7 +728,7 @@ well be that one's basic model is flawed.
 
 ## The Kernel Trick and Kernel Ridge Regression{#sec-kerneltrick}
 
-How about do you see a named trick in a math book? Well, there is indeed
+How often do you see a named trick in a math book? Well, there is indeed
 one here, one that is of great practical value.
 
 ### Polynomial Regression
@@ -793,10 +798,10 @@ bracketed expressions? The answer is that every major computation here
 is a dot product: 
 
 * In $x_{new} A'$, we are taking dot products of rows of $x_{new}$
-  and columns of $A'$.
+  and rows of $A$.
 
 * In $AA'$, we are taking dot products of rows of $A$
-  and columns of $A'$.
+  and rows of $A$.
 
 The idea of the Kernel Trick is to replace dot products by kernel
 computations. In computing $AA'$, for example, denote row $i$ of $A$

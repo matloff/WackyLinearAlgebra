@@ -827,6 +827,8 @@ intercept term $\beta_0$. This often simplifies matters in various ways.
 Note that in this setting, we do not include a 1s column in the $A$
 matrix.
 
+The R function **scale** does centering and/or scaling.
+
 ## Your Turn
 
 ❄️  **Your Turn:** Show @eq-dda. Write $a = (a_1,...,a_k)'$ and find the
