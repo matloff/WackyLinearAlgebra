@@ -182,20 +182,19 @@ $M$ are orthogonal.
 ::: {.proof}
 
 Let $u$ and $v$ be such eigenvectors, corresponding to
-eigenvalues $\mu$ and $\nu$.
+eigenvalues $\mu$ and $\nu$. Keeping mind that $M'=M$,
+$(ab)' = b'a'$ that the transpose of a number is just that number, 
+we calculate $u'Mv$ in two different ways.
 
 $$
-u' M u = (u' M u)' = u' M' u = u' M u
+u'Mv = u' \nu v = \nu u'v 
 $$
 
 $$
-u'v = (u'v)' = [u'(\frac{-1}{\nu} M v)]' = \frac{-1}{\nu}v'M'u =
-\frac{-1}{\nu}v'Mu =
-\frac{\mu}{\nu}v'u 
+(u'Mv)' = v'(u'M)' = v'Mu = \mu v'u = \mu u'v
 $$
 
-We see that $u'v$, a number, is equal to $\mu/\nu$ times itself, and
-since that fraction is not equal to 1 by assumption, $u'v$ must be 0
+So, $\mu u'v = \nu u'v$, forcing $u'v = 0$.
 
 $\square$
 
@@ -209,15 +208,17 @@ One application of this is the computation of powers of a diagonal
 matrix:
 
 $$
-R^k = (P^{-1}RP) ~ (P^{-1}RP) ~ ... ~ (P^{-1}RP) = P^{-1}D^kP
+R^k = (P^{-1}DP) ~ (P^{-1}DP) ~ ... ~ (P^{-1}DP) = P^{-1}D^kP
 $$
 
-$D^k$ is equal to the diagonal matrix with elements $d_k^k$, so the
-computation of $M^k$ is easy.
+since $PP^{-1} = I$.
+
+$D^k$ is equal to the diagonal matrix with elements $d_i^k$, so the
+computation of $R^k$ is easy.
 
 ::: {#thm-symmeig}
 
-Any symmetric matrix $M$ has the following properties
+Any symmetric matrix $M$ has the following properties:
 
 * $M$ is diagonalizable. 
 
@@ -244,17 +245,32 @@ Any symmetric matrix $M$ has the following properties
 Use partitioned matrices. 
 
 Let $D = diag(d_1,...,d_m)$, where the $d_i$ are the eigenvalues of $M$,
-corresponding to eigenvectors $P_i$. Set the latter to have length 1,
-by dividing by their lengths.  
+corresponding to the eigenvectors of $P$. Set these eigenvectors $u_i$ to
+have length 1, by dividing by their lengths.  
 
 Recall that the eigenvectors of $M$, i.e. the columns of $P$, are
-orthogonal. Again using partitioning, we see that 
+orthogonal. Again using partitioning, write $P$ as
 
 $$
-P'P = I
+P = (u_1 | ... | u_m)
 $$
 
-so that $P^{-1} = P'$.
+so that
+
+$$
+P'P = 
+ \left (
+ \begin{array}{r}
+ u_1' \\
+ ... \\
+ u_m' \\
+ \end{array}
+ \right )
+  (u_1 | ... | u_m)
+$$
+
+Then the row $i$, column $j$ element of $P'P$ is equal to either 1 or 0,
+according to whether $i=j$ or $i \neq j$.
 
 By the way, any square matrix $Q$ such that $Q'Q = I$ is said to be
 *orthogonal*. And, its inverse is its transpose.
@@ -262,7 +278,7 @@ By the way, any square matrix $Q$ such that $Q'Q = I$ is said to be
 Now use partitioning again:
 
 $$
-MP = M(P_1 | ... | P_m) = (MP_1 | ... | MP_n) =
+MP = M(u_1 | ... | u_m) = (Mu_1 | ... | Mu_n) =
 (d_1 P_1 | ... | (d_m P_m) = PD
 $$
 
@@ -295,11 +311,13 @@ its transpose. (For example, we can expand either across the top row or
 the leftmost row.) Then $\lambda$ also satisfies
 
 $$
-0 = \det[(A - \lambda I)'] = \det[(A' - \lambda I)']
+0 = \det[(A - \lambda I)'] = \det[(A' - \lambda I)]
 $$
 
 Thus $\lambda$ is also an eigenvalue of $A'$. This argument works in
-reverse, or just interchange the roles of $A$ and $A'$.
+reverse, or better, note the above shows that $A'$ has least the
+eigenvalues of $A$ -- and no more than that, since both have $n$
+eigenvalues.
 
 $\square$
 
