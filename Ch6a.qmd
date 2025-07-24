@@ -119,7 +119,7 @@ chapter, after laying the groundwork in the current chapter.
 The concept itself is simple:
 
 
-> Consider an $m \times  m$ matrix $M$. If there is a nonzero vector
+> Consider an $n \times  n$ matrix $M$. If there is a nonzero vector
 > $x$ and a number $\lambda$ such that
 > 
 > $$
@@ -146,38 +146,35 @@ Here are a few properties to start with:
   det(M - \lambda I) = 0
   $${#eq-chareqn}
 
-* The left-hand side of this equation is a polynomial in $\lambda$. So
-  for an $n \times  n$ matrix $M$, there are $n$ roots of the
-  equation and thus $n$ eigenvalues. Note that some roots may be
-  repeated; if $M$ is the zero matrix, it will have an eigenvalue $0$
+* As mentioned before, determinants can be defined in the form of
+  polynomials. Here the left-hand side of this equation is a polynomial
+  in $\lambda$. So for an $n \times  n$ matrix $M$, there are $n$ roots
+  of the equation and thus $n$ eigenvalues. Note that some roots may be
+  repeated; if $M$ is the zero matrix, say, it will have an eigenvalue $0$
   with multiplicity $n$.
 
 * In principle, that means we can solve the above determinant equation
-  to find the eigenvalues of the matrix, though There are much better
-  ways to calculate the eigenvalues than this, but a useful piece
-  information arising from that analysis is that $M$ as $m$ eigenvalues
-  (not necessarily distinct). 
+  to find the eigenvalues of the matrix. There are much better
+  ways to calculate the eigenvalues than this, though.
 
 ## The Special Case of Symmetric Matrices
 
-Many matrices in data science are symmetric, such as covariance matrices
-and $A'A$ in @eq-linregformula. 
-
 Some eigenvalues may be complex numbers, i.e. of the form $a+bi$, but it
 can be shown that if $M$ is symmetric, its eigenvalues are guaranteed to
-be real. This is good news for data science, as many matrices in that
-field are symmetric, such covariance matrices.
+be real. This is good news for Data Science, as many matrices in that
+field are symmetric, such as covariance matrices and $A'A$ in
+@eq-linregformula. 
 
 ::: {#thm-eigreal}
 
-Eigenvalues of a symmetric matrix are real, not complex numbers, i.e. not of
+The eigenvalues of a symmetric matrix are real, not complex numbers, i.e. not of
 the form $a+bi$.
 
 :::
 
 ::: {#thm-eigortho}
 
-Eigenvectors corresponding to distinct eigenvalues of a symmetric matrix
+The eigenvectors corresponding to distinct eigenvalues of a symmetric matrix
 $M$ are orthogonal.
 
 :::
