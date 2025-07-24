@@ -983,14 +983,14 @@ sizes $m \times n$ and $n \times k$, and consider the product
 $AB$. Partition $B$ by its columns,
 
 $$
-B = (B^{(1)},B^{(2)},..., B^{(k)})
+B = (B^{(1)}|B^{(2)}|...| B^{(k)})
 $$ 
 
 Now pretending that $A$ is a $1 \times 1$ "matrix" and $B$ is 
 a  $1 \times k$ "matrix", we have
 
 $$
-AB = (AB^{(1)},AB^{(2)},..., AB^{(k)})
+AB = (AB^{(1)}|AB^{(2)}|...| AB^{(k)})
 $$
 
 In other words, making use of @thm-lincombRows,
