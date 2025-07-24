@@ -532,13 +532,14 @@ When we derive confidence intervals in @sec-confsets, the distinction
 won't matter.  By @eq-iterexpect, a conditional confidence interval,
 say, at the 95% level also has that level
 unconditionally.]{.column-margin} $\widehat{\beta}$ is a random vector,
-and thus has a covariance matrix. Using @eq-acova and setting $R =
-(A'A)^{-1} A'$, we have
+and thus has a covariance matrix. Using @eq-acova with $R =
+(A'A)^{-1}$, and recalling the properties of transpose, we have
 
-$$
-Cov(\widehat{\beta}|A) = R Cov(S|A) R' = R \sigma^2 I R' = \sigma^2 R R' =
-\sigma^2 (A'A)^{-1}
-$${#eq-varcovar}
+\begin{align}
+Cov(\widehat{\beta}) &= Cov(RA'S) \\
+&= RA' \sigma^2 I AR' \\
+&= \sigma^2 (A'A)^{-1} 
+\end{align}
 
 Classical statistical formulas use this relation to find standard errors
 for $\widehat{\beta}_i$ etc., to be presented in @sec-confsets.
