@@ -146,7 +146,7 @@ $$
 Cov(U,V) = E(UV) - (EU) (EV)
 $${#eq-covuv} 
 
-### Covariance matrices
+### Covariance matrices{#sec-covmats}
 
 The above was a review of the notion of covariance between two scalar
 random variables. We now turn to defining covariance for a random
@@ -155,17 +155,29 @@ vector, which will turn out to be a matrix.
 The relations between the various components of a random vector $X$ are
 often characterized by the *covariance matrix* of $X$, whose entries
 consist of scalar covariances between pairs of components of a random
-vector.  [The notation is somewhat overloaded.  "Cov" refers both to the
-covariance between two random variables, say height and weight, and to
-the covariance matrix of a random vector. But it will always be clear
-from context which one is being discussed.  ]{.column-margin} It is
-defined as follows for a $k$-component random vector $X$. The
+vector.
+
+It is defined as follows for a $k$-component random vector $X$. The
 covariance matrix, denoted by $Cov(X)$, is a $k \times k$ matrix, and
 for $1 \leq i,j \leq k$, its row $i$, column $j$ element is
 
 $$
 Cov(X)_{ij} = Cov(X_i,X_j)
 $$
+
+**Warning:** The notation is somewhat overloaded.  "Cov" refers both to the
+covariance between two random variables, say height and weight, and to
+the covariance matrix of a random vector. But it will always be clear
+from context which one is being discussed. 
+
+The matrix expression for $Cov(X)$ is
+
+$$
+E[(X - EX)(X - EX)']
+$${#eq-matcov}
+
+where $EX$ is the mean vector for $X$, whose $i^{th}$ component is
+$E(X_i)$.
 
 As an example, here is data on major league baseball players:
 
