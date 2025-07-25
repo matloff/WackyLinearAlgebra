@@ -53,8 +53,8 @@ Examples:
   models (e.g. social networks) to motivate the notion of a matrix and
   matrix multiplication. An interest in finding the stationary
   distribution of a Markov chain then leads to the concept of matrix
-  inverses. (Linear models are presented later, after groundwork of matrix
-  rank is laid.) 
+  inverses. (Linear models are presented later, after some groundwork 
+  is laid.) 
 
 * The chapter on matrix rank starts with a dataset right off the bat, and
   shows that R's linear model function **lm** fails if categorical
