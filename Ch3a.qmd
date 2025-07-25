@@ -36,8 +36,11 @@ Loosely speaking, the term *standard error* of is our estimate of
 $\sqrt{Var(\widehat{\theta})}$.  More precisely, suppose that
 $\widehat{\theta}$ is asymptotically normal.  The standard error is an
 estimate of the standard deviation of that normal distribution. For
-this reason, It is customary to write $AVar(\widehat{\theta})$ 
-rather than $Var(\widehat{\theta})$.
+this reason, it is customary to write $AVar(\widehat{\theta})$ 
+rather than $Var(\widehat{\theta})$. Similarly we use $ACov$ rather than $Cov$.
+[Recall the Warning in @sec-covmats. Just as Cov can mean either the
+covariance between two random variables or the covariance matrix of a
+random vector, the analogous statement holds for ACov.]{.column-margin}
 
 This can be used to form a confidence interval (see below), but 
 also stands on its own as an indication of the accuracy of 
@@ -68,19 +71,22 @@ $${#eq-pmse}
 ::: {.callout-important}
 ## Note Regarding Sensitivity of Phrasing
 
-There is a bit of drama in this word "contain" in the phrase "will
+There is a bit of drama in this word *contain* in the phrase "will
 contain $\theta$." Instead of saying the intervals *contain* $\theta$,
 why not simply say $\theta$ is *in* the intervals? Aren't these two
-descriptions equivalent in terms of English?  Of course they are. But
-many instructors of statistics classes worry that students will take the
-description based on "in" to mean that $\theta$ is the random quantity, when in
-fact the CI is random (random center, random radius) and $\theta$ is
-fixed (though unknown). The instructors thus insist on the more awkward
-phrasing "contain," so as to avoid students misunderstanding. Indeed some
-instructors would contend that use of the word *in* is itself just plain
-incorrect. My own view is that in some cases the word *in* is clearer
-(and certainly correct in any case), and that it is better to add a
-warning about what is random/nonrandom than engage in awkward phrasing.
+descriptions equivalent in terms of English?  Of course they are. 
+
+But many instructors of statistics classes worry that students will take
+the description based on "in" to mean that $\theta$ is the random
+quantity, when in fact the CI is random (random center, random radius)
+and $\theta$ is fixed (though unknown). The instructors thus insist on
+the more awkward phrasing "contain," so as to avoid students
+misunderstanding. Indeed some instructors would contend that use of the
+word *in* is itself just plain incorrect. 
+
+My own view is that in some cases the word *in* is clearer (and
+certainly correct in any case), and that it is better to add a warning
+about what is random/nonrandom than engage in awkward phrasing.
 
 :::
 
@@ -94,13 +100,13 @@ Due to the Multivariate Central Limit Theorem, many common statistical
 estimators have approximately normal distributions.  In R, functions
 such as **lm**, **glm**, **lme** and **coxph** come with an associated
 function **vcov**. This gives the approximate covariance matrix of the
-computed estimator, e.g. for the estimated coefficients vector in a
+computed estimator, e.g. for the estimated beta coefficients vector in a
 linear model. This enables formation of approximate confidence intervals
 for not only individual model parameters but also linear combinations of
 them, as well as computing other quantities related to confidence sets.
 [The **vcov** function is an R *generic* function, playing a similar
 role to **print**, **plot**, **summary** and so on. Many R statistical
-functions have this for their output, including **lm**. When we make the
+functions have this for their output, including say **glm**. When we make the
 call **vcov(glmOut)**, the R interpreter sees that **glmOut** is of
 class "glm" and thus transfers the call to the class-specific function,
 **vcov.glm(glmOut)**.  The function **coef**, also used here, is also
@@ -108,8 +114,9 @@ generic.]{.column-margin}
 
 ### Example: Iranian churn data
 
-Here we predict whether a telecom customer will move to another
-provider. We obtain $AVar(\widehat{\beta})$ using the **vcov** function:
+Here we use a logistic mode to predict whether a telecom customer will
+move to another provider. We obtain $AVar(\widehat{\beta})$ using the
+**vcov** function:
 
 
 ```{r}
@@ -190,7 +197,7 @@ and $\log'(t) = 1/t$ and so on.
 
 The key point is that as n grows, $\bar{X}-\mu$ goes to 0, and
 $(\bar{X}-\mu)^2$ goes to 0 even faster. Using theorems from probability
-theory, one can show that, in the sense of distribution, 
+theory, one can show that, *in the sense of distribution*, 
 
 $$
 W \approx log(\mu) + log'(\mu) (\bar{X}-\mu)
@@ -200,13 +207,15 @@ The right-hand side is a linear function of $\overline{X}$. The latter
 is asymptotically normal by the Central Limit Theorem, and thus the
 linear function $W$ is also asymptotically normal.
 
-
-In other words, $W$ has an approximate normal distribution that
-has mean $log(\mu)$ and variance
+[Note the wording. The distribution of $W$ is close to a normal
+distribution, but mean and variance formulas here apply to that latter
+distribution, *not* that of $W$. For example, $E(W)$ could be far from
+@eq-eofnormal.]{.column-margin} In other words, $W$ has an approximate
+normal distribution that has mean $log(\mu)$ and variance
 
 $$
 \frac{1}{\mu^2} \sigma^2/n
-$$
+$${#eq-eofnormal}
 
 where $\sigma^2$ is the population variance $Var(X)$ . We estimate the
 latter by the usual $S^2$ quantity, and thus have our standard error,
@@ -221,8 +230,10 @@ Now, what if the function $f$ has two arguments instead of one? The
 above linear approximation is now
 
 $$
-f(v,w) \approx f(v_0,w_0) + f_1(v_0,w_0) (v-v_0) + f_2(v_0,w_0)(w-w_0)
-$${#eq-twotaylor}
+f(v,w) \approx f(v_0,w_0) 
++ f_1(v_0,w_0) (v-v_0) 
++ f_2(v_0,w_0)(w-w_0)
+$${#eq-taylor}
 
 where $f_1$ and $f_2$ are partial derivatives,[A *partial derivative* of
 a function of more than one variable is the derivative with respect to
@@ -243,8 +254,7 @@ $(\alpha,\beta)'$ by $(Q,R)'$, standard error of the latter is
 the square root of
 
 \begin{align}
-f_1^2 (Q,R) AVar(Q) &+ \\
-f_2^2 (Q,R) AVar(R) 
+f_1^2 (Q,R) AVar(Q) &+ f_2^2 (Q,R) AVar(R) \\ 
 &+ 2 f_1(Q,R) f_2(Q,R) ACov(Q,R)
 \end{align}
 
@@ -264,7 +274,7 @@ f_2 (v_0,w_0) \\
 \right )
 $$
 
-so that @eq-twotaylor can be written as
+so that our above Taylor series @eq-taylor can be written as
 
 $$
 f(v,w) \approx f(v_0,w_0) + (\nabla f)' 
@@ -284,7 +294,7 @@ $$
 AVar[f(Q,R)] = (\nabla f)' ACov(Q,R) (\nabla f)
 $${#eq-deltaquad}
 
-where 'ACov' means the asymptotic covariance matrix of the vector
+Here 'ACov' means the asymptotic covariance matrix of the vector
 
 $$
 W =
@@ -379,7 +389,7 @@ Thus we will need $AVar(\bar{D})$, $AVar(\bar{M})$ and $ACov(\bar{D},\bar{M})$.
 These quantities are exact, not asymptotic, so we can simplify our
 notation, e.g. changing  $AVar(\bar{M})$ to $Var(\bar{M})$.
 
-Be sure to distinguish between similar quantities. For example:
+Be sure to distinguish between population and sample  quantities. For example:
 
 * $Var(M)$ measures how $M$ varies across all individuals in the
   population,
@@ -396,8 +406,17 @@ Be sure to distinguish between similar quantities. For example:
   \sum_{i=1}^n (M_i - \bar{M})^2 
   $$
 
+  which measures how much $M$ varies in our sample. Similarly,
+
+  $$
+  E[(D - ED)^2]
+  $$
+
+  measures how much $D$ varies in our sample, and so on.
+
 * $Var(\bar{M})$ measures how $\bar{M}$ varies across all size-$n$ 
-  samples in the population.
+  samples in the population. 
+
 
 * We know from statistics that
 
@@ -406,10 +425,10 @@ Be sure to distinguish between similar quantities. For example:
   $$ 
 
   Similar properties hold for $Var(\bar{D})$ and 
-  $Cov(\bar{D},\bar{M})$.
+  $Cov(\bar{D},\bar{M})$:
 
 In other words, we obtain the needed covariance matrix of
-@eq-covdm as
+@eq-covdm via the sample analog of @eq-matcov as
 
 $$
 \frac{1}{n^2} \sum_{i=1}^n (W_i -\bar{W})  (W_i -\bar{W})'
@@ -444,7 +463,7 @@ n <- length(m)
 sigma <- (1/n) * cov(cbind(m,d))
 se <- sqrt(t(fDel) %*% sigma %*% fDel)
 se
-meanmd <-meanm / meand
+meanmd <- meanm / meand
 meanmd
 c(meanmd - 1.96*se, meanmd + 1.96*se)
 ```
@@ -464,7 +483,7 @@ f'(x) = \lim_{w \rightarrow 0}
 \frac{f(x+w) - f(x)}{w}
 $$
 
-So an aproximate value of $f'(x)$ is obtained by choosing some small
+So an approximate value of $f'(x)$ is obtained by choosing some small
 value of $w$ and evaluating 
 
 $$
@@ -518,11 +537,9 @@ $$
 
 In the case $k=2$, the set of all $t = (t_1,...,t_k)'$ such that
 
-$$
-(t-\mu)' \Sigma^{-1} (t-\mu) = d_{\alpha}
-$$
+$$ (t-\mu)' \Sigma^{-1} (t-\mu) = d_{\alpha} $$
 
-is an ellipse. (If $\Sigma = I$, we have a circle.) For $k=3$ we have an
+is an ellipse in the $t_1,t_2$ plane. (If $\Sigma = I$, we have a circle.) For $k=3$ we have an
 ellipsoid, a "football," and so on in higher dimensions..  
 
 [We will use the linear model here for concretenss, but the same
@@ -595,15 +612,13 @@ subject to the constraint.
 
 $$
 3x + y = 8
-$$ {#eq-constraint}
+$$ 
 
 We form the expression
 
 $$
 x^2 + 2y^2 + \lambda (3x + y - 8)
 $$
-
-xxx
 
 and take partial derivatives with respect to $x$, $y$ and $\lambda$:
 
@@ -625,7 +640,7 @@ $$
 0 = 2x - 12y
 $$
 
-Substituting into @eq-constraint, we find that 
+Substituting, we find that 
 
 $$
 y = \frac{8}{19}
@@ -653,7 +668,14 @@ inside the ellipsoid, say to the point $u$, yet with $a'u$ either larger
 or smaller that $a'q$, depending on the direction we move in. So the min
 or max cannot be in the interior.]{.column-margin} To find a CI for
 $a'\beta$, we find its maximum and minimum values subject to $\beta$ being
-in the ellipsoid. In other words, we solve the Lagrange multiplier problem
+in the ellipsoid, i.e. subject to the constraint
+
+$$
+(\beta-\widehat{\beta})' \widehat{\Sigma}^{-1} (\beta-\widehat{\beta}) = 
+d_{\alpha}
+$${#eq-constraint}
+
+In other words, we solve the Lagrange multiplier problem
 
 $$
 min, max_{\beta, \lambda} ~~
@@ -681,7 +703,8 @@ $$
 \widehat{\Sigma} a
 $${#eq-sothat}
 
-Now substitute for $\beta - \widehat{\beta}$ in the constraint:
+Now substitute for $\beta - \widehat{\beta}$ in the constraint
+@eq-constraint:
 
 $$
 d_{\alpha} = 
