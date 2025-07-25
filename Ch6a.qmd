@@ -339,7 +339,7 @@ svc <- svcensus[,c(1,4:6)]
 svc$man <- as.numeric(svc$gender == 'male')
 svc$woman <- as.numeric(svc$gender == 'female')
 svc$gender <- NULL
-a <- as.matrix(svc[,-2])
+a <- as.matrix(svc[,-2]) # look at "X" only, not "Y"
 a <- cbind(1,a)  # add the column of 1s
 m <- t(a) %*% a
 eigs <- eigen(m)
