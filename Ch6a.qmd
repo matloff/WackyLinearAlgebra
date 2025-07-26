@@ -277,10 +277,12 @@ By the way, any square matrix $Q$ such that $Q'Q = I$ is said to be
 
 Now use partitioning again:
 
-$$
-MP = M(u_1 | ... | u_m) = (Mu_1 | ... | Mu_n) =
-(d_1 P_1 | ... | (d_m P_m) = PD
-$$
+\begin{align}
+MP &= M(u_1 | ... | u_m) \\
+&= (Mu_1 | ... | Mu_n) \\
+&= (d_1 P_1 | ... | (d_m P_m) \\
+&= PD
+\end{align}
 
 Multiply on the left by $P'$, and we are done:
 
@@ -370,7 +372,8 @@ Ax \approx 0
 $$
 
 and since $Ax$ is a linear combination of the columns of $A$,
-we thus we have found multicollinearity in $A$.
+we thus we have found multicollinearity in $A$, flagged by the presence
+of a small eigenvalue..
 
 One often sees use of the *condition number* of a matrix, which is the
 ratio of the largest eigenvalue to the smallest one. This too might be
@@ -392,13 +395,17 @@ crc <- as.matrix(crc)
 crcapa <- t(crc) %*% crc
 eigs <- eigen(crcapa)
 eigs
-# illustrate Ax = lambda x
+
+# that last eigenvalue is much smaller than the others
+
+# illustrate Ax = lambda x approx 0
 crcapa %*% eigs$vectors[,5]
 eigs$values[5] *  eigs$vectors[,5] 
 # is Ax small?
 head(crcapa)
 ```
 
+The value for the franc is much smaller than the others.
 So yes, this dataset has some multicollinearity.
 
 ## Computation: the Power Method
@@ -411,8 +418,11 @@ $$
 x_1 = M x_0
 $$
 
-We keep iterating until convergence, generating $x_2$ from $x_1$ and so
-on. However, the $x_i$ may grow, so we normalize to length 1:
+We keep iterating, generating $x_2$ from $x_1$,, generating $x_3$ from
+$x_2$ and so on.  until convergence, meaning that $x_{i+1}$ and $x_i$ do
+not differ much from each other.
+
+However, the $x_i$ may grow, so we normalize to length 1:
 
 $$
 x_i \leftarrow \frac{x_i}{||x_i||}
@@ -429,8 +439,8 @@ $$
 To see this, simply substitute $Ax$ in the numerator by $\lambda x$.
 
 It can be shown that the above iterative process yields the maximal eigenvalue
-of $A$.
-
+of $A$. But what about the rest of the eigenvalues? This is achieved via 
+*deflation* techniques, which we will not present here.
 
 ## Application: Computation of Long-Run Distribution in Markov Chains
 
@@ -442,11 +452,6 @@ PageRank, there is a Markov state for every page on the Web!
 Instead, we exploit the fact that @eq-MarkovPi says that the transition
 matrix has an eigenvector $\nu$ with eigenvalue 1.  Due to the typical
 huge size of the matrix, the power method or a variant is often used.
-
-## Eigenanalysis of Nonsquare Matrices
-
-What if the matrix $M$ is not square, as we have assumed above? It turns
-out that it is still useful to define eigenvalues
 
 ## Your Turn
 
