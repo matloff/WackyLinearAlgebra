@@ -52,7 +52,14 @@ that we will develop in the current chapter.
 ### The first PC{#sec-firstPC}
 
 Let **X** denote a set of variables of interest (not necessarily in a
-prediction context).  In searching for good linear combinations, we want
+prediction context). For concreteness, consider the **mtcars** dataset
+that comes with R.
+
+```{r}
+head(mtcars)
+```
+
+In searching for good linear combinations $Xu$, we want
 to aim for ones with high variance. We certainly don't want ones with
 low variance; after all, a random variable with 0 variance is a
 constant.  So we wish to find linear combinations 

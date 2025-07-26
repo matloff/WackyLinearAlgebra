@@ -27,16 +27,23 @@ basically an eigenvectors and eigenvalues application.
 
 ## The Second, Third Etc. PCs
 
-Say we have a dataset $X$ in matrix form.  There are as many principal
+Say we have a dataset $X$ in matrix form, again using the **mtcars**
+data for concreteness.
+
+```{r}
+head(mtcars)
+```
+
+There are as many principal
 components as there are columns in $X$. We derived the first PC in
-@secfirstPC.  So, how are the second, third and so on components defined
+@sec-firstPC.  So, how are the second, third and so on components defined
 and computed?
 
 The key issue is that we want our PCs to be orthogonal, because as we
-have seen orthogonal random vectors are statistically uncorrelated, and
+have seen, orthogonal random vectors are statistically uncorrelated, and
 independent in the multivariate normal case. So if we summarize our data
 with say, the first few PCs, the fact that they are uncorrelated makes
-for a neater summary.
+for a neater summary, in a sense no duplication.
 
 So with $u$ and $v$ denoting the first and second PCs, we want $v$ 
 to maximize $v'Cov(X)v$, so we set the derivative of
@@ -45,7 +52,8 @@ $$
 v'Cov(X)v + \omega (v'v - 1) + \tau (u'v - 0)
 $$
 
-with respect to $v$ to 0. 
+with respect to $v$ to 0. (Note the two Lagrange variables, $\omega$ and
+$\tau$.)
 
 $$
 0 = 2 Cov(X) v + 2 \omega v + \tau u 
@@ -54,16 +62,20 @@ $${#eq-eig2a}
 Pre-multiply by $u'$:
 
 $$
-0 = 2 u' Cov(X) v + 2 \omega u'v + \tau u'u = 2 u' Cov(X) v + \tau 1
+\begin{aligned}
+0 &= 2 u' Cov(X) v + 2 \omega u'v + \tau u'u \\
+&= 2 u' Cov(X) v + \tau 
+\end{aligned}
 $${#eq-eig2b}
 
 Also, since $Cov(X)$ is symmetric and $u$ is an eigenvector of $Cov(X)$,
+say with eigenvalue $\gamma$,
 
 $$
 u' Cov(X) v = [Cov(X) u]' v = \gamma u' v = 0
-$$
+$${#eq-eig2c}
 
-So @eq-eig2b now tells us that $\tau = 0$, and thus @eq-eig2a 
+So @eq-eig2b and @eq-eig2c now tell us that $\tau = 0$, and thus @eq-eig2a 
 reduces to
 
 $$
@@ -109,11 +121,12 @@ The principle components have the following properties:
 ## Eigenanalysis Relation between $A$ and $Cov(X)$ in Linear Regression{#sec-eiglm}
 
 Consider our usual linear regression setting, in which the matrix $A$
-contains the data for our predictor variables $X$.  If we center and
-scale our data, then 
+contains the data for our predictor variables $X$. Say we are in the
+*random-X* setting discussed in @sec-varbhat.  If we center and scale
+our data, then 
 
 $$
-Cov(X) = A'A 
+\frac{1}{n} \widehat{Cov}(X) = A'A 
 $$
 
 To see an example of the implications of this, say the PCA of X has a 0

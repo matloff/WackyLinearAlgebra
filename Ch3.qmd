@@ -528,14 +528,14 @@ handy, as follows.
 
 Recall that $\widehat{\beta}$ is our estimate of the unknown population
 parameter $\beta$, based on our random sample data. But that means that
-[In some applications, $A$ is actually chosen by an experimenter, so
-that it is not random, the so-called *fixed-X* setting. But even in the
-random case (*random-X* setting), it is standard to condition on $A$.
-When we derive confidence intervals in @sec-confsets, the distinction
-won't matter.  By @eq-iterexpect, a conditional confidence interval,
-say, at the 95% level also has that level
-unconditionally.]{.column-margin} $\widehat{\beta}$ is a random vector,
-and thus has a covariance matrix. Using @eq-acova with $R =
+[Fixed-X vs. random-X settings: In some applications, $A$ is actually
+chosen by an experimenter, so that it is not random, the so-called
+*fixed-X* setting. But even in the random case (*random-X* setting), it
+is standard to condition on $A$.  When we derive confidence intervals in
+@sec-confsets, the distinction won't matter.  By @eq-iterexpect, a
+conditional confidence interval, say, at the 95% level also has that
+level unconditionally.]{.column-margin} $\widehat{\beta}$ is a random
+vector, and thus has a covariance matrix. Using @eq-acova with $R =
 (A'A)^{-1}$, and recalling the properties of transpose, we have
 
 \begin{align}
