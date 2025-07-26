@@ -504,15 +504,15 @@ In analyzing the Iranian Churn data above, we might form many CIs, each
 at the 0.95 level. However, we may wish to set an *overall* level to at
 least 0.95, meaning that the probability that at least one of the CIs
 fails to contain the desired population value is at most 0.05. This
-concept is known as *multiple inference*,  *simultaneous inference*
-or *multiple comparisons*.
+concept is variously known as *multiple inference*,  *simultaneous
+inference* or *multiple comparisons*.
 
 
-Whether to do this is a philosphical question, and the answer will
-depend on one's goals and personal preferences, or possibly due to
-requirements of a research journal or employer. If we do wish to pursue
-the matter, then how? One of the most well-known approaches makes good
-use of linear algebra.
+Whether to do this is a philosophical question, and the answer will
+depend on one's goals and personal preferences, or may possibly be due
+to requirements of a research journal or employer. If we do wish to
+pursue the matter, then how? One of the most well-known approaches makes
+good use of linear algebra.
 
 ### A confidence set for $\widehat{\beta}$ in the linear model
 
@@ -539,7 +539,7 @@ In the case $k=2$, the set of all $t = (t_1,...,t_k)'$ such that
 
 $$ (t-\mu)' \Sigma^{-1} (t-\mu) = d_{\alpha} $$
 
-is an ellipse in the $t_1,t_2$ plane. (If $\Sigma = I$, we have a circle.) For $k=3$ we have an
+is an ellipse in the $(t_1,t_2)$ plane. (If $\Sigma = I$, we have a circle.) For $k=3$ we have an
 ellipsoid, a "football," and so on in higher dimensions..  
 
 [We will use the linear model here for concretenss, but the same
@@ -588,7 +588,7 @@ By the way, note that the smaller $\alpha$ is, the larger will be the
 value of $d_{\alpha}$, thus the larger the ellipse. The reader should
 pause to confirm that this makes sense.
 
-However, this is but an itermediate step toward our goal of a multiple
+However, this is but an intermediate step toward our goal of a multiple
 inference method. Our next step will be to set up a math tool.
 
 ### Lagrange multipliers {#sec-lagrange}
