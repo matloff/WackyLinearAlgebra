@@ -25,6 +25,30 @@ finding an eigenvector and eigenvalue.  It turns out that this is true
 for the second, third and all the components. In other words, PCA is
 basically an eigenvectors and eigenvalues application.
 
+## Review:  Random-X Model
+
+In a sidebar in @sec-varbhat, we introduced the notion of *fixed-X*
+versus *random-X* regression models. In the former case, the "X" data
+has been chosen beforehand by the analyst, and thus is nonrandom. In the
+random-X case, the "X" and "Y" are considered to be a sample from some
+population, which will be our context here.
+
+As our concrete example, let's once again consider the census data
+(@sec-svcensus).
+
+```{r}
+library(WackyData)
+data(svcensus)
+head(svcensus)
+```
+
+Convert the categorical variables to dummies.
+
+```{r}
+svc <- regtools::factorsToDummies(svcensus)  # loaded by qeML
+head(svc)
+```
+
 ## The Second, Third Etc. PCs
 
 Say we have a dataset $X$ in matrix form, again using the **mtcars**

@@ -760,7 +760,7 @@ Least-squares computation doesn't work here, though some modifications
 do, e.g. *Iteratively Reweighted Least Squares*. This topic is beyond
 the scope of this book.
 
-### Example: census data
+### Example: census data{#sec-svcensus}
 
 This is data for Silicon Valley programmers and engineers in the 2000
 Census.

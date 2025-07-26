@@ -432,7 +432,7 @@ In other words, we obtain the needed covariance matrix of
 
 $$
 \frac{1}{n^2} \sum_{i=1}^n (W_i -\bar{W})  (W_i -\bar{W})'
-$$
+$${#eq-covmatest}
 
 where 
 
