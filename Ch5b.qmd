@@ -114,13 +114,11 @@ a nonzero contribution to the integral and thus to the inner product.
 
 $\cal RV(\Omega)$:
 
-[We need to restrict attention to this subspace, in order to meet
-the requirement that $<U,U> = 0$ if and only if $U = 0$. Otherwise, any
-constant random variable would violate that condition. To avoid bringing
-in yet another symbol for the subspace, let's redefine $\cal RV(\Omega)$
-to consist only of mean-0 random variables.]{.column-margin}
-We will focus on the subspace of random variables that have mean 0, and
-take covariance as our inner product:
+[We need to restrict attention to this subspace, in order to meet the
+requirement that $<U,U> = 0$ if and only if $U = 0$. Otherwise, any
+constant random variable would violate that condition.]{.column-margin}
+We will focus on the subspace $\cal RV(\Omega)_0$ of random variables
+that have mean 0, and take covariance as our inner product:
 
 $$
 <U,V> = Cov(U,V) = E[(U - EU) (V - EV)] = E(UV)
@@ -190,7 +188,7 @@ By dividing the covariance by the product of the standard deviations, we
 obtain a unitless quantity, i.e. free of units such as centimeters and
 degrees.
 
-Now, say $X$ and $Y$ are in $\cal RV(\Omega)$.  Recalling our inner
+Now, say $X$ and $Y$ are in $\cal RV(\Omega)_0$.  Recalling our inner
 product for this space, we have
 
 $$
@@ -535,30 +533,33 @@ chosen to be orthonormal.
 Finally, we say that $V$ is the *direct sum* of $W$ and $W^{\perp}$,
 denoted $V = W \oplus W^{\perp}$.
 
-## Projections in $\cal RV(\Omega)$
+## Projections in $\cal RV(\Omega)_0$
 
 Here is a good example of how a very abstract vector space becomes
 useful in practical applications, such as will be presented in
 @sec-fairness. The material is rather involved, consisting of
-computation of various probabilistic quantities. Since $\cal RV(\Omega)$
+computation of various probabilistic quantities. Since $\cal
+RV(\Omega)_0$
 is a vector space of random variables, each entity is both a random
 variable and a vector. Sometimes the latter will be the focus, sometimes
 the former.  We request the reader's patience in following this duality.
 
-Here is an important example:
+Here is an important example, relating the probabilistic notion of
+covariance to the concept of inner product spaces:
 
 ::: {.callout-note}
 ## Orthogonality and Uncorrelatedness
 
-Recall that correlation is the quotient of covariance and the product of
-standard deviations. Thus random variables $U$ and $V$ are uncorrelated
-if and only if they are orthogonal in $\cal RV(\Omega)$.
+Recall from @eq-rhodef that correlation is the quotient of covariance
+and the product of standard deviations. Thus random variables $U$ and
+$V$ in $\cal RV(\Omega)_0$.  are uncorrelated if and only if they are
+orthogonal as vectors. 
 
 :::
 
 ### Conditional expectation
 
-It will turn out that in $\cal RV(\Omega)$, projections take the form
+It will turn out that in $\cal RV(\Omega)_0$, projections take the form
 of conditional means. Let's see how that arises. 
 
 One of the Your Turn problems at the end of this chapter covers this
@@ -657,9 +658,9 @@ Note, though that that outer $E()$ (the first 'E') is a weighted
 average, since some departments are larger than others. The weights are
 the distribution of $D$.
 
-### Projections in $\cal RV(\Omega)$: how they work{#sec-howtheywork}
+### Projections in $\cal RV(\Omega)_0$: how they work{#sec-howtheywork}
 
-Consider random variables $X$ and $Y$ in $\cal RV(\Omega)$, and consider
+Consider random variables $X$ and $Y$ in $\cal RV(\Omega)_0$, and consider
 the subspace $W$ consisting of all functions of $X$. (By definition,
 this means that each such function, say $g(X)$, has finite variance and
 mean 0.)
@@ -692,7 +693,7 @@ $$
 
 In other words:
 
-> Projections in $\cal RV(\Omega)$ take the form of conditional means.
+> Projections in $\cal RV(\Omega)_0$ take the form of conditional means.
 > Here, the projection of $Y$ onto $W$ is $E(Y | X)$.
 > 
 > Moreover:
@@ -893,7 +894,7 @@ independent.
 ❄️  **Your Turn:** Prove that the vector $Y - E(Y|X)$ is uncorrelated
 with $E(Y|X)$
 
-❄️  **Your Turn:** For $X$ and $Y$ in $\cal RV(\Omega$, prove that
+❄️  **Your Turn:** For $X$ and $Y$ in $\cal RV(\Omega)_0$, prove that
 
 $$
 Var(Y) = E[Var(Y|X)] + Var[E(Y|X)],
@@ -905,7 +906,7 @@ quicker proof.  As before, assume $X$ and $Y$ are centered.
 
 ❄️  **Your turn:** Show that @eq-hii holds. 
 
-❄️  **Your Turn:** Consider the space $\cal RV(\Omega)$. In order for the
+❄️  **Your Turn:** Consider the space $\cal RV(\Omega)_0$. In order for the
 claimed inner product to be valid, we must have that if $<X,X> = 0$,
 then $X$ must be the 0 vector. Prove this. 
 
