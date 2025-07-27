@@ -121,11 +121,12 @@ The principal components have the following properties:
 
 Consider our usual linear regression setting, in which the matrix $A$
 contains the data for our predictor variables $X$. Say we are in the
-*random-X* setting discussed in @sec-varbhat.  If we center and scale
-our data, then 
+*random-X* setting discussed in @sec-varbhat.  If we center our data
+(subtract from each column the mean of that column), then 
 
 $$
-\frac{1}{n} \widehat{Cov}(X) = A'A 
+\widehat{Cov}(X) 
+= \frac{1}{n} A'A 
 $$
 
 To see an example of the implications of this, say the PCA of X has a 0
