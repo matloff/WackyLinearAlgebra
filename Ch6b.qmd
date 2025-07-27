@@ -25,105 +25,80 @@ finding an eigenvector and eigenvalue.  It turns out that this is true
 for the second, third and all the components. In other words, PCA is
 basically an eigenvectors and eigenvalues application.
 
-## Review:  Random-X Model
-
-In a sidebar in @sec-varbhat, we introduced the notion of *fixed-X*
-versus *random-X* regression models. In the former case, the "X" data
-has been chosen beforehand by the analyst, and thus is nonrandom. In the
-random-X case, the "X" and "Y" are considered to be a sample from some
-population, which will be our context here.
-
-As our concrete example, let's once again consider the census data
-(@sec-svcensus).
-
-```{r}
-library(WackyData)
-data(svcensus)
-head(svcensus)
-```
-
-Convert the categorical variables to dummies.
-
-```{r}
-svc <- regtools::factorsToDummies(svcensus)  # loaded by qeML
-head(svc)
-```
-
 ## The Second, Third Etc. PCs
 
-Say we have a dataset $X$ in matrix form, again using the **mtcars**
+Say we have a dataset $Q$ in matrix form, again using the **mtcars**
 data for concreteness.
 
 ```{r}
 head(mtcars)
 ```
 
-There are as many principal
-components as there are columns in $X$. We derived the first PC in
-@sec-firstPC.  So, how are the second, third and so on components defined
-and computed?
+There are as many principal components as there are columns in $Q$. We
+derived the first PC in @sec-firstPC.  So, how are the second, third and
+so on components defined and computed?
 
-The key issue is that we want our PCs to be orthogonal, because as we
-have seen, orthogonal random vectors are statistically uncorrelated, and
-independent in the multivariate normal case. So if we summarize our data
-with say, the first few PCs, the fact that they are uncorrelated makes
-for a neater summary, in a sense no duplication.
+The key issue is that we want our PCs to be orthogonal vectors, because
+as we have seen, orthogonal random vectors are statistically
+uncorrelated, and independent in the multivariate normal case. So if we
+summarize our data with say, the first few PCs, the fact that they are
+uncorrelated makes for a neater summary, in a sense no duplication.
 
 So with $u$ and $v$ denoting the first and second PCs, we want $v$ 
-to maximize $v'Cov(X)v$, so we set the derivative of
+to maximize $v'Cov(Q)v$, so we set the derivative of
 
 $$
-v'Cov(X)v + \omega (v'v - 1) + \tau (u'v - 0)
+v'Cov(Q)v + \omega (v'v - 1) + \tau (u'v - 0)
 $$
 
 with respect to $v$ to 0. (Note the two Lagrange variables, $\omega$ and
 $\tau$.)
 
 $$
-0 = 2 Cov(X) v + 2 \omega v + \tau u 
+0 = 2 Cov(Q) v + 2 \omega v + \tau u 
 $${#eq-eig2a}
 
 Pre-multiply by $u'$:
 
 $$
 \begin{aligned}
-0 &= 2 u' Cov(X) v + 2 \omega u'v + \tau u'u \\
-&= 2 u' Cov(X) v + \tau 
+0 &= 2 u' Cov(Q) v + 2 \omega u'v + \tau u'u \\
+&= 2 u' Cov(Q) v + \tau 
 \end{aligned}
 $${#eq-eig2b}
 
-Also, since $Cov(X)$ is symmetric and $u$ is an eigenvector of $Cov(X)$,
+Also, since $Cov(Q)$ is symmetric and $u$ is an eigenvector of $Cov(Q)$,
 say with eigenvalue $\gamma$,
 
 $$
-u' Cov(X) v = [Cov(X) u]' v = \gamma u' v = 0
+u' Cov(Q) v = [Cov(Q) u]' v = \gamma u' v = 0
 $${#eq-eig2c}
 
 So @eq-eig2b and @eq-eig2c now tell us that $\tau = 0$, and thus @eq-eig2a 
 reduces to
 
 $$
-Cov(X) v = -\omega v 
+Cov(Q) v = -\omega v 
 $${#eq-eig2c}
 
-showing that the second PC is again an eigenvector of $Cov(X)$.
+showing that the second PC is again an eigenvector of $Cov(Q)$.
 @eq-maxvar then says that $-\omega$ is the corresponding variance.
 
 The story is the same for the remaining PCs. We thus have:
 
 ::: {#thm-thestory}
 
-The principle components have the following properties:
+The principal components have the following properties:
 
 * They are orthogonal to each other.
 
-* They are eigenvectors of $Cov(X)$.
+* They are eigenvectors of $Cov(Q)$.
 
-* The eigenvalue corresponding to a PC $z$ is $Var(z'X)$.
+* The eigenvalue corresponding to a PC $z$ is $Var(z'Q)$.
 
 * The eigenvalues form a nondecreasing sequence.
 
-* Say $X$ is of length $m$. Normalize the PCs $u_i$ (i.e. divide a PC by
+* Say $Q$ has $m$ columns. Normalize the PCs $u_i$ (i.e. divide a PC by
   its length, so that we have a vector of length 1) and form the $m
   \times m$ (partitioned) matrix
 
@@ -134,11 +109,11 @@ The principle components have the following properties:
   Then 
 
   $$
-  P' Cov(X) P = D
+  P' Cov(Q) P = D
   $$ {#eq-diagonalize}
 
   where $D$ is a diagonal matrix whose entries 
-  are $Var(u_i'X)$, and $P'P = I$.
+  are $Var(u_i'Q)$, and $P'P = I$.
 
 :::
 

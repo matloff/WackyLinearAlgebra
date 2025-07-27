@@ -120,14 +120,14 @@ constant random variable would violate that condition. To avoid bringing
 in yet another symbol for the subspace, let's redefine $\cal RV(\Omega)$
 to consist only of mean-0 random variables.]{.column-margin}
 We will focus on the subspace of random variables that have mean 0, and
-take covariance as our inner project:
+take covariance as our inner product:
 
 $$
 <U,V> = Cov(U,V) = E[(U - EU) (V - EV)] = E(UV)
 $$
 
 The properties of expected value, e.g. linearity, show that the
-requirements for an inner product hold.  
+requirements for an inner product hold.
 
 ## Norm of a Vector
 
@@ -544,6 +544,17 @@ computation of various probabilistic quantities. Since $\cal RV(\Omega)$
 is a vector space of random variables, each entity is both a random
 variable and a vector. Sometimes the latter will be the focus, sometimes
 the former.  We request the reader's patience in following this duality.
+
+Here is an important example:
+
+::: {.callout-note}
+## Orthogonality and Uncorrelatedness
+
+Recall that correlation is the quotient of covariance and the product of
+standard deviations. Thus random variables $U$ and $V$ are uncorrelated
+if and only if they are orthogonal in $\cal RV(\Omega)$.
+
+:::
 
 ### Conditional expectation
 
