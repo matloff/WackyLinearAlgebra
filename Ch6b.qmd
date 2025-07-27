@@ -20,7 +20,7 @@ is the focus of the current chapter.
 ::: 
 
 So in the last chapter we had a very brief introduction to Principal
-Components Analysis (PCA), and that finding the first component entails
+Components Analysis (PCA), finding the first component entails
 finding an eigenvector and eigenvalue.  It turns out that this is true
 for the second, third and all the components. In other words, PCA is
 basically an eigenvectors and eigenvalues application.
@@ -42,7 +42,7 @@ The key issue is that we want our PCs to be orthogonal vectors, because
 as we have seen, orthogonal random vectors are statistically
 uncorrelated, and independent in the multivariate normal case. So if we
 summarize our data with say, the first few PCs, the fact that they are
-uncorrelated makes for a neater summary, in a sense no duplication.
+uncorrelated makes for a neater summary, in a sense having no duplication.
 
 So with $u$ and $v$ denoting the first and second PCs, we want $v$ 
 to maximize $v'Cov(Q)v$, so we set the derivative of
