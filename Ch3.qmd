@@ -816,7 +816,7 @@ logit modeling a probability, of central importance.
 ## Centering and Scaling One's Data{#sec-ctrscl}
 
 You often hear data analysts speak of *centering and scaling* their
-data. What does mean, and why is useful?
+data. What does it mean, and why is useful?
 
 * Centering a variable means to subtract its mean. The new version now
   has mean 0.
@@ -824,7 +824,7 @@ data. What does mean, and why is useful?
 * Scaling a variable means to divide by its standard deviation. The new
   version now has standard deviation 1.0.
 
-Both operations make the variables more comparable, especially scaling.
+Both operations make variables more comparable, especially scaling.
 If say two predictor variables are of different sizes, say Height and
 Age in our baseball data above, it's hard to compare their
 $\widehat{\beta}_i$ values. Scaling them makes things more comparable.
@@ -832,7 +832,7 @@ $\widehat{\beta}_i$ values. Scaling them makes things more comparable.
 As to centering, this can reduce roundoff error in computations, and
 anyway it seems questionable to scale but not center.
 
-Note that if we center and scale not only the "X" variables but also
+Note that if we center not only the "X" variables but also
 "Y," it can be shown this is equivalent to setting a model without an
 intercept term $\beta_0$. This often simplifies matters in various ways.
 Note that in this setting, we do not include a 1s column in the $A$
