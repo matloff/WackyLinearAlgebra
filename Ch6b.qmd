@@ -39,13 +39,18 @@ derived the first PC in @sec-firstPC.  So, how are the second, third and
 so on components defined and computed?
 
 The key issue is that we want our PCs to be orthogonal vectors, because
-as we have seen, orthogonal random vectors are statistically
+as we saw in @sec-rvomegaprojs, orthogonal random vectors are statistically
 uncorrelated, and independent in the multivariate normal case. So if we
 summarize our data with say, the first few PCs, the fact that they are
 uncorrelated makes for a neater summary, in a sense having no duplication.
 
-So with $u$ and $v$ denoting the first and second PCs, we want $v$ 
-to maximize $v'Cov(Q)v$, so we set the derivative of
+
+[In the sense of random-X regression (@sec-varbhat), what we write as
+"Cov(X)" below should actually be $\widehat{Cov}(X)$, a sample estimate of
+a population quantity. However, we omit the "hat" in the interests of
+simplicity.]{.column-margin} So with $u$ and $v$ denoting the first and
+second PCs, we want $v$ to maximize $v'Cov(Q)v$, so we set the
+derivative of
 
 $$
 v'Cov(Q)v + \omega (v'v - 1) + \tau (u'v - 0)
@@ -84,7 +89,7 @@ $${#eq-eig2c}
 showing that the second PC is again an eigenvector of $Cov(Q)$.
 @eq-maxvar then says that $-\omega$ is the corresponding variance.
 
-The story is the same for the remaining PCs. We thus have:
+The story is the same for the remaining PCs. 
 
 ::: {#thm-thestory}
 
@@ -115,40 +120,123 @@ The principal components have the following properties:
   where $D$ is a diagonal matrix whose entries 
   are $Var(u_i'Q)$, and $P'P = I$.
 
+* PC1, i.e. $u_1$, is a linear combination of the original variables, 
+  PC2, i.e. $u_2$, is a linear combination of the original variables, 
+  and so on. The PCi are our new predictor variables, though we will 
+  probably use only the first few.
+
+* Let $G$ denote a matrix in the same form at the matrix $A$ in the
+  linear regression model (without a 1s column). In other words, each
+  row contains the data on one sampling unit, e.g. one person. To
+  convert from the original predictor variables to PCs, compute
+
+  ``` r
+  GP[,1:nPC]
+  ```
+
+  where **nPC** denotes our desired number of PCs. (A topic to be
+  explored in @sec-howmanypcs.)
+
 :::
 
-## Eigenanalysis Relation between $A$ and $Cov(X)$ in Linear Regression{#sec-eiglm}
+## Review of Goals Achieved
 
-Consider our usual linear regression setting, in which the matrix $A$
-contains the data for our predictor variables $X$. Say we are in the
-*random-X* setting discussed in @sec-varbhat.  If we center our data
-(subtract from each column the mean of that column), then 
+* We hope to achieve *dimension reduction*, meaning a reduction in our
+  number of predictor variables, for two reasons:
 
-$$
-\widehat{Cov}(X) 
-= \frac{1}{n} A'A 
-$$
+  * Parsimony: All else being equal, smaller models are easier to deal
+    with and interpret.
 
-To see an example of the implications of this, say the PCA of X has a 0
-eigenvalue. That implies that some linear combination $u'X$ has 0
-variance. Then
+  * Avoidance of overfitting: As the model size $p$ increases relative
+    to fixed data size $n$, there is a point past which the predictive
+    power of a model actually begins to decline. (But see @sec-chapDD.)
 
-$$
-0 = Var(u'X) = u' Cov(X) u = u' A'A u = (Au)'Au
-$$
+* PCA achieves those goals:
+ 
+  * We produce new predictors, the PCs, from our original ones, ranked
+    according to variance. (Recall: A variable with low variance is
+    nearly constant, thus rather useless.)
 
-Thus 
+  * We can reduce our number of predictors by using only some of the
+    PCs.
 
-$$
-Au = 0
-$$
+  * The new predictors don't duplicate each other, in that they are
+    uncorrelated.
 
-Since $Au$ is a linear combination of the columns of $A$, we see that
-the columns of $A$ are linearly dependent.
+## The PCs as Our New Predictor Variables
 
-The same argument works in reverse. If $Au = 0$, we fine that $Var(u'X)
-= 0$, and since the eigenvalues of $Cov(X)$ are variances of linear
-combinations of $X$, we see that one of those variances is 0.
+So, let's see how all this works. We will start with a simple dataset,
+our census data.
+
+```{r} 
+data(svcensus) 
+head(svcensus) 
+svc <- factorsToDummies(svcensus) 
+# remove our "Y" variable 
+svc <- svc[,-11]  
+z <- prcomp(svc) 
+names(z)
+z$sdev 
+``` 
+
+[It's called a rotation because geometrically the change of variables
+really does cause a rotation of the coordinate system.]{.column-margin}
+The entity **z$rotation** is our matrix $P$.  Here **sdev** is the
+square roots of the variances, i.e. the eigenvalues. It appears that
+there are two main PCs, the rest minor.  Here we can see which of the
+original variables each of these two PCs focuses on.
+
+``` r 
+> z$rotation
+                        PC1           PC2          PC3           PC4
+age            0.0071442921  0.9999532343  0.000726208 -2.397875e-05
+educ.14       -0.0010745227  0.0010525943 -0.321503608  4.907644e-01
+educ.16       -0.0004109197  0.0010580494 -0.036350998  2.631539e-02
+educ.zzzOther  0.0014854423 -0.0021106436  0.357854606 -5.170798e-01
+occ.100        0.0009216241  0.0009575240  0.242783424 -8.554274e-02
+occ.101        0.0016559718 -0.0011507204  0.101640265 -1.731946e-01
+occ.102       -0.0016720082 -0.0037463757 -0.245946083  3.378269e-01
+occ.106       -0.0001386860 -0.0001002262  0.017018077  3.846487e-03
+occ.140       -0.0001607628 -0.0003608480 -0.010823679 -1.106524e-02
+occ.141       -0.0006061389  0.0044006464 -0.104672004 -7.187076e-02
+wkswrkd       -0.9999670218  0.0071416042  0.003457670 -9.540378e-04
+gender.female  0.0015140583 -0.0001762090  0.559515249  4.088654e-01
+gender.male   -0.0015140583  0.0001762090 -0.559515249 -4.088654e-01
+...
+```
+
+In that first PC, the largest component by far is **wkswrkd**, trailed
+substantially by the next-largest, **age**. Those two variables more or
+less trade places in the second PC.
+
+This suggests that none of the other predictors is very powerful, though
+this should not be viewed as meaning that the others are collectively
+useless. 
+
+In other words, if our project is to predict wage income, we might use
+PCs 1 and 2 as our predictors, as opposed to using all 13 of the
+original variables.
+
+Well, how do we do that? Say we have several new people for which we
+need to predict wage income. Place their predictor values in a matrix,
+say $Q$, one person per row (i.e. the same format at the matrix $A$ in
+@eq-linregformula, though without a 1s column). Then, applying our usual
+knowledge of matrix partitioning, our matrix of new predictor data is 
+simply the matrix product shown above
+
+``` r
+G %*% P[,1:nPC]
+```
+
+So to make the full switch, convert the entire dataset:
+
+```{r}
+P <- z$rotation 
+svcNew <- svc %*% P[,1:2] 
+head(svcNew)  # our new data!
+lmOut <- lm(svcensus$wageinc ~ svcNew) 
+lmOut 
+```
 
 ## Back to the African Soils Example{#sec-backtoafrica}
 
@@ -161,31 +249,18 @@ to better illustrate the concepts, we do things from scratch.
 library(WackyData)
 data(AfricanSoil)
 x <- AfricanSoil[,-c(1,3595,3598)]
-dim(x)
-xcov <- cov(x)
-eigs <- eigen(xcov)
-eigs$values[1:100]  # don't print out all 3597!
+z <- prcomp(x) 
+head(z$sdev,25)
 ```
 
-Ah, the eigenvalues fall off rapidly after the first few. So, let's say
-we decide to use the first 9 $u$ vectors.  
+Ah, the eigenvalues fall off rapidly after the first few. So we might
+use, say, the first dozen PCs.
 
 ```{r}
-eigvecs <- eigs$vectors[,1:9]
-dim(eigvecs)
-```
-
-So, recalling the sequence of equations leading to @eq-aha, we are ready
-to replace our old variables by the new ones, which are linear
-combinations of the old ones.
-
-```{r} 
-x <- as.matrix(x)
-dim(x)
-xnew <- x %*% eigvecs
-dim(xnew)  
-lmout <- lm(AfricanSoil$pH ~ xnew)
-# and so on
+newx <- as.matrix(x) %*% z$rotation[,1:12]
+head(newx)
+lmOut <- lm(AfricanSoil[,3598] ~ newx)
+lmOut
 ```
 
 ## PCA in Detection of Multicollinearity{#sec-detect}
@@ -250,7 +325,7 @@ $$
 for the same 0-measure reasons. In other words, $A'A$ will be invertible
 with probability 1.
 
-## How Many Principal Components Should We Use?
+## How Many Principal Components Should We Use?{#sec-howmanypcs}
 
 We chose to use the first 9 principal components in our example here,
 but that was just for illustration purposes.  There are no formal rules
@@ -402,11 +477,77 @@ matrix $\Sigma$. Here is how it works:
   Q = \mu + \Sigma^{0.5} Z
   $$
 
-
-
-
 $\square$
 :::
+
+## Eigenanalysis of the Relation between $A$ and $Cov(X)$ in Linear Regression{#sec-eiglm}
+
+Consider our usual linear regression setting, in which the matrix $A$
+contains the data for our predictor variables $X$. Say we are in the
+*random-X* setting discussed in @sec-varbhat.  
+
+Recall that the population definition is
+
+$$
+Cov(X) = E[(X-EX)(X-EX)']
+$${#eq-popcov}
+
+which if we center our data becomes
+
+$$
+Cov(X) = E[XX']
+$${#eq-centercov}
+
+the average value of $XX'$ in the population.
+
+Let $x_i$ denote the value of the vector $X$ for our $i^{th}$ data
+point, so that $x_i'$ is row $i$ of $A$. Then the sample analog of
+@eq-popcov is the average value of $XX'$ in the sample,
+
+\begin{align}
+Cov(X) 
+&= \frac{1}{n} \sum_{i=1}^n x_i x_i' \\
+&= \frac{1}{n} (x_1 | ... | x_n) 
+\left (
+\begin{array}{r}
+x_1' \\
+... \\
+x_n' \\
+\end{array}
+\right ) \\
+&= \frac{1}{n} A'A
+\end{align}
+
+To see an example of the implications of this, say the PCA of X has a 0
+eigenvalue. That implies that some linear combination $u'X$ has 0
+variance. Then
+
+\begin{align}
+0 &= Var(u'X) \\
+&= u' Cov(X) u \\
+&= \frac{1}{n} u' A'A u \\
+&= \frac{1}{n} (Au)'Au
+\end{align}
+
+Thus 
+
+$$
+Au = 0
+$$
+
+Since $Au$ is a linear combination of the columns of $A$, we see that
+the columns of $A$ are linearly dependent.
+
+The same argument works in reverse. If $Au = 0$, we find that $Var(u'X)
+= 0$, and since the eigenvalues of $Cov(X)$ are variances of linear
+combinations of $X$, we see that one of those variances is 0. Similar
+statements can be made for small but nonzero eigenvalues.
+
+In other words:
+
+> The presence of small eigenvalues in $A'A$ does indeed reflect
+> approximate linear dependencies among the predictors, reaffirming our
+> discussion in @sec-eigenChap.
 
 ## Your Turn
 

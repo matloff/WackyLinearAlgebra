@@ -533,7 +533,7 @@ chosen to be orthonormal.
 Finally, we say that $V$ is the *direct sum* of $W$ and $W^{\perp}$,
 denoted $V = W \oplus W^{\perp}$.
 
-## Projections in $\cal RV(\Omega)_0$
+## Projections in $\cal RV(\Omega)_0${#sec-rvomegaprojs}
 
 Here is a good example of how a very abstract vector space becomes
 useful in practical applications, such as will be presented in
