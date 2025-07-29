@@ -267,9 +267,8 @@ lmOut
 
 ## How Many Principal Components Should We Use?{#sec-howmanypcs}
 
-We chose to use the first 9 principal components in our example here,
-but that was just for illustration purposes.  There are no formal rules
-for how many to use. Various "rules of thumb" exist. 
+There are no formal rules for how many PCs to use. Various "rules of
+thumb" do exist, but of uncertain real value. 
 
 If we are doing prediction, there is a very natural way to choose our
 number of PCs -- do cross-validation (@sec-xval), and use whichever 
@@ -277,18 +276,19 @@ number gives the most accurate prediction.
 
 ### Example: New York City taxi trips{#sec-nyc}
 
-This is a well-known dataset, a version of which is included in the
-**qeML** package. The object is to predict trip time, given pickup and
-dropoff locations, trip distance and day of the week.
+This dataset was introduced in @sec-useall, a version of which is
+included in the **qeML** package. The object is to predict trip time,
+given pickup and dropoff locations, trip distance and day of the week.
 
 In the raw form of the data, there are just 5 columns, thus 4
 predictors.  But the pickup and dropoff locations are R factors, coding
-numerous locations. These must be decoded to dummy variables (values 1
-or 0, coding whether or not, say, a given trip began at pickup location
-121). If for instance one calls the R linear regression function **lm**,
-that function will do the conversion internally, but in our case we will
-perform the conversion ourselves, using **regtools::factorsToDummies**.
-(The **regtools** package is included by **qeML**.)
+numerous locations. As before, these must be decoded to dummy variables
+(values 1 or 0, coding whether or not, say, a given trip began at pickup
+location 121). If for instance one calls the R linear regression
+function **lm**, that function will do the conversion internally, but in
+our case we will perform the conversion ourselves, using
+**regtools::factorsToDummies**.  (The **regtools** package is included
+by **qeML**.)
 
 ```{r}
 library(qeML)
@@ -398,7 +398,7 @@ Say we wish to write code to simulate a random vector $Q$ having an
 m-variate normal distribution with mean vector $\mu$ and covariance
 matrix $\Sigma$. Here is how it works:
 
-* We start with generating $Z$, a vector o $m$ independent N(0,1)
+* We start with generating $Z$, a vector of $m$ independent N(0,1)
   variables. That means $Z$ is m-variate normally distributed, with
   mean vector consisting of $m$ 0s, and covariance matrix $I$, the
   $m \times m$ identity matrix.
