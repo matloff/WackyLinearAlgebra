@@ -73,8 +73,8 @@ $i=r+1,...,n$.
 ### Recommender Systems
 
 Recall @sec-recsys, which began with movie ratings data. We would like
-to predict the rating some particular user would give to some particular
-movie. It will turn out that we can set up SVD in such a way that $U$
+to predict the rating of some particular user would give to some particular
+movie. It will turn out that we can neatly set up SVD in such a way that $U$
 contains movie data and $V$ contains user data. 
 
 ### Text Classification
@@ -101,16 +101,17 @@ achieve dimension reduction by replacing even some of the smaller
 eigenvalues by 0s as well, with corresponding adjustments to the columns
 of $U$ and $V$. We will discuss this below in @sec-svddimred. 
 
-
+xxx
 
 ## Solution to Our SVD Goal
 
 There are various derivations, e.g. along the lines of @sec-firstPC, 
 but let's go directly to the answer:  
 
-1. Say $A$ is $p \times n$, so that $A'A$ will be of size $n
-   \times n$. Let $r$ denote the rank of $A'A$, which will be the same
-   as the rank of $A$ from @thm-rankapa.
+1. Say we have a $p \times n$ matrix $A$ (not necessarily from the
+   regression context), so that $A'A$ will be of size $n \times n$. Let
+   $r$ denote the rank of $A'A$, which will be the same as the rank of
+   $A$ from @thm-rankapa.
 
 2. Compute the eigenvalues $\sigma_1,...,\sigma_n$
    and eigenvectors $v_1,...,v_n$ of $A'A$. Normalize the $v_i$ by
@@ -120,10 +121,10 @@ but let's go directly to the answer:
 
 3. Since $A'A$ is symmetric and positive-semidefinite, its eigenvalues
    will be nonnegative and its eigenvectors $v_1,...,v_r$ will be
-   orthogonal as long as $\sigma_1,...,\sigma_r$ are distinct, as is the
-   case for numeric data (@sec-prob0). Since these eigenvectors
-   diagonalize $A'A$ with the $\sigma_i$ on the diagonal (@sec-pca),
-   we will have $\sigma_{r+1} = ...  = \sigma_n = 0$.
+   orthogonal as long as $\sigma_1,...,\sigma_r$ are distinct, as is
+   typically the case for numeric data. Since these eigenvectors
+   diagonalize $A'A$ with the $\sigma_i$ on the diagonal (@sec-pca), we
+   will have $\sigma_{r+1} = ...  = \sigma_n = 0$.
 
 4. Set $\Sigma$ to $diag(\sigma_1,...,\sigma_n)$, the
    nonincreasing list of those eigenvalues. Set the first $r$ columns of
@@ -170,8 +171,9 @@ of $AA'$:
 
 So, $u_i$ is an eigenvector of $AA'$, with eigenvalue $\sigma_i$. 
 
-In other words, taking for concreteness the application in which
-moviegoers rate movies (we take $A$ to be fully known for now):
+Now, in the recommender systems context, take $A$ to be the matrix whose
+row $i$, column $j$ element is the rating user $i$ gives to movie $j$.
+(We take $A$ to be fully known for now.)
 
 * The columns of $U$ are basically eigenvectors of the matrix $AA'$,
   which in turn has one row and one column for each moviegoer.
@@ -212,10 +214,6 @@ columns, thus solving the problem of less than full rank, but the use of
 binary variables, the use of generalized inverses may be more
 convenient.
 
-We will omit the formal definition of generalzed inverses and their
-properties, returning to the topic in @sec-chapDD.  For now, we note the
-following:
-
 One of the most famous forms of generalized inverse, is the
 Moore-Penrose *pseudoinverse*, based on SVD.  Given the SVD of a matrix
 $M$, 
@@ -249,14 +247,15 @@ We claim that
 
 $$
 b = A^{+} S = V \Sigma^{+} U' S
-$$ 
+$${#eq-ginvsol}
 
 solves the equation. (Actually if $A$ is of less than full rank, there
 are infinitely many solutions, a point discussed in detail in
 @sec-chapDD.)
 
 Let's check. Before beginning, recall that the orthogonal nature of $U$
-and $V$ implies that $U'U = I$ and $V'V = I$.
+and $V$ implies that $U'U = I$ and $V'V = I$. Now substitute @eq-ginvsol
+in the left side of @eq-overdetermined:
 
 \begin{align}
 A'A b &= (U \Sigma V')' (U \Sigma V') (U \Sigma V')^{+} S \\
@@ -304,6 +303,7 @@ This is a very common application of SVD.
 The SVD of a rank $r$, $q \times n$ matrix $A$ can be partitioned as
 
 $$
+A=
 (U_1 | U_2) 
 \left (
 \begin{array}{rr}
@@ -349,7 +349,7 @@ columns of $U_1$ and $V_1$. Why do this?
 * Achieve a further reduction in storage requirements. for instance in
   settings in which we have many, many images or even better, many, many
   videos. [It can be shown that the above recipe produces the "best"
-  low-rank approximation, in terms of *Frobenius* norm. The lattern
+  low-rank approximation, in terms of *Frobenius* norm. The latter
   treats an $m \times n$ matrix as a vector of length $mn$ and applies
   the ordinary $l_2$ norm.]{.column-margin}
 
@@ -376,7 +376,7 @@ Here is the code:
 ```{r}
 library(imager)
 img <- load.image('prj.png')  
-# grayscale() doesn't work directly on this, 
+# grayscale() doesn't work directly on this
 # image, due to alpha (transparency) channel
 imgNoAlpha <- rm.alpha(img)
 imgGrayNoAlpha <- grayscale(imgNoAlpha)
@@ -406,8 +406,8 @@ elements of $A$ are unknown, and we hope to predict them with some
 reasonable amount of accuracy.
 
 Again, since we do not know all of $A$, we do not know any of the
-matrices on the right either. We will return to this problem shortly,
-but for now pretend $A$ and the matrices are known. 
+matrices that make up its generalized inverse. We will return to this
+problem shortly, but for now pretend $A$ and the matrices are known. 
 
 Write the SVD, as in @eq-wh:
 
@@ -433,7 +433,7 @@ This suggests that the following iterative process may work:
 2. Find $W$ and $H'$ for that temporary version of $A$, our guess.
 
 3. Use the formula $w_i h_j$ to calculate (new guesses for) the unknown
-   elements, and even the known elements, updating accordingly to a 
+   elements, updating accordingly to a 
    new guess for $A$.
 
 4. If convergence not yet reached, go to Step 2.
@@ -459,11 +459,12 @@ $${#eq-altls}
 
 again in the spirit of @sec-shrinkage, with shrinkage parameters
 $\lambda$ and $\mu$. The computation is made much easier via an
-*alternating least squares* scheme. One first holds $H'$ fixed,
+*alternating least squares* scheme. One first holds $H$ fixed,
 minimizing @eq-altls with respect to $W$. In effect, this is ridge
-regresssion, with $W$ playing the role of the unknown coefficients
-vector. Then in the seccond iterations, the roles are reversed, with
-$H'$ now taken as the unknown coefficients vector, and so on.
+regresssion, with the matrix $W$ playing an analogous role to the
+unknown coefficients vector in ridge. Then in the second iteration,
+the roles are reversed, with $H'$ now taken as the unknown coefficients
+vector, and so on.
 
 ## Using SVD to Gain Insight into Ridge Regression
 
@@ -483,9 +484,8 @@ b_{\lambda} = \Sigma_{\sigma_j > 0}
 v_j \frac{\sigma_j^2}{\sigma_j^2 + \lambda^2} u_j'S
 $${#eq-ridgeb}
 
-where $u_j$ and $v_j$ are column $j$ of $U$ and $S$.
-
-And the vector of fitted "Y" values is
+where $u_j$ and $v_j$ are column $j$ of $U$ and $V$, as well as
+an expression for the vector of fitted "Y" values, 
 
 $$
 Ab = \Sigma_{\sigma_j > 0}
