@@ -242,8 +242,7 @@ lmOut
 
 So, we remove the ``Y'' variable, **pH**, number 3598 as seen above, and
 proceed. We will also remove the nonnumeric columns,
-**PIDN** and **Depth**. We could use R's **prcomp** function here, but
-to better illustrate the concepts, we do things from scratch.
+**PIDN** and **Depth**. 
 
 ```{r} 
 library(WackyData)
@@ -256,74 +255,15 @@ head(z$sdev,25)
 Ah, the eigenvalues fall off rapidly after the first few. So we might
 use, say, the first dozen PCs.
 
+That's quite a feat! We started with over 3,000 predictors, and cut it
+down to 12.
+
 ```{r}
 newx <- as.matrix(x) %*% z$rotation[,1:12]
 head(newx)
 lmOut <- lm(AfricanSoil[,3598] ~ newx)
 lmOut
 ```
-
-## PCA in Detection of Multicollinearity{#sec-detect}
-
-Recall the itemized list in @sec-nearly of various conditions 
-under which we have multicollinearity. We can add the following item to
-that list:  
-
-* $A$ has an eigenvalue that is nearly 0.
-
-This follows from what we found about 0 eigenvalues in @sec-eiglm.     
-If an eigenvalue is 0, the rank is exactly less than full. If it is
-approximately 0, the rank is technically full, but there is a linear
-combination of the variables that is approximately 0.
-
-In fact, PCA can warn us of specific linear combinations of $Cov(A'A)$
-that are nearly 0, as follows.
-
-* Say a PC corresponds to a small eigenvalue.
-
-* Then from @sec-firstPC that linear combination has small variance.
-
-* Random variables with small variance are nearly constant.
-
-* Thus with high probability, the linear combination is near to $c$
-  for some number $c$. If we are working with numerical data, that number
-  $c$ is nonzero with high probability (see @sec-prob0).
-
-* If our design matrix $A$ includes a 1s column, then the above linear
-  combination, together with this 1s column, gives us a linear
-  combination that is usually close to the 0 vector, thus
-  multicollinear.
-
-In other words, PCA can point out to us specific linear combinations of
-our variables that may be problematic. If we are considering solving the
-problem by removing one or more predictor variables, this analysis could
-suggest which ones to remove.
-
-## An Important Property of All-Numeric Predictor Data{#sec-prob0}
-
-Say we throw a dart at the interval (0,1). If the distribution of the
-hitting location $D$ is U(0,1) or any other continuous distribution, the
-probability of hitting a specific point is 0, e.g. $P(D = 0.324) = 0$.
-Such is the nature of continuous distributions. The problem is that the
-length of the line segment (0.324,0.324) is 0. In math, we say it has
-*measure* 0.
-
-If we throw our dart at the unit square, $(0,1) \times (0,1)$,
-then e.g. the probability that $D$ lies on a specified straight line or
-some other specified curve is also 0. Here the problem is that the area
-of that line or curve is 0.
-
-This has implications for material in this book. For instance, consider
-linear regression models. If our $A$ matrix consists of all numeric
-data, then (in the absence of perfect correlation among the columns), we
-will have 
-
-$$
-P(determinant(A'A) = 0) = 0
-$$
-
-for the same 0-measure reasons. In other words, $A'A$ will be invertible
-with probability 1.
 
 ## How Many Principal Components Should We Use?{#sec-howmanypcs}
 
