@@ -34,11 +34,11 @@ Classically, statistics and ML books have stated that, for fixed number
 of data points $n$, the graph of predictive accuracy against number of
 predictor variables $p$ roughly has a U-shape, concave up. Starting at
 $p = 1$ and then increasing $p$, we achieve better and better predictive
-power until we reach the minimum point of the U; adding further
+power until we reach the minimum point of the U; then adding further
 predictors degrades performance.
 
 We wish to explore this notion on the Million Song dataset from
-@sec-millonsong. Here "Y" is the year of release of a song, stored in
+@sec-millionsong. Here "Y" is the year of release of a song, stored in
 the first column with label **V1**. "X" is a set of 90 audio
 measurements. In the version of the dataset used here, we have 5000
 rows.
@@ -54,7 +54,7 @@ sapply(seq(10,90,10),function(p)
 
 Here we are running a linear model on the first 150 rows of the dataset
 (i.e. $n=150$), and the first $p$ columns, so that $p = 10,20,...,90$.
-Since the $qeML$ functions automatically form holdout sets, we obtain
+Since **qeML** functions automatically form holdout sets, we obtain
 the accuracy value, Mean Absolute Prediction Error. And since the
 holdout set is randomly chosen, we do this 500 times. We graph the
 result using **qePlotCurves** (which does smoothing).
@@ -82,14 +82,14 @@ Consider a linear regression model, for convenience say with no
 $\beta_0$ term.  As $p$ increases, eventually it becomes equal to $n$,
 the number of rows. When that happens, we get a "perfect" 
 fit: Our line, plane or hyperplane will pass through every data point,
-and @eq-matrixss will be 0. Just think of the case $p=1$, now with a
+and @eq-matrixss will be 0. Just think of the case $n=2$, $p=1$, now with a
 $\beta_0$ term: Two points in $\cal{R}^2$, through which we can draw a
-line passing through them.
+line passing exactly through them.
 
 This value of $p$ is thus called the *interpolation point*, viewed
 classically as follows.  
 
-* Of course, setting $p$ to be the interpolation point would will be a
+* Of course, setting $p$ to the interpolation point would be a
   terrible fit, unable to predict new data well; we are at the
   right-hand end of the U. 
 
@@ -102,9 +102,9 @@ were they wrong!
 ## Double Descent
 
 Though the prevailing wisdom used to be that, as noted above, there is
-no point in trying values of $p$ even near $n$, let alone beyond $n$. It
+no point in trying values of $p$ even near $n$, let alone beyond $n$, it
 turns out that in some cases, the best value of $p$ is in fact larger
-than $n$
+than $n$.
 
 As a first step to seeing this, consider the following code:
 
