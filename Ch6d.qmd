@@ -277,7 +277,8 @@ $$
 and since we have a free hand in choosing $w_{r+1},...,w_n$, we minimize
 $||w||$ by setting those $n-r$ values to 0. That will make $||x||$
 minimum-norm as well, since $x = Vw$.
-
+% Now in @eq-newResids, look at the nonzero parts, i.e. the upper $r
+% \times r$ portion of $\Sigma$ and the 
 Thus we can make @eq-newResids equal to 0, i.e. exact fit, by setting
 
 $$
