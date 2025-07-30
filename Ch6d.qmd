@@ -165,13 +165,13 @@ descent*. This introduces the concept, but the big news is:
 > The minimum of the second U is sometimes lower than that of the first.
 > In other words, it can pay to overfit!
 
-We'll see examples shortly, but first let's see how linear algebra plays a
-role.
+Let's see how linear algebra plays a role in explaining how double
+descent can occur..
 
 ## Plausibility of Double Descent: the Minimum Norm Solutions
 
-In an overdetermined linear system such as @eq-overdetermined, there are
-many solutions. Our **qePolyLin** function calls
+In an overdetermined linear system ($p > n$) such as @eq-overdetermined,
+there are many solutions. Our **qePolyLin** function calls
 **regtools::penrosePoly**.  An advantage of Moore-Penrose is that it
 gives us the *minimum norm* solution. We'll discuss the significance of
 this for Double Descent shortly, but let's prove it first.
@@ -241,7 +241,7 @@ $$
 ||Bx - q||^2 = ||\Sigma V' x - U'q||^2
 $${#eq-RSS2}
 
-Rename $V'x$ to $w$ and $U'q$ to $s$ (a constant vector):
+Rename $V'x$ to $w$ and $U'q$ to $s$:
 
 $$
 ||Bx - q||^2 = ||\Sigma w - s||^2
@@ -275,7 +275,8 @@ $$
 $$
 
 and since we have a free hand in choosing $w_{r+1},...,w_n$, we minimize
-$||w||$ by setting those $n-r$ values to 0.
+$||w||$ by setting those $n-r$ values to 0. That will make $||x||$
+minimum-norm as well, since $x = Vw$.
 
 Thus we can make @eq-newResids equal to 0, i.e. exact fit, by setting
 
