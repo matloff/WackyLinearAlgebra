@@ -827,7 +827,7 @@ Here $k$ is a *kernel function* satisfying
   The latter is a generalization of nonnegative definite matrices. If we
   have a set of vectors $u_1,...,u_r$ and form the matrix having its row
   $i$, column $j$ value equal to $k(u_i,u_j)$, then the matrix is
-  required to nonnegative positive definite.
+  required to be nonnegative definite.
 
 What does that give us? Suppose we wish to do polynomial regression of
 degree 2. As noted above, we could add the appropriate columns to the $A$
