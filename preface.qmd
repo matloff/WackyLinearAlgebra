@@ -91,14 +91,15 @@ motivated by intellectual curiosity rather than a course grade.
 
 Basic data science:
 
-* Calculus.  
+* Calculus, e.g. derivatives as rates of change and slopes of tangent lines.  
+
+* Basics of random variables, e.g. density functiopns,
+  expected value and variance.
 
 * Some exposure to R is recommended, but the text can be read
-without it.[For a quick, painless introduction to R, see my
-[fasteR](https://github.com/matloff/fasteR) tutorial, say the first 8
-lessons.]{.column-margin}
-
-* Basics of random variables, expected value and variance.
+  without it.[For a quick, painless introduction to R, see my
+  [fasteR](https://github.com/matloff/fasteR) tutorial, say the first 8
+  lessons.]{.column-margin}
 
 ## The Role of Math (and R)
 

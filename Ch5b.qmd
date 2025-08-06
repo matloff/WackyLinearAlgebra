@@ -40,7 +40,8 @@ This was shown in this book's cover, shown here:
 
 The point at the end of the green vector is projected onto the
 mustard-colored plane, producing the red vector. It in turn is projected
-onto the blue line. There are right angles in each case.
+onto the blue line, the latter being a subspace of the mustard-colored
+one. There are right angles in each case.
 
 
 The early developers of linear algebra wanted to extend such concepts to
@@ -78,7 +79,7 @@ and a numerical output, with the following properties:
 
 ## Examples
 
-$\cal R^n$:
+### $\cal R^n$
 
 As noted, ordinary dot product is the most common inner product on this
 space.
@@ -86,7 +87,23 @@ space.
 $<(a_1,...,a_n),(b_1,...,b_n> =
 a_1 b_1 + ... + a_n b_n$
 
-*C(0,1)*:
+But other inner products may be defined. For instance, say an $n \times
+n$ matrix $A$ is *positive definite*, meaning that 
+
+$$
+q' A q \geq 0
+$$
+
+for all $q$ in $\cal R^n$, with equality only if $q = 0$. Then it is
+easily seen that the function 
+
+$$
+g(q,r) = q'Ar
+$$
+
+fits the definition of inner product.
+
+### *C(0,1)*
 
 One inner product on this space is
 
@@ -111,8 +128,7 @@ A non-0 $f$ will have $f^2(t) > 0$ for at least one $t$, and by
 continuity, $f^2(t) > 0$ on an interval containing that $t$, thus making
 a nonzero contribution to the integral and thus to the inner product.
 
-
-$\cal RV(\Omega)$:
+### $\cal RV(\Omega)$
 
 [We need to restrict attention to this subspace, in order to meet the
 requirement that $<U,U> = 0$ if and only if $U = 0$. Otherwise, any
@@ -256,6 +272,8 @@ geometry. Then we have the following:
 Consider an inner product space $\cal V$, with subspace $\cal W$.  Then
 for any vector $x$ in $\cal V$, there is a unique vector $z$ in $\cal
 W$, such that $z$ is the closest vector to $x$ in $\cal W$. 
+
+We say that $z$ is the *projection* of $x$ onto $W$.
 
 Furthermore, $x-z$ is orthogonal to any vector $r$ in $\cal W$.
 
