@@ -253,14 +253,14 @@ Note too that we have implictly assumed above that our vector spaces here are
 *finite-dimensional*, i.e. that any basis consists of finitely-many
 vectors ($r$ in the above definition). This need not be the case.
 
-### Example: $\cal Poly(0,1)$
+Example: $\cal Poly(0,1)$
 
 This is the space of all polynomials defined on the interval (0,1), such
 as $f(t) = 2.5t$ and $g(t) = t^{13} - t^{12} - t^{5} + t + 1$. Vector addition
 and scalar multiplication can be defined in the obvious manner, e.g.
 
 $$
-h(t) = 2f(t) + 3g(t) = 3t^{13} - 3t^{12} - 3 t^{5} - 2t + 3
+h(t) = 2f(t) + 3g(t) = 3t^{13} - 3t^{12} - 3 t^{5} + 2t + 3
 $$
 
 A natural basis is 
@@ -279,15 +279,17 @@ But just to tantalize the reader, we point out that under the more
 general definitiion, @eq-polybasis is actually a basis for $C(0,1)$!
 Again, there are mathematics niceties that must be filled in, but it
 turns out that any continuous function on a finite interval can be
-approximated by some polynomial.[For those with a background in
-mathematical analysis, here is how the problem is handled. One starts
-with a subspace that is *dense* in the full space, i.e.\ any vector in
-the full space can be approximated to any precision by some linear
-combination of vectors in the dense set. For instance, the famoua
-Stone-Weierstrauss Theorem says that the set of all polynomials is dense
-in $C(0,1)$. One then defines the dense set to be a "basis." The use
-of trig functions as the dense set is much more common than use of
-polynomials, in the familiar *Fourier series*.]{.column-margin}
+approximated by some polynomial, with as close a degree of approximation
+as we want. Basis is then defined in the context of approximation.[For
+those with a background in mathematical analysis, here is how the
+problem is handled. One starts with a subspace that is *dense* in the
+full space, i.e.\ any vector in the full space can be approximated to
+any precision by some linear combination of vectors in the dense set.
+For instance, the famoua Stone-Weierstrauss Theorem says that the set of
+all polynomials is dense in $C(0,1)$. One then defines the dense set to
+be a "basis." The use of trig functions as the dense set is much more
+common than use of polynomials, in the familiar *Fourier
+series*.]{.column-margin}
 
 $\cal RV(\Omega)$:
 
