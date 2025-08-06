@@ -255,7 +255,7 @@ vectors ($r$ in the above definition). This need not be the case.
 
 Example: $\cal Poly(0,1)$
 
-This is the space of all polynomials defined on the interval (0,1), such
+This is the space of all polynomials defined on the interval [0,1], such
 as $f(t) = 2.5t$ and $g(t) = t^{13} - t^{12} - t^{5} + t + 1$. Vector addition
 and scalar multiplication can be defined in the obvious manner, e.g.
 

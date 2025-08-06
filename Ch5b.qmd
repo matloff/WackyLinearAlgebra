@@ -39,9 +39,9 @@ This was shown in this book's cover, shown here:
 ![Projections](Projections.png)
 
 The point at the end of the green vector is projected onto the
-mustard-colored plane, producing the red vector. It in turn is projected
-onto the blue line, the latter being a subspace of the mustard-colored
-one. There are right angles in each case.
+mustard-colored plane, a subspace, producing the red vector. It in turn
+is projected onto the blue line, the latter being a subspace of the
+mustard-colored one. There are right angles in each case.
 
 
 The early developers of linear algebra wanted to extend such concepts to
@@ -286,7 +286,7 @@ background in real analysis. Indeed, even the statement of the theorem
 is not mathematically tight.[For readers who do have such background,
 this is the Hilbert Projection Theorem. "Closest" is defined in terms of
 infimum, and $\cal W$ needs to be a topologically closed
-set. See for example [the Wikipedia entry.l](https://en.wikipedia.org/wiki/Hilbert_projection_theorem)]{.column-margin}
+set. See for example [the Wikipedia entry.](https://en.wikipedia.org/wiki/Hilbert_projection_theorem)]{.column-margin}
 
 $\square$
 
@@ -299,6 +299,27 @@ projection, i.e.
 $$
 z = P_W x
 $$
+
+In that case, we have the famous relation:
+
+::: {#thm-projdeccomp}
+
+Say the vector $x$ is in $\cal R^n$, and $\cal W$ is a subspace of the
+latter. Then there is a matrix $P_W$ such that
+
+* $P_W x$ is the projection of $x$ onto $W$.
+
+* $x$ can be uniquely represented as
+
+  $$
+  x = P_W x + (I-P_W x)
+  $$
+
+  where the two summands are orthogonal to each other.
+
+$\square$
+
+:::
 
 Note that projection operators are *idempotent*, meaning that if you
 apply a projection twice, the effect is the same as applying it once. In
@@ -348,15 +369,16 @@ in the vector space $R^n$, where $n$ is the number of our data
 points.[Of course, "data points" means rows in the data frame.  In the
 statistics realm, people often speak of "observations."]{.column-margin}
 Since we are minimizing that quantity with respect to $b$, the solution,
-$A \widehat{\beta}$, is the projection of $Y$ onto the subspace.
+$A \widehat{\beta}$, is the projection of $Y$ onto the subspace
+consisting of all vectors of the form $Ab$.
 
-But wait -- *what* subspace?  Well, it is the subspace consisting of all
-vectors of the form $Ab$:
+Note that from the above theorem, we have that
 
-> The linear model projects the vector $Y$ onto the column space of $A$.
+$$
+S - A \widehat{\beta}
+$$
 
-Again, this follows from fact that setting $\widehat{\beta}$ to the
-least-squares estimate amounts to minimizing $||S - Ab||$.
+is orthogonal to $A \widehat{\beta}$.
 
 ### The "hat" matrix
 
@@ -448,8 +470,7 @@ easily be converted to orthonormal.
 ### Motivation
 
 Say we have a vector space $\cal V$, a subspace $\cal W$, and a vector
-$x$ in $\cal V$. We know $x$ has a projection in $\cal W$; call it $z$. But
-how do we find $z$?
+$x$ in $\cal V$. How do we fine the projection $z$ of $x$ in $\cal W$? 
 
 Let $u_1,...,u_k$ be a basis for $\cal W$.[So we are assuming $\cal W$
 (but not necessarily $\cal V$ is finite-dimensional. Using proper math,
@@ -961,3 +982,6 @@ subspace of $C(0,1)$.  Also since the vectors here are functions, you'll
 need a data structure capable of storing functions. An R **list** will
 work well here.
 
+❄️  **Your Turn:** We noted that projection matrices in $\cal R^n$ are
+idempotent. Prove the converse, i.e. that any idempotent matrix $A$ must
+be a projection to some subspace. Hint: Try the column space of $A$.
