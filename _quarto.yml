@@ -26,6 +26,7 @@ book:
      - Ch4.qmd
      - Ch5a.qmd
      - Ch5b.qmd
+     - Projections.qmd
      - Ch5bb.qmd
      - Ch5c.qmd
      - Ch6a.qmd
@@ -42,6 +43,7 @@ format:
      number-sections: true
      fig_caption: no
      fig_numbers: no
+     embed-resources: true
   pdf:
      toc: true  
      number-sections: true      
