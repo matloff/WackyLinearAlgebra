@@ -230,9 +230,7 @@ linearly independent:
 Note that subspaces are vector spaces in their own right, and thus also
 have bases.
 
-### Examples
-
-$\cal R^3$: 
+### Example: $\cal R^3$: 
 
 The vectors (1,0,0), (0,1,0) and (0,0,1) are easily seen to be a basis
 here.[Our convention has been that vectors are considered in matrix
@@ -249,10 +247,39 @@ equally well as a basis for this space, as do (infinitely) many others..
 A basis for the subspace of vectors of the form (a,a,b) is (1,1,0) and
 (0,0,1). 
 
+### Infinite-dimensional vector spaces
+
+Note too that we have implictly assumed above that our vector spaces here are 
+*finite-dimensional*, i.e. that any basis consists of finitely-many
+vectors ($r$ in the above definition). This need not be the case.
+
+### Example: $\cal Poly(0,1)$
+
+This is the space of all polynomials defined on the interval (0,1), such
+as $f(t) = 2.5t$ and $g(t) = t^{13} - t^{12} - t^{5} + t + 1$. Vector addition
+and scalar multiplication can be defined in the obvious manner, e.g.
+
+$$
+h(t) = 2f(t) + 3g(t) = 3t^{13} - 3t^{12} - 3 t^{5} - 2t + 3
+$$
+
+A natural basis is 
+
+$$
+u_i (t) = t^i, ~ i = 1,2,3,...
+$${#eq-polybasis}
+
 $C(0,1)$: 
 
-Alas, there is no finite basis here. Even infinite ones have issues in
-their mathematical formulation.[For those with a background in
+There is no basis here, finite or infinite. But with more sophisticated
+mathematics, something like an infinite basis can be formed. A full
+account would be beyond the scope of this book. 
+
+But just to tantalize the reader, we point out that under the more
+general definitiion, @eq-polybasis is actually a basis for $C(0,1)$!
+Again, there are mathematics niceties that must be filled in, but it
+turns out that any continuous function on a finite interval can be
+approximated by some polynomial.[For those with a background in
 mathematical analysis, here is how the problem is handled. One starts
 with a subspace that is *dense* in the full space, i.e.\ any vector in
 the full space can be approximated to any precision by some linear
