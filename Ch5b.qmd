@@ -333,5 +333,4 @@ Triangle Inequality, using the following algebraic outline.
 ❄️  **Your Turn:** Explain why any set of orthogonal vectors is linearly
 independent.
 
-❄️  **Your turn:** Show that @eq-hii holds. 
 

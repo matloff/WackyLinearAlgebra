@@ -13,6 +13,10 @@ library(qeML)
 
 ## Goals of this chapter:
 
+Here we go into detail on the tremendous value derived by viewing
+certain operations as projections.
+
+:::
 
 ## Projections{#sec-projections}
 
@@ -60,7 +64,13 @@ $$
 z = P_W x
 $$
 
-In that case, we have the famous relation:
+Now consider a subspace $W$ of an inner product space $V$. The set of
+vectors having inner product 0 with vectors in $W$ is denoted
+$W^{\perp}$, known as the *orthogonal complement* of $W$.  It too is a
+subspace, and it will be shown later that jointly $W$ and $W^{\perp}$
+span all of $V$.
+
+We then have the famous relations:
 
 ::: {#thm-projdecomp}
 
@@ -69,13 +79,14 @@ latter. Then there is a matrix $P_W$ such that
 
 * $P_W x$ is the projection of $x$ onto $W$.
 
-* $x$ can be uniquely represented as
+* $x$ can be uniquely represented as a sum of two orthogonal terms, one
+  in $Q$ and the other in $\cal W$ and the other in $\cal W^{\perp}$,
+  Specifically,
 
   $$
   x = P_W x + (I-P_W x)
   $$
 
-  where the two summands are orthogonal to each other.
 
 $\square$
 
@@ -88,11 +99,6 @@ once you drop down to the subspace, there is no further dropping down to
 that same space.
 
 ## Orthogonal Complements and Direct Sums
-
-Consider a subspace $W$ of an inner product space $V$. The set of
-vectors having inner product 0 with vectors in $W$ is denoted
-$W^{\perp}$, known as the *orthogonal complement* of $W$.  It too is a
-subspace, and jointly $W$ and $W^{\perp}$ span all of $V$.
 
 From @sec-projections, we know that for any $x$ in $V$, one can uniquely
 write
