@@ -166,7 +166,7 @@ $$
 
 </blockquote>
 
-## Set of Orthogonal Vectors
+## Sets of Orthogonal Vectors
 
 We say that vectors $u$ and $v$ are *orthogonal* if $<u,v> = 0$. This is
 the general extension of the notion of perpendicularity in high school

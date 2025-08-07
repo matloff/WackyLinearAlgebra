@@ -35,11 +35,11 @@ Then we have the following:
 
 Consider an inner product space $V$, with subspace $W$.  Then for any
 vector $x$ in $V$, there is a unique vector $z$ in $W$, such that $z$ is
-the closest vector to $x$ in $W$. 
+the closest vector to $x$ in $W$.  Furthermore, $x-z$ is orthogonal to
+any vector $r$ in $W$.
 
 We say that $z$ is the *projection* of $x$ onto $W$.
 
-Furthermore, $x-z$ is orthogonal to any vector $r$ in $W$.
 
 :::
 
@@ -65,11 +65,9 @@ z = P_W x
 $$
 
 Now consider a subspace $W$ of an inner product space $V$. The set of
-vectors having inner product 0 with vectors in $W$ is denoted
-$W^{\perp}$.
-It too is a
-subspace, and it will be shown later that jointly $W$ and $W^{\perp}$
-span all of $V$.
+vectors having inner product 0 with all vectors in $W$ is denoted
+$W^{\perp}$.  It too is a subspace, and jointly $W$ and $W^{\perp}$ span
+all of $V$.
 
 We then have the famous relations:
 
