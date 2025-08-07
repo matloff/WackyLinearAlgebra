@@ -33,13 +33,13 @@ Then we have the following:
 
 ## Projection Theorem
 
-Consider an inner product space $\cal V$, with subspace $\cal W$.  Then
-for any vector $x$ in $\cal V$, there is a unique vector $z$ in $\cal
-W$, such that $z$ is the closest vector to $x$ in $\cal W$. 
+Consider an inner product space $V$, with subspace $W$.  Then for any
+vector $x$ in $V$, there is a unique vector $z$ in $W$, such that $z$ is
+the closest vector to $x$ in $W$. 
 
 We say that $z$ is the *projection* of $x$ onto $W$.
 
-Furthermore, $x-z$ is orthogonal to any vector $r$ in $\cal W$.
+Furthermore, $x-z$ is orthogonal to any vector $r$ in $W$.
 
 :::
 
@@ -49,7 +49,7 @@ The full proof is beyond the scope of this book, as it requires
 background in real analysis. Indeed, even the statement of the theorem
 is not mathematically tight.[For readers who do have such background,
 this is the Hilbert Projection Theorem. "Closest" is defined in terms of
-infimum, and $\cal W$ needs to be a topologically closed
+infimum, and $W$ needs to be a topologically closed
 set. See for example [the Wikipedia entry.](https://en.wikipedia.org/wiki/Hilbert_projection_theorem)]{.column-margin}
 
 $\square$
@@ -57,7 +57,7 @@ $\square$
 :::
 
 In the case of $R^n$, It will be seen shortly that for each
-$\cal W$ in the theorem, there is a matrix $P_{W}$ that implements the
+$W$ in the theorem, there is a matrix $P_{W}$ that implements the
 projection, i.e.
 
 $$
@@ -66,7 +66,8 @@ $$
 
 Now consider a subspace $W$ of an inner product space $V$. The set of
 vectors having inner product 0 with vectors in $W$ is denoted
-$W^{\perp}$, known as the *orthogonal complement* of $W$.  It too is a
+$W^{\perp}$.
+It too is a
 subspace, and it will be shown later that jointly $W$ and $W^{\perp}$
 span all of $V$.
 
@@ -74,14 +75,13 @@ We then have the famous relations:
 
 ::: {#thm-projdecomp}
 
-Say the vector $x$ is in $\cal R^n$, and $\cal W$ is a subspace of the
+Say the vector $x$ is in $R^n$, and $W$ is a subspace of the
 latter. Then there is a matrix $P_W$ such that
 
 * $P_W x$ is the projection of $x$ onto $W$.
 
 * $x$ can be uniquely represented as a sum of two orthogonal terms, one
-  in $Q$ and the other in $\cal W$ and the other in $\cal W^{\perp}$,
-  Specifically,
+  in $W$ and the other in $W^{\perp}$:
 
   $$
   x = P_W x + (I-P_W x)
@@ -100,21 +100,25 @@ that same space.
 
 ## Orthogonal Complements and Direct Sums
 
-From @sec-projections, we know that for any $x$ in $V$, one can uniquely
+From @thm-projection, we know that for any $x$ in $V$, one can uniquely
 write
 
 $$
 x = x_1 + x_2
-$$
+$${#eq-x1x2}
 
 where $x_1$ and $x_2$ are in $W$ and $W^{\perp}$, respectively.
 
 Say $u_1,...,u_r$ and $v_1,...,v_s$ are bases for $W$ and $W^{\perp}$.
-Then together they form a basis for all of $V$. Typically they are
-chosen to be orthonormal.
+Then in @eq-x1x2, we can generate $x_1$ from the $u_i$ and $x_2$ from
+the $v_j$. So together these two sets of vectors form a basis for all of
+$V$. Typically they are chosen to be orthonormal. (@sec-gramschmidt
+shows how we can convert the $u_i$ and $x_2$ to an orthonormal basis for
+$V$.)
 
 Finally, we say that $V$ is the *direct sum* of $W$ and $W^{\perp}$,
-denoted $V = W \oplus W^{\perp}$.
+denoted $V = W \oplus W^{\perp}$, and that the two subspaces 
+are *orthogonal complement* of each other.
 
 ## Projections in the Linear Model{#sec-conditexpect}
 
@@ -131,12 +135,12 @@ $$
 <S-Ab,S-Ab>
 $${#eq-rss}
 
-in the vector space $\cal R^n$, where $n$ is the number of our data
+in the vector space $R^n$, where $n$ is the number of our data
 points.[Of course, "data points" means rows in the data frame.  In the
 statistics realm, people often speak of "observations."]{.column-margin}
 
 Keep in mind, we are minimizing @eq-rss with respect to $b$. The set of
-all $Ab$, as $b$ varies, is a subspace $W$ of $\cal R^n$. In other
+all $Ab$, as $b$ varies, is a subspace $W$ of $R^n$. In other
 words, *we are finding the value of $b$ that makes $Ab$ closest to $S$*.
 That means that the minimizing $Ab$ is the projection of $S$ onto $W$.
 
@@ -236,18 +240,20 @@ members are orthogonal to each other.  We'll now see why, and see how to
 generate such a basis from a nonorthogonal one.
 
 [Converting a vector to length 1 in this manner is known as
-*normalizing* the vector.]{.column-margin} An orthogonal basis in which
-every vector has length 1 is called *orthonormal*. Recall that if $x
-\neq 0$ then $x/||x||$ has length 1, so that any orthogonal basis can
-easily be converted to orthonormal.
+*normalizing* the vector.]{.column-margin} As noted, an orthogonal basis
+in which every vector has length 1 is called *orthonormal*. Recall that
+if $x \neq 0$ then $x/||x||$ has length 1, so that any orthogonal basis
+can easily be converted to orthonormal.
 
 ### Motivation
 
-Say we have a vector space $\cal V$, a subspace $\cal W$, and a vector
-$x$ in $\cal V$. How do we fine the projection $z$ of $x$ in $\cal W$? 
+Our main question:
 
-Let $u_1,...,u_k$ be a basis for $\cal W$.[So we are assuming $\cal W$
-(but not necessarily $\cal V$ is finite-dimensional. Using proper math,
+> Say we have a vector space $V$, a subspace $W$, and a vector
+> $x$ in $V$. How do we find the projection $z$ of $x$ in $W$? 
+
+Let $u_1,...,u_k$ be a basis for $W$.[So we are assuming $W$
+(but not necessarily $V$ is finite-dimensional. Using proper math,
 this could be extended.]{.column-margin} Then there exist $a_1,...,a_k$
 such that
 
@@ -260,7 +266,7 @@ So we can find $z$ by finding the $a_i$, as follows.
 ### The virtues of orthogonality
 
 We do have a hint to work from: We know that $x-z$ is orthogonal to
-every vector in $\cal W$ -- including the $u_i$. So
+every vector in $W$ -- including the $u_i$. So
 
 $$
 0 = <x-z,u_i> = <x,u_i> - <z,u_i>
@@ -273,30 +279,68 @@ $$
 $$
 
 Now, say the $u_i$ are orthogonal to each other, and let's also say they
-are length 1. Then $<z,u_i> = a_i$,
-
-so 
+are length 1. Then $<z,u_i> = a_i$, and thus
 
 $$
 <x,u_i> = a_i
 $$
 
-So, we're done! We want to determine the $a_i$, and now we see that we
-can easily obtain it by calculating $<x,u_i>$.  So, we have:
+So, we're done! We wanted to determine the $a_i$ in @eq-aiui, and now we
+see that we can easily obtain it by calculating $<x,u_i>$.  So, we have:
 
-> Given: a vector space $\cal V$; a subspace $\cal W$ with orthonormal
+> Given: a vector space $V$; a subspace $W$ with orthonormal
 > basis $u_1,...,u_k$; and a vector
-> $x$ in $\cal V$. Then the projection of $x$ onto $\cal V$ is equal to
+> $x$ in $V$. Then the projection of $x$ onto $V$ is equal to
 > 
 > $$
-> p = <x,u_1> u_1+...+<x,u_k> u_k.
+> p = <x,u_1> u_1+...+<x,u_k> 
 > $${#eq-orthoproj}
 > 
 > And, as a projection, we have that $x-p$ is orthogonal to all the $u_i$.
 
+@sec-gramschmidt will show us how we obtain an orthogonal basis. 
 
-But how do we obtain an orthogonal basis, if we only 
-have a nonorthogonal one? That's next...
+## Matrix Form
+
+We now see how to obtain the matrix $P_W$ in @thm-projdecomp: Set row $i$
+to $u_i'$ in @eq-orthoproj. Then using matrix
+partitioning, we havd
+
+\begin{align}
+P_w x &= 
+ \left (
+ \begin{array}{r}
+ u_1' \\
+ ... \\
+ u_k' \\
+ \end{array}
+ \right ) x \\
+&= 
+ \left (
+ \begin{array}{r}
+ u_1' x \\
+ ... \\
+ u_k' x \\
+ \end{array}
+ \right ) \\
+&= 
+ \left (
+ \begin{array}{r}
+ u_1' z \\
+ ... \\
+ u_k' z \\
+ \end{array}
+ \right ) \\
+&= 
+ \left (
+ \begin{array}{r}
+ u_1' \\
+ ... \\
+ u_k' \\
+ \end{array}
+ \right ) z \\
+&= P_w z \\
+\end{align}
 
 ## The Gram-Schmidt Method{#sec-gramschmidt}
 
@@ -323,7 +367,7 @@ $u_1,...,u_{i-1}$.  Since $q$ is the projection of $b_i$ onto $\cal{W}$,
 $b_i - q$ will be orthogonal to $\cal{W}$, thus to $u_1,...,u_{i-1}$ --
 exactly what we need.
 
-## Projections in $\cal RV(\Omega)_0${#sec-rvomegaprojs}
+## Projections in $RV(\Omega)_0${#sec-rvomegaprojs}
 
 Here is a good example of how a very abstract vector space becomes
 useful in practical applications, such as will be presented in
@@ -342,14 +386,14 @@ covariance to the concept of inner product spaces:
 
 Recall from @eq-rhodef that correlation is the quotient of covariance
 and the product of standard deviations. Thus random variables $U$ and
-$V$ in $\cal RV(\Omega)_0$.  are uncorrelated if and only if they are
+$V$ in $RV(\Omega)_0$.  are uncorrelated if and only if they are
 orthogonal as vectors. 
 
 :::
 
 ### Conditional expectation
 
-It will turn out that in $\cal RV(\Omega)_0$, projections take the form
+It will turn out that in $RV(\Omega)_0$, projections take the form
 of conditional means. Let's see how that arises. 
 
 One of the Your Turn problems at the end of this chapter covers this
@@ -448,9 +492,9 @@ Note, though that that outer $E()$ (the first 'E') is a weighted
 average, since some departments are larger than others. The weights are
 the distribution of $D$.
 
-### Projections in $\cal RV(\Omega)_0$: how they work{#sec-howtheywork}
+### Projections in $RV(\Omega)_0$: how they work{#sec-howtheywork}
 
-Consider random variables $X$ and $Y$ in $\cal RV(\Omega)_0$, and consider
+Consider random variables $X$ and $Y$ in $RV(\Omega)_0$, and consider
 the subspace $W$ consisting of all functions of $X$. (By definition,
 this means that each such function, say $g(X)$, has finite variance and
 mean 0.)
@@ -483,7 +527,7 @@ $$
 
 In other words:
 
-> Projections in $\cal RV(\Omega)_0$ take the form of conditional means.
+> Projections in $RV(\Omega)_0$ take the form of conditional means.
 > Here, the projection of $Y$ onto $W$ is $E(Y | X)$.
 > 
 > Moreover:
@@ -684,7 +728,7 @@ independent.
 ❄️  **Your Turn:** Prove that the vector $Y - E(Y|X)$ is uncorrelated
 with $E(Y|X)$
 
-❄️  **Your Turn:** For $X$ and $Y$ in $\cal RV(\Omega)_0$, prove that
+❄️  **Your Turn:** For $X$ and $Y$ in $RV(\Omega)_0$, prove that
 
 $$
 Var(Y) = E[Var(Y|X)] + Var[E(Y|X)],
@@ -696,11 +740,11 @@ quicker proof.  As before, assume $X$ and $Y$ are centered.
 
 ❄️  **Your turn:** Show that @eq-hii holds. 
 
-❄️  **Your Turn:** Consider the space $\cal RV(\Omega)_0$. In order for the
+❄️  **Your Turn:** Consider the space $RV(\Omega)_0$. In order for the
 claimed inner product to be valid, we must have that if $<X,X> = 0$,
 then $X$ must be the 0 vector. Prove this. 
 
-❄️  **Your Turn:** Say $\cal V$ is $R^n$. Form the matrix $A$ whose
+❄️  **Your Turn:** Say $V$ is $R^n$. Form the matrix $A$ whose
 columns are the $u_i$, and let $P = AA'$. Show that
 
 $$
@@ -733,6 +777,6 @@ subspace of $C(0,1)$.  Also since the vectors here are functions, you'll
 need a data structure capable of storing functions. An R **list** will
 work well here.
 
-❄️  **Your Turn:** We noted that projection matrices in $\cal R^n$ are
+❄️  **Your Turn:** We noted that projection matrices in $R^n$ are
 idempotent. Prove the converse, i.e. that any idempotent matrix $A$ must
 be a projection to some subspace. Hint: Try the column space of $A$.

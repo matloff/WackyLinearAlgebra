@@ -239,10 +239,24 @@ will be convenient to write $\cal R^n$ vectors as rows.]{.column-margin}
 They are linearly independent, and clearly span $\cal R^3$. For
 instance, to generate (3,1,-0.2), we use this linear combination:
 
-(3,1,-0.2) = 3 (1,0,0) + 1 (0,1,0) + (-0.2) (0,0,,1)
+$$
+(3,1,-0.2) = 3 (1,0,0) + 1 (0,1,0) + (-0.2) (0,0,1)
+$$
 
 But bases are not unique; for instance, the set (1,0,0, (0,1,0), (0,1,1) works
-equally well as a basis for this space, as do (infinitely) many others..
+equally well as a basis for this space (as do infinitely many others).
+For instance,
+
+$$
+(3,1,-0.2) = 3 (1,0,0) + 1.2 (0,1,0) + (-0.2) (0,1,1)
+$${#eq-coords}
+
+We refer to the coefficients in those linear combinations as
+*coordinates* (evoking the old "(X,Y} coordinates" in elementary algebra
+courses). In the first example above, we say:
+
+> The coordinates of the vector (3,1,-0.2) with respect to the basis
+> (1,0,0), (0,1,0) and (0,1,1) are 3, 1.2 and -0.2.
 
 A basis for the subspace of vectors of the form (a,a,b) is (1,1,0) and
 (0,0,1). 
