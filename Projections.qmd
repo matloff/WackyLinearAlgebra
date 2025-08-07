@@ -116,7 +116,7 @@ $V$.)
 
 Finally, we say that $V$ is the *direct sum* of $W$ and $W^{\perp}$,
 denoted $V = W \oplus W^{\perp}$, and that the two subspaces 
-are *orthogonal complement* of each other.
+are *orthogonal complements* of each other.
 
 ## Projections in the Linear Model{#sec-conditexpect}
 
@@ -137,11 +137,14 @@ in the vector space $R^n$, where $n$ is the number of our data
 points.[Of course, "data points" means rows in the data frame.  In the
 statistics realm, people often speak of "observations."]{.column-margin}
 
-Keep in mind, we are minimizing @eq-rss with respect to $b$. The set of
-all $Ab$, as $b$ varies, is a subspace $W$ of $R^n$. In other
-words, *we are finding the value of $b$ that makes $Ab$ closest to $S$*.
-That means that the minimizing $Ab$ is the projection of $S$ onto $W$.
+As usual, let $p$ denote the number of columns of $A$, and write
+$\widehat{\beta}$ for the value of $b$ that minimizes @eq-rss.
 
+Keep in mind, we are minimizing @eq-rss with respect to $b$. The set $W$
+of all $Ab$, as $b$ varies, is a subspace of $R^n$. In minimizing
+@eq-rss, *we are finding the value of $b$ that makes $Ab$ closest to
+$S$*.  That means that the minimizing $Ab$ *is the projection of $S$ onto
+$W$*.
 
 Then from @thm-projdecomp, we have that
 
@@ -153,8 +156,10 @@ is orthogonal to $A \widehat{\beta}$. In other words, it must be true
 that
 
 $$
-\sum_{i=1}^n A \widehat{\beta} (S_i - A \widehat{\beta}) = 0
+\sum_{i=1}^n A_i \widehat{\beta} (S_i - A_i \widehat{\beta}) = 0
 $$
+
+where $A_i$ denotes row $i$ of $A$.
 
 ### The "hat" matrix
 
@@ -165,20 +170,20 @@ $$
 \widehat{\beta} = (A'A)^{-1} A'S
 $$
 
-The projection itself, i.e. the matrix $P_W$ in @sec-projections, is then 
+The projection itself, i.e. the matrix $P_W x$ in @sec-projections, is then 
 
 $$
 A \widehat{\beta} = A(A'A)^{-1} A'S = HS
 $$
 
-where the matrix 
+where 
 
 $$
 H = A(A'A)^{-1} A'
 $$ 
 
-which projects $S$ onto the column space of $A$, is called the *hat
-matrix*. 
+As discussed above, $H$ projects $S$ onto the space of all $Ab$. It is
+called the *hat matrix*. 
 
 As a projection, $H$ is idempotent, which one can easily verify by
 multiplication.  $H$ is also symmetric.
@@ -187,14 +192,14 @@ multiplication.  $H$ is also symmetric.
 
 An *outlier* is a data point that is rather far from the others. It
 could be an error, or simply an anomalous case. Even in the latter
-situation, such a data point could distort our results, so in both
+situation, such a data point could distort our $\widehat{\beta}$, so in both
 cases, identifying outliers, and possibly removing them, is important.
 
-Let $h_{ii}$ denote element $i$ of the diagonal of $H$, with $x_i$
-denoting row $i$ of A. One can show that
+Let $h_{ii}$ denote element $i$ of the diagonal of $H$, and again with
+$A_i$ denoting row $i$ of A. One can show that
 
 $$
-h_{ii} = x_{i} (A'A)^{-1} x_i'
+h_{ii} = A_{i} (A'A)^{-1} A_i'
 $${#eq-hii}
 
 The quantity $h_{ii}$ is called the *leverage* for datapoint $i$, with
@@ -211,8 +216,9 @@ $$
 
 for $A$ of size $n \times p$.
 
-Thus the average value of $h_{ii}$ is $p/n$. Accordingly, we might
-suspect an outlier if $h_{ii}$ is considerably larger than $p/n$. 
+Thus the average value of the $n$ quantities $h_{ii}$ is $p/n$.
+Accordingly, we might suspect that $A_i$ is an outlier if $h_{ii}$ is
+considerably larger than $p/n$. 
 
 For example, let's look at the Major League Baseball player  data we've
 seen earlier (@sec-mlb):
@@ -231,7 +237,7 @@ hist(diag(H))
 The ratio $p/n$ here is 3/1015, about 0.003. We might take a look at the 
 observations having $h_{ii}$ above 0.01, say.
 
-## Orthogonal Bases
+## Review: Orthogonal Bases
 
 It turns out that a basis for a vector space is especially useful if its
 members are orthogonal to each other.  We'll now see why, and see how to
@@ -259,7 +265,10 @@ $$
 z = a_1 u_1 + ..., + a_k u_k
 $${#eq-aiui}
 
-So we can find $z$ by finding the $a_i$, as follows.
+So we can find $z$ by finding its coordinates $a_i$, as
+follows.[Below, keep in mind that $x$ is known but $z$
+is not. We desire a method by which we can find $z$
+from $x$.]{.column-margin}
 
 ### The virtues of orthogonality
 
@@ -270,7 +279,7 @@ $$
 0 = <x-z,u_i> = <x,u_i> - <z,u_i>
 $$
 
-Thus
+and thus
 
 $$
 <x,u_i> = <z,u_i>
@@ -280,32 +289,66 @@ Now, say the $u_i$ are orthogonal to each other, and let's also say they
 are length 1. Then $<z,u_i> = a_i$, and thus
 
 $$
-<x,u_i> = a_i
+a_i = <x,u_i> 
 $$
 
-So, we're done! We wanted to determine the $a_i$ in @eq-aiui, and now we
-see that we can easily obtain it by calculating $<x,u_i>$.  So, we have:
+So, we're almost done! We wanted to determine the coordinates $a_i$ of
+$z$ in @eq-aiui, and now we see that we can easily obtain them by
+calculating $<x,u_i>$.  Our projection $z$ is
+
+$$
+z = <x,u_1> u_1+...+<x,u_k> u_k
+$$
+
+In partitioned matrix forms, the vector $a$ of the coordinates of $z$ is
+
+$$
+a = 
+(u_1' | ... | u_k') x
+$$
+
+and $z$ itself is
+
+$$
+z =
+(u_1 | ... | u_k) 
+ \left (
+ \begin{array}{rr}
+ a_1 \\
+ ... \\
+ a_k \\
+ \end{array}
+ \right )
+$$
+
+In other words,
+
+$$
+z = (u_1 | ... | u_k) (u_1' | ... | u_k') x
+$$
 
 > Given: a vector space $V$; a subspace $W$ with orthonormal
 > basis $u_1,...,u_k$; and a vector
 > $x$ in $V$. Then the projection of $x$ onto $V$ is equal to
 > 
 > $$
-> p = <x,u_1> u_1+...+<x,u_k> 
+> p = <x,u_1> u_1+...+<x,u_k> u_k
 > $${#eq-orthoproj}
 > 
 > And, as a projection, we have that $x-p$ is orthogonal to all the $u_i$.
 
-@sec-gramschmidt will show us how we obtain an orthogonal basis. 
+@sec-gramschmidt will show us how we obtain an orthonormal basis. 
 
 ## Matrix Form
 
-We now see how to obtain the matrix $P_W$ in @thm-projdecomp: Set row $i$
-to $u_i'$ in @eq-orthoproj. Then using matrix
-partitioning, we havd
+We now see how to obtain the matrix $P_W$ in @thm-projdecomp: First,
+form a matrix $Q$ in which
+row $i$
+is $u_i'$ in @eq-orthoproj. Then using matrix
+partitioning, we have
 
 \begin{align}
-P_w x &= 
+Q x &= 
  \left (
  \begin{array}{r}
  u_1' \\
@@ -337,7 +380,7 @@ P_w x &=
  u_k' \\
  \end{array}
  \right ) z \\
-&= P_w z \\
+&= Q z \\
 \end{align}
 
 ## The Gram-Schmidt Method{#sec-gramschmidt}
