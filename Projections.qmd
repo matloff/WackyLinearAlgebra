@@ -237,27 +237,15 @@ hist(diag(H))
 The ratio $p/n$ here is 3/1015, about 0.003. We might take a look at the 
 observations having $h_{ii}$ above 0.01, say.
 
-## Review: Orthogonal Bases
-
-It turns out that a basis for a vector space is especially useful if its
-members are orthogonal to each other.  We'll now see why, and see how to
-generate such a basis from a nonorthogonal one.
-
-[Converting a vector to length 1 in this manner is known as
-*normalizing* the vector.]{.column-margin} As noted, an orthogonal basis
-in which every vector has length 1 is called *orthonormal*. Recall that
-if $x \neq 0$ then $x/||x||$ has length 1, so that any orthogonal basis
-can easily be converted to orthonormal.
-
-### Motivation
+## Matrix Form of Projections in $\cal R^n$
 
 Our main question:
 
 > Say we have a vector space $V$, a subspace $W$, and a vector
 > $x$ in $V$. How do we find the projection $z$ of $x$ in $W$? 
 
-Let $u_1,...,u_k$ be a basis for $W$.[So we are assuming $W$
-(but not necessarily $V$ is finite-dimensional. Using proper math,
+Let $u_1,...,u_k$ be an orthonormal basis for $W$.[So we are assuming
+$W$ (but not necessarily $V$ is finite-dimensional. Using proper math,
 this could be extended.]{.column-margin} Then there exist $a_1,...,a_k$
 such that
 
@@ -265,12 +253,12 @@ $$
 z = a_1 u_1 + ..., + a_k u_k
 $${#eq-aiui}
 
-So we can find $z$ by finding its coordinates $a_i$, as
-follows.[Below, keep in mind that $x$ is known but $z$
-is not. We desire a method by which we can find $z$
-from $x$.]{.column-margin}
-
-### The virtues of orthogonality
+We can find $z$ by first finding its coordinates $a_i$ with respect to
+the $u_i$, as follows.[Below, keep in mind that $x$ is known but $z$ is
+not. We desire a method by which we can find $z$ from
+$x$.]{.column-margin} .
+ 
+### Exploiting orthonormality 
 
 We do have a hint to work from: We know that $x-z$ is orthogonal to
 every vector in $W$ -- including the $u_i$. So
@@ -285,8 +273,7 @@ $$
 <x,u_i> = <z,u_i>
 $$
 
-Now, say the $u_i$ are orthogonal to each other, and let's also say they
-are length 1. Then $<z,u_i> = a_i$, and thus
+Then $<z,u_i> = a_i$, and thus
 
 $$
 a_i = <x,u_i> 
@@ -321,67 +308,20 @@ z =
  \right )
 $$
 
-In other words,
+Combining the last two equations, we have
 
 $$
-z = (u_1 | ... | u_k) (u_1' | ... | u_k') x
+z = (u_1 | ... | u_k) (u_1' | ... | u_k') x = QQ'x
 $$
 
-> Given: a vector space $V$; a subspace $W$ with orthonormal
-> basis $u_1,...,u_k$; and a vector
-> $x$ in $V$. Then the projection of $x$ onto $V$ is equal to
-> 
-> $$
-> p = <x,u_1> u_1+...+<x,u_k> u_k
-> $${#eq-orthoproj}
-> 
-> And, as a projection, we have that $x-p$ is orthogonal to all the $u_i$.
+Wrapping up:
 
-@sec-gramschmidt will show us how we obtain an orthonormal basis. 
+::: {#thm-psubw}
 
-## Matrix Form
-
-We now see how to obtain the matrix $P_W$ in @thm-projdecomp: First,
-form a matrix $Q$ in which
-row $i$
-is $u_i'$ in @eq-orthoproj. Then using matrix
-partitioning, we have
-
-\begin{align}
-Q x &= 
- \left (
- \begin{array}{r}
- u_1' \\
- ... \\
- u_k' \\
- \end{array}
- \right ) x \\
-&= 
- \left (
- \begin{array}{r}
- u_1' x \\
- ... \\
- u_k' x \\
- \end{array}
- \right ) \\
-&= 
- \left (
- \begin{array}{r}
- u_1' z \\
- ... \\
- u_k' z \\
- \end{array}
- \right ) \\
-&= 
- \left (
- \begin{array}{r}
- u_1' \\
- ... \\
- u_k' \\
- \end{array}
- \right ) z \\
-&= Q z \\
-\end{align}
+Given: a vector space $V$; a subspace $W$ with orthonormal basis
+$u_1,...,u_k$; and a vector $x$ in $V$. Then the projection of $x$
+onto $W$ is equal to $QQ'x$, where $Q$ is the matrix whose columns are
+the $u_i$# Calculating a Projection Matrix
 
 ## The Gram-Schmidt Method{#sec-gramschmidt}
 
