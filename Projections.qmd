@@ -239,15 +239,13 @@ observations having $h_{ii}$ above 0.01, say.
 
 ## Matrix Form of Projections in $\cal R^n$
 
-Our main question:
+Our main question in this section:
 
-> Say we have a vector space $V$, a subspace $W$, and a vector
-> $x$ in $V$. How do we find the projection $z$ of $x$ in $W$? 
+> Say we have a subspace $W$ of $\cal R^n$, and a vector
+> $x$ in $V$. How do we find the projection of $x$ in $W$? 
 
-Let $u_1,...,u_k$ be an orthonormal basis for $W$.[So we are assuming
-$W$ (but not necessarily $V$ is finite-dimensional. Using proper math,
-this could be extended.]{.column-margin} Then there exist $a_1,...,a_k$
-such that
+Call the projection $z$, and let $u_1,...,u_k$ be an orthonormal basis
+for $W$.  Then there exist $a_1,...,a_k$ such that
 
 $$
 z = a_1 u_1 + ..., + a_k u_k
@@ -273,10 +271,24 @@ $$
 <x,u_i> = <z,u_i>
 $$
 
-Then $<z,u_i> = a_i$, and thus
+Since $<z,u_i> = a_i$, we have
 
 $$
-a_i = <x,u_i> 
+a_i = <x,u_i> = u_i' x
+$$
+
+In partitioned matrix forms, the vector $a$ of the coordinates of $z$ is
+
+$$
+a = 
+ \left (
+ \begin{array}{r}
+ u_1' \\
+ ... \\
+ u_k' \\
+ \end{array}
+ \right )
+ x
 $$
 
 So, we're almost done! We wanted to determine the coordinates $a_i$ of
@@ -284,20 +296,6 @@ $z$ in @eq-aiui, and now we see that we can easily obtain them by
 calculating $<x,u_i>$.  Our projection $z$ is
 
 $$
-z = <x,u_1> u_1+...+<x,u_k> u_k
-$$
-
-In partitioned matrix forms, the vector $a$ of the coordinates of $z$ is
-
-$$
-a = 
-(u_1' | ... | u_k') x
-$$
-
-and $z$ itself is
-
-$$
-z =
 (u_1 | ... | u_k) 
  \left (
  \begin{array}{rr}
@@ -311,17 +309,26 @@ $$
 Combining the last two equations, we have
 
 $$
-z = (u_1 | ... | u_k) (u_1' | ... | u_k') x = QQ'x
+z = (u_1 | ... | u_k) 
+ \left (
+ \begin{array}{r}
+ u_1' \\
+ ... \\
+ u_k' \\
+ \end{array}
+ \right ) x
+= QQ'x
 $$
 
 Wrapping up:
 
 ::: {#thm-psubw}
+# Calculating a Projection Matrix
 
-Given: a vector space $V$; a subspace $W$ with orthonormal basis
+Given: a subspace $W$ of $\cal R^n$ with orthonormal basis
 $u_1,...,u_k$; and a vector $x$ in $V$. Then the projection of $x$
 onto $W$ is equal to $QQ'x$, where $Q$ is the matrix whose columns are
-the $u_i$# Calculating a Projection Matrix
+the $u_i$.
 
 ## The Gram-Schmidt Method{#sec-gramschmidt}
 
@@ -359,8 +366,15 @@ is a vector space of random variables, each entity is both a random
 variable and a vector. Sometimes the latter will be the focus, sometimes
 the former.  We request the reader's patience in following this duality.
 
-Here is an important example, relating the probabilistic notion of
-covariance to the concept of inner product spaces:
+Recall first the definition of inner products in this space,
+@eq-covinner, a connection between the notion of covariance in
+probability theory and the notion of inner product in linear algebra.
+
+$$
+<U,V> = Cov(U,V) = E[(U - EU) (V - EV)] = E(UV)
+$$
+
+Among other things, this implies:
 
 ::: {.callout-note}
 ## Orthogonality and Uncorrelatedness
@@ -374,8 +388,13 @@ orthogonal as vectors.
 
 ### Conditional expectation
 
-It will turn out that in $RV(\Omega)_0$, projections take the form
-of conditional means. Let's see how that arises. 
+[Our definition of $RV(\Omega)_0$ restricts to random variables with
+mean 0. Thus technically the derivation here should subtract means; e.g.
+the random variable $Y$ below should be replaced by $\tilde{Y} = Y -
+EY$. However, in order to avoid clutter, we do not take this
+step.]{.column-margin} It will turn out that in $RV(\Omega)_0$,
+projections take the form of conditional means. Let's see how that
+arises. 
 
 One of the Your Turn problems at the end of this chapter covers this
 setting: 
@@ -384,7 +403,7 @@ setting:
 > we get a bonus roll, yielding $B$ additional dots; otherwise, $B = 0$.
 > Let $Y = X+B$.
 
-*The basic form:*
+*The basic form, conditioning value specified:*
 
 Now, what is $E(Y | B = 2)$? If $B = 2$, then we got the bonus roll, so
 $X = 6$ and $Y = X + B = 8$:
@@ -407,7 +426,7 @@ $$
 P(Y = i | B = 0) = P(X = i | X \neq 6) = \frac{1}{5}, ~ i=1,2,3,4,5
 $$
 
-We then have $E(Y|B=0) = 3 = 3$
+We then have $E(Y|B=0) = 3$.
 
 So our answer is
 
@@ -422,7 +441,8 @@ $$
 *The random variable form:*
 
 The quantity $E(Y | B = i)$, a number, can be converted to a random
-variable, in the form of a function of $B$, which we will call $q(B)$: 
+variable, in the form of a function of $B$, which we will call $q(B)$.
+Write
 
 $$
 q(B) = 
@@ -434,7 +454,7 @@ $$
 
 We will denote $q(B)$ by $ $E(Y | B)$ -- without '= i'. 
 
-$B$ is random, so $q(B)$ is also random. In other words, $(EY|B)$ is a
+$B$ is random, so $q(B)$ is also random. In other words, $E(Y|B)$ is a
 random variable.
 
 We need one more thing:

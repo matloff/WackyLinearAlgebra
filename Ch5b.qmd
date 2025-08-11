@@ -138,7 +138,7 @@ that have mean 0, and take covariance as our inner product:
 
 $$
 <U,V> = Cov(U,V) = E[(U - EU) (V - EV)] = E(UV)
-$$
+$${#eq-covinner}
 
 The properties of expected value, e.g. linearity, show that the
 requirements for an inner product hold.
