@@ -46,7 +46,7 @@ present context and others that will arise in later chapters:
 
 Roughly speaking, the row $i$, column $j$ element of $A'A$ is an
 indicator of the strength of the relation between predictor variables
-$i$ and $j$. If we center and scale our data (@sec-ctrscl), that that
+$i$ and $j$. If we center and scale our data (@sec-ctrscl), then that
 element is exactly $n$ times the (sample) correlation between these two
 predictors.
 
@@ -60,7 +60,7 @@ $$
 \widehat{\rho} =
 \frac
 {\frac{1}{n}
-\sum_{i=1}^n (X_{i} - \overline{X}) (Y_{i} - \overline{Y}) }
+\sum_{m=1}^n (X_{m} - \overline{X}) (Y_{m} - \overline{Y}) }
 {s_X s_Y}
 $$
 
@@ -70,10 +70,12 @@ standard deviations become 1, yielding
 $$
 \widehat{\rho} =
 \frac{1}{n}
-\sum_{i=1}^n (X_{i} Y_{i})
-$$
+\sum_{m=1}^n (X_{m} Y_{m})
+$${#eq-zzz}
 
-as claimed.
+Now take $X$ and $Y$ to be columns $i$ and $j$ of $A$ in
+@eq-linregformula. The element $(i,j)$ in $A'A)$ is exactly 
+@eq-zzz, without the $\frac{1}{n}$ factor.
 
 In other words, multicollinearity arises in settings in which at least
 some of the predictor variables are highly correlated.
@@ -144,7 +146,7 @@ Their solution is simple: Add some quantity to the diagonal of $A'A$.
 Specifically, @eq-linregformula now becomes
 
 $$
-\widehat{\beta} = (A'A + \lambda I)^{-1} A'S
+\widehat{\beta} = (A'A + \lambda^{0.5} I)^{-1} A'S
 $${#eq-ridge}
 
 where $\lambda$ is a positive number chosen by the analyst.  Here $A$
@@ -165,7 +167,7 @@ A_{new} =
  \left (
  \begin{array}{r}
  A \\
- \lambda I \\
+ \lambda^{0.5} I \\
  \end{array}
  \right )
 $$
@@ -182,10 +184,23 @@ S_{new} =
  \right )
 $$
 
-where 0 means $p$ 0s. In essence, we are adding artificial data here,
-consisting of $p$ new rows to $A$, and $p$ new elements to the vector
-$S$.  So @eq-ridge is just the result of applying @eq-linregformula to
-$A_{new}$ and $S_{new}$.
+where 0 means a vector consisting of $p$ 0s. In essence, we are adding
+artificial data here, consisting of $p$ new rows to $A$, and $p$ new
+elements to the vector $S$.  So @eq-ridge is just the result of applying
+@eq-linregformula to $A_{new}$ and $S_{new}$. For example, using matrix
+partitioning, we have
+
+$$
+A_{new}' A_{new} =
+(A'|\lambda^{0.5} I)
+ \left (
+ \begin{array}{r}
+ A  \\
+ \lambda^{0.5} I  \\
+ \end{array}
+ \right )
+= A'A + \lambda I
+$$
 
 Loosely speaking, we can think of the addition of $\lambda I$ to $A'A$
 as making the latter "larger", and thus making its inverse smaller. In
@@ -251,6 +266,8 @@ bhOLS <- coef(lm(V1 ~ .,s50a))
 l2norm(bhOLS)
 
 ```
+
+Again, the coefficients vector shrank.
 
 ## Choosing the Value of $\lambda$
 
