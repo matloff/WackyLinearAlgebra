@@ -440,8 +440,8 @@ $$
 
 *The random variable form:*
 
-The quantity $E(Y | B = i)$, a number, can be converted to a random
-variable, in the form of a function of $B$, which we will call $q(B)$.
+The quantity $E(Y | B = i)$, a number, *can be converted to a random
+variable*, in the form of a function of $B$, which we will call $q(B)$.
 Write
 
 $$
@@ -452,7 +452,7 @@ q(B) =
 \end{cases}
 $$
 
-We will denote $q(B)$ by $ $E(Y | B)$ -- without '= i'. 
+It is standard to denote $q(B)$ by $E(Y | B)$ -- without '= i'. 
 
 $B$ is random, so $q(B)$ is also random. In other words, $E(Y|B)$ is a
 random variable.
@@ -556,13 +556,18 @@ treated black and white defendants equally.
 It should be noted the *ProPublica* did not accuse Northpointe of
 intentional bias. Instead, the issue largely concerns *proxies*,
 variables that are related to race, rather than race (or gender etc.)
-itself. If for example COMPAS were to use a person's home location as a
-predictor, that would be correlated to race, and thus would be unfair to
-use in prediction. The point here is that, due to proxies, we cannot
-solve the problem by simply removing $S$ from our analysis; we would
-still be using correlates of $S$.
+itself. If for example COMPAS were to use a person's ZIP code as a
+predictor, that might be correlated with race, and thus would be unfair to
+use in prediction. 
 
-This book of course does not take a position on the specific dispute. 
+Let $S$ denote a vector of one or more sensitive variable, e.g. race.
+The point here is that, due to proxies, we cannot solve the problem by
+simply removing $S$ from our analysis; we would still be using
+correlates of $S$.
+
+This book of course does not take a position on the specific dispute
+between Northpointe and *ProPublica*. The above is simply a motivational
+example.
 
 ### Setting
 
@@ -578,9 +583,9 @@ case here.
 
 The basic assumption (BA) amounts to $(Y,X,S)$ having a multivariate
 Gaussian distribution, with $Y$ scalar and $X$ being a vector of length
-$p$.  For convenience, assume here that $S$ is scalar.  As discussed
-earlier in @sec-ctrscl, all variables are assumed centered,
-by subtracting their means, so that they now have mean 0.
+$p$.  Again, all variables
+are assumed centered, by subtracting their means, so that they now have
+mean 0.
 
 Let's review the material in @sec-mvn: Say we have $W$ with a
 multivariate normal distribution, and wish to predict one of its
@@ -601,17 +606,17 @@ One can also show that,
 One first applies a linear model in regressing $X$ on $S$,
 
 $$
-E(X | S) = S \gamma 
+E(X | S) = \gamma' S 
 $$
 
 where $\gamma$ is a length-$p$ coefficient vector. Here we are
-predicting the predictors (of $Y$), seemingly odd, but a first step in
-ridding ourselves from the influence of $S$.
+predicting the predictors (of $Y$), seemingly odd, but as a first step
+in ridding ourselves from the influence of $S$.
 
 Now consider the resulting prediction errors (*residuals)*,
 
 $$
-U = X - S \gamma 
+U = X - \gamma' S 
 $$
 
 $U$ can be viewed as the part of $X$ that is unrelated to $S$; think of
@@ -628,8 +633,8 @@ Note the following:
 
   \begin{align}
   0 &= <S,X - E(X|S)> \\
-    &= E[S (X - E(X|S))]\\ 
-    &= E(SU) \\
+    &= E[S' (X - E(X|S))]\\ 
+    &= E(S' U) \\
     &= Cov(S,U)
   \end{align}
 
