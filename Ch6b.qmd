@@ -425,6 +425,7 @@ matrix $\Sigma$. Here is how it works:
 $\square$
 :::
 
+<!--
 ## Eigenanalysis of the Relation between $A$ and $Cov(X)$ in Linear Regression{#sec-eiglm}
 
 Consider our usual linear regression setting, in which the matrix $A$
@@ -493,6 +494,7 @@ In other words:
 > The presence of small eigenvalues in $A'A$ does indeed reflect
 > approximate linear dependencies among the predictors, reaffirming our
 > discussion in @sec-eigenChap.
+-->
 
 ## Your Turn
 
