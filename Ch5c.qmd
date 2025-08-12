@@ -146,7 +146,7 @@ Their solution is simple: Add some quantity to the diagonal of $A'A$.
 Specifically, @eq-linregformula now becomes
 
 $$
-\widehat{\beta} = (A'A + \lambda^{0.5} I)^{-1} A'S
+\widehat{\beta} = (A'A + \lambda I)^{-1} A'S
 $${#eq-ridge}
 
 where $\lambda$ is a positive number chosen by the analyst.  Here $A$
@@ -299,7 +299,7 @@ accuracy on our training set yet actually overfit.
 
 A common way to choose among models is *cross-validation*: We set aside
 a subset of the data, known as the *holdout* or *test* set, for use in
-testing predictive accuracy.  The remaining data is the *training set*.
+assessing predictive accuracy.  The remaining data is the *training set*.
 For each of our competing models -- in this case, competing values of
 $\lambda$ -- we fit the model on the training set, then use the result
 to predict the test set. We then use whichever model -- again, in this
@@ -333,8 +333,12 @@ the function tried; see $\textbf{glmOut\$lambda}$.)
 A more conservative value of $\lambda$ was 0.9987, the largest $\lambda$
 giving MSE within one standard error of the minimum; it's conservative
 in the sense of being less likely to overfit (p-hacking); its MSE value,
-90.28, was only slightly larger than the best one. In each case, all 90
-predictors had nonzero coefficient estimates.
+90.28, was only slightly larger than the best one. 
+
+In each case, all 90 predictors had nonzero coefficient estimates. This
+part of the output will usually not be very meaningful for the ridge
+case, and is aimed mainly at the LASSO, to be presented later in this
+chapter.
 
 We can then predict as usual. Say we have a song similar to that in
 **s50[1,]**, but with **V2** equal to 25.0.
@@ -476,8 +480,8 @@ show that they are typically equivalent.
 
 The LASSO (Least Absolute Shrinkage and Selection Operator) was
 developed by Robert Tibshirani in 1996, following earlier work by Leo
-Breiman.  It takes $\widehat{\beta}$ to be the value of $b$ that
-minimizes
+Breiman and Tin Kam Ho. It takes $\widehat{\beta}$ to be the value of
+$b$ that minimizes
 
 $$
 (S - Ab)'(S - Ab) + \lambda ||b||_1
@@ -492,7 +496,7 @@ $$
 We will write our original norm as $||b||_2$.
 
 This is a seemingly minor change, but with important implications.  What
-Breiman and Tibshirani were trying to do was to obtain a *sparse*
+the researchers were trying to do was to obtain a *sparse*
 $\widehat{\beta}$ , i.e. a solution with lots of 0s, thereby providing a
 method for predictor variable selection. This is important because
 so-called "parsimonious" prediction models are desirable.
@@ -526,7 +530,7 @@ number chosen by the analyst.
 Today's large datasets being so common, we need a way to "cut things
 down to size," i.e. *dimension reduction*, aimed at reducing the number
 of predictor variables. This is done both for the sake of simplicity and
-to avoid *overfitting*, in which fitting an overly complex model can
+to avoid overfitting, in which fitting an overly complex model can
 reduce predictive power.
 
 ### Geometric view
@@ -677,7 +681,7 @@ settling on a final guess.
 This may or may not work well.  Here are some of the major
 issues/perils:
 
-* initial guess
+* choice of initial guess
 
 * updating method
 
@@ -801,8 +805,8 @@ large saving in memory storage space and computation time.
 
 But we reap even larger benefit by looking at fitted or predicted
 values. Let $x_{new}$ be a matrix of "X" values at which we wish to
-predict "Y," in the same format as $X$.  Then the fitted/predicted
-values are
+predict "Y," in the same format as the rows of $X$.  Then the
+fitted/predicted values are
 
 $$
 x_{new} \widehat{\beta} 
@@ -826,7 +830,7 @@ by $a_i$. Then we replace the expression for the row $i$, column $j$
 element of $AA'$,
 
 $$
-a_i' a_j
+a_i a_j'
 $$ {#eq-aiaj}
 
 by

@@ -88,14 +88,8 @@ $<(a_1,...,a_n),(b_1,...,b_n> =
 a_1 b_1 + ... + a_n b_n$
 
 But other inner products may be defined. For instance, say an $n \times
-n$ matrix $A$ is *positive definite*, meaning that 
-
-$$
-q' A q \geq 0
-$$
-
-for all $q$ in $\cal R^n$, with equality only if $q = 0$. Then it is
-easily seen that the function 
+n$ matrix $A$ is *positive definite* (@eq-covpdef).
+Then it is easily seen that the function 
 
 $$
 g(q,r) = q'Ar

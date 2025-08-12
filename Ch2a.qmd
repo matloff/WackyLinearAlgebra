@@ -211,15 +211,15 @@ Properties of the matrix version of covariance:
 
 * For statistically independent random vectors $Q$ and $W$ of the same length,
 
-$$
-Cov(Q+W) = Cov(Q) + Cov(W) 
-$${#eq-indepcov}
+  $$
+  Cov(Q+W) = Cov(Q) + Cov(W) 
+  $${#eq-indepcov}
 
 * For any nonrandom scalar $c$, and $Q$ a random vector, we have 
 
-$$
-Cov(cQ) = c^2 Cov(Q)
-$$
+  $$
+  Cov(cQ) = c^2 Cov(Q)
+  $$
 
 * Say we have a random vector $X$, of length $k$, and a nonrandom matrix
   $A$ of size $m \times k$. Then $A X$ is a new random vector $Y$ of $m$
@@ -239,34 +239,42 @@ $$
 
 * If $X$ is a vector of length 1, i.e. a number, then
 
-$$
-Cov(X) = Var(X)
-$$
+  $$
+  Cov(X) = Var(X)
+  $$
 
 * For any length-$k$ column vector $a$,
 
-$$
-Var(a'X) = a' ~ Cov(X) ~ a
-$${#eq-quadform}
+  $$
+  Var(a'X) = a' ~ Cov(X) ~ a
+  $${#eq-quadform}
 
 * Since variance is nonnegative, we thus see that  $Cov(X)$ is *nonnegative
   definite*, meaning that for any length-$k$ column vector $a$
 
-$$
-a' Cov(X) a \geq 0
-$${#eq-covnndef}
+  $$
+  a' Cov(X) a \geq 0
+  $${#eq-covnndef}
+
+  Similarly, a matrix $Q$ is termed positive definite if
+
+  $$
+  a' Q a > 0
+  $${#eq-covpdef}
+
+  unless $a = 0$.
 
 * More generally, for any compatible constant vectors $a$ and $b$,
 
-$$
-Cov(a'X,b'X) = a' Cov(X) b
-$$
+  $$
+  Cov(a'X,b'X) = a' Cov(X) b
+  $$
 
 * For any constant (i.e. nonrandom) $m \times k$ matrix $A$,
 
-$$
-Cov(AX) = A Cov(X) A'
-$${#eq-covax} 
+  $$
+  Cov(AX) = A Cov(X) A'
+  $${#eq-covax} 
 
 <!--
 ### Cross-covariance
