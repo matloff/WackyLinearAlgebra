@@ -209,7 +209,7 @@ title of this chapter, Shrinkage Estimators. This effect
 is made even stronger by the fact that we added 0s data to $S$. This
 will be made more precise below.
 
-### Example: Million Song dataset
+### Example: Million Song dataset {#sec-millsong}
 
 We will use **glmnet**, one of the most widely-used R  packages.
 

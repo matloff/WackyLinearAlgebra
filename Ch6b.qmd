@@ -129,13 +129,17 @@ The principal components have the following properties:
   linear regression model (without a 1s column). In other words, each
   row contains the data on one sampling unit, e.g. one person. To
   convert from the original predictor variables to PCs, compute
+  $GP$. If we wish to use just the first few PCs, then compute
 
-  ``` r
-  GP[,1:nPC]
-  ```
+  $$
+  G (P_1 | ... | P_k)
+  $$
 
-  where **nPC** denotes our desired number of PCs. (A topic to be
+  where $k$ denotes our desired number of PCs. (A topic to be
   explored in @sec-howmanypcs.)
+
+* By construction, the covariance matrix of $GP$ is $D$, so the PCs are
+  uncorrelated.
 
 :::
 
@@ -182,9 +186,10 @@ z$sdev
 [It's called a rotation because geometrically the change of variables
 really does cause a rotation of the coordinate system.]{.column-margin}
 The entity **z$rotation** is our matrix $P$.  Here **sdev** is the
-square roots of the variances, i.e. the eigenvalues. It appears that
-there are two main PCs, the rest minor.  Here we can see which of the
-original variables each of these two PCs focuses on.
+square roots of the variances, i.e. of the square roots of the
+eigenvalues. It appears that there are two main PCs, the rest minor.
+Here we can see which of the original variables each of these two PCs
+focuses on.
 
 ``` r 
 > z$rotation
@@ -209,20 +214,20 @@ In that first PC, the largest component by far is **wkswrkd**, trailed
 substantially by the next-largest, **age**. Those two variables more or
 less trade places in the second PC.
 
-This suggests that none of the other predictors is very powerful, though
-this should not be viewed as meaning that the others are collectively
-useless. 
-
 In other words, if our project is to predict wage income, we might use
 PCs 1 and 2 as our predictors, as opposed to using all 13 of the
 original variables.
 
-Well, how do we do that? Say we have several new people for which we
-need to predict wage income. Place their predictor values in a matrix,
-say $Q$, one person per row (i.e. the same format at the matrix $A$ in
-@eq-linregformula, though without a 1s column). Then, applying our usual
-knowledge of matrix partitioning, our matrix of new predictor data is 
-simply the matrix product shown above
+The numbers suggest that none of the other predictors is very powerful, though
+this should not be viewed as meaning that the others are collectively
+useless. 
+
+Well, how do we actually use PC1 and PC2?  Say we have several new
+people for which we need to predict wage income. Place their predictor
+values in a matrix, say $G$, one person per row (i.e. the same format at
+the matrix $A$ in @eq-linregformula, though without a 1s column). Then
+as stated in the theorem, our matrix of new predictor data is simply the
+matrix product shown above
 
 ``` r
 G %*% P[,1:nPC]
@@ -240,8 +245,8 @@ lmOut
 
 ## Back to the African Soils Example{#sec-backtoafrica}
 
-So, we remove the ``Y'' variable, **pH**, number 3598 as seen above, and
-proceed. We will also remove the nonnumeric columns,
+So, we remove the ``Y'' variable, **pH**, number 3598 as in
+@sec-african, and proceed. We will also remove the nonnumeric columns,
 **PIDN** and **Depth**. 
 
 ```{r} 

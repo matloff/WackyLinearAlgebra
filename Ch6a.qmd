@@ -19,7 +19,7 @@ basic ideas and properties in this chapter.
 
 :::
 
-## Example: African Soils Data
+## Example: African Soils Data {#sec-african}
 
 To get things started, let's consider the African Soils dataset.
 
@@ -34,11 +34,11 @@ names(AfricanSoil)[3576:3600]
 ```
 
 Let's try predicting **pH**, the acidity. But that leaves 3599 possible
-predictors. There is an old rule of thumb that one should have 
-$p < \sqrt{n}$, for $p$ predictors and $n$ data points,
-to avoid overfitting, a rule which in our setting of $n = 1157$
-is grossly violated.  We need to do dimension reduction. One way to
-accomplish this is to use Principal Components Analysis (PCA). 
+predictors. As mentioned in an earlier chapter, there is an old rule of
+thumb that one should have $p < \sqrt{n}$, for $p$ predictors and $n$
+data points, to avoid overfitting, a rule which in our setting of $n =
+1157$ is grossly violated.  We need to do dimension reduction. One way
+to accomplish this is to use Principal Components Analysis (PCA). 
 
 ## Overall Idea 
 
@@ -107,7 +107,7 @@ Cov(X) ~ u = -\gamma u
 $${#eq-aha}
 
 We see a situation in which a matrix ($Cov(X)$) times a vector ($u$)
-equals a constant ($-\gamma$) times that same vector.  We say that
+equals a constant ($-\gamma$) times *that same vector*.  We say that
 $-\gamma$ is an *eigenvalue* of the matrix $Cov(X)$, and that $u$ is a
 corresponding *eigenvector*.  Seems innocuous, but it opens a huge new
 world! 
@@ -179,6 +179,8 @@ the form $a+bi$.
 
 :::
 
+We omit the proof.
+
 ::: {#thm-eigortho}
 
 The eigenvectors corresponding to distinct eigenvalues of a symmetric matrix
@@ -189,8 +191,8 @@ $M$ are orthogonal.
 ::: {.proof}
 
 Let $u$ and $v$ be such eigenvectors, corresponding to
-eigenvalues $\mu$ and $\nu$. Keeping mind that $M'=M$,
-$(ab)' = b'a'$ that the transpose of a number is just that number, 
+eigenvalues $\mu$ and $\nu$. Keeping in mind that $M'=M$,
+$(ab)' = b'a'$, and that the transpose of a number is just that number, 
 we calculate $u'Mv$ in two different ways.
 
 $$
@@ -201,7 +203,8 @@ $$
 (u'Mv)' = v'(u'M)' = v'Mu = \mu v'u = \mu u'v
 $$
 
-So, $\mu u'v = \nu u'v$, forcing $u'v = 0$.
+So, $\mu u'v = \nu u'v$, forcing $u'v = 0$ since $\mu$ and $\nu$ are
+distinct.
 
 $\square$
 
@@ -211,8 +214,8 @@ A square matrix $R$ is said to be *diagonalizable* if there exists an
 invertible matrix $P$ such that $P^{-1}RP$ is equal to some diagonal
 matrix $D$. We will see that symmetric matrices fall into this category.
 
-One application of this is the computation of powers of a diagonal
-matrix:
+One application of this is the computation of powers of a
+diagonalizable matrix:
 
 $$
 R^k = (P^{-1}DP) ~ (P^{-1}DP) ~ ... ~ (P^{-1}DP) = P^{-1}D^kP
@@ -249,14 +252,14 @@ Any symmetric matrix $M$ has the following properties:
 
 ::: {.proof}
 
-Use partitioned matrices. 
+Let $D = diag(d_1,...,d_m)$, where the $d_i$ are the eigenvalues of $M$.
+Set these eigenvectors $u_i$ to have length 1, by dividing by their
+lengths.  
 
-Let $D = diag(d_1,...,d_m)$, where the $d_i$ are the eigenvalues of $M$,
-corresponding to the eigenvectors of $P$. Set these eigenvectors $u_i$ to
-have length 1, by dividing by their lengths.  
-
-Recall that the eigenvectors of $M$, i.e. the columns of $P$, are
-orthogonal. Again using partitioning, write $P$ as
+Recall from @thm-eigortho that the eigenvectors of $M$, i.e. the columns
+of $P$, are orthogonal, provided the eigenvalues are distinct, which we
+will take as an extra assumption here (the theorem is valid without it).
+Again using partitioning, write $P$ as
 
 $$
 P = (u_1 | ... | u_m)
@@ -276,17 +279,18 @@ P'P =
   (u_1 | ... | u_m)
 $$
 
-Then the row $i$, column $j$ element of $P'P$ is equal to either 1 or 0,
-according to whether $i=j$ or $i \neq j$.
+Then the row $i$, column $j$ element of $P'P$ is equal to $u_i' u_j$,
+which is either 1 or 0, according to whether $i=j$ or $i \neq j$.
+Thus $P'P = I$, as claimed.
 
 By the way, any square matrix $Q$ such that $Q'Q = I$ is said to be
-*orthogonal*. And, its inverse is its transpose.
+*orthogonal*. 
 
 Now use partitioning again:
 
 \begin{align}
 MP &= M(u_1 | ... | u_m) \\
-&= (Mu_1 | ... | Mu_n) \\
+&= (Mu_1 | ... | Mu_m) \\
 &= (d_1 P_1 | ... | (d_m P_m) \\
 &= PD
 \end{align}
@@ -332,10 +336,10 @@ $\square$
 
 :::
 
-
 ## Example: Census Dataset
 
-Let's illustrate all this with the data in @sec-pgtn. We will form the
+Let's illustrate all this with the census dataset, modified to include
+both male and female columns as in @sec-millsong. We will form the
 matrix $A'A$ in @sec-linregformula, which as mentioned, is symmetric.
 
 Recall that in that example, $A$ is not of full rank. Thus we should
