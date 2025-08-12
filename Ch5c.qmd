@@ -868,7 +868,7 @@ computing dot products. For instance, the new value of @eq-aiaj would
 now be
 
 $$
-\phi(a_i)' \phi(a_j)
+\phi(a_i) \phi(a_j)'
 $$
 
 The Kernel Trick involves finding a kernel $k$ for which
@@ -883,7 +883,8 @@ $$
 k(u,v) = (c + u'v)^d
 $$ {#eq-polykern}
 
-for polynomials of degree $d$.
+for polynomials of degree $d$, where $c$ is a constant chosen by the
+user.
 
 In other words:
 
@@ -966,8 +967,7 @@ quite helpful in prediction contexts. However, note the following:
 ## No Statistical Inference on Shrinkage Estimators
 
 Shrinkage produces a bias, of unknown size. Thus classical statistical
-inference (confidence intervals, hypothesis tests), e.g. those based on
-@eq-varcovar for linear models, is not possible.
+inference (confidence intervals, hypothesis tests) is not possible.
 
 :::
 
