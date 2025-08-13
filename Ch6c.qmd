@@ -70,10 +70,12 @@ $i=r+1,...,n$.
 
 ## Example Applications 
 
+Here are some brief overviews of applications.
+
 ### Recommender Systems
 
 Recall @sec-recsys, which began with movie ratings data. We would like
-to predict the rating of some particular user would give to some particular
+to predict the rating that some particular user would give to some particular
 movie. It will turn out that we can neatly set up SVD in such a way that $U$
 contains movie data and $V$ contains user data. 
 
@@ -101,8 +103,6 @@ achieve dimension reduction by replacing even some of the smaller
 eigenvalues by 0s as well, with corresponding adjustments to the columns
 of $U$ and $V$. We will discuss this below in @sec-svddimred. 
 
-xxx
-
 ## Solution to Our SVD Goal
 
 There are various derivations, e.g. along the lines of @sec-firstPC, 
@@ -119,7 +119,7 @@ but let's go directly to the answer:
    Order the $\sigma_i$ from largest to smallest, and use the same
    ordering for the $v_i$.
 
-3. Since $A'A$ is symmetric and positive-semidefinite, its eigenvalues
+3. Since $A'A$ is symmetric and nonnegativre-definite, its eigenvalues
    will be nonnegative and its eigenvectors $v_1,...,v_r$ will be
    orthogonal as long as $\sigma_1,...,\sigma_r$ are distinct, as is
    typically the case for numeric data. Since these eigenvectors
@@ -142,7 +142,7 @@ but let's go directly to the answer:
 
    $$
    u_i' u_j = \frac{1}{\sigma_i \sigma_j} v_i' A'A v_j =
-   \frac{1}{\sigma_i \sigma_j} v_i' v_j = 0
+   v_i' v_j = 0
    $$
 
    where we have used the facts that $v_j$ is an eigenvector of $A'A$
@@ -165,32 +165,11 @@ of $AA'$:
 \begin{align}
 (AA') u_{i} &= (AA') ( \frac{1}{\sigma_i} Av_i) \\
 &= \frac{1}{\sigma_i} A[(A'A) ~ v_i] \\
-&= \frac{1}{\sigma_i} A [\sigma_i v_i] \\
+&= \frac{1}{\sigma_i} A \sigma_i v_i \\
 &= \sigma_i u_i
 \end{align}
 
 So, $u_i$ is an eigenvector of $AA'$, with eigenvalue $\sigma_i$. 
-
-Now, in the recommender systems context, take $A$ to be the matrix whose
-row $i$, column $j$ element is the rating user $i$ gives to movie $j$.
-(We take $A$ to be fully known for now.)
-
-* The columns of $U$ are basically eigenvectors of the matrix $AA'$,
-  which in turn has one row and one column for each moviegoer.
-
-* The columns of $V$ are basically eigenvectors of the matrix $A'A$,
-  which in turn has one row and one column for each movie.
-
-* Thus the SVD $A = U \Sigma V'$ expresses the ratings matrix $A$ in
-  terms of a moviegoers data factor $U$ and a movies data factor $V$.
-  To write it as a genuine product of two factors, write
-
-  $$
-  A = U \Sigma V' = (U \Sigma^{0.5}) (\Sigma^{0.5} V') = WH'
-  $${#eq-wh}
-
-  where $\Sigma^{0.5}$ is the diagonal matrix with elements
-  $\sqrt{\sigma_i}$.
 
 ## SVD as a basis for matrix generalized inverse
 
@@ -395,7 +374,70 @@ plot(as.cimg(newImgMat))
 The rank-50 version is almost as sharp as the full image -- and achieves
 a huge reduction in storage space.
 
+### Example: MNIST optical character recognition
+
+The famous MNIST image dataset is the "Hello World" of image
+recognition, everyone's introductory example. It consists of 70,000
+images, each of size $28 \times 28 = 784$ pixels.  images of handwritten
+digits 0 through 9. The goal of course is to correctly guess the digit
+("Y"), based on the 784 pixels ("X").
+
+The situation here is a bit different from other classification
+applications we've covered so far, in the here "Y" is a vector rather
+than a scalar. Element $i$ of the vector is either 1 or 0, depending on
+whether the handwritten digit is $i$ or not.
+
+There are various ways of handling this, but the one we will discuss
+here is to perform 10 separate classification fits, one for each digit,
+using the logistic model. In other words, we will call **glm** 10 times,
+yielding 10 fits. Since fit $i$ gives the probability of digit $i$,
+given the values of the 784 pixels, we then take our guess for the digit
+to be the one with highest probability.
+
+In our usual notation, we have $p = 784$, with $n = 70000$. Again, the
+$p < \sqrt{n}$ rule of thumb is violated, so dimension reduction should
+be of value. We will find the low-rank approximation for the data.
+This also has the advantage of speeding up algorithms that are much
+slower than logit, such as neural networks.
+
+We will only illustrate one digit here, '5', and only the first steps.
+
+```{r}
+library(WackyData)
+data(mnistPred5)
+dim(mnistPred5)
+# final column is y, 1 or 0 for '5' or not
+u <- svd(mnistPred5[,-785]) 
+head(u$d,100) 
+```
+
+In order to maximize classification accuracy, we would probably need a
+larger value of $k$, large than the 100 value we tried here. As usual,
+we could use cross-validation to determine a "big enough" $k$.
+
+
 ## Matrix Factorization in Recommender Systems
+
+Now, in the recommender systems context, take $A$ to be the matrix whose
+row $i$, column $j$ element is the rating user $i$ gives to movie $j$.
+(We take $A$ to be fully known for now.)
+
+* The columns of $U$ are basically eigenvectors of the matrix $AA'$,
+  which in turn has one row and one column for each moviegoer.
+
+* The columns of $V$ are basically eigenvectors of the matrix $A'A$,
+  which in turn has one row and one column for each movie.
+
+* Thus the SVD $A = U \Sigma V'$ expresses the ratings matrix $A$ in
+  terms of a moviegoers data factor $U$ and a movies data factor $V$.
+  To write it as a genuine product of two factors, write
+
+  $$
+  A = U \Sigma V' = (U \Sigma^{0.5}) (\Sigma^{0.5} V') = WH'
+  $${#eq-wh}
+
+  where $\Sigma^{0.5}$ is the diagonal matrix with elements
+  $\sqrt{\sigma_i}$.
 
 In the last section, our goal was to "thin out" a matrix In this
 section, we hope to fill in a sparse matrix.
@@ -415,11 +457,10 @@ $$
 A = U \Sigma V' = (U \Sigma^{0.5}) (\Sigma^{0.5} V') = WH'
 $$
 
-For concreteness, say the context is users rating movies.  Say $A$ is $u
-\times m$, for $u$ users and $m$ movies. Again, the
-the point is that we have factored $A$ into the product of a matrix $W$
-containing information about the users' ratings and a matrix $H'$
-that does the same for items. 
+Say $A$ is $u \times m$, for $u$ users and $m$ movies. Again, the the
+point is that we have factored $A$ into the product of a matrix $W$
+containing information about the users' ratings and a matrix $H'$ that
+does the same for items. 
 
 Note that the row $i$, column $j$ element of $A$ is equal to $w_i h_j$,
 where $w_i$ is row $i$ of $W$ and $v_j$ is column $j$ of $H'$.
@@ -496,7 +537,7 @@ These two equations form great examples of the power of SVD:
 
 * @eq-ridgeb gives an explicit formula for the vector of estimated
   coefficients $b$ as a function of $\lambda$. Without it, we would need
-  to do the matrix inversion in @eq-ridge once for each value of
+  to do the matrix inversion in @eq-ridge, once for each value of
   $\lambda$, potentially a very slow process.
 
 * Ridge does not shrink the coefficients uniformly. @eq-ridgefitted tells us
