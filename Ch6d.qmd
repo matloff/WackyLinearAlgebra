@@ -178,6 +178,8 @@ this for Double Descent shortly, but let's prove it first.
 
 ### Proof of the minimum-norm property
 
+<!--
+
 We will need this:
 
 ::: {#thm-samenorm}
@@ -194,6 +196,8 @@ See the Your Turn problem below.
 
 :::
 
+-->
+
 ::: {#thm-shortest}
 
 ## The Moore-Penrose Solution Is Min-Norm
@@ -209,7 +213,12 @@ the Moore-Penrose solution minimizes $||x||$.
 
 :::
 
+In our linear regression context @eq-overdetermined,
+$B = A'A$, $x=b$ and $q = A'S$.
+
 ::: {.proof}
+
+<!--
 
 Again, write[Adapted in part from a derivation by Jose' C. Feriero.]{.column-margin}
 
@@ -296,7 +305,7 @@ $$
 
 Exactly the Moore-Penrose inverse!
 
-
+-->
 $\square$
 
 :::
