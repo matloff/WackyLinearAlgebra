@@ -168,7 +168,7 @@ descent*. This introduces the concept, but the big news is:
 Let's see how linear algebra plays a role in explaining how double
 descent can occur..
 
-## Plausibility of Double Descent: the Minimum Norm Solutions
+## Plausibility of Double Descent: the Minimum Norm Solution
 
 In an overdetermined linear system ($p > n$) such as @eq-overdetermined,
 there are many solutions. Our **qePolyLin** function calls
