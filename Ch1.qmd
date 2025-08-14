@@ -398,8 +398,17 @@ Let's consider the famous Karate Club dataset:
 library(networkdata)
 data(karate)
 library(igraph)
+```
+
+Calling 
+
+``` r
 plot(karate)
 ```
+
+then yields
+
+![Karate Club network](Karate.png)
 
 There is a link between node 13 and node 4, meaning that club members 13
 and 4 are friends.[This graph is *undirected*, as friendship is mutual.
