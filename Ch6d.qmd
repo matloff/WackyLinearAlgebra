@@ -271,8 +271,8 @@ Thus (illustrating for $B$ of rank $r = 2$)
 $$
  \left (
  \begin{array}{rrrr}
- c_1 & 0 & 0 & ...\\
- 0 & c_2 & 0 & ... \\
+ \sigma_1 & 0 & 0 & ...\\
+ 0 & \sigma_2 & 0 & ... \\
  0 & 0 & 0 & ... \\
   & ... \\
  \end{array}
@@ -303,7 +303,7 @@ r$ is; let's make them 0s.)
 So we see that
 
 $$
-w_i = \frac{1}{c_i},  i = 1,..,r
+w_i = \frac{1}{\sigma_i},  i = 1,..,r
 $$
 
 In other words, making use of @eq-diagyourturn,
