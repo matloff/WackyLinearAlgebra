@@ -218,8 +218,6 @@ $B = A'A$, $x=b$ and $q = A'S$.
 
 ::: {.proof}
 
-<!--
-
 Again, write[Adapted in part from a derivation by Jose' C. Feriero.]{.column-margin}
 
 $$
@@ -258,11 +256,18 @@ $${#eq-RSS3}
 
 So, instead of finding $x$ to minimize the residual sum of squares
 $||Bx - q||^2$, we've (temporarily) changed the problem to that of
-finding $w$ to minimmize
+finding $w$ to minimize
 
 $$
 ||\Sigma w - s||^2
 $$ {#eq-newResids}
+
+This version of the original problem is easily solved. Setting the
+derivative of  @eq-newResids with respect to $w$ to 0, we have
+
+$$
+
+$$
 
 Now bring in the fact that $\sigma_i = 0$ for $i > r$, with $r$ being
 the rank of $B$. That has the interesting implication that
@@ -305,7 +310,6 @@ $$
 
 Exactly the Moore-Penrose inverse!
 
--->
 $\square$
 
 :::
