@@ -178,8 +178,6 @@ this for Double Descent shortly, but let's prove it first.
 
 ### Proof of the minimum-norm property
 
-<!--
-
 We will need this:
 
 ::: {#thm-samenorm}
@@ -195,8 +193,6 @@ For an orthogonal matrix $M$ and a vector $w$, $||Mw|| = ||w||$.
 See the Your Turn problem below.
 
 :::
-
--->
 
 ::: {#thm-shortest}
 
@@ -262,50 +258,72 @@ $$
 ||\Sigma w - s||^2
 $$ {#eq-newResids}
 
-This version of the original problem is easily solved. Setting the
-derivative of  @eq-newResids with respect to $w$ to 0, we have
+This version of the original problem is more easily solved, since we are
+dealing with a diagonal matrix. Setting the derivative of  @eq-newResids
+with respect to $w$ to 0, we have
 
 $$
-
+\Sigma^2 w = \Sigma s
 $$
 
-Now bring in the fact that $\sigma_i = 0$ for $i > r$, with $r$ being
-the rank of $B$. That has the interesting implication that
-$w_{r+1},....,w_n$ can be anything whatsoever, in @eq-newResids -- the
-value of that expression is completely independent of
-$w_{r+1},....,w_n$.  So that shows that if $r < n$, there are infinitely
-many solutions $w$, and thus infinitely many solutions to $Bx = q$,
-since $x = Vw$.  [Note that we are also making use of the fact that $V$
-is invertible ($VV'=I$).  ]{.column-margin}
-
-Recall that our goal is to find the minimum-norm value of $x$, and since
-$||x|| = ||w||$ (@thm-samenorm), our problem is thus reduced to finding
-the minimum-norm $w$.
-
-Now since
+Thus (illustrating for $B$ of rank $r = 2$)
 
 $$
-||w||^2 = w_1^2+...+w_r^2+w_{r+1}^2+...+w_n^2
+ \left (
+ \begin{array}{rrrr}
+ c_1 & 0 & 0 & ...\\
+ 0 & c_2 & 0 & ... \\
+ 0 & 0 & 0 & ... \\
+  & ... \\
+ \end{array}
+ \right )
+ \left (
+ \begin{array}{r}
+ w_1 \\
+ w_2 \\
+ 0 \\
+ ... \\
+ 0 \\
+ \end{array}
+ \right ) =
+ \left (
+ \begin{array}{r}
+ s_1 \\
+ s_2 \\
+ 0 \\
+ ... \\
+ 0 \\
+ \end{array}
+ \right )
 $$
 
-and since we have a free hand in choosing $w_{r+1},...,w_n$, we minimize
-$||w||$ by setting those $n-r$ values to 0. That will make $||x||$
-minimum-norm as well, since $x = Vw$.
-% Now in @eq-newResids, look at the nonzero parts, i.e. the upper $r
-% \times r$ portion of $\Sigma$ and the 
-Thus we can make @eq-newResids equal to 0, i.e. exact fit, by setting
+(Due to the structure of $\Sigma$ here, it doesn't matter what $w_i, i >
+r$ is; let's make them 0s.)
+
+So we see that
+
+$$
+w_i = \frac{1}{c_i},  i = 1,..,r
+$$
+
+In other words, making use of @eq-diagyourturn,
 
 $$
 w = \Sigma^{+} s
 $$
 
-where $\Sigma^{+}$ is the diagonal matrix with elements
-$\sigma_1^{-1},...,\sigma_r^{-1},0,....,0$. 
+Recalling that $V'x = w$ and $U'q = s$, we have
+
+\begin{align}
+x &= Vw \\
+&= V \Sigma^{+} s \\
+&= V \Sigma^{+} U'q \\ 
+\end{align}
 
 Wrapping up, we have
 
 $$
-x = Vw = V \Sigma^{+} U' q
+x = V \Sigma^{+} U' q
 $$
 
 Exactly the Moore-Penrose inverse!
