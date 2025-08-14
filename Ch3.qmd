@@ -39,8 +39,17 @@ head(n1)
 # we will need a lag-1 version of the data
 n2 <- Nile[-1]
 head(n2)
+```
+
+Calling
+
+``` r
 plot(n1,n2,cex=0.4,xlim=c(0,1400),yli=c(0,1400))
 ```
+
+gives us
+
+![lagged Nile](NilePlot.png)
 
 We would like to fit a straight line through that data point cloud. We
 might have two motivations for doing this:
