@@ -580,7 +580,7 @@ $$
   > Ridge shrinks the vector of fitted "Y" values more in the directions of
   > the Principal Components of our data.
 
-## SVD As a Basis for the Four Fundamental Subspaces
+## SVD As a Foundation for the Four Fundamental Subspaces
 
 Recall the four subspaces discussed in @sec-fourspaces. We can quickly
 obtain much information about them from the SVD.
@@ -644,3 +644,13 @@ Try your code on a couple of examples.
 matrices, and the fact that $(CD)^{-1} = D^{-1} C^{-1}$ for invertible
 matrices $C$ and $D$.
 
+❄️  **Your Turn:** Consider a diagonal matrix $G =
+diag(c_1,...,c_s)$, with the $c_i$ being positive numbers. Show that
+
+$$
+G^{+} = diag(c_1,...,c_s)
+$${#eq-diagyourturn}
+
+
+i.e. that in this case $U$ and $V$ are 
+identity matrices.

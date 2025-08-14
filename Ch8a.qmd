@@ -15,13 +15,13 @@ library(qeML)
 
 ::: 
 
-The emergence of Large Language Models (LLMs) really brought machine
-learning/artificial intelligence startled the general public.  In turn,
-the pivotal research paper behind the succdess of LLMs was *Attention Is
-All You Need*, by Ashish Vaswani *et al*, 2017.  Actually, the
-mathematical operation called *attention* is rather simple in its
-foundation.  This approach is in turn related to material that has
-arisen here in earlier chapters. Here we explore the basics of this
+The emergence of Large Language Models (LLMs) really startled the
+general public, leading to an explosion of public attention to the
+field.  In turn, the pivotal research paper behind the success of LLMs
+was *Attention Is All You Need*, by Ashish Vaswani *et al*, 2017.
+Actually, the mathematical operation called *attention* is rather simple
+in its foundation.  This approach is in turn related to material that
+has arisen here in earlier chapters. Here we explore the basics of this
 idea.
 
 :::
@@ -35,7 +35,7 @@ library(qeML)
 ## Dot Product as a Measure of Similarity
 
 As discussed in @sec-multcolcause, the row $i$, column $j$
-element of the matrix $A'A$ in @linreg-formula is a measure of the
+element of the matrix $A'A$ in @eq-linregformula is a measure of the
 strength of relation between predictor variables $i$ and $j$. And since
 that matrix element is the dot product between rows $i$ and $j$, we see
 that dot products serve as measures of similarity.
@@ -49,13 +49,12 @@ This point also arises in recommender systems. Recall @sec-recsys:
 > In order to assess interuser similarity of the nature described above,
 > we might form a matrix , as follows. There would be 943 rows, one for
 > each user, and 1682 columns, one for each movie. The element in row ,
-> column would be the rating user gave to movie . Most of the matrix would
-> be 0s.
+> column would be the rating user gave to movie . Most of the matrix
+> would be 0s.
 > 
-> The point of constructing is that determining the similarity of users
-> becomes a matter of measuring similarity of rows of . This paves the way
-> to exploiting the wealth of matrix-centric methodology we will develop
-> in this book.
+> Determining the similarity of users becomes a matter of measuring
+> similarity of rows of the matrix. This paves the way to exploiting the
+> wealth of matrix-centric methodology we have developed in this book.
 
 And *how* might this similarity between users be measured? By dot
 product, of course! 
@@ -82,7 +81,7 @@ $$
 where
 
 * $A$, $n \times p$, is our predictor variable data, column $i$
-  containing predictor $i$,
+  containing predictor $i$, "X",
 
 * $S$, $n \times 1$, is our response variable data, "Y", and
 
@@ -92,7 +91,7 @@ Alluding to the fact that fitting a model is often referred to as
 "training" the model, below we will use the notation $A_{train}$ and
 $Y_{train}$ for $A$ and $S$.
 
-After computing $\widehat{\beta}$, we are readying to predict new cases!
+After computing $\widehat{\beta}$, we are ready to predict new cases!
 Say we have $m$ of them, stored in the $m \times p$ matrix $A_{new}$.
 Our predictions are
 
@@ -100,7 +99,7 @@ $$
 Y_{preds} = A_{new} \widehat{\beta} = A_{new} (A'A)^{-1} A'_{train} Y_{train}
 $$
 
-As in @eq-diagonlize, write 
+As in @eq-diagonalize, write 
 
 $$
 A'A = P D P'

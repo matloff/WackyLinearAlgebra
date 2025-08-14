@@ -337,16 +337,17 @@ $\square$
 First, consider the minimum norm solution $x_{min}$ in our last section,
 with $p > n$, i.e. post-interpolation. Intuitively, shorter solutions
 have less variability, i.e. smaller variance. Moreover, all the
-solutions have a 0 residual sum of squares. It is thus plausible that
-$x_{min}$ might do better than the value of $x$ we obtain at
-interpolation, hence a downward trend in the curve of predictive
-accuracy against $p$.  On the other hand, as $p$ grows further, $x$ has
-more and more components, and likely that minmum-norm $x$ will grow in
-length at some point, causing an increase in variance, hence the typical
-U-shape -- as our *second* U.
+solutions have a 0 residual sum of squares, so why not take the one with
+smaller variance? It is thus plausible that $x_{min}$ might do better
+than the value of $x$ we obtain at interpolation, hence a downward trend
+in the curve of predictive accuracy against $p$.  On the other hand, as
+$p$ grows even further, $x$ has more and more components, and likely
+that minimum-norm $x$ will grow in length at some point, causing an
+increase in variance, hence the typical U-shape -- as our *second* U.
 
-In addition, if *gradient descent* is used to minimize the least-squares
-problem, the tendency is that the result will be of minimum norm.
+In addition, it can be shown that if *gradient descent* is used to
+minimize the least-squares problem, the tendency is that the result will
+be of minimum norm.
 
 ## Plausibility of Double Descent: the Condition Number 
 
@@ -361,7 +362,7 @@ smallest *nonzero* eigenvalue]{.column-margin}
 the same criterion to $AA'$. Then we can go through the same exercise as
 above, starting with $p=1$, i.e. using only the first column of $A$,
 then adding more and more columns. It turns out that if we graph 
-condition number agains $p$, we again see Double Descent behavior!
+condition number against $p$, we again see Double Descent behavior!
 And again, the peak will occur at the interpolation point.
 
 Here is the code, run on the Million Song data:
@@ -385,8 +386,8 @@ plot(u,z,cex=0.5)
 There it is, a peak at $n=p$.
 
 Now, how might this relate to the original (accuracy vs. $p$
-Double Descent problemm? Recall that a large condition number indicates
-multicollinarity, which in turn causes high variance in $\widehat{\beta}$, thus impaired predictive ability.
+Double Descent problem? Recall that a large condition number indicates
+multicollinearity, which in turn causes high variance in $\widehat{\beta}$, thus impaired predictive ability.
 
 
 ## Your Turn
