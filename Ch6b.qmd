@@ -555,7 +555,7 @@ where $A_i$ ($i=1,...,r)$
 
 State the form of the eigenvalues and eigenvectors of $A$.
 
-❄️  **Your Turn:** In @sec-detect,
+❄️  **Your Turn:** In @sec-detecting,
 there was a statement "$c$ is nonzero with high probability." Why was
 that important?
 

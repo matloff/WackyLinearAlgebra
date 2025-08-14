@@ -13,8 +13,6 @@ library(qeML)
 
 ## Goals of this chapter:
 
-::: 
-
 The emergence of Large Language Models (LLMs) really startled the
 general public, leading to an explosion of public attention to the
 field.  In turn, the pivotal research paper behind the success of LLMs
