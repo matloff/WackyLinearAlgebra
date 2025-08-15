@@ -539,8 +539,9 @@ In the case $k=2$, the set of all $t = (t_1,...,t_k)'$ such that
 
 $$ (t-\mu)' \Sigma^{-1} (t-\mu) = d_{\alpha} $$
 
-is an ellipse in the $(t_1,t_2)$ plane. (If $\Sigma = I$, we have a circle.) For $k=3$ we have an
-ellipsoid, a "football," and so on in higher dimensions..  
+is an ellipse in the $(t_1,t_2)$ plane. (If $\Sigma = I$, we have a
+circle.) For $k=3$ we have an ellipsoid, a "football," and so on in
+higher dimensions..  
 
 [We will use the linear model here for concretenss, but the same
 analysis holds for any asymptotically normal statistical estimator, e.g.
@@ -579,8 +580,17 @@ The **ellipse** library can draw this for us:
 library(ellipse)
 data(mtcars)
 fit <- lm(mpg ~ disp + cyl , mtcars)
+```
+
+Calling
+
+``` r
 plot(ellipse(fit, which = c('disp', 'cyl'), level = 0.90), type = 'l')
 ```
+
+then gives us
+
+![](Ellipse.png)
 
 Here the axes are $\beta_{disp}$ and $\beta_{cyl}$. 
 
