@@ -3,7 +3,6 @@ project:
   output-dir: docs
 
 book:
-
    title: "Powered by Linear Algebra"
    subtitle: "The central role of matrices and vector spaces in Data Science"
    author: 
@@ -12,8 +11,6 @@ book:
        affiliations:
          - name: University of California, Davis
    date: today
-
-   cover-image: Projections.png
    
    chapters:
      - index.qmd
@@ -49,6 +46,9 @@ format:
      number-sections: true      
      fig_caption: no
      fig_numbers: no
+     header-includes: |
+      \titlehead{\includegraphics[width=2in]{Projections.png}}
+
 execute:
    warning: false
    message: false
