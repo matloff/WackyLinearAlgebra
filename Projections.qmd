@@ -335,6 +335,8 @@ $u_1,...,u_k$; and a vector $x$ in $V$. Then the projection of $x$
 onto $W$ is equal to $QQ'x$, where $Q$ is the matrix whose columns are
 the $u_i$.
 
+:::
+
 ## The Gram-Schmidt Method{#sec-gramschmidt}
 
 As seen in the last section, it is desirable to have an orthogonal
