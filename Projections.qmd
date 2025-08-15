@@ -231,6 +231,11 @@ A <- cbind(1,ourData[,c(1,3)])
 dim(A)
 S <- as.vector(mlb1[,3])
 H <- A %*% solve(t(A) %*% A) %*% t(A)
+```
+
+Let's take a look:
+
+``` r
 hist(diag(H))
 ```
 
