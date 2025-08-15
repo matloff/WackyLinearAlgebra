@@ -197,7 +197,7 @@ as follows:
 
 > Given matrix $A$ of $k$ rows and $m$ columns and
 > matrix $B$ of $m$ rows and $r$ columns, the product $C = AB$ is
-> a $k \times m$ matrix, whose row $i$, column $j$ element is
+> a $k \times r$ matrix, whose row $i$, column $j$ element is
 > 
 > $$
 > a_{i1} b_{1j} +
@@ -205,8 +205,9 @@ as follows:
 > a_{im} b_{mj} 
 > $$
 > 
-> This is the "dot product" of row $i$ of A and column $j$ of B:  Find the
-> products of the paired elements in the two vectors, then sum.
+>[The notion of a dot product will arise often in this book.]{.column-margin}
+> *This is the "dot product" of row $i$ of A and column $j$ of B:  Find the
+> products of the paired elements in the two vectors, then sum.*
 
 For example, set 
 
@@ -214,7 +215,7 @@ $$
 A = \left (
 \begin{array}{rrr}
 5 & 2 & 6 \\
-1 & 1 & 8 \\
+1 & 1 & 1 \\
 \end{array}
 \right )
 $$
