@@ -352,7 +352,7 @@ Let's try that idea with the picture on the cover of this book. We will
 
 Here is the code:
 
-```{r}
+``` r
 library(imager)
 img <- load.image('prj.png')  
 # grayscale() doesn't work directly on this
@@ -370,6 +370,9 @@ newImgMat <- u[,1:retainedRank] %*% diag((imgSVD$d)[1:retainedRank]) %*%
    t(v[,1:retainedRank])
 plot(as.cimg(newImgMat))
 ```
+
+![full image](OrigImg.png)
+![rank-50 image](Rank50Img.png)
 
 The rank-50 version is almost as sharp as the full image -- and achieves
 a huge reduction in storage space.
