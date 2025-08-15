@@ -577,12 +577,15 @@ coefficients $\beta_i$.
 
 Or we may draw a histogram with too many bins:
 
-```{r}
+``` r
 library(qeML)
 data(forest500)  # data on forest ground cover
 hist(forest500$V1,breaks=10)
 hist(forest500$V1,breaks=100)
 ```
+
+![](Hist10.png)
+![](Hist100.png)
 
 In a histogram, we are estimating the heights of the bins. With 10 bins
 we obtained a smooth graph, but with 100 bins it became choppy. So
