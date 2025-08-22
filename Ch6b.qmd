@@ -384,7 +384,7 @@ $$
 
 From @thm-thestory, we have $P' A P = D$ for some matrix $P$ and
 diagonal matrix $D$, with the entries of the latter being the variances
-of the PCs $\sigma_i^2$.  That latter point implies that
+of the PCs, $\sigma_i^2$.  That latter point implies that
 
 $$
 D_1^2 = D
