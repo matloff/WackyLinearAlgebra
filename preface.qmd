@@ -201,7 +201,7 @@ library(qeML)
 
 ## Edition Number
 
-Currently 1.0.0. Correction of typos etc. will usually increment the
+Currently 1.0.1. Correction of typos etc. will usually increment the
 third digit.
 
 ## Permission to Copy

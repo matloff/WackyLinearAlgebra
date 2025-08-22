@@ -829,7 +829,7 @@ Note that *we choose the partitioning*; there is no inherent partition
 structure. In some settings, there is a structure that fits our needs,
 and we use that.
 
-# Linear Combinations of Rows and Columns of a Matrix
+### Linear combinations of rows and columns of a matrix
 
 Note that the above expression @eq-lincomb1,
 
@@ -1015,7 +1015,7 @@ A similar result holds for the rows of the product.
 
 :::
 
-# Your Turn
+## Your Turn
 
 ❄️  **Your Turn:** Fill in the blank with a term from this chapter: 
 The adjacency matrix of an undirected graph is necessarily ________.
