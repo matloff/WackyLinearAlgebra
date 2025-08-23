@@ -852,6 +852,69 @@ matrix.
 
 The R function **scale** does centering and/or scaling.
 
+## Lagrange multipliers {#sec-lagrange}
+
+Earlier, we saw the power of matrix derivatives, in our case
+to minimize a sum of squares.  Here we go one step further, again doing
+optimization, but in this case under a constraint. To this end,
+we first need to introduce the concept of *Lagrange multipliers*.
+
+The context is that we wish to minimize/maximize a quantity $f(w)$,
+subject to $g(w) = 0$, where $w$ is a vector argument. We set up the
+expression $f(w) + \lambda g(w)$, and find its extreme values.
+
+For instance, say we wish to minimize
+
+$$
+f(x,y) = x^2 + 2y^2
+$$
+
+subject to the constraint.
+
+$$
+3x + y = 8
+$$
+
+We form the expression
+
+$$
+x^2 + 2y^2 + \lambda (3x + y - 8)
+$$
+
+and take partial derivatives with respect to $x$, $y$ and $\lambda$:
+
+$$
+0 = 2x + 3 \lambda
+$$
+
+$$
+0 = 4y + \lambda
+$$
+
+$$
+0 = 3x+y-8
+$$
+
+From the first two equations, we have
+
+$$
+0 = 2x - 12y
+$$
+
+Substituting, we find that
+
+$$
+y = \frac{8}{19}
+$$
+
+and so on. 
+
+Often the equations will involve matrices, with solutions requiring
+matrix inversion.
+
+The Lagrange multiplier here is $\lambda$. If we have several
+constraints, we have several multipliers.
+
 ## Your Turn
 
 ❄️  **Your Turn:** Show @eq-dda. Write $a = (a_1,...,a_k)'$ and find the

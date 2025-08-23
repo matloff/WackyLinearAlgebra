@@ -25,7 +25,7 @@ which will indeed be the case.
 
 :::
 
-## Review: Confidence Intervals, Standard Errors
+## Review: Confidence Intervals, Standard Errors{#sec-cireview}
 
 To set the stage, let's review the statistical concepts of 
 *confidence interval* and *standard error*. Say we have
@@ -566,15 +566,23 @@ Finally, recall that though 0 covariance between two random variables
 does not imply that they are statistically independent, the implication
 does hold in the case of multivariate normal distributions.  Thus $W'W$,
 the sum of the squares of the components of $W$, is indeed the sum of
-$k$ independent N(0,1) random variables.
+the squares of $k$ independent N(0,1) random variables, thus chi-square
+distributed..
 
 :::
 
 
-### A confidence set for $\widehat{\beta}$ in the linear model
+### A confidence set for asymptotically normal estimators
 
+Let's now return to the setting of @sec-cireview. Say we are estimating
+a population value $\theta$, using an estimator $\widehat{\theta}$ that
+has an asymptotically normal distribution with mean vector $\theta$ and
+covariance matrix $\Sigma$.
 
-Say $d_{\alpha}$ is the upper-$\alpha$ quantile of that distribution, i.e.
+Then in @thm-psubw, 
+
+Say $d_{\alpha}$ is the upper-$\alpha$ quantile of that chi-square
+distribution of m , i.e.
 
 $$
 P[(W-\mu)' \Sigma^{-1} (W-\mu) \leq d_{\alpha}] = 1-\alpha
@@ -645,66 +653,6 @@ pause to confirm that this makes sense.
 
 However, this is but an intermediate step toward our goal of a multiple
 inference method. Our next step will be to set up a math tool.
-
-### Lagrange multipliers {#sec-lagrange}
-
-In @sec-linmods, we saw the power of matrix derivatives, in our case
-to minimize a sum of squares.  Here we go one step further, again doing
-optimization, but in this case under a constraint. To this end,
-we first need to introduce the concept of *Lagrange multipliers*.
-
-The context is that we wish to minimize/maximize a quantity $f(w)$,
-subject to $g(w) = 0$, where $w$ is a vector argument. We set up the
-expression $f(w) + \lambda g(w)$, and find its extreme values.
-
-For instance, say we wish to minimize 
-
-$$
-f(x,y) = x^2 + 2y^2
-$$
-
-subject to the constraint.
-
-$$
-3x + y = 8
-$$ 
-
-We form the expression
-
-$$
-x^2 + 2y^2 + \lambda (3x + y - 8)
-$$
-
-and take partial derivatives with respect to $x$, $y$ and $\lambda$:
-
-$$
-0 = 2x + 3 \lambda
-$$
-
-$$
-0 = 4y + \lambda
-$$
-
-$$
-0 = 3x+y-8
-$$
-
-From the first two equations, we have
-
-$$
-0 = 2x - 12y
-$$
-
-Substituting, we find that 
-
-$$
-y = \frac{8}{19}
-$$
-
-and so on.
-
-The Lagrange multiplier here is $\lambda$. If we have several
-constraints, we have several multipliers.
 
 ### Simultaneous confidence intervals for quantities $a'\beta$
 
