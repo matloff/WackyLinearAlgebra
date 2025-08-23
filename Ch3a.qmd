@@ -678,7 +678,7 @@ $$
 d_{\alpha}
 $${#eq-constraint}
 
-In other words, we solve the Lagrange multiplier problem
+In other words, we solve the Lagrange multiplier problem (@sec-lagrange)
 
 $$
 min, max_{\beta, \lambda} ~~
