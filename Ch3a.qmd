@@ -507,14 +507,13 @@ fails to contain the desired population value is at most 0.05. This
 concept is variously known as *multiple inference*,  *simultaneous
 inference* or *multiple comparisons*.
 
-
 Whether to do this is a philosophical question, and the answer will
 depend on one's goals and personal preferences, or may possibly be due
 to requirements of a research journal or employer. If we do wish to
 pursue the matter, then how? One of the most well-known approaches makes
 good use of linear algebra.
 
-### A confidence set for $\widehat{\beta}$ in the linear model
+### Prep work
 
 First, we'll need a definition:
 
@@ -529,23 +528,51 @@ First, we'll need a definition:
 
 We also need:
 
-qmd:::: {#thm-psubw}
+::: {#thm-psubw}
 
-Say $W$ has a $k$-dimensional normal distribution random vector with mean
-vector $\mu$ and (invetible) covariance matrix $\Sigma$. Then
+Say $X$ has a $k$-dimensional random vector with mean
+vector $\mu$ and (invertible) covariance matrix $\Sigma$. Set
 
+$$
+W = \Sigma^{-0.5} (X-\mu)
+$$
+
+where $\Sigma^{0.5}$ is as in @thm-sqrt. Then $EW = 0$ and 
+
+$$
+Cov(W) = I
+$$
+
+Furthermore, if $X$ is multivariate normal, then so is $W$
+Moreover, $W'W$ has a chi-square distribution with $k$
+degrees of freedom.
 
 :::
 
 ::: {.proof}
 
-
-
-
+From @eq-acova, 
 
 $$
-Q = (W-\mu)' \Sigma^{-1} (W-\mu)
+Cov(W) = 
+\Sigma^{-0.5} Cov(X) \Sigma^{-0.5} =
+\Sigma^{-0.5} \Sigma \Sigma^{-0.5} = I
 $$
+
+The claim regarding multivariate normality follows from 
+@thm-xnormalthenaxnormal.
+
+Finally, recall that though 0 covariance between two random variables
+does not imply that they are statistically independent, the implication
+does hold in the case of multivariate normal distributions.  Thus $W'W$,
+the sum of the squares of the components of $W$, is indeed the sum of
+$k$ independent N(0,1) random variables.
+
+:::
+
+
+### A confidence set for $\widehat{\beta}$ in the linear model
+
 
 Say $d_{\alpha}$ is the upper-$\alpha$ quantile of that distribution, i.e.
 
