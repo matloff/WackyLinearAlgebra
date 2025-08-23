@@ -112,7 +112,7 @@ class "glm" and thus transfers the call to the class-specific function,
 **vcov.glm(glmOut)**.  The function **coef**, also used here, is also
 generic.]{.column-margin}
 
-### Example: Iranian churn data
+### Example: Iranian churn data{#sec-ichurn}
 
 Here we use a logistic mode to predict whether a telecom customer will
 move to another provider. We obtain $AVar(\widehat{\beta})$ using the
@@ -752,8 +752,8 @@ a'\widehat{\theta} \pm
 z_{\alpha} \sqrt{a'\widehat{\Sigma} a}
 $$
 
-Consider our Iranian Churn data analysis above, with $k = 12$. Let's
-find $\sqrt{d_{\alpha}}$, for $\alpha = 0.05$:
+Consider our Iranian Churn data analysis above in @sec-ichurn, with $k =
+12$. Let's find $\sqrt{d_{\alpha}}$, for $\alpha = 0.05$:
 
 ```{r}
 sqrt(qchisq(0.95,12))
