@@ -575,59 +575,55 @@ distributed..
 ### A confidence set for asymptotically normal estimators
 
 Let's now return to the setting of @sec-cireview. Say we are estimating
-a population value $\theta$, using an estimator $\widehat{\theta}$ that
-has an asymptotically normal distribution with mean vector $\theta$ and
-covariance matrix $\Sigma$.
+a population value $\theta$, a length-$k$ vector, using an estimator
+$\widehat{\theta}$ that has an asymptotically normal distribution with
+mean vector $\theta$ and covariance matrix $\Sigma$. Denote our estimate
+of the latter by $\widehat{\Sigma}$.
 
-Then in @thm-psubw, 
+Then in @thm-psubw, the statement about the chi-square distribution is
+only true asymptotically. However, we will write $=$ instead of $\approx$
+below, to avoid clutter.
 
 Say $d_{\alpha}$ is the upper-$\alpha$ quantile of that chi-square
-distribution of m , i.e.
+distribution with $k$ degrees of freedom, so that
 
 $$
-P[(W-\mu)' \Sigma^{-1} (W-\mu) \leq d_{\alpha}] = 1-\alpha
+P[(\widehat{\theta}-\theta)' \widehat{\Sigma}^{-1} 
+(\widehat{\theta}-\theta) \leq d_{\alpha}] = 1-\alpha
 $$
-
-In the case $k=2$, the set of all $t = (t_1,...,t_k)'$ such that
-
-$$ (t-\mu)' \Sigma^{-1} (t-\mu) = d_{\alpha} $$
-
-is an ellipse in the $(t_1,t_2)$ plane. (If $\Sigma = I$, we have a
-circle.) For $k=3$ we have an ellipsoid, a "football," and so on in
-higher dimensions..  
-
-[We will use the linear model here for concretenss, but the same
-analysis holds for any asymptotically normal statistical estimator, e.g.
-Maximum Likelihood estimates.]{.column-margin} Now, in the context of
-the linear model, take $W$ to be $\widehat{\beta}$, $\mu = \beta$ etc.
-Here $\Sigma$ must be estimated by $\widehat{\Sigma}$ (given to us via
-**vcov**), so we should replace the chi-square distribution by the
-*F-distribution*. But for simplicity, let's stick with chi-square, which
-is a good approximation for large $n$ anyway.
 
 So, the event
 
 $$
-(\widehat{\beta}-\beta)' \widehat{\Sigma}^{-1} (\widehat{\beta}-\beta) 
+(\widehat{\theta}-\theta)' \widehat{\Sigma}^{-1} (\widehat{\theta}-\theta) 
 \leq d_{\alpha}
 $$
 
 has probability $1-\alpha$. Equivalently, the event
 
 $$
-(\beta - \widehat{\beta})' \widehat{\Sigma}^{-1} (\beta-\widehat{\beta}) 
+(\theta - \widehat{\theta})' \widehat{\Sigma}^{-1} (\theta-\widehat{\theta}) 
 \leq d_{\alpha}
 $${#eq-Falpha}
 
 has that probability as well.
 
-> Therefore, the set of all $\beta$ satisfying @eq-Falpha is a
-> $100(1-\alpha)$ confidence set for the true population $\beta$.
+> Therefore, the set of all $\theta$ satisfying @eq-Falpha is a
+> $100(1-\alpha)$ confidence set for the true population $\theta$.
 
-This gives us a confidence ellipse for $\beta$ in two dimensions, a
-confidence ellipsoid in three dimensions and so on.
+In the case $k=2$, the set of all $t = (t_1,...,t_k)'$ such that
 
-The **ellipse** library can draw this for us:
+$$ (t-\theta)' \widehat{\Sigma}^{-1} (t-\theta) = d_{\alpha} $$
+
+is an ellipse in the $(t_1,t_2)$ plane. (If $\Sigma = I$, we have a
+circle.) For $k=3$ we have an ellipsoid, a "football," and so on in
+higher dimensions. 
+
+So, the above gives us a confidence ellipse for $\theta$ in two
+dimensions, a confidence ellipsoid in three dimensions and so on.
+
+The **ellipse** library can draw this for us in the case of linear
+regression:
 
 ```{r}
 library(ellipse)
@@ -652,61 +648,62 @@ value of $d_{\alpha}$, thus the larger the ellipse. The reader should
 pause to confirm that this makes sense.
 
 However, this is but an intermediate step toward our goal of a multiple
-inference method. Our next step will be to set up a math tool.
+inference method, which we now pursue.
 
-### Simultaneous confidence intervals for quantities $a'\beta$
+### Simultaneous confidence intervals for quantities $a'\theta$
 
 In @sec-rcov, we saw how to form confidence intervals for a quantity
-$a'\beta$. We may wish to form several, or even many, such intervals.
+$a'\theta$. We may wish to form several, or even many, such intervals.
 Here is how the Scheffe' method can make the intervals simultaneous.
 
 [There is an easily-missed subtlety here. Our phrasing "subject to
-$\beta$ being *in* the ellipsoid" (i.e. either in the interior or on the
-boundary) is at odds with the Langrange formulation, which stipulates
-that the min or max values occur on the boundary. But the latter property
-is implied by the linearity of $a'\beta$: Consider any point $q$ that
-is strictly interior to the ellipsoid, so our objective function has value
-$a'q$.  Then there is room for us to move away from $q$ yet still be
-inside the ellipsoid, say to the point $u$, yet with $a'u$ either larger
-or smaller that $a'q$, depending on the direction we move in. So the min
-or max cannot be in the interior.]{.column-margin} To find a CI for
-$a'\beta$, we find its maximum and minimum values subject to $\beta$ being
-in the ellipsoid, i.e. subject to the constraint
+$\theta$ being *in* the ellipsoid" (i.e. either in the interior or on
+the boundary) is at odds with the Langrange formulation, which
+stipulates that the min or max values occur on the boundary. But the
+latter property is implied by the linearity of $a'\theta$: Consider any
+point $q$ that is strictly interior to the ellipsoid, so our objective
+function has value $a'q$.  Then there is room for us to move away from
+$q$ yet still be inside the ellipsoid, say to the point $u$, yet with
+$a'u$ either larger or smaller that $a'q$, depending on the direction we
+move in. So the min or max cannot be in the interior.]{.column-margin}
+The endpoints of our CI for $a'\theta$ will consist of the latter
+quantity's maximum and minimum values subject to $\theta$ being in the
+ellipsoid, i.e. subject to the constraint
 
 $$
-(\beta-\widehat{\beta})' \widehat{\Sigma}^{-1} (\beta-\widehat{\beta}) = 
+(\theta-\widehat{\theta})' \widehat{\Sigma}^{-1} (\theta-\widehat{\theta}) = 
 d_{\alpha}
 $${#eq-constraint}
 
 In other words, we solve the Lagrange multiplier problem (@sec-lagrange)
 
 $$
-min, max_{\beta, \lambda} ~~
-a'\beta + \lambda [(\beta - \widehat{\beta})' 
-\widehat{\Sigma}^{-1} (\beta-\widehat{\beta}) - d_{\alpha}] 
+min, max_{\theta, \lambda} ~~
+a'\theta + \lambda [(\theta - \widehat{\theta})' 
+\widehat{\Sigma}^{-1} (\theta-\widehat{\theta}) - d_{\alpha}] 
 $${#eq-scheffeobjftn}
 
 Those max and min values then define our CI.
 
 Let $C$ be a symmetric matrix. The derivative of a quadratic form $u'Cu$
 with respect to $u$ can be shown to be $2Cu$. Differentiating with
-respect to $\beta$, we thus have 
+respect to $\theta$, we thus have 
 
 $$
 0 = a 
 + 2 \lambda 
-[\widehat{\Sigma}^{-1} (\beta - \widehat{\beta})]
+[\widehat{\Sigma}^{-1} (\theta - \widehat{\theta})]
 $$
 
 so that 
 
 $$
-\beta - \widehat{\beta} =
+\theta - \widehat{\theta} =
 -\frac{1}{2 \lambda}
 \widehat{\Sigma} a
 $${#eq-sothat}
 
-Now substitute for $\beta - \widehat{\beta}$ in the constraint
+Now substitute for $\theta - \widehat{\theta}$ in the constraint
 @eq-constraint:
 
 $$
@@ -720,31 +717,38 @@ Solve for $\lambda$:
 
 $$
 2 \lambda = \pm \sqrt{\frac{1}{d_{\alpha}} a'\widehat{\Sigma} a}
-$$
+$${#eq-lambdaci}
 
 Finally, recall that the quantity whose min and max interest us is
-$a'\beta$. Using @eq-sothat, we have our CI for $a'\beta$,
+$a'\theta$. Using @eq-sothat, we have 
 
 $$
-a'\widehat{\beta} \pm
+a'\theta - a'\widehat{\theta} = 
+-\frac{1}{2\lambda} a' \widehat{\Sigma} a
+$$
+
+Using @eq-lambdaci, our CI for $a'\theta$ is 
+
+$$
+a'\widehat{\theta} \pm
 \sqrt{d_{\alpha} a'\widehat{\Sigma} a}
 $${#eq-scheffeci}
 
 Now, why does this interval hold *simultaneously* over *all* $a$?  The
-point is that once we know $\beta$ is in the ellipsoid, then the above
-algebraic computations show that for *any* $a$, the quantity $a'\beta$
-will be between $a'\widehat{\beta} - \sqrt{d_{\alpha} a'\widehat{\Sigma}
-a}$ and $a'\widehat{\beta} + \sqrt{d_{\alpha} a'\widehat{\Sigma} a}$.
+point is that once we know $\theta$ is in the ellipsoid, then the above
+algebraic computations show that for *any* $a$, the quantity $a'\theta$
+will be between $a'\widehat{\theta} - \sqrt{d_{\alpha} a'\widehat{\Sigma}
+a}$ and $a'\widehat{\theta} + \sqrt{d_{\alpha} a'\widehat{\Sigma} a}$.
 Again, this is solely an algebraic property, not a probabilistic one; the only
-probabilistic action occurred in $\beta$ being in the ellipsoid.  Thus
+probabilistic action occurred in $\theta$ being in the ellipsoid.  Thus
 @eq-scheffeci will hold for all $a$ simultaneously. 
 
 However, note that we pay a price for the simultaneity, in that
-@eq-scheffeci will be wider than the ordinary CI for $a'\beta$, using
+@eq-scheffeci will be wider than the ordinary CI for $a'\theta$, using
 @eq-pmse,
 
 $$
-a'\widehat{\beta} \pm
+a'\widehat{\theta} \pm
 z_{\alpha} \sqrt{a'\widehat{\Sigma} a}
 $$
 
