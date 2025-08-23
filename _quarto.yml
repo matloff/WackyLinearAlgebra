@@ -4,7 +4,7 @@ project:
 
 book:
    title: "Powered by Linear Algebra"
-   subtitle: "The central role of matrices and vector spaces in Data Science"
+   subtitle: "The central role of matrices and vector spaces in data science"
    author: 
      - name: Norman Matloff
        email: nsmatloff@ucdavis.edu
@@ -19,7 +19,6 @@ book:
      - Ch2.qmd
      - Ch2a.qmd
      - Ch3.qmd
-     - Ch3a.qmd
      - Ch4.qmd
      - Ch5a.qmd
      - Ch5b.qmd
@@ -28,6 +27,7 @@ book:
      - Ch5c.qmd
      - Ch6a.qmd
      - Ch6b.qmd
+     - Ch3a.qmd
      - Ch6c.qmd
      - Ch6d.qmd
      - Ch8a.qmd

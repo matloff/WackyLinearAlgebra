@@ -516,20 +516,38 @@ good use of linear algebra.
 
 ### A confidence set for $\widehat{\beta}$ in the linear model
 
-[The chi-square distribution with $k$ degrees of freedom is defined to
-be the distribution of the sum of the squares of $k$ independent N(0,1)
-random variables. After applying properties such as @eq-acova, one can
-show that the quadratic form here also has that
-distribution.]{.column-margin} It can be shown that if a random vector
-$W$ has a $k$-dimensional normal distribution random vector with mean
-vector $\mu$ and covariance matrix $\Sigma$, then
+First, we'll need a definition:
+
+> If a random variable $T$ can be represented as
+> 
+> $$
+> T = Z_1^1 + ... + Z_k^2
+> $$
+> 
+> where the $Z_i$ are independent N(0,1) random variables, then we see
+> that $T$ has a  *chi-square distribution* with $k$ degrees of freedom.
+
+We also need:
+
+qmd:::: {#thm-psubw}
+
+Say $W$ has a $k$-dimensional normal distribution random vector with mean
+vector $\mu$ and (invetible) covariance matrix $\Sigma$. Then
+
+
+:::
+
+::: {.proof}
+
+
+
+
 
 $$
 Q = (W-\mu)' \Sigma^{-1} (W-\mu)
 $$
 
-has a *chi-square* distribution with $k$ *degrees of freedom*. Say
-$d_{\alpha}$ is the upper-$\alpha$ quantile of that distribution, i.e.
+Say $d_{\alpha}$ is the upper-$\alpha$ quantile of that distribution, i.e.
 
 $$
 P[(W-\mu)' \Sigma^{-1} (W-\mu) \leq d_{\alpha}] = 1-\alpha
